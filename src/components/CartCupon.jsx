@@ -47,6 +47,7 @@ function CartCupon({title, check, onCheck}){
            type="text"
            className={`form-control no-focus text-secondary`}
            value={query.toUpperCase()}
+           spellcheck="false"
            onChange={handleChange}
         ></input>
           <Button

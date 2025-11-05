@@ -34,7 +34,7 @@ function CardProduct({title, image ,price, stock, id, children, className, cols,
                 </Card.Title>
                 <Card.Text className="fs-4 fw-semibold  mb-1">
                   $ {price || "N/A"}  
-                  <span className="text-success fw-medium fs-6">
+                  <span className="mx-2 text-success fw-medium fs-6">
                     {discount ? discount + '% OFF' : ''}
                   </span>
                 </Card.Text>

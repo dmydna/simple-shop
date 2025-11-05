@@ -10,9 +10,9 @@ function CardFeature({title, image, text, id }){
            className="h-100 text-center border hover-shadow transition"
            style={{ cursor: "pointer" }}
          >
-         <div className="p-3">
+         <div className="p-4">
            <Card.Title 
-             className="fs-6 fw-semibold text-secondary text-truncate mb-2"
+             className="small fw-semibold text-secondary text-truncate mb-2"
            >
              {title}
            </Card.Title>
@@ -23,7 +23,7 @@ function CardFeature({title, image, text, id }){
              <Card.Img
                src={image}
                alt={title}
-               style={{objectFit: "contain",maxHeight: "100%",width: "auto"}}
+               style={{objectFit: "contain",maxHeight: "100%",width: "auto", filter: "hue-rotate(327deg)"}}
              />
            </div>
              <Card.Text 

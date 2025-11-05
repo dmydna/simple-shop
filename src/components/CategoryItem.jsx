@@ -23,7 +23,7 @@ function CategoryItem({category, image, link, className, variant}){
               <div className={`d-flex flex-wrap rounded overflow-hidden`}>
                 <div style={{width : 100,height: 'auto'}} className="p-3  border-end" >
                   <Card.Img 
-                   style={{ objectFit: 'contain', width : 60,height: 'auto' }}
+                   style={{ objectFit: 'contain', width : 60,height: 'auto', filter: 'hue-rotate(327deg)' }}
                    className="mx-auto d-block"
                    src={image} />
                 </div>

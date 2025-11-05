@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, ProgressBar } from "react-bootstrap";
-import Img4 from "/src/assets/check-package.png";
-import Img3 from "/src/assets/mail.png";
-import Img2 from "/src/assets/pay-later.png";
-import Img1 from "/src/assets/purchasing.png";
-import Img0 from "/src/assets/online-store.png";
+import Img3 from "/src/assets/purchasing.png";
+import Img2 from "/src/assets/check-crop.gif"
+import Img1 from "/src/assets/online-store.png";
 import SuccessCheck from "./SuccessCheck";
 
 
@@ -15,6 +13,15 @@ function ProductBuyModal({show,onHide}) {
     const [progress, setProgress] = useState(0);
     const [enabled, setEnabled] = useState('disabled')
 
+
+    useEffect(()=>{ 
+      const preloadImage = [Img1,Img2,Img3]
+      preloadImage.map((url) => {
+        const img = new Image();
+        img.src = url;
+      });
+    },[])
+  
 
     const handleNext = () => {
         setStep((prev) => prev + 1)
@@ -53,7 +60,7 @@ function ProductBuyModal({show,onHide}) {
         (
           <>
            <div className="d-flex">
-             <img className="p-4 mx-auto" width={170} src={Img0}/>
+             <img className="p-4 mx-auto" width={170} src={Img1}/>
            </div>
            <p className="text-center"> 
                 Presiona continuar para confirmar tu compra.
@@ -64,6 +71,7 @@ function ProductBuyModal({show,onHide}) {
         (
           <>
             <SuccessCheck 
+             image={Img2}
              width={170} 
              show={true} 
              handleEnd={()=>setEnabled('enabled')}
@@ -77,7 +85,7 @@ function ProductBuyModal({show,onHide}) {
         {step === 2 && (
          <>
            <div className="d-flex">
-             <img className="p-4 mx-auto" width={170} src={Img1}/>
+             <img className="p-4 mx-auto" width={170} src={Img3}/>
            </div>
            <p className="text-center">
              Gracias por tu compra. Vuelve pronto.

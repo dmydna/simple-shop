@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Table, Button, Modal, Form } from "react-bootstrap";
-import { productService } from '../services/productService';
+import { productService } from '../services/productService.js';
 
 
 const ProductCRUD = () => {

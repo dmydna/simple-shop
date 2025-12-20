@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
-
+import { productService } from '../services/productService';
 export const ProductContext = createContext(null)
 
 export function ProductosProvider({ children }){
@@ -18,23 +18,22 @@ export function ProductosProvider({ children }){
 
     // crear un estado predicateFilter que
 
+    const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
     const productosPorPagina = 8;
 
-    useEffect( () => { 
-      const fetchData = async () => {// hacer el pedido de la api
-        await fetch("https://dummyjson.com/products")
-        .then((res) => res.json())
-        .then((data) => {
-          console.log("se carga de API")
-          setProducts(data.products);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error("Error de carga de API", err);
-          setLoading(false);
-        });
-      } 
-      fetchData() 
+
+    useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const data = await productService.getAll();
+              setProducts(data.products ? data.products : data);
+          } catch (err) {
+             console.error("Error de carga de API", err);
+          } finally {
+              setLoading(false);
+          }
+      };
+      fetchData() ;
     }, []);
 
     useEffect( ()=>{

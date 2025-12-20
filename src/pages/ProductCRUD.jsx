@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Table, Button, Modal, Form } from "react-bootstrap";
+import { productService } from '../services/productService';
 
-const API_URL = "https://68489b9bec44b9f349416b0e.mockapi.io/api/clientes";
 
 const ProductCRUD = () => {
   const [items, setItems] = useState([]);
@@ -12,43 +12,19 @@ const ProductCRUD = () => {
 
 
   // Carga inicial
-  const fetchItems = async () => 
-    {
-
-    //cambia el estado para la carga inicial
-    setLoading(true);
-    try 
-    {
-      //Hace una petición HTTP para obtener datos desde la URL API_URL y espera a que termine     
-      const res = await fetch(API_URL);
-      if (!res.ok) throw new Error("Error al obtener items");
-
-      //es un método que convierte el cuerpo de la respuesta (que normalmente está en formato texto JSON) a un objeto JavaScript.
-      const data = await res.json();
-
-
-      //Guarda los datos recibidos en el estado o variable que maneja los items  
-      setItems(data);
-    } 
-    catch (error) 
-    {
-      alert("Error cargando datos");
-      console.error(error);
-    } 
-    //Independientemente de que haya ocurrido un error o no, indica que terminó la carga de datos  
-    finally 
-    {
-      setLoading(false);
-    }
-  };
-
-
-
-
-
-
-
-
+    useEffect(() => {
+    const fetchItems = async () => {
+        try {
+            const data = await productService.getAll();
+            setItems(data.products ? data.products : data);
+        } catch (err) {
+           console.error("Error de carga de API", err);
+        } finally {
+            setLoading(false);
+        }
+    };
+    fetchItems() ;
+    }, []);
 
 
   useEffect(() => {
@@ -62,15 +38,10 @@ const ProductCRUD = () => {
 
   //Esta función envía un nuevo item a la API usando POST, luego actualiza la lista de items y cierra el modal si todo sale bien. 
   // Si ocurre un error, muestra una alerta y lo registra en la consola.
-  const handleCreate = async () => 
-    {
+  const handleCreate = async () => {
+    const productData = currentItem;
     try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(currentItem),
-      });
-      if (!res.ok) throw new Error("Error al crear item");
+      await productService.create(productData)
       await fetchItems();
       handleCloseModal();
     } catch (error) {
@@ -79,27 +50,26 @@ const ProductCRUD = () => {
     }
   };
 
+
+
   const handleUpdate = async () => {
+    const id = currentItem.id;
+    const updatedData = currentItem;
     try {
-      const res = await fetch(`${API_URL}/${currentItem.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(currentItem),
-      });
-      if (!res.ok) throw new Error("Error al actualizar item");
-      await fetchItems();
-      handleCloseModal();
-    } catch (error) {
+        await productService.update(id, updatedData);
+        await fetchItems();
+        handleCloseModal();
+    } catch (err) {
       alert("Error actualizando item");
       console.error(error);
     }
   };
 
+
   const handleDelete = async (id) => {
     if (window.confirm("¿Seguro que quieres eliminar este item?")) {
       try {
-        const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-        if (!res.ok) throw new Error("Error al eliminar item");
+        await fetch(`${API_URL}/${id}`, { method: "DELETE" });
         await fetchItems();
       } catch (error) {
         alert("Error eliminando item");
@@ -126,7 +96,7 @@ const ProductCRUD = () => {
 
   return (
     <Container className="mt-4">
-      <h1>Clase 11 </h1>
+      <h1>Dashboard</h1>
 
       <Button variant="primary" onClick={openCreateModal} className="mb-3">
         Crear nuevo item

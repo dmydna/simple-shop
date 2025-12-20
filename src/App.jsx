@@ -28,6 +28,7 @@ useLocation
 
 import AdminProductTable from "./pages/AdminProductTable";
 import { UIProvider } from "./contexts/UIContext";
+import ProductCRUD from "./pages/ProductCRUD";
 
 function App() {
  
@@ -115,6 +116,10 @@ function App() {
              <ProtectedRoute>
                <AdminProductTable />
              </ProtectedRoute>} />
+          <Route path="/dashboard" element={
+              <ProductCRUD /> 
+            } 
+          />
           {/* Ruta para no coincidencias */}
           <Route path="*" element={<NotFound />} />
 

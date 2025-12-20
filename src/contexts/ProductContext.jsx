@@ -18,7 +18,6 @@ export function ProductosProvider({ children }){
 
     // crear un estado predicateFilter que
 
-    const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
     const productosPorPagina = 8;
 
 

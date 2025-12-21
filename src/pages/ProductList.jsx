@@ -12,19 +12,23 @@ import FilterSearch from "../components/FilterSearch";
 
 function Products() {
 
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   // Agregar al Carrito, actualiza stock e incrementa producto en el Carrito
 
   const categoryMatch = useMatch("/productos/category/:category");
   const searchMatch = useMatch("/productos/search/:product");
   const filterMatch = useMatch("/productos/filter/:product");
 
-  const { productosVisibles, setCategory, setSearch, filtered, setActiveFilters } = useProducts();
+  const { productosVisibles, setCategory, setSearch, filtered, setActiveFilters, setPaginaActual, setResetFilter } = useProducts();
   const location = useLocation();
+
+  // resetea valores al entrar.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setPaginaActual(1);
+    setActiveFilters({});
+    setResetFilter(true)
+  }, []);
+
 
   // Informacion a mostrar segun Pagina
   const [meta, setMeta] = useState({

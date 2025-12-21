@@ -1,39 +1,44 @@
-import React, { useState, useEffect } from "react";
-import { Container, Table, Button, Modal, Form } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Container, Form, Modal, Table } from "react-bootstrap";
+import FilterSearch from "../components/FilterSearch.jsx";
+import ProductViewModal from "../components/ProductViewModal.jsx";
+import SearchLive from "../components/SearchLive.jsx";
+import { useProducts } from "../contexts/ProductContext.jsx";
+import { useUIContext } from "../contexts/UIContext.jsx";
 import { productService } from '../services/productService.js';
-
+import ProductCreateModal from "../components/ProductCreateModal.jsx";
+import ProductTable from "../components/ProductTable.jsx";
 
 const ProductCRUD = () => {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+
+  const {onHideFilter} =  useUIContext();
+  const {fetchData, setPaginaActual} = useProducts();
   const [showModal, setShowModal] = useState(false);
   const [modalMode, setModalMode] = useState("create"); 
-  const [currentItem, setCurrentItem] = useState({ name: "", description: "" });
-
+  const [currentItem, setCurrentItem] = useState({ title: "", description: "", precio:0.0, stock:0 });
+  
+  const [showInfo, setShowInfo] = useState(false);
+  const [showCurrent, setShowCurrent] = useState(null)
 
   // Carga inicial
-    useEffect(() => {
-    const fetchItems = async () => {
-        try {
-            const data = await productService.getAll();
-            setItems(data.products ? data.products : data);
-        } catch (err) {
-           console.error("Error de carga de API", err);
-        } finally {
-            setLoading(false);
-        }
-    };
-    fetchItems() ;
-    }, []);
 
 
   useEffect(() => {
-    fetchItems();
+    setPaginaActual(1);
+    onHideFilter(true);
   }, []);
 
-  const handleChange = (e) => 
-    {
-    setCurrentItem({ ...currentItem, [e.target.name]: e.target.value });
+
+
+  const handleChange = (e) => {
+    const { name, value, type } = e.target;
+    // let val = value;
+    // if (type === 'number') {
+    //   val = name === 'stock' ? parseInt(value, 10) : parseFloat(value);
+    //   if (isNaN(val)) val = 0;
+    // }
+    const val = type === 'number' ? Number(value) : value;
+    setCurrentItem({ ...currentItem, [name]: val });
   };
 
   //Esta función envía un nuevo item a la API usando POST, luego actualiza la lista de items y cierra el modal si todo sale bien. 
@@ -42,7 +47,7 @@ const ProductCRUD = () => {
     const productData = currentItem;
     try {
       await productService.create(productData)
-      await fetchItems();
+      await fetchData();
       handleCloseModal();
     } catch (error) {
       alert("Error creando item");
@@ -51,18 +56,31 @@ const ProductCRUD = () => {
   };
 
 
-
   const handleUpdate = async () => {
     const id = currentItem.id;
-    const updatedData = currentItem;
+    // const updatedData = currentItem;
+
+    const updatedData = {
+      ...currentItem,
+      price: parseFloat(currentItem.price),
+      stock: parseInt(currentItem.stock, 10),
+      discountPercentage: parseFloat(currentItem.discountPercentage),
+      weight: parseInt(currentItem.weight, 10),
+    };
+
     try {
         await productService.update(id, updatedData);
-        await fetchItems();
+        await fetchData();
         handleCloseModal();
     } catch (err) {
       alert("Error actualizando item");
-      console.error(error);
+      console.error(err);
     }
+  };
+
+  const handleInfo = async (item) => {
+        setShowInfo(true);
+        setShowCurrent(item);
   };
 
 
@@ -70,7 +88,7 @@ const ProductCRUD = () => {
     if (window.confirm("¿Seguro que quieres eliminar este item?")) {
       try {
         await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-        await fetchItems();
+        await fetchData();
       } catch (error) {
         alert("Error eliminando item");
         console.error(error);
@@ -80,7 +98,7 @@ const ProductCRUD = () => {
 
   const openCreateModal = () => {
     setModalMode("create");
-    setCurrentItem({ name: "", description: "" });
+    setCurrentItem({ title: "", description: "" });
     setShowModal(true);
   };
 
@@ -96,60 +114,43 @@ const ProductCRUD = () => {
 
   return (
     <Container className="mt-4">
-      <h1>Dashboard</h1>
+      
+      <div className="w-100 d-flex flex-wrap mt-2 mb-4">
+         <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
+            Dashboard
+         </span>
+         <span style={{lineHeight: '2.3rem'}} className="text-secondary">
+          Administra tus publicaciones
+         </span>
+       </div>
 
-      <Button variant="primary" onClick={openCreateModal} className="mb-3">
-        Crear nuevo item
+      
+      <Button variant="primary" onClick={openCreateModal} className="mb-5">
+        <i class="bi bi-plus-lg"></i>
+        <span className="ms-2">Crear nuevo item</span>
       </Button>
 
-      {loading ? (
-        <p>Cargando...</p>
-      ) : (
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Descripción</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.length === 0 && (
-              <tr>
-                <td colSpan="4" className="text-center">
-                  No hay items
-                </td>
-              </tr>
-            )}
-            {items.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.description}</td>
-                <td>
-                  <Button
-                    variant="warning"
-                    size="sm"
-                    onClick={() => openEditModal(item)}
-                    className="me-2"
-                  >
-                    Editar
-                  </Button>
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    onClick={() => handleDelete(item.id)}
-                  >
-                    Eliminar
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
+      <FilterSearch  order="order-1" className="d-block" >
+          <SearchLive></SearchLive>
+      </FilterSearch>
 
+
+     {/*  TABLE GET ALL  */} 
+      <ProductTable  
+         openEditModal={openEditModal} 
+         handleDelete={handleDelete}
+         handleInfo={handleInfo}
+       />
+
+
+      {/*  Modal READ  */} 
+      <ProductViewModal 
+         product={showCurrent} 
+         show={showInfo} 
+         onHide={setShowInfo} 
+      />
+
+      {/*  Modal CRUD  */} 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>
@@ -159,12 +160,13 @@ const ProductCRUD = () => {
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="formName">
-              <Form.Label>Nombre</Form.Label>
+              <Form.Label>Titulo</Form.Label>
               <Form.Control
+                spellCheck="false"
                 type="text"
                 placeholder="Ingrese nombre"
-                name="name"
-                value={currentItem.name}
+                name="title"
+                value={currentItem.title}
                 onChange={handleChange}
               />
             </Form.Group>
@@ -172,6 +174,7 @@ const ProductCRUD = () => {
             <Form.Group className="mb-3" controlId="formDescription">
               <Form.Label>Descripción</Form.Label>
               <Form.Control
+                spellCheck="false"
                 as="textarea"
                 rows={3}
                 placeholder="Ingrese descripción"
@@ -180,6 +183,32 @@ const ProductCRUD = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+
+            <div className="mb-3 d-flex gap-5">
+                 <Form.Group className="mb-3" controlId="formPrice">
+                   <Form.Label>Precio</Form.Label>
+                   <Form.Control
+                     type="number"
+                     rows={3}
+                     placeholder="Ingrese un precio"
+                     name="price"
+                     value={currentItem.price}
+                     onChange={handleChange}
+                   />
+                 </Form.Group>
+                 <Form.Group className="mb-3" controlId="formStock">
+                   <Form.Label>Stock</Form.Label>
+                   <Form.Control
+                     type="number"
+                     rows={3}
+                     placeholder="Ingrese un stock"
+                     name="stock"
+                     value={currentItem.stock}
+                     onChange={handleChange}
+                   />
+                 </Form.Group>
+            </div>
+            
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -189,7 +218,7 @@ const ProductCRUD = () => {
           <Button
             variant="primary"
             onClick={modalMode === "create" ? handleCreate : handleUpdate}
-            disabled={!currentItem.name || !currentItem.description}
+            disabled={!currentItem.title || !currentItem.description}
           >
             {modalMode === "create" ? "Crear" : "Actualizar"}
           </Button>
@@ -198,5 +227,6 @@ const ProductCRUD = () => {
     </Container>
   );
 };
+
 
 export default ProductCRUD;

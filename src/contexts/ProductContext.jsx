@@ -14,6 +14,7 @@ export function ProductosProvider({ children }){
     const [search, setSearch] = useState("");
     const [filterDraft, setFilterDraft] = useState({tags : [], minPrice: 0, maxPrice : 15000})
     const [activeFilters, setActiveFilters] = useState({tags : [], minPrice: 0, maxPrice : 15000})
+    const [resetFilter, setResetFilter] = useState(false)
 
 
     // crear un estado predicateFilter que
@@ -21,19 +22,21 @@ export function ProductosProvider({ children }){
     const productosPorPagina = 8;
 
 
+    const fetchData = async () => {
+      try {
+          const data = await productService.getAll();
+          setProducts(data.products ? data.products : data);
+      } catch (err) {
+         console.error("Error de carga de API", err);
+      } finally {
+          setLoading(false);
+      }
+    };
+    
     useEffect(() => {
-      const fetchData = async () => {
-          try {
-              const data = await productService.getAll();
-              setProducts(data.products ? data.products : data);
-          } catch (err) {
-             console.error("Error de carga de API", err);
-          } finally {
-              setLoading(false);
-          }
-      };
       fetchData() ;
     }, []);
+
 
     useEffect( ()=>{
       // Reseteo Pagination cuando entro en pagina categorias o busqueda
@@ -45,8 +48,15 @@ export function ProductosProvider({ children }){
     const filtered = useMemo(() => {
       return products.filter(p => {
 
+        if(resetFilter){
+          setResetFilter(false)
+          return products;
+        }
         const { tags, minPrice, maxPrice } = activeFilters;
-        const matchTags = tags.length === 0 || tags.some(t => p.tags.includes(t));
+        
+        const matchTags = ( !tags ? false: 
+          tags.length === 0 || tags?.some(t => p.tags.includes(t))
+        );
         const matchPrice = p.price >= minPrice && p.price <= maxPrice;
         
         const matchCategory = category ? p.category === category : true;
@@ -60,6 +70,7 @@ export function ProductosProvider({ children }){
           && (matchTags && matchPrice);
       });
     }, [products, category, search, activeFilters]);
+
 
 
     // Lógica de paginación
@@ -80,7 +91,9 @@ export function ProductosProvider({ children }){
           setCategory,
           setSearch,
           filterDraft, setFilterDraft,
-          activeFilters, setActiveFilters
+          activeFilters, setActiveFilters,
+          fetchData,
+          resetFilter, setResetFilter
           }}>
             {children}
         </ProductContext.Provider>

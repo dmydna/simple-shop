@@ -35,7 +35,7 @@ export const productService = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(productData)
         });
-        if (!response.ok) throw new Error("Error al crear producto");
+        if (!response.ok) throw new Error("Error al actualizar producto");
         return await response.json();
     },
 

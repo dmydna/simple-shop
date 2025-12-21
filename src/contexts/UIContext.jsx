@@ -22,6 +22,9 @@ export function UIProvider({ children }) {
     useEffect(()=>{ 
       if(!location.pathname.startsWith("/productos")){
         onHideFilter(false)
+        if(location.pathname.startsWith("/dashboard")){
+          onHideFilter(true)
+        }
       }
     },[location])
 

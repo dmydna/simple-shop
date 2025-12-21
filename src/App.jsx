@@ -114,10 +114,16 @@ function App() {
           />
           <Route path="/admin/:manager" element= {             
              <ProtectedRoute>
-               <AdminProductTable />
+               {/* <AdminProductTable /> */}
+                <ProductCRUD /> 
+                <Pagination />
              </ProtectedRoute>} />
           <Route path="/dashboard" element={
-              <ProductCRUD /> 
+             <>
+                <ProductCRUD /> 
+                <Pagination />
+             </> 
+
             } 
           />
           {/* Ruta para no coincidencias */}

@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { useProducts } from '../contexts/ProductContext';
+import { useUIContext } from '../contexts/UIContext';
+import Pagination from './Pagination';
 
 
 function ProductTable({openEditModal, handleDelete,  handleInfo}) {
 
-  const{productosVisibles, loading} = useProducts();
+  const { currentItems, setVisibleClients, setItems, setItemsPerPage, currentPage, setCurrentPage, totalPages } = useUIContext()
+  const  {filtered, products, loading} =  useProducts()
+
+  useEffect(()=>{
+    // Lógica de paginación
+    setItemsPerPage(8)
+    setItems(filtered)
+    console.log(filtered)
+  },[filtered, products])
+
+
 
   return (
      loading ? 
        <p>Cargando...</p> : 
+      <>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -19,14 +32,14 @@ function ProductTable({openEditModal, handleDelete,  handleInfo}) {
           </tr>
         </thead>
         <tbody>
-          {productosVisibles.length === 0 && (
+          {currentItems.length === 0 && (
             <tr>
               <td colSpan="4" className="text-center">
                 No hay items
               </td>
             </tr>
           )}
-          {productosVisibles.map((item) => (
+          {currentItems.map((item) => (
             <tr key={item.id}>
               <td>{item.id}</td>
               <td style={{ width: '60%' }} >{item.title}</td>
@@ -63,6 +76,10 @@ function ProductTable({openEditModal, handleDelete,  handleInfo}) {
           ))}
         </tbody>
       </Table>
+      <Pagination
+          currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} 
+      />
+      </>
   );
 }
 

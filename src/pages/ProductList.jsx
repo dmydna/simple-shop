@@ -1,33 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
-import { Link, useLocation, useMatch, useSearchParams } from "react-router-dom";
+import { Container, Row } from "react-bootstrap";
+import { useLocation, useMatch } from "react-router-dom";
 import AddToCartButton from "../components/AddToCartButton";
-import CategoryNav from "../components/CategoryNav";
-import { HoverProvider } from "../contexts/HoverContext";
-import HoverWrapper from "../contexts/HoverWrapper";
-import { useProducts } from "../contexts/ProductContext";
 import CardProduct from "../components/CardProduct";
-import BuyNowButton from "../components/BuyNowButton";
+import CategoryNav from "../components/CategoryNav";
 import FilterSearch from "../components/FilterSearch";
+import { useProducts } from "../contexts/ProductContext";
+import { useUIContext } from "../contexts/UIContext";
+import Pagination from "../components/Pagination";
+
+
 
 function Products() {
 
   // Agregar al Carrito, actualiza stock e incrementa producto en el Carrito
 
+  const {currentItems, setVisibleClients, setItems, setItemsPerPage, currentPage, setCurrentPage, totalPages} = useUIContext();
+
   const categoryMatch = useMatch("/productos/category/:category");
   const searchMatch = useMatch("/productos/search/:product");
   const filterMatch = useMatch("/productos/filter/:product");
 
-  const { productosVisibles, setCategory, setSearch, filtered, setActiveFilters, setPaginaActual, setResetFilter } = useProducts();
+  const { setCategory, setSearch, filtered, setActiveFilters, setResetFilter,loading, products } = useProducts();
   const location = useLocation();
 
   // resetea valores al entrar.
   useEffect(() => {
     window.scrollTo(0, 0);
-    setPaginaActual(1);
     setActiveFilters({});
     setResetFilter(true)
   }, []);
+
 
 
   // Informacion a mostrar segun Pagina
@@ -111,7 +114,16 @@ function Products() {
 
   }, [location.pathname, categoryMatch, searchMatch, filtered]);
 
- 
+
+
+    // Lógica de paginación
+    useEffect(()=>{
+      setItemsPerPage(8)
+      setItems(filtered)
+      console.log(filtered)
+    },[filtered, products])
+
+
   return (
     <>
     <Container fluid="xl" className="bg-white rounded mt-2 mb-5 pb-5">
@@ -133,8 +145,9 @@ function Products() {
        }
 
 
+
       <Row>
-        {productosVisibles.map((p) => (  
+        {currentItems.map((p) => (  
           <CardProduct className={'border m-2'}
             id={p.id}
             image={p.thumbnail}
@@ -148,6 +161,10 @@ function Products() {
         ))}
       </Row>
     </Container>
+    <Pagination 
+           currentPage={currentPage} 
+           setCurrentPage={setCurrentPage} totalPages={totalPages} 
+      />
     </>
   )
 }

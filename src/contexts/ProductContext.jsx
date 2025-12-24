@@ -1,12 +1,15 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { productService } from '../services/productService.js';
+
+import { useUIContext } from "./UIContext.jsx";
 export const ProductContext = createContext(null)
 
 export function ProductosProvider({ children }){
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [paginaActual, setPaginaActual] = useState(1);
+    const {setItems, setItemsPerPage, currentItems, setCurrentPage } = useUIContext();
+    const [visibleProducts, setVisibleProducts] = useState([])
 
 
     // Filtros
@@ -19,7 +22,7 @@ export function ProductosProvider({ children }){
 
     // crear un estado predicateFilter que
 
-    const productosPorPagina = 8;
+
 
 
     const fetchData = async () => {
@@ -40,7 +43,7 @@ export function ProductosProvider({ children }){
 
     useEffect( ()=>{
       // Reseteo Pagination cuando entro en pagina categorias o busqueda
-      setPaginaActual(1)
+      setCurrentPage(1)
     }, [category, search])
 
 
@@ -71,28 +74,19 @@ export function ProductosProvider({ children }){
       });
     }, [products, category, search, activeFilters]);
 
-
-
-    // Lógica de paginación
-    const indiceUltimoProducto = paginaActual * productosPorPagina; 
-    const indicePrimerProducto = indiceUltimoProducto - productosPorPagina;
-    const productosVisibles = filtered.slice(indicePrimerProducto, indiceUltimoProducto);
-    const totalPaginas = Math.ceil(filtered.length / productosPorPagina);
-
-
     return (
         
         <ProductContext.Provider 
         value={{ 
           products, setProducts, 
-          loading, setLoading, 
-          totalPaginas, paginaActual, setPaginaActual, 
-          productosVisibles ,filtered,
+          loading, setLoading ,filtered,
           setCategory,
           setSearch,
           filterDraft, setFilterDraft,
           activeFilters, setActiveFilters,
           fetchData,
+          filtered,
+          visibleProducts, setVisibleProducts,
           resetFilter, setResetFilter
           }}>
             {children}
@@ -102,3 +96,4 @@ export function ProductosProvider({ children }){
 }
 
 export const useProducts = () => useContext(ProductContext);
+

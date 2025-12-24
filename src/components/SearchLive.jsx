@@ -1,19 +1,19 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Button, Dropdown, Form, InputGroup } from "react-bootstrap";
 import { useProducts } from "../contexts/ProductContext";
+import { useClients } from "../contexts/ClientContext";
 
-function SearchLive() {
+function SearchLive({items, handleSearch}) {
   const [query, setQuery] = useState(""); 
-  const {setSearch} = useProducts(); // Falta este estado
-  const {products} = useProducts();
+//   const {setSearch, clients} = useController();
 
   useEffect(() => {
       if (!query.trim()) {
-          setSearch("");
+        handleSearch("");
           return;
       }
-      setSearch(query);
-  }, [products, query]);
+      handleSearch(query);
+  }, [items, query]);
 
   function handleChange(e) {
       const value = e.target.value;

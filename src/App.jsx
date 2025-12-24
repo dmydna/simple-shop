@@ -2,14 +2,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Nav  from "./components/Nav";
 import NavHeader from "./components/NavHeader";
 import Pagination from "./components/Pagination";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CarritoProvider } from "./contexts/CartContext";
-import { DropdownContext } from "./contexts/DropdownContext";
 import { ProductosProvider } from "./contexts/ProductContext";
 import Admin from "./pages/Admin";
 import Carrito from "./pages/Cart";
@@ -23,21 +20,20 @@ import Products from "./pages/ProductList";
 import "./styles/index.css"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-useLocation
-
-import AdminProductTable from "./pages/AdminProductTable";
 import { UIProvider } from "./contexts/UIContext";
 import ProductCRUD from "./pages/ProductCRUD";
+import ClientCRUD from "./pages/ClientCRUD";
+import ClientTable from "./components/ClientTable";
+import { ClientProvider } from "./contexts/ClientContext";
 
 function App() {
  
+
 
   const navItems = ["Inicio", "Productos", "Contacto"];
   const [seccion, setSeccion] = useState("Inicio");
 
   const navFix = 'mt-5 pt-5';
-
 
   const location = useLocation()
 
@@ -54,9 +50,10 @@ function App() {
 
   return (
     <AuthProvider>
+    <UIProvider>
     <ProductosProvider>
     <CarritoProvider>
-    <UIProvider>
+    <ClientProvider>
     <div className="d-flex flex-column min-vh-100 pt-3">
         
 
@@ -79,12 +76,11 @@ function App() {
             </ProtectedRoute>}>
           </Route>
           <Route path="/contacto" element={<Contact />} />
-          <Route path="/carrito"   element={<Carrito/>} 
-          />
+          <Route path="/carrito"   element={<Carrito/>} />
+          <Route path="/carrito/:buy" element={<Carrito/>} />
           <Route path="/productos/category/:category" element={
             <>
             <Products/>
-            <Pagination />
             </>
 
           }
@@ -92,14 +88,12 @@ function App() {
           <Route path="/productos/filter/" element={
             <> 
             <Products/>
-            <Pagination/>
             </>
           }
           /> 
           <Route path="/productos/search/:product" element={
             <> 
             <Products/>
-            <Pagination/>
             </>
           }
           />         
@@ -121,11 +115,15 @@ function App() {
           <Route path="/dashboard" element={
              <>
                 <ProductCRUD /> 
-                <Pagination />
-             </> 
 
+             </> 
             } 
           />
+          <Route path="/dashboard/clients" element={ 
+            <>
+            <ClientCRUD  />
+            <Pagination />
+            </>} />
           {/* Ruta para no coincidencias */}
           <Route path="*" element={<NotFound />} />
 
@@ -134,10 +132,10 @@ function App() {
       </main>
       <Footer />
     </div>
-    </UIProvider>
+    </ClientProvider>
     </CarritoProvider>
     </ProductosProvider>
-    
+    </UIProvider>
     </AuthProvider>
   );
 }

@@ -4,11 +4,21 @@ import { useCart } from "../contexts/CartContext";
 import AddToCartButton from "./AddToCartButton";
 import BuyNowButton from "./BuyNowButton";
 import ProductBuyModal from "./ProductBuyModal";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useProducts } from "../contexts/ProductContext";
 
 function ProductBuyCard({ title, rating, ship, id, stock, price, discount }) {
+
+  const { cartItems, addToCart} = useCart()
+  const { products } = useProducts()
   const [modalShow, setModalShow] = useState(false);
   const {clearCart} = useCart()
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate("/carrito/buy");
+    addToCart( products.find(p => p.id == id) )
+  }
 
   return (
     <Card className="h-100">
@@ -29,19 +39,19 @@ function ProductBuyCard({ title, rating, ship, id, stock, price, discount }) {
         <BuyNowButton
           className='m-2'
           variante='primary'
-          handle={() => setModalShow(true)} 
+          handle={handleClick} 
         />
         <AddToCartButton id={id} />
         <ProductBuyModal
           show={modalShow}
           onHide={() => {
             setModalShow(false);
-            clearCart();
           }}
         />
       </InputGroup>
     </Card>
   );
 }
+
 
 export default ProductBuyCard;

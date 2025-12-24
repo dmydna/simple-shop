@@ -5,6 +5,10 @@ import CardReview from "../components/CardReviews";
 import ProductBuyCard from "../components/ProductBuyCard";
 import ProductSpecs from "../components/ProductSpecs";
 import { useProducts } from "../contexts/ProductContext";
+import ProductSection from "../components/ProductSection";
+import ProductCarousel from "../components/ProductCarousel";
+import CarouselImages from "../components/CarouselImages";
+
 
 
 function ProductDetails(){
@@ -22,7 +26,8 @@ function ProductDetails(){
         <>
         {products.map((p) => ( 
             name != p.title ? 
-            '' :
+            '' : 
+            <>
               <Row className="g-3"  key={p.id}>
                 {/**Breadcrumb */}
                 <Col className="mb-5" xs={12}>
@@ -34,12 +39,18 @@ function ProductDetails(){
                     </Link>
                 </Col>
 
-               {/**Product Image */}
+                {/** Carrousel */}
                 <Col sm={12} md={7}>
+                    <CarouselImages className="mx-0 my-3 p-4" col={1} images={p.images}> 
+                    </CarouselImages>
+                </Col>
+
+               {/**Product Image */}
+                {/* <Col sm={12} md={7}>
                     <div className="w-100">
                       <img className="d-block mx-auto" src={p.thumbnail || "https://dummyimage.com/300x300/fff/000&text=Image+not+found"} />
                     </div>
-                </Col>
+                </Col> */}
 
                {/**Buy Card */}
                 <Col style={{top: '55px'}} className="sticky-md-bottom" xs={12} md={5}>
@@ -86,7 +97,8 @@ function ProductDetails(){
                       
                    </Col>
                 </Col >
-            </Row>
+            </Row> 
+            </>
           ))}
         </>
         </Container>

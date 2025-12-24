@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Form, Modal, Table } from "react-bootstrap";
+import { Button, Container, Form, Modal } from "react-bootstrap";
 import FilterSearch from "../components/FilterSearch.jsx";
+import ProductTable from "../components/ProductTable.jsx";
 import ProductViewModal from "../components/ProductViewModal.jsx";
 import SearchLive from "../components/SearchLive.jsx";
 import { useProducts } from "../contexts/ProductContext.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
+import { handleCreateAll } from "../dev/loadProductDataList.js";
 import { productService } from '../services/productService.js';
-import ProductCreateModal from "../components/ProductCreateModal.jsx";
-import ProductTable from "../components/ProductTable.jsx";
 
 const ProductCRUD = () => {
 
+
+  const {setItems, setItemsPerPage, currentItems, setCurrentPage } = useUIContext();
+
   const {onHideFilter} =  useUIContext();
-  const {fetchData, setPaginaActual} = useProducts();
+  const {fetchData, filtered, products, setSearch} = useProducts();
   const [showModal, setShowModal] = useState(false);
   const [modalMode, setModalMode] = useState("create"); 
   const [currentItem, setCurrentItem] = useState({ title: "", description: "", precio:0.0, stock:0 });
@@ -22,21 +25,19 @@ const ProductCRUD = () => {
 
   // Carga inicial
 
-
   useEffect(() => {
-    setPaginaActual(1);
+
+    // setItemsPerPage(3)
+    // setItems(filtered)
+    // setCurrentPage(1);
     onHideFilter(true);
+    handleCreateAll()
   }, []);
 
 
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
-    // let val = value;
-    // if (type === 'number') {
-    //   val = name === 'stock' ? parseInt(value, 10) : parseFloat(value);
-    //   if (isNaN(val)) val = 0;
-    // }
     const val = type === 'number' ? Number(value) : value;
     setCurrentItem({ ...currentItem, [name]: val });
   };
@@ -131,7 +132,10 @@ const ProductCRUD = () => {
       </Button>
 
       <FilterSearch  order="order-1" className="d-block" >
-          <SearchLive></SearchLive>
+          <SearchLive 
+             items={products}
+             handleSearch={setSearch}
+          />
       </FilterSearch>
 
 

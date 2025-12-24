@@ -3,7 +3,7 @@
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 export const productService = {
-    // GET: Obtener todos los productos
+    // GET ALL: Obtener todos los productos
     getAll: async () => {
         const response = await fetch(`${BASE_URL}/api/products`);
         if (!response.ok) throw new Error("Error al obtener productos");
@@ -23,6 +23,17 @@ export const productService = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(productData)
+        });
+        if (!response.ok) throw new Error("Error al crear producto");
+        return await response.json();
+    },
+
+    // POST: Crear a partir de una lista producto
+    createBulk: async (productDataList) => {
+        const response = await fetch(`${BASE_URL}/api/products/bulk`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(productDataList)
         });
         if (!response.ok) throw new Error("Error al crear producto");
         return await response.json();

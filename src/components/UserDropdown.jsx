@@ -62,7 +62,7 @@ function UserDropdown({className}) {
             <Dropdown.Item as={Link} to={`/perfil/${user}`}>
               <i className="bi bi-person me-2"></i> Perfil
             </Dropdown.Item>
-            <Dropdown.Item as={Link} to="/admin">
+            <Dropdown.Item as={Link} to="/dashboard">
               <i className="bi bi-gear me-2"></i> Dashboard
             </Dropdown.Item>
   

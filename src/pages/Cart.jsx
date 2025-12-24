@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 import BuyNowButton from "../components/BuyNowButton";
@@ -9,12 +9,14 @@ import ProductBuyModal from "../components/ProductBuyModal";
 import { useCart } from "../contexts/CartContext";
 import { useWindowsHeight, useWindowsWidth } from "../contexts/useWindowSize";
 import Img0 from "/src/assets/empty-cart.png";
+import { Link, useLocation, useMatch, useSearchParams } from "react-router-dom";
+
 
 import CartEmpty from "../components/CartEmpty";
 
 function Carrito() {
 
-
+  const buyMatch = useMatch("/carrito/:buy")
   const height = useWindowsHeight()
   const width = useWindowsWidth()
 
@@ -40,7 +42,6 @@ function Carrito() {
       total: totalPrice + envio - descuento
     };
   }, [cuponCheck, totalPrice]);
-
 
 
   return( cartItems.length != 0 ? 
@@ -105,9 +106,12 @@ function Carrito() {
 
         <BuyNowButton
           handle={()=>{setModalShow(true)}}
-          variant='primary'
-        >
-         Finalizar Compra
+          variant={buyMatch ? 'danger' : 'primary'}
+        > 
+        { buyMatch ? 
+          "Confirma Compra" : 
+          "Finalizar Compra"}
+
         </BuyNowButton>
       </Card>
       </Col>
@@ -117,7 +121,7 @@ function Carrito() {
 
       <ProductBuyModal 
         show={modalShow} 
-        onHide={() =>{ setModalShow(false); clearCart() }}
+        onHide={() =>{ setModalShow(false)}}
       />
     </Container> :
     <CartEmpty 

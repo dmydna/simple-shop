@@ -12,7 +12,7 @@ function CardProduct({title, image ,price, stock, id, children, className, cols,
            <Card className={`${className || 'm-2'}`}>
               <Link 
                 className="text-decoration-none text-reset p-0"
-               to={"/productos/details/" + encodeURIComponent(title)}
+                to={`/productos/details/${encodeURIComponent(title)}`}
               >
               <Card.Img   src={image || "https://dummyimage.com/300x300/fff/000&text=Image+not+found"}
                     style={{ 

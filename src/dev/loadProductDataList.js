@@ -1,5 +1,5 @@
+import { listingService as productService } from "../services/listingService";
 import { productDataList } from "./productDataList";
-import { productService } from "../services/productService";
 
 export const handleCreateAll = async () => {
   try {

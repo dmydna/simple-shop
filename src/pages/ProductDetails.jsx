@@ -17,7 +17,6 @@ function ProductDetails(){
       window.scrollTo(0, 0);
     }, []);
   
-
     const name = decodeURIComponent(useParams().name) 
     const { products } = useProducts()
 

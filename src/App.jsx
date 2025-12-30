@@ -21,10 +21,11 @@ import "./styles/index.css"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UIProvider } from "./contexts/UIContext";
-import ProductCRUD from "./pages/ProductCRUD";
+import ListingCRUD from "./pages/ListingCRUD";
 import ClientCRUD from "./pages/ClientCRUD";
 import ClientTable from "./components/ClientTable";
 import { ClientProvider } from "./contexts/ClientContext";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
  
@@ -82,7 +83,6 @@ function App() {
             <>
             <Products/>
             </>
-
           }
           /> 
           <Route path="/productos/filter/" element={
@@ -103,26 +103,26 @@ function App() {
           />
           <Route path="/productos" element={
             <> <Products/>
-              <Pagination />
             </>}
           />
           <Route path="/admin/:manager" element= {             
              <ProtectedRoute>
                {/* <AdminProductTable /> */}
-                <ProductCRUD /> 
-                <Pagination />
+                <ListingCRUD /> 
              </ProtectedRoute>} />
-          <Route path="/dashboard" element={
-             <>
-                <ProductCRUD /> 
+          <Route path="/dashboard/" element={
+             <Dashboard /> 
+          } />
 
+          <Route path="/dashboard/listing" element={
+             <>
+                <ListingCRUD /> 
              </> 
             } 
           />
           <Route path="/dashboard/clients" element={ 
             <>
             <ClientCRUD  />
-            <Pagination />
             </>} />
           {/* Ruta para no coincidencias */}
           <Route path="*" element={<NotFound />} />

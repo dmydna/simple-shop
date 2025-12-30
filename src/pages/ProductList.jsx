@@ -8,6 +8,7 @@ import FilterSearch from "../components/FilterSearch";
 import { useProducts } from "../contexts/ProductContext";
 import { useUIContext } from "../contexts/UIContext";
 import Pagination from "../components/Pagination";
+import Paginator from "../components/Paginator";
 
 
 

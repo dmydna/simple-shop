@@ -68,6 +68,15 @@ function ProductTable({openEditModal, handleDelete,  handleInfo}) {
                   onClick={() => handleInfo(item)}
                   className="mb-1"
                 >
+                  <i class="bi bi-info-circle-fill"></i>
+                  {/* <p className="m-0 ms-2 d-none d-md-inline-block">ver detalles</p> */}
+                </Button>
+                <Button
+                  variant="dark"
+                  size="sm"
+                  onClick={() => handleInfo(item)}
+                  className="ms-3 mb-1"
+                >
                   <i class="bi bi-eye-fill"></i>
                   {/* <p className="m-0 ms-2 d-none d-md-inline-block">ver detalles</p> */}
                 </Button>

@@ -7,9 +7,9 @@ import SearchLive from "../components/SearchLive.jsx";
 import { useProducts } from "../contexts/ProductContext.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
 import { handleCreateAll } from "../dev/loadProductDataList.js";
-import { productService } from '../services/productService.js';
+import { listingService as productService } from '../services/listingService.js';
 
-const ProductCRUD = () => {
+const ListingCRUD = () => {
 
 
   const {setItems, setItemsPerPage, currentItems, setCurrentPage } = useUIContext();
@@ -233,4 +233,4 @@ const ProductCRUD = () => {
 };
 
 
-export default ProductCRUD;
+export default ListingCRUD;

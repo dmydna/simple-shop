@@ -1,25 +1,26 @@
 // src/services/clientService.js
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+const ENDPOINT = "api/clients"
 
 export const clientService = {
     // GET ALL: Obtener todos los clientes
     getAll: async () => {
-        const response = await fetch(`${BASE_URL}/api/clients`);
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}`);
         if (!response.ok) throw new Error("Error al obtener clientes");
         return await response.json();
     },
 
     // GET: Obtener un Cliente por ID
     getById: async (id) => {
-        const response = await fetch(`${BASE_URL}/api/clients/${id}`);
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`);
         if (!response.ok) throw new Error("Cliente no encontrado");
         return await response.json();
     },
 
     // POST: Crear un nuevo Cliente
     create: async (clientData) => {
-        const response = await fetch(`${BASE_URL}/api/clients`, {
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(clientData)
@@ -30,7 +31,7 @@ export const clientService = {
 
     // POST: Crear a partir de una lista Cliente
     createBulk: async (clientDataList) => {
-        const response = await fetch(`${BASE_URL}/api/clients/bulk`, {
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/bulk`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(clientDataList)
@@ -41,7 +42,7 @@ export const clientService = {
 
     // PUT: Actualiza Cliente por ID
     update: async (id, clientData) => {
-        const response = await fetch(`${BASE_URL}/api/clients/${id}`, {
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(clientData)
@@ -52,7 +53,7 @@ export const clientService = {
 
     // DELETE: Eliminar un Cliente por ID
     delete: async (id) => {
-        const response = await fetch(`${BASE_URL}/api/clients/${id}`, {
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'DELETE',
         });
 

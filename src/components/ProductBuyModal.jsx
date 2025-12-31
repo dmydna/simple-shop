@@ -46,14 +46,18 @@ function ProductBuyModal({show,onHide}) {
 
 
     const handleCreateOrder = async (newClient) => {
+      console.log(cartItems)
       setOrder({ 
         ...order,
         state: "PROCESANDO", 
         client: { id: newClient.id }, 
         details: cartItems.map(p => ({
-          product: { id: p.id }, 
+          productId: p.id, 
+          name: p.name,
+          stock: p.stock || 0,
           quantity: p.quantity || 1,
-          price: p.price
+          price: p.price,
+          priceAtPurchase: p.price * p.quantity
         })),
       });
       const orderData = order;

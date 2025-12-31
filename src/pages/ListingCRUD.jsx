@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Modal } from "react-bootstrap";
 import FilterSearch from "../components/FilterSearch.jsx";
-import ProductTable from "../components/ProductTable.jsx";
-import ProductViewModal from "../components/ProductViewModal.jsx";
+import ListingTable from "../components/ListingTable.jsx";
+import ListingViewModal from "../components/ListingViewModal.jsx";
 import SearchLive from "../components/SearchLive.jsx";
-import { useProducts } from "../contexts/ProductContext.jsx";
+import { useListings } from "../contexts/ListingContext.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
 import { handleCreateAll } from "../dev/loadProductDataList.js";
 import { listingService as productService } from '../services/listingService.js';
+import { Link } from "react-router-dom";
 
 const ListingCRUD = () => {
 
@@ -15,7 +16,7 @@ const ListingCRUD = () => {
   const {setItems, setItemsPerPage, currentItems, setCurrentPage } = useUIContext();
 
   const {onHideFilter} =  useUIContext();
-  const {fetchData, filtered, products, setSearch} = useProducts();
+  const {fetchData, filtered, products, setSearch ,loading, filterDraft, setActiveFilters, setFilterDraft, setResetFilter} = useListings(); 
   const [showModal, setShowModal] = useState(false);
   const [modalMode, setModalMode] = useState("create"); 
   const [currentItem, setCurrentItem] = useState({ title: "", description: "", precio:0.0, stock:0 });
@@ -117,22 +118,29 @@ const ListingCRUD = () => {
     <>
     <Container className="mt-4">
       
-      <div className="w-100 d-flex flex-wrap mt-2 mb-4">
+    <div className="w-100 d-flex flex-wrap mt-2 mb-4">
+         <Link to={'/dashboard'} className={`text-decoration-none text-dark`} >
          <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
             Dashboard
          </span>
+         </Link>
          <span style={{lineHeight: '2.3rem'}} className="text-secondary">
           Administra tus publicaciones
          </span>
-       </div>
+    </div>
 
       
       <Button variant="primary" onClick={openCreateModal} className="mb-5">
-        <i class="bi bi-plus-lg"></i>
+        <i className="bi bi-plus-lg"></i>
         <span className="ms-2">Crear nuevo item</span>
       </Button>
 
-      <FilterSearch  order="order-1" className="d-block" >
+      <FilterSearch  order="order-1" className="d-block" 
+          items={products} 
+          filterDraft={filterDraft} 
+          onFilterDraft={setFilterDraft} 
+          onActiveFilters={setActiveFilters} 
+          onResetFilter={setResetFilter}>
           <SearchLive 
              items={products}
              handleSearch={setSearch}
@@ -141,7 +149,7 @@ const ListingCRUD = () => {
 
 
      {/*  TABLE GET ALL  */} 
-      <ProductTable  
+      <ListingTable  
          openEditModal={openEditModal} 
          handleDelete={handleDelete}
          handleInfo={handleInfo}
@@ -149,7 +157,7 @@ const ListingCRUD = () => {
 
 
       {/*  Modal READ  */} 
-      <ProductViewModal 
+      <ListingViewModal 
          product={showCurrent} 
          show={showInfo} 
          onHide={setShowInfo} 

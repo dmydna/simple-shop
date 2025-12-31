@@ -1,7 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Button, Dropdown, Form, InputGroup } from "react-bootstrap";
-import { useProducts } from "../contexts/ProductContext";
-import { useClients } from "../contexts/ClientContext";
+import React, { useEffect, useState } from "react";
+import { Button, InputGroup } from "react-bootstrap";
 
 function SearchLive({items, handleSearch}) {
   const [query, setQuery] = useState(""); 

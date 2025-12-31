@@ -1,9 +1,10 @@
 
-.h-white:active,
-.h-white:hover,
-.h-white:focus{
+.hover-color-white:active,
+.hover-color-white:hover{
     color: white!important;
 }
+
+
 
 
 .hover-icon{

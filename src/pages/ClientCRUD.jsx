@@ -10,7 +10,7 @@ import { handleCreateAll } from "../dev/loadProductDataList.js";
 import { clientService } from '../services/clientService.js';
 import ClientTable from "../components/ClientTable.jsx";
 import { useClients } from "../contexts/ClientContext.jsx";
-
+import { Link } from "react-router-dom";
 import ClientViewModal from "../components/ClientViewModal.jsx";
 
 
@@ -95,14 +95,18 @@ const ClientCRUD = () => {
 
     return(
      <Container className="mt-4">
-          <div className="w-100 d-flex flex-wrap mt-2 mb-4">
-               <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
-                  Dashboard
-               </span>
-               <span style={{lineHeight: '2.3rem'}} className="text-secondary">
-                Administra tus Clientes
-               </span>
-           </div>
+          
+        <div className="w-100 d-flex flex-wrap mt-2 mb-4">
+            <Link to={'/dashboard'} className={`text-decoration-none text-dark`} >
+            <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
+               Dashboard
+            </span>
+            </Link>
+            <span style={{lineHeight: '2.3rem'}} className="text-secondary">
+             Administra tus clientes
+            </span>
+        </div>
+
 
             <div className="mb-4">
                <SearchLive  
@@ -112,11 +116,11 @@ const ClientCRUD = () => {
             </div>
 
 
-           <ClientTable  
+        <ClientTable  
               openEditModal={openEditModal} 
               handleDelete={handleDelete}
               handleInfo={handleInfo}
-           />
+        />
 
         <ClientViewModal 
            client={showCurrent} 

@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Card, InputGroup } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
+import { useListings } from "../contexts/ListingContext";
 import AddToCartButton from "./AddToCartButton";
 import BuyNowButton from "./BuyNowButton";
 import ProductBuyModal from "./ProductBuyModal";
-import { Link, useNavigate } from "react-router-dom";
-import { useProducts } from "../contexts/ProductContext";
 
 function ProductBuyCard({ title, rating, ship, id, stock, price, discount }) {
 
   const { cartItems, addToCart} = useCart()
-  const { products } = useProducts()
+  const { products } = useListings()
   const [modalShow, setModalShow] = useState(false);
   const {clearCart} = useCart()
   const navigate = useNavigate()
@@ -32,7 +32,7 @@ function ProductBuyCard({ title, rating, ship, id, stock, price, discount }) {
         </Card.Text>
         <Card.Text className="text-secondary">stock: {stock || "N/A"}</Card.Text>
         <Card.Text className="text-secondary mb-3">
-          <i class="bi bi-truck"></i> {ship || 'N/A'}
+          <i className="bi bi-truck"></i> {ship || 'N/A'}
         </Card.Text>
       </Card.Body>
       <InputGroup className="w-100 align-items-center gap">

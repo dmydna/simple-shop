@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Container, Modal, Table } from 'react-bootstrap';
-import ProductTable from './ProductTable';
 import OrderViewModal from './OrderViewModal';
 
 function ClientViewModal({client, show ,onHide}){
@@ -57,7 +56,7 @@ return (
                   onClick={() => openEditModal(item.product)}
                   className="me-3 mb-1"
                 >
-                  <i class="bi bi-pencil-square"></i>
+                  <i className="bi bi-pencil-square"></i>
                   {/* <p className="m-0 ms-2 d-none d-md-inline-block">Editar</p> */}
                 </Button>
                 <Button
@@ -66,7 +65,7 @@ return (
                   onClick={() => handleDelete(item.product.id)}
                   className="me-3 mb-1"
                 >
-                  <i class="bi bi-trash3-fill"></i>
+                  <i className="bi bi-trash3-fill"></i>
                   {/* <p className="m-0 ms-2 d-none d-md-inline-block">Eliminar</p> */}
                 </Button>
                 <Button
@@ -75,7 +74,7 @@ return (
                   onClick={() => showOrderHandle(item)}
                   className="mb-1"
                 >
-                  <i class="bi bi-eye-fill"></i>
+                  <i className="bi bi-eye-fill"></i>
                 </Button>
               </td>
               </tr>

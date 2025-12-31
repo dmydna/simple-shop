@@ -8,6 +8,7 @@ import { useProducts } from "../contexts/ProductContext";
 import ProductSection from "../components/ProductSection";
 import ProductCarousel from "../components/ProductCarousel";
 import CarouselImages from "../components/CarouselImages";
+import { useListings } from "../contexts/ListingContext";
 
 
 
@@ -18,7 +19,7 @@ function ProductDetails(){
     }, []);
   
     const name = decodeURIComponent(useParams().name) 
-    const { products } = useProducts()
+    const { products } = useListings()
 
     return (
         <Container fluid="xl" className="bg-white rounded mt-2 pt-2">

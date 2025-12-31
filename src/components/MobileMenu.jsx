@@ -30,7 +30,7 @@ function MobileMenu({children}) {
   return (
     <>
       <Button className="d-md-none" variant="light" onClick={handleShow}>
-        <span class="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon"></span>
       </Button>
       <Offcanvas show={showMenu} onHide={handleClose}>
         <Offcanvas.Header closeButton>
@@ -50,7 +50,7 @@ function MobileMenu({children}) {
               style={{ opacity: 0.8 }}
               onClick={handleLogin}
             >
-              <i class="bi bi-box-arrow-in-left me-2"></i>
+              <i className="bi bi-box-arrow-in-left me-2"></i>
               Iniciar sesión
             </Button>
     

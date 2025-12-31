@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useCart } from "../contexts/CartContext";
 import { useProducts } from "../contexts/ProductContext";
+import { useListings } from "../contexts/ListingContext";
 
 
 
@@ -10,7 +11,7 @@ function AddToCartButton({id, variant='success', children}){
 
     const { cartItems, addToCart} = useCart()
 
-    const {products} = useProducts()
+    const {products} = useListings()
 
     const [product] = useMemo(()=>{
       return products.filter((p)=> {

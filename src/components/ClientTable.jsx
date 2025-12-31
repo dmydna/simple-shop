@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
-import { useProducts } from '../contexts/ProductContext';
 import { useClients } from '../contexts/ClientContext';
 import { useUIContext } from '../contexts/UIContext';
 import Pagination from './Pagination';
@@ -15,8 +14,7 @@ function ClientTable({openEditModal, handleDelete,  handleInfo}) {
     setItemsPerPage(8)
     setItems(filtered)
     console.log(filtered)
-  },[filtered, clients])
-
+  },[filtered, clients, loading])
 
 
   return (
@@ -50,7 +48,7 @@ function ClientTable({openEditModal, handleDelete,  handleInfo}) {
                   onClick={() => openEditModal(item)}
                   className="me-3 mb-1"
                 >
-                  <i class="bi bi-pencil-square"></i>
+                  <i className="bi bi-pencil-square"></i>
                   {/* <p className="m-0 ms-2 d-none d-md-inline-block">Editar</p> */}
                 </Button>
                 <Button
@@ -59,7 +57,7 @@ function ClientTable({openEditModal, handleDelete,  handleInfo}) {
                   onClick={() => handleDelete(item.id)}
                   className="me-3 mb-1"
                 >
-                  <i class="bi bi-trash3-fill"></i>
+                  <i className="bi bi-trash3-fill"></i>
                   {/* <p className="m-0 ms-2 d-none d-md-inline-block">Eliminar</p> */}
                 </Button>
                 <Button
@@ -68,7 +66,7 @@ function ClientTable({openEditModal, handleDelete,  handleInfo}) {
                   onClick={() => handleInfo(item)}
                   className="mb-1"
                 >
-                  <i class="bi bi-eye-fill"></i>
+                  <i className="bi bi-eye-fill"></i>
                   {/* <p className="m-0 ms-2 d-none d-md-inline-block">ver detalles</p> */}
                 </Button>
               </td>

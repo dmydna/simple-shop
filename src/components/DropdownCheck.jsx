@@ -1,17 +1,15 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Col, Form, Row, Button, Dropdown } from "react-bootstrap";
-import { useProducts } from "../contexts/ProductContext";
+import React, { useEffect, useState } from "react";
+import { Dropdown, Form } from "react-bootstrap";
+import { useListings } from "../contexts/ListingContext";
 
-function DropdownCheck({children, array ,className, style, variant}){
+function DropdownCheck({children, array ,className, style, variant, onFilterDraft}){
 
 
     const [selectedTags, setSelectedTags] = useState([]);
-    const { setFilterDraft } = useProducts()
-
 
     useEffect(()=>{
       if(selectedTags.length != 0){
-        setFilterDraft(prev =>  ({
+        onFilterDraft(prev =>  ({
           ...prev, 
           tags : selectedTags
         }))

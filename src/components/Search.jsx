@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useProducts } from "../contexts/ProductContext";
 import { useUIContext } from "../contexts/UIContext";
 import { useWindowsWidth } from "../contexts/useWindowSize";
+import { useListings } from "../contexts/ListingContext";
 
 function Search({toggle, setToggle}){
     
@@ -13,7 +14,7 @@ function Search({toggle, setToggle}){
 
     const {onHideFilter} = useUIContext()
     const [query, setQuery] = useState(""); 
-    const {products} = useProducts()
+    const {products} = useListings()
 
     const [show, setShow] = useState(false);
 

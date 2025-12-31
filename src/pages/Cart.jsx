@@ -1,5 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
+import { useMatch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import BuyNowButton from "../components/BuyNowButton";
 import CartClearModal from "../components/CartClearModal";
@@ -9,7 +10,6 @@ import ProductBuyModal from "../components/ProductBuyModal";
 import { useCart } from "../contexts/CartContext";
 import { useWindowsHeight, useWindowsWidth } from "../contexts/useWindowSize";
 import Img0 from "/src/assets/empty-cart.png";
-import { Link, useLocation, useMatch, useSearchParams } from "react-router-dom";
 
 
 import CartEmpty from "../components/CartEmpty";
@@ -50,10 +50,10 @@ function Carrito() {
     <Row className="g-0" md={4}>
       <Col className="col-12 col-md-12 col-lg-12 col-xl-7">
       <Card className="m-2 p-4">
-      <div class="d-flex align-items-center justify-content-between">
+      <div className="d-flex align-items-center justify-content-between">
         <p className="h5 fw-bold pt-3">Mi carrito({cartItems.length})</p>
         <i onClick={() => onHideClearCart(true)} 
-        style={{fontSize: "xx-large"}} class="bi bi-x hover-icon"></i>
+        style={{fontSize: "xx-large"}} className="bi bi-x hover-icon"></i>
       </div>
 
       <CartClearModal  
@@ -102,7 +102,6 @@ function Carrito() {
             ${Order.total.toFixed(2)}
           </Card.Text>
         </div>
-
 
         <BuyNowButton
           handle={()=>{setModalShow(true)}}

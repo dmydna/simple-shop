@@ -3,11 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./components/Footer";
 import NavHeader from "./components/NavHeader";
-import Pagination from "./components/Pagination";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
-import { CarritoProvider } from "./contexts/CartContext";
-import { ProductosProvider } from "./contexts/ProductContext";
 import Admin from "./pages/Admin";
 import Carrito from "./pages/Cart";
 import Contact from "./pages/Contact";
@@ -20,11 +17,10 @@ import Products from "./pages/ProductList";
 import "./styles/index.css"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { UIProvider } from "./contexts/UIContext";
+import { CRUDWrapper } from "./contexts/CRUDWrapper";
 import ListingCRUD from "./pages/ListingCRUD";
 import ClientCRUD from "./pages/ClientCRUD";
-import ClientTable from "./components/ClientTable";
-import { ClientProvider } from "./contexts/ClientContext";
+import ProductCRUD from "./pages/ProductCRUD";
 import Dashboard from "./pages/Dashboard";
 
 function App() {
@@ -51,10 +47,7 @@ function App() {
 
   return (
     <AuthProvider>
-    <UIProvider>
-    <ProductosProvider>
-    <CarritoProvider>
-    <ClientProvider>
+    <CRUDWrapper>
     <div className="d-flex flex-column min-vh-100 pt-3">
         
 
@@ -114,6 +107,10 @@ function App() {
              <Dashboard /> 
           } />
 
+          <Route path="/dashboard/products" element={
+             <ProductCRUD /> 
+          } />
+
           <Route path="/dashboard/listing" element={
              <>
                 <ListingCRUD /> 
@@ -132,10 +129,7 @@ function App() {
       </main>
       <Footer />
     </div>
-    </ClientProvider>
-    </CarritoProvider>
-    </ProductosProvider>
-    </UIProvider>
+    </CRUDWrapper>
     </AuthProvider>
   );
 }

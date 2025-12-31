@@ -1,18 +1,20 @@
 import React, { useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
-import { useProducts } from '../contexts/ProductContext.jsx';
+import { useListings } from '../contexts/ListingContext';
 import { useUIContext } from '../contexts/UIContext';
 import Pagination from './Pagination';
 
-function ProductTable({openEditModal, handleDelete,  handleInfo}) {
+
+function ListingTable({openEditModal, handleDelete,  handleInfo}) {
 
   const { currentItems, setVisibleClients, setItems, setItemsPerPage, currentPage, setCurrentPage, totalPages } = useUIContext()
-  const  {filtered, products, loading} =  useProducts()
+  const  {filtered, products, loading} = useListings()
 
   useEffect(()=>{
     // Lógica de paginación
     setItemsPerPage(8)
     setItems(filtered)
+    console.log(filtered)
   },[filtered, products, loading])
 
 
@@ -44,7 +46,7 @@ function ProductTable({openEditModal, handleDelete,  handleInfo}) {
             currentItems.map((item) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
-                <td style={{ width: '60%' }}>{item.name}</td>
+                <td style={{ width: '60%' }}>{item.title}</td>
                 <td>
                   <Button
                     variant="warning"
@@ -73,6 +75,15 @@ function ProductTable({openEditModal, handleDelete,  handleInfo}) {
                     <i className="bi bi-info-circle-fill"></i>
                     {/* <p className="m-0 ms-2 d-none d-md-inline-block">ver detalles</p> */}
                   </Button>
+                  <Button
+                    variant="dark"
+                    size="sm"
+                    onClick={() => handleInfo(item)}
+                    className="ms-3 mb-1"
+                  >
+                    <i className="bi bi-eye-fill"></i>
+                    {/* <p className="m-0 ms-2 d-none d-md-inline-block">ver detalles</p> */}
+                  </Button>
                 </td>
               </tr>
             ))
@@ -89,4 +100,4 @@ function ProductTable({openEditModal, handleDelete,  handleInfo}) {
   );
 }
 
-export default ProductTable;
+export default ListingTable;

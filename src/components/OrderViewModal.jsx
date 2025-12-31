@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Button, Table, Modal, Container } from 'react-bootstrap';
+import React from 'react';
+import { Button, Container, Modal, Table } from 'react-bootstrap';
 
 
 function OrderViewModal({order, show ,onHide, openEditModal, handleDelete,  handleInfo}) {
@@ -53,7 +53,7 @@ function OrderViewModal({order, show ,onHide, openEditModal, handleDelete,  hand
                   onClick={() => openEditModal(item.product)}
                   className="me-3 mb-1"
                 >
-                  <i class="bi bi-pencil-square"></i>
+                  <i className="bi bi-pencil-square"></i>
                 </Button>
                 <Button
                   variant="danger"
@@ -61,7 +61,7 @@ function OrderViewModal({order, show ,onHide, openEditModal, handleDelete,  hand
                   onClick={() => handleDelete(item.product.id)}
                   className="me-3 mb-1"
                 >
-                  <i class="bi bi-trash3-fill"></i>
+                  <i className="bi bi-trash3-fill"></i>
                 </Button>
               </td>
             </tr>

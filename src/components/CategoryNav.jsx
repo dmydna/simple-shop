@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { Link, useMatch } from "react-router-dom";
-import { useProducts } from "../contexts/ProductContext";
 import { Col, Container, Row } from "react-bootstrap";
 import CategoryItem from "./CategoryItem";
 
@@ -9,6 +8,7 @@ import Img2 from '../assets/perfume.png';
 import Img3 from "../assets/dressing-table.png";
 import Img4 from '../assets/grocery.png';
 import { useUIContext } from "../contexts/UIContext";
+import { useListings } from "../contexts/ListingContext";
 
 
 function CategoryNav(){
@@ -16,7 +16,7 @@ function CategoryNav(){
     const categoryMatch = useMatch("/productos/category/:category");
     const searchMatch = useMatch("/productos/search/:product");
     const {showFilter} = useUIContext()
-    const {products} = useProducts()
+    const {products} = useListings()
 
     const  categories = useMemo(()=>(
       [...new Set(products.map(p => p.category))]

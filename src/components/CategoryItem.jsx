@@ -3,7 +3,6 @@ import { Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import CarritoInput from "./CartInput";
-import { useProducts } from "../contexts/ProductContext";
 import CarritoItem from "./CartItem";
 
 function CategoryItem({category, image, link, className, variant}){

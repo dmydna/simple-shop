@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
-import { useProducts } from '../contexts/ProductContext';
 import { useWindowsWidth } from '../contexts/useWindowSize';
 import CardProduct from './CardProduct';
+import { useListings } from '../contexts/ListingContext';
 
 
 
@@ -14,7 +14,7 @@ function ProductCarousel({children, filterFn, col, className}) {
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
-  const { products, filtered } = useProducts()
+  const { products, filtered } = useListings()
 
 
   const [chunkSize, setChunkSize] = useState()

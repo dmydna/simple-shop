@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Dropdown, Form, Row } from "react-bootstrap";
-import { useProducts } from "../contexts/ProductContext";
+import { useListings } from "../contexts/ListingContext";
 
 
 
@@ -13,7 +13,8 @@ function DropdownRange({
     style, 
     className, 
     variant, 
-    onFilterUpdate}){
+    onFilterUpdate
+}){
 
 
 
@@ -21,7 +22,7 @@ function DropdownRange({
     const [minPrice, setMinPrice] = useState(min)
 
 
-    const {setFilterDraft} =  useProducts()
+    const {setFilterDraft} =  useListings()
 
     useEffect(()=>{
         setFilterDraft( prev => ({

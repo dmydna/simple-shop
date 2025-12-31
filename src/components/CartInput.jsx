@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { useCart } from "../contexts/CartContext";
 
@@ -44,13 +44,13 @@ function CarritoInput({ producto, className }) {
   const handleChange = (e) => {
      // actCarrito(producto,e);
      const inputValue = e.target.value;
+     const val = parseInt(inputValue );
 
     if (inputValue === "") {
       setCantidad(1); 
       setCantidadCartItem(producto, 1)
       return
     }
-     const val = parseInt(inputValue );
 
     if(val > producto.stock){
       setCantidad(producto.stock); 
@@ -81,7 +81,7 @@ function CarritoInput({ producto, className }) {
           className="btn p-1 border-0 ps-3"
           onClick={() =>  decCarrito(producto) }
           variant
-        ><i class="bi bi-dash-lg"></i>
+        ><i className="bi bi-dash-lg"></i>
         </Button>
 
         {/* InputCart */}
@@ -99,7 +99,7 @@ function CarritoInput({ producto, className }) {
           className="btn p-1 border-0 pe-3"
           onClick={() => incCarrito(producto)}
           variant
-        ><i class="bi bi-plus-lg"></i>
+        ><i className="bi bi-plus-lg"></i>
         </Button>
       </InputGroup>
 

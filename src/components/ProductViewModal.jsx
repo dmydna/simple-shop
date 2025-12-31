@@ -13,22 +13,35 @@ return (
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-           <p><b>Title: </b>{product?.title}</p>
+            { product?.title === undefined ?  '' : 
+                <p><b>Title: </b>{product?.title}</p> } 
+            { product?.name  === undefined ? '' : 
+                <p><b>Name:  </b>{product?.name} </p> } 
            <p>
-              <span className='me-3'><b>Rating:</b> {product?.rating}</span> 
-              <span className='me-3'><b>Price: </b>{product?.price}</span>
-              <span><b>Stock: </b>{product?.stock}</span>
+              { product?.rating  === undefined ? '' : 
+                  <span className='me-3'><b>Rating:</b> {product?.rating}</span> } 
+              { product?.price  === undefined ?  '' : 
+                  <span className='me-3'><b>Price:</b> {product?.price}</span>   } 
+              { product?.stock  === undefined ?  '' : 
+                  <span className='me-3'><b>Stock:</b> {product?.stock}</span>   } 
            </p>
 
-           <p><b>Description: </b>{product?.description}</p>
+           { product?.description === undefined ?  '' : 
+              <p><b>Description: </b>{product?.description}</p> } 
 
            <p>
-              <span className='me-3'><b>Brand: </b>{product?.brand}</span>
-              <span className='me-3'><b>Category: </b>{product?.category}</span>
+              { product?.stock  === undefined ?  '' : 
+                  <span className='me-3'><b>Brand:</b> {product?.brand}</span>   } 
+              { product?.category  === undefined ?  '' : 
+                  <span className='me-3'><b>Category:</b> {product?.category}</span>   } 
            </p>
+           
+           { product?.thumbnail  === undefined ?  '' : 
+                <>
+                  <p className='me-3'><b>Brand:</b> {product?.thumbnail}</p> 
+                  <img src={product?.thumbnail} width={155} />
+                </>  } 
 
-           <p><b>Images: </b></p>
-           <img src={product?.thumbnail} width={155} />
         </Modal.Body>
         <Modal.Footer>
         <Button variant="success" onClick={()=> onHide(false)}>

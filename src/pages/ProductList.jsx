@@ -8,6 +8,7 @@ import FilterSearch from "../components/FilterSearch";
 import { useProducts } from "../contexts/ProductContext";
 import { useUIContext } from "../contexts/UIContext";
 import Pagination from "../components/Pagination";
+import { useListings } from "../contexts/ListingContext";
 
 
 
@@ -22,7 +23,7 @@ function Products() {
   const searchMatch = useMatch("/productos/search/:product");
   const filterMatch = useMatch("/productos/filter/:product");
 
-  const { setCategory, setSearch, filtered, setActiveFilters, setResetFilter,loading, products } = useProducts();
+  const { setCategory, setSearch, filtered, setActiveFilters, setResetFilter,loading, products, setFilterDraft, filterDraft } = useListings();
   const location = useLocation();
 
   // resetea valores al entrar.
@@ -141,7 +142,13 @@ function Products() {
         location.pathname.startsWith('/productos/filter') ?
         <>
           <CategoryNav show={showCategoryNav} />
-          <FilterSearch className=""/>
+          <FilterSearch 
+              items={products} 
+              filterDraft={filterDraft} 
+              onFilterDraft={setFilterDraft} 
+              onActiveFilters={setActiveFilters} 
+              onResetFilter={setResetFilter}
+          className=""/>
         </> : ''
        }
 

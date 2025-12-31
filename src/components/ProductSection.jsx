@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
-import { useProducts } from '../contexts/ProductContext';
 import { useWindowsWidth } from '../contexts/useWindowSize';
 import CardProduct from './CardProduct';
+import { useListings } from '../contexts/ListingContext';
 
 function ProductSection({children, filterFn, count, className, borders}){
 
-    const { products } = useProducts()
+    const { products } = useListings() 
 
     const width = useWindowsWidth()
     const cfiltered = useMemo(()=>{

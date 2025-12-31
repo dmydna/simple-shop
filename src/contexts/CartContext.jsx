@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useProducts } from "./ProductContext";
+import { useListings } from "./ListingContext";
 
 const CartContext = createContext();
 
@@ -7,7 +7,7 @@ const CartContext = createContext();
 export function CarritoProvider({ children }) {
 
 
-  const {products, setProducts} = useProducts()
+  const {products, setProducts} = useListings()
   const [couponDiscount, setCouponDiscount] = useState(false)
 
   const [cartItems, setCartItems] = useState([]);

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import CarritoInput from "./CartInput";
@@ -37,17 +37,17 @@ function CarritoItem(){
                     <div className="d-flex flex-wrap justify-content-between align-items-center">
                     <CarritoInput className={'order-1 order-md-2'} producto={item}/>
                       <Card.Text className="text-secondary small m-0 d-none d-md-block">
-                        <i class="bi bi-eye me-1"></i> 
+                        <i className="bi bi-eye me-1"></i> 
                         stock: 
                         {item.stock - item.cantidad || 0}
                       </Card.Text>
                       <Card.Text className="text-secondary small m-0 d-none d-md-block">
                         p.u: 
-                        <i class="bi bi-currency-dollar"></i>
+                        <i className="bi bi-currency-dollar"></i>
                         {(item.price).toFixed(2)}
                       </Card.Text>
                       <Card.Text className="h5 m-0 order-2 order-md-1 mt-2 mt-sm-0">
-                        <i class="bi bi-currency-dollar"></i> 
+                        <i className="bi bi-currency-dollar"></i> 
                         {(item.price*item.cantidad).toFixed(2)}
                       </Card.Text>
                     </div>

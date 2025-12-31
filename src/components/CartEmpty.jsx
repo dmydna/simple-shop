@@ -1,7 +1,7 @@
-import { Container, Button, Col } from "react-bootstrap";
+import { useEffect } from "react";
+import { Button, Col, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import emptyCaryImg from "/src/assets/empty-cart.png";
-import { useEffect } from "react";
 
 
 function CartEmpty({ 
@@ -46,7 +46,7 @@ function CartEmpty({
           className="rounded w-100 px-4 py-1 mt-4 "
         >   
            <div className="d-flex gap-3 justify-content-center align-items-center p-2">
-              <i style={{scale: "1.2"}} class="bi bi-plus-lg"></i>
+              <i style={{scale: "1.2"}} className="bi bi-plus-lg"></i>
               <span className="fw-semibold small text-uppercase"> Agregar al carrito</span>
            </div>
         </Button>

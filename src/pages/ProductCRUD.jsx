@@ -7,29 +7,22 @@ import SearchLive from "../components/SearchLive.jsx";
 import { useProducts } from "../contexts/ProductContext.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
 import { handleCreateAll } from "../dev/loadProductDataList.js";
-import { listingService as productService } from '../services/listingService.js';
+import { productService } from '../services/productService.js';
+import { Link } from "react-router-dom";
 
 const ProductCRUD = () => {
 
-
-  const {setItems, setItemsPerPage, currentItems, setCurrentPage } = useUIContext();
-
   const {onHideFilter} =  useUIContext();
-  const {fetchData, filtered, products, setSearch} = useProducts();
+  const {fetchData, filtered, products, setSearch ,loading, filterDraft, setActiveFilters, setFilterDraft, setResetFilter} = useProducts();
   const [showModal, setShowModal] = useState(false);
   const [modalMode, setModalMode] = useState("create"); 
-  const [currentItem, setCurrentItem] = useState({ title: "", description: "", precio:0.0, stock:0 });
+  const [currentItem, setCurrentItem] = useState({ name: "", price:0.0 , stock:0 });
   
   const [showInfo, setShowInfo] = useState(false);
   const [showCurrent, setShowCurrent] = useState(null)
 
   // Carga inicial
-
   useEffect(() => {
-
-    // setItemsPerPage(3)
-    // setItems(filtered)
-    // setCurrentPage(1);
     onHideFilter(true);
     handleCreateAll()
   }, []);
@@ -117,21 +110,30 @@ const ProductCRUD = () => {
     <Container className="mt-4">
       
       <div className="w-100 d-flex flex-wrap mt-2 mb-4">
+         <Link to={'/dashboard'} className={`text-decoration-none text-dark`} >
          <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
             Dashboard
          </span>
+         </Link>
          <span style={{lineHeight: '2.3rem'}} className="text-secondary">
           Administra tus publicaciones
          </span>
-       </div>
+      </div>
 
       
       <Button variant="primary" onClick={openCreateModal} className="mb-5">
-        <i class="bi bi-plus-lg"></i>
+        <i className="bi bi-plus-lg"></i>
         <span className="ms-2">Crear nuevo item</span>
       </Button>
 
-      <FilterSearch  order="order-1" className="d-block" >
+      <FilterSearch  
+          order="order-1"
+          className="d-block" 
+          items={products} 
+          filterDraft={filterDraft} 
+          onFilterDraft={setFilterDraft} 
+          onActiveFilters={setActiveFilters} 
+          onResetFilter={setResetFilter}>
           <SearchLive 
              items={products}
              handleSearch={setSearch}

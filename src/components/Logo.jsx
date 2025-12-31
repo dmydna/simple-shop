@@ -8,7 +8,7 @@ function Logo(){
 
     return(
         <Navbar.Brand as={Link} to="/" className={`p-0`}>
-          <b class="h3 fw-bolder text-black">Simple</b>
+          <b className="h3 fw-bolder text-black">Simple</b>
           <b className="text-danger" style={subLogo}> SHOP</b>
         </Navbar.Brand>
     )

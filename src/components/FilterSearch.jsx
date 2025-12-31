@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
-import { useProducts } from "../contexts/ProductContext";
+import { useListings } from "../contexts/ListingContext";
 import { useUIContext } from "../contexts/UIContext";
 import DropdownCheck from "./DropdownCheck";
 import DropdownRange from "./DropdownRange";
 
-function FilterSearch({className, children, order=""}){
+function FilterSearch({className, children, order="", items, filterDraft, onFilterDraft, onActiveFilters, onResetFilter}){
 
 
     const {showFilter} =  useUIContext()
-    const {products,  filterDraft, setFilterDraft, setActiveFilters, setVisibleProducts, resetFilter, setResetFilter} = useProducts()
+    // const {products,  filterDraft, setFilterDraft, setActiveFilters, setVisibleProducts, resetFilter, setResetFilter} = useListings()
 
     const [searchParams, setSearchParams] = useSearchParams();
  
@@ -19,49 +19,63 @@ function FilterSearch({className, children, order=""}){
     const maxPriceParam = searchParams.get('maxPrice');
 
 
+
+
     useEffect(()=>{
       const selectedTags = tagsParam ? tagsParam.split(',') : [];
       const minPrice = minPriceParam ? Number(minPriceParam) : 0
       const maxPrice = maxPriceParam ? Number(maxPriceParam) : 15000
-      setFilterDraft( prev => ({
-        ...prev, 
-        tags:     selectedTags,
-        minPrice: minPrice,
-        maxPrice: maxPrice,
-      }))
-      setActiveFilters( filterDraft ) 
-    },[products, tagsParam, maxPriceParam, minPriceParam])
+      if(filterDraft.minPrice != undefined && filterDraft.maxPrice != undefined){
+        onFilterDraft( prev => ({
+          ...prev, 
+          minPrice: minPrice,
+          maxPrice: maxPrice,
+        }))
+      }
       
-
-    const handleReset = () => {
-      setSearchParams("")
-      setActiveFilters({})
-      setResetFilter(true)
-    }
+      if(filterDraft.tags != undefined){
+        onFilterDraft( prev => ({
+          ...prev, 
+          tags: selectedTags,
+        }))
+      }
+      onActiveFilters( filterDraft ) 
+    },[items, tagsParam, maxPriceParam, minPriceParam])
+      
 
     const handleApplyFilters = () => {
       const newSearchParams = {};
         
-      if (filterDraft?.tags?.length > 0) {
+      if (filterDraft?.tags != undefined && 
+          filterDraft?.tags.length > 0
+      ) {
         newSearchParams.tags = filterDraft.tags.join(',');
       }
-      newSearchParams.minPrice =filterDraft.minPrice;
-      newSearchParams.maxPrice = filterDraft.maxPrice;
+      if(filterDraft.minPrice != undefined  && filterDraft.maxPrice != undefined ){
+        newSearchParams.minPrice =filterDraft.minPrice;
+        newSearchParams.maxPrice = filterDraft.maxPrice;
+      }
+
       // Esto actualiza la URL a /filter?tags=oferta,nuevo&minPrice=50&maxPrice=300
       setSearchParams(newSearchParams)
       // aplica filtros
-      setActiveFilters( filterDraft )
+      onActiveFilters( filterDraft )
     }
 
     const handleSubmit = () => {
-      if(filterDraft != {}){
-        handleApplyFilters()
-      }      
+      if (Object.keys(filterDraft).length > 0) {
+        handleApplyFilters();
+        console.log(filterDraft)
+      }    
     }
 
+    const handleReset = () => {
+      setSearchParams("")
+      onActiveFilters({})
+      onResetFilter(true)
+    }
 
-
-    const setTags = [...new Set(products.flatMap(p => p.tags))];
+    const setTags = [...new Set(items.flatMap(p => p.tags))];
 
     return(
 
@@ -72,6 +86,7 @@ function FilterSearch({className, children, order=""}){
       <Form.Group as={Row}>
         <Col xs={12} sm={6} md={4} lg={3} className={order}>
           <DropdownCheck 
+              onFilterDraft={ onFilterDraft }
               variant="light"
               className="border rounded my-2" 
               array={setTags}>
@@ -104,7 +119,7 @@ function FilterSearch({className, children, order=""}){
             style={{maxWidth: "200px"}} className="w-100 my-2"
             variant="secondary"
           >
-            <i class="bi bi-trash3-fill"></i>
+            <i className="bi bi-trash3-fill"></i>
             <span className="ms-2">limpiar</span>
           </Button>
           </div>

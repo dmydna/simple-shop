@@ -20,6 +20,8 @@ export function CarritoProvider({ children }) {
     setCartCount(0)
   }
 
+
+
   const  removeFromCart = (productoCarrito) => {
 
     setCartCount((prevContador) => 
@@ -41,6 +43,40 @@ export function CarritoProvider({ children }) {
     ))
 
   }
+
+
+  const setCantidadCartItem = (productoCarrito, value) => {
+    // 1. Validar que el valor sea un número válido
+    const nuevaCantidad = parseInt(value);
+    if (isNaN(nuevaCantidad) || nuevaCantidad < 1) return;
+  
+    const totalDisponible = productoCarrito.stock + productoCarrito.cantidad;
+    
+    // Si el usuario pide más de lo que existe en total, limitamos al máximo
+    const cantidadFinal = nuevaCantidad > totalDisponible ? totalDisponible : nuevaCantidad;
+    const nuevoStockRestante = totalDisponible - cantidadFinal;
+  
+    setCartItems((prev) =>
+      prev.map((item) =>
+        item.id === productoCarrito.id 
+          ? { ...item, cantidad: cantidadFinal } 
+          : item
+      )
+    );
+    const diferencia = cantidadFinal - productoCarrito.cantidad;
+
+    // Actualizamos el contador global sumando la diferencia
+    setCartCount((prevContador) => prevContador + diferencia)
+    // 4. Actualizar Productos
+    setProducts((prev) =>
+      prev.map((item) =>
+        item.id === productoCarrito.id 
+          ? { ...item, stock: nuevoStockRestante } 
+          : item
+      )
+    );
+  };
+
 
   const decreaseCartItem = (productoCarrito) => {
 
@@ -186,7 +222,8 @@ export function CarritoProvider({ children }) {
          products,
          clearCart,
          addToCart,
-         couponDiscount, 
+         couponDiscount,
+         setCantidadCartItem, 
          setCouponDiscount}}>
       {children}
     </CartContext.Provider>

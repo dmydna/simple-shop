@@ -2,34 +2,30 @@ import { listingService as productService } from "../services/listingService";
 import { productDataList } from "./productDataList";
 
 export const handleCreateAll = async () => {
-  try {
-      // 1. Verificar si ya existen productos (esperando la respuesta)
-      const existingProducts = await productService.getAll();
-      
-      // Si la lista tiene elementos, cancelamos la carga masiva
-      if (existingProducts && existingProducts.length > 0) {
-          console.log("⚠️ Ya existen productos en la base de datos. Operación cancelada.");
-          return;
+    let success = false;
+  
+    while (!success) {
+      try {
+        // 1. Verificar existencia JUSTO ANTES de intentar crear
+        const existing = await productService.getAll();
+        if (existing && existing.length > 0) {
+          console.log("⚠️ Los productos ya están en la base de datos.");
+          success = true; // Salimos del bucle porque ya están ahí
+          break;
+        }
+  
+        console.log("📤 Intentando carga masiva...");
+        await productService.createBulk(productDataList);
+        
+        success = true;
+        console.log("✅ Carga masiva completada");
+  
+      } catch (error) {
+        console.error("❌ Fallo en el intento. Reintentando en 2s...", error);
+        await new Promise(resolve => setTimeout(resolve, 2000));
       }
-
-      let success = false;
-      
-      // 2. Bucle de reintento hasta el éxito
-      while (!success) {
-          try {
-              console.log("📤 Intentando carga masiva...");
-              await productService.createBulk(productDataList);
-              
-              success = true; 
-              await fetchData(); // Refresca la UI
-              handleCloseModal();
-              console.log("✅ Carga masiva completada con éxito");
-          } catch (error) {
-              console.error("❌ Error de red o servidor. Reintentando en 2s...", error);
-              await new Promise(resolve => setTimeout(resolve, 2000));
-          }
-      }
-  } catch (error) {
-      console.error("❌ Error al verificar productos existentes:", error);
-  }
-};
+    }
+  
+    // Ejecutar una sola vez al final del éxito
+    return success;
+  };

@@ -1,3 +1,5 @@
+import nprogress from 'nprogress';
+import 'nprogress/nprogress.css';
 import { useProducts } from "../contexts/ProductContext";
 import left from "/src/assets/angle-ts-left.svg";
 import LinkArrow from './LinkArrow';
@@ -7,26 +9,35 @@ import { useUIContext } from '../contexts/UIContext';
 import PaginatorInput from "./PaginatorInput";
 // Componente que muestra los botones de paginación
 
-const Pagination = ({currentPage, setCurrentPage, totalPages, className}) => {
+const Pagination = ({fluid,currentPage, setCurrentPage, totalPages, className}) => {
 
+  nprogress.configure({ 
+    speed: 500,     // Velocidad de la animación de cierre
+    trickleSpeed: 200 // Velocidad del avance automático
+  });
     // Cambia a una página específica si está dentro del rango
-const irAPagina = (numeroPagina) => {
+  const irAPagina = (numeroPagina) => {
     if (numeroPagina >= 1 && numeroPagina <= totalPages) {
-      setCurrentPage(numeroPagina);
+      
+        nprogress.start();
+        nprogress.set(0.25);
+        window.scrollTo({
+          top: 0,
+          behavior: 'instant'
+        });
+        const timer = setTimeout(() => {
+          nprogress.done();
+          setCurrentPage(numeroPagina);
+        }, 500); 
+      
+        return () => clearTimeout(timer);
     }
   };
 
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'instant' // Fuerza el salto inmediato
-    });
-  }, [currentPage]);
-
 
   return (
-    <Container fluid="xl" className={`${totalPages == 0 ?  'd-none' :'d-flex'} mt-4 my-5 flex-wrap small ${className}`}>
+    <div className={`${totalPages == 0 ?  'd-none' :'d-flex'} mt-4 my-5 flex-wrap small ${className}`}>
       {/* Botón Anterior */}
 
       <Button
@@ -54,7 +65,7 @@ const irAPagina = (numeroPagina) => {
       >
         <i class={`bi bi-chevron-right`}></i>
       </Button>
-    </Container>
+    </div>
   );
 };
 

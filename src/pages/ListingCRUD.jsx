@@ -21,17 +21,17 @@ const ListingCRUD = () => {
   const [currentItem, setCurrentItem] = useState({ title: "", description: "", precio:0.0, stock:0 });
   
   const [showInfo, setShowInfo] = useState(false);
-  const [showCurrent, setShowCurrent] = useState(null)
+  const [showCurrent, setShowCurrent] = useState(null);
+  const [isCreating, setIsCreating] = useState(false);
 
   // Carga inicial
 
   useEffect(() => {
-
-    // setItemsPerPage(3)
-    // setItems(filtered)
-    // setCurrentPage(1);
     onHideFilter(true);
-    handleCreateAll()
+    if(!isCreating){
+      handleCreateAll()
+      setIsCreating(true)
+    }
   }, []);
 
 
@@ -114,6 +114,7 @@ const ListingCRUD = () => {
   };
 
   return (
+    <>
     <Container className="mt-4">
       
       <div className="w-100 d-flex flex-wrap mt-2 mb-4">
@@ -229,6 +230,7 @@ const ListingCRUD = () => {
         </Modal.Footer>
       </Modal>
     </Container>
+    </>
   );
 };
 

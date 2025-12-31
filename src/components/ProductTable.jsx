@@ -86,6 +86,7 @@ function ProductTable({openEditModal, handleDelete,  handleInfo}) {
         </tbody>
       </Table>
       <Pagination
+          fluid=""
           currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} 
       />
       </>

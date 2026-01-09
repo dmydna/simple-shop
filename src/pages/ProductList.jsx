@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useLocation, useMatch } from "react-router-dom";
-import AddToCartButton from "../components/AddToCartButton";
-import CardProduct from "../components/CardProduct";
-import CategoryNav from "../components/CategoryNav";
-import FilterSearch from "../components/FilterSearch";
-import { useProducts } from "../contexts/ProductContext";
-import { useUIContext } from "../contexts/UIContext";
-import Pagination from "../components/Pagination";
+import AddToCartButton from "../components/cart/AddToCartButton";
+import CategoryNav from "../components/common/CategoryNav";
+import Pagination from "../components/pagination/Pagination";
+import CardProduct from "../components/product/CardProduct";
+import FilterSearch from "../components/search/FilterSearch";
 import { useListings } from "../contexts/ListingContext";
+import { useUIContext } from "../contexts/UIContext";
 
 
 

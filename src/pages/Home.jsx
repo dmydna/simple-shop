@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { Children, useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import HeroBanner from "../components/HeroBanner";
-import CardPromo from "../components/CardPromo";
-import ProductCarousel from "../components/ProductCarousel";
-import ProductSection from "../components/ProductSection";
-import CardFeature from "../components/CardFeature";
+import HeroBanner from "../components/common/HeroBanner";
+import CardPromo from "../components/common/CardPromo";
+import CardFeature from "../components/common/CardFeature";
+import CouponModal from "../components/common/CouponModal";
+import ProductCarousel from "../components/product/ProductCarousel";
+import ProductSection from "../components/product/ProductSection";
 
 import Img1 from "../assets/lipstick.png";
 import Img2 from "../assets/dressing-table.png";
-import Img3 from "../assets/grocery-basket.gif";
+import Img3 from "../assets/snowman.png";
 import Img4 from '../assets/open-store.png';
 import Img5 from "../assets/purchasing.png"
 import Img6 from "../assets/new-product.png"
@@ -19,8 +20,8 @@ import Img8 from "../assets/discount.png"
 import Img9 from "../assets/customer-service.png"
 import Img10 from "../assets/online-store.png"
 import Img11 from "../assets/paper-bag.png"
-import CouponModal from "../components/CouponModal";
 import { useAuth } from "../contexts/AuthContext";
+import BannerAds from "../components/common/BannerAds";
 
 function Home() {
 
@@ -42,21 +43,10 @@ function Home() {
 
   return (
   <>
-     {/** Home Banner */}
-
-    <HeroBanner image={Img3} variant="white">
-      <h1> Bienvenido a la Aplicacion </h1>
-      <h1> de <b>Simple SHOP</b> </h1>
-      <div className="d-flex align-items-center gap-2">
-        <p>Una tienda original</p>
-        <p style={{ fontFamily: "'Noto Emoji', sans-serif", fontSize: "1.5rem"}}> 😉 </p>    
-      </div>
-      
-    </HeroBanner>
 
     {/** Features */}
 
-    <div className="bg-gradient-0">
+    <div className="bg-heaven">
       <Container fluid="xl">
        <Row className="g-4 py-3 mb-3">
           <CardFeature
@@ -83,6 +73,41 @@ function Home() {
        </Row>
      </Container>
    </div>
+
+     {/** Home Banner */}
+{/* 
+    <HeroBanner image={Img3} variant="white">
+      <h2> Increibles Descuentos </h2>
+      <h2> en <b>ropa de invierno</b> </h2>
+      <div className="d-flex align-items-center gap-2">
+      <p className="border rounded px-3 py-1 small bg-white" 
+         style={{transform: "translateY(28px)"}}>ver marcas</p> 
+      </div>
+    </HeroBanner> */}
+
+     {/** Banner ads */}
+
+    <Container fluid="xl" className={`mb-3`}>
+       <Row className="g-0">
+        <BannerAds 
+           className={"bg-color-heaven my-3 me-md-2 me-0"} 
+           image={Img10}
+           btnText={'ver ofertas'}
+        >
+           <h3> Increibles Descuentos </h3>
+           <h3> usando la <b>App</b> </h3>
+        </BannerAds>
+        <BannerAds 
+          image={Img3} 
+          className={"bg-wave-0 my-3 ms-md-2 ms-0"} 
+          btnText={'ver marcas'}
+        >
+            <h3> Temporada Invierno </h3>
+            <h3> con <b>precios congelados</b> </h3>
+        </BannerAds>
+       </Row>
+    </Container>
+
    <Container fluid="xl">
 
       {/** Product Ilands */}

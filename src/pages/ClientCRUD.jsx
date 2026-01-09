@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Container, Form, Modal } from "react-bootstrap";
-import FilterSearch from "../components/FilterSearch.jsx";
-import ProductTable from "../components/ProductTable.jsx";
-import ProductViewModal from "../components/ProductViewModal.jsx";
-import SearchLive from "../components/SearchLive.jsx";
-import { useProducts } from "../contexts/ProductContext.jsx";
-import { useUIContext } from "../contexts/UIContext.jsx";
-import { handleCreateAll } from "../dev/loadProductDataList.js";
-import { clientService } from '../services/clientService.js';
-import ClientTable from "../components/ClientTable.jsx";
-import { useClients } from "../contexts/ClientContext.jsx";
 import { Link } from "react-router-dom";
-import ClientViewModal from "../components/ClientViewModal.jsx";
+import ClientTable from "../components/client/ClientTable.jsx";
+import ClientViewModal from "../components/client/ClientViewModal.jsx";
+import SearchLive from "../components/search/SearchLive.jsx";
+import { useClients } from "../contexts/ClientContext.jsx";
+import { useUIContext } from "../contexts/UIContext.jsx";
+import { clientService } from '../services/clientService.js';
 
 
 const ClientCRUD = () => {
@@ -98,6 +93,8 @@ const ClientCRUD = () => {
           
         <div className="w-100 d-flex flex-wrap mt-2 mb-4">
             <Link to={'/dashboard'} className={`text-decoration-none text-dark`} >
+            <i class="bi bi-chevron-left me-2 border p-2 me-3 rounded text-muted" 
+               style={{opacity: '.6', background: ''}}></i>
             <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
                Dashboard
             </span>

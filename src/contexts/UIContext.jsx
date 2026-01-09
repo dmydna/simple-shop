@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useMediaQuery } from 'react-responsive';
-import ContactModal from "../components/ContactModal";
-import LoginModal from "../components/LoginModal";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import ContactModal from "../components/common/ContactModal";
+import LoginModal from "../components/login/LoginModal";
 
 const UIContext = createContext(null)
 

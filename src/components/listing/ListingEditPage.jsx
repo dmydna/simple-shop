@@ -14,7 +14,7 @@ import Img0 from "/src/assets/empty-cart.png";
 
 
 
-function Carrito() {
+function ListingEditPage() {
 
   const buyMatch = useMatch("/carrito/:buy")
   const height = useWindowsHeight()
@@ -44,16 +44,15 @@ function Carrito() {
   }, [cuponCheck, totalPrice]);
 
 
-  return( cartItems.length != 0 ? 
+  return(
     <Container fluid="xl" className="mt-4">
       <div className="h1 d-none">Carrito</div>
     <Row className="g-0" md={4}>
       <Col className="col-12 col-md-12 col-lg-12 col-xl-7">
       <Card className="m-2 p-4">
       <div className="d-flex align-items-center justify-content-between">
-        <p className="h5 fw-bold pt-3">Mi carrito({cartItems.length})</p>
-        <i onClick={() => onHideClearCart(true)} 
-        style={{fontSize: "xx-large"}} className="bi bi-x hover-icon"></i>
+        <p className="h5 fw-bold pt-3">Publicacion</p>
+        
       </div>
 
       <CartClearModal  
@@ -122,13 +121,7 @@ function Carrito() {
         show={modalShow} 
         onHide={() =>{ setModalShow(false)} }
       />
-    </Container> :
-    <CartEmpty 
-      image={Img0} 
-      message= "Tu carrito está vacío"
-      subtext= "Agregá productos para comenzar tu compra." 
-  
-  />
+    </Container> 
   )
 
 
@@ -137,4 +130,4 @@ function Carrito() {
   //muestro las cards
 }
 
-export default Carrito;
+export default ListingEditPage;

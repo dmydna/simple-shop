@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Modal } from "react-bootstrap";
-import FilterSearch from "../components/FilterSearch.jsx";
-import ListingTable from "../components/ListingTable.jsx";
-import ListingViewModal from "../components/ListingViewModal.jsx";
-import SearchLive from "../components/SearchLive.jsx";
+import { Link } from "react-router-dom";
+import ListingTable from "../components/listing/ListingTable.jsx";
+import FilterSearch from "../components/search/FilterSearch.jsx";
+import SearchLive from "../components/search/SearchLive.jsx";
 import { useListings } from "../contexts/ListingContext.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
 import { handleCreateAll } from "../dev/loadProductDataList.js";
 import { listingService as productService } from '../services/listingService.js';
-import { Link } from "react-router-dom";
+import  ListingFormCrud  from '../components/listing/ListingFormCrud.jsx'
+import { CRUD } from "../components/common/crudUtils.js";
 
 const ListingCRUD = () => {
 
@@ -80,11 +81,11 @@ const ListingCRUD = () => {
     }
   };
 
-  const handleInfo = async (item) => {
-        setShowInfo(true);
-        setShowCurrent(item);
+  const handleRead = async (item) => {
+    setModalMode(CRUD.READ);
+    setShowModal(true);
+    setCurrentItem(item);
   };
-
 
   const handleDelete = async (id) => {
     if (window.confirm("¿Seguro que quieres eliminar este item?")) {
@@ -99,13 +100,13 @@ const ListingCRUD = () => {
   };
 
   const openCreateModal = () => {
-    setModalMode("create");
+    setModalMode(CRUD.CREATE);
     setCurrentItem({ title: "", description: "" });
     setShowModal(true);
   };
 
   const openEditModal = (item) => {
-    setModalMode("edit");
+    setModalMode(CRUD.UPDATE);
     setCurrentItem(item);
     setShowModal(true);
   };
@@ -120,6 +121,8 @@ const ListingCRUD = () => {
       
     <div className="w-100 d-flex flex-wrap mt-2 mb-4">
          <Link to={'/dashboard'} className={`text-decoration-none text-dark`} >
+         <i class="bi bi-chevron-left me-2 border p-2 me-3 rounded text-muted" 
+               style={{opacity: '.6', background: ''}}></i>
          <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
             Dashboard
          </span>
@@ -152,91 +155,23 @@ const ListingCRUD = () => {
       <ListingTable  
          openEditModal={openEditModal} 
          handleDelete={handleDelete}
-         handleInfo={handleInfo}
+         handleRead={handleRead}
        />
 
 
-      {/*  Modal READ  */} 
-      <ListingViewModal 
-         product={showCurrent} 
-         show={showInfo} 
-         onHide={setShowInfo} 
-      />
-
       {/*  Modal CRUD  */} 
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            {modalMode === "create" ? "Crear nuevo item" : "Editar item"}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="formName">
-              <Form.Label>Titulo</Form.Label>
-              <Form.Control
-                spellCheck="false"
-                type="text"
-                placeholder="Ingrese nombre"
-                name="title"
-                value={currentItem.title}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formDescription">
-              <Form.Label>Descripción</Form.Label>
-              <Form.Control
-                spellCheck="false"
-                as="textarea"
-                rows={3}
-                placeholder="Ingrese descripción"
-                name="description"
-                value={currentItem.description}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <div className="mb-3 d-flex gap-5">
-                 <Form.Group className="mb-3" controlId="formPrice">
-                   <Form.Label>Precio</Form.Label>
-                   <Form.Control
-                     type="number"
-                     rows={3}
-                     placeholder="Ingrese un precio"
-                     name="price"
-                     value={currentItem.price}
-                     onChange={handleChange}
-                   />
-                 </Form.Group>
-                 <Form.Group className="mb-3" controlId="formStock">
-                   <Form.Label>Stock</Form.Label>
-                   <Form.Control
-                     type="number"
-                     rows={3}
-                     placeholder="Ingrese un stock"
-                     name="stock"
-                     value={currentItem.stock}
-                     onChange={handleChange}
-                   />
-                 </Form.Group>
-            </div>
-            
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Cancelar
-          </Button>
-          <Button
-            variant="primary"
-            onClick={modalMode === "create" ? handleCreate : handleUpdate}
-            disabled={!currentItem.title || !currentItem.description}
-          >
-            {modalMode === "create" ? "Crear" : "Actualizar"}
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <ListingFormCrud
+         showModal = {showModal}
+         handleCloseModal = {handleCloseModal}
+         modalMode    = {modalMode}
+         currentItem  = {currentItem}
+         handleChange = {handleChange}
+         handleUpdate = {handleUpdate} 
+         handleCreate = {handleCreate}
+         handleRead   = {handleRead}
+         onCurrentItem= {setCurrentItem}
+      />
+      
     </Container>
     </>
   );

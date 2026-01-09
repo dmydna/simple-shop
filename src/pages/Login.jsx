@@ -3,7 +3,7 @@ import { Form, Button, Container, Alert, Card, Row } from "react-bootstrap";
 import React, { useContext, useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../components/login/LoginForm";
 
 
 function Login(){

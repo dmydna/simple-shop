@@ -1,32 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { Button, Container, Form, Modal } from "react-bootstrap";
-import FilterSearch from "../components/FilterSearch.jsx";
-import ProductTable from "../components/ProductTable.jsx";
-import ProductViewModal from "../components/ProductViewModal.jsx";
-import SearchLive from "../components/SearchLive.jsx";
+import React, { useEffect, useMemo, useState } from "react";
+import { Button, Container, Form, Modal,InputGroup } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import ProductTable from "../components/product//ProductTable.jsx";
+import FilterSearch from "../components/search/FilterSearch.jsx";
+import SearchLive from "../components/search/SearchLive.jsx";
 import { useProducts } from "../contexts/ProductContext.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
 import { handleCreateAll } from "../dev/loadProductDataList.js";
 import { productService } from '../services/productService.js';
-import { Link } from "react-router-dom";
+import { CRUD } from "../components/common/crudUtils.js";
+import ProductFormCrud from "../components/product/ProductFormCrud.jsx";
 
 const ProductCRUD = () => {
 
   const {onHideFilter} =  useUIContext();
   const {fetchData, filtered, products, setSearch ,loading, filterDraft, setActiveFilters, setFilterDraft, setResetFilter} = useProducts();
   const [showModal, setShowModal] = useState(false);
-  const [modalMode, setModalMode] = useState("create"); 
+  const [modalMode, setModalMode] = useState(CRUD.CREATE); 
   const [currentItem, setCurrentItem] = useState({ name: "", price:0.0 , stock:0 });
+  const [editableFields, setEditableFields] = useState({});
   
-  const [showInfo, setShowInfo] = useState(false);
-  const [showCurrent, setShowCurrent] = useState(null)
 
   // Carga inicial
   useEffect(() => {
     onHideFilter(true);
     handleCreateAll()
   }, []);
-
 
 
   const handleChange = (e) => {
@@ -56,10 +55,12 @@ const ProductCRUD = () => {
 
     const updatedData = {
       ...currentItem,
+      product_name: currentItem.product_name,
       price: parseFloat(currentItem.price),
       stock: parseInt(currentItem.stock, 10),
       discountPercentage: parseFloat(currentItem.discountPercentage),
       weight: parseInt(currentItem.weight, 10),
+      category: currentItem.category
     };
 
     try {
@@ -70,11 +71,6 @@ const ProductCRUD = () => {
       alert("Error actualizando item");
       console.error(err);
     }
-  };
-
-  const handleInfo = async (item) => {
-        setShowInfo(true);
-        setShowCurrent(item);
   };
 
 
@@ -91,19 +87,30 @@ const ProductCRUD = () => {
   };
 
   const openCreateModal = () => {
-    setModalMode("create");
+    setModalMode(CRUD.CREATE);
     setCurrentItem({ title: "", description: "" });
     setShowModal(true);
   };
 
   const openEditModal = (item) => {
-    setModalMode("edit");
+    setModalMode(CRUD.UPDATE);
     setCurrentItem(item);
     setShowModal(true);
   };
 
+
   const handleCloseModal = () => {
     setShowModal(false);
+    setEditableFields({})
+  };
+
+
+
+  const handleEnableEdit = (fieldName) => {
+    setEditableFields(prev => ({
+      ...prev,
+      [fieldName]: true // Se activa y no se desactiva con el mismo botón
+    }));
   };
 
   return (
@@ -111,12 +118,13 @@ const ProductCRUD = () => {
       
       <div className="w-100 d-flex flex-wrap mt-2 mb-4">
          <Link to={'/dashboard'} className={`text-decoration-none text-dark`} >
+         <i class="bi bi-chevron-left me-2 border p-2 me-3 rounded text-muted" style={{opacity: '.6', background: ''}}></i>
          <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
             Dashboard
          </span>
          </Link>
          <span style={{lineHeight: '2.3rem'}} className="text-secondary">
-          Administra tus publicaciones
+          Administra tus productos
          </span>
       </div>
 
@@ -145,91 +153,23 @@ const ProductCRUD = () => {
       <ProductTable  
          openEditModal={openEditModal} 
          handleDelete={handleDelete}
-         handleInfo={handleInfo}
        />
 
 
-      {/*  Modal READ  */} 
-      <ProductViewModal 
-         product={showCurrent} 
-         show={showInfo} 
-         onHide={setShowInfo} 
-      />
-
       {/*  Modal CRUD  */} 
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            {modalMode === "create" ? "Crear nuevo item" : "Editar item"}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="formName">
-              <Form.Label>Titulo</Form.Label>
-              <Form.Control
-                spellCheck="false"
-                type="text"
-                placeholder="Ingrese nombre"
-                name="title"
-                value={currentItem.title}
-                onChange={handleChange}
-              />
-            </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formDescription">
-              <Form.Label>Descripción</Form.Label>
-              <Form.Control
-                spellCheck="false"
-                as="textarea"
-                rows={3}
-                placeholder="Ingrese descripción"
-                name="description"
-                value={currentItem.description}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <div className="mb-3 d-flex gap-5">
-                 <Form.Group className="mb-3" controlId="formPrice">
-                   <Form.Label>Precio</Form.Label>
-                   <Form.Control
-                     type="number"
-                     rows={3}
-                     placeholder="Ingrese un precio"
-                     name="price"
-                     value={currentItem.price}
-                     onChange={handleChange}
-                   />
-                 </Form.Group>
-                 <Form.Group className="mb-3" controlId="formStock">
-                   <Form.Label>Stock</Form.Label>
-                   <Form.Control
-                     type="number"
-                     rows={3}
-                     placeholder="Ingrese un stock"
-                     name="stock"
-                     value={currentItem.stock}
-                     onChange={handleChange}
-                   />
-                 </Form.Group>
-            </div>
-            
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Cancelar
-          </Button>
-          <Button
-            variant="primary"
-            onClick={modalMode === "create" ? handleCreate : handleUpdate}
-            disabled={!currentItem.title || !currentItem.description}
-          >
-            {modalMode === "create" ? "Crear" : "Actualizar"}
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <ProductFormCrud 
+        showModal = {showModal} 
+        handleCloseModal = {handleCloseModal}
+        modalMode    = {modalMode}
+        currentItem  = {currentItem}
+        handleChange = {handleChange}
+        handleCreate = {handleCreate}
+        handleUpdate = {handleUpdate}
+        handleEnableEdit= {handleEnableEdit}
+        editableFields= {editableFields}
+      />
+      
     </Container>
   );
 };

@@ -1,27 +1,27 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Footer from "./components/Footer";
-import NavHeader from "./components/NavHeader";
-import ProtectedRoute from "./components/ProtectedRoute";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Footer from "./components/common/Footer";
+import NavHeader from "./components/common/NavHeader";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
+import { CRUDWrapper } from "./contexts/CRUDWrapper";
 import Admin from "./pages/Admin";
 import Carrito from "./pages/Cart";
+import ClientCRUD from "./pages/ClientCRUD";
 import Contact from "./pages/Contact";
+import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
+import ListingCRUD from "./pages/ListingCRUD";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Perfil from "./pages/Perfil";
+import ProductCRUD from "./pages/ProductCRUD";
 import ProductDetails from "./pages/ProductDetails";
 import Products from "./pages/ProductList";
-import "./styles/index.css"
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { CRUDWrapper } from "./contexts/CRUDWrapper";
-import ListingCRUD from "./pages/ListingCRUD";
-import ClientCRUD from "./pages/ClientCRUD";
-import ProductCRUD from "./pages/ProductCRUD";
-import Dashboard from "./pages/Dashboard";
+import "./styles/index.css";
 
 function App() {
  
@@ -37,9 +37,9 @@ function App() {
   useEffect(()=>{
     if(location.pathname.startsWith('/contacto') || location.pathname.startsWith('/login') ) 
      {
-      document.querySelector('body')?.classList.add('bg-gradient-0')
+      document.querySelector('body')?.classList.add('bg-full-heaven')
     }else{
-      document.querySelector('body')?.classList.remove('bg-gradient-0')
+      document.querySelector('body')?.classList.remove('bg-full-heaven')
     }
   },[location])
 
@@ -108,6 +108,10 @@ function App() {
           } />
 
           <Route path="/dashboard/products" element={
+             <ProductCRUD /> 
+          } />
+
+          <Route path="/dashboard/products/create" element={
              <ProductCRUD /> 
           } />
 

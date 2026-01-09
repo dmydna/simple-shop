@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Button, Container } from "react-bootstrap";
-import CouponModal from "../components/CouponModal";
-import { useState } from "react";
+
 
 export default function Perfil(){
     const {id} = useParams()

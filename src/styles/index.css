@@ -1,3 +1,21 @@
+:root {
+    /* Azul Base (Referencia) */
+    --color-blue: #a2d9ff;
+  
+    /* Naranja / Durazno (Cálido y suave) */
+    --color-orange: #ffca92;
+    --text-on-orange: #5c3a1a;
+  
+    /* Violeta / Lavanda (Elegante y místico) */
+    --color-purple: #c7b3ff;
+    --text-on-purple: #3a2a66;
+  
+    /* Otros colores (para mantener consistencia) */
+    --color-red: #ffabab;
+    --color-green: #a2ffc1;
+    --color-yellow: #fff2a2;
+  }
+
 
 .hover-color-white:active,
 .hover-color-white:hover{
@@ -32,6 +50,43 @@
 
 .no-caret::after{
     display: none!important;
+}
+
+
+.bg-heaven{
+    background: url('./bg-heaven.svg') repeat-x
+}
+
+
+
+.bg-full-heaven {
+    background: 
+       linear-gradient(to bottom, #8ed1fc 30vh, transparent 0%), 
+       url(/src/styles/bg-heaven.svg) left 30vh;
+    background-size: 100% 100%, auto;
+    background-repeat: repeat-x;
+    height: 100vh;
+}
+
+.bg-to-rect{
+    background-position: right;
+    background: linear-gradient(to bottom, #a2d9ff 65%, white 60%);
+}
+
+.bg-deg-rect{
+    background: linear-gradient(45deg, #a2d9ff 60%, white 60%);
+}
+
+.bg-wave-0{
+    background: url('./bg-wave.svg');
+    background-size: cover;
+    background-position: right;
+}
+
+
+
+.bg-color-heaven{
+    background: #a2d9ff;
 }
 
 .bg-gradient-0{
@@ -175,4 +230,12 @@
     } 
 
 }
-@media (max-width: 575.98px)  { /* xs */ }
+@media (max-width: 575.98px)  { /* xs */ 
+
+    .bg-wave-0{
+        background: url('./bg-wave-sm.svg');
+         background-size: cover;
+         background-position-x: -480px;
+    }
+
+}

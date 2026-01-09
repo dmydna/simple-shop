@@ -1,8 +1,6 @@
-import React, { useEffect, useState }  from 'react';
-import { Container, Form, Button, Nav, NavDropdown, Col, Row } from 'react-bootstrap';
-import ContactForm from '../components/ContactForm';
-import { useLocation } from 'react-router-dom';
-import MobileMenuDos from '../components/MobileMenuDos';
+import React, { useEffect } from 'react';
+import { Container, Row } from 'react-bootstrap';
+import ContactForm from '../components/common/ContactForm';
 
 
 function Contact() {

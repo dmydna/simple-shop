@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Row, Form, Modal } from "react-bootstrap";
-import CategoryItem from "../components/CategoryItem.jsx";
+import CategoryItem from "../components/common/CategoryItem.jsx";
 
 import Img1 from "../assets/print-product.png";
 import Img2 from '../assets/delivery-time.png';

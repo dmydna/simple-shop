@@ -5,8 +5,9 @@ import { useUIContext } from '../../contexts/UIContext.jsx';
 import Pagination from '../pagination/Pagination.jsx';
 import FilterSearch from '../search/FilterSearch.jsx';
 import SearchLive from '../search/SearchLive.jsx';
+import { useListingsForm } from '../../contexts/ListingFormContext.jsx';
 
-function ProductSelectTable({ handleProduct, children }) {
+function ProductSelectTable({ children, handleSelect }) {
 
 
   const { filtered, products, loading, filterDraft, setFilterDraft, setActiveFilters, setSearch, setResetFilter } = useProducts()
@@ -20,11 +21,14 @@ function ProductSelectTable({ handleProduct, children }) {
   const firstItemIndex = lastItemIndex - itemsPerPage;
   const currentItems = items.slice(firstItemIndex, lastItemIndex);
 
+  const { setCurrentItem } = useListingsForm()
+
   useEffect(() => {
     // Lógica de paginación
     setItemsPerPage(2)
     setItems(filtered)
   }, [filtered, products, loading])
+
 
 
 
@@ -76,12 +80,11 @@ function ProductSelectTable({ handleProduct, children }) {
                   {/* Select */}
 
                   <input
-                    onChange={() => handleProduct(item)}
+                    onChange={() => handleSelect(item)}
                     type="radio"
                     name="product_id"
                     id="selecProduct"
                   />
-
 
                 </td>
               </tr>

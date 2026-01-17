@@ -64,7 +64,6 @@ function FilterSearch({className, children, order="", items, filterDraft, onFilt
     const handleSubmit = () => {
       if (Object.keys(filterDraft).length > 0) {
         handleApplyFilters();
-        console.log(filterDraft)
       }    
     }
 

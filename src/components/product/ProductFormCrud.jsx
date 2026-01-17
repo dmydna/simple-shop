@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { Button, Container, Form, Modal, InputGroup } from "react-bootstrap";
-import { CRUD } from "../common/crudUtils";
+import React, { useMemo } from "react";
+import { Button, Form, InputGroup, Modal } from "react-bootstrap";
+import { CRUD } from "../../enums/crudUtils.js";
 
 
 const ProductFormCrud = ({ showModal, handleCloseModal, modalMode, currentItem, handleChange, handleCreate, handleUpdate, handleEnableEdit, editableFields }) => {
@@ -22,7 +22,7 @@ const ProductFormCrud = ({ showModal, handleCloseModal, modalMode, currentItem, 
         <Modal.Title>
           {modalMode === CRUD.CREATE && (
             <>
-              <i style={{ opacity: '.6' }} class="bi bi-send me-3"></i>
+              <i style={{ opacity: '.6' }} className="bi bi-send me-3"></i>
               <span>Crear nuevo producto</span>
             </>
           )}
@@ -43,7 +43,7 @@ const ProductFormCrud = ({ showModal, handleCloseModal, modalMode, currentItem, 
 
       <Modal.Body>
         <Form>
-          <Form className="mb-3" controlId="formName">
+          <Form.Group className="mb-3" controlId="formName">
             <InputGroup size="xs" className="shadow-sm border rounded overflow-hidden pagination-input-group">
               <InputGroup.Text className="fw-semibold bg-light border-0 text-muted px-3" style={{ fontSize: "0.95rem" }}>
                 Nombre
@@ -62,7 +62,9 @@ const ProductFormCrud = ({ showModal, handleCloseModal, modalMode, currentItem, 
               <InputGroup.Text
                 className="fw-semibold border-0 text-muted px-3"
                 style={{
-                  fontSize: "0.95rem", backgroundColor: 'rgb(233, 236, 239)', cursor: editableFields["name"] ? 'default' : 'pointer'
+                  fontSize: "0.95rem", 
+                  backgroundColor: 'rgb(233, 236, 239)', 
+                  cursor: editableFields["name"] ? 'default' : 'pointer'
                 }}
                 onClick={() => handleEnableEdit("name")}
               >
@@ -71,7 +73,7 @@ const ProductFormCrud = ({ showModal, handleCloseModal, modalMode, currentItem, 
                 </i>
               </InputGroup.Text>
             </InputGroup>
-          </Form>
+          </Form.Group>
 
 
           <div className="d-flex gap-2 mb-3">
@@ -106,7 +108,7 @@ const ProductFormCrud = ({ showModal, handleCloseModal, modalMode, currentItem, 
               </InputGroup>
             </Form>
 
-            <Form controlId="formSkuProduct">
+            <Form.Group controlId="formSkuProduct">
               <InputGroup size="xs" className="shadow-sm border rounded overflow-hidden pagination-input-group">
                 <InputGroup.Text className="fw-semibold bg-light border-0 text-muted px-3" style={{ fontSize: "0.95rem" }}>
                   sku:
@@ -134,12 +136,12 @@ const ProductFormCrud = ({ showModal, handleCloseModal, modalMode, currentItem, 
                   </i>
                 </InputGroup.Text>
               </InputGroup>
-            </Form>
+            </Form.Group>
           </div>
 
 
           <div className="d-flex gap-2">
-            <Form className="mb-3" controlId="formStock">
+            <Form.Group className="mb-3" controlId="formStock">
               <InputGroup size="xs" className="shadow-sm border rounded overflow-hidden pagination-input-group">
                 <InputGroup.Text className="fw-semibold bg-light border-0 text-muted px-3" style={{ fontSize: "0.95rem" }}>
                   stock:
@@ -167,8 +169,8 @@ const ProductFormCrud = ({ showModal, handleCloseModal, modalMode, currentItem, 
                   </i>
                 </InputGroup.Text>
               </InputGroup>
-            </Form>
-            <Form className="mb-3" controlId="formWeight">
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formWeight">
               <InputGroup size="xs" className="shadow-sm border rounded overflow-hidden pagination-input-group">
                 <InputGroup.Text className="fw-semibold bg-light border-0 text-muted px-3" style={{ fontSize: "0.95rem" }}>
                   peso:
@@ -196,10 +198,10 @@ const ProductFormCrud = ({ showModal, handleCloseModal, modalMode, currentItem, 
                   </i>
                 </InputGroup.Text>
               </InputGroup>
-            </Form>
+            </Form.Group>
           </div>
 
-          <Form controlId="formBrandProduct">
+          <Form.Group controlId="formBrandProduct">
             <InputGroup size="xs" className="shadow-sm border rounded overflow-hidden pagination-input-group">
               <InputGroup.Text className="fw-semibold bg-light border-0 text-muted px-3" style={{ fontSize: "0.95rem" }}>
                 categoria:
@@ -227,7 +229,7 @@ const ProductFormCrud = ({ showModal, handleCloseModal, modalMode, currentItem, 
                 </i>
               </InputGroup.Text>
             </InputGroup>
-          </Form>
+          </Form.Group>
 
         </Form>
       </Modal.Body>

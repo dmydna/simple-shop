@@ -10,7 +10,6 @@ function ClientViewModal({client, show ,onHide}){
 
 const showOrderHandle = (item) => {
       setCurrentOrder(item);
-      console.log(item);
       setShowOrder(true);
 }
 

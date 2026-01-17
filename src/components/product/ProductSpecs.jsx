@@ -9,7 +9,7 @@ function ProductSpecs({producto, children}) {
   return (
     <>
     {children}
-    <Table striped hover rounded>
+    <Table striped hover>
       <tbody className="rounded">
         <tr className="border-0">
           <td className="fw-medium border-0">Brand</td>

@@ -4,6 +4,7 @@ import { ProductProvider } from "./ProductContext";
 import { ClientProvider } from "./ClientContext";
 import { CarritoProvider } from "./CartContext";
 import { UIProvider } from "./UIContext";
+import { ListingFormProvider } from "./ListingFormContext";
 
 // Este es tu Wrapper "CRUD"
 export const CRUDWrapper = ({ children }) => {
@@ -13,7 +14,9 @@ export const CRUDWrapper = ({ children }) => {
         <ClientProvider>
           <ProductProvider>
             <CarritoProvider>
-              {children}
+              <ListingFormProvider>
+                {children}
+              </ListingFormProvider>
             </CarritoProvider>
           </ProductProvider>
         </ClientProvider>

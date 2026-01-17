@@ -12,12 +12,9 @@ export default function Register(){
     const { login } = useAuth();
     const navigate = useNavigate();
     
-    const handleSubmit = (e) => 
-        {
-        console.log('click')
+    const handleSubmit = (e) => {
         e.preventDefault();
-        if (login(user, pass)) 
-          {
+        if (login(user, pass)) {
           navigate("/dashboard");
         } else {
           setError("Usuario o contraseña inválidos");

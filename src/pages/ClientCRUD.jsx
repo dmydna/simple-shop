@@ -93,7 +93,7 @@ const ClientCRUD = () => {
           
         <div className="w-100 d-flex flex-wrap mt-2 mb-4">
             <Link to={'/dashboard'} className={`text-decoration-none text-dark`} >
-            <i class="bi bi-chevron-left me-2 border p-2 me-3 rounded text-muted" 
+            <i className="bi bi-chevron-left me-2 border p-2 me-3 rounded text-muted" 
                style={{opacity: '.6', background: ''}}></i>
             <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
                Dashboard

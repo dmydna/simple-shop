@@ -121,7 +121,6 @@ function Products() {
     useEffect(()=>{
       setItemsPerPage(8)
       setItems(filtered)
-      console.log(filtered)
     },[filtered, products])
 
 
@@ -156,6 +155,7 @@ function Products() {
       <Row>
         {currentItems.map((p) => (  
           <CardProduct className={'border m-2'}
+            key={p.id}
             id={p.id}
             image={p.thumbnail}
             title={p.title}

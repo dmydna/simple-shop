@@ -74,10 +74,11 @@ function ProductCarousel({children, filterFn, col, className}) {
     <Carousel className="col-12"
     indicators={false} variant="dark" activeIndex={index} onSelect={handleSelect}>
       {slides.map((group, index)=>(
-          <Carousel.Item>
-          <div className="row d-flex justify-content-around"> {/* Use flexbox for item arrangement */}
+          <Carousel.Item key={index}>
+          <div className="row d-flex justify-content-around">
             {group.map((p)=>(
               <CardProduct 
+                key={p.id}
                 className={'border-0'} 
                 id={p.id} 
                 image={p.thumbnail} 

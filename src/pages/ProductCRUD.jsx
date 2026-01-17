@@ -1,15 +1,15 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Button, Container, Form, Modal,InputGroup } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { CRUD } from "../enums/crudUtils.js";
 import ProductTable from "../components/product//ProductTable.jsx";
+import ProductFormCrud from "../components/product/ProductFormCrud.jsx";
 import FilterSearch from "../components/search/FilterSearch.jsx";
 import SearchLive from "../components/search/SearchLive.jsx";
 import { useProducts } from "../contexts/ProductContext.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
-import { handleCreateAll } from "../dev/loadProductDataList.js";
+import { handleCreateAll } from "../dev/loadData.js";
 import { productService } from '../services/productService.js';
-import { CRUD } from "../components/common/crudUtils.js";
-import ProductFormCrud from "../components/product/ProductFormCrud.jsx";
 
 const ProductCRUD = () => {
 
@@ -24,7 +24,6 @@ const ProductCRUD = () => {
   // Carga inicial
   useEffect(() => {
     onHideFilter(true);
-    handleCreateAll()
   }, []);
 
 
@@ -118,7 +117,7 @@ const ProductCRUD = () => {
       
       <div className="w-100 d-flex flex-wrap mt-2 mb-4">
          <Link to={'/dashboard'} className={`text-decoration-none text-dark`} >
-         <i class="bi bi-chevron-left me-2 border p-2 me-3 rounded text-muted" style={{opacity: '.6', background: ''}}></i>
+         <i className="bi bi-chevron-left me-2 border p-2 me-3 rounded text-muted" style={{opacity: '.6', background: ''}}></i>
          <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
             Dashboard
          </span>

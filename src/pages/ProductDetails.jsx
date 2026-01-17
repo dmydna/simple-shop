@@ -24,7 +24,6 @@ function ProductDetails() {
             {products.map((p) => (
                name != p.title ?
                   '' :
-                  <>
                      <Row className="g-3" key={p.id}>
                         {/**Breadcrumb */}
                         <Col className="mb-5" xs={12}>
@@ -78,6 +77,7 @@ function ProductDetails() {
                               <div className="fs-5 fw-medium mb-5">Opiniones</div>
                               {p.reviews?.map(r =>
                                  <CardReview
+                                    key={r.id}
                                     id={r.id}
                                     comment={r.comment}
                                     rating={r.rating}
@@ -88,7 +88,6 @@ function ProductDetails() {
                            </Col>
                         </Col >
                      </Row>
-                  </>
             ))}
          </>
       </Container>

@@ -18,7 +18,6 @@ import { useUIContext } from "../../contexts/UIContext";
     
     const handleSubmit = (e) => 
         {
-        console.log('click')
         e.preventDefault();
         if (login(user, pass)) 
           {

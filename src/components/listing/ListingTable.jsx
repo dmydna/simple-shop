@@ -1,28 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { useListings } from '../../contexts/ListingContext';
+import { useListingsForm } from '../../contexts/ListingFormContext';
 import { useUIContext } from '../../contexts/UIContext';
 import Pagination from '../pagination/Pagination';
-import { CRUD } from '../common/crudUtils';
 
-function ListingTable({ openEditModal, handleDelete, handleRead }) {
+function ListingTable() {
 
-  const { currentItems, setVisibleClients, setItems, setItemsPerPage, currentPage, setCurrentPage, totalPages } = useUIContext()
+  const { currentItems, setItems, setItemsPerPage, currentPage, setCurrentPage, totalPages } = useUIContext()
   const { filtered, products, loading } = useListings()
-
+  const { openEditModal, handleDelete, openReadModal, handleVisibility } = useListingsForm()
 
   useEffect(() => {
     // Lógica de paginación
     setItemsPerPage(8)
     setItems(filtered)
-    console.log(filtered)
   }, [filtered, products, loading])
 
 
 
   return (
     <>
-      <Table striped bordered hover>
+      <Table striped={true} bordered={true} hover={true}>
         <thead>
           <tr>
             <th>ID</th>
@@ -70,21 +69,12 @@ function ListingTable({ openEditModal, handleDelete, handleRead }) {
                     <i className="bi bi-trash3-fill"></i>
                   </Button>
 
-                  {/* Preview  */}
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    onClick={() => handleRead(item)}
-                    className="mb-1"
-                  >
-                    <i className="bi bi-info-circle-fill"></i>
-                  </Button>
 
                   {/* Mostrar/Ocultar  */}
                   <Button
                     variant="dark"
                     size="sm"
-                    onClick={() => handleRead(item)}
+                    onClick={() => handleVisibility(item)}
                     className="ms-3 mb-1"
                   >
                     <i className="bi bi-eye-fill"></i>

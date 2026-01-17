@@ -30,6 +30,62 @@ export const listingService = {
         return await response.json();
     },
 
+    createWithImage: async (listingDTO, selectedFile) => {
+        const formData = new FormData();
+    
+        // Parte 1: JSON con tipo explícito
+        formData.append('listing', new Blob([JSON.stringify(listingDTO)], {
+            type: 'application/json'
+        }));
+    
+        // Parte 2: Archivo
+        if (selectedFile) {
+            formData.append('file', selectedFile);
+        }
+    
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
+            method: 'POST',
+            // Sin headers manuales de Content-Type
+            body: formData
+        });
+    
+        if (!response.ok) {
+            const errorData = await response.json(); // Intentar leer el error del servidor
+            console.error("Detalle del error:", errorData);
+            throw new Error("Error 400: Revisa el formato de los datos");
+        }
+        return await response.json();
+    },
+    updateVisibility: async (id, visibility) => {
+        // 1. Pasamos la visibilidad como un Query Parameter (?visibility=...)
+        // 2. Quitamos la barra final si el backend no la espera
+        const response = await fetch(`${BASE_URL}/${id}/visibility?visibility=${visibility}`, {
+            method: 'PATCH',
+        });
+    
+        if (!response.ok) {
+            const errorMsg = await response.text();
+            throw new Error(errorMsg || "No se actualizó la visibilidad");
+        }
+        return await response.json();
+    }
+    ,
+
+    imageUpload: async (id, selectedFile) => {
+        const formData = new FormData();
+        formData.append("file", selectedFile); // "file" debe coincidir con el @RequestParam de Java
+      
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/upload-image`, {
+            method: 'POST',
+            body: formData
+        });
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Error al subir imagen: ${errorText}`);
+        }
+        return await response.text();
+      },
+
     // POST: Crear a partir de una lista producto
     createBulk: async (productDataList) => {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/bulk`, {
@@ -63,5 +119,7 @@ export const listingService = {
         }
         return response.status === 204 ? 
         { success: true } : await response.json();
-    }
+    },
+
+
 };

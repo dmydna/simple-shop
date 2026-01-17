@@ -29,6 +29,7 @@ function ProductSection({children, filterFn, count, className, borders}){
           {children}
         {cfiltered.map((p, i) => (
             <CardProduct 
+              key={p.id}
               className={'border-0 m-0 p-0'} 
               id={p.id} 
               image={p.thumbnail} 

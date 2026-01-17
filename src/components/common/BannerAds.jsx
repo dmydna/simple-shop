@@ -1,10 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Img2 from "../../assets/coffee-cup.png"
 
 function BannerAds({image, children, className, imgWith, btnText}){
-
-
 
     return(
       <Col sm={12} md={12} lg

@@ -23,7 +23,6 @@ function ProductBuyModal({show,onHide}) {
       const { name, value, type } = e.target;
       const val = type === 'number' ? Number(value) : value;
       setClient({ ...client, [name]: val });
-      console.log(client);
     };
   
 
@@ -31,7 +30,6 @@ function ProductBuyModal({show,onHide}) {
       try {
         // Crea Cliente
         const savedClient = await clientService.create(client);
-        console.log("Cliente creado con ID:", savedClient.id);
         // Crea Pedido
         await handleCreateOrder(savedClient);
         alert("Pedido realizado con éxito");
@@ -45,7 +43,6 @@ function ProductBuyModal({show,onHide}) {
 
 
     const handleCreateOrder = async (newClient) => {
-      console.log(cartItems)
       setOrder({ 
         ...order,
         state: "PROCESANDO", 
@@ -60,7 +57,6 @@ function ProductBuyModal({show,onHide}) {
         })),
       });
       const orderData = order;
-      console.log(order)
       try {
         await orderService.create(orderData); 
       } catch (error) {

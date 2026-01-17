@@ -13,7 +13,6 @@ function ClientTable({openEditModal, handleDelete,  handleInfo}) {
     // Lógica de paginación
     setItemsPerPage(8)
     setItems(filtered)
-    console.log(filtered)
   },[filtered, clients, loading])
 
 

@@ -22,6 +22,7 @@ import ProductCRUD from "./pages/ProductCRUD";
 import ProductDetails from "./pages/ProductDetails";
 import Products from "./pages/ProductList";
 import "./styles/index.css";
+import ListingDraft from "./pages/ListingDraft";
 
 function App() {
  
@@ -92,6 +93,10 @@ function App() {
           />         
           <Route path="/productos/details/:name" element={
               <ProductDetails /> 
+            } 
+          />
+          <Route path="/dashboard/draft" element={
+              <ListingDraft /> 
             } 
           />
           <Route path="/productos" element={

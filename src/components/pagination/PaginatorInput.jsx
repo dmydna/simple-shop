@@ -3,7 +3,11 @@ import { Button, Container, Form, Modal, InputGroup } from "react-bootstrap";
 
 function PaginationInput({currentPage, totalPages, irAPagina}){
 
-    const [inputPage, setInputPage] = useState(currentPage);
+    const [inputPage, setInputPage] = useState(1);
+
+    // useEffect(()=>{
+    //     setInputPage(currentPage)
+    // },[currentPage])
 
     useEffect(()=>{
         setInputPage(currentPage)

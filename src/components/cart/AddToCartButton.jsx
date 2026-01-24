@@ -10,13 +10,13 @@ function AddToCartButton({id, variant='success', children}){
 
     const { cartItems, addToCart} = useCart()
 
-    const {products} = useListings()
+    const {listings} = useListings()
 
     const [product] = useMemo(()=>{
-      return products.filter((p)=> {
+      return listings.filter((p)=> {
         return p.id == id
       })
-    },[products]) 
+    },[listings]) 
 
     const handleAddToCart = () => {
       if (toast.isActive()) {

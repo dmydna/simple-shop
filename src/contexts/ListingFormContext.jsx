@@ -1,8 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
-import { CRUD, mode } from "../enums/crudUtils.js";
-import { Visibility } from "../enums/Visibility.js";
+import { CRUD, mode } from "../utils/crud.js";
+import { visibility } from "../utils/posts.js";
 import { listingService } from '../services/listingService.js';
 import { useListings } from "./ListingContext.jsx";
+import { useFetchListings } from "./useFetchListings.jsx";
+
 
 export const ListingFormContext = createContext(null)
 
@@ -113,15 +115,15 @@ export function ListingFormProvider({ children }){
 
 
     const visibilityToggle = async () => {
-      return currentItem.visibility == Visibility.HIDDEN ? 
-      Visibility.PUBLIC : Visibility.HIDDEN 
+      return currentItem.visibility == visibility.HIDDEN ? 
+      visibility.PUBLIC : visibility.HIDDEN 
     }
 
     const handleVisibility = async (id) => {
-      const visibility = visibilityToggle()
+      const Visibility = visibilityToggle()
       if (window.confirm("¿Seguro que quieres ocultar/mostrar este item?")) {
         try {
-          await listingService.updateVisibility(id, visibility)
+          await listingService.updateVisibility(id, Visibility)
           await fetchData();
           window.confirm("operacion exitosa!")
         } catch (error) {
@@ -181,7 +183,7 @@ export function ListingFormProvider({ children }){
             setProductMode, 
             productMode,
             selectedFile, 
-            setSelectedFile
+            setSelectedFile,
           }}>
             {children}
         </ListingFormContext.Provider>

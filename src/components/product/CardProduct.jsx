@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function CardProduct({title, image ,price, stock, id, children, className, cols, discount}){
+function CardProduct({title, image, hash ,price, stock, id, children, className, cols, discount, imgSize}){
 
 
     return(
@@ -11,12 +11,12 @@ function CardProduct({title, image ,price, stock, id, children, className, cols,
            <Card className={`${className || 'm-2'}`}>
               <Link 
                 className="text-decoration-none text-reset p-0"
-                to={`/productos/details/${encodeURIComponent(title)}`}
+                to={`/productos/${hash}/${encodeURIComponent(title)}`}
               >
               <Card.Img   src={image || "https://dummyimage.com/300x300/fff/000&text=Image+not+found"}
                     style={{ 
                       objectFit: 'contain', 
-                      height: '180px', 
+                      height: imgSize || '180px', 
                       padding: "1rem" 
                     }}
               />

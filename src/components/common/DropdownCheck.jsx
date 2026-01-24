@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Dropdown, Form } from "react-bootstrap";
+import { useListings } from "../../contexts/ListingContext";
 
 function DropdownCheck({children, array ,className, style, variant, onFilterDraft}){
 
 
+    const {setFilterDraft, filterDraft} = useListings()
     const [selectedTags, setSelectedTags] = useState([]);
 
     useEffect(()=>{
       if(selectedTags.length != 0){
-        onFilterDraft(prev =>  ({
+        setFilterDraft(prev =>  ({
           ...prev, 
           tags : selectedTags
         }))

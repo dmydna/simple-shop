@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, InputGroup } from "react-bootstrap";
 import { useListingsForm } from "../../../contexts/ListingFormContext";
-import { CRUD } from "../../../enums/crudUtils";
+import { CRUD } from "../../../utils/crud.js";
 
 
 function StepDetalles({children}){

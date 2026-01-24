@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
 import { useUIContext } from "../../contexts/UIContext";
 import DropdownCheck from "../common/DropdownCheck";
 import DropdownRange from "../common/DropdownRange";
+import { useListings } from "../../contexts/ListingContext";
 
-function FilterSearch({className, children, order="", items, filterDraft, onFilterDraft, onActiveFilters, onResetFilter, size="lg"}){
+function FilterSearch({className, children, order="", size="lg"}){
 
-
-    const {showFilter} =  useUIContext()
-    // const {products,  filterDraft, setFilterDraft, setActiveFilters, setVisibleProducts, resetFilter, setResetFilter} = useListings()
+    const { showFilter } =  useUIContext();
+    const { setFilters, listings, setFilterDraft, filterDraft  } = useListings();
 
     const [searchParams, setSearchParams] = useSearchParams();
  
@@ -25,7 +25,7 @@ function FilterSearch({className, children, order="", items, filterDraft, onFilt
       const minPrice = minPriceParam ? Number(minPriceParam) : 0
       const maxPrice = maxPriceParam ? Number(maxPriceParam) : 15000
       if(filterDraft.minPrice != undefined && filterDraft.maxPrice != undefined){
-        onFilterDraft( prev => ({
+        setFilterDraft( prev => ({
           ...prev, 
           minPrice: minPrice,
           maxPrice: maxPrice,
@@ -33,13 +33,13 @@ function FilterSearch({className, children, order="", items, filterDraft, onFilt
       }
       
       if(filterDraft.tags != undefined){
-        onFilterDraft( prev => ({
+        setFilterDraft( prev => ({
           ...prev, 
           tags: selectedTags,
         }))
       }
-      onActiveFilters( filterDraft ) 
-    },[items, tagsParam, maxPriceParam, minPriceParam])
+      setFilters( (prev) => ({...prev, ...filterDraft})) 
+    },[listings, tagsParam, maxPriceParam, minPriceParam])
       
 
     const handleApplyFilters = () => {
@@ -58,7 +58,7 @@ function FilterSearch({className, children, order="", items, filterDraft, onFilt
       // Esto actualiza la URL a /filter?tags=oferta,nuevo&minPrice=50&maxPrice=300
       setSearchParams(newSearchParams)
       // aplica filtros
-      onActiveFilters( filterDraft )
+      setFilters( filterDraft )
     }
 
     const handleSubmit = () => {
@@ -69,11 +69,10 @@ function FilterSearch({className, children, order="", items, filterDraft, onFilt
 
     const handleReset = () => {
       setSearchParams("")
-      onActiveFilters({})
-      onResetFilter(true)
+      setFilters({})
     }
 
-    const setTags = [...new Set(items.flatMap(p => p.tags))];
+    const setTags = [...new Set(listings.flatMap(p => p.tags))];
 
     return(
 
@@ -84,7 +83,7 @@ function FilterSearch({className, children, order="", items, filterDraft, onFilt
       <Form.Group as={Row}>
         <Col xs={12} sm={6} md={4} lg={size == 'sm'  ? 6 : 3} className={order}>
           <DropdownCheck 
-              onFilterDraft={ onFilterDraft }
+              setFilterDraft={ setFilterDraft }
               variant="light"
               className="border rounded my-2" 
               array={setTags}>

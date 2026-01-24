@@ -1,29 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { CRUD } from "../enums/crudUtils.js";
 import ListingFormCrud from '../components/listing/ListingForm/ListingFormCrud.jsx';
 import ListingTable from "../components/listing/ListingTable.jsx";
+import { useListingsForm } from "../contexts/ListingFormContext.jsx";
+import { useUIContext } from "../contexts/UIContext.jsx";
+import { CRUD } from "../utils/crud.js";
 import FilterSearch from "../components/search/FilterSearch.jsx";
 import SearchLive from "../components/search/SearchLive.jsx";
 import { useListings } from "../contexts/ListingContext.jsx";
-import { useUIContext } from "../contexts/UIContext.jsx";
-import { handleCreateAll } from "../dev/loadData.js";
-import { listingService } from '../services/listingService.js';
-import { useListingsForm } from "../contexts/ListingFormContext.jsx";
+
 
 const ListingCRUD = () => {
 
 
   const {onHideFilter} =  useUIContext();
+  
 
+  const { listings, setFilters, filters } = useListings()
 
-  const {fetchData, products, setSearch, filterDraft, setActiveFilters, setFilterDraft, setResetFilter} = useListings(); 
-  const {showModal, setShowModal,modalMode, setModalMode,currentItem, setCurrentItem, editableFields, setEditableFields, handleChange, handleCreate, handleUpdate, handleDelete} = useListingsForm()
+  const {showModal, setShowModal,modalMode, setModalMode,currentItem, setCurrentItem, editableFields, setEditableFields, handleChange, handleCreate, handleUpdate, handleDelete } = useListingsForm()
 
   const [isCreating, setIsCreating] = useState(false);
+  const [search, setSearch] = useState()
 
   // Carga inicial
+
+  useEffect(()=>{
+    setFilters({page:0, title: search })
+    console.log(filters)
+  }, [search])
 
   useEffect(() => {
     onHideFilter(true);
@@ -31,6 +37,11 @@ const ListingCRUD = () => {
       setIsCreating(true)
     }
   }, []);
+
+
+  const handleSearch = () => {
+    set
+  }
 
   const openCreateModal = () => {
     setModalMode(CRUD.CREATE);
@@ -62,14 +73,9 @@ const ListingCRUD = () => {
         <span className="ms-2">Crear nuevo item</span>
       </Button>
 
-      <FilterSearch  order="order-1" className="d-block" 
-          items={products} 
-          filterDraft={filterDraft} 
-          onFilterDraft={setFilterDraft} 
-          onActiveFilters={setActiveFilters} 
-          onResetFilter={setResetFilter}>
-          <SearchLive 
-             items={products}
+      <FilterSearch  order="order-1" className="d-block" >
+          <SearchLive
+             items={listings}
              handleSearch={setSearch}
           />
       </FilterSearch>

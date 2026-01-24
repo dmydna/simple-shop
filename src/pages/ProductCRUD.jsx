@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { CRUD } from "../enums/crudUtils.js";
 import ProductTable from "../components/product//ProductTable.jsx";
 import ProductFormCrud from "../components/product/ProductFormCrud.jsx";
 import FilterSearch from "../components/search/FilterSearch.jsx";
 import SearchLive from "../components/search/SearchLive.jsx";
 import { useProducts } from "../contexts/ProductContext.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
-import { handleCreateAll } from "../dev/loadData.js";
+import { CRUD } from "../utils/crud.js";
 import { productService } from '../services/productService.js';
 
 const ProductCRUD = () => {

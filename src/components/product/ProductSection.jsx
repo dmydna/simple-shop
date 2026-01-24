@@ -1,17 +1,19 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useListings } from '../../contexts/ListingContext';
 import { useWindowsWidth } from '../../contexts/useWindowSize';
 import CardProduct from '../product/CardProduct';
+import { listingService } from '../../services/listingService';
+import { useFetchListings } from '../../contexts/useFetchListings';
 
 function ProductSection({children, filterFn, count, className, borders}){
 
-    const { products } = useListings() 
+    const { listings, setFilters } = useFetchListings(count) 
+
+    useEffect(()=>{
+      setFilters(filterFn)
+    },[filterFn])
 
     const width = useWindowsWidth()
-    const cfiltered = useMemo(()=>{
-       const filtered = products.filter(p => filterFn(p))
-       return count ? filtered.slice(0, (count)) : filtered
-     }, [products])
 
     
     const colClass = useMemo(() => {
@@ -27,11 +29,12 @@ function ProductSection({children, filterFn, count, className, borders}){
       <div className={`${className} rounded  h-100 p-4`}>
         <div className='row'>
           {children}
-        {cfiltered.map((p, i) => (
+        {listings.map((p, i) => (
             <CardProduct 
               key={p.id}
               className={'border-0 m-0 p-0'} 
               id={p.id} 
+              hash={p.hash}
               image={p.thumbnail} 
               title={p.title} 
               stock={p.stock} 

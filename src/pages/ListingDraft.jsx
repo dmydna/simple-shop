@@ -1,25 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { CRUD } from "../enums/crudUtils.js";
-import ListingFormCrud from '../components/listing/ListingForm/ListingFormCrud.jsx';
-import ListingTable from "../components/listing/ListingTable.jsx";
-import FilterSearch from "../components/search/FilterSearch.jsx";
-import SearchLive from "../components/search/SearchLive.jsx";
-import { useListings } from "../contexts/ListingContext.jsx";
-import { useUIContext } from "../contexts/UIContext.jsx";
-import { handleCreateAll } from "../dev/loadData.js";
-import { listingService } from '../services/listingService.js';
-import { useListingsForm } from "../contexts/ListingFormContext.jsx";
+import Img0 from "../assets/cubic.png";
 import Pagination from "../components/pagination/Pagination.jsx";
-import { productDataList } from "../dev/productDataList.js";
-
+import { useUIContext } from "../contexts/UIContext.jsx";
+import { listingDataList } from "../dev/listingDataList.js";
+import { listingService } from '../services/listingService.js';
 
 const ListingDraft = () => {
 
 
-  const { currentItems, setItems, setItemsPerPage, currentPage, setCurrentPage, totalPages } = useUIContext();
+  const { currentItems, items,setItems, setItemsPerPage, currentPage, setCurrentPage, totalPages } = useUIContext();
   
+
+
+
   const [ listingDraft, setListingDraft ] = useState({});
   const [ listingDraftList, setListingDraftList ] = useState([]);
   const [currentItem, setCurrentItem ] = useState();
@@ -29,11 +24,11 @@ const ListingDraft = () => {
   const [isCreatingALL, setIsCreatingALL ] = useState(false)
 
   useEffect(() => {
-    setListingDraftList(productDataList)
-    setItems(productDataList)
-    setLoading(true)
+    setListingDraftList(listingDataList)
+    setItems(listingDraftList)
     setItemsPerPage(8)
-  },[])
+    setLoading(true)
+  },[items])
 
 
 
@@ -61,9 +56,9 @@ const ListingDraft = () => {
   }
 
   const handleSendAll = async () => {
-    const productDataList = listingDraftList; 
+    const listingDataList = listingDraftList; 
     try {
-      await listingService.createBulk(productDataList);
+      await listingService.createBulk(listingDataList);
       handleDeleteAllDraft()
     } catch (error) {
       alert("Error creando item");
@@ -80,6 +75,7 @@ const ListingDraft = () => {
   const toPublishAll = () => {
      handleSendAll()
   }
+
 
 
   return (
@@ -117,10 +113,10 @@ const ListingDraft = () => {
           />
       </FilterSearch> */}
       
-      <Table striped={true} bordered={true} hover={true}>
-        <thead>
+      <Table striped={true} hover={true}>
+        <thead className="d-none">
           <tr>
-            <th>n°</th>
+            <th></th>
             <th style={{ width: '60%' }}>Nombre</th>
             <th>Acciones</th>
           </tr>
@@ -128,10 +124,12 @@ const ListingDraft = () => {
         <tbody>
           {(
             currentItems.map((item, index) => (
-              <tr key={index}>
-                <td>{index}</td>
-                <td style={{ width: '60%' }}>{item.title}</td>
+              <tr style={{borderStyle: "hidden"}} key={index}>
                 <td>
+                  {item.id ? item.id : <img style={{opacity: '0.7999'}} width={55} src={Img0} /> } 
+                </td>
+                <td style={{ width: '60%', lineHeight: '55px' }}>{item.title}</td>
+                <td style={{ textAlign: "end", lineHeight: '55px'}}>
 
                   {/* READ  */}
 

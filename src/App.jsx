@@ -79,19 +79,19 @@ function App() {
             </>
           }
           /> 
-          <Route path="/productos/filter/" element={
+          {/* <Route path="/productos/filter/" element={
             <> 
             <Products/>
             </>
           }
-          /> 
+          />  */}
           <Route path="/productos/search/:product" element={
             <> 
             <Products/>
             </>
           }
           />         
-          <Route path="/productos/details/:name" element={
+          <Route path="/productos/:hash/:name" element={
               <ProductDetails /> 
             } 
           />

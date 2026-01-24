@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import { useLocation, useMatch } from "react-router-dom";
+import { useLocation, useMatch, useSearchParams } from "react-router-dom";
 import AddToCartButton from "../components/cart/AddToCartButton";
 import CategoryNav from "../components/common/CategoryNav";
 import Pagination from "../components/pagination/Pagination";
@@ -8,122 +8,41 @@ import CardProduct from "../components/product/CardProduct";
 import FilterSearch from "../components/search/FilterSearch";
 import { useListings } from "../contexts/ListingContext";
 import { useUIContext } from "../contexts/UIContext";
-
+import { usePaginacion } from "../contexts/PaginationContext";
+import { category, tags } from "../utils/posts";
 
 
 
 function Products() {
+  
+  const { listings, currentPage, setCurrentPage, totalPages, setFilters } = useListings()
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  // Agregar al Carrito, actualiza stock e incrementa producto en el Carrito
+  const tagsParam = searchParams.get('tags');
+  const pageParam = searchParams.get('page');
+  const searchParam = searchParams.get('search')
+  const categoryParam = searchParams.get('category')
 
-  const {currentItems, setVisibleClients, setItems, setItemsPerPage, currentPage, setCurrentPage, totalPages} = useUIContext();
-
-  const categoryMatch = useMatch("/productos/category/:category");
-  const searchMatch = useMatch("/productos/search/:product");
-  const filterMatch = useMatch("/productos/filter/:product");
-
-  const { setCategory, setSearch, filtered, setActiveFilters, setResetFilter,loading, products, setFilterDraft, filterDraft } = useListings();
-  const location = useLocation();
-
-  // resetea valores al entrar.
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setActiveFilters({});
-    setResetFilter(true)
-  }, []);
+  useEffect(()=>{
+    if(!isNaN(pageParam)) setCurrentPage(pageParam);
+    if(tagsParam) setFilters({page: 0, tags: tagsParam})
+    if(categoryParam) setFilters({page:0, categories: categoryParam});
+    if(searchParam) setFilters({page: 0, title: searchParam})
+  }, [tagsParam, pageParam, categoryParam, searchParam])
 
 
+  useEffect(()=>{
+    console.log(searchParam)
+  }, [searchParam])
 
-  // Informacion a mostrar segun Pagina
   const [meta, setMeta] = useState({
     title: "Productos",
     message: "",
     description: "",
   });
+
+  const { showFilter } =  useUIContext()
   
-
-  const [ showCategoryNav, setShowCategoryNav ] = useState(false);
-
-
-  
-  useEffect(() => {
-     if( location.pathname.startsWith("/productos/category") || 
-       location.pathname.startsWith("/productos/search")   || 
-       location.pathname === "/productos" ){
-      // resetea filtro activos
-      setActiveFilters({tags : [], minPrice: 0, maxPrice : 15000})
-     }
-     if(location.pathname.startsWith("/productos/filter")){
-      // resetea otro filtros 
-      setSearch("")
-      setCategory(null)
-     }
-  },[location])
-
-  useEffect(() => {
-    let routeType = 'base';
-
-    if (categoryMatch?.params.category) {
-        routeType = 'category';
-    } else if (searchMatch?.params.product) {
-        routeType = 'search';
-    } else if (location.pathname.startsWith("/productos/filter")) {
-        routeType = 'filter';
-    }
-    
-    switch (routeType) {
-        case 'category':
-            setCategory(categoryMatch.params.category);
-            setSearch(""); // Limpieza de búsqueda
-            setMeta(prev => ({
-                ...prev,
-                title: categoryMatch.params.category,
-                message: filtered.length + " productos"
-            }));
-            break;
-
-        case 'search':
-            setCategory(null); // Limpieza de categoría
-            setSearch(searchMatch?.params.product)
-            setMeta(prev => ({
-                ...prev,
-                title: "Resultados",
-                message: filtered.length + " encontrado"
-            }));
-            break;
-
-        case 'filter':
-            // Si el filtro es solo por query params sin búsqueda de texto libre
-            setMeta(prev => ({
-                ...prev,
-                title: "Resultados",
-                message: filtered.length + " encontrados"
-            }));
-            break;
-
-        case 'base':
-        default:
-            setCategory(null);
-            setSearch("");
-            setMeta(prev => ({
-                ...prev,
-                title: "Productos",
-                message: "todas las categorias"
-            }));
-            break;
-    }
-
-  }, [location.pathname, categoryMatch, searchMatch, filtered]);
-
-
-
-    // Lógica de paginación
-    useEffect(()=>{
-      setItemsPerPage(8)
-      setItems(filtered)
-    },[filtered, products])
-
-
   return (
     <>
     <Container fluid="xl" className="bg-white rounded mt-2 mb-5 pb-5">
@@ -137,15 +56,11 @@ function Products() {
          </span>
        </div>
        {
-        location.pathname.startsWith('/productos/filter') ?
+        showFilter ?
         <>
-          <CategoryNav show={showCategoryNav} />
+          <CategoryNav show={showFilter} />
           <FilterSearch 
-              items={products} 
-              filterDraft={filterDraft} 
-              onFilterDraft={setFilterDraft} 
-              onActiveFilters={setActiveFilters} 
-              onResetFilter={setResetFilter}
+              items={listings} 
           className=""/>
         </> : ''
        }
@@ -153,10 +68,11 @@ function Products() {
 
 
       <Row>
-        {currentItems.map((p) => (  
+        {listings.map((p) => (  
           <CardProduct className={'border m-2'}
             key={p.id}
             id={p.id}
+            hash={p.hash}
             image={p.thumbnail}
             title={p.title}
             stock={p.stock}
@@ -169,10 +85,11 @@ function Products() {
       </Row>
     </Container>
     <Pagination 
-           className={`container-xl`}
-           currentPage={currentPage} 
-           setCurrentPage={setCurrentPage} totalPages={totalPages} 
-      />
+        className={`container-xl`}
+        currentPage={currentPage} 
+        setCurrentPage={setCurrentPage} 
+        totalPages={totalPages} 
+    />
     </>
   )
 }

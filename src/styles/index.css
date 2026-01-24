@@ -24,6 +24,9 @@
 
 
 
+.bg-soft-primary {
+  background-color: rgba(13 110 253 / 19%) !important
+}
 
 .hover-icon{
     opacity: .8;

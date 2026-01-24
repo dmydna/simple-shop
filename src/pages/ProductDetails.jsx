@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import CardReview from "../components/common/CardReviews";
@@ -6,8 +6,8 @@ import ProductBuyCard from "../components/product/ProductBuyCard";
 import ProductSpecs from "../components/product/ProductSpecs";
 import CarouselImages from "../components/common/CarouselImages";
 import { useListings } from "../contexts/ListingContext";
-
-
+import { listingService } from "../services/listingService";
+import ProductCarousel from "../components/product/ProductCarousel";
 
 function ProductDetails() {
 
@@ -15,15 +15,26 @@ function ProductDetails() {
       window.scrollTo(0, 0);
    }, []);
 
-   const name = decodeURIComponent(useParams().name)
-   const { products } = useListings()
+   const {name, hash} = useParams()
+
+   const { currentListing, getCurrentListing } = useListings()
+
+   useEffect(()=>{
+      getCurrentListing(hash)
+      console.log(currentListing)
+   },[])
+
+
+   const p = useMemo(()=>{
+      return currentListing;
+   }, [currentListing])
 
    return (
       <Container fluid="xl" className="bg-white rounded mt-2 pt-2">
          <>
-            {products.map((p) => (
-               name != p.title ?
+            { !currentListing ?
                   '' :
+                  <>
                      <Row className="g-3" key={p.id}>
                         {/**Breadcrumb */}
                         <Col className="mb-5" xs={12}>
@@ -72,23 +83,35 @@ function ProductDetails() {
                         </Col >
 
                         {/**Product Reviews */}
-                        <Col className="m-3 mx-0" xs={12} md={7}>
-                           <Col md={12} >
-                              <div className="fs-5 fw-medium mb-5">Opiniones</div>
-                              {p.reviews?.map(r =>
-                                 <CardReview
-                                    key={r.id}
-                                    id={r.id}
-                                    comment={r.comment}
-                                    rating={r.rating}
-                                    date={r.date}
-                                 />
-                              ) || ''}
-
-                           </Col>
-                        </Col >
+                        {p.reviews && (
+                           <Col className="m-3 mx-0" xs={12} md={7}>
+                              <Col md={12} >
+                                <div className="fs-5 fw-medium mb-5">Reseñas</div>
+                                {p.reviews.map(r =>
+                                  <CardReview
+                                     key={r.id}
+                                     id={r.id}
+                                     comment={r.comment}
+                                     rating={r.rating}
+                                     date={r.date}
+                                  />
+                                 ) || ''}
+                              </Col>
+                           </Col >
+                        )}
                      </Row>
-            ))}
+                     {/** Carousels  */}
+                     <Row className="g-0">
+                        <ProductCarousel className="border mx-0 my-3 p-4" filterFn={{ categories : p.category }} col={4} imgSize={140} >
+                           <h3 className="fs-4 fw-medium pb-0 m-0 ">Productos similares</h3>
+                           <Link to={`/productos/category/${p.category}`} 
+                             className="text-decoration-none fw-bold">
+                             Ver mas
+                           </Link>  
+                        </ProductCarousel>
+                     </Row>
+                  </>
+            }
          </>
       </Container>
    );

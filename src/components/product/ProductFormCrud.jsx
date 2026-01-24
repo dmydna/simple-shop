@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
-import { CRUD } from "../../enums/crudUtils.js";
+import { CRUD } from "../../utils/crud.js";
 
 
 const ProductFormCrud = ({ showModal, handleCloseModal, modalMode, currentItem, handleChange, handleCreate, handleUpdate, handleEnableEdit, editableFields }) => {
@@ -9,7 +9,7 @@ const ProductFormCrud = ({ showModal, handleCloseModal, modalMode, currentItem, 
     switch (modalMode) {
       case CRUD.CREATE: return "Crear"
       case CRUD.UPDATE: return "Actualizar"
-      case CRUD.READ: return "Ver"
+      case CRUD.READ:   return "Ver"
       case CRUD.DELETE: return "Eliminar"
     }
   }, [modalMode])

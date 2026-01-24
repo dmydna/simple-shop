@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useMediaQuery } from 'react-responsive';
 import { useLocation } from "react-router-dom";
 import ContactModal from "../components/common/ContactModal";
@@ -20,8 +20,7 @@ export function UIProvider({ children }) {
     const totalPages = Math.ceil(items.length / itemsPerPage);
     const lastItemIndex = currentPage * itemsPerPage; 
     const firstItemIndex = lastItemIndex - itemsPerPage;
-    const currentItems = items.slice(firstItemIndex, lastItemIndex);
-
+    const currentItems = items.slice(firstItemIndex, lastItemIndex)
 
 
     const isDesktop = useMediaQuery({ minWidth: 768 });

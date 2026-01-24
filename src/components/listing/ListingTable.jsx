@@ -7,26 +7,26 @@ import Pagination from '../pagination/Pagination';
 
 function ListingTable() {
 
-  const { currentItems, setItems, setItemsPerPage, currentPage, setCurrentPage, totalPages } = useUIContext()
-  const { filtered, products, loading } = useListings()
+  const { currentItems, setItems, setItemsPerPage } = useUIContext()
+  const { listings, loading, currentPage, setCurrentPage, totalPages } = useListings()
   const { openEditModal, handleDelete, openReadModal, handleVisibility } = useListingsForm()
 
   useEffect(() => {
     // Lógica de paginación
-    setItemsPerPage(8)
-    setItems(filtered)
-  }, [filtered, products, loading])
+    setCurrentPage(1)
+  }, [])
 
 
 
   return (
     <>
-      <Table striped={true} bordered={true} hover={true}>
+    <div className='shadow-sm border rounded p-2'>
+      <Table className="mb-0" striped={true} bordered={false} hover={true}>
         <thead>
           <tr>
             <th>ID</th>
             <th style={{ width: '60%' }}>Nombre</th>
-            <th>Acciones</th>
+            <th style={{ textAlign: 'end' }} ></th>
           </tr>
         </thead>
         <tbody>
@@ -38,20 +38,20 @@ function ListingTable() {
                 <p className="mt-2">Cargando datos...</p>
               </td>
             </tr>
-          ) : currentItems.length === 0 ? (
+          ) : listings.length === 0 ? (
             <tr>
               <td colSpan="3" className="text-center">No hay items</td>
             </tr>
           ) : (
-            currentItems.map((item) => (
-              <tr key={item.id}>
+            listings.map((item) => (
+              <tr style={{ borderStyle: 'hidden' }} key={item.id}>
                 <td>{item.id}</td>
                 <td style={{ width: '60%' }}>{item.title}</td>
-                <td>
+                <td style={{ textAlign: 'end' }} >
 
                   {/* Editar  */}
                   <Button
-                    variant="warning"
+                    variant="outline-dark"
                     size="sm"
                     onClick={() => openEditModal(item)}
                     className="me-3 mb-1"
@@ -61,7 +61,7 @@ function ListingTable() {
 
                   {/* Eliminar  */}
                   <Button
-                    variant="danger"
+                    variant="outline-dark"
                     size="sm"
                     onClick={() => handleDelete(item.id)}
                     className="me-3 mb-1"
@@ -75,7 +75,7 @@ function ListingTable() {
                     variant="dark"
                     size="sm"
                     onClick={() => handleVisibility(item)}
-                    className="ms-3 mb-1"
+                    className="mb-1"
                   >
                     <i className="bi bi-eye-fill"></i>
                   </Button>
@@ -85,6 +85,7 @@ function ListingTable() {
           )}
         </tbody>
       </Table>
+      </div>
 
       <Pagination
         currentPage={currentPage}

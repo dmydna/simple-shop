@@ -1,10 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button, Dropdown, Form, InputGroup } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useProducts } from "../../contexts/ProductContext";
 import { useUIContext } from "../../contexts/UIContext";
 import { useWindowsWidth } from "../../contexts/useWindowSize";
-import { useListings } from "../../contexts/ListingContext";
+import {useFetchListings} from "../../contexts/useFetchListings"
 
 function Search({toggle, setToggle}){
     
@@ -12,9 +11,9 @@ function Search({toggle, setToggle}){
     const navigate = useNavigate();
     const location = useLocation();
 
-    const {onHideFilter} = useUIContext()
+    const {onHideFilter} = useUIContext();
     const [query, setQuery] = useState(""); 
-    const {products} = useListings()
+    const {listings, setFilters} = useFetchListings(4);
 
     const [show, setShow] = useState(false);
 
@@ -34,21 +33,15 @@ function Search({toggle, setToggle}){
 
     function handleFilter(e){
       e.preventDefault();
-      if(!location.pathname.startsWith('/productos/filter')){
-        navigate('/productos/filter');
-        onHideFilter(true);
-      }else{
         onHideFilter(prev => !prev);
       }
-    }
+    
     
     // Filtro para la lista de coincidencias
-    const filtered = useMemo(() => {
-      if (!query) return [];
-      return products.filter(p =>
-        p.title.toLowerCase().includes(query.toLowerCase())
-      );
-    }, [products, query]);
+    useEffect(() => {
+      if (!query) return ;
+      setFilters({page:0, title: query})
+    }, [listings, query]);
 
     return (
       <div className="d-flex w-100">
@@ -88,14 +81,14 @@ function Search({toggle, setToggle}){
           >
             {/* !! convierte a booleano cualquier expresion */}
             <Dropdown.Menu className={`w-100`}>
-              {filtered.slice(0, 3).map((p) => (
+              {listings.map((p) => (
                 <Dropdown.Item
                   onClick={() => {
                     setShow(false);
                     setToggle(false);
                   }}
                   as={Link}
-                  to={`/productos/details/${p.title}`}
+                  to={`/productos/${p.hash}/${p.title}`}
                   key={p.id}
                 >
                   {p.title}

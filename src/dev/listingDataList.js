@@ -1,4 +1,4 @@
-export const productDataList = [
+export const listingDataList = [
 	{
       "title": "Essence Mascara Lash Princess",
       "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",

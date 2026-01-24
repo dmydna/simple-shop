@@ -3,7 +3,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 import Img3 from '../../../assets/edit.png';
 import Img0 from '../../../assets/message.png';
 import { useListingsForm } from "../../../contexts/ListingFormContext";
-import { CRUD } from "../../../enums/crudUtils.js";
+import { CRUD } from "../../../utils/crud.js";
 import ProductSelectTable from "../ProductSelectTable";
 import StepDetalles from "./StepDetalles";
 import StepProductos from "./StepProducto";

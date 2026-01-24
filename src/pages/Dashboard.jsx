@@ -7,8 +7,13 @@ import Img2 from '../assets/delivery-time.png';
 import Img3 from "../assets/expend.png";
 import Img4 from '../assets/paper.png';
 import Img5 from "../assets/t-shirt.png"
+import Img6 from "../assets/draft.png"
+import { useListings } from "../contexts/ListingContext.jsx";
+
 
 const Dashboard = () => {
+
+    const {totalListings} = useListings()
 
     return (
         <Container className="mt-4">
@@ -22,32 +27,42 @@ const Dashboard = () => {
            </div>
            <Row className={`mb-3 d-md-flex`}> 
              <CategoryItem 
-               className="border ps-0"
-               category="your listings"
+               className="border ps-0 bg-soft-primary"
+               category="your posts"
                image={Img1} 
                link={`/dashboard/listing`}
              />
              <CategoryItem 
                // variant="primary"
-               className="border"
+               className="border bg-soft-primary"
                category="your products"
                image={Img5} 
                link={`/dashboard/products`}
              />
              <CategoryItem 
                // variant="success"
-               className="border"
+               className="border bg-soft-primary"
                category="your clients"
                image={Img3} 
                link={`/dashboard/clients`}
              />
              <CategoryItem 
                // variant="dark"
-               className="border pe-0"
+               className="border pe-0 bg-soft-primary"
                category="your orders" 
                image={Img4} 
                link={`/dashboard/orders`}
              />
+             {totalListings >= 30 && (
+                <CategoryItem 
+                   // variant="dark"
+                   className="border pe-0 bg-soft-primary"
+                   category="Dev Posts" 
+                   image={Img6} 
+                   link={`/dashboard/draft`}
+                />
+             )}
+
            </Row>
         </Container>
     )

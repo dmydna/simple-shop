@@ -10,15 +10,11 @@ function ProductTable({openEditModal, handleDelete,  handleRead}) {
   const  {filtered, products, loading} =  useProducts()
 
 
-
-
-
   useEffect(()=>{
     // Lógica de paginación
     setItemsPerPage(8)
     setItems(filtered)
   },[filtered, products, loading])
-
 
 
   return (

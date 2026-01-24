@@ -4,50 +4,65 @@ import Carousel from 'react-bootstrap/Carousel';
 import { useListings } from '../../contexts/ListingContext';
 import { useWindowsWidth } from '../../contexts/useWindowSize';
 import CardProduct from './CardProduct';
+import { listingService } from '../../services/listingService';
+import { useFetchListings } from '../../contexts/useFetchListings';
 
 
 
-function ProductCarousel({children, filterFn, col, className}) {
+
+function ProductCarousel({children, filterFn, col, className, imgSize = 180}) {
 
   const [index, setIndex] = useState(0);
+  const [chunkSize, setChunkSize] = useState(col)
+  const width = useWindowsWidth()
+
+  const {listings, setFilters} = useFetchListings(8)
 
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
-  const { products, filtered } = useListings()
+
+  useEffect(()=>{
+    setFilters(filterFn)
+  },[filterFn])
 
 
-  const [chunkSize, setChunkSize] = useState()
-  const width = useWindowsWidth()
-
-  //  copia local de filtered
-  const cfiltered = useMemo(()=>{
-     return products.filter(p => filterFn(p))
-  }, [products, chunkSize])
- 
-  
    
-  const [visibleProducts, setVisibleProducts] = useState(cfiltered);
+  const [visibleProducts, setVisibleProducts] = useState([]);
 
   useEffect(() => {
     if (width < 576){
-      setVisibleProducts(cfiltered.slice(0,3))
+      setVisibleProducts(listings.slice(0,3))
       setChunkSize(1);
     } 
     else if(width < 992){
-      setVisibleProducts(cfiltered.slice(0,10))
+      setVisibleProducts(listings.slice(0,10))
       setChunkSize(2)
     }
     else{ 
-      setVisibleProducts(cfiltered)
+      setVisibleProducts(listings)
       setChunkSize(col);
     }
-  }, [width, cfiltered]);
+  }, [width, listings]);
 
-  const slides = [];
-  for (let i = 0; i < visibleProducts.length; i += chunkSize) {
-    slides.push(visibleProducts.slice(i, i + chunkSize));
-  }
+  const slides = useMemo(() => {
+    if (visibleProducts.length === 0) return [];
+    
+    const arr = [];
+    // Recorremos la lista original de i en i según el chunkSize
+    for (let i = 0; i < visibleProducts.length; i += chunkSize) {
+      const chunk = [];
+      // Para cada grupo, tomamos exactamente 'chunkSize' elementos
+      for (let j = 0; j < chunkSize; j++) {
+        // (i + j) % length hace que cuando lleguemos al final, 
+        // el índice vuelva a 0, 1, 2...
+        const index = (i + j) % visibleProducts.length;
+        chunk.push(visibleProducts[index]);
+      }
+      arr.push(chunk);
+    }
+    return arr;
+  }, [visibleProducts, chunkSize]);
 
 
   return (
@@ -81,7 +96,9 @@ function ProductCarousel({children, filterFn, col, className}) {
                 key={p.id}
                 className={'border-0'} 
                 id={p.id} 
+                hash={p.hash}
                 image={p.thumbnail} 
+                imgSize={imgSize}
                 title={p.title} 
                 stock={p.stock} 
                 price={p.price}

@@ -1,7 +1,7 @@
 import { listingService as productService } from "../services/listingService";
-import { productDataList } from "./productDataList";
+import { listingDataList } from "./listingDataList";
 
-export const handleCreateAll = async () => {
+export const handleCreateAllListing = async () => {
 
       try {
         // 1. Verificar existencia JUSTO ANTES de intentar crear
@@ -13,7 +13,7 @@ export const handleCreateAll = async () => {
         }
   
         console.log("📤 Intentando carga masiva...");
-        await productService.createBulk(productDataList);
+        await productService.createBulk(listingDataList);
         
         success = true;
         console.log("✅ Carga masiva completada");

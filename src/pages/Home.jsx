@@ -113,7 +113,7 @@ function Home() {
       {/** Product Ilands */}
 
       <Row className="g-0">
-        <ProductSection className="border p-4 my-3" filterFn={(p)=> p.category == "beauty"} count={4}>
+        <ProductSection className="border p-4 my-3" filterFn={{ categories : ["fragrances"] }} count={4}>
           <p className="fs-4 fw-medium pb-0 m-0">Lo mas visto</p>
           <Link to={'/productos'} className="text-decoration-none fw-bold">ver mas</Link>
         </ProductSection>
@@ -122,14 +122,14 @@ function Home() {
 
       <Row className="g-0"> 
       <Col className="p-0 my-3" md={12} lg={4}>
-         <ProductSection className="border p-4 m-0 me-lg-3" filterFn={(p)=> p.category === "beauty"} count={1}>
+         <ProductSection className="border p-4 m-0 me-lg-3"  filterFn={{ tags : ["vegetables"] }} count={1}>
            <p className="fs-4 fw-medium pb-0 m-0 ">Oferton del día</p>
            <Link to="/productos" className="text-decoration-none fw-bold">ver más</Link>
          </ProductSection>
        </Col>
 
        <Col className="p-0 my-3" md={12} lg={8}>
-         <ProductSection className="border p-4" filterFn={(p)=> p.category === "furniture"} count={3}>
+         <ProductSection className="border p-4" filterFn={{ categories : ["furniture"] }} count={3}>
            <p className="fs-4 fw-medium pb-0 m-0 ">Para llevar más de uno</p>
            <Link to="/productos" className="text-decoration-none fw-bold">ver más</Link>
          </ProductSection>
@@ -140,8 +140,8 @@ function Home() {
       
       {/** Carousels  */}
 
-  <Row className="g-0">
-    <ProductCarousel className="border mx-0 my-3 p-4" filterFn={(p)=> p.category == "beauty"} col={3} >
+   <Row className="g-0">
+    <ProductCarousel className="border mx-0 my-3 p-4" filterFn={{ tags : ["vegatables"] }} col={3} >
        <h3 className="fs-4 fw-medium pb-0 m-0 ">Con envio gratis</h3>
        <Link to={'/productos/category/groceries'} 
          className="text-decoration-none fw-bold">
@@ -150,8 +150,9 @@ function Home() {
     </ProductCarousel>
   </Row>
 
+
   <Row className="g-0">
-    <ProductCarousel className="border mx-0 my-3 p-4" filterFn={(p)=> p.discountPercentage >= 12} col={4}>
+    <ProductCarousel className="border mx-0 my-3 p-4" filterFn={{ categories : ["beauty"] }} col={4}>
       <h3 className="fs-4 fw-medium pb-0 m-0 ">Ofertas</h3>
       <Link to={'/productos/category/groceries'} 
         className="text-decoration-none fw-bold">

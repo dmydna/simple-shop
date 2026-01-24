@@ -6,26 +6,18 @@ import PaginatorInput from "./PaginatorInput";
 
 const Pagination = ({currentPage, setCurrentPage, totalPages, className}) => {
 
-  nprogress.configure({ 
-    speed: 500,     // Velocidad de la animación de cierre
-    trickleSpeed: 200 // Velocidad del avance automático
-  });
+  // nprogress.configure({ 
+  //   speed: 500,     // Velocidad de la animación de cierre
+  //   trickleSpeed: 200 // Velocidad del avance automático
+  // });
     // Cambia a una página específica si está dentro del rango
   const irAPagina = (numeroPagina) => {
     if (numeroPagina >= 1 && numeroPagina <= totalPages) {
-      
-        nprogress.start();
-        nprogress.set(0.25);
         window.scrollTo({
           top: 0,
           behavior: 'instant'
         });
-        const timer = setTimeout(() => {
-          nprogress.done();
           setCurrentPage(numeroPagina);
-        }, 500); 
-      
-        return () => clearTimeout(timer);
     }
   };
 

@@ -16,7 +16,9 @@ function ProductCarousel({children, filterFn, col, className, imgSize = 180}) {
   const [chunkSize, setChunkSize] = useState(col)
   const width = useWindowsWidth()
 
-  const {listings, setFilters} = useFetchListings(8)
+  const {listings, setFilters} = useFetchListings(8) //LOCAL
+  // Evitados mostrar el current Listing
+  const {currentListing} = useListings()               //Global
 
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
@@ -24,6 +26,7 @@ function ProductCarousel({children, filterFn, col, className, imgSize = 180}) {
 
   useEffect(()=>{
     setFilters(filterFn)
+    console.log(filterFn)
   },[filterFn])
 
 
@@ -57,62 +60,71 @@ function ProductCarousel({children, filterFn, col, className, imgSize = 180}) {
         // (i + j) % length hace que cuando lleguemos al final, 
         // el índice vuelva a 0, 1, 2...
         const index = (i + j) % visibleProducts.length;
+        if(currentListing?.id == visibleProducts[index]?.id){
+          continue
+        }
         chunk.push(visibleProducts[index]);
       }
       arr.push(chunk);
     }
+
+    console.log(arr)
     return arr;
   }, [visibleProducts, chunkSize]);
 
 
   return (
 
-    <div className={`row ${className} rounded  h-100`}>
-      <div className='col-12 d-flex justify-content-between'>
-        <div>
-         {children} {/* header */}
-        </div>
-        <div className="d-flex justify-content-center mt-3 gap-2">
-          {slides.map((g, i) => (
-            <Button
-              key={i}
-              variant={i === index ? 'primary' : 'outline-secondary'}
-              size="sm"
-              onClick={() => setIndex(i)}
-              className="rounded-circle"
-              style={{ width: 12, height: 12, padding: 0 }}
-            />
-          ))}
-        </div>
-      </div>
-      
-    <Carousel className="col-12"
-    indicators={false} variant="dark" activeIndex={index} onSelect={handleSelect}>
-      {slides.map((group, index)=>(
-          <Carousel.Item key={index}>
-          <div className="row d-flex justify-content-around">
-            {group.map((p)=>(
-              <CardProduct 
-                key={p.id}
-                className={'border-0'} 
-                id={p.id} 
-                hash={p.hash}
-                image={p.thumbnail} 
-                imgSize={imgSize}
-                title={p.title} 
-                stock={p.stock} 
-                price={p.price}
-                discount={p.discountPercentage}
-              />
-            ))}
+       <>
+       { slides?.length > 0 && (
+        <div className={`row ${className} rounded  h-100`}>
+          <div className='col-12 d-flex justify-content-between'>
+            <div>
+              {children} {/* header */}
+            </div>
+            <div className="d-flex justify-content-center mt-3 gap-2">
+              {slides.map((g, i) => (
+                <Button
+                  key={i}
+                  variant={i === index ? 'primary' : 'outline-secondary'}
+                  size="sm"
+                  onClick={() => setIndex(i)}
+                  className="rounded-circle"
+                  style={{ width: 12, height: 12, padding: 0 }}
+                />
+              ))}
+            </div>
           </div>
-        </Carousel.Item>        
-      ))}
-  </Carousel>
-    </div>
 
+          <Carousel className="col-12"
+            indicators={false} variant="dark" activeIndex={index} onSelect={handleSelect}>
+            {slides.map((group, index) => (
+              <Carousel.Item key={index}>
+                <div className="row d-flex justify-content-around">
+                  {group.map((p) => (
+                    <CardProduct
+                      key={p.id}
+                      className={'border-0'}
+                      id={p.id}
+                      hash={p.hash}
+                      image={p.thumbnail}
+                      imgSize={imgSize}
+                      title={p.title}
+                      stock={p.stock}
+                      price={p.price}
+                      discount={p.discountPercentage}
+                    />
+                  ))}
+                </div>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </div>
 
-
+       )}
+       
+       </>
+        
   );
 }
 

@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import { useLocation, useMatch, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import AddToCartButton from "../components/cart/AddToCartButton";
 import CategoryNav from "../components/common/CategoryNav";
 import Pagination from "../components/pagination/Pagination";
 import CardProduct from "../components/product/CardProduct";
-import FilterSearch from "../components/search/FilterSearch";
+import SearchFilter from "../components/search/SearchFilter";
 import { useListings } from "../contexts/ListingContext";
 import { useUIContext } from "../contexts/UIContext";
-import { usePaginacion } from "../contexts/PaginationContext";
-import { category, tags } from "../utils/posts";
 
 
 
 function Products() {
   
-  const { listings, currentPage, setCurrentPage, totalPages, setFilters } = useListings()
+  const { listings, currentPage, setCurrentPage, totalPages, setFilters, totalListings } = useListings()
   const [searchParams, setSearchParams] = useSearchParams();
+  const [meta, setMeta] = useState({
+    title: "Productos",
+    message: "",
+    description: "",
+  });
 
   const tagsParam = searchParams.get('tags');
   const pageParam = searchParams.get('page');
@@ -24,22 +27,32 @@ function Products() {
   const categoryParam = searchParams.get('category')
 
   useEffect(()=>{
-    if(!isNaN(pageParam)) setCurrentPage(pageParam);
-    if(tagsParam) setFilters({page: 0, tags: tagsParam})
-    if(categoryParam) setFilters({page:0, categories: categoryParam});
-    if(searchParam) setFilters({page: 0, title: searchParam})
-  }, [tagsParam, pageParam, categoryParam, searchParam])
+    if(!searchParam){
+      setMeta({title: "Productos"});
+      setFilters({});
+    }
+    if(!isNaN(pageParam)){
+      setCurrentPage(pageParam);
+    }  
+    if(tagsParam) { 
+      setFilters({tags: tagsParam}); 
+    }
+    if(categoryParam) {
+      setFilters({page:0, categories: categoryParam});
+      if(categoryParam.split(',').length == 1){
+        setMeta((prev) => ({...prev, title: categoryParam}));
+      }
+    }
+    if(searchParam) {
+      setFilters({title: searchParam});
+      setMeta((prev) => ({
+          ...prev, 
+          title: "Resultados", 
+          message: `encontrados: ${totalListings}`}  
+      ));
+    }
+  }, [tagsParam, pageParam, categoryParam, searchParam, searchParam])
 
-
-  useEffect(()=>{
-    console.log(searchParam)
-  }, [searchParam])
-
-  const [meta, setMeta] = useState({
-    title: "Productos",
-    message: "",
-    description: "",
-  });
 
   const { showFilter } =  useUIContext()
   
@@ -59,7 +72,7 @@ function Products() {
         showFilter ?
         <>
           <CategoryNav show={showFilter} />
-          <FilterSearch 
+          <SearchFilter 
               items={listings} 
           className=""/>
         </> : ''

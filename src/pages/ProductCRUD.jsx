@@ -3,12 +3,12 @@ import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ProductTable from "../components/product//ProductTable.jsx";
 import ProductFormCrud from "../components/product/ProductFormCrud.jsx";
-import FilterSearch from "../components/search/FilterSearch.jsx";
+import SearchFilter from "../components/search/SearchFilter.jsx";
 import SearchLive from "../components/search/SearchLive.jsx";
 import { useProducts } from "../contexts/ProductContext.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
-import { CRUD } from "../utils/crud.js";
 import { productService } from '../services/productService.js';
+import { CRUD } from "../utils/crud.js";
 
 const ProductCRUD = () => {
 
@@ -132,7 +132,7 @@ const ProductCRUD = () => {
         <span className="ms-2">Crear nuevo item</span>
       </Button>
 
-      <FilterSearch  
+      <SearchFilter  
           order="order-1"
           className="d-block" 
           items={products} 
@@ -144,7 +144,7 @@ const ProductCRUD = () => {
              items={products}
              handleSearch={setSearch}
           />
-      </FilterSearch>
+      </SearchFilter>
 
 
      {/*  TABLE GET ALL  */} 

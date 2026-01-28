@@ -21,7 +21,7 @@ import { useUIContext } from "../../contexts/UIContext";
         e.preventDefault();
         if (login(user, pass)) 
           {
-          navigate("/perfil/admin");
+          navigate("/user/");
           onHideLogin(false)
 
         } else {

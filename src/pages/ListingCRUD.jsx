@@ -3,12 +3,12 @@ import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ListingFormCrud from '../components/listing/ListingForm/ListingFormCrud.jsx';
 import ListingTable from "../components/listing/ListingTable.jsx";
+import SearchFilter from "../components/search/SearchFilter.jsx";
+import SearchLive from "../components/search/SearchLive.jsx";
+import { useListings } from "../contexts/ListingContext.jsx";
 import { useListingsForm } from "../contexts/ListingFormContext.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
 import { CRUD } from "../utils/crud.js";
-import FilterSearch from "../components/search/FilterSearch.jsx";
-import SearchLive from "../components/search/SearchLive.jsx";
-import { useListings } from "../contexts/ListingContext.jsx";
 
 
 const ListingCRUD = () => {
@@ -73,12 +73,12 @@ const ListingCRUD = () => {
         <span className="ms-2">Crear nuevo item</span>
       </Button>
 
-      <FilterSearch  order="order-1" className="d-block" >
+      <SearchFilter  order="order-1" className="d-block" >
           <SearchLive
              items={listings}
              handleSearch={setSearch}
           />
-      </FilterSearch>
+      </SearchFilter>
 
 
      {/*  TABLE GET ALL  */} 

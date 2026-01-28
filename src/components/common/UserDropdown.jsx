@@ -49,7 +49,7 @@ function UserDropdown({className}) {
             {/* Perfil info */}
             <Dropdown.Item
               as={Link}
-              to={`/perfil/${user}`}
+              to={`/user/information`}
               className="border-bottom py-2"
             >
               <div>
@@ -59,7 +59,7 @@ function UserDropdown({className}) {
             </Dropdown.Item>
   
             {/* Links de navegación */}
-            <Dropdown.Item as={Link} to={`/perfil/${user}`}>
+            <Dropdown.Item as={Link} to={`/user/information`}>
               <i className="bi bi-person me-2"></i> Perfil
             </Dropdown.Item>
             <Dropdown.Item as={Link} to="/dashboard">

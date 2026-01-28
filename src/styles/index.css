@@ -22,6 +22,53 @@
     color: white!important;
 }
 
+.edit-pic-button{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 8%;
+    left: 67%;
+}
+
+.img-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* El efecto Hover */
+  .img-container::after {
+    content: '✕'; /* Icono de X */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Gris transparente */
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.3s ease;
+  }
+  
+  .img-container:hover::after {
+    opacity: 1; /* Se muestra al pasar el mouse */
+  }
 
 
 .bg-soft-primary {
@@ -43,6 +90,17 @@
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);;
 }
 
+
+
+.simple-link:hover{
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.simple-link {
+    text-decoration: none;
+    color: initial;
+}
 
 
 .hover-link:hover{
@@ -241,4 +299,16 @@
          background-position-x: -480px;
     }
 
+}
+
+
+/* En tu archivo style.css */
+.h4-5 {
+    font-size: calc(1.125rem + 0.15vw); /* Un punto medio entre h4 y h5 */
+}
+
+@media (min-width: 1200px) {
+    .h4-5 {
+        font-size: 1.375rem; /* Ajuste manual */
+    }
 }

@@ -79,7 +79,8 @@ export function ListingProvider({ children }){
           getCurrentListing,
           setFilters,
           filterDraft, 
-          setFilterDraft, totalPages
+          setFilterDraft, totalPages,
+          totalListings
         }}>
             {children}
         </ListingContext.Provider>

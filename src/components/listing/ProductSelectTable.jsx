@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Table } from 'react-bootstrap';
-import { useProducts } from '../../contexts/ProductContext.jsx';
-import { useUIContext } from '../../contexts/UIContext.jsx';
-import Pagination from '../pagination/Pagination.jsx';
-import FilterSearch from '../search/FilterSearch.jsx';
-import SearchLive from '../search/SearchLive.jsx';
+import { Table } from 'react-bootstrap';
 import { useListingsForm } from '../../contexts/ListingFormContext.jsx';
+import { useProducts } from '../../contexts/ProductContext.jsx';
+import Pagination from '../pagination/Pagination.jsx';
+import SearchFilter from '../search/SearchFilter.jsx';
+import SearchLive from '../search/SearchLive.jsx';
 
 function ProductSelectTable({ children, handleSelect }) {
 
@@ -36,7 +35,7 @@ function ProductSelectTable({ children, handleSelect }) {
   return (
     <>
       {children}
-      <FilterSearch size='sm' order="order-1" className="d-block"
+      <SearchFilter size='sm' order="order-1" className="d-block"
         items={products}
         filterDraft={filterDraft}
         onFilterDraft={setFilterDraft}
@@ -47,7 +46,7 @@ function ProductSelectTable({ children, handleSelect }) {
           items={products}
           handleSearch={setSearch}
         />
-      </FilterSearch>
+      </SearchFilter>
 
       <Table striped bordered hover>
         <thead>

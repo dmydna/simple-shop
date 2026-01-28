@@ -1,12 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { Button, Form } from "react-bootstrap";
-import { useListings } from '../../../contexts/ListingContext';
-import { listingService } from '../../../services/listingService';
-import { useListingsForm } from '../../../contexts/ListingFormContext';
 
-const StepUploadImage = ({ productId, title, className, multiple = true }) => {
-  const {selectedFile, setSelectedFile} = useListingsForm();
-  const [preview, setPreview] = useState([]);
+
+
+const UserPerfil = ({ productId, title, className, multiple = true }) => {
+  const [selectedFile, setSelectedFile] = useState();
+  const [preview, setPreview] = useState(["https://dummyimage.com/300x300/dadada/"]);
   const fileInputRef = useRef(null);
 
   // Manejar el cambio del input
@@ -51,7 +50,7 @@ const StepUploadImage = ({ productId, title, className, multiple = true }) => {
 
   return (
     // CAMBIO: Usamos Form de react-bootstrap que renderiza una etiqueta <form> real
-    <Form className={`upload-form p-3 rounded ${className}`}>
+    <Form className={`upload-form rounded ${className}`}>
       <div className='h4 mb-3'>{title}</div>
       
       <Form.Group className="mb-3">
@@ -67,13 +66,14 @@ const StepUploadImage = ({ productId, title, className, multiple = true }) => {
 
       {/* Vista previa */}
       {preview && (
-        <div className="d-flex mb-3 text-center">
+        <div className="d-flex mb-3 text-center justify-content-center">
           {preview.map( (url, index) => 
             ( <div 
                 key={url} 
                 className="img-container" 
                 onClick={() => handleRemove(index)}
                 title="Click para eliminar"
+                style={{width: "170px",height: "170px"}}
               >
                   <img 
                     src={url} 
@@ -87,11 +87,11 @@ const StepUploadImage = ({ productId, title, className, multiple = true }) => {
       )}
 
       {/* Usamos el Button de Bootstrap para mejor estética */}
-      {/* <Button onClick={handleSubmit} variant="primary" disabled>
+      <Button onClick={handleSubmit} variant="primary">
         Subir Imagen
-      </Button> */}
+      </Button>
     </Form>
   );
 };
 
-export default StepUploadImage;
+export default UserPerfil;

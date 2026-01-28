@@ -1,9 +1,8 @@
 import React from "react";
 import { Card, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function CardProduct({title, image, hash ,price, stock, id, children, className, cols, discount, imgSize}){
-
 
     return(
         <Col className={`d-flex flex-column p-0

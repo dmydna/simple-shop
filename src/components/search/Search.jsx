@@ -26,7 +26,8 @@ function Search({toggle, setToggle}){
     function handleSubmit(e){
       e.preventDefault();
       !! query && 
-      navigate(`/productos/search/${query}?`);
+      navigate(`/productos?search=${query}`);
+      setFilters({title: query})
       setToggle(false);
       setShow(false);
     }
@@ -34,6 +35,7 @@ function Search({toggle, setToggle}){
     function handleFilter(e){
       e.preventDefault();
         onHideFilter(prev => !prev);
+        navigate("/productos")
       }
     
     
@@ -61,7 +63,7 @@ function Search({toggle, setToggle}){
               onChange={handleChange}
               onClick={() => (!!query ? setShow(true) : {})}
             />
-
+            {/** FILTERS */}
             <Button
               style={{opacity: .4}}
               variant="ligth"
@@ -97,6 +99,7 @@ function Search({toggle, setToggle}){
             </Dropdown.Menu>
           </Dropdown>
         </Form>
+        {/** SEARCH */}
         <Button
           onClick={()=> setToggle((prev)=>!prev)}
           variant="ligth"

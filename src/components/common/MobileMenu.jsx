@@ -68,7 +68,7 @@ function MobileMenu({children}) {
           <>
           <Nav className="me-auto w-100 border-bottom">
             {[
-              { to: '/perfil/admin', label: 'Perfil' },
+              { to: '/user/admin', label: 'User' },
               { to: '/dashboard', label: 'Dashboard' },
             ].map(({ to, label }) => (
               <Nav.Link

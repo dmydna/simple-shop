@@ -17,12 +17,12 @@ import Home from "./pages/Home";
 import ListingCRUD from "./pages/ListingCRUD";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
-import Perfil from "./pages/Perfil";
 import ProductCRUD from "./pages/ProductCRUD";
 import ProductDetails from "./pages/ProductDetails";
 import Products from "./pages/ProductList";
 import "./styles/index.css";
 import ListingDraft from "./pages/ListingDraft";
+import User from "./pages/User"
 
 function App() {
  
@@ -60,10 +60,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/inicio" element={<Home />} />
-          <Route path="/perfil/:id" element={
-            <ProtectedRoute> 
-              <Perfil /> 
-            </ProtectedRoute>}>
+          <Route path="/user/:page" element={
+            <> 
+              <User /> 
+            </>}>
           </Route>
           <Route path="/admin" element={
             <ProtectedRoute>
@@ -100,8 +100,8 @@ function App() {
             } 
           />
           <Route path="/productos" element={
-            <> <Products/>
-            </>}
+            <Products/>
+            }
           />
           <Route path="/admin/:manager" element= {             
              <ProtectedRoute>

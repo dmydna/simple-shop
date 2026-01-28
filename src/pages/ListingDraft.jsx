@@ -101,7 +101,7 @@ const ListingDraft = () => {
         <span className="ms-2">Publicar Todo</span>
       </Button>
 
-      {/* <FilterSearch  order="order-1" className="d-block" 
+      {/* <SearchFilter  order="order-1" className="d-block" 
           items={products} 
           filterDraft={filterDraft} 
           onFilterDraft={setFilterDraft} 
@@ -111,7 +111,7 @@ const ListingDraft = () => {
              items={products}
              handleSearch={setSearch}
           />
-      </FilterSearch> */}
+      </SearchFilter> */}
       
       <Table striped={true} hover={true}>
         <thead className="d-none">
@@ -134,25 +134,25 @@ const ListingDraft = () => {
                   {/* READ  */}
 
                   <Button
-                    variant="success"
+                    variant="outline-dark"
                     size="sm"
                     onClick={() => openEditModal(item)}
                     className="me-3 mb-1"
                   >
                     <i className="bi bi-eye"></i>
-                    <span className="ms-2">VER</span>
+                    <span className="ms-2 small">VER</span>
                   </Button>
 
                   {/* CREATE */}
                   
                   <Button
-                    variant="primary"
+                    variant="dark"
                     size="sm"
                     onClick={() => toPublish(item)}
                     className="me-3 mb-1"
                   >
                     <i className="bi bi-send-fill"></i>
-                    <span className="ms-2">PUBLICAR</span>
+                    <span className="ms-2 small">PUBLICAR</span>
                   </Button>
                   
                 </td>

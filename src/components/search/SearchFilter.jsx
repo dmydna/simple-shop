@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
+import { useListings } from "../../contexts/ListingContext";
 import { useUIContext } from "../../contexts/UIContext";
 import DropdownCheck from "../common/DropdownCheck";
 import DropdownRange from "../common/DropdownRange";
-import { useListings } from "../../contexts/ListingContext";
 
-function FilterSearch({className, children, order="", size="lg"}){
+function SearchFilter({className, children, order="", size="lg"}){
 
     const { showFilter } =  useUIContext();
     const { setFilters, listings, setFilterDraft, filterDraft  } = useListings();
@@ -129,4 +129,4 @@ function FilterSearch({className, children, order="", size="lg"}){
     )
 }
 
-export default FilterSearch;
+export default SearchFilter;

@@ -16,7 +16,7 @@ export function ListingFormProvider({ children }){
     const [ productMode, setProductMode] = useState(null) 
     const [ currentItem, setCurrentItem ] = useState({ title: "", description: "", precio:0.0, stock:0 });
     const [ editableFields, setEditableFields ] = useState({});
-    const [ selectedFile, setSelectedFile ] = useState(null); // Para subir Imagenes.
+    const [ selectedFile, setSelectedFile ] = useState([]); // Para subir Imagenes.
   
     const handleChange = (e) => {
       const { name, value, type } = e.target;

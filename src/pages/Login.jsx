@@ -18,7 +18,7 @@ function Login(){
     }, []);
 
 
-    if(isAuth) navigate('/perfil/admin');
+    if(isAuth) navigate('/user/');
 
     return (
     <Container fluid="xl">

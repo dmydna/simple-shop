@@ -73,8 +73,10 @@ export const listingService = {
         }));
     
         // Parte 2: Archivo
-        if (selectedFile) {
-            formData.append('file', selectedFile);
+        if (selectedFile.length != 0) {
+            selectedFile.forEach((file) => {
+                formData.append('files', file); // 'images' es el nombre que recibirá tu backend
+            });
         }
     
         const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {

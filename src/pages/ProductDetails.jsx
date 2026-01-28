@@ -21,8 +21,7 @@ function ProductDetails() {
 
    useEffect(()=>{
       getCurrentListing(hash)
-      console.log(currentListing)
-   },[])
+   },[hash])
 
 
    const p = useMemo(()=>{
@@ -41,7 +40,7 @@ function ProductDetails() {
                            <Link className='text-decoration-none fw-bold' to='/productos'> Volver</Link>
                            <span className="fw-bold mx-2"> | </span>
                            <Link className='text-decoration-none text-capitalize'
-                              to={`/productos/category/${p.category || ''}`}>
+                              to={`/productos?category=${p.category || ''}`}>
                               {p.category}
                            </Link>
                         </Col>
@@ -83,7 +82,7 @@ function ProductDetails() {
                         </Col >
 
                         {/**Product Reviews */}
-                        {p.reviews && (
+                        {p.reviews && p.reviews.length > 0 &&  (
                            <Col className="m-3 mx-0" xs={12} md={7}>
                               <Col md={12} >
                                 <div className="fs-5 fw-medium mb-5">Reseñas</div>
@@ -104,7 +103,7 @@ function ProductDetails() {
                      <Row className="g-0">
                         <ProductCarousel className="border mx-0 my-3 p-4" filterFn={{ categories : p.category }} col={4} imgSize={140} >
                            <h3 className="fs-4 fw-medium pb-0 m-0 ">Productos similares</h3>
-                           <Link to={`/productos/category/${p.category}`} 
+                           <Link to={`/productos?category=${p.category}`} 
                              className="text-decoration-none fw-bold">
                              Ver mas
                            </Link>  

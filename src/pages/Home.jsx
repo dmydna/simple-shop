@@ -143,7 +143,7 @@ function Home() {
    <Row className="g-0">
     <ProductCarousel className="border mx-0 my-3 p-4" filterFn={{ tags : ["vegatables"] }} col={3} >
        <h3 className="fs-4 fw-medium pb-0 m-0 ">Con envio gratis</h3>
-       <Link to={'/productos/category/groceries'} 
+       <Link to={'/productos?category=groceries'} 
          className="text-decoration-none fw-bold">
          Ver mas
        </Link>  
@@ -154,7 +154,7 @@ function Home() {
   <Row className="g-0">
     <ProductCarousel className="border mx-0 my-3 p-4" filterFn={{ categories : ["beauty"] }} col={4}>
       <h3 className="fs-4 fw-medium pb-0 m-0 ">Ofertas</h3>
-      <Link to={'/productos/category/groceries'} 
+      <Link to={'/productos?category=groceries'} 
         className="text-decoration-none fw-bold">
         ver mas
       </Link>  

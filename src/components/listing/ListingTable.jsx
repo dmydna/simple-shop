@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { useListings } from '../../contexts/ListingContext';
 import { useListingsForm } from '../../contexts/ListingFormContext';
-import { useUIContext } from '../../contexts/UIContext';
 import Pagination from '../pagination/Pagination';
+import { Link } from 'react-router-dom';
+
 
 function ListingTable() {
 
-  const { currentItems, setItems, setItemsPerPage } = useUIContext()
   const { listings, loading, currentPage, setCurrentPage, totalPages } = useListings()
-  const { openEditModal, handleDelete, openReadModal, handleVisibility } = useListingsForm()
+  const { openEditModal, handleDelete, handleVisibility } = useListingsForm()
 
   useEffect(() => {
     // Lógica de paginación
@@ -22,9 +22,9 @@ function ListingTable() {
     <>
     <div className='shadow-sm border rounded p-2'>
       <Table className="mb-0" striped={true} bordered={false} hover={true}>
-        <thead>
+        <thead className='d-none'>
           <tr>
-            <th>ID</th>
+            {/* <th>ID</th> */}
             <th style={{ width: '60%' }}>Nombre</th>
             <th style={{ textAlign: 'end' }} ></th>
           </tr>
@@ -45,13 +45,18 @@ function ListingTable() {
           ) : (
             listings.map((item) => (
               <tr style={{ borderStyle: 'hidden' }} key={item.id}>
-                <td>{item.id}</td>
-                <td style={{ width: '60%' }}>{item.title}</td>
+                {/* <td><span className='text-secondary'>id: </span>{item.id}</td> */}
+                <td style={{ width: '60%' }}>
+                  <Link to={`/productos/${item.hash}/${item.title}`} className='mb-2 fw-semibold text-decoration-none hover-link' style={{fontSize: "1.20rem", color: "#000"}} >
+                    {item.title}
+                  </Link>
+                  <p className='text-muted small p-0 m-0'>id: {item.id}</p>
+                </td>
                 <td style={{ textAlign: 'end' }} >
 
                   {/* Editar  */}
                   <Button
-                    variant="outline-dark"
+                    variant="outline-secondary"
                     size="sm"
                     onClick={() => openEditModal(item)}
                     className="me-3 mb-1"
@@ -61,7 +66,7 @@ function ListingTable() {
 
                   {/* Eliminar  */}
                   <Button
-                    variant="outline-dark"
+                    variant="outline-secondary"
                     size="sm"
                     onClick={() => handleDelete(item.id)}
                     className="me-3 mb-1"

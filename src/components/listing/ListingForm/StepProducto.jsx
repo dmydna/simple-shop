@@ -234,7 +234,9 @@ function StepProductos({children}){
                   )}
               </InputGroup>
             </Form.Group>
-
+            
+            {modalMode == CRUD.UPDATE && <hr  style={{opacity: '.2'}}/>}  
+            
             <div className="my-3 d-flex gap-2">
               <Form.Group className="mb-3" controlId="formPrice">
                 <InputGroup size="xs" className="shadow-sm border rounded overflow-hidden pagination-input-group">

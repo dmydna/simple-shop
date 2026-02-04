@@ -4,7 +4,7 @@ import { Card, Col } from "react-bootstrap";
 function CardPerfil({ name, image, children, className, imgSize }) {
 
   return (
-    <Card style={{ maxHeight: "320px" }} className={`mb-5 border-0`}>
+    <Card style={{ maxHeight: "340px" }} className={`mb-4`}>
       <div className="d-block mx-auto" style={{ zIndex: 10, position: "relative", }}>
         <Card.Img className="perfil-img" src={image || "https://dummyimage.com/300x300/dadada/"}
           style={{
@@ -23,7 +23,7 @@ function CardPerfil({ name, image, children, className, imgSize }) {
 
 
       <Card.Body
-        style={{ position: "relative", textAlign: "center", paddingTop: "90px", top: "-85px" }} className="border rounded">
+        style={{ position: "relative", textAlign: "center", paddingTop: "90px", top: "-85px" }} className="rounded">
         <Card.Title
           className={`text-truncate-2 hover-link mb-2 fs-3 fw-semibold`}
           style={{

@@ -12,7 +12,8 @@ function CardProduct({title, image, hash ,price, stock, id, children, className,
                 className="text-decoration-none text-reset p-0"
                 to={`/productos/${hash}/${encodeURIComponent(title)}`}
               >
-              <Card.Img   src={image || "https://dummyimage.com/300x300/fff/000&text=Image+not+found"}
+              <Card.Img   
+                    src={image || "https://dummyimage.com/300x300/fff/000&text=Image+not+found"}
                     style={{ 
                       objectFit: 'contain', 
                       height: imgSize || '180px', 

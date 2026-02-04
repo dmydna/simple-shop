@@ -50,7 +50,11 @@ const UserPerfil = ({ productId, title, className, multiple = true }) => {
 
   return (
     // CAMBIO: Usamos Form de react-bootstrap que renderiza una etiqueta <form> real
-    <Form className={`upload-form rounded ${className}`}>
+    <>
+        <Form 
+          style={{ minHeight: '470px' }} 
+          id='userPerfilForm' 
+          className={`upload-form rounded ${className}`}>
       <div className='h4 mb-3'>{title}</div>
       
       <Form.Group className="mb-3">
@@ -85,12 +89,13 @@ const UserPerfil = ({ productId, title, className, multiple = true }) => {
           )}
         </div>
       )}
-
+    </Form>
       {/* Usamos el Button de Bootstrap para mejor estética */}
-      <Button onClick={handleSubmit} variant="primary">
+      <Button form="userPerfilForm" onClick={handleSubmit} variant="primary">
         Subir Imagen
       </Button>
-    </Form>
+    </>
+
   );
 };
 

@@ -29,16 +29,16 @@ export default function User() {
 
 
     return (
-        <Container fluid="xl" className="mt-4 px-4 px-sm-4 px-md-4 px-lg-5">
+        <Container fluid="xl" className="px-4 px-sm-4 px-md-4 px-lg-5">
             <Row>
-                <Col className={`col-12 col-sm-6 col-md-4 col-lg-4 px-0`}>
+                <Col className={`col-12 col-sm-6 col-md-4 col-lg-4 px-0 mb-4`}>
                     <CardPerfil name={'admin'}></CardPerfil>
                     <div className="border rounded p-4">
                         <PerfilSideBar onSelection={setSecction}></PerfilSideBar>
                     </div>
 
                 </Col>
-                <Col style={{ marginTop: "55px" }} className="col-12 col-sm-6 col-md-4 col-lg-7 mx-auto rounded border pt-5 p-5">
+                <Col className="col-12 col-sm-6 col-md-4 col-lg-7 mx-auto rounded border pt-5 p-5 mb-4">
                     {secction && secction == "information" && (
                         <InformationPerfil >
                             <p className="h4">Bienvenido a la informacion de usuario</p>

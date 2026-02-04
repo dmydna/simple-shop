@@ -11,9 +11,9 @@ function InformationPerfil({children}){
         (e) => setUser(e.target.value)
     }
     return(
-             <div className="">
+             <div>
                 {children}
-                <Form  onSubmit={handleSubmit}>
+                <Form id='informationPerfilForm' style={{minHeight :'370px'}}  onSubmit={handleSubmit}>
                 <Form.Group className="mb-3 p-2">
                     <div className="d-flex justify-content-between">
                         <Form.Group className="me-3 w-50">
@@ -36,7 +36,7 @@ function InformationPerfil({children}){
                         </Form.Group>
                     </div>
                 </Form.Group>
-                <Form.Group className="mb-3 p-2">
+                <Form.Group  className="mb-3 p-2">
                     <div className="d-flex gap-3">
                         <Form.Group className="me-3 w-50">
                            <Form.Label>Email</Form.Label>
@@ -58,10 +58,10 @@ function InformationPerfil({children}){
                         </Form.Group>
                     </div>
                 </Form.Group>
-                <Button variant="primary" type="submit" className="my-2" >
-                    Actualizar
-                </Button>
             </Form>
+            <Button form='informationPerfilForm' variant="primary" type="submit" className="my-2" >
+                Actualizar
+            </Button>
             </div>
                
     )

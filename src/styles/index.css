@@ -79,6 +79,19 @@
     opacity: .8;
 }
 
+.muted{
+    opacity: .3;
+    color: #212529bf;
+}
+
+.bg-listing-welcome {
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: 70%;
+    background-size: 35%;
+}
+
+
 
 .hover-icon:hover {
     color: black;
@@ -144,7 +157,9 @@
     background-position: right;
 }
 
-
+.carousel-control-next, .carousel-control-prev {
+    width: 5%;
+}
 
 .bg-color-heaven{
     background: #a2d9ff;
@@ -272,6 +287,9 @@
     font-size: 6.5625rem; 
     color: rgb(50, 121, 175);
 }
+
+
+
 
 
 @media (min-width: 1200px) { /* xl */

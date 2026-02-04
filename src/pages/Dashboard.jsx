@@ -53,7 +53,7 @@ const Dashboard = () => {
                image={Img4} 
                link={`/dashboard/orders`}
              />
-             {totalListings >= 30 && (
+             {totalListings == 0 ? (
                 <CategoryItem 
                    // variant="dark"
                    className="border pe-0 bg-soft-primary"
@@ -61,7 +61,7 @@ const Dashboard = () => {
                    image={Img6} 
                    link={`/dashboard/draft`}
                 />
-             )}
+             ) : ''}
 
            </Row>
         </Container>

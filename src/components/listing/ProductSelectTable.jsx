@@ -24,7 +24,7 @@ function ProductSelectTable({ children, handleSelect }) {
 
   useEffect(() => {
     // Lógica de paginación
-    setItemsPerPage(2)
+    setItemsPerPage(4)
     setItems(filtered)
   }, [filtered, products, loading])
 
@@ -35,6 +35,7 @@ function ProductSelectTable({ children, handleSelect }) {
   return (
     <>
       {children}
+      
       <SearchFilter size='sm' order="order-1" className="d-block"
         items={products}
         filterDraft={filterDraft}

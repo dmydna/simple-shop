@@ -10,9 +10,12 @@ function StepProductOption({children, handleProductMode}) {
 
     return (
         <>
-            <div className="w-100 py-5 d-flex justify-content-spacebetween">
-                <div>
+            <div className="w-100">
+                <div 
+                   className="w-100 pb-5 bg-listing-welcome" 
+                   style={{ minHeight:'300px', backgroundImage: `url(${Img1})` }}>
                     {children}
+                </div>
                     <div className="py-3">
                         <Button 
                            onClick={() => handleProductMode("SELECT")} 
@@ -29,12 +32,7 @@ function StepProductOption({children, handleProductMode}) {
                             <i className="bi bi-plus-circle"></i>
                             <span className="ms-2"> Crear producto </span>
                         </Button>
-                    </div>
                 </div>
-                <div>
-                    <img className="ps-3" src={Img1} alt="" />
-                </div>
-
             </div>
         </>
     )

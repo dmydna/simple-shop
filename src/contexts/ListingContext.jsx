@@ -1,3 +1,6 @@
+import nprogress from 'nprogress';
+import 'nprogress/nprogress.css';
+
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { listingService } from '../services/listingService.js';
 import { useUIContext } from "./UIContext.jsx";
@@ -19,8 +22,12 @@ export function ListingProvider({ children }){
     const [totalListings, setTotalListings] = useState(0)
     const [totalPages, setTotalPages] = useState(0)
     const [currentPage, setCurrentPage] = useState(1);
+    const [error, setError] = useState(null);
 
     const fetchData = async (page, currentFilters) => {
+        nprogress.start();
+        setLoading(true);
+        setError(null)
         try {
           // Enviamos TODO al backend
           const data = await listingService.getPage({
@@ -34,8 +41,10 @@ export function ListingProvider({ children }){
           console.log("LISTING FETCH: Ok!")
         } catch (err) {
            console.error("Error de carga de API", err);
+           setError("No pudimos cargar los productos. Revisa tu conexión.")
         } finally {
-            setLoading(false);
+           setLoading(false);
+           nprogress.done();
         }
     };
     // crear un estado predicateFilter que
@@ -79,8 +88,10 @@ export function ListingProvider({ children }){
           getCurrentListing,
           setFilters,
           filterDraft, 
-          setFilterDraft, totalPages,
-          totalListings
+          setFilterDraft, 
+          totalPages,
+          totalListings, 
+          error
         }}>
             {children}
         </ListingContext.Provider>

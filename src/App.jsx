@@ -23,6 +23,8 @@ import Products from "./pages/ProductList";
 import "./styles/index.css";
 import ListingDraft from "./pages/ListingDraft";
 import User from "./pages/User"
+import ListingPanel from "./components/listing/LisitingPanel/ListingPanel";
+import ProtectedListingRoute from "./components/common/ProtectedListingRoute";
 
 function App() {
  
@@ -79,12 +81,14 @@ function App() {
             </>
           }
           /> 
-          {/* <Route path="/productos/filter/" element={
+          <Route path="/panel/:page" element={
             <> 
-            <Products/>
+            <ProtectedListingRoute>
+              <ListingPanel/>
+            </ProtectedListingRoute>
             </>
           }
-          />  */}
+          />  
           <Route path="/productos/search/:product" element={
             <> 
             <Products/>

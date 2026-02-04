@@ -13,7 +13,7 @@ function PasswordPerfil({children}){
     return(
              <div className="">
                 {children}
-                <Form  onSubmit={handleSubmit}>
+                <Form  id='passwordPerfilForm' style={{minHeight :'370px'}} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3 p-2">
                     <Form.Group className="me-3 w-100">
                            <Form.Label>Usuario</Form.Label>
@@ -36,10 +36,10 @@ function PasswordPerfil({children}){
                            />
                         </Form.Group>
                 </Form.Group>
-                <Button variant="primary" type="submit" className="my-2" >
-                    Actualizar
-                </Button>
             </Form>
+            <Button form='passwordPerfilForm' variant="primary" type="submit" className="my-2" >
+                Actualizar
+            </Button>
             </div>
                
     )

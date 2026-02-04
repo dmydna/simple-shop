@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams  } from "react-router-dom";
 import ListingFormCrud from '../components/listing/ListingForm/ListingFormCrud.jsx';
 import ListingTable from "../components/listing/ListingTable.jsx";
 import SearchFilter from "../components/search/SearchFilter.jsx";
@@ -11,9 +11,10 @@ import { useUIContext } from "../contexts/UIContext.jsx";
 import { CRUD } from "../utils/crud.js";
 
 
+
 const ListingCRUD = () => {
 
-
+  const navigate = useNavigate();
   const {onHideFilter} =  useUIContext();
   
 
@@ -27,8 +28,7 @@ const ListingCRUD = () => {
   // Carga inicial
 
   useEffect(()=>{
-    setFilters({page:0, title: search })
-    console.log(filters)
+    if(search)  setFilters({page:0, title: search })
   }, [search])
 
   useEffect(() => {
@@ -39,14 +39,13 @@ const ListingCRUD = () => {
   }, []);
 
 
-  const handleSearch = () => {
-    set
-  }
+
 
   const openCreateModal = () => {
     setModalMode(CRUD.CREATE);
     setCurrentItem({ title: "", description: "" });
     setShowModal(true);
+    navigate('/panel/welcome')
   };
 
 
@@ -84,7 +83,7 @@ const ListingCRUD = () => {
      {/*  TABLE GET ALL  */} 
       <ListingTable  />
       {/*  Modal CRUD  */} 
-      <ListingFormCrud />
+      {/* <ListingFormCrud /> */}
       
     </Container>
     </>

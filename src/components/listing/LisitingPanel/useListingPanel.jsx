@@ -4,11 +4,11 @@ import { visibility } from "../utils/posts.js";
 import { listingService } from '../services/listingService.js';
 import { useListings } from "./ListingContext.jsx";
 import { useFetchListings } from "./useFetchListings.jsx";
-import { useLocation, useNavigate } from "react-router-dom";
 
-export const ListingFormContext = createContext(null)
 
-export function ListingFormProvider({ children }){
+export const ListingPanelContext = createContext(null)
+
+export function ListingPanelProvider({ children }){
 
     const { fetchData } = useListings(); 
     const [ showModal, setShowModal ] = useState(false);
@@ -80,15 +80,11 @@ export function ListingFormProvider({ children }){
       setCurrentItem({ title: "", description: "" });
       setShowModal(true);
     };
-    
-    const navigate = useNavigate();
-    const location = useLocation();
-
+  
     const openEditModal = (item) => {
       setModalMode(CRUD.UPDATE);
       setCurrentItem(item);
       setShowModal(true);
-      navigate('/panel/welcome')
     };
   
     const openReadModal = async (item) => {
@@ -159,7 +155,7 @@ export function ListingFormProvider({ children }){
 
     return (
         
-        <ListingFormContext.Provider 
+        <ListingPanelContext.Provider 
         value={{ 
             // CRUD
             handleUpdate,
@@ -190,10 +186,10 @@ export function ListingFormProvider({ children }){
             setSelectedFile,
           }}>
             {children}
-        </ListingFormContext.Provider>
+        </ListingPanelContext.Provider>
 
     )
 }
 
-export const useListingsForm = () => useContext(ListingFormContext);
+export const useListingsPanel = () => useContext(ListingPanelContext);
 

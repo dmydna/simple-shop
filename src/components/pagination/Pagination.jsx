@@ -1,15 +1,9 @@
-import nprogress from 'nprogress';
-import 'nprogress/nprogress.css';
 import { Button } from "react-bootstrap";
 import PaginatorInput from "./PaginatorInput";
 // Componente que muestra los botones de paginación
 
 const Pagination = ({currentPage, setCurrentPage, totalPages, className}) => {
 
-  // nprogress.configure({ 
-  //   speed: 500,     // Velocidad de la animación de cierre
-  //   trickleSpeed: 200 // Velocidad del avance automático
-  // });
     // Cambia a una página específica si está dentro del rango
   const irAPagina = (numeroPagina) => {
     if (numeroPagina >= 1 && numeroPagina <= totalPages) {

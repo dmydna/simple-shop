@@ -1,27 +1,20 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useMediaQuery } from 'react-responsive';
 import { useLocation } from "react-router-dom";
-import ContactModal from "../components/common/ContactModal";
-import LoginModal from "../components/login/LoginModal";
+import ContactModal from "../features/contact/ContactModal.jsx";
+import LoginModal from "../features/auth/components/LoginModal.jsx";
 
 const UIContext = createContext(null)
 
 export function UIProvider({ children }) {
 
-    const [showLogin, onHideLogin] = useState(false)
+    const [showLoginModal, setShowLoginModal] = useState(false)
+    const [showRegisterModal, setShowRegisterModal] = useState(false)
     const [showContact, onHideContact] = useState(false)
     const [showMenu, onHideMenu] = useState(false)
     const [showFilter, onHideFilter] = useState(false)
 
-    // Paginador
-    const [items, setItems] = useState([]); // Todos los datos
-    const [currentPage,  setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage ] = useState(10); // Ejemplo: 10 por página
-    const totalPages = Math.ceil(items.length / itemsPerPage);
-    const lastItemIndex = currentPage * itemsPerPage; 
-    const firstItemIndex = lastItemIndex - itemsPerPage;
-    const currentItems = items.slice(firstItemIndex, lastItemIndex)
-
+    const [selectedTags, setSelectedTags] = useState([]);
 
     const isDesktop = useMediaQuery({ minWidth: 768 });
     useEffect(() => {
@@ -42,25 +35,25 @@ export function UIProvider({ children }) {
     return (
         <UIContext.Provider 
          value={{ 
-            showLogin, 
+            showLogin: showLoginModal,
             showContact,
             onHideContact, 
-            onHideLogin, 
+            setShowLoginModal, setShowRegisterModal,
             showMenu,
             onHideMenu,
             showFilter, 
             onHideFilter,
-            totalPages,
-            currentItems,
-            currentPage,
-            items,
-            setCurrentPage,
-            setItemsPerPage,
-            setItems
+            selectedTags, setSelectedTags
           }}>
           {children}
-          <LoginModal show={showLogin} onHide={onHideLogin}/> 
-          <ContactModal show={showContact} onHide={onHideContact}/>
+          <LoginModal 
+                 show={showLoginModal} 
+                 onHide={setShowLoginModal}
+         />
+          <ContactModal 
+                 show={showContact}
+                 onHide={onHideContact}
+         />
         </UIContext.Provider>
       )
 }

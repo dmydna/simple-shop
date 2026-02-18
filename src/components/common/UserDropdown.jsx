@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../features/auth/hooks/AuthContext.jsx";
 import { useUIContext } from "../../contexts/UIContext";
 
 
@@ -10,12 +10,12 @@ function UserDropdown({className}) {
 
 
   const { user, isAuth, logout } = useAuth();
-  const {onHideLogin} = useUIContext()
+  const {setShowLoginModal, showLoginModal} = useUIContext()
 
   const [isActive, setIsActive] = useState(false)
   
   // si esta logeado activa el dropdown toggle, si no muestra LoginModal
-  const handleToggle =  (isOpen) =>  isAuth ? setIsActive(isOpen) : onHideLogin(true)
+  const handleToggle =  (isOpen) =>  isAuth ? setIsActive(isOpen) : setShowLoginModal(true)
 
   const navigate = useNavigate();
 
@@ -59,11 +59,15 @@ function UserDropdown({className}) {
             </Dropdown.Item>
   
             {/* Links de navegación */}
-            <Dropdown.Item as={Link} to={`/user/information`}>
+            <Dropdown.Item as={Link} to={`/user/general`}>
               <i className="bi bi-person me-2"></i> Perfil
             </Dropdown.Item>
             <Dropdown.Item as={Link} to="/dashboard">
               <i className="bi bi-gear me-2"></i> Dashboard
+            </Dropdown.Item>
+
+            <Dropdown.Item as={Link} to="/dashboard">
+              <i className="bi bi-heart me-2"></i> favoritos
             </Dropdown.Item>
   
             <Dropdown.Divider />

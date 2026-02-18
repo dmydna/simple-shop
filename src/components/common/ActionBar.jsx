@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
-import CartButton from "../cart/CartButton";
-import SearchOverlay from "../search/SearchOverlay";
+import CartButton from "../../features/cart/components/CartButton.jsx";
+import SearchOverlay from "../../features/search/SearchOverlay";
 import UserDropdown from "./UserDropdown";
 
 

@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Dropdown, Form } from "react-bootstrap";
-import { useListings } from "../../contexts/ListingContext";
+import { useListings } from "../../features/listing/hooks/ListingContext.jsx";
+import {TagsList} from "../../features/crud/TagsList.jsx";
+import {useUIContext} from "../../contexts/UIContext.jsx";
+import {useFilterBarContext} from "../../features/filters/context/FilterBarContext.jsx";
 
-function DropdownCheck({children, array ,className, style, variant, onFilterDraft}){
+function DropdownCheck({children ,className, style, variant }){
 
 
-    const {setFilterDraft, filterDraft} = useListings()
-    const [selectedTags, setSelectedTags] = useState([]);
+    const {array, onFilterDraft} = useFilterBarContext()
+    const {selectedTags, setSelectedTags} = useUIContext() //<-- campartir seletedTags
 
     useEffect(()=>{
       if(selectedTags.length != 0){
-        setFilterDraft(prev =>  ({
+          onFilterDraft(prev =>  ({
           ...prev, 
           tags : selectedTags
         }))
       }
     },[selectedTags])
+
 
     // 2. Función para manejar los cambios
     const handleTagChange = (tag) => {
@@ -23,6 +27,7 @@ function DropdownCheck({children, array ,className, style, variant, onFilterDraf
       if (selectedTags.includes(tag)) {
         // Si está, la eliminamos (desmarcar)
         setSelectedTags(selectedTags.filter((t) => t !== tag));
+
       } else {
         // Si no está, la agregamos (marcar)
         setSelectedTags([...selectedTags, tag]);
@@ -37,7 +42,7 @@ function DropdownCheck({children, array ,className, style, variant, onFilterDraf
               className="container-fluid d-flex toggle-end align-items-center" 
               id="dropdown-basic">
                {children} :
-               <span className="small text-muted fw-semibold ms-3">
+               <span className="small text-muted fw-semibold mx-3">
                   {selectedTags.length != 0 ?  `${selectedTags[0]} (${selectedTags.length}) ` : 'Seleccionar'  }
                </span>
           </Dropdown.Toggle>
@@ -49,6 +54,7 @@ function DropdownCheck({children, array ,className, style, variant, onFilterDraf
               id={`checkbox-${t}`} // ¡ID único es CRÍTICO!
               label={t}
               onChange={(e) => handleTagChange(t)}
+              checked={selectedTags.includes(t)}
              />
           </div>
           ))}

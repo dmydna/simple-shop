@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Button, Container, Form, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ClientTable from "../components/client/ClientTable.jsx";
-import ClientViewModal from "../components/client/ClientViewModal.jsx";
-import SearchLive from "../components/search/SearchLive.jsx";
-import { useClients } from "../contexts/ClientContext.jsx";
+import ClientTable from "../features/client/ClientTable.jsx";
+import ClientViewModal from "../features/client/ClientViewModal.jsx";
+import SearchLive from "../features/search/SearchLive.jsx";
+import { useClients } from "../features/client/ClientContext.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
-import { clientService } from '../services/clientService.js';
+import { clientService } from '../features/client/clientService.js';
 
 
 const ClientCRUD = () => {

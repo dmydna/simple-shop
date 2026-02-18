@@ -6,12 +6,13 @@ function BuyNowButton({handle, variant, children, className}){
 
     return(
         <Button
-          className={`rounded flex-fill ${className}`}
-          variant={variant}
-          type="submit"
-          onClick={handle}
+            className={`rounded flex-fill ${className}`}
+            variant={variant}
+            type="submit"
+            onClick={()=> handle()}
         >
-         {children ? children : 'Comprar ahora' }
+            <i className="bi bi-cart3 me-3"></i>
+            {children ? children : 'Comprar ahora'}
         </Button>
     )
 }

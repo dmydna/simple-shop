@@ -1,12 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "./components/common/Footer";
-import NavHeader from "./components/common/NavHeader";
+import Footer from "./components/layout/Footer.jsx";
+import NavHeader from "./components/layout/NavHeader.jsx";
 import ProtectedRoute from "./components/common/ProtectedRoute";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider } from "./features/auth/hooks/AuthContext.jsx";
 import { CRUDWrapper } from "./contexts/CRUDWrapper";
 import Admin from "./pages/Admin";
 import Carrito from "./pages/Cart";
@@ -21,14 +21,23 @@ import ProductCRUD from "./pages/ProductCRUD";
 import ProductDetails from "./pages/ProductDetails";
 import Products from "./pages/ProductList";
 import "./styles/index.css";
-import ListingDraft from "./pages/ListingDraft";
-import User from "./pages/User"
-import ListingPanel from "./components/listing/LisitingPanel/ListingPanel";
-import ProtectedListingRoute from "./components/common/ProtectedListingRoute";
+import ListingDev from "./dev/ListingDev.jsx";
+import UserProfile from "./pages/UserProfile.jsx"
+import ListingPanel from "./features/listing/components/ListingPanel.jsx";
+import ProtectedRouteListing from "./components/common/ProtectedRouteListing.jsx";
+import Register from "./pages/Register.jsx";
+import ProtectedRouteAdmin from "./components/common/ProtectedRouteAdmin.jsx";
+import PageLoading from "./pages/PageLoading.jsx";
+import {FormCreater} from "./features/crud/FormCreater.jsx";
+import {Col} from "react-bootstrap";
+import {TagsList} from "./features/crud/TagsList.jsx";
+import Page404NotFound from "./pages/Page404NotFound.jsx";
+import {listingDataList} from "./dev/listingDataList.js";
+import DashboardX from "./pages/DashboardX.jsx";
+
+
 
 function App() {
- 
-
 
   const navItems = ["Inicio", "Productos", "Contacto"];
   const [seccion, setSeccion] = useState("Inicio");
@@ -38,7 +47,11 @@ function App() {
   const location = useLocation()
 
   useEffect(()=>{
-    if(location.pathname.startsWith('/contacto') || location.pathname.startsWith('/login') ) 
+    if(
+        location.pathname.startsWith('/login') ||
+        location.pathname.startsWith('/contacto') ||
+        location.pathname.startsWith('/auth') ||
+        location.pathname.startsWith('/register') )
      {
       document.querySelector('body')?.classList.add('bg-full-heaven')
     }else{
@@ -61,11 +74,17 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/inicio" element={<Home />} />
           <Route path="/user/:page" element={
-            <> 
-              <User /> 
-            </>}>
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>}>
+          </Route>
+          <Route path="/user" element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>}>
           </Route>
           <Route path="/admin" element={
             <ProtectedRoute>
@@ -75,6 +94,25 @@ function App() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/carrito"   element={<Carrito/>} />
           <Route path="/carrito/:buy" element={<Carrito/>} />
+         <Route path="/test" element={ <PageLoading /> }></Route>
+         <Route path="/test/tags" element={
+             <TagsList
+                 className={'bg-light border island p-4 p-md-5'} style={{maxWidth: 500}}
+                 array={["hola","chau","gato","perro"]}
+             />} />
+         <Route path="/test/form" element={
+            <FormCreater
+                 className={'bg-light border island p-4 p-md-5'} style={{maxWidth: 500}}
+                 objeto={listingDataList[0]}
+                 onSubmit={(data)=>{console.log(data)}}>
+                <div className="d-flex align-items-center justify-content-between mb-4">
+                    <p className="fs-3 m-0">Form Creator</p>
+                </div>
+            </FormCreater>} />
+            <Route path="/test/dashboard" element={
+                <DashboardX />
+            } />
+
           <Route path="/productos/category/:category" element={
             <>
             <Products/>
@@ -82,10 +120,12 @@ function App() {
           }
           /> 
           <Route path="/panel/:page" element={
-            <> 
-            <ProtectedListingRoute>
-              <ListingPanel/>
-            </ProtectedListingRoute>
+            <>
+              <ProtectedRouteAdmin>
+                <ProtectedRouteListing>
+                  <ListingPanel/>
+                </ProtectedRouteListing>
+              </ProtectedRouteAdmin>
             </>
           }
           />  
@@ -100,7 +140,7 @@ function App() {
             } 
           />
           <Route path="/dashboard/draft" element={
-              <ListingDraft /> 
+              <ListingDev />
             } 
           />
           <Route path="/productos" element={
@@ -113,7 +153,9 @@ function App() {
                 <ListingCRUD /> 
              </ProtectedRoute>} />
           <Route path="/dashboard/" element={
-             <Dashboard /> 
+            <ProtectedRouteAdmin>
+              <Dashboard />
+            </ProtectedRouteAdmin>
           } />
 
           <Route path="/dashboard/products" element={
@@ -135,7 +177,7 @@ function App() {
             <ClientCRUD  />
             </>} />
           {/* Ruta para no coincidencias */}
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<Page404NotFound />} />
 
         </Routes>
         <ToastContainer limit={3} />

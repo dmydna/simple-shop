@@ -1,26 +1,33 @@
 :root {
     /* Azul Base (Referencia) */
     --color-blue: #a2d9ff;
-  
+
     /* Naranja / Durazno (Cálido y suave) */
     --color-orange: #ffca92;
     --text-on-orange: #5c3a1a;
-  
+
     /* Violeta / Lavanda (Elegante y místico) */
     --color-purple: #c7b3ff;
     --text-on-purple: #3a2a66;
-  
+
     /* Otros colores (para mantener consistencia) */
     --color-red: #ffabab;
     --color-green: #a2ffc1;
     --color-yellow: #fff2a2;
-  }
+    --bs-breadcrumb-divider: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E");
 
-
-.hover-color-white:active,
-.hover-color-white:hover{
-    color: white!important;
 }
+
+hr {
+    opacity: .15;
+}
+
+.disabled {
+    opacity: .6
+}
+
+.z-index-10 {z-index: 10}
+.z-index-20 {z-index: 20}
 
 .edit-pic-button{
     width: 50px;
@@ -33,6 +40,7 @@
     left: 67%;
 }
 
+.img-container-nn,
 .img-container {
     position: relative;
     width: 150px;
@@ -42,13 +50,14 @@
     border-radius: 8px;
   }
   
+  .img-container-nn img,
   .img-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  
-  /* El efecto Hover */
+
+
   .img-container::after {
     content: '✕'; /* Icono de X */
     position: absolute;
@@ -71,9 +80,11 @@
   }
 
 
-.bg-soft-primary {
-  background-color: rgba(13 110 253 / 19%) !important
-}
+
+.profile .profile-small-img {
+    height: 135px;
+    width: 135px;
+} 
 
 .hover-icon{
     opacity: .8;
@@ -104,6 +115,12 @@
 }
 
 
+.hover-color-white:active,
+.hover-color-white:hover{
+    color: white!important;
+}
+
+
 
 .simple-link:hover{
     color: #0d6efd;
@@ -131,12 +148,14 @@
     background: url('./bg-heaven.svg') repeat-x
 }
 
-
+.bg-soft-primary {
+    background-color: rgba(13 110 253 / 19%) !important
+}
 
 .bg-full-heaven {
     background: 
        linear-gradient(to bottom, #8ed1fc 30vh, transparent 0%), 
-       url(/src/styles/bg-heaven.svg) left 30vh;
+       url(/src/styles/bg-heaven.svg) left 29vh;
     background-size: 100% 100%, auto;
     background-repeat: repeat-x;
     height: 100vh;
@@ -157,9 +176,7 @@
     background-position: right;
 }
 
-.carousel-control-next, .carousel-control-prev {
-    width: 5%;
-}
+
 
 .bg-color-heaven{
     background: #a2d9ff;
@@ -183,6 +200,11 @@
       transparent 50%)
 }
 
+
+.carousel-control-next,
+.carousel-control-prev {
+    width: 5%;
+}
 
 .truncate-2 {
     display: -webkit-box;
@@ -237,6 +259,8 @@
 }
 
 
+
+
 @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
@@ -275,7 +299,7 @@
 }
 
 
-.pageNotFound {
+.pageNotFoundMsg {
     color: rgb(50, 121, 175);
     opacity: 0.8;
     max-width: 71px;
@@ -283,13 +307,47 @@
     height: 53px;
 }
 
-.page404 {
+
+
+.island {
+    background: #ffffff;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.sub-island {
+    background: #f9f9f9; /* Contraste suave */
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 12px;
+}
+
+.cardReview{
+    background: #f9f9f9;
+    border: 1px solid #eee !important;
+    border-radius: 12px;
+}
+
+.page404,
+.page403 {
     font-size: 6.5625rem; 
     color: rgb(50, 121, 175);
 }
 
+.pageForbiddenMsg {
+    color: rgb(50, 121, 175);
+    line-height: 20px;
+    font-size: 38px;
+    z-index: 93;
+}
 
-
+.pageNotContentMsg {
+    color: rgb(50, 121, 175);
+    line-height: 20px;
+    font-size: 38px;
+    z-index: 93;
+}
 
 
 @media (min-width: 1200px) { /* xl */
@@ -330,3 +388,4 @@
         font-size: 1.375rem; /* Ajuste manual */
     }
 }
+

@@ -8,12 +8,12 @@ import Img3 from "../assets/expend.png";
 import Img4 from '../assets/paper.png';
 import Img5 from "../assets/t-shirt.png"
 import Img6 from "../assets/draft.png"
-import { useListings } from "../contexts/ListingContext.jsx";
+import { useListings } from "../features/listing/hooks/ListingContext.jsx";
 
 
 const Dashboard = () => {
 
-    const {totalListings} = useListings()
+    const {totalItems} = useListings()
 
     return (
         <Container className="mt-4">
@@ -53,7 +53,7 @@ const Dashboard = () => {
                image={Img4} 
                link={`/dashboard/orders`}
              />
-             {totalListings == 0 ? (
+             {totalItems == 0 ? (
                 <CategoryItem 
                    // variant="dark"
                    className="border pe-0 bg-soft-primary"

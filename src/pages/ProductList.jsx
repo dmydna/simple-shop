@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
-import AddToCartButton from "../components/cart/AddToCartButton";
+import AddToCartButton from "../features/cart/components/AddToCartButton.jsx";
 import CategoryNav from "../components/common/CategoryNav";
-import Pagination from "../components/pagination/Pagination";
-import CardProduct from "../components/product/CardProduct";
-import SearchFilter from "../components/search/SearchFilter";
-import { useListings } from "../contexts/ListingContext";
+import Pagination from "../features/pagination/components/Pagination.jsx";
+import ProductCard from "../features/product/components/ProductCard.jsx";
+import FilterBar from "../features/filters/components/FilterBar.jsx";
+import { useListings } from "../features/listing/hooks/ListingContext.jsx";
 import { useUIContext } from "../contexts/UIContext";
-import { ListingPlaceholder } from "../components/listing/ListingPlaceholder";
+import {ListingPlaceholder} from "../features/placeholder/ListingPlaceholder.jsx";
+import {DataHandler} from "../contexts/DataHandler.jsx";
+import DropdownRange from "../components/common/DropdownRange.jsx";
+import DropdownCheck from "../components/common/DropdownCheck.jsx";
 
 
 
 function Products() {
 
-  const { error, listings, currentPage, setCurrentPage, totalPages, setFilters, totalListings, loading, fetchData } = useListings()
+  const { error, listings, currentPage,setCurrentPage, totalPages,
+    setFilters ,totalElements, loading, fetchData } = useListings()
+
   const [searchParams, setSearchParams] = useSearchParams();
+
   const [meta, setMeta] = useState({
     title: "Productos",
     message: "",
@@ -32,12 +38,8 @@ function Products() {
       setMeta({ title: "Productos" });
       setFilters({});
     }
-    if (!isNaN(pageParam)) {
-      setCurrentPage(pageParam);
-    }
-    if (tagsParam) {
-      setFilters({ tags: tagsParam });
-    }
+    if (!isNaN(pageParam)) {setCurrentPage(pageParam);}
+    if (tagsParam) {setFilters({ tags: tagsParam });}
     if (categoryParam) {
       setFilters({ page: 0, categories: categoryParam });
       if (categoryParam.split(',').length == 1) {
@@ -49,40 +51,28 @@ function Products() {
       setMeta((prev) => ({
         ...prev,
         title: "Resultados",
-        message: `encontrados: ${totalListings}`
+        message: `encontrados: ${totalElements}`
       }
       ));
     }
-  }, [tagsParam, pageParam, categoryParam, searchParam, searchParam])
 
+
+  }, [tagsParam, pageParam, categoryParam,
+    searchParam, setFilters, setCurrentPage, totalElements])
 
   const { showFilter } = useUIContext()
 
+
   return (
     <>
-      {loading ? (
-      
-      // PLACEHOLDER --
-        <Container fluid="xl" className="bg-white rounded mt-2 mb-5 pb-5">
-          <h5 className="card-title placeholder-glow mb-4">
-            <span className="placeholder col-1"></span>
-          </h5>
-          <Row>
-            {[...Array(6)].map((_, i) => <ListingPlaceholder key={i} />)}
-          </Row>
-        </Container> ) : error ? (
 
-    //  ERROR --
-    <div className="col-12 text-center py-5">
-      <div className="alert alert-danger shadow-sm">
-        <p className="mb-0">⚠️ {error}</p>
-        <button className="btn btn-outline-danger btn-sm mt-3" onClick={() => fetchData(1, {})}>
-           Reintentar carga
-        </button>
-      </div>
-    </div> ) : (
-
-    // CONTENT --
+      <DataHandler
+          loading={loading}
+          onRetry={fetchData}
+          error={error}
+          placeholder={<ListingPlaceholder/>}
+          isEmpty={ totalElements === 0 }
+      >
         <>
           <Container fluid="xl" className="bg-white rounded mt-2 mb-5 pb-5">
             <div className="w-100 d-flex flex-wrap mt-2 mb-4">
@@ -94,38 +84,44 @@ function Products() {
               </span>
             </div>
             {showFilter ?
-              <>
-                <CategoryNav show={showFilter} />
-                <SearchFilter
-                  items={listings}
-                  className="" />
-              </> : ''
+                <>
+                  <CategoryNav show={showFilter} />
+                  <FilterBar dataSource={listings} onApply={setFilters} className="mb-5" >
+                        <DropdownCheck variant="light"  className="border rounded my-2">
+                            <span className="fw-semibold">etiquetas</span>
+                        </DropdownCheck>
+                         <DropdownRange className="border rounded my-2" variant="light"  min={0} max={1500} defaultValue={20} type={'$'}>
+                              <span className="fw-medium">precio</span>
+                         </DropdownRange>
+                  </FilterBar>
+                </> : ''
             }
             <Row>
               {listings.map((p) => (
-                <CardProduct className={'border m-2'}
-                  key={p.id}
-                  id={p.id}
-                  hash={p.hash}
-                  image={p.thumbnail}
-                  title={p.title}
-                  stock={p.stock}
-                  price={p.price}
-                  discount={p.discountPercentage}
-                >
-                  <AddToCartButton variant="outline-success" id={p.id} />
-                </CardProduct>
+                  <ProductCard className={'border m-2 p-2 island'}
+                               visibility={p?.visibility}
+                               key={p.id}
+                               id={p.id}
+                               hash={p.hash}
+                               image={p.thumbnail}
+                               title={p.title}
+                               stock={p.stock}
+                               price={p.price}
+                               discount={p.discountPercentage}
+                  >
+                    <AddToCartButton variant="outline-success" id={p.id} />
+                  </ProductCard>
               ))}
             </Row>
           </Container>
           <Pagination
-            className={`container-xl`}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            totalPages={totalPages}
+              className={`container-xl`}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              totalPages={totalPages}
           />
         </>
-     )}
+      </DataHandler>
     </>
   )
 }

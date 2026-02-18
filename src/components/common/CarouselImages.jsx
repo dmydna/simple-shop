@@ -20,7 +20,7 @@ function CarouselImages({images, children, col, className, order=false}) {
         </div>
           {/* carrousel dots */}
           <div className="d-flex justify-content-center mt-3 gap-2">
-          {images.length > 1 && images.map((g, i) => (
+          {images && images.length > 1 && images.map((g, i) => (
             <Button
               key={i}
               variant={i === index ? 'primary' : 'outline-secondary'}

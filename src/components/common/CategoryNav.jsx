@@ -3,7 +3,7 @@ import { Row } from "react-bootstrap";
 import { useMatch } from "react-router-dom";
 import CategoryItem from "./CategoryItem";
 
-import { useListings } from "../../contexts/ListingContext";
+import { useListings } from "../../features/listing/hooks/ListingContext.jsx";
 import { useUIContext } from "../../contexts/UIContext";
 import Img3 from "../../assets/dressing-table.png";
 import Img4 from '../../assets/grocery.png';

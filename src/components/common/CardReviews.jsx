@@ -5,8 +5,8 @@ function CardReview({id, comment, rating, date}){
 
 
     return(
-        <Card key={id} className="my-2 overflow-hidden">
-        <div className="d-flex" md={4}>
+        <Card key={id} className="my-2 overflow-hidden border-0">
+        <div className="d-flex cardReview" md={4}>
           <Card.Img  src="/user.png"
                 style={{scale: "0.8",
                   height: "66px",

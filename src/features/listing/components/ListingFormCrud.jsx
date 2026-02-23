@@ -1,135 +1,88 @@
-import {step} from "../../../utils/posts.js";
-import StepPublicacion from "./StepPublicacion.jsx";
-import StepProductOption from "./StepProductOption.jsx";
-import ProductSelectTable from "./ProductSelectTable.jsx";
-import StepProductos from "./StepProducto.jsx";
+
+import StepPublication from "./StepPublication.jsx";
+import StepOptionsCreate from "./StepOptionsCreate.jsx";
+import ProductSearch from "./ProductSearch.jsx";
+import StepProductos from "./StepProduct.jsx";
 import {CRUD} from "../../../utils/crud.js";
-import StepDetalles from "./StepDetalles.jsx";
+import StepDetails from "./StepDetails.jsx";
 import StepUploadImage from "./StepUploadImage.jsx";
 import {StepNavigation} from "./StepNavigation.jsx";
-import {Col} from "react-bootstrap";
-import {useState} from "react";
-import {useListingsForm} from "../hooks/ListingFormContext.jsx";
-import StepWelcomeEdit from "./StepWelcomeEdit.jsx";
-import StepWelcomeCreate from "./StepWelcomeCreate.jsx";
+import {Alert, Button, Col} from "react-bootstrap";
+import React, {useState} from "react";
+import {useListingCrud} from "../contexts/ListingCrudContext.jsx";
+import StepOptionsEdit from "./StepOptionsEdit.jsx";
+import {StepBreadcrumb} from "./StepBreadcrumb.jsx";
+import {Link} from "react-router-dom";
+import {useWizard} from "../../../contexts/WisardContext.jsx";
+
 
 
 function ListingFormCrud({className, style}){
 
-
-    const [currentStep, setCurrentStep] = useState(0);
-    const [isSelectedProduct, setIsSelectedProduct] = useState(false)
-    const [enabled, setEnabled] = useState(true)
-    const { modalMode, currentItem, setProductMode, setCurrentItem } = useListingsForm()
-
-
-    const handleProductMode = (mode) => {
-        setEnabled(mode === 'SELECT' ? false : true)
-        setProductMode(mode)
-        setCurrentStep(
-            mode == "SELECT" ?
-                step.TABLE :
-                step.PRODUCT
-        )
-    }
-
-    const handleSelect = (elem) => {
-        setIsSelectedProduct(true);
-        setCurrentItem((prev) => ({
-            ...prev,
-            productName: elem.name,
-            productId: elem.id,
-            sku: elem.sku,
-            brand: elem.brand,
-            stock: elem.stock,
-            weight: elem.weight
-        }))
-    }
-
+    const { currentStep, step } = useWizard()
+    const { crudMode, currentItem } = useListingCrud()
 
     return (
         <Col style={style} className={`${className ||''}`}>
 
-            <div>
+            <StepBreadcrumb />
 
-                {currentStep === step.WELCOME &&
-                    modalMode === CRUD.CREATE && (
-                    <StepWelcomeCreate></StepWelcomeCreate>
-                )}
+            <div className="py-2">
 
-                {currentStep === step.WELCOME &&
-                    modalMode === CRUD.UPDATE && (
-                    <StepWelcomeEdit></StepWelcomeEdit>
-                )}
+                {currentStep === step.OPTIONS_CREATE && (
+                         <StepOptionsCreate></StepOptionsCreate>
+                    )}
+
+                {currentStep === step.OPTIONS_UPDATE && (
+                        <StepOptionsEdit></StepOptionsEdit>
+                    )}
+
 
                 {currentStep === step.PUBLICATION && (
-                    <StepPublicacion  >
-                        <p style={{fontWeight: '500'}}  className="fs-5 mb-4">Informacion de Publicacion</p>
-                        <p
-                            style={{ opacity: '.5' }}
-                            className="d-none my-4 small">
-                            Los campos a completar son necesarios para finalizar el proceso.
-                        </p>
-                    </StepPublicacion>
+                    <StepPublication  >
+                            <p className='fs-5 pb-3 fw-semibold'> Informacion Basica </p>
+                            <p
+                                style={{ opacity: '.5' }}
+                                className="d-none my-4 small">
+                                Los campos a completar son necesarios para finalizar el proceso.
+                            </p>
+                    </StepPublication>
                 )}
-                {currentStep === step.OPTIONS && (
-                    <StepProductOption handleProductMode={handleProductMode}>
-                        <p  style={{fontWeigth: '500'}} className="fs-5 mb-4">Producto</p>
-                        <p
-                            style={{ opacity: '.5' }}
-                            className="mt-4 mb-5 bg-white">
-                            Para continuar <b>selecciona</b> un producto que ya publicaste rapidamente o <b>crea</b> un nuevo producto
-                        </p>
-                    </StepProductOption>
-                )}
-                {currentStep === step.TABLE && (
-                    <ProductSelectTable handleSelect={handleSelect}>
-                        <p className='fs-5 mb-4'>
-                            Selecciona un Producto
-                        </p>
-                    </ProductSelectTable>
-                )}
+
 
                 {currentStep === step.PRODUCT && (
                     <StepProductos>
-                        <p style={{fontWeigth: '500'}} className="fs-5 mb-4">
-                            Producto
-                        </p>
-                        {modalMode === CRUD.UPDATE &&
-                            <p
-                                style={{ opacity: '.5' }}
-                                className="mb-4">
-                                Puedes ver toda la informacion del  producto publicado y solo editar campos especificos como: <b>precio</b> y <b>descuento</b>. <br />
-                                Para <b>editar</b> los demas campos del producto ve a la seccion correspondiente <b>(*?)</b>
-                            </p>}
-
+                        <p className='fs-5 fw-semibold'> Producto </p>
+                        {crudMode === CRUD.UPDATE &&
+                                <Alert>
+                                    Para <b>editar</b> el producto <b>asociado</b> a esta publicacion
+                                    ve a la seccion correspondiente <b><Link to={'#'}>(*?)</Link></b>
+                                </Alert> }
                     </StepProductos>
                 )}
 
                 {currentStep === step.DETAILS && (
-                    <StepDetalles>
-                        <p className="fs-4 mb-4">
-                            Detalles
-                        </p>
-                    </StepDetalles>
+                    <StepDetails>
+                    </StepDetails>
                 )}
 
                 {currentStep === step.UPLOAD && (
-                    <StepUploadImage
-                        productId={currentItem.id}
-                        title="Subir Imagen del Producto"
-                    >
-                    </StepUploadImage>
+                        <StepUploadImage
+                            productId={currentItem.id}
+                        >
+                        </StepUploadImage>
                 )}
             </div>
 
+            {currentStep !== step.OPTIONS_CREATE &&
+                currentStep !== step.OPTIONS_UPDATE && (
+                <hr></hr>
+            )}
 
             <StepNavigation
-                showNavigation={modalMode === CRUD.CREATE}
-                currentStep={currentStep}
-                setCurrentStep={setCurrentStep}
-                isSelectedProduct={isSelectedProduct}
+                showNavigation={crudMode === CRUD.CREATE}
             />
+
 
         </Col>
     )

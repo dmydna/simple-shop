@@ -22,7 +22,7 @@ const tags = Object.freeze({
 });
 
 
-const step = Object.freeze({
+const listingStep = Object.freeze({
     WELCOME: 0,
     PUBLICATION: 1,
     OPTIONS: 2,
@@ -44,13 +44,13 @@ const stepUrl = Object.freeze({
 
 
 const stepUrlMap = {
-    [step.WELCOME]: stepUrl.WELCOME,
-    [step.PUBLICATION]: stepUrl.PUBLICATION,
-    [step.OPTIONS]: stepUrl.OPTIONS,
-    [step.TABLE]: stepUrl.TABLE,
-    [step.PRODUCT]: stepUrl.PRODUCT,
-    [step.DETAILS]: stepUrl.DETAILS,
-    [step.UPLOAD]: stepUrl.UPLOAD,
+    [listingStep.WELCOME]: stepUrl.WELCOME,
+    [listingStep.PUBLICATION]: stepUrl.PUBLICATION,
+    [listingStep.OPTIONS]: stepUrl.OPTIONS,
+    [listingStep.TABLE]: stepUrl.TABLE,
+    [listingStep.PRODUCT]: stepUrl.PRODUCT,
+    [listingStep.DETAILS]: stepUrl.DETAILS,
+    [listingStep.UPLOAD]: stepUrl.UPLOAD,
 }
 
 
@@ -63,4 +63,4 @@ const visibility = Object.freeze({
     HIDDEN: "HIDDEN"
 });
 
-export {category, tags, visibility, step, stepUrl, stepUrlMap};
+export {category, tags, visibility, listingStep, stepUrl, stepUrlMap};

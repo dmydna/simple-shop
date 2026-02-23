@@ -17,13 +17,11 @@ import Home from "./pages/Home";
 import ListingCRUD from "./pages/ListingCRUD";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
-import ProductCRUD from "./pages/ProductCRUD";
 import ProductDetails from "./pages/ProductDetails";
 import Products from "./pages/ProductList";
 import "./styles/index.css";
 import ListingDev from "./dev/ListingDev.jsx";
 import UserProfile from "./pages/UserProfile.jsx"
-import ListingPanel from "./features/listing/components/ListingPanel.jsx";
 import ProtectedRouteListing from "./components/common/ProtectedRouteListing.jsx";
 import Register from "./pages/Register.jsx";
 import ProtectedRouteAdmin from "./components/common/ProtectedRouteAdmin.jsx";
@@ -33,7 +31,10 @@ import {Col} from "react-bootstrap";
 import {TagsList} from "./features/crud/TagsList.jsx";
 import Page404NotFound from "./pages/Page404NotFound.jsx";
 import {listingDataList} from "./dev/listingDataList.js";
-import DashboardX from "./pages/DashboardX.jsx";
+import ListingCrudNext from "./pages/ListingCrudNext.jsx";
+import ProductSearch from "./features/listing/components/ProductSearch.jsx";
+import ProductCrudTable from "./features/product/components/ProductCrudTable.jsx";
+import ProductCrudNext from "./pages/ProductCrudNext.jsx";
 
 
 
@@ -109,23 +110,13 @@ function App() {
                     <p className="fs-3 m-0">Form Creator</p>
                 </div>
             </FormCreater>} />
-            <Route path="/test/dashboard" element={
-                <DashboardX />
+            <Route path="/test/product" element={
+                <ProductSearch />
             } />
 
           <Route path="/productos/category/:category" element={
             <>
             <Products/>
-            </>
-          }
-          /> 
-          <Route path="/panel/:page" element={
-            <>
-              <ProtectedRouteAdmin>
-                <ProtectedRouteListing>
-                  <ListingPanel/>
-                </ProtectedRouteListing>
-              </ProtectedRouteAdmin>
             </>
           }
           />  
@@ -139,8 +130,8 @@ function App() {
               <ProductDetails /> 
             } 
           />
-          <Route path="/dashboard/draft" element={
-              <ListingDev />
+          <Route path="/dev" element={
+              <ProductCrudNext />
             } 
           />
           <Route path="/productos" element={
@@ -158,20 +149,19 @@ function App() {
             </ProtectedRouteAdmin>
           } />
 
-          <Route path="/dashboard/products" element={
-             <ProductCRUD /> 
-          } />
-
-          <Route path="/dashboard/products/create" element={
-             <ProductCRUD /> 
-          } />
 
           <Route path="/dashboard/listing" element={
              <>
-                <ListingCRUD /> 
+                <ListingCrudNext />
              </> 
             } 
           />
+            <Route path="/dashboard/product" element={
+                <>
+                    <ProductCrudNext />
+                </>
+            }
+            />
           <Route path="/dashboard/clients" element={ 
             <>
             <ClientCRUD  />

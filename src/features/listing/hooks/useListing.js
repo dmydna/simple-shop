@@ -1,18 +1,12 @@
-import nprogress from 'nprogress';
-import 'nprogress/nprogress.css';
-
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import {useContext, useEffect, useState} from "react";
+import nprogress from "nprogress";
 import {listingService} from "../services/listingService.js";
-import {useSearchParams} from "react-router-dom";
+import {useFiltersCallback} from "../../filters/hooks/useFiltersCallback.jsx";
+import {usePageable} from "../../pagination/hook/usePageable.js";
 import {useFilter} from "../../filters/hooks/useFilter.jsx";
-import {usePageable} from "../contexts/usePageable.js";
-import {usePageFilter} from "../contexts/usePageFilter.js";
-import {useFetch} from "../../search/useFetch.jsx";
+import {useFetch} from "../../../contexts/useFetch.jsx";
 
-export const ListingContext = createContext(null)
-
-export function ListingProvider({ children }){
-
+export const useListing = (initialSize = 8) => {
 
     const [products, setProducts] = useState([]);
     const [listingHash, setListingHash] = useState(null);
@@ -31,7 +25,7 @@ export function ListingProvider({ children }){
         try {
             // Enviamos TODO al backend
             const data = await listingService.getPage({
-                page: page-1,
+                page:  isNaN(page) || page-1 === -1 ?  0 : page-1,
                 size: 8,
                 ...currentFilters
             });
@@ -74,31 +68,24 @@ export function ListingProvider({ children }){
     }, [listingHash]);
 
 
-    return (
-
-        <ListingContext.Provider
-            value={{
-                fetchDataByHash ,
-                listings: content,
-                setListings: setContent,
-                setCurrentPage,
-                currentPage,
-                totalElements,
-                loading,
-                fetchData,
-                setFilters,
-                currentListing,
-                error,
-                totalPages,
-                filters,
-                products, setProducts,
-                listingHash,
-                setListingHash
-            }}>
-            {children}
-        </ListingContext.Provider>
-
-    )
+    return ({
+        fetchDataByHash ,
+        content,
+        setContent,
+        listings: content,
+        setListings: setContent,
+        setCurrentPage,
+        currentPage,
+        totalElements,
+        loading,
+        fetchData,
+        setFilters,
+        currentListing,
+        error,
+        totalPages,
+        filters,
+        products, setProducts,
+        listingHash,
+        setListingHash
+    })
 }
-
-export const useListings = () => useContext(ListingContext);

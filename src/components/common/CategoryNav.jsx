@@ -3,7 +3,7 @@ import { Row } from "react-bootstrap";
 import { useMatch } from "react-router-dom";
 import CategoryItem from "./CategoryItem";
 
-import { useListings } from "../../features/listing/hooks/ListingContext.jsx";
+import { useListingContext } from "../../features/listing/contexts/ListingContext.jsx";
 import { useUIContext } from "../../contexts/UIContext";
 import Img3 from "../../assets/dressing-table.png";
 import Img4 from '../../assets/grocery.png';
@@ -16,7 +16,7 @@ function CategoryNav(){
     const categoryMatch = useMatch("/productos/category/:category");
     const searchMatch = useMatch("/productos/search/:product");
     const {showFilter} = useUIContext()
-    const {listings, setFilters} = useListings()
+    const {listings, setFilters} = useListingContext()
 
 
     const handleClick = (category) => {

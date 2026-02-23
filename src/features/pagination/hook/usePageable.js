@@ -1,6 +1,4 @@
 import {useEffect, useState} from "react";
-import {useSearchParams} from "react-router-dom";
-
 
 // Usa backend para la logica de paginacion
 export const usePageable = () => {

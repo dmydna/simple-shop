@@ -1,19 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useListings } from '../../listing/hooks/ListingContext.jsx';
-import { useWindowsWidth } from '../../../contexts/useWindowSize.jsx';
 import ProductCard from './ProductCard.jsx';
-import { listingService } from '../../listing/services/listingService.js';
-import { useFetchListings } from '../../listing/hooks/useFetchListings.jsx';
+import {useListing} from "../../listing/hooks/useListing.js";
 
 function ProductSection({children, filterFn, count, className, borders}){
 
-    const { listings, setFilters } = useFetchListings(count) 
+    const { listings, setFilters } = useListing(count)
 
     useEffect(()=>{
       setFilters(filterFn)
     },[filterFn])
 
-    const width = useWindowsWidth()
 
     
     const colClass = useMemo(() => {

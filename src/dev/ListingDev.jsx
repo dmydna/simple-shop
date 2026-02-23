@@ -6,30 +6,31 @@ import Pagination from "../features/pagination/components/Pagination.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
 import { listingDataList } from "./listingDataList.js";
 import { listingService } from '../features/listing/services/listingService.js';
+import {useListingContext} from "../features/listing/contexts/ListingContext.jsx";
+import {usePagination} from "../features/pagination/contexts/PaginationContext.jsx";
 
 const ListingDev = () => {
 
 
-  const { currentItems, items,setItems, setItemsPerPage, currentPage, setCurrentPage, totalPages } = useUIContext();
-  
+  const { currentItems, items,setItems, setPageSize, currentPage, setCurrentPage, totalPages } = usePagination;
 
 
-
-  const [ listingDraft, setListingDraft ] = useState({});
   const [ listingDraftList, setListingDraftList ] = useState([]);
   const [currentItem, setCurrentItem ] = useState();
   const [loading, setLoading] = useState(false);
-
-  const [isCreating, setIsCreating] = useState(false);
   const [isCreatingALL, setIsCreatingALL ] = useState(false)
 
   useEffect(() => {
-    setListingDraftList(listingDataList)
-    setItems(listingDraftList)
-    setItemsPerPage(8)
+    setListingDraftList(listingDataList);
+    setPageSize(8)
     setLoading(true)
+    console.log(listingDraftList)
   },[items])
 
+
+  useEffect(()=>{
+    setItems(listingDraftList)
+  },[listingDraftList])
 
 
   const handleSend = async (productData) => {
@@ -123,7 +124,7 @@ const ListingDev = () => {
         </thead>
         <tbody>
           {(
-            currentItems.map((item, index) => (
+            currentItems?.map((item, index) => (
               <tr style={{borderStyle: "hidden"}} key={index}>
                 <td>
                   {item.id ? item.id : <img style={{opacity: '0.7999'}} width={55} src={Img0} /> } 
@@ -136,7 +137,6 @@ const ListingDev = () => {
                   <Button
                     variant="outline-dark"
                     size="sm"
-                    onClick={() => openEditModal(item)}
                     className="me-3 mb-1"
                   >
                     <i className="bi bi-eye"></i>

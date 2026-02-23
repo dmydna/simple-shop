@@ -1,12 +1,12 @@
 import React from "react";
 import { Form, InputGroup } from "react-bootstrap";
-import { useListingsForm } from "../hooks/ListingFormContext.jsx";
+import { useListingCrud } from "../contexts/ListingCrudContext.jsx";
 import { CRUD } from "../../../utils/crud.js";
 
 
 function StepProductos({children, className}){
 
-    const {currentItem, handleChange, modalMode, isDisabledField, handleEnableEdit, editableFields} = useListingsForm();
+    const {currentItem, handleChange, modalMode, isDisabledField, handleEnableEdit, editableFields} = useListingCrud();
 
     return (
         <>
@@ -234,78 +234,7 @@ function StepProductos({children, className}){
                   )}
               </InputGroup>
             </Form.Group>
-            
-            {modalMode == CRUD.UPDATE && <hr  style={{opacity: '.2'}}/>}  
-            
-            <div className="my-3 d-flex gap-2">
-              <Form.Group className="mb-3" controlId="formPrice">
-                <InputGroup size="xs" className="shadow-sm border rounded overflow-hidden pagination-input-group">
-                  <InputGroup.Text className="fw-semibold bg-light border-0 text-muted px-3" style={{ fontSize: "0.95rem" }}>
-                    Precio
-                  </InputGroup.Text>
-                  <Form.Control
-                    style={{ fontSize: "1rem", boxShadow: 'none', borderColor: '#ced4da' }}
-                    className="border-0 no-arrows"
-                    type="number"
-                    rows={3}
-                    placeholder="Ingrese un precio"
-                    name="price"
-                    value={currentItem.price}
-                    onChange={handleChange}
-                    disabled={isDisabledField("price")}
-                    />
-                    {modalMode != CRUD.CREATE && (
-                    <InputGroup.Text
-                      className="fw-semibold border-0 text-muted px-3"
-                      style={{
-                        fontSize: "0.95rem", 
-                        backgroundColor: 'rgb(233, 236, 239)', 
-                        cursor: editableFields["price"] ? 'default' : 'pointer'
-                      }}
-                      onClick={() => handleEnableEdit("price")}
-                    >
-                      <i className={`bi ${editableFields["price"] ? "bi-check text-primary" : "bi-pencil"}`}
-                        style={{ opacity: '.8' }}>
-                      </i>
-                    </InputGroup.Text>
-                    )}
-                </InputGroup>
-              </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formDiscountPercentage">
-                <InputGroup size="xs" className="shadow-sm border rounded overflow-hidden pagination-input-group">
-                  <InputGroup.Text className="fw-semibold bg-light border-0 text-muted px-3" style={{ fontSize: "0.95rem" }}>
-                    Descuento
-                  </InputGroup.Text>
-                  <Form.Control
-                    style={{ fontSize: "1rem", boxShadow: 'none', borderColor: '#ced4da' }}
-                    className="border-0 no-arrows"
-                    type="number"
-                    rows={3}
-                    placeholder="Ingrese un Valor"
-                    name="discountPercentage"
-                    value={currentItem.discountPercentage}
-                    onChange={handleChange}
-                    disabled={isDisabledField("discountPercentage")}
-                    />
-                    {modalMode != CRUD.CREATE && (
-                    <InputGroup.Text
-                      className="fw-semibold border-0 text-muted px-3"
-                      style={{
-                        fontSize: "0.95rem", 
-                        backgroundColor: 'rgb(233, 236, 239)', 
-                        cursor: editableFields["discountPercentage"] ? 'default' : 'pointer'
-                      }}
-                      onClick={() => handleEnableEdit("discountPercentage")}
-                    >
-                      <i className={`bi ${editableFields["discountPercentage"] ? "bi-check text-primary" : "bi-pencil"}`}
-                        style={{ opacity: '.8' }}>
-                      </i>
-                    </InputGroup.Text>
-                    )}
-                </InputGroup>
-              </Form.Group>
-            </div>
 
           </>
     )

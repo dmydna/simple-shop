@@ -100,6 +100,58 @@ background: conic-gradient(
 }
 
 
+
+/*Col expandx animation*/
+
+.col-transition {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /*overflow: hidden; !* Evita scrolls raros durante la animación *!*/
+}
+
+.fade-in {
+    /*animation: fadeIn 0.5s forwards;*/
+    animation: fadeIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+/* Filtro de desenfoque suave para la columna de fondo */
+.blur-background {
+    filter: blur(4px) grayscale(20%); /* Desenfoca y quita un poco de color */
+    pointer-events: none; /* Evita que el usuario haga clic accidentalmente atrás */
+    transition: filter 0.4s ease;
+}
+
+/* El contenedor del detalle con un fondo semi-transparente */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.85); /* Blanco con transparencia */
+    backdrop-filter: blur(10px); /* Desenfoque interno estilo iOS */
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+
+.rise-and-pop {
+    animation: risePop 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    transform-origin: center bottom; /* La escala nace desde abajo */
+}
+
+@keyframes risePop {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
 /*.border-glow img {*/
 /*   border-radius: 100%!important*/
 /*}*/

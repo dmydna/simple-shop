@@ -1,13 +1,12 @@
 import { BrowserRouter } from "react-router-dom";
-import { ListingProvider } from "../features/listing/hooks/ListingContext.jsx";
-import { ProductProvider } from "../features/product/hooks/ProductContext.jsx";
+import { ListingProvider } from "../features/listing/contexts/ListingContext.jsx";
 import { ClientProvider } from "../features/client/ClientContext.jsx";
 import { CarritoProvider } from "../features/cart/contexts/CartContext.jsx";
 import { UIProvider } from "./UIContext";
-import { ListingFormProvider } from "../features/listing/hooks/ListingFormContext.jsx";
+import { ListingCrudProvider } from "../features/listing/contexts/ListingCrudContext.jsx";
 import { UserProvider } from '../features/profile/hooks/UserContext.jsx'
-import {ProductFormProvider} from "../features/product/hooks/ProductFormContext.jsx";
-
+import {ProductCrudProvider} from "../features/product/context/ProductCrudContex.jsx";
+import {ProductProvider} from "../features/product/context/ProductContext.jsx";
 
 // Este es tu Wrapper "CRUD"
 export const CRUDWrapper = ({ children }) => {
@@ -15,17 +14,17 @@ export const CRUDWrapper = ({ children }) => {
   <UIProvider>
     <ListingProvider> 
         {/*<ClientProvider>*/}
-        {/*  <ProductProvider>*/}
-        {/*    <ProductFormProvider>*/}
+          <ProductProvider>
+            <ProductCrudProvider>
               <CarritoProvider>
-                <ListingFormProvider>
+                <ListingCrudProvider>
                   <UserProvider>
                     {children}
                   </UserProvider>
-                </ListingFormProvider>
+                </ListingCrudProvider>
               </CarritoProvider>
-        {/*    </ProductFormProvider>*/}
-        {/*  </ProductProvider>*/}
+            </ProductCrudProvider>
+          </ProductProvider>
         {/*</ClientProvider>*/}
     </ListingProvider>
   </UIProvider>

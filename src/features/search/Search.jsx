@@ -3,7 +3,7 @@ import { Button, Dropdown, Form, InputGroup } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useUIContext } from "../../contexts/UIContext.jsx";
 import { useWindowsWidth } from "../../contexts/useWindowSize.jsx";
-import {useFetchListings} from "../listing/hooks/useFetchListings.jsx"
+import {useListing} from "../listing/hooks/useListing.js";
 
 function Search({toggle, setToggle}){
     
@@ -13,7 +13,7 @@ function Search({toggle, setToggle}){
 
     const {onHideFilter} = useUIContext();
     const [query, setQuery] = useState(""); 
-    const {listings, setFilters} = useFetchListings(4);
+    const {listings, setFilters} = useListing(4);
 
     const [show, setShow] = useState(false);
 

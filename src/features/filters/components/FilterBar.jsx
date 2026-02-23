@@ -1,12 +1,12 @@
 import React, {useEffect, useMemo, useState} from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
-import { useListings } from "../../listing/hooks/ListingContext.jsx";
+import { useListingContext } from "../../listing/contexts/ListingContext.jsx";
 import { useUIContext } from "../../../contexts/UIContext.jsx";
 import DropdownCheck from "../../../components/common/DropdownCheck.jsx";
 import DropdownRange from "../../../components/common/DropdownRange.jsx";
 import {useUrlFilters} from "../hooks/useUrlFilters.jsx";
-import {useTagsList} from "../../listing/contexts/useTagsList.js";
+import {useTagsList} from "../../../contexts/useTagsList.js";
 import {TagsList} from "../../crud/TagsList.jsx";
 import {FilterTags} from "../../crud/FilterTags.jsx";
 import {FilterBarProvider} from "../context/FilterBarContext.jsx";

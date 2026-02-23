@@ -8,12 +8,12 @@ import Img3 from "../assets/expend.png";
 import Img4 from '../assets/paper.png';
 import Img5 from "../assets/t-shirt.png"
 import Img6 from "../assets/draft.png"
-import { useListings } from "../features/listing/hooks/ListingContext.jsx";
+import { useListingContext } from "../features/listing/contexts/ListingContext.jsx";
 
 
 const Dashboard = () => {
 
-    const {totalItems} = useListings()
+    const {totalItems} = useListingContext()
 
     return (
         <Container className="mt-4">
@@ -37,7 +37,7 @@ const Dashboard = () => {
                className="border bg-soft-primary"
                category="your products"
                image={Img5} 
-               link={`/dashboard/products`}
+               link={`/dashboard/product`}
              />
              <CategoryItem 
                // variant="success"

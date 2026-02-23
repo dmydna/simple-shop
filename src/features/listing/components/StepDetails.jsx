@@ -1,12 +1,12 @@
 import React from "react";
 import { Form, InputGroup } from "react-bootstrap";
-import { useListingsForm } from "../hooks/ListingFormContext.jsx";
+import { useListingCrud } from "../contexts/ListingCrudContext.jsx";
 import { CRUD } from "../../../utils/crud.js";
 
-function StepDetalles({children, className}){
+function StepDetails({children, className}){
 
-    const {currentItem, handleChange, modalMode,
-    isDisabledField, editableFields, handleEnableEdit} = useListingsForm();
+    const {currentItem, handleChange, crudMode,
+    isDisabledField, editableFields, handleEnableEdit} = useListingCrud();
 
     return (
         <>
@@ -28,7 +28,7 @@ function StepDetalles({children, className}){
                   onChange={handleChange}
                   disabled={isDisabledField("warrantyInformation")}
                   />
-                  {modalMode != CRUD.CREATE && (
+                  {crudMode !== CRUD.CREATE && (
                   <InputGroup.Text
                     className="fw-semibold border-0 text-muted px-3"
                     style={{
@@ -62,7 +62,7 @@ function StepDetalles({children, className}){
                   onChange={handleChange}
                   disabled={isDisabledField("shippingInformation")}
                   />
-                  {modalMode != CRUD.CREATE && (
+                  {crudMode !== CRUD.CREATE && (
                   <InputGroup.Text
                     className="fw-semibold border-0 text-muted px-3"
                     style={{
@@ -84,4 +84,4 @@ function StepDetalles({children, className}){
 }
 
 
-export default StepDetalles;
+export default StepDetails;

@@ -1,106 +1,120 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import Img3 from '../../../assets/edit.png';
-import Img0 from '../../../assets/message.png';
-import { useListingsForm } from "../hooks/ListingFormContext.jsx";
+import { useListingCrud } from "../contexts/ListingCrudContext.jsx";
 import { CRUD } from "../../../utils/crud.js";
-import { step, wizardSteps, getVisibleSteps, getCurrentIndex, getNextStep, getPrevStep } from "../../../utils/listingWizard.js";
-import { useLocation, useNavigate } from "react-router-dom";
+
+import {useWizard} from "../../../contexts/WisardContext.jsx";
 
 
-export const StepNavigation = ({currentStep, setCurrentStep, isSelectedProduct, showNavigation}) => {
+export const StepNavigation = () => {
 
-    const { showModal, modalMode, currentItem, handleCreate, handleUpdate, handleCloseModal, setProductMode, productMode, editableFields, setCurrentItem } = useListingsForm()
+    const { crudMode, currentItem, handleCreate,
+        handleUpdate, handleCloseModal, editableFields,
+        isSelectedProduct } = useListingCrud()
 
-    const navigate = useNavigate()
+    const {next, prev, currentStep, step, goTo} = useWizard()
+
     const modeActions = useMemo(() => {
-        switch (modalMode) {
+        switch (crudMode) {
             case CRUD.CREATE: return "Crear"
             case CRUD.UPDATE: return "Actualizar"
             case CRUD.READ:   return "Salir"
             case CRUD.DELETE: return "Eliminar"
         }
-    }, [modalMode])
-
-    useEffect(() => {
-        const current = wizardSteps.find(s => s.id === currentStep)
-        //if (current) navigate(current.url)
-    }, [currentStep])
+    }, [crudMode])
 
 
-    const handleNext = () => {
-      const next = getNextStep(currentStep, modalMode)
-      if (!next) return
-      setCurrentStep(next.id)
-    }
+    // Vuelve al primer step cuando se cierra wizard
+    useEffect(()=>{
+        const firstStep =
+            crudMode === CRUD.CREATE ?
+                step.OPTIONS_CREATE : step.OPTIONS_UPDATE
+        goTo(firstStep)
+    },[crudMode])
 
-    const handlePrev = () => {
-      const prev = getPrevStep(currentStep, modalMode)
-      if (!prev) return
-      setCurrentStep(prev.id)
-    }
- 
 
     const lastStepToCreate = step.UPLOAD
     const lastStepToUpdate = step.DETAILS
 
-    const isDisabledCreate = () => {
+    const isDisabledCreate =  useMemo(()=>{
         return !currentItem.title || !currentItem.description
-    }
+    },[currentItem.title, currentItem.description])
 
 
-    const isDisabledUpdate = () => {
-        return (modalMode === CRUD.UPDATE && Object.keys(editableFields).length === 0)
+    const isDisabledUpdate = useMemo(()  => {
+        return (crudMode === CRUD.UPDATE
+            && Object.keys(editableFields).length === 0 ||
+            crudMode === CRUD.UPDATE && currentStep === step.PRODUCT)
+    },[editableFields, crudMode])
+
+    const isDisabledContinue = useMemo(() => {
+        return crudMode === CRUD.UPDATE ||
+            crudMode === CRUD.CREATE && !isSelectedProduct;
+    }, [crudMode, isSelectedProduct]);
+
+    const isVisibleContinue =  useMemo(()=>{
+        return currentStep >= 0
+            && crudMode === CRUD.CREATE
+            && currentStep !==  lastStepToCreate
+    },[currentStep, lastStepToCreate, crudMode])
+
+    const isVisibleBack =  useMemo(()=>{
+        return  crudMode !== CRUD.UPDATE;
+    },[currentStep, crudMode])
+
+    const isVisibleCancel = () => {
+        return true
     }
 
-    const isDisabledContinue = () => {
-        return currentStep == 2 && modalMode != CRUD.UPDATE ||
-            currentStep == step.TABLE && !isSelectedProduct
-    }
-
-    const isHideContinue = () => {
-        return currentStep >= 0 && modalMode === CRUD.UPDATE  &&  currentStep !=  lastStepToUpdate
-            || currentStep >= 0 && modalMode === CRUD.CREATE  &&  currentStep !=  lastStepToCreate
-    }
-
-    const isHideToAppyChanges = () => {
-        return  modalMode === CRUD.CREATE  && currentStep == lastStepToCreate ||  
-                modalMode === CRUD.UPDATE  && currentStep == lastStepToUpdate
-    }
+    const isHideApplyChanges = useMemo(()=>{
+        return  crudMode === CRUD.CREATE
+            && currentStep === lastStepToCreate
+            || crudMode === CRUD.UPDATE
+            && currentStep !== step.OPTIONS_UPDATE
+    },[crudMode, currentStep, lastStepToCreate])
 
 
     return (
         <>
             <div className="d-flex w-100 justify-content-between">
-                <Button variant="warning border btn-sm" onClick={handleCloseModal}>
-                    Cancelar
-                </Button>
+
+                { isVisibleCancel() && (
+                    <Button
+                        variant="dark border rounded-3 btn-sm"
+                        onClick={handleCloseModal}>
+                        Cancelar
+                    </Button>
+                )}
                 <div className="w-md-50 d-flex justify-content-end gap-3">
-                    {currentStep > 0 && (
+                    {isVisibleBack && (
                         <>
-                            <Button variant="outline-secondary border btn-sm" onClick={handlePrev}>
-                                <i className={`bi bi-chevron-left`}></i> Atras
+                            <Button
+                                variant="outline-secondary border btn-sm rounded-3"
+                                onClick={prev}>
+                                <i className={`bi bi-chevron-left`}></i>
+                                Atras
                             </Button>
                         </>
                     )}
-                    { isHideContinue() && (
+                    { isVisibleContinue && (
                         <Button
-                            disabled={isDisabledContinue()}
-                            variant="outline-secondary border btn-sm"
-                            onClick={ handleNext }>
+                            disabled={isDisabledContinue}
+                            variant="outline-secondary border btn-sm rounded-3"
+                            onClick={ next }>
                             Continuar <i className={`bi bi-chevron-right`}></i>
                         </Button>
                     )}
 
-                    { isHideToAppyChanges() && (
+                    { isHideApplyChanges && (
                         <>
                             <Button
-                                variant={isDisabledUpdate() || isDisabledCreate() ?
-                                    "outline-secondary border btn.sm" : "primary border"}
+                                variant={isDisabledUpdate || isDisabledCreate ?
+                                    "outline-secondary border btn.sm rounded-3" : "primary border rounded-3"}
                                 onClick={
-                                    modalMode === CRUD.CREATE && handleCreate ||
-                                    modalMode === CRUD.UPDATE && handleUpdate}
-                                disabled={isDisabledCreate() || isDisabledUpdate()}
+                                    crudMode === CRUD.CREATE && handleCreate ||
+                                    crudMode === CRUD.UPDATE && handleUpdate
+                                }
+                                disabled={isDisabledCreate || isDisabledUpdate}
                             >
                                 {modeActions}
                             </Button>

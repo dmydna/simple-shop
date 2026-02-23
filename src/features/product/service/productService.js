@@ -9,13 +9,15 @@ export const productService = {
 
     getPage : async ({ page = 0, size = 10, ...filters } = {}) => {
         // 1. Creamos un objeto plano para los parámetros
+
+
         const cleanParams = new URLSearchParams();
 
         cleanParams.append('page', page);
         cleanParams.append('size', size);
 
         // 2. Agregamos los filtros dinámicamente
-        mapToURLSearchParams(filters, cleanParams)
+        mapToURLSearchParams(cleanParams, filters)
 
         console.log("URL con Parametros:", cleanParams.toString());
 

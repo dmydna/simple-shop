@@ -18,12 +18,35 @@
 
 }
 
+.onhover:hover {
+    cursor: pointer;
+}
+
+
+.normalize-breadcrumb a {
+    text-decoration: none;
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
+}
+
+.normalize-breadcrumb a:hover {
+    color: blue!important;
+    cursor: pointer;
+}
+
+
+
 hr {
     opacity: .15;
 }
 
 .disabled {
     opacity: .6
+}
+
+
+.selected td {
+    background-color: #6c757d24;
 }
 
 .z-index-10 {z-index: 10}

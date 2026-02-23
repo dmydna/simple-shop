@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
-import { listingService } from '../services/listingService.js';
+import { listingService } from '../../features/listing/services/listingService.js';
 
-const ImageUploadForm = ({ productId, title, className }) => {
+const ImageUploadForm = ({ productId, children, className }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
 
@@ -32,7 +32,10 @@ const ImageUploadForm = ({ productId, title, className }) => {
   return (
     // CAMBIO: Usamos Form de react-bootstrap que renderiza una etiqueta <form> real
     <Form className={`upload-form p-3 rounded ${className}`}>
-      <div className='h4 mb-3'>{title}</div>
+
+      <div className='h4 mb-3'>
+        {children}
+      </div>
       
       <Form.Group className="mb-3">
         <Form.Label>Selecciona una imagen</Form.Label>

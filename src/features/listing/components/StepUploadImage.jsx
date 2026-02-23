@@ -1,13 +1,20 @@
-import React, { useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { Button, Form } from "react-bootstrap";
-import { useListings } from '../hooks/ListingContext.jsx';
+
 import { listingService } from '../services/listingService.js';
-import { useListingsForm } from '../hooks/ListingFormContext.jsx';
+import { useListingCrud } from '../contexts/ListingCrudContext.jsx';
+import {useListingContext} from "../contexts/ListingContext.jsx";
 
 const StepUploadImage = ({ productId, title, className, multiple = true }) => {
-  const {selectedFile, setSelectedFile} = useListingsForm();
+  const {selectedFile, setSelectedFile, currentItem} = useListingCrud();
   const [preview, setPreview] = useState([]);
   const fileInputRef = useRef(null);
+  const {fetchDataByHash} = useListingContext()
+
+
+  useEffect(() => {
+     setPreview(currentItem?.images || [])
+  }, [currentItem]);
 
   // Manejar el cambio del input
   const handleFileChange = (e) => {
@@ -51,12 +58,12 @@ const StepUploadImage = ({ productId, title, className, multiple = true }) => {
 
   return (
     // CAMBIO: Usamos Form de react-bootstrap que renderiza una etiqueta <form> real
-    <Form className={`upload-form p-3 rounded ${className || ''}`}>
+    <Form className={`upload-form rounded ${className || ''}`}>
       <div className='h4 mb-3'>{title}</div>
       
       <Form.Group className="mb-3">
-        <Form.Label>Selecciona una imagen</Form.Label>
-        <Form.Control 
+        <Form.Label style={{fontWeight: '500'}} >Selecciona una imagen</Form.Label>
+        <Form.Control
           ref={fileInputRef}
           type="file" 
           accept="image/*" 
@@ -87,9 +94,9 @@ const StepUploadImage = ({ productId, title, className, multiple = true }) => {
       )}
 
       {/* Usamos el Button de Bootstrap para mejor estética */}
-      {/* <Button onClick={handleSubmit} variant="primary" disabled>
+       <Button onClick={handleSubmit} variant="primary" >
         Subir Imagen
-      </Button> */}
+      </Button>
     </Form>
   );
 };

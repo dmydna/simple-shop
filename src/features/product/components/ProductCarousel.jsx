@@ -1,11 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
-import { useListings } from '../../listing/hooks/ListingContext.jsx';
 import { useWindowsWidth } from '../../../contexts/useWindowSize.jsx';
 import ProductCard from './ProductCard.jsx';
-import { listingService } from '../../listing/services/listingService.js';
-import { useFetchListings } from '../../listing/hooks/useFetchListings.jsx';
+import {useListing} from "../../listing/hooks/useListing.js";
 
 
 
@@ -16,9 +14,8 @@ function ProductCarousel({children, filterFn, col, className, imgSize = 180}) {
   const [chunkSize, setChunkSize] = useState(col || 3)
   const width = useWindowsWidth()
 
-  const {listings, setFilters} = useFetchListings(8) //LOCAL
-  // Evitados mostrar el current Listing
-  const {currentListing} = useListings()               //Global
+  const {listings, setFilters} = useListing(8) //LOCAL
+
 
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);

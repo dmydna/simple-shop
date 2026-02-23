@@ -1,6 +1,6 @@
 // src/services/listingService.js
 
-import { mapToURLSearchParams, ENDPOINTS, TOKEN, ROLE, BASE_URL } from "../../../utils/config.js";
+import {mapToURLSearchParams, ENDPOINTS, ROLE, BASE_URL, TOKEN} from "../../../utils/config.js";
 const ENDPOINT = ENDPOINTS.LISTENING;
 const CREDENTIALS = ROLE == 'ADMIN' ? { 'Authorization': `Bearer ${TOKEN}`} : {}
 
@@ -18,6 +18,7 @@ export const listingService = {
 
     // POST: Crear un nuevo producto
     create: async (listingData) => {
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
             method: 'POST',
             headers: {
@@ -47,6 +48,7 @@ export const listingService = {
     },
 
     getByHash: async (hash) => {
+
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/hash/${hash}`);
         if (!response.ok) throw new Error("Producto no encontrado");
         return await response.json();
@@ -56,6 +58,7 @@ export const listingService = {
     // Cambiamos la firma para recibir un objeto desestructurado
     getPage : async ({ page = 0, size = 10, ...filters } = {}) => {
 
+        const TOKEN = localStorage.getItem("token")
         // 1. Creamos un objeto plano para los parámetros
         const cleanParams = new URLSearchParams();
 
@@ -80,6 +83,9 @@ export const listingService = {
     // TODO: renombrar a create
     // POST: crear listing con imagenes (permite sin imagenes)
     createWithImage: async (listingDTO, selectedFile) => {
+
+        const TOKEN = localStorage.getItem("token")
+
         const formData = new FormData();
 
         // Parte 1: JSON con tipo explícito
@@ -88,7 +94,7 @@ export const listingService = {
         }));
     
         // Parte 2: Archivo
-        if (selectedFile.length != 0) {
+        if (selectedFile.length !== 0) {
             selectedFile.forEach((file) => {
                 formData.append('files', file); // 'images' es el nombre que recibirá tu backend
             });
@@ -114,6 +120,7 @@ export const listingService = {
 
     updateVisibility: async (id, visibility) => {
         // Pasa  visibilidad como un Query Parameter (?visibility=...)
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/visibility?visibility=${visibility}`, {
             method: 'PATCH',
             headers: {
@@ -132,6 +139,7 @@ export const listingService = {
 
     imageUpload: async (id, selectedFile) => {
 
+        const TOKEN = localStorage.getItem("token")
         const formData = new FormData();
         formData.append("file", selectedFile); // "file" debe coincidir con el @RequestParam de Java
       
@@ -153,6 +161,7 @@ export const listingService = {
 
     // POST: Crear a partir de una lista
     createBulk: async (listingDataList) => {
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/bulk`, {
             method: 'POST',
             headers: {
@@ -167,6 +176,7 @@ export const listingService = {
 
     // PUT: Actualiza producto por ID
     update: async (id, listingData) => {
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'PUT',
             headers: {
@@ -181,6 +191,7 @@ export const listingService = {
 
     // DELETE: Eliminar un producto por ID
     delete: async (id) => {
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'DELETE',
             headers: {

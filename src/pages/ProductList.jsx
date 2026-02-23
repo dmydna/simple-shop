@@ -6,7 +6,7 @@ import CategoryNav from "../components/common/CategoryNav";
 import Pagination from "../features/pagination/components/Pagination.jsx";
 import ProductCard from "../features/product/components/ProductCard.jsx";
 import FilterBar from "../features/filters/components/FilterBar.jsx";
-import { useListings } from "../features/listing/hooks/ListingContext.jsx";
+import { useListingContext } from "../features/listing/contexts/ListingContext.jsx";
 import { useUIContext } from "../contexts/UIContext";
 import {ListingPlaceholder} from "../features/placeholder/ListingPlaceholder.jsx";
 import {DataHandler} from "../contexts/DataHandler.jsx";
@@ -18,8 +18,7 @@ import DropdownCheck from "../components/common/DropdownCheck.jsx";
 function Products() {
 
   const { error, listings, currentPage,setCurrentPage, totalPages,
-    setFilters ,totalElements, loading, fetchData } = useListings()
-
+    setFilters ,totalElements, loading, fetchData } = useListingContext()
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [meta, setMeta] = useState({

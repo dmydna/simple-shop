@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, InputGroup } from "react-bootstrap";
 
-function SearchLive({className, items, handleSearch}) {
+function SearchLive({className, items, handleSearch, handleActive}) {
   const [query, setQuery] = useState(""); 
 //   const {setSearch, clients} = useController();
 
@@ -16,6 +16,9 @@ function SearchLive({className, items, handleSearch}) {
   function handleChange(e) {
       const value = e.target.value;
       setQuery(value);
+      if(!value && handleActive) {
+          handleActive();
+      }
   }
 
   return (

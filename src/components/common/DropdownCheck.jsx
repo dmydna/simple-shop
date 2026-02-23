@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Dropdown, Form } from "react-bootstrap";
-import { useListings } from "../../features/listing/hooks/ListingContext.jsx";
+import { useListingContext } from "../../features/listing/contexts/ListingContext.jsx";
 import {TagsList} from "../../features/crud/TagsList.jsx";
 import {useUIContext} from "../../contexts/UIContext.jsx";
 import {useFilterBarContext} from "../../features/filters/context/FilterBarContext.jsx";

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
-import { useProducts } from '../product/hooks/ProductContext.jsx';
+import { useProducts } from '../product/context/ProductContext.jsx';
 import { useUIContext } from '../../contexts/UIContext.jsx';
 import Pagination from '../pagination/components/Pagination.jsx';
 

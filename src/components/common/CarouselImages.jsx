@@ -33,10 +33,10 @@ function CarouselImages({images, children, col, className, order=false}) {
         </div>
       </div>
       
-    {images.length > 1 && 
+    {images?.length > 1 &&
     <Carousel className={`col-12 order-${order ? 1 : 2}`}
     indicators={false} variant="dark" activeIndex={index} onSelect={handleSelect}>
-      {images.map((img, index)=>(
+      {images?.map((img, index)=>(
           <Carousel.Item key={index}>
           <div className=" d-flex justify-content-around"> 
               <img src={img} height={300} />
@@ -45,7 +45,7 @@ function CarouselImages({images, children, col, className, order=false}) {
       ))}
      </Carousel>
     }
-    {images.length == 1 && 
+    {images?.length == 1 &&
       <div className=" d-flex justify-content-around"> 
           <img src={images[0]} height={300} />
       </div>

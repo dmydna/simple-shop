@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Dropdown, Form, Row } from "react-bootstrap";
-import { useListings } from "../../features/listing/hooks/ListingContext.jsx";
+import { useListingContext } from "../../features/listing/contexts/ListingContext.jsx";
 import {useFilterBarContext} from "../../features/filters/context/FilterBarContext.jsx";
 
 

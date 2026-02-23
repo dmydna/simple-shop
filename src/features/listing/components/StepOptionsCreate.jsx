@@ -1,9 +1,12 @@
-import React, {useState} from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { Button, Form, InputGroup, Modal } from "react-bootstrap";
+import Img1 from '../../../assets/box.png';
+import { useListingCrud } from "../contexts/ListingCrudContext.jsx";
 import ProductSearch from "./ProductSearch.jsx";
-import {useListingCrud} from "../contexts/ListingCrudContext.jsx";
 
-function StepWelcomeCreate({className}){
 
+
+function StepOptionsCreate({children, handleProductMode, className}) {
     const [selected, setSelected] = useState(false);
     const { setCurrentItem, currentItem } = useListingCrud()
     const handleSelect = (item) => {
@@ -32,4 +35,4 @@ function StepWelcomeCreate({className}){
     )
 }
 
-export  default StepWelcomeCreate
+export default StepOptionsCreate;

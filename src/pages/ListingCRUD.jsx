@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import ListingTable from "../features/listing/components/ListingTable.jsx";
+import ListingCrudTable from "../features/listing/components/ListingCrudTable.jsx";
 import FilterBar from "../features/filters/components/FilterBar.jsx";
 import SearchLive from "../features/search/SearchLive.jsx";
-import { useListings } from "../features/listing/hooks/ListingContext.jsx";
-import { useListingsForm } from "../features/listing/hooks/ListingFormContext.jsx";
+import { useListingContext } from "../features/listing/contexts/ListingContext.jsx";
+import { useListingCrud } from "../features/listing/contexts/ListingCrudContext.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
 import { CRUD } from "../utils/crud.js";
 import DropdownCheck from "../components/common/DropdownCheck.jsx";
@@ -18,11 +18,11 @@ const ListingCRUD = () => {
     const {onHideFilter} =  useUIContext();
 
 
-    const { listings, setFilters } = useListings()
+    const { listings, setFilters } = useListingContext()
 
 
     const { setShowModal, setModalMode, setCurrentItem,
-        handleDelete, handleVisibility } = useListingsForm()
+        handleDelete, handleVisibility } = useListingCrud()
 
     const [isCreating, setIsCreating] = useState(false);
     const [search, setSearch] = useState()
@@ -85,7 +85,7 @@ const ListingCRUD = () => {
                         </DropdownCheck>
                     </FilterBar>
                 </div>
-                <ListingTable>
+                <ListingCrudTable>
 
                     { (key, item) => {
                         if(key == 'buttons'){
@@ -123,7 +123,7 @@ const ListingCRUD = () => {
                         }
                     }}
 
-                </ListingTable>
+                </ListingCrudTable>
 
             </Container>
         </>

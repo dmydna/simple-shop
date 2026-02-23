@@ -5,7 +5,7 @@ import CardReview from "../components/common/CardReviews";
 import ProductBuyCard from "../features/product/components/ProductBuyCard.jsx";
 import ProductSpecs from "../features/product/components/ProductSpecs.jsx";
 import CarouselImages from "../components/common/CarouselImages";
-import { useListings } from "../features/listing/hooks/ListingContext.jsx";
+import { useListingContext } from "../features/listing/contexts/ListingContext.jsx";
 import { listingService } from "../features/listing/services/listingService.js";
 import ProductCarousel from "../features/product/components/ProductCarousel.jsx";
 import { DataHandler } from "../contexts/DataHandler.jsx";
@@ -19,7 +19,7 @@ function ProductDetails() {
 
    const {name, hash} = useParams()
 
-   const { currentListing, error, loading, setListingHash, fetchDataByHash } = useListings()
+   const { currentListing, error, loading, setListingHash, fetchDataByHash } = useListingContext()
 
    useEffect(()=>{
       setListingHash(hash)

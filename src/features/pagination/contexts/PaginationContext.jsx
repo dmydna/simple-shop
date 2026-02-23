@@ -1,13 +1,14 @@
 import React, {  useEffect,  useState } from "react";
-import {usePageable} from "../../listing/contexts/usePageable.js";
+import {usePageable} from "../hook/usePageable.js";
 
 
 /** Paginacion Local **/
 export function usePagination() {
 
     // usa pageable para NO repetir codigo.
-    const { totalPages, setTotalPages, currentPage, setCurrentPage, pageSize,
-        setPageSize, totalItems, setTotalItems} = usePageable();
+    const { totalPages, setTotalPages, currentPage,
+        setCurrentPage, pageSize, setPageSize, totalItems,
+        setTotalItems} = usePageable();
 
     // Paginador
     const [items, setItems] = useState([]);

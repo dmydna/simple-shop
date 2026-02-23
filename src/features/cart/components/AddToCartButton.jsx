@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useCart } from "../contexts/CartContext.jsx";
-import { useListings } from "../../listing/hooks/ListingContext.jsx";
+import { useListingContext } from "../../listing/contexts/ListingContext.jsx";
 
 
 
@@ -10,11 +10,11 @@ function AddToCartButton({id, variant='success', children}){
 
     const { cartItems, addToCart} = useCart()
 
-    const {listings} = useListings()
+    const {listings} = useListingContext()
 
     const [product] = useMemo(()=>{
       return listings.filter((p)=> {
-        return p.id == id
+        return p?.id == id
       })
     },[listings]) 
 
@@ -38,12 +38,12 @@ function AddToCartButton({id, variant='success', children}){
               style={{cursor: "pointer"}}
           >
               {cartItems.map((item) =>
-                      item.id === product.id && item.cantidad != 0 ?
+                      item?.id === product?.id && item?.cantidad !== 0 ?
                           <div className="position-relative d-inline-block me-3">
             <span className={`rounded-circle badge bg-white text-success
-              px-${item.cantidad < 10 ? 2 : 1}`}
+              px-${item?.cantidad < 10 ? 2 : 1}`}
             >
-              {item.cantidad}
+              {item?.cantidad}
             </span>
                           </div> : ''
               )}

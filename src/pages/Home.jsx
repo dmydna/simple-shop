@@ -22,7 +22,7 @@ import Img10 from "../assets/online-store.png"
 import Img11 from "../assets/paper-bag.png"
 import { useAuth } from "../features/auth/hooks/AuthContext.jsx";
 import BannerAds from "../components/common/BannerAds";
-import {useListings} from "../features/listing/hooks/ListingContext.jsx";
+import {useListingContext} from "../features/listing/contexts/ListingContext.jsx";
 import {FeaturesPlaceholder} from "../features/placeholder/FeaturesPlaceholder.jsx";
 import {DataHandler} from "../contexts/DataHandler.jsx";
 
@@ -32,7 +32,7 @@ function Home() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }, []);
 
-    const {loading, totalItems, error, fetchData} = useListings();
+    const {loading, totalItems, error, fetchData} = useListingContext();
     const {isAuth} = useAuth()
 
 

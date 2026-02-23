@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, InputGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../cart/contexts/CartContext.jsx";
-import { useListings } from "../../listing/hooks/ListingContext.jsx";
+import { useListingContext } from "../../listing/contexts/ListingContext.jsx";
 import BuyNowButton from "../../../components/common/BuyNowButton.jsx";
 import AddToCartButton from "../../cart/components/AddToCartButton.jsx";
 import ProductBuyModal from "./ProductBuyModal.jsx";
@@ -10,7 +10,7 @@ import ProductBuyModal from "./ProductBuyModal.jsx";
 function ProductBuyCard({ title, rating, ship, id, stock, price, discount, className }) {
 
   const { cartItems, addToCart, clearCart} = useCart()
-  const { products } = useListings()
+  const { products } = useListingContext()
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate()
 
@@ -24,7 +24,7 @@ function ProductBuyCard({ title, rating, ship, id, stock, price, discount, class
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <img className="mb-2" src={`/rating${Math.round(rating || 1)}.png`} />
-        <Card.Text className="h3">$ {price.toFixed(2)} 
+        <Card.Text className="h3">$ {price?.toFixed(2)}
           <span className="mx-2 text-success fw-medium fs-6">
             {discount ? discount + '% OFF' : ''}
           </span> 

@@ -4,7 +4,6 @@ import { useListingContext } from '../contexts/ListingContext.jsx';
 import { useListingCrud } from '../contexts/ListingCrudContext.jsx';
 import CrudTable from "../../../components/common/CrudTable.jsx";
 import {CRUD} from "../../../utils/crud.js";
-import {step} from "../../../utils/ListingWizard.js";
 
 
 export  const ListingCrudTable = ({children}) => {
@@ -13,7 +12,7 @@ export  const ListingCrudTable = ({children}) => {
     const crudHook = useListingCrud()
 
     const { handleDelete, handleVisibility, setShowCrud, setCrudMode,
-        setCurrentItem, setCurrentStep, setExpandx }  = crudHook
+        setCurrentItem, setCurrentStep, setExpandx, step }  = crudHook
 
     const openEditModal = (item) => {
         setCrudMode(CRUD.UPDATE);
@@ -30,7 +29,7 @@ export  const ListingCrudTable = ({children}) => {
           baseHook={baseHook}
           handleclick={(item) =>openEditModal(item)}>
           {(key, item)=>{
-              if(key=='title'){
+              if(key === 'title'){
                   return (
                       <>
                           <p className="h5 my-4">
@@ -39,7 +38,7 @@ export  const ListingCrudTable = ({children}) => {
                       </>
                   )
               }
-              if(key=='buttons'){
+              if(key === 'buttons'){
                   return (
                       <>  {/** Editar */}
                           <Button

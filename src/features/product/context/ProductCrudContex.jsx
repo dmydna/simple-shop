@@ -2,9 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 import { CRUD, mode } from "../../../utils/crud.js";
 import { visibility } from "../../../utils/posts.js";
 import {productService} from "../service/productService.js";
-import {useProduct} from "../hooks/useProduct.js";
 import {usePanel} from "../../../contexts/usePanel.js";
-import {useStepNavigation} from "../../listing/hooks/useStepNavigation.js";
 import {useProductContext} from "./ProductContext.jsx";
 
 export const ProductCrudContext = createContext(null)
@@ -18,7 +16,6 @@ export function ProductCrudProvider({ children }){
     const [ currentItem, setCurrentItem ] = useState({ title: "", description: "", precio:0.0, stock:0 });
     const [ editableFields, setEditableFields ] = useState({});
     const [ selectedFile, setSelectedFile ] = useState([]); // Para subir Imagenes.
-    const {currentStep, setCurrentStep} = useStepNavigation()
 
     const handleChange = (e) => {
         const { name, value, type } = e.target;
@@ -161,8 +158,7 @@ export function ProductCrudProvider({ children }){
                 selectedFile,
                 setSelectedFile,
                 // Panel
-                expandx, setExpandx,
-                setCurrentStep, currentStep
+                expandx, setExpandx
             }}>
             {children}
         </ProductCrudContext.Provider>

@@ -4,10 +4,10 @@ import { visibility } from "../../../utils/posts.js";
 import { listingService } from '../services/listingService.js';
 import { useListingContext } from "./ListingContext.jsx";
 import {usePanel} from "../../../contexts/usePanel.js";
-import {useStepNavigation} from "../hooks/useStepNavigation.js";
 import {useFetch} from "../../../contexts/useFetch.jsx";
 import {useForm} from "../../../contexts/useForm.js";
-import {step} from "../../../utils/ListingWizard.js";
+import {useWizard} from "../../../contexts/WisardContext.jsx";
+
 
 export const ListingCrudContext = createContext(null)
 
@@ -20,7 +20,6 @@ export function ListingCrudProvider({ children }){
     const [ currentItem, setCurrentItem ] = useState({ title: "", description: "", precio:0.0, stock:0 });
     const [ editableFields, setEditableFields ] = useState({});
     const [ selectedFile, setSelectedFile ] = useState([]); // Para subir Imagenes.
-    const { currentStep, setCurrentStep } = useStepNavigation();
     const [ isSelectedProduct, setIsSelectedProduct ] = useState(false)
     const { expandx, setExpandx } = usePanel()
     const {formData, onChange} = useForm();
@@ -191,7 +190,6 @@ export function ListingCrudProvider({ children }){
                 setSelectedFile,
                 // Panel
                 expandx, setExpandx,
-                setCurrentStep, currentStep,
                 isSelectedProduct, setIsSelectedProduct,
                 handleUploadImage
             }}>

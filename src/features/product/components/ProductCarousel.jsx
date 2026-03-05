@@ -8,10 +8,10 @@ import {useListing} from "../../listing/hooks/useListing.js";
 
 
 
-function ProductCarousel({children, filterFn, col, className, imgSize = 180}) {
+function ProductCarousel({children, filter, maxCols, maxElems, className, imgSize = 180}) {
 
   const [index, setIndex] = useState(0);
-  const [chunkSize, setChunkSize] = useState(col || 3)
+  const [chunkSize, setChunkSize] = useState(maxCols || 4)
   const width = useWindowsWidth()
 
   const {listings, setFilters} = useListing(8) //LOCAL
@@ -22,9 +22,9 @@ function ProductCarousel({children, filterFn, col, className, imgSize = 180}) {
   };
 
   useEffect(()=>{
-    setFilters(filterFn)
-    console.log(filterFn)
-  },[filterFn])
+    setFilters(filter)
+    console.log(filter)
+  },[filter])
 
 
    
@@ -41,7 +41,7 @@ function ProductCarousel({children, filterFn, col, className, imgSize = 180}) {
     }
     else{ 
       setVisibleProducts(listings)
-      setChunkSize(col);
+      setChunkSize(maxCols);
     }
   }, [width, listings]);
 

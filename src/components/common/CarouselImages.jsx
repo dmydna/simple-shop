@@ -13,13 +13,13 @@ function CarouselImages({images, children, col, className, order=false}) {
 
   return (
 
-    <div className={`row ${className} rounded  h-100`}>
-      <div className={`col-12 d-flex justify-content-${order ? 'center' : 'between'}  order-${order ? 2 : 1}`}>
+    <div className={`row ${className}  position-relative rounded  h-100`}>
+      <div className={`position-absolute bottom-0 col-12 d-flex justify-content-${order ? 'center' : 'between'}  order-${order ? 2 : 1}`}>
         <div>
          {children} {/* header */}
         </div>
           {/* carrousel dots */}
-          <div className="d-flex justify-content-center mt-3 gap-2">
+          <div className="d-flex justify-content-center mt-3 gap-2 ">
           {images && images.length > 1 && images.map((g, i) => (
             <Button
               key={i}

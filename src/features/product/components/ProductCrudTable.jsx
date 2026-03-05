@@ -6,7 +6,6 @@ import {useProductCrud} from "../context/ProductCrudContex.jsx";
 import {useProductContext} from "../context/ProductContext.jsx";
 import CrudTable from "../../../components/common/CrudTable.jsx";
 import {CRUD} from "../../../utils/crud.js";
-import {step} from "../../../utils/ListingWizard.js";
 
 export  const ProductCrudTable = ({children}) => {
 
@@ -14,7 +13,7 @@ export  const ProductCrudTable = ({children}) => {
   const crudHook = useProductCrud()
 
   const { handleDelete, handleVisibility, setShowCrud, setCrudMode,
-    setCurrentItem, setCurrentStep, setExpandx }  = crudHook
+    setCurrentItem, setCurrentStep, setExpandx, step }  = crudHook
 
   const openEditModal = (item) => {
     setCrudMode(CRUD.UPDATE);

@@ -2,22 +2,22 @@ import { useEffect, useMemo, useState } from 'react';
 import ProductCard from './ProductCard.jsx';
 import {useListing} from "../../listing/hooks/useListing.js";
 
-function ProductSection({children, filterFn, count, className, borders}){
+function ProductSection({children, maxElems=1 ,filter, maxCols, className, borders}){
 
-    const { listings, setFilters } = useListing(count)
+    const { listings, setFilters } = useListing(maxCols)
 
     useEffect(()=>{
-      setFilters(filterFn)
-    },[filterFn])
+      setFilters(filter)
+    },[filter])
 
 
     
     const colClass = useMemo(() => {
-      if (count >= 4) return 'col-lg-3 col-md-4 col-sm-6 col-12'
+      if (maxCols >= 4) return 'col-lg-3 col-md-4 col-sm-6 col-12'
     
-      const fix = Math.floor(12 / count)
+      const fix = Math.floor(12 / maxCols)
       return `col-lg-${fix} col-md-${fix} col-sm-12 col-12`
-    }, [count])
+    }, [maxCols])
 
 
 
@@ -25,7 +25,7 @@ function ProductSection({children, filterFn, count, className, borders}){
       <div className={`${className} rounded  h-100 p-4`}>
         <div className='row'>
           {children}
-        {listings.map((p) => (
+        {listings.slice(0, maxElems).map((p) => (
             <ProductCard
               key={p.id}
               className={'border-0 m-0 p-0'} 

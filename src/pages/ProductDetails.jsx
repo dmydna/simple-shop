@@ -54,7 +54,7 @@ function ProductDetails() {
                           <Col sm={12} md={7}>
                              <CarouselImages
                                  order={true}
-                                 className="mx-0 my-3 p-4"
+                                 className="m-0"
                                  col={1}
                                  images={currentListing.images}>
                              </CarouselImages>
@@ -116,8 +116,8 @@ function ProductDetails() {
                        <Row className="g-0">
                           <ProductCarousel
                               className="border mx-0 my-3 p-4 island"
-                              filterFn={{ categories : [currentListing.category] }}
-                              col={4}
+                              filter={{ categories : [currentListing.category] }}
+                              maxCols={4}
                               imgSize={140} >
                              <h3 className="fs-4 fw-medium pb-0 m-0 ">Productos similares</h3>
                              <Link to={`/productos?category=${currentListing.category}`}

@@ -6,13 +6,14 @@ import SearchLive from "../features/search/SearchLive.jsx";
 import DropdownCheck from "../components/common/DropdownCheck.jsx";
 import {useUIContext} from "../contexts/UIContext.jsx";
 import {CRUD} from "../utils/crud.js";
-import {step} from "../utils/ListingWizard.js";
 import {useProductContext} from "../features/product/context/ProductContext.jsx";
 import {useProductCrud} from "../features/product/context/ProductCrudContex.jsx";
 import ProductCrudTable from "../features/product/components/ProductCrudTable.jsx";
 import ProductFormCrud from "../features/product/components/ProductFormCrud.jsx";
 import "../styles/animations.css"
 import CrudHeader from "../components/common/CrudHeader.jsx";
+import {getVisibleSteps, step} from "../features/listing/hooks/wizardConfig.js";
+import {WizardProvider} from "../contexts/WisardContext.jsx";
 
 
 function ProductCrudNext() {
@@ -20,10 +21,11 @@ function ProductCrudNext() {
     const baseHook = useProductContext()
     const crudHook = useProductCrud()
 
+
     const {onHideFilter} =  useUIContext();
 
     const { setShowCrud, setCrudMode, setCurrentItem,
-    setCurrentStep, expandx, setExpandx }   = crudHook
+    setCurrentStep, expandx, setExpandx, crudMode}   = crudHook
     const { products, content, setFilters } = baseHook
 
 
@@ -51,6 +53,11 @@ function ProductCrudNext() {
     };
 
     return(
+        <WizardProvider
+            mode={crudMode}
+            getVisibleSteps={getVisibleSteps}
+            step={step}
+        >
             <Container fluid="xl" className="mt-4">
                 <Row className="g-0" md={4}>
                     <CrudHeader
@@ -97,6 +104,7 @@ function ProductCrudNext() {
                     <ToastContainer />
                 </Row>
             </Container>
+            </WizardProvider>
     )
 
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Img0 from "../assets/cubic.png";
 import Pagination from "../features/pagination/components/Pagination.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
@@ -8,22 +8,24 @@ import { listingDataList } from "./listingDataList.js";
 import { listingService } from '../features/listing/services/listingService.js';
 import {useListingContext} from "../features/listing/contexts/ListingContext.jsx";
 import {usePagination} from "../features/pagination/contexts/PaginationContext.jsx";
+import {FeedbackMessage} from "../components/common/FeedbackMessage.jsx";
 
 const ListingDev = () => {
 
 
-  const { currentItems, items,setItems, setPageSize, currentPage, setCurrentPage, totalPages } = usePagination;
+  const { currentItems, items, setItems, setPageSize,
+      currentPage, setCurrentPage, totalPages } = usePagination();
+    const {totalElements} = useListingContext()
 
 
   const [ listingDraftList, setListingDraftList ] = useState([]);
-  const [currentItem, setCurrentItem ] = useState();
-  const [loading, setLoading] = useState(false);
+  const [ currentItem, setCurrentItem ] = useState();
+  const [ loading, setLoading] = useState(false);
   const [isCreatingALL, setIsCreatingALL ] = useState(false)
 
   useEffect(() => {
     setListingDraftList(listingDataList);
     setPageSize(8)
-    setLoading(true)
     console.log(listingDraftList)
   },[items])
 
@@ -54,16 +56,20 @@ const ListingDev = () => {
     alert("Operacion exitosa!")
     setListingDraftList([]);
     setIsCreatingALL(false);
+    setItems([])
   }
 
   const handleSendAll = async () => {
-    const listingDataList = listingDraftList; 
+    const listingDataList = listingDraftList;
+    setLoading(true)
     try {
       await listingService.createBulk(listingDataList);
       handleDeleteAllDraft()
     } catch (error) {
       alert("Error creando item");
       console.error(error);
+    }finally{
+      setLoading(false)
     }
   }
 
@@ -78,99 +84,117 @@ const ListingDev = () => {
   }
 
 
+    const navigate = useNavigate();
+    const goToBack = () => {
+        navigate("/dashboard")
+    }
+    const error = 'Todo el contenido fue publicado con exito';
 
-  return (
-    <>
-    <Container className="mt-4">
-      
-    <div className="w-100 d-flex flex-wrap mt-2 mb-4">
-         <Link to={'/dashboard'} className={`text-decoration-none text-dark`} >
-         <i className="bi bi-chevron-left me-2 border p-2 me-3 rounded text-muted" 
-               style={{opacity: '.6', background: ''}}></i>
-         <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
+
+
+  return(
+      totalElements === 0 ? (
+          <>
+              <Container className="mt-4">
+
+                  <div className="w-100 d-flex flex-wrap mt-2 mb-4">
+                      <Link to={'/dashboard'} className={`text-decoration-none text-dark`} >
+                          <i className="bi bi-chevron-left me-2 border p-2 me-3 rounded text-muted"
+                             style={{opacity: '.6', background: ''}}></i>
+                          <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
             Dashboard
          </span>
-         </Link>
-         <span style={{lineHeight: '2.3rem'}} className="text-secondary">
+                      </Link>
+                      <span style={{lineHeight: '2.3rem'}} className="text-secondary">
           <b>Borradores</b> de publicaciones
          </span>
-    </div>
+                  </div>
 
-      
-      <Button variant="primary" onClick={toPublishAll} className="mb-5">
-        <i className="bi bi-plus-lg"></i>
-        <span className="ms-2">Publicar Todo</span>
-      </Button>
-
-      {/* <FilterBar  order="order-1" className="d-block"
-          items={products} 
-          filterDraft={filterDraft} 
-          onFilterDraft={setFilterDraft} 
-          onActiveFilters={setActiveFilters} 
-          onResetFilter={setResetFilter}>
-          <SearchLive 
-             items={products}
-             handleSearch={setSearch}
-          />
-      </FilterBar> */}
-      
-      <Table striped={true} hover={true}>
-        <thead className="d-none">
-          <tr>
-            <th></th>
-            <th style={{ width: '60%' }}>Nombre</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {(
-            currentItems?.map((item, index) => (
-              <tr style={{borderStyle: "hidden"}} key={index}>
-                <td>
-                  {item.id ? item.id : <img style={{opacity: '0.7999'}} width={55} src={Img0} /> } 
-                </td>
-                <td style={{ width: '60%', lineHeight: '55px' }}>{item.title}</td>
-                <td style={{ textAlign: "end", lineHeight: '55px'}}>
-
-                  {/* READ  */}
-
-                  <Button
-                    variant="outline-dark"
-                    size="sm"
-                    className="me-3 mb-1"
-                  >
-                    <i className="bi bi-eye"></i>
-                    <span className="ms-2 small">VER</span>
+                  <Button variant="primary" onClick={toPublishAll} className="mb-5">
+                      <i className="bi bi-plus-lg"></i>
+                      <span className="ms-2">Publicar Todo</span>
                   </Button>
 
-                  {/* CREATE */}
-                  
-                  <Button
-                    variant="dark"
-                    size="sm"
-                    onClick={() => toPublish(item)}
-                    className="me-3 mb-1"
-                  >
-                    <i className="bi bi-send-fill"></i>
-                    <span className="ms-2 small">PUBLICAR</span>
-                  </Button>
-                  
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </Table>
 
-      <Pagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalPages={totalPages}
-      />
 
-    </Container>
-    </>
-  );
+                  <Table striped={true} hover={true}>
+                      <thead className="d-none">
+                      <tr>
+                          <th></th>
+                          <th style={{ width: '60%' }}>Nombre</th>
+                          <th>Acciones</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {loading ? (
+                          // Mientras carga, mostramos una fila de carga elegante
+                          <tr>
+                              <td colSpan="3" className="text-center py-5">
+                                  <div className="spinner-border text-primary" role="status"></div>
+                                  <p className="mt-2">Cargando datos...</p>
+                              </td>
+                          </tr>
+                      ) : currentItems.length === 0 ? (
+                          <tr>
+                              <td colSpan="3" className="text-center">No hay items</td>
+                          </tr>
+                      ) : ( currentItems?.map((item, index) => (
+                              <tr style={{borderStyle: "hidden"}} key={index}>
+                                  <td>
+                                      {item.id ? item.id : <img style={{opacity: '0.7999'}} width={55} src={Img0} /> }
+                                  </td>
+                                  <td style={{ width: '60%', lineHeight: '55px' }}>{item.title}</td>
+                                  <td style={{ textAlign: "end", lineHeight: '55px'}}>
+
+                                      {/* READ  */}
+
+                                      <Button
+                                          variant="outline-dark"
+                                          size="sm"
+                                          className="me-3 mb-1"
+                                      >
+                                          <i className="bi bi-eye"></i>
+                                          <span className="ms-2 small">VER</span>
+                                      </Button>
+
+                                      {/* CREATE */}
+
+                                      <Button
+                                          variant="dark"
+                                          size="sm"
+                                          onClick={() => toPublish(item)}
+                                          className="me-3 mb-1"
+                                      >
+                                          <i className="bi bi-send-fill"></i>
+                                          <span className="ms-2 small">PUBLICAR</span>
+                                      </Button>
+
+                                  </td>
+                              </tr>
+                          ))
+                      )}
+                      </tbody>
+                  </Table>
+
+                  <Pagination
+                      currentPage={currentPage}
+                      setCurrentPage={setCurrentPage}
+                      totalPages={totalPages}
+                  />
+
+              </Container>
+          </>
+      ) : (
+    <FeedbackMessage
+        title="Contenido Publicado"
+        message={error}
+        icon="bi-patch-check"
+        actionLabel="volver a Dashboard"
+        onAction={goToBack}
+    />
+      )
+  )
+
 };
 
 

@@ -6,7 +6,8 @@ import { useListingContext } from "./ListingContext.jsx";
 import {usePanel} from "../../../contexts/usePanel.js";
 import {useFetch} from "../../../contexts/useFetch.jsx";
 import {useForm} from "../../../contexts/useForm.js";
-import {useWizard} from "../../../contexts/WisardContext.jsx";
+import {useWizard} from "../../wizardCrud/contexts/WisardContext.jsx";
+import {useListing} from "../hooks/useListing.js";
 
 
 export const ListingCrudContext = createContext(null)
@@ -14,15 +15,17 @@ export const ListingCrudContext = createContext(null)
 export function ListingCrudProvider({ children }){
 
     const { fetchData } = useListingContext();
+    const { setListingHash, listingHash, currentListing} = useListing();
     const { loading, setLoading, content ,setContent, error,setError} = useFetch()
     const [ showCrud, setShowCrud ] = useState(false);
     const [ crudMode, setCrudMode ] = useState("create");
-    const [ currentItem, setCurrentItem ] = useState({ title: "", description: "", precio:0.0, stock:0 });
+    const [ dataItem, setDataItem ] = useState({ });
     const [ editableFields, setEditableFields ] = useState({});
     const [ selectedFile, setSelectedFile ] = useState([]); // Para subir Imagenes.
     const [ isSelectedProduct, setIsSelectedProduct ] = useState(false)
     const { expandx, setExpandx } = usePanel()
-    const {formData, onChange} = useForm();
+    const { formData, onChange } = useForm();
+    const [ hashItem, setHashItem] = useState({});
 
 
     // Primer step segun modo
@@ -31,7 +34,7 @@ export function ListingCrudProvider({ children }){
 
     // On-change Current Item
     useEffect(()=>{
-        setCurrentItem(formData)
+        setDataItem(formData)
     },[formData])
 
 
@@ -40,7 +43,7 @@ export function ListingCrudProvider({ children }){
     const handleCreate = async () => {
         setLoading(true)
         setError(null)
-        const productData = currentItem;
+        const productData = dataItem;
         try {
             await listingService.createWithImage(productData, selectedFile)
             await fetchData();
@@ -69,21 +72,21 @@ export function ListingCrudProvider({ children }){
 
 
     const handleUpdate = async () => {
-        const id = currentItem.id;
+        const id = dataItem.id;
         setLoading(true)
         setError(null)
 
         const updatedData = {
-            ...currentItem,
-            productName: (currentItem.productName),
-            price: parseFloat(currentItem.price),
-            stock: parseInt(currentItem.stock, 10),
-            discountPercentage: parseFloat(currentItem.discountPercentage),
-            weight: parseInt(currentItem.weight, 10),
+            ...dataItem,
+            productName: (dataItem.productName),
+            price: parseFloat(dataItem.price),
+            stock: parseInt(dataItem.stock, 10),
+            discountPercentage: parseFloat(dataItem.discountPercentage),
+            weight: parseInt(dataItem.weight, 10),
         };
 
         try {
-            await listingService.update(id, updatedData);
+            await listingService.update(id, updatedData, selectedFile);
             await fetchData();
             handleCloseModal();
         } catch (err) {
@@ -122,17 +125,17 @@ export function ListingCrudProvider({ children }){
         setEditableFields({});
         setSelectedFile(null);
         setCrudMode(CRUD.CREATE);
-        setCurrentItem({});
+        setDataItem({});
     }
 
 
     const visibilityToggle = () => {
-        return currentItem.visibility == visibility.HIDDEN ?
+        return dataItem.visibility == visibility.HIDDEN ?
             visibility.PUBLIC : visibility.HIDDEN
     }
 
     const handleVisibility = async (item) => {
-        setCurrentItem(item)
+        setDataItem(item)
         const str_visibility = visibilityToggle();
         if (window.confirm("¿Seguro que quieres ocultar/mostrar este item?")) {
             try {
@@ -179,15 +182,24 @@ export function ListingCrudProvider({ children }){
                 handleCloseModal,
                 // FORM
                 handleVisibility,
-                currentItem,
+                dataItem,
+                setDataItem,
                 handleChange: onChange,
                 handleEnableEdit,
                 editableFields,
                 setEditableFields,
-                setCurrentItem,
                 isDisabledField,
                 selectedFile,
                 setSelectedFile,
+
+                currentListing,
+                setListingHash,
+                listingHash,
+                itemHash: listingHash,
+                setItemHash: setListingHash,
+                currentItem: currentListing,
+
+
                 // Panel
                 expandx, setExpandx,
                 isSelectedProduct, setIsSelectedProduct,

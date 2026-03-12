@@ -7,8 +7,8 @@ export function usePagination() {
 
     // usa pageable para NO repetir codigo.
     const { totalPages, setTotalPages, currentPage,
-        setCurrentPage, pageSize, setPageSize, totalItems,
-        setTotalItems} = usePageable();
+        setCurrentPage, pageSize, setPageSize, totalElements,
+        setTotalElements} = usePageable();
 
     // Paginador
     const [items, setItems] = useState([]);
@@ -18,7 +18,7 @@ export function usePagination() {
 
     useEffect(() => {
         setTotalPages(Math.ceil(items.length / pageSize));
-        setTotalItems(items.length)
+        setTotalElements(items.length)
     }, [items.length, pageSize]);
 
 
@@ -29,9 +29,10 @@ export function usePagination() {
             pageSize,
             setPageSize,
             setCurrentPage,
-            currentItems, 
-            totalItems,
-            totalPages,
+            currentItems,
+            totalElements,
+            setTotalElements,
+            totalPages
          })
 
 }

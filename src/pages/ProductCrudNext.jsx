@@ -13,7 +13,7 @@ import ProductFormCrud from "../features/product/components/ProductFormCrud.jsx"
 import "../styles/animations.css"
 import CrudHeader from "../components/common/CrudHeader.jsx";
 import {getVisibleSteps, step} from "../features/listing/hooks/wizardConfig.js";
-import {WizardProvider} from "../contexts/WisardContext.jsx";
+import {WizardProvider} from "../features/wizardCrud/contexts/WisardContext.jsx";
 
 
 function ProductCrudNext() {

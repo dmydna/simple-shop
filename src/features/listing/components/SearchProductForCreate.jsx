@@ -1,11 +1,16 @@
-import React, {useState} from "react";
-import ProductSearch from "./ProductSearch.jsx";
-import {useListingCrud} from "../contexts/ListingCrudContext.jsx";
+import React, { useEffect, useMemo, useState } from "react";
+import { Button, Form, InputGroup, Modal } from "react-bootstrap";
+import Img1 from '../../../assets/box.png';
+import { useListingCrud } from "../contexts/ListingCrudContext.jsx";
+import FormProductSearch from "./FormProductSearch.jsx";
 
-function StepWelcomeCreate({className}){
+
+
+function SearchProductForCreate({children, handleProductMode, className}) {
 
     const [selected, setSelected] = useState(false);
     const { setCurrentItem, currentItem } = useListingCrud()
+
     const handleSelect = (item) => {
         if(currentItem.id == item.id){
             setSelected(true)
@@ -17,7 +22,7 @@ function StepWelcomeCreate({className}){
         <div className={`w-100 pb-5 bg-listing-welcome ${className || ''}`}>
             <p className='fs-5 fw-semibold'> Selccionar un Producto </p>
 
-            <ProductSearch
+            <FormProductSearch
                 handleSelect={handleSelect}
                 handleCreate={() => setSelected(true)}
             >
@@ -26,10 +31,10 @@ function StepWelcomeCreate({className}){
                     className="mt-4 mb-2 bg-white">
                     Busca un producto para publicar
                 </p>
-            </ProductSearch>
+            </FormProductSearch>
 
         </div>
     )
 }
 
-export  default StepWelcomeCreate
+export default SearchProductForCreate;

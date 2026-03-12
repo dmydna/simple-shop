@@ -372,7 +372,6 @@ hr {
     z-index: 93;
 }
 
-
 @media (min-width: 1200px) { /* xl */
     .container-xl {
         /* padding-inline: 0!important; */
@@ -385,10 +384,7 @@ hr {
 @media (max-width: 1199.98px) { /* lg */ }
 @media (max-width: 991.98px)  { /* md */ }
 @media (max-width: 767.98px)  { /* sm */ 
-    .multi-col-dropdown-menu{
-        column-count: 2; 
-    } 
-
+    .multi-col-dropdown-menu{ column-count: 2; }
 }
 @media (max-width: 575.98px)  { /* xs */ 
 
@@ -401,14 +397,9 @@ hr {
 }
 
 
-/* En tu archivo style.css */
-.h4-5 {
-    font-size: calc(1.125rem + 0.15vw); /* Un punto medio entre h4 y h5 */
-}
+.h4-5 { font-size: calc(1.125rem + 0.15vw); }
 
 @media (min-width: 1200px) {
-    .h4-5 {
-        font-size: 1.375rem; /* Ajuste manual */
-    }
+    .h4-5 { font-size: 1.375rem; }
 }
 

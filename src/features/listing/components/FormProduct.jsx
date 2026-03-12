@@ -4,9 +4,10 @@ import { useListingCrud } from "../contexts/ListingCrudContext.jsx";
 import { CRUD } from "../../../utils/crud.js";
 
 
-function StepProductos({children, className}){
+function FormProducts({children, className}){
 
-    const {currentItem, handleChange, modalMode, isDisabledField, handleEnableEdit, editableFields} = useListingCrud();
+    const {dataItem, handleChange, modalMode,
+      isDisabledField, handleEnableEdit, editableFields} = useListingCrud();
 
     return (
         <>
@@ -27,7 +28,7 @@ function StepProductos({children, className}){
                     type="text"
                     placeholder="Ingrese nombre"
                     name="productName"
-                    value={currentItem.productName || undefined}
+                    value={dataItem.productName || undefined}
                     onChange={handleChange}
                     disabled={isDisabledField("productName", true)}
                     />
@@ -63,7 +64,7 @@ function StepProductos({children, className}){
                       type="text"
                       placeholder="Ingrese marca"
                       name="brand"
-                      value={currentItem.brand}
+                      value={dataItem.brand}
                       onChange={handleChange}
                       disabled={isDisabledField("brand", true)}
                       />
@@ -99,7 +100,7 @@ function StepProductos({children, className}){
                       type="text"
                       placeholder="Ingrese sku"
                       name="sku"
-                      value={currentItem.sku}
+                      value={dataItem.sku}
                       onChange={handleChange}
                       disabled={isDisabledField("sku", true)}
                       />
@@ -138,7 +139,7 @@ function StepProductos({children, className}){
                       rows={3}
                       placeholder="Ingrese peso"
                       name="stock"
-                      value={currentItem.stock}
+                      value={dataItem.stock}
                       onChange={handleChange}
                       disabled={isDisabledField("stock", true)}
                       />
@@ -174,7 +175,7 @@ function StepProductos({children, className}){
                       rows={3}
                       placeholder="Ingrese peso"
                       name="weight"
-                      value={currentItem.weight}
+                      value={dataItem.weight}
                       onChange={handleChange}
                       disabled={isDisabledField("weight", true)}
                       />
@@ -212,7 +213,7 @@ function StepProductos({children, className}){
                   type="text"
                   placeholder="Ingrese categoria"
                   name="category"
-                  value={currentItem.category}
+                  value={dataItem.category}
                   onChange={handleChange}
                   disabled={isDisabledField("category", true)}
                   />
@@ -239,4 +240,4 @@ function StepProductos({children, className}){
           </>
     )
 }
-export default StepProductos
+export default FormProducts

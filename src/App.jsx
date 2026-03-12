@@ -32,7 +32,7 @@ import {TagsList} from "./features/crud/TagsList.jsx";
 import Page404NotFound from "./pages/Page404NotFound.jsx";
 import {listingDataList} from "./dev/listingDataList.js";
 import ListingCrudNext from "./pages/ListingCrudNext.jsx";
-import ProductSearch from "./features/listing/components/ProductSearch.jsx";
+import FormProductSearch from "./features/listing/components/FormProductSearch.jsx";
 import ProductCrudTable from "./features/product/components/ProductCrudTable.jsx";
 import ProductCrudNext from "./pages/ProductCrudNext.jsx";
 
@@ -111,7 +111,7 @@ function App() {
                 </div>
             </FormCreater>} />
             <Route path="/test/product" element={
-                <ProductSearch />
+                <FormProductSearch />
             } />
 
           <Route path="/productos/category/:category" element={
@@ -156,10 +156,12 @@ function App() {
              </> 
             } 
           />
+            <Route path="/dashboard/dev" element={
+                <ListingDev />
+            }
+            />
             <Route path="/dashboard/product" element={
-                <>
                     <ProductCrudNext />
-                </>
             }
             />
           <Route path="/dashboard/clients" element={ 

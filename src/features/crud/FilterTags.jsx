@@ -1,6 +1,6 @@
 import {Badge, Col} from "react-bootstrap";
 import React from "react";
-import {useUIContext} from "../../contexts/UIContext.jsx";
+import { useUIContext } from "../../contexts/UIContext.jsx";
 
 export const FilterTags = ({className, style})  => {
 

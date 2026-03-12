@@ -108,6 +108,10 @@ background: conic-gradient(
     /*overflow: hidden; !* Evita scrolls raros durante la animación *!*/
 }
 
+.scale-in {
+    animation: scaleIn 0.9s;
+}
+
 .fade-in {
     /*animation: fadeIn 0.5s forwards;*/
     animation: fadeIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
@@ -149,6 +153,11 @@ background: conic-gradient(
         opacity: 1;
         transform: translateY(0) scale(1);
     }
+}
+
+@keyframes scaleIn {
+    0%   { transform:  scale(0.8); }
+    100% { transform: scale(1);}
 }
 
 

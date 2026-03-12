@@ -3,16 +3,16 @@ import { Form, InputGroup } from "react-bootstrap";
 import { useListingCrud } from "../contexts/ListingCrudContext.jsx";
 import { CRUD } from "../../../utils/crud.js";
 
-function StepDetails({children, className}){
+function FormDetails({children, className}){
 
-    const {currentItem, handleChange, crudMode,
+    const {dataItem, handleChange, crudMode,
     isDisabledField, editableFields, handleEnableEdit} = useListingCrud();
 
     return (
         <>
             {/* Detalles */}
             {children}
-            <Form.Group className={`mb-3 ${className || ''}`} controlId="formWarrantyInformation">
+            <Form.Group className={`${className || ''} mb-3`} controlId="formWarrantyInformation">
               <InputGroup size="xs" className="shadow-sm border rounded overflow-hidden pagination-input-group">
                 <InputGroup.Text className="fw-semibold bg-light border-0 text-muted px-3" style={{ fontSize: "0.95rem" }}>
                   Garantia
@@ -24,7 +24,7 @@ function StepDetails({children, className}){
                   type="text"
                   placeholder="Ingrese nombre"
                   name="warrantyInformation"
-                  value={currentItem.warrantyInformation}
+                  value={dataItem.warrantyInformation}
                   onChange={handleChange}
                   disabled={isDisabledField("warrantyInformation")}
                   />
@@ -58,7 +58,7 @@ function StepDetails({children, className}){
                   type="text"
                   placeholder="Ingrese nombre"
                   name="shippingInformation"
-                  value={currentItem.shippingInformation}
+                  value={dataItem.shippingInformation}
                   onChange={handleChange}
                   disabled={isDisabledField("shippingInformation")}
                   />
@@ -84,4 +84,4 @@ function StepDetails({children, className}){
 }
 
 
-export default StepDetails;
+export default FormDetails;

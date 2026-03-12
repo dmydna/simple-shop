@@ -175,16 +175,30 @@ export const listingService = {
     },
 
     // PUT: Actualiza producto por ID
-    update: async (id, listingData) => {
+    update: async (id, listingData, selectedFiles) => {
         const TOKEN = localStorage.getItem("token")
+        const formData = new FormData();
+
+        formData.append('data', new Blob([JSON.stringify(listingData)], {
+            type: 'application/json'
+        }));
+
+        if (selectedFiles.length !== 0) {
+            selectedFiles.forEach((file) => {
+                formData.append('files', file); // 'images' es el nombre que recibirá tu backend
+            });
+        }
+
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json',
+                // SOLO agregar el TOKEN.
                 'Authorization': `Bearer ${TOKEN}`
+                // Nota: no se agrega 'Content-Type', el navegador lo hara solo.
             },
-            body: JSON.stringify(listingData)
+            body: formData
         });
+
         if (!response.ok) throw new Error("Error al actualizar producto");
         return await response.json();
     },

@@ -4,9 +4,11 @@ import { useListingCrud } from "../contexts/ListingCrudContext.jsx";
 import { CRUD } from "../../../utils/crud.js";
 
 
-function StepPublication({children, className}) {
+function FormBasic({children, className}) {
 
-    const { currentItem, handleChange, modalMode, isDisabledField, editableFields,  handleEnableEdit } = useListingCrud()
+    const { dataItem, handleChange, modalMode,
+        isDisabledField, editableFields,  handleEnableEdit } = useListingCrud()
+
     return (
         <>
             {children}
@@ -22,7 +24,7 @@ function StepPublication({children, className}) {
                         type="text"
                         placeholder="Ingrese nombre"
                         name="title"
-                        value={currentItem.title}
+                        value={dataItem.title}
                         onChange={handleChange}
                         disabled={isDisabledField("title")}
                     />
@@ -58,7 +60,7 @@ function StepPublication({children, className}) {
                             rows={3}
                             placeholder="Ingrese un precio"
                             name="price"
-                            value={currentItem.price}
+                            value={dataItem.price}
                             onChange={handleChange}
                             disabled={isDisabledField("price")}
                         />
@@ -91,7 +93,7 @@ function StepPublication({children, className}) {
                             rows={3}
                             placeholder="Ingrese un Valor"
                             name="discountPercentage"
-                            value={currentItem.discountPercentage}
+                            value={dataItem.discountPercentage}
                             onChange={handleChange}
                             disabled={isDisabledField("discountPercentage")}
                         />
@@ -138,11 +140,11 @@ function StepPublication({children, className}) {
                     <Form.Control
                         spellCheck="false"
                         as="textarea"
-                        rows={7}
+                        rows={3}
                         placeholder="Ingrese descripción"
                         name="description"
                         className="border-0 rounded-0" // Quitamos bordes y redondeado interno
-                        value={currentItem.description}
+                        value={dataItem.description}
                         onChange={handleChange}
                         disabled={isDisabledField("description")}
                         style={{ boxShadow: 'none' }} // Evita el brillo azul doble al hacer foco
@@ -156,4 +158,4 @@ function StepPublication({children, className}) {
         </>
     )
 }
-export default StepPublication
+export default FormBasic

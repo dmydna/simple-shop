@@ -4,22 +4,24 @@ import { useListingContext } from '../contexts/ListingContext.jsx';
 import { useListingCrud } from '../contexts/ListingCrudContext.jsx';
 import CrudTable from "../../../components/common/CrudTable.jsx";
 import {CRUD} from "../../../utils/crud.js";
+import {useWizard} from "../../wizardCrud/contexts/WisardContext.jsx";
 
 
 export  const ListingCrudTable = ({children}) => {
 
     const baseHook = useListingContext()
     const crudHook = useListingCrud()
+    // const {setCurrentStep, step} = useWizard()
 
-    const { handleDelete, handleVisibility, setShowCrud, setCrudMode,
-        setCurrentItem, setCurrentStep, setExpandx, step }  = crudHook
+    const { setShowCrud, setCrudMode, setItemHash, setExpandx, setDataItem }  = crudHook
 
     const openEditModal = (item) => {
-        setCrudMode(CRUD.UPDATE);
-        setCurrentItem(item);
-        setShowCrud(true);
-        setExpandx(true);
-        setCurrentStep(step.OPTIONS_UPDATE)
+        setCrudMode(CRUD.UPDATE); //  cambia a modo editar de wizard
+        // setCurrentStep(step.OPTIONS_UPDATE) // primer step del modo editar
+        setItemHash(item?.hash); // <- hash de item actual
+        setDataItem(item);       // <- datos de item actual
+        setShowCrud(true);       // <- muestra wizard crud
+        setExpandx(true);        // <- animacion de wizard
     };
 
   return (
@@ -42,30 +44,11 @@ export  const ListingCrudTable = ({children}) => {
                   return (
                       <>  {/** Editar */}
                           <Button
-                              variant="outline-secondary"
+                              variant="border-0 ligth"
                               size="sm"
                               onClick={() => openEditModal(item)}
-                              className="me-3 mb-1 border"
                           >
-                              <i className="bi bi-pencil-square"></i>
-                          </Button>
-                          {/** Delete */}
-                          <Button
-                              variant="outline-secondary"
-                              size="sm"
-                              onClick={() => handleDelete(item.id)}
-                              className="me-3 mb-1 border"
-                          >
-                              <i className="bi bi-trash3"></i>
-                          </Button>
-                          {/** Visibility */}
-                          <Button
-                              variant="secondary"
-                              size="sm"
-                              onClick={() => handleVisibility(item)}
-                              className="mb-1 border"
-                          >
-                              <i className="bi bi-eye"></i>
+                              <i className="bi bi-three-dots-vertical h5"></i>
                           </Button>
 
                       </>

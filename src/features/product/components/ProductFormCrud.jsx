@@ -4,7 +4,7 @@ import React, {useState} from "react";
 
 import StepCreate from "./StepCreate.jsx";
 import {useProductCrud} from "../context/ProductCrudContex.jsx";
-import StepProductos from "../../listing/components/StepProduct.jsx";
+import FormProducts from "../../listing/components/FormProduct.jsx";
 import {CRUD} from "../../../utils/crud.js";
 import {Link} from "react-router-dom";
 

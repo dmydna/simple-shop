@@ -7,18 +7,19 @@ import {Link} from "react-router-dom";
 import {useListingCrud} from "../contexts/ListingCrudContext.jsx";
 
 
-function ProductSearch({ className, children, onSelect }) {
+function FormProductSearch({ className, children, onSelect }) {
 
     const { error, products, currentPage,setCurrentPage, totalPages,
         setFilters, filters ,totalElements, loading,
-        setCurrentFilter, fetchData } = useProduct()
+        setCurrentFilter, fetchData, content } = useProduct()
 
-    const {setIsSelectedProduct, setCurrentItem, currentItem} = useListingCrud()
+    const {setIsSelectedProduct, setDataItem, dataItem} = useListingCrud()
 
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState()
 
     const [selectedItem, setSelectedItem] = useState({})
+
     const selected = (item) => {
 
         // selecciona el item vacio para crear producto desde cero.
@@ -43,6 +44,15 @@ function ProductSearch({ className, children, onSelect }) {
         setShow(false)
     }
 
+    useEffect(()=>{
+        console.log('Products desde Search', products)
+    },[products])
+
+    useEffect(()=>{
+        console.log('SELECTED ITEM :::>',selectedItem)
+    },[selectedItem])
+
+
     const handleClick = (item) => {
         setSelectedItem(item)
         setIsSelectedProduct(true)
@@ -55,7 +65,7 @@ function ProductSearch({ className, children, onSelect }) {
             "weight": item?.weight,
             "category": item?.category
         }
-        setCurrentItem({...currentItem, ...safeItem})
+        setDataItem({...dataItem, ...safeItem})
     }
 
 
@@ -132,4 +142,4 @@ function ProductSearch({ className, children, onSelect }) {
   );
 }
 
-export default ProductSearch;
+export default FormProductSearch;

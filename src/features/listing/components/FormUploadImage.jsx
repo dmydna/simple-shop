@@ -5,16 +5,19 @@ import { listingService } from '../services/listingService.js';
 import { useListingCrud } from '../contexts/ListingCrudContext.jsx';
 import {useListingContext} from "../contexts/ListingContext.jsx";
 
-const StepUploadImage = ({ productId, title, className, multiple = true }) => {
-  const {selectedFile, setSelectedFile, currentItem} = useListingCrud();
+const FormUploadImage = ({ productId, title, className, multiple = true }) => {
+  const {selectedFile, setSelectedFile, currentItem, setDataItem, dataItem} = useListingCrud();
   const [preview, setPreview] = useState([]);
   const fileInputRef = useRef(null);
   const {fetchDataByHash} = useListingContext()
 
 
+  // actualizamos el preview con las imagenes del item
   useEffect(() => {
      setPreview(currentItem?.images || [])
+    setDataItem({...dataItem, "images": preview})
   }, [currentItem]);
+
 
   // Manejar el cambio del input
   const handleFileChange = (e) => {
@@ -34,7 +37,11 @@ const StepUploadImage = ({ productId, title, className, multiple = true }) => {
     
     setPreview(newPreview);
     setSelectedFile(newSelectedFiles);
-  
+
+    // Importante: actualizar lista de imagenes eliminados a enviar.
+    setDataItem({...dataItem,"images": newPreview})
+    console.log(dataItem);
+
     // Si borras todas las fotos, reseteamos el input físicamente
     if (newSelectedFiles.length === 0 && fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -94,11 +101,11 @@ const StepUploadImage = ({ productId, title, className, multiple = true }) => {
       )}
 
       {/* Usamos el Button de Bootstrap para mejor estética */}
-       <Button onClick={handleSubmit} variant="primary" >
+      {/* <Button onClick={handleSubmit} variant="primary" >
         Subir Imagen
-      </Button>
+      </Button> */}
     </Form>
   );
 };
 
-export default StepUploadImage;
+export default FormUploadImage;

@@ -11,8 +11,9 @@ export const useProduct = (initialSize = 8) => {
 
     const [productId, setProductId] = useState(null);
     const [currentProduct, setCurrentProduct] = useState({})
-    const {loading, setLoading, error, setError, content, setContent} = useFetch()
-    const {currentPage,setCurrentPage,setTotalElements,
+    const {loading, setLoading, error,
+        setError, content, setContent} = useFetch()
+    const {currentPage,setCurrentPage, setTotalElements,
         setTotalPages, totalPages,totalElements} = usePageable()
     const [ filters, setFilters ] = useState({})
 

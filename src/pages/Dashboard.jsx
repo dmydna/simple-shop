@@ -13,7 +13,7 @@ import { useListingContext } from "../features/listing/contexts/ListingContext.j
 
 const Dashboard = () => {
 
-    const {totalItems} = useListingContext()
+    const {totalElements} = useListingContext()
 
     return (
         <Container className="mt-4">
@@ -27,39 +27,39 @@ const Dashboard = () => {
            </div>
            <Row className={`mb-3 d-md-flex`}> 
              <CategoryItem 
-               className="border ps-0 bg-soft-primary"
+               className="border ps-0"
                category="your posts"
                image={Img1} 
                link={`/dashboard/listing`}
              />
              <CategoryItem 
                // variant="primary"
-               className="border bg-soft-primary"
+               className="border"
                category="your products"
                image={Img5} 
                link={`/dashboard/product`}
              />
              <CategoryItem 
                // variant="success"
-               className="border bg-soft-primary"
+               className="border"
                category="your clients"
                image={Img3} 
                link={`/dashboard/clients`}
              />
              <CategoryItem 
                // variant="dark"
-               className="border pe-0 bg-soft-primary"
+               className="border pe-0"
                category="your orders" 
                image={Img4} 
                link={`/dashboard/orders`}
              />
-             {totalItems == 0 ? (
+             {totalElements == 0 ? (
                 <CategoryItem 
                    // variant="dark"
-                   className="border pe-0 bg-soft-primary"
+                   className="border pe-0"
                    category="Dev Posts" 
                    image={Img6} 
-                   link={`/dashboard/draft`}
+                   link={`/dashboard/dev`}
                 />
              ) : ''}
 

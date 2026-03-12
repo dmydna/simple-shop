@@ -1,5 +1,5 @@
 // src/services/productService.js
-import {mapToURLSearchParams, BASE_URL ,TOKEN} from "../../../utils/config.js";
+import {mapToURLSearchParams, BASE_URL} from "../../../utils/config.js";
 
 const ENDPOINT = "api/products"
 
@@ -10,6 +10,7 @@ export const productService = {
     getPage : async ({ page = 0, size = 10, ...filters } = {}) => {
         // 1. Creamos un objeto plano para los parámetros
 
+        const TOKEN = localStorage.getItem("token")
 
         const cleanParams = new URLSearchParams();
 
@@ -52,6 +53,7 @@ export const productService = {
 
     // GET: Obtener un producto por ID
     getById: async (id) => {
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             headers: { 'Authorization': `Bearer ${TOKEN}` },
         });
@@ -61,6 +63,7 @@ export const productService = {
 
     // POST: Crear a partir de una lista producto
     createBulk: async (productDataList) => {
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/bulk`, {
             method: 'POST',
             headers: {
@@ -75,6 +78,7 @@ export const productService = {
 
     // PUT: Actualiza producto por ID
     update: async (id, productData) => {
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'PUT',
             headers: {
@@ -89,6 +93,7 @@ export const productService = {
 
     // DELETE: Eliminar un producto por ID
     delete: async (id) => {
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'DELETE',
             headers: {'Authorization': `Bearer ${TOKEN}`}

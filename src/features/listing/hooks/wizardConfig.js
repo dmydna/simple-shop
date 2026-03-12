@@ -1,4 +1,5 @@
 import {CRUD} from "../../../utils/crud.js";
+import {skipIfCreateMode, skipIfUpdateMode} from "../../wizardCrud/contexts/wizardUtils.js";
 
 export const step = Object.freeze({
     OPTIONS_CREATE: 0,
@@ -13,14 +14,12 @@ export const step = Object.freeze({
 export const wizardSteps = [
     // nota : se debe seguir el formato:
     // wizardSteps[step[x]] = { id: step[x], ... }
-    { id: step.OPTIONS_CREATE,     url: 'options_CREATE' ,
-        skipIf: (modalMode)=> modalMode === CRUD.UPDATE},
-    { id: step.OPTIONS_UPDATE,     url: 'options_UPDATE',
-        skipIf: (modalMode)=> modalMode === CRUD.CREATE },
-    { id: step.PRODUCT,            url: 'product' },
-    { id: step.PUBLICATION,        url: 'publication' },
-    { id: step.DETAILS,            url: 'details' },
-    { id: step.UPLOAD,             url: 'imageUpload' },
+    { id: step.OPTIONS_CREATE, url: 'options_CREATE', skipIf: skipIfUpdateMode },
+    { id: step.OPTIONS_UPDATE, url: 'options_UPDATE', skipIf: skipIfCreateMode },
+    { id: step.PRODUCT,        url: 'product' },
+    { id: step.PUBLICATION,    url: 'publication' },
+    { id: step.DETAILS,        url: 'details' },
+    { id: step.UPLOAD,         url: 'imageUpload' },
 ]
 
 

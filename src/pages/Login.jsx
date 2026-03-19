@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Alert, Card, Row } from "react-bootstrap";
 import React, { useContext, useEffect, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../features/auth/hooks/AuthContext.jsx";
 
-import LoginForm from "../components/login/LoginForm";
+import LoginForm from "../features/auth/components/LoginForm.jsx";
 
 
 function Login(){
@@ -18,7 +18,6 @@ function Login(){
     }, []);
 
 
-    if(isAuth) navigate('/perfil/admin');
 
     return (
     <Container fluid="xl">

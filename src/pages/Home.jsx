@@ -6,8 +6,8 @@ import HeroBanner from "../components/common/HeroBanner";
 import CardPromo from "../components/common/CardPromo";
 import CardFeature from "../components/common/CardFeature";
 import CouponModal from "../components/common/CouponModal";
-import ProductCarousel from "../components/product/ProductCarousel";
-import ProductSection from "../components/product/ProductSection";
+import ProductCarousel from "../features/product/components/ProductCarousel.jsx";
+import ProductSection from "../features/product/components/ProductSection.jsx";
 
 import Img1 from "../assets/lipstick.png";
 import Img2 from "../assets/dressing-table.png";
@@ -20,167 +20,201 @@ import Img8 from "../assets/discount.png"
 import Img9 from "../assets/customer-service.png"
 import Img10 from "../assets/online-store.png"
 import Img11 from "../assets/paper-bag.png"
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../features/auth/hooks/AuthContext.jsx";
 import BannerAds from "../components/common/BannerAds";
+import {useListingContext} from "../features/listing/contexts/ListingContext.jsx";
+import {FeaturesPlaceholder} from "../features/placeholder/FeaturesPlaceholder.jsx";
+import {DataHandler} from "../contexts/DataHandler.jsx";
 
 function Home() {
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, []);
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, []);
+
+    const {loading, totalItems, error, fetchData} = useListingContext();
+    const {isAuth} = useAuth()
 
 
-  const{isAuth} = useAuth()
 
-  useEffect(()=>{
-    const cuponElem = document.querySelector('#cupon');
-    cuponElem.addEventListener("click", ()=> {
-      isAuth ? setShowCupon(true) : {} 
-    })
-  },[document.onload])
+    const [showCupon, setShowCupon] = useState()
 
-  const [showCupon, setShowCupon] = useState()
-
-  return (
-  <>
-
-    {/** Features */}
-
-    <div className="bg-heaven">
-      <Container fluid="xl">
-       <Row className="g-4 py-3 mb-3">
-          <CardFeature
-            title='Compra Protegida'
-            image= {Img5} 
-            text='Podes devolver tu compra gratis'
-          />
-          <CardFeature
-            id={'cupon'}
-            title='Cupones'
-            image={Img8} 
-            text='Descubri los mejores descuentos'
-          />
-          <CardFeature
-            title='Envios Express'
-            image= {Img6} 
-            text='Recibi tu compra mas rapido'
-          />
-          <CardFeature
-            title='Tiendas oficiales'
-            image={Img4} 
-            text='Encontra tus marcas preferidas'
-          />
-       </Row>
-     </Container>
-   </div>
-
-     {/** Home Banner */}
-{/* 
-    <HeroBanner image={Img3} variant="white">
-      <h2> Increibles Descuentos </h2>
-      <h2> en <b>ropa de invierno</b> </h2>
-      <div className="d-flex align-items-center gap-2">
-      <p className="border rounded px-3 py-1 small bg-white" 
-         style={{transform: "translateY(28px)"}}>ver marcas</p> 
-      </div>
-    </HeroBanner> */}
-
-     {/** Banner ads */}
-
-    <Container fluid="xl" className={`mb-3`}>
-       <Row className="g-0">
-        <BannerAds 
-           className={"bg-color-heaven my-3 me-md-2 me-0"} 
-           image={Img10}
-           btnText={'ver ofertas'}
+    return (
+        <DataHandler
+            loading={loading}
+            onRetry={fetchData}
+            error={error}
+            placeholder={<FeaturesPlaceholder/>}
+            isEmpty={ totalItems === 0 }
         >
-           <h3> Increibles Descuentos </h3>
-           <h3> usando la <b>App</b> </h3>
-        </BannerAds>
-        <BannerAds 
-          image={Img3} 
-          className={"bg-wave-0 my-3 ms-md-2 ms-0"} 
-          btnText={'ver marcas'}
-        >
-            <h3> Temporada Invierno </h3>
-            <h3> con <b>precios congelados</b> </h3>
-        </BannerAds>
-       </Row>
-    </Container>
+            <>
 
-   <Container fluid="xl">
+                {/** Features */}
 
-      {/** Product Ilands */}
+                <div className="bg-heaven">
+                    <Container fluid="xl">
+                        <Row className="g-4 py-3 mb-3">
+                            <CardFeature
+                                title='Compra Protegida'
+                                image= {Img5}
+                                text='Podes devolver tu compra gratis'
+                            />
+                            <CardFeature
+                                id={'cupon'}
+                                title='Cupones'
+                                image={Img8}
+                                text='Descubri los mejores descuentos'
+                            />
+                            <CardFeature
+                                title='Envios Express'
+                                image= {Img6}
+                                text='Recibi tu compra mas rapido'
+                            />
+                            <CardFeature
+                                title='Tiendas oficiales'
+                                image={Img4}
+                                text='Encontra tus marcas preferidas'
+                            />
+                        </Row>
+                    </Container>
+                </div>
 
-      <Row className="g-0">
-        <ProductSection className="border p-4 my-3" filterFn={(p)=> p.category == "beauty"} count={4}>
-          <p className="fs-4 fw-medium pb-0 m-0">Lo mas visto</p>
-          <Link to={'/productos'} className="text-decoration-none fw-bold">ver mas</Link>
-        </ProductSection>
-      </Row>
-  
+                {/** Home Banner */}
+                {/*
+                <HeroBanner image={Img3} variant="white">
+                    <h2> Increibles Descuentos </h2>
+                    <h2> en <b>ropa de invierno</b> </h2>
+                    <div className="d-flex align-items-center gap-2">
+                        <p className="border rounded px-3 py-1 small bg-white"
+                            style={{transform: "translateY(28px)"}}>ver marcas</p>
+                    </div>
+                </HeroBanner> */}
 
-      <Row className="g-0"> 
-      <Col className="p-0 my-3" md={12} lg={4}>
-         <ProductSection className="border p-4 m-0 me-lg-3" filterFn={(p)=> p.category === "beauty"} count={1}>
-           <p className="fs-4 fw-medium pb-0 m-0 ">Oferton del día</p>
-           <Link to="/productos" className="text-decoration-none fw-bold">ver más</Link>
-         </ProductSection>
-       </Col>
+                {/** Banner ads */}
 
-       <Col className="p-0 my-3" md={12} lg={8}>
-         <ProductSection className="border p-4" filterFn={(p)=> p.category === "furniture"} count={3}>
-           <p className="fs-4 fw-medium pb-0 m-0 ">Para llevar más de uno</p>
-           <Link to="/productos" className="text-decoration-none fw-bold">ver más</Link>
-         </ProductSection>
-       </Col>
+                <Container fluid="xl" className={`mb-3`}>
+                    <Row className="g-0">
+                        <BannerAds
+                            className={"bg-color-heaven my-3 me-md-2 me-0"}
+                            image={Img10}
+                            btnText={'ver ofertas'}
+                        >
+                            <h3> Increibles Descuentos </h3>
+                            <h3> usando la <b>App</b> </h3>
+                        </BannerAds>
+                        <BannerAds
+                            image={Img3}
+                            className={"bg-wave-0 my-3 ms-md-2 ms-0"}
+                            btnText={'ver marcas'}
+                        >
+                            <h3> Temporada Invierno </h3>
+                            <h3> con <b>precios congelados</b> </h3>
+                        </BannerAds>
+                    </Row>
+                </Container>
 
-     </Row>
+                <Container fluid="xl">
 
-      
-      {/** Carousels  */}
+                    {/** Product Ilands */}
 
-  <Row className="g-0">
-    <ProductCarousel className="border mx-0 my-3 p-4" filterFn={(p)=> p.category == "beauty"} col={3} >
-       <h3 className="fs-4 fw-medium pb-0 m-0 ">Con envio gratis</h3>
-       <Link to={'/productos/category/groceries'} 
-         className="text-decoration-none fw-bold">
-         Ver mas
-       </Link>  
-    </ProductCarousel>
-  </Row>
-
-  <Row className="g-0">
-    <ProductCarousel className="border mx-0 my-3 p-4" filterFn={(p)=> p.discountPercentage >= 12} col={4}>
-      <h3 className="fs-4 fw-medium pb-0 m-0 ">Ofertas</h3>
-      <Link to={'/productos/category/groceries'} 
-        className="text-decoration-none fw-bold">
-        ver mas
-      </Link>  
-    </ProductCarousel>
-  </Row>
-
-  
-  {/** Card Promos */}
-
-  <Row className="g-0">
-    <CardPromo className="my-3 me-md-1 me-0" Img={Img1} variant="primary" to={'/productos/category/beauty'} cta="comprar ahora">
-        <p className="mb-1">6 cuotas sin interés</p>
-        <p className="h5 fw-bold mb-1">HASTA 40% OFF EN</p>
-        <p className="h5 fw-bold">PERFUMES Y BELLEZA</p>
-    </CardPromo>
-    <CardPromo className="my-3 ms-md-1 ms-0" Img={Img2} variant="success" to={'/productos/category/furniture'} cta="ver ofertas">
-       <p className="mb-1">6 cuotas sin interés</p>
-       <p className="h5 fw-bold mb-1">2X1 EN ARTICULOS</p>
-       <p className="h5 fw-bold">PARA EL HOGAR</p>
-    </CardPromo>
-  </Row>
+                    <Row className="g-0">
+                        <ProductSection
+                            maxElems={4}
+                            maxCols={4}
+                            className="border p-4 my-3 island"
+                            filter={{ categories : ["fragrances"] }}
+                        >
+                            <p className="fs-4 fw-medium pb-0 m-0">Lo mas visto</p>
+                            <Link to={'/productos'} className="text-decoration-none fw-bold">ver mas</Link>
+                        </ProductSection>
+                    </Row>
 
 
-    </Container>
-    <CouponModal show={showCupon} onHide={setShowCupon}/>
-    </>
-  );
+                    <Row className="g-0">
+                        <Col className="p-0 my-3" md={12} lg={4}>
+                            <ProductSection
+                                maxCols={1}
+                                maxElems={1}
+                                className="border p-4 m-0 me-lg-3 island"
+                                filter={{ tags : ["vegetables"] }}
+                            >
+                                <p className="fs-4 fw-medium pb-0 m-0 ">Oferton del día</p>
+                                <Link to="/productos" className="text-decoration-none fw-bold">ver más</Link>
+                            </ProductSection>
+                        </Col>
+
+                        <Col className="p-0 my-3" md={12} lg={8}>
+                            <ProductSection
+                                maxCols={3}
+                                maxElems={3}
+                                className="border p-4 island"
+                                filter={{ categories : ["furniture"] }}
+                            >
+                                <p className="fs-4 fw-medium pb-0 m-0 ">Para llevar más de uno</p>
+                                <Link to="/productos" className="text-decoration-none fw-bold">ver más</Link>
+                            </ProductSection>
+                        </Col>
+
+                    </Row>
+
+
+                    {/** Carousels  */}
+
+                    <Row className="g-0">
+                        <ProductCarousel
+                            className="border mx-0 my-3 p-4 island"
+                            filter={{ categories : ["furniture"] }}
+                            maxCols={3}
+                        >
+                            <h3 className="fs-4 fw-medium pb-0 m-0 ">Con envio gratis</h3>
+                            <Link to={'/productos?category=groceries'}
+                                  className="text-decoration-none fw-bold">
+                                Ver mas
+                            </Link>
+                        </ProductCarousel>
+                    </Row>
+
+
+                    <Row className="g-0">
+                        <ProductCarousel
+                            className="border mx-0 my-3 p-4 island"
+                            filter={{ categories : ["beauty"] }}
+                            maxCols={4}
+                            maxElems={4}>
+                            <h3 className="fs-4 fw-medium pb-0 m-0 ">Ofertas</h3>
+                            <Link to={'/productos?category=groceries'}
+                                  className="text-decoration-none fw-bold">
+                                ver mas
+                            </Link>
+                        </ProductCarousel>
+                    </Row>
+
+
+                    {/** Card Promos */}
+
+                    <Row className="g-0">
+                        <CardPromo className="my-3 me-md-1 me-0" Img={Img1} variant="primary" to={'/productos/category/beauty'} cta="comprar ahora">
+                            <p className="mb-1">6 cuotas sin interés</p>
+                            <p className="h5 fw-bold mb-1">HASTA 40% OFF EN</p>
+                            <p className="h5 fw-bold">PERFUMES Y BELLEZA</p>
+                        </CardPromo>
+                        <CardPromo className="my-3 ms-md-1 ms-0" Img={Img2} variant="success" to={'/productos/category/furniture'} cta="ver ofertas">
+                            <p className="mb-1">6 cuotas sin interés</p>
+                            <p className="h5 fw-bold mb-1">2X1 EN ARTICULOS</p>
+                            <p className="h5 fw-bold">PARA EL HOGAR</p>
+                        </CardPromo>
+                    </Row>
+
+
+                </Container>
+            </>
+            <CouponModal show={showCupon} onHide={setShowCupon}/>
+
+        </DataHandler>
+
+
+    )
+
 }
 
 export default Home;

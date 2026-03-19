@@ -3,54 +3,60 @@ import { Row } from "react-bootstrap";
 import { useMatch } from "react-router-dom";
 import CategoryItem from "./CategoryItem";
 
-import { useListings } from "../../contexts/ListingContext";
+import { useListingContext } from "../../features/listing/contexts/ListingContext.jsx";
 import { useUIContext } from "../../contexts/UIContext";
 import Img3 from "../../assets/dressing-table.png";
 import Img4 from '../../assets/grocery.png';
 import Img1 from "../../assets/lipstick.png";
 import Img2 from '../../assets/perfume.png';
-
+import { category } from "../../utils/posts.js";
 
 function CategoryNav(){
 
     const categoryMatch = useMatch("/productos/category/:category");
     const searchMatch = useMatch("/productos/search/:product");
     const {showFilter} = useUIContext()
-    const {products} = useListings()
+    const {listings, setFilters} = useListingContext()
 
-    const  categories = useMemo(()=>(
-      [...new Set(products.map(p => p.category))]
-    ),[products])
+
+    const handleClick = (category) => {
+      setFilters({ page: 0, categories : [category] })
+    }
+  
     
     
     return(
-       <Row className={`mb-3 d-none  ${showFilter ? 'd-md-flex' : ''}`}> 
+       <Row className={`mb-3  ${showFilter ? 'd-md-flex' : ''}`}> 
         <CategoryItem 
           className="border ps-0"
-          category={categories[0]} 
           image={Img1} 
-          link={`/productos/category/${categories[0]}`}
+          category={category.BEAUTY} 
+          link={`/productos?category=${category.BEAUTY}`}
+          handleClick={() => handleClick(category.BEAUTY)}
         />
         <CategoryItem 
           // variant="primary"
           className="border"
-          category={categories[1]} 
           image={Img2} 
-          link={`/productos/category/${categories[1]}`}
+          category={category.FRAGRANCE} 
+          link={`/productos?category=${category.FRAGRANCE}`}
+          handleClick={() => handleClick(category.FRAGRANCE)}
         />
         <CategoryItem 
           // variant="success"
           className="border"
-          category={categories[2]} 
           image={Img3} 
-          link={`/productos/category/${categories[2]}`}
+          category={category.FURNITURE} 
+          link={`/productos?category=${category.FURNITURE}`}
+          handleClick={() => handleClick(category.FURNITURE)}
         />
         <CategoryItem 
           // variant="dark"
           className="border pe-0"
-          category={categories[3]} 
           image={Img4} 
-          link={`/productos/category/${categories[3]}`}
+          category={category.GROCERIES} 
+          link={`/productos?category=${category.GROCERIES}`}
+          handleClick={() => handleClick(category.GROCERIES)}
         />
       </Row>
          

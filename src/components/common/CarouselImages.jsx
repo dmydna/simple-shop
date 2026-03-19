@@ -13,14 +13,14 @@ function CarouselImages({images, children, col, className, order=false}) {
 
   return (
 
-    <div className={`row ${className} rounded  h-100`}>
-      <div className={`col-12 d-flex justify-content-${order ? 'center' : 'between'}  order-${order ? 2 : 1}`}>
+    <div className={`row ${className}  position-relative rounded  h-100`}>
+      <div className={`position-absolute bottom-0 col-12 d-flex justify-content-${order ? 'center' : 'between'}  order-${order ? 2 : 1}`}>
         <div>
          {children} {/* header */}
         </div>
           {/* carrousel dots */}
-          <div className="d-flex justify-content-center mt-3 gap-2">
-          {images.length > 1 && images.map((g, i) => (
+          <div className="d-flex justify-content-center mt-3 gap-2 ">
+          {images && images.length > 1 && images.map((g, i) => (
             <Button
               key={i}
               variant={i === index ? 'primary' : 'outline-secondary'}
@@ -33,11 +33,11 @@ function CarouselImages({images, children, col, className, order=false}) {
         </div>
       </div>
       
-    {images.length > 1 && 
+    {images?.length > 1 &&
     <Carousel className={`col-12 order-${order ? 1 : 2}`}
     indicators={false} variant="dark" activeIndex={index} onSelect={handleSelect}>
-      {images.map((img, index)=>(
-          <Carousel.Item>
+      {images?.map((img, index)=>(
+          <Carousel.Item key={index}>
           <div className=" d-flex justify-content-around"> 
               <img src={img} height={300} />
           </div>
@@ -45,7 +45,7 @@ function CarouselImages({images, children, col, className, order=false}) {
       ))}
      </Carousel>
     }
-    {images.length == 1 && 
+    {images?.length == 1 &&
       <div className=" d-flex justify-content-around"> 
           <img src={images[0]} height={300} />
       </div>

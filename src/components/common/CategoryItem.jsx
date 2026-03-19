@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function CategoryItem({category, image, link, className, variant}){
+function CategoryItem({category, image, filter, link, className, variant, handleClick}){
 
 
     return (
@@ -18,7 +18,7 @@ function CategoryItem({category, image, link, className, variant}){
               <div className={`d-flex flex-wrap rounded overflow-hidden`}>
                 <div style={{width : 100,height: 'auto'}} className="p-3  border-end" >
                   <Card.Img 
-                   style={{ objectFit: 'contain', width : 60,height: 'auto', filter: 'hue-rotate(327deg)' }}
+                   style={{ objectFit: 'contain', width : 60,height: 'auto', filter: `${filter}` }}
                    className="mx-auto d-block"
                    src={image} />
                 </div>
@@ -31,7 +31,8 @@ function CategoryItem({category, image, link, className, variant}){
                     className={`d-block text-uppercase small text-decoration-none 
                         ${!!variant ? '' : 'hover-link'} 
                         text-center fw-medium  h-100`}
-                    to={link} >
+                    to={link}
+                    onClick={handleClick} >
                       {category}
                     </Card.Title>
                   </Card.Body>

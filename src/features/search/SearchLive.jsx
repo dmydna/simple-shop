@@ -1,0 +1,43 @@
+import React, { useEffect, useState } from "react";
+import { Button, InputGroup } from "react-bootstrap";
+
+function SearchLive({className, items, handleSearch, handleActive}) {
+  const [query, setQuery] = useState(""); 
+//   const {setSearch, clients} = useController();
+
+  useEffect(() => {
+      if (!query.trim()) {
+        handleSearch("");
+          return;
+      }
+      handleSearch(query);
+  }, [items, query]);
+
+  function handleChange(e) {
+      const value = e.target.value;
+      setQuery(value);
+      if(!value && handleActive) {
+          handleActive();
+      }
+  }
+
+  return (
+      <div className={`d-flex align-items-center my-2 ${className}`}>
+          <InputGroup className="border rounded shadow-sm">
+              <input
+                  type="text"
+                  placeholder="Buscar en el dashboard..."
+                  className="form-control border-0 no-focus"
+                  value={query}
+                  onChange={handleChange}
+              />
+              <Button 
+                  variant="light" 
+                  className="bi-search border-0 opacity-50"
+              />
+          </InputGroup>
+      </div>
+  );
+}
+
+export default SearchLive;

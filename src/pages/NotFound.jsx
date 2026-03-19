@@ -22,7 +22,7 @@ export default function NotFound(){
           <h4 className="fw-bold  text-uppercase text-center m-0 mt-4 page404">
             404
           </h4>
-          <div className="fw-bolder m-0 text-uppercase fs-4 pageNotFound">
+          <div className="fw-bolder m-0 text-uppercase fs-4 pageNotFoundMsg">
             <p className="m-0 p-0">Page</p>
             <p className="m-0 p-0">Not</p>  
             <p className="m-0 p-0">Found</p>
@@ -30,10 +30,10 @@ export default function NotFound(){
         </div>
 
         <Button style={{maxWidth:"300px"}} as={Link} to={'/productos'}  
-        className="col w-100 col-md-2 p-2 d-block mx-auto my-4" variant="primary"> 
+        className="col w-100 col-md-2 p-2 d-block mx-auto my-2" variant="outline-primary">
         <i className="bi bi-chevron-left"></i>
-        <b className="mx-2 text-uppercase fw-medium">
-          volver
+        <b className="mx-2 fw-bold">
+          Back to Homepage
         </b></Button>
       </div>
    </Container>

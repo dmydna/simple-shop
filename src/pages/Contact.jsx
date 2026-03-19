@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap';
-import ContactForm from '../components/common/ContactForm';
+import ContactForm from '../features/contact/ContactForm.jsx';
 
 
 function Contact() {

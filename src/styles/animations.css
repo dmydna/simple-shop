@@ -1,0 +1,168 @@
+.spaceman {
+    width: 250px;
+    height: auto;
+    /* Mantenemos el suavizado de bordes para la animación */
+    backface-visibility: hidden;
+
+    /* Aplicamos las tres dimensiones del movimiento */
+    animation:
+            space-spin 150s linear infinite,
+            space-float 124s ease-in-out infinite alternate;
+}
+
+/* 1. Giro Lento y Constante */
+@keyframes space-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 2. Flotación + Profundidad (Scale) */
+@keyframes space-float {
+    0% {
+        translate: 0 0;
+        scale: 1;
+        filter: drop-shadow(0 5px 15px rgba(255,255,255,0.1));
+    }
+    50% {
+        scale: 1.1; /* Se acerca al espectador */
+        filter: drop-shadow(0 20px 30px rgba(255,255,255,0.2));
+    }
+    100% {
+        translate: 15px -40px; /* Se desplaza hacia un lado y hacia arriba */
+        scale: 0.9; /* Se aleja en el espacio */
+        filter: drop-shadow(0 5px 10px rgba(255,255,255,0.05));
+    }
+}
+
+
+/*Loading borders*/
+
+
+/*.border-glow {*/
+/*    animation: border-pulsate 1.5s infinite ease-in-out;*/
+/*    border-radius: 100%;*/
+/*    border: 3px solid green;*/
+/*}*/
+
+
+.border-glow {
+    position: relative;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Corta el exceso del borde que gira */
+    background: #e0e0e0; /* Fondo base */
+}
+
+/* La "luz" que gira */
+.border-glow::before {
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    /* Crea el efecto de segmento giratorio */
+background: conic-gradient(
+        from 0deg,
+        #4caf50 0deg,      /* Empieza verde */
+        #4caf50 90deg,     /* Sigue verde hasta los 90 grados (un cuarto de círculo) */
+        transparent 90deg, /* Corte seco a transparente */
+        transparent 360deg
+    );
+    animation: rotate-border 1.5s linear infinite;
+}
+
+/* El círculo interno que tapa el centro y deja ver el borde */
+.border-glow::after {
+    content: "";
+    position: absolute;
+    inset: 3px; /* Este es el grosor de tu borde */
+    background: white; /* Color de fondo de tu app */
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.border-glow img {
+    width: calc(100% - 6px); /* Ajuste para que no tape el borde */
+    height: calc(100% - 6px);
+    border-radius: 50% !important;
+    object-fit: cover;
+    z-index: 2; /* Por encima de todo */
+}
+
+@keyframes rotate-border {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+
+/*Col expandx animation*/
+
+.col-transition {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /*overflow: hidden; !* Evita scrolls raros durante la animación *!*/
+}
+
+.scale-in {
+    animation: scaleIn 0.9s;
+}
+
+.fade-in {
+    /*animation: fadeIn 0.5s forwards;*/
+    animation: fadeIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+/* Filtro de desenfoque suave para la columna de fondo */
+.blur-background {
+    filter: blur(4px) grayscale(20%); /* Desenfoca y quita un poco de color */
+    pointer-events: none; /* Evita que el usuario haga clic accidentalmente atrás */
+    transition: filter 0.4s ease;
+}
+
+/* El contenedor del detalle con un fondo semi-transparente */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.85); /* Blanco con transparencia */
+    backdrop-filter: blur(10px); /* Desenfoque interno estilo iOS */
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+
+.rise-and-pop {
+    animation: risePop 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    transform-origin: center bottom; /* La escala nace desde abajo */
+}
+
+@keyframes risePop {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes scaleIn {
+    0%   { transform:  scale(0.8); }
+    100% { transform: scale(1);}
+}
+
+
+/*.border-glow img {*/
+/*   border-radius: 100%!important*/
+/*}*/
+
+

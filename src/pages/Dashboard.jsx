@@ -7,8 +7,13 @@ import Img2 from '../assets/delivery-time.png';
 import Img3 from "../assets/expend.png";
 import Img4 from '../assets/paper.png';
 import Img5 from "../assets/t-shirt.png"
+import Img6 from "../assets/draft.png"
+import { useListingContext } from "../features/listing/contexts/ListingContext.jsx";
+
 
 const Dashboard = () => {
+
+    const {totalElements} = useListingContext()
 
     return (
         <Container className="mt-4">
@@ -23,7 +28,7 @@ const Dashboard = () => {
            <Row className={`mb-3 d-md-flex`}> 
              <CategoryItem 
                className="border ps-0"
-               category="your listings"
+               category="your posts"
                image={Img1} 
                link={`/dashboard/listing`}
              />
@@ -32,7 +37,7 @@ const Dashboard = () => {
                className="border"
                category="your products"
                image={Img5} 
-               link={`/dashboard/products`}
+               link={`/dashboard/product`}
              />
              <CategoryItem 
                // variant="success"
@@ -48,6 +53,16 @@ const Dashboard = () => {
                image={Img4} 
                link={`/dashboard/orders`}
              />
+             {totalElements == 0 ? (
+                <CategoryItem 
+                   // variant="dark"
+                   className="border pe-0"
+                   category="Dev Posts" 
+                   image={Img6} 
+                   link={`/dashboard/dev`}
+                />
+             ) : ''}
+
            </Row>
         </Container>
     )

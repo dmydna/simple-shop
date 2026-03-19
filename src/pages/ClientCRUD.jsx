@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Button, Container, Form, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ClientTable from "../components/client/ClientTable.jsx";
-import ClientViewModal from "../components/client/ClientViewModal.jsx";
-import SearchLive from "../components/search/SearchLive.jsx";
-import { useClients } from "../contexts/ClientContext.jsx";
+import ClientTable from "../features/client/ClientTable.jsx";
+import ClientViewModal from "../features/client/ClientViewModal.jsx";
+import SearchLive from "../features/search/SearchLive.jsx";
+import { useClients } from "../features/client/ClientContext.jsx";
 import { useUIContext } from "../contexts/UIContext.jsx";
-import { clientService } from '../services/clientService.js';
+import { clientService } from '../features/client/clientService.js';
 
 
 const ClientCRUD = () => {
@@ -93,7 +93,7 @@ const ClientCRUD = () => {
           
         <div className="w-100 d-flex flex-wrap mt-2 mb-4">
             <Link to={'/dashboard'} className={`text-decoration-none text-dark`} >
-            <i class="bi bi-chevron-left me-2 border p-2 me-3 rounded text-muted" 
+            <i className="bi bi-chevron-left me-2 border p-2 me-3 rounded text-muted" 
                style={{opacity: '.6', background: ''}}></i>
             <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
                Dashboard

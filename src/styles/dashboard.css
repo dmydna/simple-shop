@@ -1,0 +1,49 @@
+
+
+.tableCrudCol{
+    width: 100%;
+    flex: 1 1;
+}
+
+.wizardCrudCol:not(.active) {
+    margin-left: -680px;
+    visibility: hidden;
+    opacity: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.wizardCrudCol{
+    width: 100%;
+    max-width: 680px;
+    margin-left: 0px;
+    transition:
+      margin-left ease .6s,
+      width ease .6s,
+      opacity ease 1s;
+}
+
+
+@media (min-width: 1200px)    { /* xl */ }
+@media (max-width: 1399.98px) { /* xl */ }
+@media (max-width: 1199.98px) { /* lg */ }
+@media (max-width: 991.98px)  { /* md */
+    .wizardCrudCol{
+        max-width:  100%;
+        transition:
+           margin-left ease .1s,
+           width ease .1s,
+           opacity ease .1s;
+    }
+    .tableCrudCol.active{
+        margin-left: -100%;
+        max-width: 100%;
+        opacity: 0;
+    }
+    .tableCrudCol{
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 767.98px)  { /* sm */ }

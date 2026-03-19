@@ -14,7 +14,7 @@ import FormDetails from "./FormDetails.jsx";
 import FormUploadImage from "./FormUploadImage.jsx";
 import React, {useMemo, useState} from "react";
 import {useListingCrud} from "../contexts/ListingCrudContext.jsx";
-import {getVisibleSteps, step} from "../hooks/wizardConfig.js";
+import { WIZARD_CONFIG } from "../hooks/wizardConfig.js";
 
 function ListingCrudWizard(){
 
@@ -34,16 +34,15 @@ function ListingCrudWizard(){
         <WizardCrud
             updateRef={ currentItem }
             mode={ crudMode }
-            getVisibleSteps={ getVisibleSteps }
-            step={ step }
+            steps={ WIZARD_CONFIG }
             show={ showCrud  }
             onCancel={ handleClose }
             onSubmit={ handleSubmit }
         >
-            <WizardItem eventKey={step.OPTIONS_CREATE}>
+            <WizardItem eventKey={0}>
                 <SearchProductForCreate />
             </WizardItem>
-            <WizardItem eventKey={step.OPTIONS_UPDATE}>
+            <WizardItem eventKey={1}>
                 <CrudAccordion defaultKey="0" currentItem={currentItem}>
                     <AccordionInfo
                         className='border-0 border-bottom'
@@ -59,9 +58,8 @@ function ListingCrudWizard(){
                     </AccordionDanger>
                 </CrudAccordion>
             </WizardItem>
-            <WizardCrud.Item eventKey={step.PUBLICATION}>
+            <WizardCrud.Item eventKey={2}>
                 <FormBasic  >
-                    <p className='fs-5 pb-3 fw-semibold'> Informacion Basica </p>
                     <p
                         style={{ opacity: '.5' }}
                         className="d-none my-4 small">
@@ -69,20 +67,19 @@ function ListingCrudWizard(){
                     </p>
                 </FormBasic>
             </WizardCrud.Item>
-            <WizardCrud.Item eventKey={step.PRODUCT}>
+            <WizardCrud.Item eventKey={3}>
                 <FormProducts>
-                    <p className='fs-5 fw-semibold'> Producto </p>
-                    {crudMode === CRUD.UPDATE &&
+                    {false && crudMode === CRUD.UPDATE &&
                         <Alert>
                             Para <b>editar</b> el producto <b>asociado</b> a esta publicacion
                             ve a la seccion correspondiente <b><Link to={'#'}>(*?)</Link></b>
                         </Alert> }
                 </FormProducts>
             </WizardCrud.Item>
-            <WizardCrud.Item eventKey={step.DETAILS}>
+            <WizardCrud.Item eventKey={4}>
                 <FormDetails/>
             </WizardCrud.Item>
-            <WizardCrud.Item eventKey={step.UPLOAD}>
+            <WizardCrud.Item eventKey={5}>
                 <FormUploadImage productId={currentItem.id} />
             </WizardCrud.Item>
         </WizardCrud>

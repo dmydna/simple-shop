@@ -1,6 +1,7 @@
 import {Button} from "react-bootstrap";
 import React from "react";
 import {useWizard} from "../contexts/WisardContext.jsx";
+import StepNavbar from "./StepNavbar.jsx";
 
 function WizardButtons({ configButtons, onCancel, onSubmit, prev, next }) {
 
@@ -12,11 +13,17 @@ function WizardButtons({ configButtons, onCancel, onSubmit, prev, next }) {
         isVisibleSubmitCreate,
         isDisabledContinue,
         isDisabledUpdate,
-        isDisabledCreate } = configButtons;
+        isDisabledCreate,
+        isVisibleStepNavbar,
+        show
+    } = configButtons;
+
+
 
     return (
         <>
-            <div className="mt-5 d-flex w-100 justify-content-between">
+        {show && (
+            <div className="mt-4 pt-3 d-flex w-100 justify-content-between">
 
                 { false && isVisibleCancel && (
                     <Button
@@ -25,7 +32,13 @@ function WizardButtons({ configButtons, onCancel, onSubmit, prev, next }) {
                         Cancelar
                     </Button>
                 )}
-                <div className="w-100 d-flex justify-content-center gap-3">
+
+                <div className="w-100 d-flex justify-content-between gap-3">
+
+                    { isVisibleStepNavbar && (
+                        <StepNavbar className="small" />
+                    )}
+
                     {isVisibleBack && (
                         <>
                             <Button
@@ -39,7 +52,7 @@ function WizardButtons({ configButtons, onCancel, onSubmit, prev, next }) {
                     { isVisibleContinue && (
                         <Button
                             disabled={isDisabledContinue}
-                            variant="outline-secondary border btn-sm rounded-3 w-25 p-2 px-3 rounded-4"
+                            variant="outline-secondary border btn-sm rounded-3 p-2 px-3 rounded-4"
                             onClick={ next }>
                             Continuar <i className={`bi bi-chevron-right`}></i>
                         </Button>
@@ -48,7 +61,7 @@ function WizardButtons({ configButtons, onCancel, onSubmit, prev, next }) {
                     { (isVisibleSubmitUpdate || isVisibleSubmitCreate) && (
                         <>
                             <Button
-                                className='border rounded-4 w-25'
+                                className='border rounded-4'
                                 variant={isDisabledUpdate || isDisabledCreate ?
                                     "outline-secondary" : "primary"}
                                 onClick={onSubmit}
@@ -60,7 +73,11 @@ function WizardButtons({ configButtons, onCancel, onSubmit, prev, next }) {
                         </>
                     )}
                 </div>
+
+
+
             </div>
+        )}
         </>
     )
 }

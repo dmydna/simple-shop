@@ -50,24 +50,7 @@ export  const ProductCrudTable = ({children}) => {
                   >
                     <i className="bi bi-pencil-square"></i>
                   </Button>
-                  {/** Delete */}
-                  <Button
-                      variant="outline-secondary"
-                      size="sm"
-                      onClick={() => handleDelete(item.id)}
-                      className="me-3 mb-1 border"
-                  >
-                    <i className="bi bi-trash3"></i>
-                  </Button>
-                  {/** Visibility */}
-                  <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => handleVisibility(item)}
-                      className="mb-1 border"
-                  >
-                    <i className="bi bi-eye"></i>
-                  </Button>
+
 
                 </>
             )

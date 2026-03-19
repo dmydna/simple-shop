@@ -1,7 +1,9 @@
 import { useState } from "react";
+import {CRUD} from "../utils/crud.js";
 
 export const useForm = (initialState = {}) => {
 
+    const [ selectedFile, setSelectedFile ] = useState([]); // Para subir Imagenes.
     const [formData, setFormData] = useState(initialState);
 
     const onResetForm = () => setFormData(initialState);
@@ -28,13 +30,14 @@ export const useForm = (initialState = {}) => {
             [name]: val
         });
     };
-
+    
     return {
         ...formData,
         formData,
         onChange,
         onResetForm,
         setFormData,
-        onValue
+        onValue,
+        selectedFile, setSelectedFile
     };
 };

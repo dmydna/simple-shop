@@ -10,7 +10,8 @@ function WizardNavigation({onSubmit, onClose}) {
     const { crudMode, dataItem, editableFields,
         isSelectedProduct } = useListingCrud()
 
-    const { mode, next,prev, currentStep, step, goTo, updateRef } = useWizard()
+    const { mode, next,prev, currentStep, step, goTo,
+        updateRef, firstStep, lastStep } = useWizard()
 
     // Vuelve al primer step cuando se cierra wizard
     useEffect(()=>{
@@ -40,13 +41,13 @@ function WizardNavigation({onSubmit, onClose}) {
     }, [crudMode, isSelectedProduct]);
 
     const isVisibleContinue =  useMemo(()=>{
-        if(mode !== CRUD.CREATE) return false
-        return currentStep >= 0 && currentStep !==  lastStepToCreate
-    },[currentStep, lastStepToCreate, crudMode])
+        if(crudMode !== CRUD.CREATE) return false
+        return currentStep !== lastStep
+    },[currentStep , crudMode, firstStep, lastStep])
 
     const isVisibleBack =  useMemo(()=>{
         return false;
-        return  crudMode !== CRUD.UPDATE;
+        // return  crudMode !== CRUD.UPDATE;
     },[currentStep, crudMode])
 
     const isVisibleCancel = useMemo (() => {
@@ -63,12 +64,26 @@ function WizardNavigation({onSubmit, onClose}) {
         return currentStep !== step.OPTIONS_UPDATE
     },[crudMode, currentStep, lastStepToUpdate])
 
+    const isVisibleStepNavbar = useMemo (()=>{
+        if(crudMode == CRUD.CREATE) return true
+        console.log('Cambio stepbar', currentStep !== firstStep && crudMode == CRUD.UPDATE )
+        if(crudMode == CRUD.UPDATE) return currentStep !== firstStep
+    },[currentStep, crudMode])
+
+    const show = useMemo(()=>{
+        if(crudMode === CRUD.CREATE) return true;
+        if(crudMode === CRUD.UPDATE) return currentStep !== firstStep;
+    },[currentStep])
+
+
 
     const config = {
         isVisibleBack, isVisibleCancel,
         isVisibleContinue, isDisabledContinue,
         isVisibleSubmitUpdate, isVisibleSubmitCreate,
-        isDisabledUpdate, isDisabledCreate
+        isDisabledUpdate, isDisabledCreate,
+        isVisibleStepNavbar,
+        show
     }
 
     return (

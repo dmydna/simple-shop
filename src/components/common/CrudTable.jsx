@@ -68,12 +68,12 @@ export  const CrudTable = ({children, crudHook, baseHook,  handleclick, classNam
                                                 {item?.name || item?.title}
                                             </p>
                                             <p className='text-muted small p-0 m-0'>
-                                                {   <>
+                                                {  item?.createdDate ?
+                                                    <>
                                                         <i className="bi bi-calendar3 me-2"></i>
                                                         {item?.createdDate.join('-')}
                                                     </>
-
-                                                    ||
+                                                        :
                                                     'id: ' + item?.id}
                                             </p>
                                         </div>

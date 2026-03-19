@@ -13,21 +13,23 @@ function DangerList() {
         <>
             <ul className="list-group list-group-flush">
 
-                <li className={`list-group-item`} >
-                    <Link className="simple-link"
-                          onClick={() => handleDelete(currentItem.id)}>
-                        <div className="item">
-                            <i className="bi bi-eye-fill fs-5 ps-0 p-2"></i>
-                            <span> Cambiar visibilidad </span>
-                        </div>
-                    </Link>
-                </li>
                 
                 <li className={`list-group-item`}>
                     <Link className="simple-link"
                           onClick={() => handleVisibility(currentItem)}>
                         <div className="item">
-                            <i className="bi bi-trash-fill fs-5 ps-0 p-2"></i>
+                            <i className="bi bi-eye fs-5 ps-0 p-2"></i>
+                            <span>Cambiar visibilidad </span>
+                        </div>
+                    </Link>
+                </li>
+
+
+                <li className={`list-group-item`} >
+                    <Link className="simple-link"
+                          onClick={() => handleDelete(currentItem.id)}>
+                        <div className="item">
+                            <i className="bi bi-trash fs-5 ps-0 p-2"></i>
                             <span> Eliminar </span>
                         </div>
                     </Link>

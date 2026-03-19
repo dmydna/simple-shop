@@ -1,9 +1,19 @@
 import {createContext, useContext, useEffect, useMemo, useState} from "react";
 import useWizardButtons from "../hooks/useWizardButtons.js";
-import {wizardSteps} from "../../listing/hooks/wizardConfig.js";
 import {CRUD} from "../../../utils/crud.js";
 
 
+export const stepIndex = (WIZARD_CONFIG) => Object.freeze(
+    WIZARD_CONFIG?.reduce((acc, curr, index) => {
+        acc[curr.key] = index;
+        return acc;
+    }, {})
+);
+
+// 3. Helper para obtener pasos visibles
+export const getVisibleSteps = (WIZARD_CONFIG, modalMode) => {
+    return WIZARD_CONFIG?.filter(s => !s.skipIf?.(modalMode)) || [];
+};
 
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -12,20 +22,25 @@ export const WizardContext = createContext(null)
 // Se hace uso de estaticos para evitar recursiones.
 // getVisible, step ...
 export const WizardProvider = (
-    { children, mode, getVisibleSteps, step, updateRef, show }) => {
+    { children, mode, steps, updateRef, show }) => {
 
     const navigationButtons = useWizardButtons()
     const [currentStep, setCurrentStep] = useState(1);
 
+    const step = useMemo(() => {
+        console.log(steps)
+        return stepIndex(steps)
+    },[steps] )
+
     const visibleSteps = useMemo(() => {
-        return getVisibleSteps(mode);
-    }, [getVisibleSteps, mode]);
+        console.log('VISIBLE STEPS: ', getVisibleSteps(steps, mode))
+        return getVisibleSteps(steps, mode);
+    }, [steps, mode]);
 
     // reinicia cuando cambia de item.
     useEffect(()=>{
-        console.log('VISIBLE STEPS: ', visibleSteps)
         if(visibleSteps.length !== 0)
-            setCurrentStep(visibleSteps[0].id);
+            setCurrentStep(step[visibleSteps[0].key]);
     },[updateRef, show])
 
 
@@ -36,26 +51,26 @@ export const WizardProvider = (
 
     // 3. Calculamos la navegación basándonos en ese filtro
     const navigation = useMemo(() => {
-        const currentIndex = visibleSteps.findIndex(s => s.id === currentStep);
+        const currentIndex = visibleSteps?.findIndex(s => step[s.key] === currentStep);
 
         return {
             next: () => {
                 const nextStep = visibleSteps[currentIndex + 1];
-                if (nextStep) setCurrentStep(nextStep.id);
+                if (nextStep) setCurrentStep(step[nextStep.key]);
             },
             prev: () => {
                 const prevStep = visibleSteps[currentIndex - 1];
-                if (prevStep) setCurrentStep(prevStep.id);
+                if (prevStep) setCurrentStep(step[prevStep.key]);
             },
             reset: () => {
                 if(visibleSteps.length !== 0)
-                    setCurrentStep(visibleSteps[0]);
+                    setCurrentStep(step[visibleSteps[0].key]);
             },
 
             firstStep: (visibleSteps.length === 0 ?
-                -1 : visibleSteps[0].id),
+                -1 : step[visibleSteps[0].key]),
             lastStep:  (visibleSteps.length === 0 ?
-                -1 : visibleSteps[visibleSteps.length - 1].id),
+                -1 : step[visibleSteps[visibleSteps.length - 1].key]),
             steps: visibleSteps,
             currentStepData: visibleSteps[currentIndex],// El objeto del paso actual
             goTo: (stepId) => setCurrentStep(stepId),
@@ -67,7 +82,7 @@ export const WizardProvider = (
 
     return (
         <WizardContext.Provider
-            value={{ ...navigation, mode, step, visibleSteps,
+            value={{ ...navigation, mode, step, visibleSteps, steps,
                 currentStep, setCurrentStep,
                 ...navigationButtons }}>
             {children}

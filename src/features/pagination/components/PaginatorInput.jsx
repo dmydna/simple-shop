@@ -29,7 +29,7 @@ function PaginationInput({currentPage, totalPages, irAPagina}){
             <Form.Control
             className="text-center border-0 fw-bold no-arrows"
             style={{ width: "50px", fontSize: "0.9rem", boxShadow: 'none' }}
-            value={inputPage ||1}
+            value={inputPage || 1}
             onChange={(e) => setInputPage(e.target.value)} // Permite borrar y escribir
             onBlur={handleSubmit} // Opcional: cambia de página al hacer click fuera
             />

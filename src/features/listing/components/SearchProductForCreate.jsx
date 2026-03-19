@@ -20,8 +20,6 @@ function SearchProductForCreate({children, handleProductMode, className}) {
 
     return (
         <div className={`w-100 pb-5 bg-listing-welcome ${className || ''}`}>
-            <p className='fs-5 fw-semibold'> Selccionar un Producto </p>
-
             <FormProductSearch
                 handleSelect={handleSelect}
                 handleCreate={() => setSelected(true)}
@@ -32,7 +30,6 @@ function SearchProductForCreate({children, handleProductMode, className}) {
                     Busca un producto para publicar
                 </p>
             </FormProductSearch>
-
         </div>
     )
 }

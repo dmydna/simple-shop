@@ -1,45 +1,44 @@
-import { useState } from 'react';
+import {useMemo, useState} from 'react';
+import {useFetch} from "../../contexts/useFetch.jsx";
+import {CRUD} from "../../utils/crud.js";
+import {useService} from "./useService.js";
+import {useForm} from "../../contexts/useForm.js";
 
-export const useCrud = (service, fetchData) => {
-    const [lock, setLock] = useState(false);
-    const [mode, setMode] = useState("CREATE");
-    const [currentItem, setCurrentItem] = useState({});
-    const [selectedFile, setSelectedFile] = useState(null);
+export const useCrud = (onUpdateElem) => {
+    
+    const [showCrud, setShowCrud] = useState(false);
+    const [crudMode, setCrudMode] = useState(CRUD.CREATE);
+    const { formData, setFormData, onChange,
+        selectedFile, setSelectedFile } = useForm({});
+
 
     // Gestores de Modo
     const openCreate = (initialData = {}) => {
-        setMode("CREATE");
-        setCurrentItem(initialData);
-        setLock(true);
+        setCrudMode(CRUD.CREATE);
+        setFormData(initialData);
+        setShowCrud(true);
     };
 
     const openEdit = (item) => {
-        setMode("UPDATE");
-        setCurrentItem(item);
-        setLock(true);
+        setCrudMode(CRUD.UPDATE);
+        setFormData(item);
+        setShowCrud(true);
+        onUpdateElem(item?.hash);
     };
 
     const close = () => {
-        setLock(false);
-        setCurrentItem({});
-        setSelectedFile(null);
+         setShowCrud(false)
+         setFormData({});
+         setSelectedFile(null);
     };
 
-    // Acciones Genéricas
-    const execute = async (action, ...args) => {
-        try {
-            await action(...args);
-            if (fetchData) await fetchData();
-            close();
-        } catch (error) {
-            console.error("Error en operación CRUD", error);
-            alert("Ocurrió un error");
-        }
-    };
-
+    
     return {
-        lock, mode, currentItem, setCurrentItem,
+        crudMode, setCrudMode,
+        openCreate, openEdit, close,
         selectedFile, setSelectedFile,
-        openCreate, openEdit, close, execute
+        showCrud, setShowCrud,
+        dataItem: formData, setDataItem: setFormData,
+        onChange
     };
 };

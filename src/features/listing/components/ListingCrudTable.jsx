@@ -17,11 +17,9 @@ export  const ListingCrudTable = ({children}) => {
 
     const openEditModal = (item) => {
         setCrudMode(CRUD.UPDATE); //  cambia a modo editar de wizard
-        // setCurrentStep(step.OPTIONS_UPDATE) // primer step del modo editar
         setItemHash(item?.hash); // <- hash de item actual
         setDataItem(item);       // <- datos de item actual
         setShowCrud(true);       // <- muestra wizard crud
-        setExpandx(true);        // <- animacion de wizard
     };
 
   return (

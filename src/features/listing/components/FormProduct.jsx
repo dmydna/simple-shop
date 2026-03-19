@@ -6,7 +6,7 @@ import { CRUD } from "../../../utils/crud.js";
 
 function FormProducts({children, className}){
 
-    const {dataItem, handleChange, modalMode,
+    const {dataItem, handleChange, crudMode,
       isDisabledField, handleEnableEdit, editableFields} = useListingCrud();
 
     return (
@@ -30,10 +30,10 @@ function FormProducts({children, className}){
                     name="productName"
                     value={dataItem.productName || undefined}
                     onChange={handleChange}
-                    disabled={isDisabledField("productName", true)}
+                    disabled={isDisabledField("productName")}
                     />
-                    {modalMode != CRUD.CREATE &&
-                     modalMode != CRUD.UPDATE && (
+                    {crudMode != CRUD.CREATE &&
+                     crudMode != CRUD.UPDATE && (
                     <InputGroup.Text
                     className="fw-semibold border-0 text-muted px-3"
                     style={{
@@ -66,10 +66,10 @@ function FormProducts({children, className}){
                       name="brand"
                       value={dataItem.brand}
                       onChange={handleChange}
-                      disabled={isDisabledField("brand", true)}
+                      disabled={isDisabledField("brand")}
                       />
-                      {modalMode != CRUD.CREATE &&
-                       modalMode != CRUD.UPDATE && (
+                      {crudMode != CRUD.CREATE &&
+                       crudMode != CRUD.UPDATE && (
                       <InputGroup.Text
                       className="fw-semibold border-0 text-muted px-3"
                       style={{
@@ -102,11 +102,11 @@ function FormProducts({children, className}){
                       name="sku"
                       value={dataItem.sku}
                       onChange={handleChange}
-                      disabled={isDisabledField("sku", true)}
+                      disabled={isDisabledField("sku")}
                       />
 
-                      {modalMode != CRUD.CREATE &&
-                       modalMode != CRUD.UPDATE && (
+                      {crudMode != CRUD.CREATE &&
+                       crudMode != CRUD.UPDATE && (
                       <InputGroup.Text
                         className="fw-semibold border-0 text-muted px-3"
                         style={{
@@ -141,12 +141,12 @@ function FormProducts({children, className}){
                       name="stock"
                       value={dataItem.stock}
                       onChange={handleChange}
-                      disabled={isDisabledField("stock", true)}
+                      disabled={isDisabledField("stock")}
                       />
-                      {modalMode != CRUD.CREATE &&
-                       modalMode != CRUD.UPDATE && (
+                      {crudMode != CRUD.CREATE &&
+                       crudMode != CRUD.UPDATE && (
                       <InputGroup.Text
-                        className={`${modalMode == CRUD.CREATE ? 'd-none' : ''} fw-semibold border-0 text-muted px-3`}
+                        className={`${crudMode == CRUD.CREATE ? 'd-none' : ''} fw-semibold border-0 text-muted px-3`}
                         style={{
                           fontSize: "0.95rem", 
                           backgroundColor: 'rgb(233, 236, 239)', 
@@ -177,12 +177,12 @@ function FormProducts({children, className}){
                       name="weight"
                       value={dataItem.weight}
                       onChange={handleChange}
-                      disabled={isDisabledField("weight", true)}
+                      disabled={isDisabledField("weight")}
                       />
-                      {modalMode != CRUD.CREATE &&
-                       modalMode != CRUD.UPDATE && (
+                      {crudMode != CRUD.CREATE &&
+                       crudMode != CRUD.UPDATE && (
                       <InputGroup.Text
-                        className={`${modalMode == CRUD.CREATE ? 'd-none' : ''} fw-semibold border-0 text-muted px-3`}
+                        className={`${crudMode == CRUD.CREATE ? 'd-none' : ''} fw-semibold border-0 text-muted px-3`}
                         style={{
                           fontSize: "0.95rem", 
                           backgroundColor: 'rgb(233, 236, 239)', 
@@ -215,10 +215,10 @@ function FormProducts({children, className}){
                   name="category"
                   value={dataItem.category}
                   onChange={handleChange}
-                  disabled={isDisabledField("category", true)}
+                  disabled={isDisabledField("category")}
                   />
-                  {modalMode != CRUD.CREATE &&
-                   modalMode != CRUD.UPDATE && (
+                  {crudMode != CRUD.CREATE &&
+                   crudMode != CRUD.UPDATE && (
                   <InputGroup.Text
                     className="fw-semibold border-0 text-muted px-3"
                     style={{

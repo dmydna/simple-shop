@@ -13,20 +13,20 @@ export function ProductCrudProvider({ children }){
     const [ showCrud, setShowCrud ] = useState(false);
     const [ crudMode, setCrudMode ] = useState("create");
     const [ productMode, setProductMode] = useState(null)
-    const [ currentItem, setCurrentItem ] = useState({ title: "", description: "", precio:0.0, stock:0 });
+    const [ dataItem, setDataItem ] = useState({ title: "", description: "", precio:0.0, stock:0 });
     const [ editableFields, setEditableFields ] = useState({});
     const [ selectedFile, setSelectedFile ] = useState([]); // Para subir Imagenes.
 
     const handleChange = (e) => {
         const { name, value, type } = e.target;
         const val = type === 'number' ? Number(value) : value;
-        setCurrentItem({ ...currentItem, [name]: val });
+        setDataItem({ ...dataItem, [name]: val });
     };
 
     //Esta función envía un nuevo item a la API usando POST, luego actualiza la lista de items y cierra el modal si todo sale bien.
     // Si ocurre un error, muestra una alerta y lo registra en la consola.
     const handleCreate = async () => {
-        const productData = currentItem;
+        const productData = dataItem;
         try {
             await productService.create(productData)
             await fetchData();
@@ -39,11 +39,11 @@ export function ProductCrudProvider({ children }){
 
 
     const handleUpdate = async () => {
-        const id = currentItem.id;
+        const id = dataItem.id;
         // const updatedData = currentItem;
 
         const updatedData = {
-            ...currentItem,
+            ...dataItem,
         };
 
         try {
@@ -85,17 +85,17 @@ export function ProductCrudProvider({ children }){
         setSelectedFile(null);
         setProductMode(mode.INIT);
         setModalMode(CRUD.CREATE);
-        setCurrentItem({});
+        setDataItem({});
     }
 
 
     const visibilityToggle = () => {
-        return currentItem.visibility == visibility.HIDDEN ?
+        return dataItem.visibility == visibility.HIDDEN ?
             visibility.PUBLIC : visibility.HIDDEN
     }
 
     const handleVisibility = async (item) => {
-        setCurrentItem(item)
+        setDataItem(item)
         const str_visibility = visibilityToggle();
         if (window.confirm("¿Seguro que quieres ocultar/mostrar este item?")) {
             try {
@@ -146,12 +146,12 @@ export function ProductCrudProvider({ children }){
                 handleCloseModal,
                 // FORM
                 handleVisibility,
-                currentItem,
+                currentItem: dataItem,
                 handleChange,
                 handleEnableEdit,
                 editableFields,
                 setEditableFields,
-                setCurrentItem,
+                setCurrentItem: setDataItem,
                 isDisabledField,
                 setProductMode,
                 productMode,

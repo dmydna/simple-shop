@@ -7,7 +7,7 @@ import WizardButtons from "./WizardButtons.jsx";
 
 function WizardCrud({
       children,
-      step,
+      steps,
       mode,
       show,
       getVisibleSteps,
@@ -18,7 +18,7 @@ function WizardCrud({
     return (
         <WizardProvider
             mode={mode}
-            step={step}
+            steps={steps}
             show={show}
             getVisibleSteps={getVisibleSteps}
             updateRef={updateRef}

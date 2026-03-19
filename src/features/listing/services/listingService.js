@@ -204,7 +204,7 @@ export const listingService = {
     },
 
     // DELETE: Eliminar un producto por ID
-    delete: async (id) => {
+    Delete: async (id) => {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'DELETE',

@@ -6,7 +6,12 @@ import {useWizard} from "../../wizardCrud/contexts/WisardContext.jsx";
 
 function EditList() {
 
-    const {setCurrentStep, step} = useWizard()
+    const {setCurrentStep, step, steps, visibleSteps} = useWizard()
+
+    const handleGetStepName = (key) => {
+        if (!steps || steps.length == 0) return
+        return steps[key]?.url;
+    }
 
     return (
         <>
@@ -16,7 +21,7 @@ function EditList() {
                     <span className="simple-link"
                           onClick={() => setCurrentStep(step.PUBLICATION)} >
                         <i className="bi bi-person-check fs-5 ps-0 p-2"></i>
-                        <span> Informacion Basica </span>
+                        <span> {handleGetStepName(step.PUBLICATION)} </span>
                     </span>
                 </li>
 
@@ -25,7 +30,7 @@ function EditList() {
                           onClick={() => setCurrentStep(step.PRODUCT)}>
                         <div className="item">
                             <i className="bi bi-box fs-5 ps-0 p-2"></i>
-                            <span> Detalles Técnicos y Descripción </span>
+                            <span> {handleGetStepName(step.PRODUCT)} </span>
                         </div>
                     </span>
                 </li>
@@ -34,7 +39,7 @@ function EditList() {
                           onClick={() => setCurrentStep(step.DETAILS)}>
                         <div className="item">
                             <i className="bi bi-bell fs-5 ps-0 p-2"></i>
-                            <span> Garantia y Envio </span>
+                            <span> {handleGetStepName(step.DETAILS)} </span>
                         </div>
                     </span>
                 </li>
@@ -42,7 +47,7 @@ function EditList() {
                     <span className="simple-link"
                           onClick={() => setCurrentStep(step.UPLOAD)}>
                         <i className="bi bi-image-fill fs-5 ps-0 p-2"></i>
-                        <span> Imagenes </span>
+                        <span> {handleGetStepName(step.UPLOAD)}  </span>
                     </span>
                 </li>
             </ul>

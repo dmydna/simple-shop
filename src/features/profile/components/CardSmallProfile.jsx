@@ -28,7 +28,7 @@ function CardSmallProfile({ name, image, children, className, imgSize }) {
 
             <Card.Body style={{lineHeight: '1px'}} className="rounded mt-3">
                 <Card.Title className='fs-5'>
-                    {name || "N/A"}
+                    { pofile.name || "N/A" }
                 </Card.Title>
                 <Card.Text>
                 <span className="text-secondary fs-6">

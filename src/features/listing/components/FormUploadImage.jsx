@@ -69,7 +69,6 @@ const FormUploadImage = ({ productId, title, className, multiple = true }) => {
       <div className='h4 mb-3'>{title}</div>
       
       <Form.Group className="mb-3">
-        <Form.Label style={{fontWeight: '500'}} >Selecciona una imagen</Form.Label>
         <Form.Control
           ref={fileInputRef}
           type="file" 

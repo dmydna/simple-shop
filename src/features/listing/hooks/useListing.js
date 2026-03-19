@@ -22,6 +22,7 @@ export const useListing = (initialSize = 8) => {
         nprogress.start();
         setLoading(true);
         setError(null)
+        console.log('FetchData current page', currentPage)
         try {
             // Enviamos TODO al backend
             const data = await listingService.getPage({

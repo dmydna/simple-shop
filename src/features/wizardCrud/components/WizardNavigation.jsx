@@ -71,6 +71,7 @@ function WizardNavigation({onSubmit, onClose}) {
     },[currentStep, crudMode])
 
     const show = useMemo(()=>{
+        if(currentStep == -1000) return false;
         if(crudMode === CRUD.CREATE) return true;
         if(crudMode === CRUD.UPDATE) return currentStep !== firstStep;
     },[currentStep])
@@ -86,9 +87,16 @@ function WizardNavigation({onSubmit, onClose}) {
         show
     }
 
+    const handleSubmit = () => {
+        goTo(-1000)  // <-- crud feedback
+        onSubmit()
+    }
+
+
     return (
         <WizardButtons
-            onSubmit={onSubmit}
+            show={show}
+            onSubmit={handleSubmit}
             onCancel={onClose}
             configButtons={config}
             next={next}

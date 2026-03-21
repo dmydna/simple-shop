@@ -4,6 +4,8 @@ import WizardBreadcrumb from "./WizardBreadcrumb.jsx";
 import WizardNavigation from "./WizardNavigation.jsx";
 import React from "react";
 import WizardButtons from "./WizardButtons.jsx";
+import WizardFeedback from "./WizardFeedback.jsx";
+import {useListingCrud} from "../../listing/contexts/ListingCrudContext.jsx";
 
 function WizardCrud({
       children,
@@ -13,7 +15,11 @@ function WizardCrud({
       getVisibleSteps,
       onCancel,
       onSubmit,
-      updateRef }) {
+      updateRef
+
+}) {
+
+    const {loading, error} = useListingCrud()
 
     return (
         <WizardProvider
@@ -28,6 +34,13 @@ function WizardCrud({
             onClose={onCancel}
         />
             {children}
+            <WizardCrud.Item eventKey={-1000}>
+                <WizardFeedback
+                    loading={loading}
+                    error={error}
+                    onAction={onCancel}
+                />
+            </WizardCrud.Item>
         <WizardNavigation
             onCancel={onCancel}
             onSubmit={onSubmit}

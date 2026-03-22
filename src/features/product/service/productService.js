@@ -10,6 +10,8 @@ export const productService = {
     getPage : async ({ page = 0, size = 10, ...filters } = {}) => {
         // 1. Creamos un objeto plano para los parámetros
 
+        console.log('\n --- GET PAGE PRODUCT --\n')
+
         const TOKEN = localStorage.getItem("token")
 
         const cleanParams = new URLSearchParams();
@@ -20,7 +22,7 @@ export const productService = {
         // 2. Agregamos los filtros dinámicamente
         mapToURLSearchParams(cleanParams, filters)
 
-        console.log("URL con Parametros:", cleanParams.toString());
+        console.log("-- URL con Parametros:", cleanParams.toString());
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}` , {
             headers: {'Authorization': `Bearer ${TOKEN}`},

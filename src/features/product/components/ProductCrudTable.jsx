@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import Pagination from '../../pagination/components/Pagination.jsx';
 import {Link} from "react-router-dom";
-import {useProductCrud} from "../context/ProductCrudContex.jsx";
-import {useProductContext} from "../context/ProductContext.jsx";
+import {useProductCrud} from "../contexts/ProductCrudContex.jsx";
+import {useProductContext} from "../contexts/ProductContext.jsx";
 import CrudTable from "../../../components/common/CrudTable.jsx";
 import {CRUD} from "../../../utils/crud.js";
 
@@ -12,15 +12,13 @@ export  const ProductCrudTable = ({children}) => {
   const baseHook = useProductContext()
   const crudHook = useProductCrud()
 
-  const { handleDelete, handleVisibility, setShowCrud, setCrudMode,
-    setCurrentItem, setCurrentStep, setExpandx, step }  = crudHook
+  const { setShowCrud, setCrudMode, setItemHash, dataItem ,setExpandx, setDataItem }  = crudHook
 
   const openEditModal = (item) => {
-    setCrudMode(CRUD.UPDATE);
-    setCurrentItem(item);
-    setShowCrud(true);
-    setExpandx(true);
-    setCurrentStep(step.OPTIONS_UPDATE)
+    setCrudMode(CRUD.UPDATE); //  cambia a modo editar de wizard
+    setItemHash(item?.id);   // <- hash de item actual
+    setDataItem(item);       // <- datos de item actual
+    setShowCrud(true);       // <- muestra wizard crud
   };
 
   return (
@@ -30,7 +28,7 @@ export  const ProductCrudTable = ({children}) => {
           baseHook={baseHook}
           handleclick={(item) =>openEditModal(item)}>
         {(key, item)=>{
-          if(key=='title'){
+          if(key=='name'){
             return (
                 <>
                   <p className="h5 my-4">
@@ -50,8 +48,6 @@ export  const ProductCrudTable = ({children}) => {
                   >
                     <i className="bi bi-pencil-square"></i>
                   </Button>
-
-
                 </>
             )
           }

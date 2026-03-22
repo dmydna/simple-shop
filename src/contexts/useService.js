@@ -1,18 +1,12 @@
 import {useMemo, useState} from "react";
-import {useFetch} from "../../contexts/useFetch.jsx";
-import {useListingContext} from "../listing/contexts/ListingContext.jsx";
+import {useFetch} from "./useFetch.jsx";
+import {useListingContext} from "../features/listing/contexts/ListingContext.jsx";
 
-export const useService = ({service, hook}) => {
-
-
-    const { fetchData, currentPage } = hook;
+export const useService = ({service, onSuccess, onError, onRefresh}) => {
 
 
     const {loading, setLoading, content ,
         setContent, error, setError} = useFetch()
-
-    const [succeeded, setSucceeded] = useState()
-    const [failed, setFailed]  = useState();
 
     const serviceCrud = useMemo(() => {
         const wrapper = {};
@@ -33,13 +27,13 @@ export const useService = ({service, hook}) => {
         setError(null)
         try {
             const result = await service[action](...args)
-            if (fetchData) await fetchData(currentPage, {});
-            if (succeeded) succeeded();
+            onSuccess?.(result);
+            onRefresh?.();
             return result;
-        } catch (error) {
-            setError(error)
-            if(failed) failed();
-            console.error("Error en operación CRUD", error);
+        } catch (err) {
+            setError(err);
+            onError?.(err);
+            throw err;
         } finally {
             setLoading(false)
         }

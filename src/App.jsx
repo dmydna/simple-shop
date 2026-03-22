@@ -16,24 +16,20 @@ import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import ListingCRUD from "./pages/ListingCRUD";
 import Login from "./pages/Login";
-import NotFound from "./pages/NotFound";
 import ProductDetails from "./pages/ProductDetails";
 import Products from "./pages/ProductList";
 import "./styles/index.css";
 import ListingDev from "./dev/ListingDev.jsx";
 import UserProfile from "./pages/UserProfile.jsx"
-import ProtectedRouteListing from "./components/common/ProtectedRouteListing.jsx";
 import Register from "./pages/Register.jsx";
 import ProtectedRouteAdmin from "./components/common/ProtectedRouteAdmin.jsx";
 import PageLoading from "./pages/PageLoading.jsx";
 import {FormCreater} from "./features/crud/FormCreater.jsx";
-import {Col} from "react-bootstrap";
 import {TagsList} from "./features/crud/TagsList.jsx";
 import Page404NotFound from "./pages/Page404NotFound.jsx";
 import {listingDataList} from "./dev/listingDataList.js";
 import ListingCrudNext from "./pages/ListingCrudNext.jsx";
 import FormProductSearch from "./features/listing/components/FormProductSearch.jsx";
-import ProductCrudTable from "./features/product/components/ProductCrudTable.jsx";
 import ProductCrudNext from "./pages/ProductCrudNext.jsx";
 
 

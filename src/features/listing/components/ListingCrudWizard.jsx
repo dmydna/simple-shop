@@ -18,8 +18,9 @@ import { WIZARD_CONFIG } from "../hooks/wizardConfig.js";
 
 function ListingCrudWizard(){
 
-    const { crudMode, currentItem, setExpandx,
-        handleUpdate, handleCreate, showCrud } = useListingCrud()
+    const crudHook = useListingCrud()
+    const {crudMode, handleUpdate, handleCreate,
+        setExpandx, showCrud, currentItem} = crudHook
 
 
     const handleSubmit = () => {
@@ -32,18 +33,17 @@ function ListingCrudWizard(){
 
     return (
         <WizardCrud
-            updateRef={ currentItem }
-            mode={ crudMode }
             steps={ WIZARD_CONFIG }
-            show={ showCrud  }
             onCancel={ handleClose }
             onSubmit={ handleSubmit }
+            crudHook={ crudHook }
         >
             <WizardItem eventKey={0}>
                 <SearchProductForCreate />
             </WizardItem>
             <WizardItem eventKey={1}>
-                <CrudAccordion defaultKey="0" currentItem={currentItem}>
+                <CrudAccordion
+                    defaultKey="0" currentItem={currentItem}>
                     <AccordionInfo
                         className='border-0 border-bottom'
                         eventKey="0" >Information

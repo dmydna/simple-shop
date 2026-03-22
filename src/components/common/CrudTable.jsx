@@ -7,7 +7,7 @@ import CarritoInput from "../../features/cart/components/CartInput.jsx";
 export  const CrudTable = ({children, crudHook, baseHook,  handleclick, className}) => {
 
     const { content, loading ,currentPage, setCurrentPage, totalPages } = baseHook
-    const { currentListing } = crudHook
+    const { currentItem } = crudHook
 
     useEffect(() => {
         // Lógica de paginación
@@ -15,7 +15,7 @@ export  const CrudTable = ({children, crudHook, baseHook,  handleclick, classNam
     }, [])
 
     const selected = (item) => {
-        return (item.id === currentListing?.id ? 'selected' : '')
+        return (item.id === currentItem?.id ? 'selected' : '')
     }
 
     return (
@@ -39,12 +39,12 @@ export  const CrudTable = ({children, crudHook, baseHook,  handleclick, classNam
                                 <p className="mt-2">Cargando datos...</p>
                             </td>
                         </tr>
-                    ) : content.length === 0 ? (
+                    ) : content?.length === 0 ? (
                         <tr>
                             <td colSpan="3" className="text-center">No hay items</td>
                         </tr>
                     ) : (
-                        content.map((item) => (
+                        content?.map((item) => (
                             <tr className={`onhover ${selected(item)}`}
                                 onClick={() =>handleclick(item)}
                                 style={{ borderStyle: 'hidden' }} key={item.id}>
@@ -56,7 +56,7 @@ export  const CrudTable = ({children, crudHook, baseHook,  handleclick, classNam
                                             <Card.Img
                                                 style={{ objectFit: 'contain', width: '80px', height: '80px' }} // Altura fija igual al texto
                                                 className="border border-1 rounded flex-shrink-0"
-                                                src={item.thumbnail}
+                                                src={item?.thumbnail}
                                             />
                                         )}
 

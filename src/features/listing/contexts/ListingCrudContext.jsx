@@ -1,11 +1,11 @@
-import React, {createContext, useContext, useEffect, useMemo, useState} from "react";
+import React, {createContext, useCallback, useContext, useEffect, useMemo, useState} from "react";
 import { visibility } from "../../../utils/posts.js";
 import { listingService } from '../services/listingService.js';
 import { useListingContext } from "./ListingContext.jsx";
 import {useListing} from "../hooks/useListing.js";
 import {useEditableForm} from "../../crud/useEditableForm.js";
 import {useCrud} from "../../crud/useCrud.js";
-import {useService} from "../../crud/useService.js";
+import {useService} from "../../../contexts/useService.js";
 
 
 export const ListingCrudContext = createContext(null)
@@ -13,21 +13,20 @@ export const ListingCrudContext = createContext(null)
 export function ListingCrudProvider({ children }){
 
     const { setListingHash, listingHash, currentListing} = useListing();
-
-
     const listingHook = useListingContext();
+    const {fetchData, currentPage, filters} = listingHook
+
+    const refreshList = useCallback(() => {
+        fetchData(currentPage, filters);
+    }, [currentPage, filters, fetchData]);
 
 
-    const { createWithImage, update, Delete,
-        updateVisibility } = useService({service: listingService, hook: listingHook })
+    const { createWithImage, update, Delete, updateVisibility } =
+        useService({service: listingService, onRefresh: refreshList})
 
-
-    const { crudMode, setCrudMode,
-        openCreate, openEdit, close,
-        selectedFile, setSelectedFile,
-        showCrud, setShowCrud,
-        dataItem, setDataItem,
-        onChange } = useCrud({onUpdateElem: listingHash})
+    const { crudMode, setCrudMode, openCreate, openEdit, close,
+    selectedFile, setSelectedFile, showCrud, setShowCrud,
+    dataItem, setDataItem, onChange } = useCrud({onUpdateElem: listingHash})
 
 
     const { editableFields, setEditableFields,

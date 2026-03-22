@@ -13,8 +13,8 @@ export function UIProvider({ children }) {
     const [showContact, onHideContact] = useState(false)
     const [showMenu, onHideMenu] = useState(false)
     const [showFilter, onHideFilter] = useState(false)
-
     const [selectedTags, setSelectedTags] = useState([]);
+
 
     const isDesktop = useMediaQuery({ minWidth: 768 });
     useEffect(() => {

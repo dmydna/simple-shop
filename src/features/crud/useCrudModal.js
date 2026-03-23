@@ -1,32 +1,31 @@
-import {useMemo, useState} from 'react';
-import {CRUD} from "../../utils/crud.js";
-import {useForm} from "../../contexts/useForm.js";
+import { useState } from 'react';
+import { CRUD } from "../../utils/crud.js";
 
-export const useCrud = (onUpdateElem) => {
+export const useCrudModal = () => {
     
     const [showCrud, setShowCrud] = useState(false);
     const [crudMode, setCrudMode] = useState(CRUD.CREATE);
-    const { formData, setFormData, onChange,
-        selectedFile, setSelectedFile } = useForm({});
+    const [dataItem, setDataItem] = useState({});
 
 
     // Gestores de Modo
     const openCreate = (initialData = {}) => {
         setCrudMode(CRUD.CREATE);
-        setFormData(initialData);
+        setDataItem(initialData);
         setShowCrud(true);
+
     };
 
     const openEdit = (item) => {
         setCrudMode(CRUD.UPDATE);
-        setFormData(item);
+        setDataItem(item);
         setShowCrud(true);
-        onUpdateElem(item?.hash);
+        console.log(item)
     };
 
     const close = () => {
          setShowCrud(false)
-         setFormData({});
+         setDataItem({});
          setSelectedFile(null);
     };
 
@@ -34,9 +33,7 @@ export const useCrud = (onUpdateElem) => {
     return {
         crudMode, setCrudMode,
         openCreate, openEdit, close,
-        selectedFile, setSelectedFile,
         showCrud, setShowCrud,
-        dataItem: formData, setDataItem: setFormData,
-        onChange
+        dataItem, setDataItem
     };
 };

@@ -38,6 +38,7 @@ export const useForm = (initialState = {}) => {
         onResetForm,
         setFormData,
         onValue,
-        selectedFile, setSelectedFile
+        selectedFile, 
+        setSelectedFile
     };
 };

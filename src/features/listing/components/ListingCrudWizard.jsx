@@ -19,13 +19,15 @@ import { WIZARD_CONFIG } from "../hooks/wizardConfig.js";
 function ListingCrudWizard(){
 
     const crudHook = useListingCrud()
-    const {crudMode, handleUpdate, handleCreate,
-        setExpandx, showCrud, currentItem} = crudHook
+    const {crudMode, handleUpdate, handleCreate,setExpandx, showCrud,
+     currentItem, selectedFile, formData} = crudHook
 
 
     const handleSubmit = () => {
-        if(crudMode === CRUD.UPDATE) handleUpdate();
-        if(crudMode === CRUD.CREATE) handleCreate();
+        if(crudMode === CRUD.UPDATE) 
+            handleUpdate(currentItem.id, formData, selectedFile);
+        if(crudMode === CRUD.CREATE) 
+            handleCreate();
     }
     const handleClose = () => {
         setExpandx(false)
@@ -68,13 +70,7 @@ function ListingCrudWizard(){
                 </FormBasic>
             </WizardCrud.Item>
             <WizardCrud.Item eventKey={3}>
-                <FormProducts>
-                    {false && crudMode === CRUD.UPDATE &&
-                        <Alert>
-                            Para <b>editar</b> el producto <b>asociado</b> a esta publicacion
-                            ve a la seccion correspondiente <b><Link to={'#'}>(*?)</Link></b>
-                        </Alert> }
-                </FormProducts>
+                <FormProducts/>
             </WizardCrud.Item>
             <WizardCrud.Item eventKey={4}>
                 <FormDetails/>

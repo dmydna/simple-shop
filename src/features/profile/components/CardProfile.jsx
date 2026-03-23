@@ -1,6 +1,5 @@
-import React from "react";
-import { Card, Col } from "react-bootstrap";
-import {useUser} from "../hooks/UserContext.jsx";
+import { Card } from "react-bootstrap";
+import { useUser } from "../hooks/ProfileContext.jsx";
 
 function CardProfile({ name, image, children, className, imgSize }) {
 

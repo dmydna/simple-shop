@@ -28,32 +28,36 @@ function CategoryNav(){
     return(
        <Row className={`mb-3  ${showFilter ? 'd-md-flex' : ''}`}> 
         <CategoryItem 
-          className="border ps-0"
+          className="border ps-0 rounded-4"
           image={Img1} 
-          category={category.BEAUTY} 
+          category={category.BEAUTY}
+          description='salud e higiene' 
           link={`/productos?category=${category.BEAUTY}`}
           handleClick={() => handleClick(category.BEAUTY)}
         />
         <CategoryItem 
           // variant="primary"
-          className="border"
+          className="border rounded-4"
           image={Img2} 
+          description='perfumeria' 
           category={category.FRAGRANCE} 
           link={`/productos?category=${category.FRAGRANCE}`}
           handleClick={() => handleClick(category.FRAGRANCE)}
         />
         <CategoryItem 
           // variant="success"
-          className="border"
+          className="border rounded-4"
           image={Img3} 
           category={category.FURNITURE} 
+          description='oficina y hogar' 
           link={`/productos?category=${category.FURNITURE}`}
           handleClick={() => handleClick(category.FURNITURE)}
         />
         <CategoryItem 
           // variant="dark"
-          className="border pe-0"
+          className="border pe-0 rounded-4"
           image={Img4} 
+          description='comercio y almacen' 
           category={category.GROCERIES} 
           link={`/productos?category=${category.GROCERIES}`}
           handleClick={() => handleClick(category.GROCERIES)}

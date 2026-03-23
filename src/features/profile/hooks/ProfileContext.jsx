@@ -1,13 +1,13 @@
-import {createContext, useContext, useEffect, useState} from "react";
-import {useAuth} from "../../auth/hooks/AuthContext.jsx";
-import {profileService} from "../services/profileService.js";
 import nprogress from 'nprogress';
 import 'nprogress/nprogress.css';
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useAuth } from "../../auth/hooks/AuthContext.jsx";
+import { profileService } from "../services/profileService.js";
 
-const UserContext = createContext();
+const ProfileContext = createContext();
 
-export function UserProvider({ children }) {
+export function ProfileProvider({ children }) {
 
     const [ loading, setLoading ] = useState(true);
     const [ profile, setProfile ] = useState({})
@@ -81,11 +81,11 @@ export function UserProvider({ children }) {
     },[isAuth])
 
     return (
-        <UserContext.Provider
+        <ProfileContext.Provider
             value={{ fetchData, profile, loading, profileService, handleChange, updatePerfil , updateImage }}>
             {children}
-        </UserContext.Provider>
+        </ProfileContext.Provider>
     );
 }
 
-export const useUser = () => useContext(UserContext);
+export const useProfile = () => useContext(ProfileContext);

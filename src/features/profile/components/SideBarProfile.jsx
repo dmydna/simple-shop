@@ -28,7 +28,7 @@ function SideBarProfile() {
                         </div>
                     </Link>
                 </li>
-                <li className="list-group-item">
+                <li className="list-group-item disabled">
                     <Link className="simple-link" to={`/user/social`}>
                         <div className="item">
                             <i className="bi bi-bell fs-5 ps-0 p-2"></i>
@@ -37,7 +37,7 @@ function SideBarProfile() {
                     </Link>
                 </li>
 
-                <li className="list-group-item">
+                <li className="list-group-item disabled">
                     <Link className="simple-link" to={`/user/social`}>
                         <div className="item">
                             <i className="bi bi-handbag fs-5 ps-0 p-2"></i>
@@ -46,7 +46,7 @@ function SideBarProfile() {
                     </Link>
                 </li>
 
-                <li className="list-group-item">
+                <li className="list-group-item disabled">
                     <Link className="simple-link" to={`/user/social`}>
                         <div className="item">
                             <i className="bi bi-star fs-5 ps-0 p-2"></i>
@@ -55,7 +55,7 @@ function SideBarProfile() {
                     </Link>
                 </li>
 
-                <li className="list-group-item">
+                <li className="list-group-item disabled">
                     <Link className="simple-link" to={`/user/social`}>
                         <div className="item">
                             <i className="bi bi-heart fs-5 ps-0 p-2"></i>

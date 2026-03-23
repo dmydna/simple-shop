@@ -11,7 +11,7 @@ import Img6 from "../assets/draft.png"
 import { useListingContext } from "../features/listing/contexts/ListingContext.jsx";
 
 
-const Dashboard = () => {
+const Dashboard = ({col}) => {
 
     const {totalElements} = useListingContext()
 
@@ -27,35 +27,44 @@ const Dashboard = () => {
            </div>
            <Row className={`mb-3 d-md-flex`}> 
              <CategoryItem 
-               className="border ps-0"
+               col={col}
+               className="border ps-0 rounded-4"
                category="your posts"
+               description="administrar anuncios"
                image={Img1} 
                link={`/dashboard/listing`}
              />
              <CategoryItem 
                // variant="primary"
-               className="border"
+                col={col}
+               className="border rounded-4"
+               description="administrar productos"
                category="your products"
                image={Img5} 
                link={`/dashboard/product`}
              />
              <CategoryItem 
                // variant="success"
-               className="border"
-               category="your clients"
+               col={col}
+               className="border rounded-4"
+               category="usuarios"
+               description="administrar usuarios"
                image={Img3} 
                link={`/dashboard/clients`}
              />
              <CategoryItem 
                // variant="dark"
-               className="border pe-0"
+               col={col}
+               className="border pe-0 rounded-4 disabled"
                category="your orders" 
+               description="administrar pedidos"
                image={Img4} 
-               link={`/dashboard/orders`}
+               link={`#`}
              />
              {totalElements == 0 ? (
                 <CategoryItem 
                    // variant="dark"
+                   col={col}
                    className="border pe-0"
                    category="Dev Posts" 
                    image={Img6} 

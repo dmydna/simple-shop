@@ -13,14 +13,16 @@ export  const ListingCrudTable = ({children}) => {
     const crudHook = useListingCrud()
     // const {setCurrentStep, step} = useWizard()
 
-    const { setShowCrud, setCrudMode, setItemHash, setExpandx, setDataItem }  = crudHook
+    const { setShowCrud, setCrudMode, setItemHash, setItemId, 
+        setExpandx, setDataItem, currentItem ,openEdit : openEditModal }  = crudHook
 
-    const openEditModal = (item) => {
-        setCrudMode(CRUD.UPDATE); //  cambia a modo editar de wizard
-        setItemHash(item?.hash); // <- hash de item actual
-        setDataItem(item);       // <- datos de item actual
-        setShowCrud(true);       // <- muestra wizard crud
-    };
+    // const openEditModal = (item) => {
+    //     setCrudMode(CRUD.UPDATE); //  cambia a modo editar de wizard
+    //     setItemHash?.(item?.hash); // <- hash de item actual
+    //     setItemId?.(item?.id)
+    //     setDataItem(item);       // <- datos de item actual
+    //     setShowCrud(true);       // <- muestra wizard crud
+    // };
 
   return (
       <CrudTable

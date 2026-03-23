@@ -28,9 +28,11 @@ import {FormCreater} from "./features/crud/FormCreater.jsx";
 import {TagsList} from "./features/crud/TagsList.jsx";
 import Page404NotFound from "./pages/Page404NotFound.jsx";
 import {listingDataList} from "./dev/listingDataList.js";
-import ListingCrudNext from "./pages/ListingCrudNext.jsx";
 import FormProductSearch from "./features/listing/components/FormProductSearch.jsx";
-import ProductCrudNext from "./pages/ProductCrudNext.jsx";
+
+import ListingCrudNext from "./pages/CrudNext/ListingCrudNext.jsx";
+import ProductCrudNext from "./pages/CrudNext/ProductCrudNext.jsx";
+import UserCrudNext from "./pages/CrudNext/UserCrudNext.jsx";
 
 
 
@@ -127,11 +129,13 @@ function App() {
             } 
           />
           <Route path="/dev" element={
-              <ProductCrudNext />
+              <>
+                 <ProductCrudNext />
+              </> 
             } 
           />
           <Route path="/productos" element={
-            <Products/>
+              <Products/>
             }
           />
           <Route path="/admin/:manager" element= {             
@@ -148,22 +152,23 @@ function App() {
 
           <Route path="/dashboard/listing" element={
              <>
-                <ListingCrudNext />
+                <ListingCrudNext /> 
              </> 
             } 
           />
             <Route path="/dashboard/dev" element={
-                <ListingDev />
+                <>
+                   <ListingDev />
+                </>
             }
             />
             <Route path="/dashboard/product" element={
-                    <ProductCrudNext />
+                  <>
+                     <ProductCrudNext />
+                  </>
             }
             />
-          <Route path="/dashboard/clients" element={ 
-            <>
-            <ClientCRUD  />
-            </>} />
+          <Route path="/dashboard/clients" element={ <UserCrudNext/>} />
           {/* Ruta para no coincidencias */}
           <Route path="*" element={<Page404NotFound />} />
 

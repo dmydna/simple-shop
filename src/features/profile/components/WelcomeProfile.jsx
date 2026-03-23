@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
-import {Link, useNavigate} from "react-router-dom";
-import {Alert, Button, Col, Form} from "react-bootstrap";
-import {useAuth} from "../../auth/hooks/AuthContext.jsx";
-import {useUser} from "../hooks/UserContext.jsx";
+import { useEffect, useState } from "react";
+import { Alert, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useProfile } from "../hooks/ProfileContext.jsx";
 
 
 function WelcomePerfil({children}){
 
-   const { updateImage, loading, profile } = useUser();
+   const { updateImage, loading, profile } = useProfile();
    const [ completeRegistration, setCompleteRegistration ] = useState(false)
    
    useEffect(()=>{

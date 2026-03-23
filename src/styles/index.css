@@ -23,6 +23,10 @@
 }
 
 
+.accordion-button{
+    background-color: transparent!important;
+}
+
 .normalize-breadcrumb a {
     text-decoration: none;
     --bs-text-opacity: 1;

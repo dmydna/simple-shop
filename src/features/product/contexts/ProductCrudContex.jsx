@@ -1,59 +1,41 @@
-import React, {createContext, useContext, useEffect, useState} from "react";
-import {productService} from "../service/productService.js";
-import {useProductContext} from "./ProductContext.jsx";
-import {useService} from "../../../contexts/useService.js";
-import {useCrud} from "../../crud/useCrud.js";
-import {useEditableForm} from "../../crud/useEditableForm.js";
-import {useProduct} from "../hooks/useProduct.js";
+import { createContext, useCallback, useContext, useEffect } from "react";
+import { useCrudActions } from "../../crud/useCrudActions.js";
+import { useCrudForm } from "../../crud/useCrudForm.js";
+import { useCrudModal } from "../../crud/useCrudModal.js";
+import { useProduct } from "../hooks/useProduct.js";
+import { productService } from "../service/productService.js";
+import { useProductContext } from "./ProductContext.jsx";
 
 export const ProductCrudContext = createContext(null)
 
 export function ProductCrudProvider({ children }){
 
-    const { setProductId, productId, currentProduct} = useProduct();
-    const productHook = useProductContext();
-    const { create, update, Delete }
-        = useService({service: productService, hook: productHook })
+    const { setProductId, productId, currentProduct } = useProduct();
+    const { fetchData, currentPage, filters } = useProductContext();
 
-    const { crudMode, setCrudMode,
-        openCreate, openEdit, close,
-        showCrud, setShowCrud,
-        dataItem, setDataItem,
-        onChange } = useCrud({onUpdateElem: productId})
+    const refreshList = useCallback(() => {
+        fetchData(currentPage, filters);
+    }, [currentPage, filters, fetchData]);
 
-    const { editableFields, setEditableFields,
-        handleEnableEdit, isDisabledField } = useEditableForm( crudMode ) ;
+    const { showCrud, setShowCrud, crudMode, setCrudMode, 
+        dataItem, setDataItem, openCreate, openEdit, close }
+        = useCrudModal({ onUpdateElem: setProductId });
 
+    const { editableFields, setEditableFields, handleEnableEdit, 
+        isDisabledField, selectedFile, setSelectedFile, onChange, formData  }
+        = useCrudForm({ dataItem });
 
-    const handleCreate = async () => {
-        const productData = dataItem;
-        create(productData)
-    }
-
-    const handleUpdate = async () => {
-        console.log('Estoy actualizando el item:', dataItem.id)
-        const updatedData = {
-            ...dataItem,
-            name: (dataItem.productName),
-            stock: parseInt(dataItem.stock, 10),
-            weight: parseInt(dataItem.weight, 10),
-        };
-        update(dataItem.id, updatedData)
-    }
-
-
-    const handleDelete = async (id) => {
-        const MSG_ALERT = "¿Seguro que quieres eliminar este item?"
-        if (window.confirm(MSG_ALERT)) {
-            Delete(id)
-        }
-    }
+    const { handleCreate, handleUpdate, handleDelete, 
+        handleVisibility, loading: loadingCrud, error: errorCrud }
+        = useCrudActions({ service: productService, onRefresh: refreshList });
 
 
     useEffect(() => {
-        if(!showCrud) setEditableFields({})
-    }, [showCrud]);
+        if (!showCrud) setEditableFields({});
+         setProductId(dataItem?.id)
+    }, [showCrud, dataItem]);
 
+    
 
     return (
 
@@ -81,6 +63,7 @@ export function ProductCrudProvider({ children }){
                 editableFields,
                 setEditableFields,
                 isDisabledField,
+                formData,
 
                 currentProduct,
                 setProductId,

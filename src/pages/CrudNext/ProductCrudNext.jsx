@@ -1,26 +1,23 @@
 import React, {useEffect, useMemo, useState} from "react";
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
-import ListingCrudTable from "../features/listing/components/ListingCrudTable.jsx";
-import FilterBar from "../features/filters/components/FilterBar.jsx";
-import SearchLive from "../features/search/SearchLive.jsx";
-import DropdownCheck from "../components/common/DropdownCheck.jsx";
-import {useListingContext} from "../features/listing/contexts/ListingContext.jsx";
-import {useUIContext} from "../contexts/UIContext.jsx";
-import {useListingCrud} from "../features/listing/contexts/ListingCrudContext.jsx";
-import {CRUD} from "../utils/crud.js";
-import "../styles/animations.css"
-import "../styles/dashboard.css"
-import CrudHeader from "../components/common/CrudHeader.jsx";
-import ListingCrudWizard from "../features/listing/components/ListingCrudWizard.jsx";
+import FilterBar from "../../features/filters/components/FilterBar.jsx";
+import SearchLive from "../../features/search/SearchLive.jsx";
+import DropdownCheck from "../../components/common/DropdownCheck.jsx";
+import {useUIContext} from "../../contexts/UIContext.jsx";
+import "../../styles/animations.css"
+import "../../styles/dashboard.css"
+import CrudHeader from "../../components/common/CrudHeader.jsx";
+import ProductCrudTable from "../../features/product/components/ProductCrudTable.jsx";
+import ProductCrudWizard from "../../features/product/components/ProductCrudWizard.jsx";
+import {useProductCrud} from "../../features/product/contexts/ProductCrudContex.jsx";
+import {useProductContext} from "../../features/product/contexts/ProductContext.jsx";
 
 
+function ProductCrudNext() {
 
-function ListingCrudNext() {
-
-    const { listings, setFilters } = useListingContext()
+    const { products, setFilters } = useProductContext()
     const { onHideFilter } =  useUIContext();
-    const { setCrudMode, crudMode ,setShowCrud, setDataItem,
-        expandx, setExpandx , showCrud} = useListingCrud()
+    const { setCrudMode ,setShowCrud, setDataItem, expandx, setExpandx, openCreate: openCreateModal } = useProductCrud()
 
     const [isCreating, setIsCreating] = useState(false);
     const [search, setSearch] = useState()
@@ -37,20 +34,13 @@ function ListingCrudNext() {
     }, []);
 
 
-    const openCreateModal = () => {
-        setCrudMode(CRUD.CREATE);
-        setDataItem({ });
-        setShowCrud(true);
-        setExpandx(true);
-    };
-
     return(
 
         <Container fluid="xl" className={`mt-4`}
         >
             <CrudHeader
-                title="Listing"
-                subtitle="administra tus publicaciones"
+                title="Productos"
+                subtitle="administra tus productos"
             />
 
             <div className='d-flex'>
@@ -62,7 +52,7 @@ function ListingCrudNext() {
                     {/* Filter */}
                     <Card className="m-0 my-2 ms-lx-2  p-4 border island" >
                         <FilterBar
-                            dataSource={listings}
+                            dataSource={products}
                             onApply={setFilters}
                             className="d-block"
                             concealable={false}
@@ -76,7 +66,7 @@ function ListingCrudNext() {
                             </Button>
                             <SearchLive
                                 className='flex-fill'
-                                items={listings}
+                                items={products}
                                 handleSearch={setSearch}
                             />
                             <DropdownCheck variant="light"  className="border rounded my-2">
@@ -85,7 +75,7 @@ function ListingCrudNext() {
                         </FilterBar>
                     </Card>
                     {/* Table */}
-                    <ListingCrudTable />
+                    <ProductCrudTable />
 
                 </div>
 
@@ -95,7 +85,7 @@ function ListingCrudNext() {
                         style={{top: '60px'}}
                         className="m-0 my-2 ms-lg-2 sticky-top rounded border p-4 island"
                     >
-                        <ListingCrudWizard></ListingCrudWizard>
+                        <ProductCrudWizard />
                     </div>
                 </div>
             </div>
@@ -104,4 +94,4 @@ function ListingCrudNext() {
 
 }
 
-export default ListingCrudNext;
+export default ProductCrudNext;

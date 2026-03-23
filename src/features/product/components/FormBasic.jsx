@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Form, Button, Row, Col, Alert } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Alert, Button, Col, Form, Row } from 'react-bootstrap';
 
-function ProductForm({ onSubmit, productoAEditar, onCancel,  }) {
+function FormBasic({ onSubmit, productoAEditar, onCancel,  }) {
 
   const [title, setNombre] = useState('');
   const [price, setPrecio] = useState('');
@@ -103,4 +103,4 @@ function ProductForm({ onSubmit, productoAEditar, onCancel,  }) {
   );
 }
 
-export default ProductForm;
+export default FormBasic;

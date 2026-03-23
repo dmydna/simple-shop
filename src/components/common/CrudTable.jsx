@@ -65,7 +65,7 @@ export  const CrudTable = ({children, crudHook, baseHook,  handleclick, classNam
                                                 className='mb-1 fw-semibold text-decoration-none hover-link'
                                                 style={{ fontSize: "1.20rem", color: "#000", lineHeight: '1.2' }}
                                             >
-                                                {item?.name || item?.title}
+                                                {item?.name || item?.title || item?.username}
                                             </p>
                                             <p className='text-muted small p-0 m-0'>
                                                 {  item?.createdDate ?

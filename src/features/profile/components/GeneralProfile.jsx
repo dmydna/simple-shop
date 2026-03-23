@@ -1,13 +1,11 @@
-import {useEffect, useState} from "react";
 import { Button, Form } from "react-bootstrap";
-import {useNavigate} from "react-router-dom";
-import {useUser} from "../hooks/UserContext.jsx";
+import { useProfile } from "../hooks/ProfileContext.jsx";
 
 
 
 function GeneralProfile({children}){
 
-    const { profile, handleChange, updatePerfil } = useUser()
+    const { profile, handleChange, updatePerfil } = useProfile()
 
    const handleUpdate = (e) => {
         e.preventDefault()

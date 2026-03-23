@@ -20,6 +20,8 @@ function  StepNavbar({className}) {
                          of {" " + visibleSteps.length - 1} </span>
             {/*<i className="bi bi-three-dots-vertical ms-3 onhover"></i>*/}
             <StepBadge
+                style={{opacity: '.6'}}
+                className='d-inline-block mx-2 small'
                 ico='bi-three-dots-vertical'
             ></StepBadge>
         </div>

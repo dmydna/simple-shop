@@ -1,35 +1,38 @@
-import { BrowserRouter } from "react-router-dom";
-import { ListingProvider } from "../features/listing/contexts/ListingContext.jsx";
-import { ClientProvider } from "../features/client/ClientContext.jsx";
+import { CrudProvider } from "../features/crud/CrudContext.jsx";
 import { CarritoProvider } from "../features/cart/contexts/CartContext.jsx";
-import { UIProvider } from "./UIContext";
+import { ListingProvider } from "../features/listing/contexts/ListingContext.jsx";
 import { ListingCrudProvider } from "../features/listing/contexts/ListingCrudContext.jsx";
-import { UserProvider } from '../features/profile/hooks/UserContext.jsx'
-import {ProductCrudProvider} from "../features/product/contexts/ProductCrudContex.jsx";
-import {ProductProvider} from "../features/product/contexts/ProductContext.jsx";
-import {CrudProvider} from "../CrudContext.jsx";
+import { ProductProvider } from "../features/product/contexts/ProductContext.jsx";
+import { ProductCrudProvider } from "../features/product/contexts/ProductCrudContex.jsx";
+import { ProfileProvider } from '../features/profile/hooks/ProfileContext.jsx';
+import { UserProvider } from "../features/user/contexts/UserContext.jsx";
+import { UserCrudProvider } from "../features/user/contexts/UserCrudContext.jsx";
+import { UIProvider } from "./UIContext";
 
 // Este es tu Wrapper "CRUD"
+
 export const CRUDWrapper = ({ children }) => {
   return (
-  <UIProvider>
-    <CrudProvider>
-      <ListingProvider>
-        {/*<ClientProvider>*/}
-        <ProductProvider>
-          <ProductCrudProvider>
-            <CarritoProvider>
-              <ListingCrudProvider>
-                <UserProvider>
-                  {children}
-                </UserProvider>
-              </ListingCrudProvider>
-            </CarritoProvider>
-          </ProductCrudProvider>
-        </ProductProvider>
-        {/*</ClientProvider>*/}
-      </ListingProvider>
-    </CrudProvider>
-  </UIProvider>
+    <UIProvider>
+      <CrudProvider>
+        <ListingProvider>
+          <ProductProvider>
+            <ProductCrudProvider>
+              <CarritoProvider>
+                <ListingCrudProvider>
+                  <UserProvider>
+                    <UserCrudProvider>
+                    <ProfileProvider>
+                      {children}
+                    </ProfileProvider>
+                    </UserCrudProvider>
+                  </UserProvider>
+                </ListingCrudProvider>
+              </CarritoProvider>
+            </ProductCrudProvider>
+          </ProductProvider>
+        </ListingProvider>
+      </CrudProvider>
+    </UIProvider>
   );
 };

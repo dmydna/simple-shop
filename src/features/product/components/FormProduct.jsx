@@ -1,13 +1,12 @@
-import React from "react";
 import { Form, InputGroup } from "react-bootstrap";
-import { useListingCrud } from "../contexts/ListingCrudContext.jsx";
 import { CRUD } from "../../../utils/crud.js";
+import { useProductCrud } from "../contexts/ProductCrudContex.jsx";
 
 
 function FormProduct({children, className}){
 
     const {dataItem, handleChange, crudMode,
-      isDisabledField, handleEnableEdit, editableFields} = useListingCrud();
+      isDisabledField, handleEnableEdit, editableFields} = useProductCrud();
 
     return (
         <>
@@ -28,9 +27,9 @@ function FormProduct({children, className}){
                     type="text"
                     placeholder="Ingrese nombre"
                     name="productName"
-                    value={dataItem.productName || undefined}
+                    value={dataItem.name || undefined}
                     onChange={handleChange}
-                    disabled={isDisabledField("productName")}
+                    disabled={isDisabledField("name")}
                     />
                     {crudMode != CRUD.CREATE && (
                     <InputGroup.Text
@@ -40,7 +39,7 @@ function FormProduct({children, className}){
                       backgroundColor: 'rgb(233, 236, 239)', 
                       cursor: editableFields["productName"] ? 'default' : 'pointer'
                     }}
-                    onClick={() => handleEnableEdit("productName")}
+                    onClick={() => handleEnableEdit("name")}
                   >
                     <i className={`bi ${editableFields["productName"] ? "bi-check text-primary" : "bi-pencil"}`}
                       style={{ opacity: '.8' }}>
@@ -103,7 +102,7 @@ function FormProduct({children, className}){
                       disabled={isDisabledField("sku")}
                       />
 
-                      {crudMode != CRUD.CREATE && (
+                      {crudMode != CRUD.CREATE  && (
                       <InputGroup.Text
                         className="fw-semibold border-0 text-muted px-3"
                         style={{

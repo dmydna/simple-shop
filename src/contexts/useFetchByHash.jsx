@@ -6,13 +6,13 @@ export const useFetchByHash = ({ service }) => {
     const [currentItem, setCurrentItem] = useState({});
     const [itemHash, setItemHash] = useState(null);
 
-    const fetchDataByHash = async (id) => {
+    const fetchDataByHash = async (hash) => {
         setLoading(true);
         setError(null);
 
         try {
-            const data = await service.getById(id);
-            setCurrentItem(data);
+            const data = await service.getByHash(hash);
+            setCurrentItem(data.listing);
         } catch (err) {
             console.error("Error de carga de API", err);
             setError(err.message || "Error al cargar el elemento");

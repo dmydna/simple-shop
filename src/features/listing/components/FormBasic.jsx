@@ -6,7 +6,7 @@ import { CRUD } from "../../../utils/crud.js";
 
 function FormBasic({children, className}) {
 
-    const { dataItem, handleChange, modalMode,
+    const { formData, handleChange, modalMode,
         isDisabledField, editableFields,  handleEnableEdit } = useListingCrud()
 
     return (
@@ -24,7 +24,7 @@ function FormBasic({children, className}) {
                         type="text"
                         placeholder="Ingrese nombre"
                         name="title"
-                        value={dataItem.title}
+                        value={formData.title}
                         onChange={handleChange}
                         disabled={isDisabledField("title")}
                     />
@@ -60,7 +60,7 @@ function FormBasic({children, className}) {
                             rows={3}
                             placeholder="Ingrese un precio"
                             name="price"
-                            value={dataItem.price}
+                            value={formData.price}
                             onChange={handleChange}
                             disabled={isDisabledField("price")}
                         />
@@ -93,7 +93,7 @@ function FormBasic({children, className}) {
                             rows={3}
                             placeholder="Ingrese un Valor"
                             name="discountPercentage"
-                            value={dataItem.discountPercentage}
+                            value={formData.discountPercentage}
                             onChange={handleChange}
                             disabled={isDisabledField("discountPercentage")}
                         />
@@ -144,7 +144,7 @@ function FormBasic({children, className}) {
                         placeholder="Ingrese descripción"
                         name="description"
                         className="border-0 rounded-0" // Quitamos bordes y redondeado interno
-                        value={dataItem.description}
+                        value={formData.description}
                         onChange={handleChange}
                         disabled={isDisabledField("description")}
                         style={{ boxShadow: 'none' }} // Evita el brillo azul doble al hacer foco

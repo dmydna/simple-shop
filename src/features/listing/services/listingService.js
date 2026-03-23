@@ -183,8 +183,8 @@ export const listingService = {
             type: 'application/json'
         }));
 
-        if (selectedFiles.length !== 0) {
-            selectedFiles.forEach((file) => {
+        if (selectedFiles?.length !== 0) {
+            selectedFiles?.forEach((file) => {
                 formData.append('files', file); // 'images' es el nombre que recibirá tu backend
             });
         }

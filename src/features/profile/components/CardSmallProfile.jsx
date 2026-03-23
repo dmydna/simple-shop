@@ -1,10 +1,10 @@
-import React, {useEffect} from "react";
-import { Card, Col } from "react-bootstrap";
-import {useUser} from "../hooks/UserContext.jsx";
+import { useEffect } from "react";
+import { Card } from "react-bootstrap";
+import { useProfile } from "../hooks/ProfileContext.jsx";
 
 function CardSmallProfile({ name, image, children, className, imgSize }) {
 
-    const { profile, fetchData } = useUser()
+    const { profile, fetchData } = useProfile()
 
     useEffect( ()=> {
         fetchData()
@@ -28,11 +28,11 @@ function CardSmallProfile({ name, image, children, className, imgSize }) {
 
             <Card.Body style={{lineHeight: '1px'}} className="rounded mt-3">
                 <Card.Title className='fs-5'>
-                    { profile?.name || "N/A" }
+                    { profile?.name || profile?.username || profile?.clientName || "N/A" }
                 </Card.Title>
                 <Card.Text>
                 <span className="text-secondary fs-6">
-                    {  profile?.email || 'user@mail.com' }
+                    {  profile?.email || 'admin@mail.com' }
                 </span>
                 </Card.Text>
                 <Card.Text >

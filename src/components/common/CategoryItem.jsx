@@ -2,12 +2,12 @@ import React from "react";
 import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function CategoryItem({category, image, filter, link, className, variant, handleClick}){
+function CategoryItem({category, image, filter, link, className, variant, handleClick, description, col}){
 
 
     return (
         <>
-    <Col className="col-12 col-sm-6 col-md-4 col-lg-3">
+    <Col className={`${col ? col: 'col-12 col-sm-6 col-md-4 col-lg-3'} `}>
     <Card  key={'category-' + category} className={`my-2 shadow-sm ${className}`} 
                style={{ 
                  borderLeft: "0", 
@@ -15,27 +15,27 @@ function CategoryItem({category, image, filter, link, className, variant, handle
                  borderTop: "0" 
                }}
             >
-              <div className={`d-flex flex-wrap rounded overflow-hidden`}>
-                <div style={{width : 100,height: 'auto'}} className="p-3  border-end" >
+              <div className={`d-flex rounded overflow-hidden`}>
+                <div style={{width : 100,height: 'auto'}} className="p-3" >
                   <Card.Img 
-                   style={{ objectFit: 'contain', width : 60,height: 'auto', filter: `${filter}` }}
+                   style={{ objectFit: 'contain', width : 60,height: '60', filter: `${filter}` }}
                    className="mx-auto d-block"
                    src={image} />
                 </div>
                 <Col
                  style={{opacity:'.9'}}
-                 className={`d-flex  flex-fill align-items-center ${!!variant ? `text-white bg-${variant}` : 'text-reset' }`}>
-                  <Card.Body style={{maxWidth: "120px"}} className="ps-3 p-1">
-                    <Card.Title 
+                 className={`d-flex  flex-fill   ${!!variant ? `text-white bg-${variant}` : 'text-reset' }`}>
+                   <Card.Title 
+                    className="text-decoration-none "
                     as={Link}
-                    className={`d-block text-uppercase small text-decoration-none 
-                        ${!!variant ? '' : 'hover-link'} 
-                        text-center fw-medium  h-100`}
                     to={link}
                     onClick={handleClick} >
-                      {category}
+                      <p className={`d-block text-uppercase small pt-4 mb-0
+                        ${!!variant ? '' : 'hover-link'} fw-medium`}>
+                          {category}
+                      </p>
+                      <small className="d-block text-secondary">{description}</small>
                     </Card.Title>
-                  </Card.Body>
                 </Col>
               </div>
             </Card>

@@ -1,9 +1,7 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button, Form } from "react-bootstrap";
-import {listingService as userService} from "../../listing/services/listingService.js";
-import {profileService} from "../services/profileService.js";
-import {useUser} from "../hooks/UserContext.jsx";
-import "../../../styles/animations.css"
+import "../../../styles/animations.css";
+import { useProfile } from "../hooks/ProfileContext.jsx";
 
 
 const UploadImageProfile = ({ title, className, multiple = true }) => {
@@ -11,7 +9,7 @@ const UploadImageProfile = ({ title, className, multiple = true }) => {
   const [selectedFile, setSelectedFile] = useState([]);
   const [preview, setPreview] = useState(["https://dummyimage.com/300x300/dadada/"]);
   const fileInputRef = useRef(null);
-  const { updateImage, loading } = useUser();
+  const { updateImage, loading } = useProfile();
 
   // Manejar el cambio del input
   const handleFileChange = (e) => {

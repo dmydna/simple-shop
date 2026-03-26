@@ -18,6 +18,7 @@ function CategoryCarrousel({className}){
       
       <Carousel.Item>
         <CategoryItem 
+          col='col-12 col-md-12 col-lg-3'
           className="border ps-0 rounded-4"
           image={Img1} 
           category={category.BEAUTY}
@@ -29,6 +30,7 @@ function CategoryCarrousel({className}){
       <Carousel.Item>
         <CategoryItem 
           // variant="primary"
+          col='col-12 col-md-12 col-lg-3'
           className="border rounded-4"
           image={Img2} 
           description='perfumeria' 
@@ -40,6 +42,7 @@ function CategoryCarrousel({className}){
       <Carousel.Item>
         <CategoryItem 
           // variant="success"
+          col='col-12 col-md-12 col-lg-3'
           className="border rounded-4"
           image={Img3} 
           category={category.FURNITURE} 
@@ -51,6 +54,7 @@ function CategoryCarrousel({className}){
       <Carousel.Item>
         <CategoryItem 
           // variant="dark"
+          col='col-12 col-md-12 col-lg-3'
           className="border pe-0 rounded-4"
           image={Img4} 
           description='comercio y almacen' 

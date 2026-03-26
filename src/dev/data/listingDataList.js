@@ -1,3 +1,7 @@
+import { listingService } from "../../features/listing/services/listingService.js";
+import { handleBulk } from "../utils.js";
+
+
 export const listingDataList = [
 	{
       "title": "Essence - Mascara Lash Princess",
@@ -1796,3 +1800,7 @@ export const listingDataList = [
       "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/kiwi/thumbnail.webp"
     }
 ]
+
+
+export const listingSaveAll = async () => 
+   await handleBulk(listingService, listingDataList)

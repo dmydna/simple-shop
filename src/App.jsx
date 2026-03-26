@@ -1,38 +1,38 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect, useState } from "react";
-import {Navigate, Route, Routes, useLocation} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProtectedRoute from "./components/common/ProtectedRoute";
+import ProtectedRouteAdmin from "./components/common/ProtectedRouteAdmin.jsx";
 import Footer from "./components/layout/Footer.jsx";
 import NavHeader from "./components/layout/NavHeader.jsx";
-import ProtectedRoute from "./components/common/ProtectedRoute";
-import { AuthProvider } from "./features/auth/hooks/AuthContext.jsx";
 import { CRUDWrapper } from "./contexts/CRUDWrapper";
+import DevDash from "./dev/components/DevDash.jsx";
+import { listingDataList } from "./dev/data/listingDataList.js";
+import { AuthProvider } from "./features/auth/hooks/AuthContext.jsx";
+import { FormCreater } from "./features/crud/FormCreater.jsx";
+import { TagsList } from "./features/crud/TagsList.jsx";
+import FormProductSearch from "./features/listing/components/FormProductSearch.jsx";
 import Admin from "./pages/Admin";
 import Carrito from "./pages/Cart";
-import ClientCRUD from "./pages/ClientCRUD";
 import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import ListingCRUD from "./pages/ListingCRUD";
 import Login from "./pages/Login";
+import Page404NotFound from "./pages/Page404NotFound.jsx";
+import PageLoading from "./pages/PageLoading.jsx";
 import ProductDetails from "./pages/ProductDetails";
 import Products from "./pages/ProductList";
-import "./styles/index.css";
-import ListingDev from "./dev/ListingDev.jsx";
-import UserProfile from "./pages/UserProfile.jsx"
 import Register from "./pages/Register.jsx";
-import ProtectedRouteAdmin from "./components/common/ProtectedRouteAdmin.jsx";
-import PageLoading from "./pages/PageLoading.jsx";
-import {FormCreater} from "./features/crud/FormCreater.jsx";
-import {TagsList} from "./features/crud/TagsList.jsx";
-import Page404NotFound from "./pages/Page404NotFound.jsx";
-import {listingDataList} from "./dev/listingDataList.js";
-import FormProductSearch from "./features/listing/components/FormProductSearch.jsx";
+import UserProfile from "./pages/UserProfile.jsx";
+import "./styles/index.css";
 
 import ListingCrudNext from "./pages/CrudNext/ListingCrudNext.jsx";
 import ProductCrudNext from "./pages/CrudNext/ProductCrudNext.jsx";
 import UserCrudNext from "./pages/CrudNext/UserCrudNext.jsx";
+import { DevProvider } from "./dev/contexts/DevContext.jsx";
 
 
 
@@ -63,6 +63,7 @@ function App() {
   return (
     <AuthProvider>
     <CRUDWrapper>
+    <DevProvider>
     <div className="d-flex flex-column min-vh-100 pt-3">
         
 
@@ -158,7 +159,7 @@ function App() {
           />
             <Route path="/dashboard/dev" element={
                 <>
-                   <ListingDev />
+                   <DevDash />
                 </>
             }
             />
@@ -177,6 +178,7 @@ function App() {
       </main>
       <Footer />
     </div>
+    </DevProvider>
     </CRUDWrapper>
     </AuthProvider>
   );

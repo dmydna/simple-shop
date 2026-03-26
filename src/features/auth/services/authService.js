@@ -20,12 +20,12 @@ export const authService = {
         const data = await response.json(); // Recibimos { token: "..." }
         console.log(data)
 
-       if (data) {
+        if (data) {
             // Guardamos para futuras peticiones
             localStorage.setItem("token", data.accessToken);
-            localStorage.setItem("user",  data.username);
-            localStorage.setItem("role",  data.role);
-       }
+            localStorage.setItem("user", data.username);
+            localStorage.setItem("role", data.role);
+        }
 
         return data;
     },
@@ -52,4 +52,18 @@ export const authService = {
     getToken: () => {
         return localStorage.getItem("token");
     },
+
+    createBulk: async (userDataList) => {
+        const TOKEN = localStorage.getItem("token")
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/bulk`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ` + TOKEN
+            },
+            body: JSON.stringify(userDataList)
+        });
+        if (!response.ok) throw new Error("Error al registar lista de usuarios");
+        return await response.json();
+    }
 };

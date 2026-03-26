@@ -51,6 +51,20 @@ export const userService = {
         }
         return response.status === 204 ? 
         { success: true } : await response.json();
-    }
+    },
+
+    createBulk: async (userDataList) => {
+            const TOKEN = localStorage.getItem("token")
+            const response = await fetch(`${BASE_URL}/${ENDPOINT}/bulk`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ` + TOKEN
+                },
+                body: JSON.stringify(userDataList)
+            });
+            if (!response.ok) throw new Error("Error al crear producto");
+            return await response.json();
+    },
 
 };

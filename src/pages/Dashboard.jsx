@@ -9,11 +9,12 @@ import Img4 from '../assets/paper.png';
 import Img5 from "../assets/t-shirt.png"
 import Img6 from "../assets/draft.png"
 import { useListingContext } from "../features/listing/contexts/ListingContext.jsx";
+import { useDevContext } from "../dev/contexts/DevContext.jsx";
 
 
 const Dashboard = ({col}) => {
 
-    const {totalElements} = useListingContext()
+    const {devMode} = useDevContext()
 
     return (
         <Container className="mt-4">
@@ -61,12 +62,13 @@ const Dashboard = ({col}) => {
                image={Img4} 
                link={`#`}
              />
-             {totalElements == 0 ? (
+             {devMode ? (
                 <CategoryItem 
                    // variant="dark"
                    col={col}
                    className="border pe-0"
-                   category="Dev Posts" 
+                   category="Dev Panel" 
+                   description="cosas de dev"
                    image={Img6} 
                    link={`/dashboard/dev`}
                 />

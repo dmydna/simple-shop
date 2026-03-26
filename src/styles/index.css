@@ -376,6 +376,11 @@ hr {
     z-index: 93;
 }
 
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    filter: invert(1)!important;
+}
+
 @media (min-width: 1200px) { /* xl */
     .container-xl {
         /* padding-inline: 0!important; */

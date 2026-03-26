@@ -1,32 +1,22 @@
-import React, { useMemo } from "react";
-import { Row } from "react-bootstrap";
-import { useMatch } from "react-router-dom";
+import { useState } from 'react';
+import Carousel from 'react-bootstrap/Carousel';
 import CategoryItem from "./CategoryItem";
-
-import { useListingContext } from "../../features/listing/contexts/ListingContext.jsx";
-import { useUIContext } from "../../contexts/UIContext";
 import Img3 from "../../assets/dressing-table.png";
 import Img4 from '../../assets/grocery.png';
 import Img1 from "../../assets/lipstick.png";
 import Img2 from '../../assets/perfume.png';
 import { category } from "../../utils/posts.js";
 
-function CategoryNav({className}){
+function CategoryCarrousel({className}){
+  const [index, setIndex] = useState(0);
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  };
 
-    const categoryMatch = useMatch("/productos/category/:category");
-    const searchMatch = useMatch("/productos/search/:product");
-    const {showFilter} = useUIContext()
-    const {listings, setFilters} = useListingContext()
-
-
-    const handleClick = (category) => {
-      setFilters({ page: 0, categories : [category] })
-    }
-  
-    
-    
-    return(
-       <Row className={`mb-3 ${className} ${showFilter ? 'd-md-flex' : ''}`}> 
+  return (
+    <Carousel className={`${className}`} activeIndex={index} onSelect={handleSelect}>
+      
+      <Carousel.Item>
         <CategoryItem 
           className="border ps-0 rounded-4"
           image={Img1} 
@@ -35,6 +25,8 @@ function CategoryNav({className}){
           link={`/productos?category=${category.BEAUTY}`}
           handleClick={() => handleClick(category.BEAUTY)}
         />
+      </Carousel.Item>  
+      <Carousel.Item>
         <CategoryItem 
           // variant="primary"
           className="border rounded-4"
@@ -44,6 +36,8 @@ function CategoryNav({className}){
           link={`/productos?category=${category.FRAGRANCE}`}
           handleClick={() => handleClick(category.FRAGRANCE)}
         />
+      </Carousel.Item>
+      <Carousel.Item>
         <CategoryItem 
           // variant="success"
           className="border rounded-4"
@@ -53,6 +47,8 @@ function CategoryNav({className}){
           link={`/productos?category=${category.FURNITURE}`}
           handleClick={() => handleClick(category.FURNITURE)}
         />
+      </Carousel.Item>
+      <Carousel.Item>
         <CategoryItem 
           // variant="dark"
           className="border pe-0 rounded-4"
@@ -62,10 +58,13 @@ function CategoryNav({className}){
           link={`/productos?category=${category.GROCERIES}`}
           handleClick={() => handleClick(category.GROCERIES)}
         />
-      </Row>
-         
-    )
+      </Carousel.Item>
+    </Carousel>
+  );
 
 }
 
-export default CategoryNav;
+export default CategoryCarrousel;
+
+
+

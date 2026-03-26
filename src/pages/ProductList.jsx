@@ -12,6 +12,7 @@ import {ListingPlaceholder} from "../features/placeholder/ListingPlaceholder.jsx
 import {DataHandler} from "../contexts/DataHandler.jsx";
 import DropdownRange from "../components/common/DropdownRange.jsx";
 import DropdownCheck from "../components/common/DropdownCheck.jsx";
+import CategoryCarrousel from "../components/common/CategoryCarrousel.jsx";
 
 
 
@@ -84,7 +85,10 @@ function Products() {
             </div>
             {showFilter ?
                 <>
-                  <CategoryNav show={showFilter} />
+                  <CategoryNav className='d-none d-m-block' show={showFilter} />
+
+                  <CategoryCarrousel className='d-block d-md-none' />
+
                   <FilterBar dataSource={listings} onApply={setFilters} className="mb-5" >
                         <DropdownCheck variant="light"  className="border rounded my-2">
                             <span className="fw-semibold">etiquetas</span>

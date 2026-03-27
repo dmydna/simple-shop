@@ -3,6 +3,9 @@ import { useMediaQuery } from 'react-responsive';
 import { useLocation } from "react-router-dom";
 import ContactModal from "../features/contact/ContactModal.jsx";
 import LoginModal from "../features/auth/components/LoginModal.jsx";
+import { useUserContext } from "../features/user/contexts/UserContext.jsx";
+import { useProductContext } from "../features/product/contexts/ProductContext.jsx";
+import { useListingContext } from "../features/listing/contexts/ListingContext.jsx";
 
 const UIContext = createContext(null)
 
@@ -14,7 +17,6 @@ export function UIProvider({ children }) {
     const [showMenu, onHideMenu] = useState(false)
     const [showFilter, onHideFilter] = useState(false)
     const [selectedTags, setSelectedTags] = useState([]);
-
 
     const isDesktop = useMediaQuery({ minWidth: 768 });
     useEffect(() => {

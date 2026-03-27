@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Row, Form, Modal } from "react-bootstrap";
+import {Link} from "react-router-dom";
 import CategoryItem from "../components/common/CategoryItem.jsx";
 
 import Img1 from "../assets/print-product.png";
@@ -12,12 +13,12 @@ import { useListingContext } from "../features/listing/contexts/ListingContext.j
 import { useDevContext } from "../dev/contexts/DevContext.jsx";
 
 
-const Dashboard = ({col}) => {
+const Dashboard = ({col, preview = false}) => {
 
     const {devMode} = useDevContext()
 
     return (
-        <Container className="mt-4">
+        <div className={` ${preview ? '' : 'mt-4 container' }`}>
           <div className="w-100 d-flex flex-wrap mt-2 mb-4">
              <span style={{fontSize: '1.4rem'}} className="text-capitalize fw-semibold me-3" >
                 Dashboard
@@ -62,7 +63,7 @@ const Dashboard = ({col}) => {
                image={Img4} 
                link={`#`}
              />
-             {devMode ? (
+             {devMode && !preview ? (
                 <CategoryItem 
                    // variant="dark"
                    col={col}
@@ -73,9 +74,14 @@ const Dashboard = ({col}) => {
                    link={`/dashboard/dev`}
                 />
              ) : ''}
+               {preview && (
+                <Button as={Link} to={'/dashboard'} variant="outline-secondary rounded-4 mt-3" className="w-auto mx-auto"> 
+                    ver mas
+                </Button>
+               )}
 
            </Row>
-        </Container>
+        </div>
     )
 }
 

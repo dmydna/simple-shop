@@ -15,7 +15,7 @@ import {FilterBarProvider} from "../context/FilterBarContext.jsx";
 
 
 
-function FilterBar({className, children, dataSource, onApply, concealable = true}) {
+function FilterBar({className, children, dataSource, onApply, concealable = true, fix=false }) {
 
     const { showFilter, setSelectedTags } =  useUIContext();
 
@@ -67,7 +67,7 @@ function FilterBar({className, children, dataSource, onApply, concealable = true
              <div className="w-100 d-flex justify-content-start justify-content-md-end gap-2">
                 <Button
                     onClick={handleSubmit}
-                    style={{maxWidth: "200px", minWidth: "100px"}} className="w-100 my-2 border"
+                    style={{maxWidth: fix ? "initial" : "200px", minWidth: "100px"}} className="w-100 my-2 border"
                     disabled={!isFiltering}
                 >
                     <i className="bi bi-funnel"></i>

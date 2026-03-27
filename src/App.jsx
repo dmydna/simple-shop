@@ -63,7 +63,6 @@ function App() {
   return (
     <AuthProvider>
     <CRUDWrapper>
-    <DevProvider>
     <div className="d-flex flex-column min-vh-100 pt-3">
         
 
@@ -178,7 +177,6 @@ function App() {
       </main>
       <Footer />
     </div>
-    </DevProvider>
     </CRUDWrapper>
     </AuthProvider>
   );

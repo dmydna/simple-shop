@@ -10,6 +10,7 @@ import UploadImageProfile from "../features/profile/components/UploadImageProfil
 import WelcomePerfil from "../features/profile/components/WelcomeProfile.jsx";
 import { useProfile } from "../features/profile/hooks/ProfileContext.jsx";
 import Dashboard from "./Dashboard.jsx";
+import Activity from "../features/profile/components/Activity.jsx";
 
 export default function UserProfile() {
     const { page } = useParams()
@@ -33,6 +34,12 @@ export default function UserProfile() {
                 setSecction(page); break;
             case "social":
                 setSecction(page); break;
+            case "dashboard":
+                setSecction(page); break;
+            case "activity":
+                setSecction(page); break;
+            default:
+                setSecction(null); break;
         }
     }, [page])
 
@@ -46,46 +53,51 @@ export default function UserProfile() {
                     style={{ top: '60px' }} // sin esto no funciona sticky
                 >
                     <CardSmallProfile name={user} />
-
                     <div className="border rounded p-4 island">
-                        <SideBarProfile onSelection={setSecction}></SideBarProfile>
+                        <SideBarProfile
+                            role={profile?.role}
+                            onSelection={setSecction}
+                        />
                     </div>
+                </Col>
+
+
+
+
+                <Col className="h-100 col-12 col-sm-12 col-md-12 col-lg-7 mx-auto rounded border pt-5 p-5 mb-4 island">
+                    { (secction == "dashboard" ) && profile?.role == 'ADMIN' && (
+                        <Dashboard preview={true}  col='col-12 col-md-12 col-lg-6' />
+                    )}
+                    { (!secction || secction == "general" || secction == "activity") 
+                    && profile?.role == 'ADMIN' && (
+                        <Activity container={false}  col='col-12 col-md-12 col-lg-6' />
+                      
+                    )}
+                    {!secction && profile?.role == 'CLIENT' && (
+                        <WelcomePerfil >
+                            <p className="h4">Bienvenido al panel de usuario</p>
+                            <p style={{ opacity: '.5' }} className="muted">Puedes ver o cambiar tu informacion</p>
+                        </WelcomePerfil>
+                    )}
+
+                    {secction && secction == "general" && profile?.role == 'CLIENT' && (
+                        <GeneralProfile >
+                            <p className="h4">Informacion general</p>
+                            <p style={{ opacity: '.5' }} className="muted mb-5">Puedes ver o cambiar tu informacion</p>
+                        </GeneralProfile>
+                    )}
+                    {secction && secction == "password" && (
+                        <PasswordProfile>
+                            <p className="h4">Cambiar contraseña</p>
+                            <p style={{ opacity: '.5' }} className="muted mb-5">Puedes ver o cambiar tu contraseña</p>
+                        </PasswordProfile>
+                    )}
+                    {secction && secction == "image" && (
+                        <UploadImageProfile multiple={false} title={"Cambiar Imagen de profile"}></UploadImageProfile>
+                    )}
 
                 </Col>
 
-                {profile?.role == 'ADMIN' && (
-                    <Col className="col-12 col-sm-12 col-md-12 col-lg-7 mx-auto rounded border island">
-                        <Dashboard col='col-12 col-md-12 col-lg-6' />
-                    </Col>
-                )}
-                {profile?.role == 'CLIENT' && (
-                    <Col className="h-100 col-12 col-sm-12 col-md-12 col-lg-7 mx-auto rounded border pt-5 p-5 mb-4 island">
-
-                        {!secction && (
-                            <WelcomePerfil >
-                                <p className="h4">Bienvenido al panel de usuario</p>
-                                <p style={{ opacity: '.5' }} className="muted">Puedes ver o cambiar tu informacion</p>
-                            </WelcomePerfil>
-                        )}
-
-                        {secction && secction == "general" && (
-                            <GeneralProfile >
-                                <p className="h4">Informacion general</p>
-                                <p style={{ opacity: '.5' }} className="muted mb-5">Puedes ver o cambiar tu informacion</p>
-                            </GeneralProfile>
-                        )}
-                        {secction && secction == "password" && (
-                            <PasswordProfile>
-                                <p className="h4">Cambiar contraseña</p>
-                                <p style={{ opacity: '.5' }} className="muted mb-5">Puedes ver o cambiar tu contraseña</p>
-                            </PasswordProfile>
-                        )}
-                        {secction && secction == "image" && (
-                            <UploadImageProfile multiple={false} title={"Cambiar Imagen de profile"}></UploadImageProfile>
-                        )}
-
-                    </Col>
-                )}
 
             </Row>
 

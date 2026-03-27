@@ -89,14 +89,14 @@ function Products() {
 
                   <CategoryCarrousel className='d-block d-md-none' />
 
-                  <FilterBar dataSource={listings} onApply={setFilters} className="mb-5" >
-                        <DropdownCheck variant="light"  className="border rounded my-2">
+                  <FilterBar fix={true} dataSource={listings} onApply={setFilters} className="mb-5" >
+                        <DropdownCheck variant="light"  className="border rounded my-2 flex-fill">
                             <span className="fw-semibold">etiquetas</span>
                         </DropdownCheck>
-                         <DropdownRange className="border rounded my-2" variant="light"  min={0} max={1500} defaultValue={20} type={'$'}>
+                         <DropdownRange variant="light" className="border rounded my-2 flex-fill"  min={0} max={1500} defaultValue={20} type={'$'}>
                               <span className="fw-medium">precio</span>
                          </DropdownRange>
-                  </FilterBar>
+                  </FilterBar >
                 </> : ''
             }
             <Row>

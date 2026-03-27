@@ -8,6 +8,7 @@ import { ProfileProvider } from '../features/profile/hooks/ProfileContext.jsx';
 import { UserProvider } from "../features/user/contexts/UserContext.jsx";
 import { UserCrudProvider } from "../features/user/contexts/UserCrudContext.jsx";
 import { UIProvider } from "./UIContext";
+import { DevProvider } from "../dev/contexts/DevContext.jsx";
 
 // Este es tu Wrapper "CRUD"
 
@@ -23,7 +24,9 @@ export const CRUDWrapper = ({ children }) => {
                   <UserProvider>
                     <UserCrudProvider>
                     <ProfileProvider>
+                      <DevProvider>
                       {children}
+                      </DevProvider>
                     </ProfileProvider>
                     </UserCrudProvider>
                   </UserProvider>

@@ -7,7 +7,7 @@ import { useProfile } from "../hooks/ProfileContext.jsx";
 const UploadImageProfile = ({ title, className, multiple = true }) => {
 
   const [selectedFile, setSelectedFile] = useState([]);
-  const [preview, setPreview] = useState(["https://dummyimage.com/300x300/dadada/"]);
+  const [preview, setPreview] = useState(["http://localhost:8080/api/image/300x300?background=dadada"]);
   const fileInputRef = useRef(null);
   const { updateImage, loading } = useProfile();
 
@@ -69,7 +69,7 @@ const UploadImageProfile = ({ title, className, multiple = true }) => {
           {preview.map( (url, index) => 
             ( <div 
                 key={url} 
-                className={`img-container-nn ${loading ? 'border-glow' : '' }`}
+                className={`img-container-nn ${loading ? 'border-glow rounded-circle' : '' }`}
                 title="Click para eliminar"
                 style={{width: "170px",height: "170px", transform: "translate(-5%, 50%)"}}
               >

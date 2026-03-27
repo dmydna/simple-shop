@@ -8,10 +8,9 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) 
 {
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
-  // const [userData, setUserData] = useState(null)
   const [role, setRole] = useState(null);
   const [error, setError] = useState(null);
   const [reset, setReset] = useState(false)
@@ -26,18 +25,12 @@ export function AuthProvider({ children })
 
   useEffect (() => {
      if(reset){
-        // setUserData(null)
         setError(null)
         setReset(false)
      }
   },[reset])
 
 
-    // const handleChange = (e) => {
-    //   const { name, value, type } = e.target;
-    //   const val = type === 'number' ? Number(value) : value;
-    //   setUserData({ ...userData, [name]: val });
-    // };
 
    useEffect(() => 
     {
@@ -107,9 +100,6 @@ export function AuthProvider({ children })
            login, 
            logout, 
            isAuth,
-           // handleChange,
-           // userData,
-           // setUserData,
            register, 
            loading, 
            error,

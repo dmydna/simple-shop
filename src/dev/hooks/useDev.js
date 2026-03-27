@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { useFetch } from "../../contexts/useFetch";
+import { useListingContext } from "../../features/listing/contexts/ListingContext";
+import { useProductContext } from "../../features/product/contexts/ProductContext";
+import { useUserContext } from "../../features/user/contexts/UserContext";
 
 export const useDev = () => {
 
@@ -9,6 +12,18 @@ export const useDev = () => {
     const [savedProducts, setSavedProducts] = useState(null)
     const [savedListings, setSavedListings] = useState(null)
     const [savedUsers, setSavedUsers] = useState(null)
+
+    const { fetchData: refreshListings } = useListingContext()
+    const { fetchData: refreshProducts } = useProductContext()
+    const { fetchData: refreshUser} = useUserContext()
+
+    useEffect(()=>{
+        if(savedProducts) refreshProducts()
+        if(savedListings) refreshListings()
+        if(savedUsers) refreshUser()
+    },[savedProducts, savedListings, savedProducts])
+
+
 
     useEffect(() => {
         const SavedProducts = localStorage.getItem("savedProducts");

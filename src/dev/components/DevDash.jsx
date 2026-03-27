@@ -101,7 +101,7 @@ const DevDash = () => {
                         <Col md={12} lg={6}>
                             <DevItem
                                 success={savedListings}
-                                image={ImgGenApi("120x120", color.menta, symbol.code0, 50, "0000")}
+                                image={ImgGenApi("120x120", color.menta, symbol.code0, 50, "000", true)}
                                 title='Publicaciones'
                                 description='Cargar muestra de publicaciones'
                                 cantidad={listingDataList?.length}
@@ -116,7 +116,7 @@ const DevDash = () => {
                         <Col md={12} lg={6}>
                             <DevItem
                                 success={savedUsers}
-                                image={ImgGenApi("120x120", color.limon, symbol.code0, 50, "0000")}
+                                image={ImgGenApi("120x120", color.limon, symbol.code0, 50, "000", true)}
                                 title='Usuarios'
                                 description='Cargar muestra de usuarios'
                                 cantidad={userDataList?.length}
@@ -131,7 +131,7 @@ const DevDash = () => {
                         <Col md={12} lg={6}>
                             <DevItem
                                 success={savedProducts}
-                                image={ImgGenApi("120x120", color.rosa, symbol.code0, 50, "0000")}
+                                image={ImgGenApi("120x120", color.rosa, symbol.code0, 50, "000", true)}
                                 title='Productos'
                                 description='Cargar muestra de productos'
                                 cantidad={productDataList?.length}

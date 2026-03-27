@@ -21,7 +21,7 @@ export const useDev = () => {
         if(savedProducts) refreshProducts()
         if(savedListings) refreshListings()
         if(savedUsers) refreshUser()
-    },[savedProducts, savedListings, savedProducts])
+    },[savedUsers, savedListings, savedProducts])
 
 
 

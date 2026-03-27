@@ -33,7 +33,7 @@ const Activity = ({col, container=true}) => {
                description="cantidad de publicaciones"
                link={`/dashboard/listing`}
                image={
-                ImgGenApi("150x150", color.melon, totalPublications > 99 ? '%2B99' : totalPublications, 50, "0000")
+                ImgGenApi("150x150", color.melon, totalPublications > 99 ? '%2B99' : totalPublications, 70, "000")
               } 
              />
              <CategoryItem 
@@ -44,7 +44,7 @@ const Activity = ({col, container=true}) => {
                description="cantidad de productos"
                link={`/dashboard/product`}
                image={
-                ImgGenApi("150x150", color.lila, totalProducts > 99 ? '%2B99' : totalProducts, 50, "0000")
+                ImgGenApi("150x150", color.lila, totalProducts > 99 ? '%2B99' : totalProducts, 70, "000")
                } 
              />
              <CategoryItem 
@@ -54,7 +54,7 @@ const Activity = ({col, container=true}) => {
                category="usuarios"
                description="cantidad de usuarios"
                image={
-                ImgGenApi("150x150", color.durazno, totalUsers > 99 ? '%2B99' : totalUsers, 50, "0000")} 
+                ImgGenApi("150x150", color.durazno, totalUsers > 99 ? '%2B99' : totalUsers, 70, "000")} 
                link={`/dashboard/clients`}
              />
              <CategoryItem 
@@ -64,7 +64,7 @@ const Activity = ({col, container=true}) => {
                className="border pe-0 rounded-4"
                description="cantidad de ordenes"
                link={`#`}
-               image={ImgGenApi("150x150", color.menta, '0', 50, "0000")} 
+               image={ImgGenApi("150x150", color.menta, '0', 70, "000")} 
              />
            </Row>
         </div>

@@ -2,8 +2,8 @@ export const BASE_URL = "http://localhost:8080"
 export const ENDPOINT = "api/image"
 
 export const symbol = {
-   "code0" : "%7B%20%7D", // { }
-   "code1" : "< />",      
+   "code0" : "F1C9", // { }
+   "code1" : "F2C6" ,      //< />
    "arr"   : "%40" ,      // @
    "hash"  :  "%23" ,     // #
 }
@@ -28,12 +28,15 @@ export const color ={
 } 
 
 
-export function ImgGenApi(dimension, background, text, size, color){
-    return `${BASE_URL}/${ENDPOINT}/${dimension}`+
-           `?background=${background}` +
-           `&text=${text}` +
-           `&fontSize=${size}` +
-           `&fontColor=${color}`
+export function ImgGenApi(dimension, background, text, size, color, isIcon=false){
+    // Valida que text sea un string
+    const finalLabel = isIcon ? `&icon=${text}` : `&text=${text}`;
+
+    return `${BASE_URL}/${ENDPOINT}/${dimension}` +
+        `?background=${background}` +
+        `&fontSize=${size}` + 
+        `&fontWeight=normal` +
+        finalLabel + `&textColor=${color}`;
 }
 
 

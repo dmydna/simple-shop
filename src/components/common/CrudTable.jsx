@@ -3,8 +3,9 @@ import { Button, Card,Table } from 'react-bootstrap';
 import Pagination from '../../features/pagination/components/Pagination.jsx';
 import { Link } from 'react-router-dom';
 import CarritoInput from "../../features/cart/components/CartInput.jsx";
+import { useUIContext } from '../../contexts/UIContext.jsx';
 
-export  const CrudTable = ({children, crudHook, baseHook,  handleclick, className}) => {
+export  const CrudTable = ({children, crudHook, baseHook,  handleclick, iconCrud,className}) => {
 
     const { content, loading ,currentPage, setCurrentPage, totalPages } = baseHook
     const { currentItem } = crudHook
@@ -52,11 +53,11 @@ export  const CrudTable = ({children, crudHook, baseHook,  handleclick, classNam
 
                                     <div className="d-flex align-items-center gap-3">
 
-                                        {item?.thumbnail && (
+                                        {( item?.thumbnail || item?.image || iconCrud) && (
                                             <Card.Img
                                                 style={{ objectFit: 'contain', width: '80px', height: '80px' }} // Altura fija igual al texto
                                                 className="border border-1 rounded flex-shrink-0"
-                                                src={item?.thumbnail}
+                                                src={ item?.thumbnail || item?.image || iconCrud }
                                             />
                                         )}
 

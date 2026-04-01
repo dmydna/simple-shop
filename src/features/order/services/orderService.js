@@ -1,10 +1,11 @@
 // src/services/orderService.js
-import {TOKEN, BASE_URL,ENDPOINTS} from "../../../utils/config.js";
+import { BASE_URL,ENDPOINTS} from "../../../utils/config.js";
 const ENDPOINT = ENDPOINTS.ORDER
 
 export const orderService = {
     // GET ALL: Obtener todos los pedidos
     getAll: async () => {
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
             headers: {'Authorization': `Bearer ${TOKEN}`}
         });
@@ -14,6 +15,7 @@ export const orderService = {
 
     // GET: Obtener un pedido por ID
     getById: async (id) => {
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             headers: {'Authorization': `Bearer ${TOKEN}`}
         });
@@ -22,14 +24,19 @@ export const orderService = {
     },
 
     // POST: Crear un nuevo pedido
-    create: async (productData) => {
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${TOKEN}`
-            },
-            body: JSON.stringify(productData)
+    // solo recibe List<OrderDetailDTO>
+    create: async (orderData, clientId) => {
+        console.log("orderData:", JSON.stringify(orderData))
+        const TOKEN = localStorage.getItem("token")
+        const client = (clientId ? `?clientId=${clientId}` : '') 
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}`+ client, 
+        {
+           method: 'POST',
+           headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${TOKEN}`
+           },
+           body: JSON.stringify(orderData)
         });
         if (!response.ok) throw new Error("Error al crear pedido");
         return await response.json();
@@ -37,6 +44,7 @@ export const orderService = {
 
     // POST: Crear a partir de una lista pedido
     createBulk: async (orderDataList) => {
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/bulk`, {
             method: 'POST',
             headers: {
@@ -51,6 +59,7 @@ export const orderService = {
 
     // PUT: Actualiza pedido por ID
     update: async (id, orderData) => {
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'PUT',
             headers: {
@@ -65,6 +74,7 @@ export const orderService = {
 
     // DELETE: Eliminar un pedido por ID
     delete: async (id) => {
+        const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/api/products/${id}`, {
             method: 'DELETE',
             headers: {'Authorization': `Bearer ${TOKEN}`}
@@ -76,4 +86,4 @@ export const orderService = {
         return response.status === 204 ? 
         { success: true } : await response.json();
     }
-};
+}

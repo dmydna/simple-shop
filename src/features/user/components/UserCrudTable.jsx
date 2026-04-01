@@ -6,6 +6,7 @@ import {useUserContext} from "../contexts/UserContext.jsx";
 import CrudTable from "../../../components/common/CrudTable.jsx";
 import {CRUD} from "../../../utils/crud.js";
 import { useUserCrud } from '../contexts/UserCrudContext.jsx';
+import { ImgGenApi } from '../../../dev/utils.js';
 
 export  const UserCrudTable = ({children}) => {
 
@@ -15,12 +16,22 @@ export  const UserCrudTable = ({children}) => {
   const { setShowCrud, setCrudMode, setItemHash, dataItem ,
     setExpandx, setDataItem, openEdit:openEditModal }  = crudHook
 
+      const baseImg = {
+        "icon": "bi-person-fill",
+        "dimension": "150x150", 
+        "fontSize": "70",
+        "textColor": "fff",
+        "background": "ddd",
+      }
+    
+      const iconCrud = ImgGenApi({...baseImg })
 
   return (
       <CrudTable
           className='shadow-sm border rounded p-3 island'
           crudHook={crudHook}
           baseHook={baseHook}
+          iconCrud={iconCrud}
           handleclick={(item) =>openEditModal(item)}>
         {(key, item)=>{
           if(key=='name'){

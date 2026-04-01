@@ -1,5 +1,6 @@
 import { Card } from "react-bootstrap";
 import { useUser } from "../hooks/ProfileContext.jsx";
+import { ImgGenApi } from "../../../dev/utils.js";
 
 function CardProfile({ name, image, children, className, imgSize }) {
 
@@ -8,7 +9,7 @@ function CardProfile({ name, image, children, className, imgSize }) {
   return (
     <Card  className={`mb-4 island border text-center`}>
       <div className="d-block mx-auto position-relative">
-        <Card.Img className="perfil-img" src={profile?.image || "https://dummyimage.com/300x300/dadada/"}
+        <Card.Img className="perfil-img" src={profile?.image || ImgGenApi("300x300", "limon", "bi-person", "000")}
           style={{
             objectFit: 'cover',
             height: imgSize || '215px',

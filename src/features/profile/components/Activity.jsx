@@ -9,11 +9,17 @@ import { useUserContext } from "../../user/contexts/UserContext.jsx";
 
 const Activity = ({col, container=true}) => {
 
-
   const {totalElements: totalPublications} = useListingContext()
   const {totalElements: totalProducts} = useProductContext()
   const {totalElements: totalUsers} = useUserContext()
-    
+  
+  const imgInfo =  { 
+     "dimension":"150x150", 
+     "textColor": "melon", 
+     "fontSize": "70",
+     "fontWeight":"normal",
+     "text": "0",
+   }
 
     return (
         <div className={` ${container ? 'mt-4 container' : '' }`}>
@@ -33,8 +39,9 @@ const Activity = ({col, container=true}) => {
                description="cantidad de publicaciones"
                link={`/dashboard/listing`}
                image={
-                ImgGenApi("150x150", color.melon, totalPublications > 99 ? '%2B99' : totalPublications, 70, "000")
-              } 
+                ImgGenApi({ ...imgInfo, "background": ".melon", 
+                  "text": (totalPublications && totalPublications > 99 ? '%2B99' : totalPublications) || "0"} )
+                } 
              />
              <CategoryItem 
                // variant="primary"
@@ -44,7 +51,8 @@ const Activity = ({col, container=true}) => {
                description="cantidad de productos"
                link={`/dashboard/product`}
                image={
-                ImgGenApi("150x150", color.lila, totalProducts > 99 ? '%2B99' : totalProducts, 70, "000")
+                ImgGenApi({ ...imgInfo, "background": ".lila", 
+                  "text": (totalProducts > 99 ? '%2B99' : totalProducts) || "0"})
                } 
              />
              <CategoryItem 
@@ -53,8 +61,9 @@ const Activity = ({col, container=true}) => {
                className="border rounded-4"
                category="usuarios"
                description="cantidad de usuarios"
-               image={
-                ImgGenApi("150x150", color.durazno, totalUsers > 99 ? '%2B99' : totalUsers, 70, "000")} 
+               image={ ImgGenApi(
+                { ...imgInfo, "background": ".cielo",  "text": (totalUsers && totalUsers > 99 ? '%2B99' : totalUsers) || 0 } 
+                )}
                link={`/dashboard/clients`}
              />
              <CategoryItem 
@@ -64,7 +73,7 @@ const Activity = ({col, container=true}) => {
                className="border pe-0 rounded-4"
                description="cantidad de ordenes"
                link={`#`}
-               image={ImgGenApi("150x150", color.menta, '0', 70, "000")} 
+               image={ ImgGenApi({ ...imgInfo, "background": ".menta" } )}
              />
            </Row>
         </div>

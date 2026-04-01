@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useListingContext } from "../../listing/contexts/ListingContext.jsx";
 import cartItem from "../components/CartItem.jsx";
 
@@ -225,6 +225,7 @@ export function CarritoProvider({ children }) {
   }
 
   useEffect(() => {
+    console.log(cartItems)
     if (cartItems.length != 0) {
       setTotalPrice(
         cartItems.reduce(
@@ -235,9 +236,22 @@ export function CarritoProvider({ children }) {
   }, [cartItems]);
   
 
+  const orderData = useMemo(()=>({
+        "details" : cartItems.map((item)=> ({
+            "productId": item?.productId,
+            "listingId": item?.id,
+            "name": item?.productName,
+            "quantity": item?.stock,
+            "priceAtPurcharse": item?.price
+        })),
+        "totalAmount": totalPrice,
+  }),[totalPrice, cartItems]) 
+
+
   return (
     <CartContext.Provider 
-    value={{  increaseCartItem,  
+    value={{  
+         increaseCartItem,  
          decreaseCartItem, 
          removeFromCart, 
          cartItems, 
@@ -252,7 +266,9 @@ export function CarritoProvider({ children }) {
          addToCart,
          couponDiscount,
          setCantidadCartItem, 
-         setCouponDiscount}}>
+         setCouponDiscount, 
+         orderData
+         }}>
       {children}
     </CartContext.Provider>
   )

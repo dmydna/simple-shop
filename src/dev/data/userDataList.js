@@ -1,11 +1,20 @@
 import { authService } from "../../features/auth/services/authService.js";
 import { handleBulk, ImgGenApi, color, symbol } from "../utils.js";
 
+
+const baseImg = {
+    "icon": "bi-person",
+    "dimension": "150x150", 
+    "fontSize": "70",
+    "textColor": "fff",
+    "background": ".menta",
+}
+
 export const userDataList = [
     {
         "username": "john_doe",
         "password": "SecurePass123!",       
-        "image":    ImgGenApi("150x150", color.menta, symbol.code0, 50, "000", true) ,
+        "image":   ImgGenApi({...baseImg}) ,
         "email": "john@example.com",
         "firstName": "John",
         "lastName": "Doe",
@@ -16,7 +25,7 @@ export const userDataList = [
         "username": "jane_smith",
         "password": "SecurePass456!",
         "email": "jane@example.com",
-        "image":  ImgGenApi("150x150", color.melon, symbol.hash, 50, "000"),
+        "image":  ImgGenApi({...baseImg, "background":".melon"}),
         "firstName": "Jane",
         "lastName": "Smith",
         "phone": "+0987654321",
@@ -26,7 +35,7 @@ export const userDataList = [
         "username": "carlos_lopez",
         "password": "SecurePass789!",
         "email": "carlos@example.com",
-        "image":  ImgGenApi("150x150", color.limon, symbol.arr, 50, "000"),
+        "image":  ImgGenApi({...baseImg, "background":".limon"}),
         "firstName": "Carlos",
         "lastName": "López",
         "phone": "+5555555555",
@@ -36,7 +45,7 @@ export const userDataList = [
         "username": "user001",
         "password": "Pass123!user001",
         "email": "user001@example.com",
-        "image":  ImgGenApi("150x150", color.plain, symbol.arr, 50, "000"),
+        "image":  ImgGenApi({...baseImg, "background":".plain"}),
         "firstName": "Alice",
         "lastName": "Johnson",
         "phone": "+12025550101",
@@ -46,7 +55,7 @@ export const userDataList = [
         "username": "user002",
         "password": "Pass123!user002",
         "email": "user002@example.com",
-        "image":  ImgGenApi("150x150", color.rosa, symbol.code1, 50, "000",true),
+        "image":  ImgGenApi({...baseImg, "background":".rosa"}),
         "firstName": "Bob",
         "lastName": "Smith",
         "phone": "+12025550102",
@@ -56,7 +65,7 @@ export const userDataList = [
         "username": "user003",
         "password": "Pass123!user003",
         "email": "user003@example.com",
-        "image":  ImgGenApi("150x150", color.lavanda, symbol.hash, 50, "000"),
+        "image":  ImgGenApi({...baseImg, "background":".manteca"}),
         "firstName": "Carol",
         "lastName": "Williams",
         "phone": "+12025550103",
@@ -66,7 +75,7 @@ export const userDataList = [
         "username": "user004",
         "password": "Pass123!user004",
         "email": "user004@example.com",
-        "image":  ImgGenApi("150x150", color.menta, symbol.arr, 50, "000"),
+        "image":  ImgGenApi({...baseImg, "background":".rosa"}),
         "firstName": "David",
         "lastName": "Brown",
         "phone": "+12025550104",
@@ -75,7 +84,7 @@ export const userDataList = [
     {
         "username": "user005",
         "password": "Pass123!user005",
-        "image":  ImgGenApi("150x150", color.pera, symbol.code1, 50, "000",true),
+        "image":  ImgGenApi({...baseImg, "background":".melon"}),
         "email": "user005@example.com",
         "firstName": "Eve",
         "lastName": "Jones",
@@ -85,7 +94,7 @@ export const userDataList = [
     {
         "username": "user006",
         "password": "Pass123!user006",
-        "image":  ImgGenApi("150x150", color.durazno, symbol.arr, 50, "000"),
+        "image":  ImgGenApi({...baseImg, "background":".durazno"}),
         "email": "user006@example.com",
         "firstName": "Frank",
         "lastName": "Garcia",
@@ -95,7 +104,7 @@ export const userDataList = [
     {
         "username": "user001a",
         "password": "Pass123!user001",
-        "image":  ImgGenApi("150x150", color.coral, symbol.hash, 50, "000"),
+        "image":  ImgGenApi({...baseImg, "background":".coral"}),
         "email": "user001@example.com",
         "firstName": "Alice",
         "lastName": "Johnson",
@@ -104,7 +113,7 @@ export const userDataList = [
     },
     {
         "username": "user002b",
-        "image":  ImgGenApi("150x150", color.malva, symbol.hash, 50, "000"),
+        "image":  ImgGenApi({...baseImg, "background":".malva"}),
         "password": "Pass123!user002",
         "email": "user002@example.com",
         "firstName": "Bob",
@@ -115,7 +124,7 @@ export const userDataList = [
     {
         "username": "user003c",
         "password": "Pass123!user003",
-        "image":  ImgGenApi("150x150", color.celeste, symbol.hash, 50, "000"),
+        "image":  ImgGenApi({...baseImg, "background":".malva"}),
         "email": "user003@example.com",
         "firstName": "Carol",
         "lastName": "Williams",
@@ -125,7 +134,7 @@ export const userDataList = [
     {
         "username": "user004d",
         "password": "Pass123!user004",
-        "image":  ImgGenApi("150x150", color.aqua, symbol.code1, 50, "000",true),
+        "image":  ImgGenApi({...baseImg, "background":".aqua"}),
         "email": "user004@example.com",
         "firstName": "David",
         "lastName": "Brown",
@@ -135,7 +144,7 @@ export const userDataList = [
     {
         "username": "user005e",
         "password": "Pass123!user005",
-        "image":  ImgGenApi("150x150", color.menta, symbol.hash, 50, "000"),
+        "image":  ImgGenApi({...baseImg }),
         "email": "user005@example.com",
         "firstName": "Eve",
         "lastName": "Jones",
@@ -145,7 +154,7 @@ export const userDataList = [
     {
         "username": "user006f",
         "password": "Pass123!user006",
-        "image":  ImgGenApi("150x150", color.limon, symbol.hash, 50, "000"),
+        "image":  ImgGenApi({...baseImg, "background":".limon"}),
         "email": "user006@example.com",
         "firstName": "Frank",
         "lastName": "Garcia",
@@ -155,7 +164,7 @@ export const userDataList = [
     {
         "username": "user007g",
         "password": "Pass123!user007",
-        "image":  ImgGenApi("150x150", color.melon, symbol.arr, 50, "000"),
+        "image":  ImgGenApi({...baseImg}),
         "email": "user007@example.com",
         "firstName": "Grace",
         "lastName": "Martinez",
@@ -165,7 +174,7 @@ export const userDataList = [
     {
         "username": "user008h",
         "password": "Pass123!user008",
-        "image":  ImgGenApi("150x150", color.menta, symbol.code1, 50, "000",true),
+        "image":  ImgGenApi({...baseImg, "background":".rosa"}),
         "email": "user008@example.com",
         "firstName": "Henry",
         "lastName": "Lopez",
@@ -175,7 +184,7 @@ export const userDataList = [
     {
         "username": "user009i",
         "password": "Pass123!user009",
-        "image":  ImgGenApi("150x150", color.lila, symbol.hash, 50, "000"),
+        "image":  ImgGenApi({...baseImg, "background":".celeste"}),
         "email": "user009@example.com",
         "firstName": "Ivy",
         "lastName": "Hernandez",
@@ -185,7 +194,7 @@ export const userDataList = [
     {
         "username": "user010j",
         "password": "Pass123!user010",
-        "image":  ImgGenApi("150x150", color.manteca, symbol.arr, 50, "000"),
+        "image":  ImgGenApi({...baseImg}),
         "email": "user010@example.com",
         "firstName": "Jack",
         "lastName": "Gonzalez",

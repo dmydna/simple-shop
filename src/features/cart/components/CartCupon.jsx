@@ -9,6 +9,7 @@ function CartCupon({title, check, onCheck}){
     const [placehoder, setPlacehoder] = useState("Ingresa cupon..")
     const [error, setError] = useState(false)
     const {couponDiscount, setCouponDiscount} = useCart()
+    const [hide, setHide] = useState(false)
 
   
     
@@ -36,9 +37,13 @@ function CartCupon({title, check, onCheck}){
 
 
     return(
-        <Card className="m-2 p-4 island" >
-        <Card.Text className="h5 py-3 fw-bold text-secondary">
-            {title}
+        <Card className={`m-2 p-4  island  ${hide ? 'd-none': ''}`} >
+        <Card.Text className="h5 fw-bold text-secondary">
+            <div className="d-flex justify-content-between">
+                <span>{title}</span>
+                <i onClick={()=>setHide(prev=>!prev) } className="btn bi bi-x-lg"></i>
+            </div>
+
         </Card.Text>
         <Form onSubmit={handleSubmit} className={(error ? 'form-error': '')}>
         <InputGroup className="align-items-center">

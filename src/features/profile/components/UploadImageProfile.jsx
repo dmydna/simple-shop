@@ -4,10 +4,10 @@ import "../../../styles/animations.css";
 import { useProfile } from "../hooks/ProfileContext.jsx";
 
 
-const UploadImageProfile = ({ title, className, multiple = true }) => {
+const UploadImageProfile = ({ title, className, multiple = true, previewImg }) => {
 
   const [selectedFile, setSelectedFile] = useState([]);
-  const [preview, setPreview] = useState(["http://localhost:8080/api/image/300x300?background=dadada"]);
+  const [preview, setPreview] = useState(["http://localhost:8080/api/image/150x150?&background=cccc&icon=F429&fontSize=70&textColor=fff"]);
   const fileInputRef = useRef(null);
   const { updateImage, loading } = useProfile();
 
@@ -45,8 +45,7 @@ const UploadImageProfile = ({ title, className, multiple = true }) => {
   return (
     // CAMBIO: Usamos Form de react-bootstrap que renderiza una etiqueta <form> real
     <>
-        <Form 
-          style={{ minHeight: '470px' }} 
+        <Form  
           id='userPerfilForm' 
           className={`upload-form rounded ${className}`}>
       <div className='h4 mb-3'>{title}</div>
@@ -63,7 +62,7 @@ const UploadImageProfile = ({ title, className, multiple = true }) => {
       </Form.Group>
 
       {/* Vista previa */}
-      <div style={{transform: '300px'}} >
+      <div className='my-5' style={{transform: '300px'}} >
       {preview && (
         <div className="d-flex mb-3 text-center justify-content-center">
           {preview.map( (url, index) => 
@@ -71,7 +70,7 @@ const UploadImageProfile = ({ title, className, multiple = true }) => {
                 key={url} 
                 className={`img-container-nn ${loading ? 'border-glow rounded-circle' : '' }`}
                 title="Click para eliminar"
-                style={{width: "170px",height: "170px", transform: "translate(-5%, 50%)"}}
+                style={{width: "170px",height: "170px"}}
               >
                   <img 
                     src={url} 

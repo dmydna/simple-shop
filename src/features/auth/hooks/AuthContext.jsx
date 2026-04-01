@@ -27,6 +27,7 @@ export function AuthProvider({ children })
      if(reset){
         setError(null)
         setReset(false)
+        setLoading(false)
      }
   },[reset])
 

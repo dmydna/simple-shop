@@ -18,6 +18,8 @@ export function UIProvider({ children }) {
     const [showFilter, onHideFilter] = useState(false)
     const [selectedTags, setSelectedTags] = useState([]);
 
+    const [iconCrud, setIconCrud] = useState()
+
     const isDesktop = useMediaQuery({ minWidth: 768 });
     useEffect(() => {
       if (!isDesktop) onHideMenu(false);
@@ -45,7 +47,8 @@ export function UIProvider({ children }) {
             onHideMenu,
             showFilter, 
             onHideFilter,
-            selectedTags, setSelectedTags
+            selectedTags, setSelectedTags,
+            iconCrud, setIconCrud
           }}>
           {children}
           <LoginModal 

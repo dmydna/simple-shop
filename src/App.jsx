@@ -33,6 +33,8 @@ import ListingCrudNext from "./pages/CrudNext/ListingCrudNext.jsx";
 import ProductCrudNext from "./pages/CrudNext/ProductCrudNext.jsx";
 import UserCrudNext from "./pages/CrudNext/UserCrudNext.jsx";
 import { DevProvider } from "./dev/contexts/DevContext.jsx";
+import PaymentForm from "./features/payment/components/PaymentForm.jsx";
+
 
 
 
@@ -50,7 +52,8 @@ function App() {
         location.pathname.startsWith('/login') ||
         location.pathname.startsWith('/contacto') ||
         location.pathname.startsWith('/auth') ||
-        location.pathname.startsWith('/register') )
+        location.pathname.startsWith('/register')
+      )
      {
       document.querySelector('body')?.classList.add('bg-full-heaven')
     }else{
@@ -91,8 +94,9 @@ function App() {
             </ProtectedRoute>}>
           </Route>
           <Route path="/contacto" element={<Contact />} />
-          <Route path="/carrito"   element={<Carrito/>} />
-          <Route path="/carrito/:buy" element={<Carrito/>} />
+
+
+
          <Route path="/test" element={ <PageLoading /> }></Route>
          <Route path="/test/tags" element={
              <TagsList
@@ -133,6 +137,10 @@ function App() {
                  <ProductCrudNext />
               </> 
             } 
+          />
+          <Route path="/cart" element={<Carrito/>} />
+          <Route path="/cart/:buy" element={ 
+            <PaymentForm />} 
           />
           <Route path="/productos" element={
               <Products/>

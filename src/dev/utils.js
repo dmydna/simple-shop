@@ -1,6 +1,18 @@
 export const BASE_URL = "http://localhost:8080"
 export const ENDPOINT = "api/image"
 
+
+export const bi_icons = {
+  "bi-person" : "F4E1",
+  "bi-person-fill" : "F4DA",
+  "bi-braces" : "F1C9",    // { }
+  "bi-code"   : "F2C8",    // < > 
+  "bi-code-slash": "F2C6", // < />
+  "bi-hash": "F40A",        // #
+  "bi-at": "F152",          // @
+  "default":"F152"
+}
+
 export const symbol = {
    "code0" : "F1C9", // { }
    "code1" : "F2C6" ,      //< />
@@ -9,34 +21,57 @@ export const symbol = {
 }
 
 export const color ={
-     "plain"    : "2999FFB",
-     "melon"    : "FFE5B4",
-     "menta"    : "B2F2BB",
-     "lavanda"  : "C7CEEA",
-     "limon"    : "FFFACD",
-     "rosa"     : "FFD6E0",
-     "cielo"    : "B5D8F7",
-     "lila"     : "E6CCFF",
-     "coral"    : "FFCBA4",
-     "aqua"     : "B2EBF2",
-     "manteca"  : "FFF5B7",
-     "salmon"   : "FFB7B2",
-     "pera"     : "D4F1A0",
-     "malva"    : "F2C4CE",
-     "celeste"  : "C9E8FF",
-     "durazno"  : "FFDAC1",
+     ".melon"    : "FFE5B4",
+     ".menta"    : "B2F2BB",
+     ".lavanda"  : "C7CEEA",
+     ".limon"    : "FFFACD",
+     ".rosa"     : "FFD6E0",
+     ".cielo"    : "B5D8F7",
+     ".lila"     : "E6CCFF",
+     ".coral"    : "FFCBA4",
+     ".aqua"     : "B2EBF2",
+     ".manteca"  : "FFF5B7",
+     ".salmon"   : "FFB7B2",
+     ".pera"     : "D4F1A0",
+     ".malva"    : "F2C4CE",
+     ".celeste"  : "C9E8FF",
+     ".durazno"  : "FFDAC1",
 } 
 
 
-export function ImgGenApi(dimension, background, text, size, color, isIcon=false){
-    // Valida que text sea un string
-    const finalLabel = isIcon ? `&icon=${text}` : `&text=${text}`;
+const funColor = (c) => {
+  const t = c + ""
+  if(t.startsWith(".")){ return color[t] || "cccc" }
+  return t
+}
 
-    return `${BASE_URL}/${ENDPOINT}/${dimension}` +
-        `?background=${background}` +
-        `&fontSize=${size}` + 
-        `&fontWeight=normal` +
-        finalLabel + `&textColor=${color}`;
+const funIcon = (i) => { 
+  const t = i + ""
+  if(t.startsWith("bi-")){ return bi_icons[t] || "F152" }
+  return i 
+}
+
+
+export function ImgGenApi(
+  { 
+    dimension = "120x120", 
+    text, 
+    icon, 
+    fontSize, 
+    background, 
+    textColor, 
+    fontWeight
+  }){
+    // Valida que text sea un string
+    const finalText = text ? `text=${text}` : '';
+    const finalIcon = icon ? `&icon=${funIcon(icon)}` : '';
+    const finalBg   = background ?  `&background=${funColor(background)}` : '' 
+    const finaltextColor = textColor ? `&textColor=${funColor(textColor)}` : ''
+    const finalWeight = fontWeight ? `&fontWeight=${fontWeight}` : ''
+    const finalFontSize = fontSize ? `&fontSize=${fontSize}` : ''
+
+    return `${BASE_URL}/${ENDPOINT}/${dimension}?` 
+    + finalText + finalBg +finalIcon + finalWeight + finalFontSize + finaltextColor ;
 }
 
 

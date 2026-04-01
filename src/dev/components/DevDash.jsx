@@ -3,9 +3,9 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useDevContext } from "../contexts/DevContext.jsx";
 import { listingDataList, listingSaveAll } from "../data/listingDataList.js";
-import { productDataList, productSaveAll } from "../data/productDataList,js";
+import { productDataList, productSaveAll } from "../data/productDataList.js";
 import { userDataList, userSaveAll } from "../data/userDataList.js";
-import { ImgGenApi, color, symbol } from "../utils.js";
+import { ImgGenApi } from "../utils.js";
 import DevItem from "./DevItem.jsx";
 
 
@@ -79,6 +79,15 @@ const DevDash = () => {
     }
 
 
+    const imgInfo = {
+        "icon": "bi-braces",
+        "dimension": "120x120",
+        "background": ".menta",
+        "fontColor":"000",
+        "fontWeight": "normal",
+        "fontSize":70,
+    }
+
     return (
             <>
                 <Container className="mt-4">
@@ -101,7 +110,7 @@ const DevDash = () => {
                         <Col md={12} lg={6}>
                             <DevItem
                                 success={savedListings}
-                                image={ImgGenApi("120x120", color.menta, symbol.code0, 50, "000", true)}
+                                image={ImgGenApi({...imgInfo, "background": ".menta"})}
                                 title='Publicaciones'
                                 description='Cargar muestra de publicaciones'
                                 cantidad={listingDataList?.length}
@@ -116,7 +125,7 @@ const DevDash = () => {
                         <Col md={12} lg={6}>
                             <DevItem
                                 success={savedUsers}
-                                image={ImgGenApi("120x120", color.limon, symbol.code0, 50, "000", true)}
+                                image={ImgGenApi({...imgInfo, "background": ".limon"})}
                                 title='Usuarios'
                                 description='Cargar muestra de usuarios'
                                 cantidad={userDataList?.length}
@@ -131,7 +140,7 @@ const DevDash = () => {
                         <Col md={12} lg={6}>
                             <DevItem
                                 success={savedProducts}
-                                image={ImgGenApi("120x120", color.rosa, symbol.code0, 50, "000", true)}
+                                image={ImgGenApi({...imgInfo, "background": ".rosa"})}
                                 title='Productos'
                                 description='Cargar muestra de productos'
                                 cantidad={productDataList?.length}

@@ -23,6 +23,10 @@ export default function UserProfile() {
         fetchData()
     }, [])
 
+	useEffect(()=>{
+     console.log([profile?.image])
+   },[profile])
+
     useEffect(() => {
 
         switch (page) {
@@ -93,7 +97,11 @@ export default function UserProfile() {
                         </PasswordProfile>
                     )}
                     {secction && secction == "image" && (
-                        <UploadImageProfile multiple={false} title={"Cambiar Imagen de profile"}></UploadImageProfile>
+                        <UploadImageProfile 
+                            multiple={false} 
+                            title={"Cambiar Imagen de profile"}
+                            previewImg={[profile?.image]}
+                         ></UploadImageProfile>
                     )}
 
                 </Col>

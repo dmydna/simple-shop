@@ -1,11 +1,11 @@
 import BuyNowButton from "../../../components/common/BuyNowButton.jsx";
-import {Card} from "react-bootstrap";
+import {Card, Button} from "react-bootstrap";
 import {useWindowsHeight, useWindowsWidth} from "../../../contexts/useWindowSize.jsx";
 import {useCart} from "../contexts/CartContext.jsx";
 import React, {useMemo, useState} from "react";
 import {useMatch} from "react-router-dom";
 
-export const MyOrderCart = ({check, oncheck, modalShow, onModalShow}) => {
+export const MyOrderCart = ({check, oncheck, handle}) => {
 
     const {totalPrice, cartItems, couponDiscount} = useCart()
 
@@ -25,8 +25,8 @@ export const MyOrderCart = ({check, oncheck, modalShow, onModalShow}) => {
     }, [check, totalPrice]);
 
     return (
-        <Card style={{top: (width > 900 ? "55px" : 0)  }}
-                   className={` sticky-md-top m-2 p-4 island`} >
+        <Card // style={{top: (width > 900 ? "55px" : 0)  }}
+                   className={`m-2 p-4 island`} >
             <Card.Text className="h5 fw-bold text-secondary py-2">
                 Mi pedido
             </Card.Text>
@@ -68,15 +68,15 @@ export const MyOrderCart = ({check, oncheck, modalShow, onModalShow}) => {
                 </Card.Text>
             </div>
 
-            <BuyNowButton
-                handle={() => { onModalShow(true) }}
+            {/* <BuyNowButton
+                handle={handle}
                 variant={buyMatch ? 'danger' : 'primary'}
             >
                 {buyMatch ?
                     "Confirma Compra" :
-                    "Finalizar Compra"}
+                    "Continuar Compra"}
 
-            </BuyNowButton>
+            </BuyNowButton> */}
         </Card>
     );
 }

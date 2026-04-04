@@ -1,5 +1,6 @@
 import { listingService } from "../../features/listing/services/listingService.js";
 import { handleBulk } from "../utils.js";
+import { BASE_URL_IMG } from "../../utils/config.js"
 
 
 export const listingDataList = [
@@ -56,12 +57,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "5784719087687",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp"
+        `${BASE_URL_IMG}/product-images/beauty/essence-mascara-lash-princess/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp`
     },
 	{
       "title": "Glamour Beauty - Eyeshadow Palette with Mirror",
@@ -116,12 +117,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "9170275171413",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/1.webp"
+        `${BASE_URL_IMG}/product-images/beauty/eyeshadow-palette-with-mirror/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp`
     },
     {
       "title": "Velvet Touch - Powder Canister",
@@ -176,12 +177,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "8418883906837",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/beauty/powder-canister/1.webp"
+        `${BASE_URL_IMG}/product-images/beauty/powder-canister/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/beauty/powder-canister/thumbnail.webp`
     },
     {
       "title": "Chic Cosmetics - Red Lipstick",
@@ -236,12 +237,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "9467746727219",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/1.webp"
+        `${BASE_URL_IMG}/product-images/beauty/red-lipstick/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/beauty/red-lipstick/thumbnail.webp`
     },
     {
       "title": "Nail Couture - Red Nail Polish",
@@ -296,12 +297,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "4063010628104",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/1.webp"
+        `${BASE_URL_IMG}/product-images/beauty/red-nail-polish/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/beauty/red-nail-polish/thumbnail.webp`
     },
     {
       "title": "Calvin Klein - CK One",
@@ -356,14 +357,14 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "2451534060749",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/1.webp",
-        "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/2.webp",
-        "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/3.webp"
+        `${BASE_URL_IMG}/product-images/fragrances/calvin-klein-ck-one/1.webp`,
+        `${BASE_URL_IMG}/product-images/fragrances/calvin-klein-ck-one/2.webp`,
+        `${BASE_URL_IMG}/product-images/fragrances/calvin-klein-ck-one/3.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/fragrances/calvin-klein-ck-one/thumbnail.webp`
     },
     {
       "title": "Chanel - Coco Noir Eau De",
@@ -418,14 +419,14 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "4091737746820",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/1.webp",
-        "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/2.webp",
-        "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/3.webp"
+        `${BASE_URL_IMG}/product-images/fragrances/chanel-coco-noir-eau-de/1.webp`,
+        `${BASE_URL_IMG}/product-images/fragrances/chanel-coco-noir-eau-de/2.webp`,
+        `${BASE_URL_IMG}/product-images/fragrances/chanel-coco-noir-eau-de/3.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp`
     },
     {
       "title": "Dior - J'adore",
@@ -480,14 +481,14 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "1445086097250",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/1.webp",
-        "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/2.webp",
-        "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/3.webp"
+        `${BASE_URL_IMG}/product-images/fragrances/dior-j'adore/1.webp`,
+        `${BASE_URL_IMG}/product-images/fragrances/dior-j'adore/2.webp`,
+        `${BASE_URL_IMG}/product-images/fragrances/dior-j'adore/3.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/fragrances/dior-j'adore/thumbnail.webp`
     },
     {
       "title": "Dolce & Gabbana - Dolce Shine Eau de",
@@ -542,14 +543,14 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "3023868210708",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/fragrances/dolce-shine-eau-de/1.webp",
-        "https://cdn.dummyjson.com/product-images/fragrances/dolce-shine-eau-de/2.webp",
-        "https://cdn.dummyjson.com/product-images/fragrances/dolce-shine-eau-de/3.webp"
+        `${BASE_URL_IMG}/product-images/fragrances/dolce-shine-eau-de/1.webp`,
+        `${BASE_URL_IMG}/product-images/fragrances/dolce-shine-eau-de/2.webp`,
+        `${BASE_URL_IMG}/product-images/fragrances/dolce-shine-eau-de/3.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/dolce-shine-eau-de/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/fragrances/dolce-shine-eau-de/thumbnail.webp`
     },
     {
       "title": "Gucci Bloom Eau de",
@@ -604,14 +605,14 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "3170832177880",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/fragrances/gucci-bloom-eau-de/1.webp",
-        "https://cdn.dummyjson.com/product-images/fragrances/gucci-bloom-eau-de/2.webp",
-        "https://cdn.dummyjson.com/product-images/fragrances/gucci-bloom-eau-de/3.webp"
+        `${BASE_URL_IMG}/product-images/fragrances/gucci-bloom-eau-de/1.webp`,
+        `${BASE_URL_IMG}/product-images/fragrances/gucci-bloom-eau-de/2.webp`,
+        `${BASE_URL_IMG}/product-images/fragrances/gucci-bloom-eau-de/3.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/gucci-bloom-eau-de/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/fragrances/gucci-bloom-eau-de/thumbnail.webp`
     },
     {
       "title": "Annibale Colombo Bed",
@@ -666,14 +667,14 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "3610757456581",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/1.webp",
-        "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/2.webp",
-        "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/3.webp"
+        `${BASE_URL_IMG}/product-images/furniture/annibale-colombo-bed/1.webp`,
+        `${BASE_URL_IMG}/product-images/furniture/annibale-colombo-bed/2.webp`,
+        `${BASE_URL_IMG}/product-images/furniture/annibale-colombo-bed/3.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/furniture/annibale-colombo-bed/thumbnail.webp`
     },
     {
       "title": "Annibale Colombo Sofa",
@@ -728,14 +729,14 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "1777662847736",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/1.webp",
-        "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/2.webp",
-        "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/3.webp"
+        `${BASE_URL_IMG}/product-images/furniture/annibale-colombo-sofa/1.webp`,
+        `${BASE_URL_IMG}/product-images/furniture/annibale-colombo-sofa/2.webp`,
+        `${BASE_URL_IMG}/product-images/furniture/annibale-colombo-sofa/3.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/furniture/annibale-colombo-sofa/thumbnail.webp`
     },
     {
       "title": "Furniture Co. - Bedside Table African Cherry",
@@ -790,14 +791,14 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "6441287925979",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/furniture/bedside-table-african-cherry/1.webp",
-        "https://cdn.dummyjson.com/product-images/furniture/bedside-table-african-cherry/2.webp",
-        "https://cdn.dummyjson.com/product-images/furniture/bedside-table-african-cherry/3.webp"
+        `${BASE_URL_IMG}/product-images/furniture/bedside-table-african-cherry/1.webp`,
+        `${BASE_URL_IMG}/product-images/furniture/bedside-table-african-cherry/2.webp`,
+        `${BASE_URL_IMG}/product-images/furniture/bedside-table-african-cherry/3.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/bedside-table-african-cherry/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/furniture/bedside-table-african-cherry/thumbnail.webp`
     },
     {
       "title": "Knoll - Saarinen Executive Conference Chair",
@@ -852,14 +853,14 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "8919386859966",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/furniture/knoll-saarinen-executive-conference-chair/1.webp",
-        "https://cdn.dummyjson.com/product-images/furniture/knoll-saarinen-executive-conference-chair/2.webp",
-        "https://cdn.dummyjson.com/product-images/furniture/knoll-saarinen-executive-conference-chair/3.webp"
+        `${BASE_URL_IMG}/product-images/furniture/knoll-saarinen-executive-conference-chair/1.webp`,
+        `${BASE_URL_IMG}/product-images/furniture/knoll-saarinen-executive-conference-chair/2.webp`,
+        `${BASE_URL_IMG}/product-images/furniture/knoll-saarinen-executive-conference-chair/3.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/knoll-saarinen-executive-conference-chair/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/furniture/knoll-saarinen-executive-conference-chair/thumbnail.webp`
     },
     {
       "title": "Bath Trends - Wooden Bathroom Sink With Mirror",
@@ -914,14 +915,14 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "1958104402873",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/furniture/wooden-bathroom-sink-with-mirror/1.webp",
-        "https://cdn.dummyjson.com/product-images/furniture/wooden-bathroom-sink-with-mirror/2.webp",
-        "https://cdn.dummyjson.com/product-images/furniture/wooden-bathroom-sink-with-mirror/3.webp"
+        `${BASE_URL_IMG}/product-images/furniture/wooden-bathroom-sink-with-mirror/1.webp`,
+        `${BASE_URL_IMG}/product-images/furniture/wooden-bathroom-sink-with-mirror/2.webp`,
+        `${BASE_URL_IMG}/product-images/furniture/wooden-bathroom-sink-with-mirror/3.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/wooden-bathroom-sink-with-mirror/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/furniture/wooden-bathroom-sink-with-mirror/thumbnail.webp`
     },
     {
       "title": "Apple",
@@ -974,12 +975,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "7962803553314",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/apple/1.webp"
+        `${BASE_URL_IMG}/product-images/groceries/apple/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/apple/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/apple/thumbnail.webp`
     },
     {
       "title": "Beef Steak",
@@ -1032,12 +1033,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "5640063409695",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/beef-steak/1.webp"
+        `${BASE_URL_IMG}/product-images/groceries/beef-steak/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/beef-steak/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/beef-steak/thumbnail.webp`
     },
     {
       "title": "Cat Food",
@@ -1091,12 +1092,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "1483991328610",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/cat-food/1.webp"
+        `${BASE_URL_IMG}/product-images/groceries/cat-food/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/cat-food/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/cat-food/thumbnail.webp`
     },
     {
       "title": "Chicken Meat",
@@ -1149,13 +1150,13 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "8829514594521",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/chicken-meat/1.webp",
-        "https://cdn.dummyjson.com/product-images/groceries/chicken-meat/2.webp"
+        `${BASE_URL_IMG}/product-images/groceries/chicken-meat/1.webp`,
+        `${BASE_URL_IMG}/product-images/groceries/chicken-meat/2.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/chicken-meat/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/chicken-meat/thumbnail.webp`
     },
     {
       "title": "Cooking Oil",
@@ -1208,12 +1209,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "4874727824518",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/cooking-oil/1.webp"
+        `${BASE_URL_IMG}/product-images/groceries/cooking-oil/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/cooking-oil/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/cooking-oil/thumbnail.webp`
     },
     {
       "title": "Cucumber",
@@ -1266,12 +1267,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "5300066378225",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/cucumber/1.webp"
+        `${BASE_URL_IMG}/product-images/groceries/cucumber/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/cucumber/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/cucumber/thumbnail.webp`
     },
     {
       "title": "Dog Food",
@@ -1325,12 +1326,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "5906686116469",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/dog-food/1.webp"
+        `${BASE_URL_IMG}/product-images/groceries/dog-food/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/dog-food/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/dog-food/thumbnail.webp`
     },
     {
       "title": "Eggs",
@@ -1383,12 +1384,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "3478638588469",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/eggs/1.webp"
+        `${BASE_URL_IMG}/product-images/groceries/eggs/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/eggs/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/eggs/thumbnail.webp`
     },
     {
       "title": "Fish Steak",
@@ -1441,12 +1442,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "9595036192098",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/fish-steak/1.webp"
+        `${BASE_URL_IMG}/product-images/groceries/fish-steak/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/fish-steak/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/fish-steak/thumbnail.webp`
     },
     {
       "title": "Green Bell Pepper",
@@ -1499,12 +1500,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "2365227493323",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/green-bell-pepper/1.webp"
+        `${BASE_URL_IMG}/product-images/groceries/green-bell-pepper/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/green-bell-pepper/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/green-bell-pepper/thumbnail.webp`
     },
     {
       "title": "Green Chili Pepper",
@@ -1557,12 +1558,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "9335000538563",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/green-chili-pepper/1.webp"
+        `${BASE_URL_IMG}/product-images/groceries/green-chili-pepper/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/green-chili-pepper/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/green-chili-pepper/thumbnail.webp`
     },
     {
       "title": "Honey Jar",
@@ -1615,12 +1616,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "6354306346329",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/honey-jar/1.webp"
+        `${BASE_URL_IMG}/product-images/groceries/honey-jar/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/honey-jar/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/honey-jar/thumbnail.webp`
     },
     {
       "title": "Ice Cream",
@@ -1673,15 +1674,15 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "0788954559076",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/ice-cream/1.webp",
-        "https://cdn.dummyjson.com/product-images/groceries/ice-cream/2.webp",
-        "https://cdn.dummyjson.com/product-images/groceries/ice-cream/3.webp",
-        "https://cdn.dummyjson.com/product-images/groceries/ice-cream/4.webp"
+        `${BASE_URL_IMG}/product-images/groceries/ice-cream/1.webp`,
+        `${BASE_URL_IMG}/product-images/groceries/ice-cream/2.webp`,
+        `${BASE_URL_IMG}/product-images/groceries/ice-cream/3.webp`,
+        `${BASE_URL_IMG}/product-images/groceries/ice-cream/4.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/ice-cream/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/ice-cream/thumbnail.webp`
     },
     {
       "title": "Juice",
@@ -1734,12 +1735,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "6936112580956",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/juice/1.webp"
+        `${BASE_URL_IMG}/product-images/groceries/juice/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/juice/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/juice/thumbnail.webp`
     },
     {
       "title": "Kiwi",
@@ -1792,12 +1793,12 @@ export const listingDataList = [
         "createdAt": "2025-04-30T09:41:02.053Z",
         "updatedAt": "2025-04-30T09:41:02.053Z",
         "barcode": "2530169917252",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+        "qrCode": `${BASE_URL_IMG}/public/qr-code.png`
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/kiwi/1.webp"
+        `${BASE_URL_IMG}/product-images/groceries/kiwi/1.webp`
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/kiwi/thumbnail.webp"
+      "thumbnail": `${BASE_URL_IMG}/product-images/groceries/kiwi/thumbnail.webp`
     }
 ]
 

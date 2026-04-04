@@ -345,6 +345,11 @@ hr {
 }
 
 
+.icn-sm { font-size: 3.5rem!important }
+.icn-xs { font-size: 3.5rem!important }
+.icn-lg { font-size: 4.5rem!important }
+.icn-xl { font-size: 5.5rem!important }
+
 
 .island {
     background: #ffffff;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useFetch } from "../../contexts/useFetch";
+import { useFetch } from "../../hooks/useFetch";
 import { useListingContext } from "../../features/listing/contexts/ListingContext";
 import { useProductContext } from "../../features/product/contexts/ProductContext";
 import { useUserContext } from "../../features/user/contexts/UserContext";

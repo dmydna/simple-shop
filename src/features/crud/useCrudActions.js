@@ -1,4 +1,4 @@
-import { useService } from "../../contexts/useService";
+import { useService } from "../../hooks/useService";
 
 export const useCrudActions = ({ service, onRefresh }) => {
     const { createWithImage, update, Delete, updateVisibility, loading, error }

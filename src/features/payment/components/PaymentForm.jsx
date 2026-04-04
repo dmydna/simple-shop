@@ -1,12 +1,8 @@
 import React, {useEffect} from "react"
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
 import payment from "../../../assets/payment.png"
-import { useUser } from "../../user/hooks/useUser";
-import { useProfile } from "../../profile/hooks/ProfileContext";
-import { useForm } from "../../../contexts/useForm";
-import { useCart } from "../../cart/contexts/CartContext";
-import { useNavigate } from "react-router-dom";
-import { usePayment } from "../hooks/usePayment";
+import { useProfile } from "../../profile/contexts/ProfileContext";
+import { useForm } from "../../../hooks/useForm";
 
 function PaymentForm(){
 

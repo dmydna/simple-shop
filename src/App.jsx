@@ -5,35 +5,35 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import ProtectedRouteAdmin from "./components/common/ProtectedRouteAdmin.jsx";
+import { TagsList } from "./components/common/TagsList.jsx";
 import Footer from "./components/layout/Footer.jsx";
 import NavHeader from "./components/layout/NavHeader.jsx";
 import { CRUDWrapper } from "./contexts/CRUDWrapper";
 import DevDash from "./dev/components/DevDash.jsx";
 import { listingDataList } from "./dev/data/listingDataList.js";
 import { AuthProvider } from "./features/auth/hooks/AuthContext.jsx";
-import { FormCreater } from "./features/crud/FormCreater.jsx";
-import { TagsList } from "./features/crud/TagsList.jsx";
+import { FormCreater } from "./components/common/FormCreater.jsx";
 import FormProductSearch from "./features/listing/components/FormProductSearch.jsx";
 import Admin from "./pages/Admin";
-import Carrito from "./pages/Cart";
+import Carrito from "./pages/Cart/Cart.jsx";
 import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
-import ListingCRUD from "./pages/ListingCRUD";
 import Login from "./pages/Login";
-import Page404NotFound from "./pages/Page404NotFound.jsx";
-import PageLoading from "./pages/PageLoading.jsx";
-import ProductDetails from "./pages/ProductDetails";
-import Products from "./pages/ProductList";
+import Page404NotFound from "./pages/errors/Page404NotFound.jsx";
+import PageLoading from "./components/common/PageLoading.jsx";
+import ProductDetails from "./pages/Product/ProductDetails";
+import Products from "./pages/Product/ProductListing";
 import Register from "./pages/Register.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
 import "./styles/index.css";
 
-import ListingCrudNext from "./pages/CrudNext/ListingCrudNext.jsx";
-import ProductCrudNext from "./pages/CrudNext/ProductCrudNext.jsx";
-import UserCrudNext from "./pages/CrudNext/UserCrudNext.jsx";
-import { DevProvider } from "./dev/contexts/DevContext.jsx";
 import PaymentForm from "./features/payment/components/PaymentForm.jsx";
+import ListingCrudNext from "./pages/Crud/ListingCrudNext.jsx";
+import ProductCrudNext from "./pages/Crud/ProductCrudNext.jsx";
+import UserCrudNext from "./pages/Crud/UserCrudNext.jsx";
+import FileUploader from "./dev/components/FileUploader";
+import UploadService from "./dev/components/UploadService";
 
 
 
@@ -98,23 +98,8 @@ function App() {
 
 
          <Route path="/test" element={ <PageLoading /> }></Route>
-         <Route path="/test/tags" element={
-             <TagsList
-                 className={'bg-light border island p-4 p-md-5'} style={{maxWidth: 500}}
-                 array={["hola","chau","gato","perro"]}
-             />} />
-         <Route path="/test/form" element={
-            <FormCreater
-                 className={'bg-light border island p-4 p-md-5'} style={{maxWidth: 500}}
-                 objeto={listingDataList[0]}
-                 onSubmit={(data)=>{console.log(data)}}>
-                <div className="d-flex align-items-center justify-content-between mb-4">
-                    <p className="fs-3 m-0">Form Creator</p>
-                </div>
-            </FormCreater>} />
-            <Route path="/test/product" element={
-                <FormProductSearch />
-            } />
+         <Route path="/test/uploader" element={ <UploadService/> } />
+
 
           <Route path="/productos/category/:category" element={
             <>
@@ -146,11 +131,6 @@ function App() {
               <Products/>
             }
           />
-          <Route path="/admin/:manager" element= {             
-             <ProtectedRoute>
-               {/* <AdminProductTable /> */}
-                <ListingCRUD /> 
-             </ProtectedRoute>} />
           <Route path="/dashboard/" element={
             <ProtectedRouteAdmin>
               <Dashboard />
@@ -164,6 +144,7 @@ function App() {
              </> 
             } 
           />
+            <Route path="/dashboard/dev/uploader" element={ <UploadService />} />
             <Route path="/dashboard/dev" element={
                 <>
                    <DevDash />

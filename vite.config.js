@@ -24,4 +24,21 @@ proxy: {
       },
     },
   },
+  resolve: {
+    alias: {
+      '@': '/src',
+      '@common': '/src/components/common',
+      '@layout': '/src/components/layout',
+      '@components': '/src/components',
+      '@components': '/src/components',
+      '@dev': '/src/dev',
+      '@features': '/src/features',
+      '@f': '/src/features',
+      '@assets': '/src/assets',
+      '@utils': '/src/utils',
+      '@hooks': '/src/hooks',
+      '@contexts': '/src/hooks',
+      '@pages': '/src/pages'
+    }
+  }
 })

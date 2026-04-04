@@ -1,13 +1,9 @@
-import { useMemo, useState, useEffect } from "react";
-import { useService } from "../../../contexts/useService.js";
-import { useFetch } from "../../../contexts/useFetch.jsx";
-import { useCart } from "../../cart/contexts/CartContext.jsx";
-import { orderService } from "../../order/services/orderService.js";
-import { useProfile } from "../../profile/hooks/ProfileContext.jsx";
-import { buyService } from '../service/buyService.js';
-import { gatewayService } from '../service/gatewayService.js';
+import { useState } from "react";
+import { useFetch } from "@hooks/useFetch.js";
+import { useCart } from "@features/cart/contexts/CartContext.jsx";
+import { useProfile } from "@features/profile/contexts/ProfileContext.jsx";
 import { useGateway } from '../hooks/useGateway.js';
-import { usePurchaseOrder } from '../hooks/usePurchaseOrder.js';
+import { usePurchaseOrder } from './usePurchaseOrder.js';
 
 export const usePayment = () => {
 

@@ -1,11 +1,7 @@
-import { useMemo, useState } from "react";
-import { useService } from "../../../contexts/useService.js";
-import { useCart } from "../../cart/contexts/CartContext.jsx";
-import { orderService } from "../../order/services/orderService.js";
-import { useProfile } from "../../profile/hooks/ProfileContext.jsx";
-import { buyService } from '../service/buyService.js';
-import { gatewayService } from '../service/gatewayService.js';
-import { useGateway } from '../hooks/useGateway.js';
+import { useState } from "react";
+import { useService } from "@hooks/useService.js";
+import { orderService } from "@features/order/services/orderService.js";
+import { buyService } from '@features/payment/service/buyService.js';
 
 export const usePurchaseOrder = ({orderData,setStep, setLoading, setError }) => {
 

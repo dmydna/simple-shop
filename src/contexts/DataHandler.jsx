@@ -1,7 +1,11 @@
-import {FeedbackMessage} from "../components/common/FeedbackMessage.jsx";
+import {useNavigate} from "react-router-dom";
+import {FeedbackMessage} from "@common/FeedbackMessage.jsx";
+import PageNotContent from "@pages/errors/PageNotContent";
 
 // DataHandler.jsx
 export const DataHandler = ({ loading, error, children, onRetry, isEmpty = false, placeholder }) => {
+
+    const navigate = useNavigate()
 
     // 1. ¿Está cargando?
     if (loading) {
@@ -14,7 +18,7 @@ export const DataHandler = ({ loading, error, children, onRetry, isEmpty = false
             <FeedbackMessage
                 title="Algo no salió bien"
                 message={error}
-                icon="bi-exclamation-triangle"
+                icon="bi-cloud-slash"
                 actionLabel="Reintentar carga"
                 onAction={onRetry}
             />
@@ -22,15 +26,7 @@ export const DataHandler = ({ loading, error, children, onRetry, isEmpty = false
     }
 
     // 3. Si no carga y no hay error, ¿está vacío?
-    if (isEmpty) {
-        return (
-            <FeedbackMessage
-                title="Sin contenido disponible"
-                message="Parece que aún no hay elementos en esta sección."
-                icon="bi-cloud-slash"
-            />
-        )
-    }
+    if (isEmpty) { return  <PageNotContent /> }
 
     return <>{children}</>;
 };

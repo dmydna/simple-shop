@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import { gatewayService } from '../service/gatewayService.js';
-import { useService } from "../../../contexts/useService.js";
-import { useCart } from "../../cart/contexts/CartContext.jsx";
+import { gatewayService } from "@features/payment/service/gatewayService.js";
+import { useService } from "@hooks/useService.js";
+import { useCart } from "@features/cart/contexts/CartContext.jsx";
 
 export const useGateway = ({orderId, clientId , buy, setLoading, setError, setSuccess}) => {
 

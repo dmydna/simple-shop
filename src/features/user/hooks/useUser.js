@@ -1,7 +1,7 @@
 import React from "react";
 import {userService} from "../service/userService.js";
-import {useFetchData} from "../../../contexts/useFetchData.js";
-import {useFetchById} from "../../../contexts/useFetchById.js";
+import {useFetchData} from "../../../hooks/useFetchData.js";
+import {useFetchById} from "../../../hooks/useFetchById.js";
 
 export const useUser = () => {
 

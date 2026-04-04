@@ -1,4 +1,4 @@
-import PageLoading from "../../../pages/PageLoading.jsx";
+import PageLoading from "../../../components/common/PageLoading.jsx";
 import {FeedbackMessage} from "../../../components/common/FeedbackMessage.jsx";
 
 function WizardFeedback({loading, error, onAction}){

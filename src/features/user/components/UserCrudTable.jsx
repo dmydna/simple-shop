@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
-import Pagination from '../../pagination/components/Pagination.jsx';
-import {Link} from "react-router-dom";
 import {useUserContext} from "../contexts/UserContext.jsx";
-import CrudTable from "../../../components/common/CrudTable.jsx";
-import {CRUD} from "../../../utils/crud.js";
+import CrudTable from "@common/CrudTable.jsx";
 import { useUserCrud } from '../contexts/UserCrudContext.jsx';
 import { ImgGenApi } from '../../../dev/utils.js';
 

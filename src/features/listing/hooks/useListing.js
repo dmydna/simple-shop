@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {listingService} from "../services/listingService.js";
-import {useFetchByHash} from "../../../contexts/useFetchByHash.jsx";
-import {useFetchData} from "../../../contexts/useFetchData.js";
+import {useFetchByHash} from "../../../hooks/useFetchByHash.js";
+import {useFetchData} from "../../../hooks/useFetchData.js";
 
 export const useListing = () => {
 

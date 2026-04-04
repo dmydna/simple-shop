@@ -19,6 +19,9 @@ export function CarritoProvider({ children }) {
     setCartItems([])
     setTotalPrice(0)
     setCartCount(0)
+    localStorage.removeItem("cartItems");
+    ocalStorage.removeItem("cartTotalPrice");
+    localStorage.removeItem("cartCount");
   }
 
 

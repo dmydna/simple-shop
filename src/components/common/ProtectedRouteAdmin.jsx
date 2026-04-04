@@ -1,9 +1,8 @@
+import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../features/auth/hooks/AuthContext.jsx";
-import NotFound from "../../pages/NotFound.jsx";
-import Page403Forbidden from "../../pages/Page403Forbidden.jsx";
-import React from "react";
-import PageLoading from "../../pages/PageLoading.jsx";
+import Page403Forbidden from "../../pages/errors/Page403Forbidden.jsx";
+import PageLoading from "./PageLoading.jsx";
 
 export default function ProtectedRouteAdmin({ children }) {
     const { isAuth, loading, role, isAdmin  } = useAuth();

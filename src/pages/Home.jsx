@@ -32,7 +32,7 @@ function Home() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }, []);
 
-    const {loading, totalItems, error, fetchData} = useListingContext();
+    const {loading, totalElements, error, fetchData} = useListingContext();
     const {isAuth} = useAuth()
 
 
@@ -45,7 +45,7 @@ function Home() {
             onRetry={fetchData}
             error={error}
             placeholder={<FeaturesPlaceholder/>}
-            isEmpty={ totalItems === 0 }
+            isEmpty={  totalElements === 0 }
         >
             <>
 

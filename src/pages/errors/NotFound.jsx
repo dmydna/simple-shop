@@ -4,7 +4,7 @@ import { Button, Card, Container } from "react-bootstrap";
 import warningIMG from "/src/assets/404.png"
 import Img1 from "/src/assets/web_404_crop.png"
 
-export default function NotFound(){
+function NotFound(){
 
     return (
     <Container style={{height: "80vh"}} 
@@ -40,3 +40,6 @@ export default function NotFound(){
         
     )
 }
+
+
+export default NotFound()

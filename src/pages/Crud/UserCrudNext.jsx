@@ -60,7 +60,7 @@ function UserCrudNext() {
                             <Button
                                 variant="primary w-md-100"
                                 onClick={openCreateModal}
-                                className="my-2 disabled">
+                                className="my-2">
                                 <i className="bi bi-plus-lg"></i>
                                 <span className="ms-2">Create new</span>
                             </Button>

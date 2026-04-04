@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { Button, Form } from "react-bootstrap";
 import "../../../styles/animations.css";
-import { useProfile } from "../hooks/ProfileContext.jsx";
+import { useProfile } from "../contexts/ProfileContext.jsx";
 
 
 const UploadImageProfile = ({ title, className, multiple = true, previewImg }) => {

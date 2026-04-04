@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../features/auth/hooks/AuthContext.jsx";
+import Activity from "../features/profile/components/Activity.jsx";
 import CardSmallProfile from "../features/profile/components/CardSmallProfile.jsx";
 import GeneralProfile from "../features/profile/components/GeneralProfile.jsx";
 import PasswordProfile from "../features/profile/components/PasswordProfile.jsx";
 import SideBarProfile from "../features/profile/components/SideBarProfile.jsx";
 import UploadImageProfile from "../features/profile/components/UploadImageProfile.jsx";
 import WelcomePerfil from "../features/profile/components/WelcomeProfile.jsx";
-import { useProfile } from "../features/profile/hooks/ProfileContext.jsx";
+import { useProfile } from "../features/profile/contexts/ProfileContext.jsx";
 import Dashboard from "./Dashboard.jsx";
-import Activity from "../features/profile/components/Activity.jsx";
 
 export default function UserProfile() {
     const { page } = useParams()

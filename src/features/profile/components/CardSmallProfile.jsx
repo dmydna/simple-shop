@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Card } from "react-bootstrap";
-import { useProfile } from "../hooks/ProfileContext.jsx";
+import { useProfile } from "../contexts/ProfileContext.jsx";
 
 function CardSmallProfile({ name, image, children, className, imgSize }) {
 

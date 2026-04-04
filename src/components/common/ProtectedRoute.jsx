@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../features/auth/hooks/AuthContext.jsx";
 import React from "react";
-import PageLoading from "../../pages/PageLoading.jsx";
+import PageLoading from "./PageLoading.jsx";
 
 export default function ProtectedRoute({ children }) {
     const { isAuth, loading, isAdmin } = useAuth();

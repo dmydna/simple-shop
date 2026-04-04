@@ -1,8 +1,8 @@
 import {useNavigate} from "react-router-dom";
-import {FeedbackMessage} from "../components/common/FeedbackMessage.jsx";
+import {FeedbackMessage} from "../../components/common/FeedbackMessage.jsx";
 import React from "react";
 
-export default function Page404NotFound(){
+function Page404NotFound(){
 
     const navigate = useNavigate();
     const goToHome = () => {
@@ -19,3 +19,5 @@ export default function Page404NotFound(){
         />
     )
 }
+
+export default Page404NotFound

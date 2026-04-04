@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Alert, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useProfile } from "../hooks/ProfileContext.jsx";
+import { useProfile } from "../contexts/ProfileContext.jsx";
 
 
 function WelcomePerfil({children}){

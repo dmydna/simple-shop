@@ -1,5 +1,5 @@
 import { Button, Form } from "react-bootstrap";
-import { useProfile } from "../hooks/ProfileContext.jsx";
+import { useProfile } from "../contexts/ProfileContext.jsx";
 
 
 

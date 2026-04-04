@@ -4,7 +4,7 @@ import { useDevContext } from "../contexts/DevContext";
 import AlertWrapper from "../../components/common/AlertWrapper";
 import Alert from 'react-bootstrap/Alert';
 
-function DevItem({ image, title, description, cantidad, handle, success, disabled, reset }) {
+function DevItem({ image, title, description, cantidad, handle, success, disabled, reset, labelBtn }) {
 
     const { loading, Error } = useDevContext()
 
@@ -27,7 +27,7 @@ function DevItem({ image, title, description, cantidad, handle, success, disable
                         variant="primary btn-sm"
                         onClick={handle}>
                         <i className='bi bi-plus-lg'></i>
-                        <span className="ms-2">Publicar todo</span>
+                        <span className="ms-2">{labelBtn ? labelBtn : "Publicar todo"}</span>
                     </Button>
                 )}
                 {success && (

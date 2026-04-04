@@ -50,7 +50,6 @@ const DevDash = () => {
 
 
 
-
     const handleClickListing = async () => {
         await handleSend(
             listingSaveAll, 
@@ -119,6 +118,19 @@ const DevDash = () => {
                                     reset("savedListings")
                                     setSavedListings(null)
                                 }}
+                            />
+                        </Col>
+
+
+                        <Col md={12} lg={6}>
+                            <DevItem
+                                success={savedListings}
+                                image={ImgGenApi({...imgInfo, "background": ".menta"})}
+                                title='Carga Masiva por archivo'
+                                description='Cargar muestra por archivo JSON'
+                                cantidad={null}
+                                handle={()=>navigate("uploader/")}
+                                labelBtn={'ver'}
                             />
                         </Col>
 

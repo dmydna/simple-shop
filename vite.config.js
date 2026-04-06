@@ -30,7 +30,6 @@ proxy: {
       '@common': '/src/components/common',
       '@layout': '/src/components/layout',
       '@components': '/src/components',
-      '@components': '/src/components',
       '@dev': '/src/dev',
       '@features': '/src/features',
       '@f': '/src/features',

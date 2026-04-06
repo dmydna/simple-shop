@@ -1,26 +1,26 @@
+import { useListing } from "@/features/listing/hooks/useListing.js";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { useListingContext } from "../../listing/contexts/ListingContext.jsx";
-import cartItem from "../components/CartItem.jsx";
 
 const CartContext = createContext();
 
 
-export function CarritoProvider({ children }) {
+export function CartProvider({ children }) {
 
 
-  const {products, setProducts} = useListingContext()
+  const {products, setProducts} = useListing()
   const [couponDiscount, setCouponDiscount] = useState(false)
 
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+
  
   const clearCart = () => {
     setCartItems([])
     setTotalPrice(0)
     setCartCount(0)
     localStorage.removeItem("cartItems");
-    ocalStorage.removeItem("cartTotalPrice");
+    localStorage.removeItem("cartTotalPrice");
     localStorage.removeItem("cartCount");
   }
 
@@ -53,35 +53,35 @@ export function CarritoProvider({ children }) {
 
 
 
-  const  removeFromCart = (productoCarrito) => {
+  const  removeFromCart = (productoCart) => {
 
     setCartCount((prevContador) => 
-      prevContador - productoCarrito.cantidad)
+      prevContador - productoCart.cantidad)
     setTotalPrice((prevTotal) => 
-      prevTotal - (productoCarrito.price * productoCarrito.cantidad))
+      prevTotal - (productoCart.price * productoCart.cantidad))
 
     setProducts((prevProducts) => // retorno implicito de un array 
       prevProducts.map((item) => 
-        item.id === productoCarrito.id
-        ? { ...item, stock: item.stock + productoCarrito.cantidad } 
+        item.id === productoCart.id
+        ? { ...item, stock: item.stock + productoCart.cantidad } 
         : item 
       )
     );
 
     setCartItems((prevProductos) =>
       prevProductos.filter((item) =>
-        item.id !== productoCarrito.id 
+        item.id !== productoCart.id 
     ))
 
   }
 
 
-  const setCantidadCartItem = (productoCarrito, value) => {
+  const setCantidadCartItem = (productoCart, value) => {
     // 1. Validar que el valor sea un número válido
     const nuevaCantidad = parseInt(value);
     if (isNaN(nuevaCantidad) || nuevaCantidad < 1) return;
   
-    const totalDisponible = productoCarrito.stock + productoCarrito.cantidad;
+    const totalDisponible = productoCart.stock + productoCart.cantidad;
     
     // Si el usuario pide más de lo que existe en total, limitamos al máximo
     const cantidadFinal = nuevaCantidad > totalDisponible ? totalDisponible : nuevaCantidad;
@@ -89,19 +89,19 @@ export function CarritoProvider({ children }) {
   
     setCartItems((prev) =>
       prev.map((item) =>
-        item.id === productoCarrito.id 
+        item.id === productoCart.id 
           ? { ...item, cantidad: cantidadFinal } 
           : item
       )
     );
-    const diferencia = cantidadFinal - productoCarrito.cantidad;
+    const diferencia = cantidadFinal - productoCart.cantidad;
 
     // Actualizamos el contador global sumando la diferencia
     setCartCount((prevContador) => prevContador + diferencia)
     // 4. Actualizar Productos
     setProducts((prev) =>
       prev.map((item) =>
-        item.id === productoCarrito.id 
+        item.id === productoCart.id 
           ? { ...item, stock: nuevoStockRestante } 
           : item
       )
@@ -109,26 +109,26 @@ export function CarritoProvider({ children }) {
   };
 
 
-  const decreaseCartItem = (productoCarrito) => {
+  const decreaseCartItem = (productoCart) => {
 
     const productoExiste = cartItems.find(
-      (item) => item.id === productoCarrito.id 
+      (item) => item.id === productoCart.id 
     );
 
-    if (productoCarrito.cantidad <= 0) {
+    if (productoCart.cantidad <= 0) {
       return;
     }
     setCartCount((prevContador) =>
-      productoCarrito.stock ? prevContador - 1 : prevContador
+      productoCart.stock ? prevContador - 1 : prevContador
     );
     
     // setTotalPrice((prevTotal) =>
-    //   productoCarrito.stock ? prevTotal - 1 : prevTotal
+    //   productoCart.stock ? prevTotal - 1 : prevTotal
     // );
 
     setCartItems((prevProductos) =>
       prevProductos.map((item) =>
-        item.id === productoCarrito.id && item.stock
+        item.id === productoCart.id && item.stock
           ? { ...item, cantidad: item.cantidad - 1 } // Incrementa la cantidad
           : item
       )
@@ -137,16 +137,16 @@ export function CarritoProvider({ children }) {
     setProducts(
       (prevProducts) => // retorno implicito de un array
         prevProducts.map((item) =>
-          item.id === productoCarrito.id && item.stock
+          item.id === productoCart.id && item.stock
             ? { ...item, stock: item.stock + 1 }
             : item
       )
     );
   };
 
-  const increaseCartItem = (productoCarrito) => {
+  const increaseCartItem = (productoCart) => {
 
-    const esProductoDisponible = productoCarrito.stock - productoCarrito.cantidad  != 0;
+    const esProductoDisponible = productoCart.stock - productoCart.cantidad  != 0;
 
     if (!esProductoDisponible) {
       return;
@@ -154,23 +154,23 @@ export function CarritoProvider({ children }) {
 
 
     const productoExiste = cartItems.find(
-      (item) => item.id === productoCarrito.id 
+      (item) => item.id === productoCart.id 
     );
 
 
 
-    if(productoCarrito.id )
+    if(productoCart.id )
     setCartCount((prevContador) =>
-      productoCarrito.stock ? prevContador + 1 : prevContador
+      productoCart.stock ? prevContador + 1 : prevContador
     );
 
     // setTotalPrice((prevTotal) =>
-    //   productoCarrito.stock ? prevTotal + 1 : prevTotal
+    //   productoCart.stock ? prevTotal + 1 : prevTotal
     // );
 
     setCartItems((prevProductos) =>
       prevProductos.map((item) =>
-        item.id === productoCarrito.id && item.stock
+        item.id === productoCart.id && item.stock
           ? { ...item, cantidad: item.cantidad + 1 } // Incrementa la cantidad
           : item
       )
@@ -178,7 +178,7 @@ export function CarritoProvider({ children }) {
 
     setProducts((prevProducts) => // retorno implicito de un array
         prevProducts.map((item) =>
-          item.id === productoCarrito.id && item.stock
+          item.id === productoCart.id && item.stock
             ? { ...item, stock: item.stock - 1 }
             : item
         )
@@ -244,8 +244,8 @@ export function CarritoProvider({ children }) {
             "productId": item?.productId,
             "listingId": item?.id,
             "name": item?.productName,
-            "quantity": item?.stock,
-            "priceAtPurcharse": item?.price
+            "quantity": item?.cantidad,
+            "priceAtPurchase": item?.price
         })),
         "totalAmount": totalPrice,
   }),[totalPrice, cartItems]) 

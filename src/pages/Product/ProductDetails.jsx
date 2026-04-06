@@ -1,16 +1,15 @@
-import React, { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import CardReview from "../../components/common/CardReviews.jsx";
-import ProductBuyCard from "../../features/product/components/ProductBuyCard.jsx";
-import ProductSpecs from "../../features/product/components/ProductSpecs.jsx";
 import CarouselImages from "../../components/common/CarouselImages.jsx";
-import { useListingContext } from "../../features/listing/contexts/ListingContext.jsx";
-import { listingService } from "../../features/listing/services/listingService.js";
-import ProductCarousel from "../../features/product/components/ProductCarousel.jsx";
-import { DataHandler } from "../../contexts/DataHandler.jsx";
-import { DetailsPlaceholder } from "../../features/placeholder/DetailsPlaceholder.jsx";
 import BreadCrumb from "../../components/layout/BreadCrumb.jsx";
+import { DataHandler } from "../../contexts/DataHandler.jsx";
+import { useListingContext } from "../../features/listing/contexts/ListingContext.jsx";
+import { DetailsPlaceholder } from "../../features/placeholder/DetailsPlaceholder.jsx";
+import ProductBuyCard from "../../features/product/components/ProductBuyCard.jsx";
+import ProductCarousel from "../../features/product/components/ProductCarousel.jsx";
+import ProductSpecs from "../../features/product/components/ProductSpecs.jsx";
 
 
 
@@ -120,7 +119,7 @@ function ProductDetails() {
                               maxCols={4}
                               imgSize={140} >
                              <h3 className="fs-4 fw-medium pb-0 m-0 ">Productos similares</h3>
-                             <Link to={`/productos?category=${currentListing.category}`}
+                             <Link to={`/products?category=${currentListing.category}`}
                                    className="text-decoration-none fw-bold">
                                 Ver mas
                              </Link>

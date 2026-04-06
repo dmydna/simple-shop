@@ -1,20 +1,19 @@
-import {useNavigate} from "react-router-dom";
-import {FeedbackMessage} from "@common/FeedbackMessage.jsx";
-import React from "react";
+import { FeedbackMessage } from "@common/FeedbackMessage.jsx";
+import { useNavigate } from "react-router-dom";
 
 function PageCartEmpty(){
 
     const navigate = useNavigate();
     const goToHome = () => {
-        navigate("/productos")
+        navigate("/products")
     }
     const msg = 'Agregá productos para comenzar tu compra.';
     return (
         <FeedbackMessage
-            title="Tu carrito está vacío"
+            title="Tu cart está vacío"
             message={msg}
             icon="bi-cart-x icn-xl"
-            actionLabel="agregar al carrito"
+            actionLabel="agregar al cart"
             onAction={goToHome}
         />
     )

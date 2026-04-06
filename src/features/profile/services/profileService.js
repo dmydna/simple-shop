@@ -4,6 +4,27 @@ const ENDPOINT = ENDPOINTS.PROFILE;
 
 
 export const profileService = {
+
+    getMyOrders:  async () => {
+        const TOKEN = localStorage.getItem('token');
+
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/orders`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + TOKEN
+            }
+        });
+        if (response.ok) {
+            const orders = await response.json();
+            console.log("My orders: ", orders);
+            return orders;
+        } else {
+            console.error("No autorizado o error de servidor");
+        }
+
+    },
+
     getMyUser : async () => {
 
         // importante: el token aca. evita errores de sincronizacion.

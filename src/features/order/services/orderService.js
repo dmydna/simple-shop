@@ -85,5 +85,21 @@ export const orderService = {
         }
         return response.status === 204 ? 
         { success: true } : await response.json();
+    },
+
+
+    cancel: async (id) => {
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/cancel/${id}`, {
+            method: 'PUT'
+        });
+
+        if (!response.ok) {
+            throw new Error("No se pudo cancelar el pedido");
+        }
+        return response.status === 204 ? 
+        { success: true } : await response.json();
     }
+
+
+
 }

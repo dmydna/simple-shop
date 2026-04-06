@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Card, InputGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../cart/contexts/CartContext.jsx";
-import { useListingContext } from "../../listing/contexts/ListingContext.jsx";
 import BuyNowButton from "../../../components/common/BuyNowButton.jsx";
 import AddToCartButton from "../../cart/components/AddToCartButton.jsx";
+import { useCart } from "../../cart/contexts/CartContext.jsx";
+import { useListingContext } from "../../listing/contexts/ListingContext.jsx";
 import ProductBuyModal from "./ProductBuyModal.jsx";
 
 function ProductBuyCard({ title, rating, ship, id, stock, price, discount, className }) {
@@ -15,7 +15,7 @@ function ProductBuyCard({ title, rating, ship, id, stock, price, discount, class
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate("/carrito/buy");
+    navigate("/cart/buy");
     addToCart( products.find(p => p.id == id) )
   }
 

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { useProfile } from "../contexts/ProfileContext.jsx";
+import { ImgGenApi } from "@/dev/utils.js";
 
 function CardSmallProfile({ name, image, children, className, imgSize }) {
 
@@ -10,10 +11,18 @@ function CardSmallProfile({ name, image, children, className, imgSize }) {
         fetchData()
     },[])
 
+    const baseImg = {
+        dimension: "150x150",
+        icon:"bi-person-fill",
+        background: ".celeste",
+        fontSize: "70",
+        textColor: "fff"
+    }
+
     return (
         <Card  className={`mb-4 island border text-start flex-row`}>
             <div className="d-block mx-auto position-relative">
-                <Card.Img className="perfil-img" src={profile?.image || "https://dummyimage.com/300x300/dadada/"}
+                <Card.Img className="perfil-img" src={profile?.image || ImgGenApi({...baseImg})}
                           style={{
                               objectFit: 'cover',
                               height: imgSize || '135px',
@@ -26,18 +35,19 @@ function CardSmallProfile({ name, image, children, className, imgSize }) {
             </div>
 
 
-            <Card.Body style={{lineHeight: '1px'}} className="rounded mt-3">
-                <Card.Title className='fs-5'>
+            <Card.Body className="rounded mt-3">
+                <Card.Title className='fs-5 mb-0'>
                     { profile?.name || profile?.username || profile?.clientName || "N/A" }
                 </Card.Title>
-                <Card.Text>
-                <span className="text-secondary fs-6">
-                    {  profile?.email || 'admin@mail.com' }
+                <Card.Text className="mb-0">
+                <span className="text-secondary fs-6 mb-0">
+                    {  profile?.email || 'example@mail.com' }
                 </span>
                 </Card.Text>
                 <Card.Text >
-                <span className="text-secondary fs-6">
-                    {  profile?.role }
+                <span style={{width:'50px', height:'50px' }} className="rounded-circle bg-primary"></span>
+                <span className="text-secondary fs-6 role-pill">
+                    {  profile?.role ? 'user' : 'admin' }
                 </span>
                 </Card.Text>
             </Card.Body>

@@ -24,7 +24,7 @@ function RegisterForm({ children, style, className}){
     const autoLogin = async () => {
         const {username, password} = formData;
         await login({username, password});
-        navigate("/user");
+        navigate("/register/complete");
     }
     
     useEffect( () => { 
@@ -63,16 +63,6 @@ function RegisterForm({ children, style, className}){
                     />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        type="email"
-                        placeholder="Ingrese contraseña"
-                        name="email"
-                        value={formData?.email || ''}
-                        onChange={onChange}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3">
                     <Form.Label>Contraseña</Form.Label>
                     <Form.Control
                         type="password"
@@ -89,7 +79,7 @@ function RegisterForm({ children, style, className}){
                 )}
 
                 {loading ? 
-                  <Button variant="primary"  className="w-100 position-relative my-2 " disabled>
+                  <Button variant="dark"  className="w-100 position-relative my-2 " disabled>
                      <div 
                         style={{scale: ".8", left: "10px", top: "1px" }}
                         className="spinner-border text-white scale-50 position-absolute" 
@@ -97,7 +87,7 @@ function RegisterForm({ children, style, className}){
                      ></div> 
                         Cargando...
                   </Button> :
-                  <Button variant="primary" type="submit" className="w-100 my-2" >
+                  <Button variant="dark" type="submit" className="w-100 my-2" >
                      Registrar
                   </Button> 
                  }

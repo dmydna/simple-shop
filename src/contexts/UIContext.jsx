@@ -1,11 +1,8 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useMediaQuery } from 'react-responsive';
 import { useLocation } from "react-router-dom";
-import ContactModal from "../features/contact/ContactModal.jsx";
 import LoginModal from "../features/auth/components/LoginModal.jsx";
-import { useUserContext } from "../features/user/contexts/UserContext.jsx";
-import { useProductContext } from "../features/product/contexts/ProductContext.jsx";
-import { useListingContext } from "../features/listing/contexts/ListingContext.jsx";
+import ContactModal from "../features/contact/ContactModal.jsx";
 
 const UIContext = createContext(null)
 
@@ -27,7 +24,7 @@ export function UIProvider({ children }) {
 
     const location = useLocation()
     useEffect(()=>{ 
-      if(!location.pathname.startsWith("/productos")){
+      if(!location.pathname.startsWith("/products")){
         onHideFilter(false)
         if(location.pathname.startsWith("/dashboard")){
           onHideFilter(true)

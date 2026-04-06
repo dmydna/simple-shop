@@ -25,7 +25,7 @@ function ProductCrudNext() {
     // Carga inicial
 
     useEffect(()=>{
-        if(search)  setFilters({page:0, title: search })
+        if(search)  setFilters({page:0, name:search})
     }, [search])
 
     useEffect(() => {

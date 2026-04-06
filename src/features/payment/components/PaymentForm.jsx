@@ -1,13 +1,15 @@
-import React, {useEffect} from "react"
-import { Button, Container, Form, Row, Col } from "react-bootstrap";
-import payment from "../../../assets/payment.png"
-import { useProfile } from "../../profile/contexts/ProfileContext";
+import { useEffect } from "react";
+import { Form } from "react-bootstrap";
+import payment from "../../../assets/payment.png";
 import { useForm } from "../../../hooks/useForm";
+import { useProfile } from "../../profile/contexts/ProfileContext";
 
 function PaymentForm(){
 
     const {profile} = useProfile()
     const {onChange, formData} = useForm(profile)
+
+    useEffect(()=>{ console.log(profile)},[])
 
     return (
     <div
@@ -27,8 +29,8 @@ function PaymentForm(){
                             type="text" 
                             placeholder="Jacob Aiden" 
                             className="w-100 px-2 py-2 border rounded" 
-                            nombre="name"
-                            value={formData.name}
+                            nombre="fullname"
+                            value={formData?.firstName + " " + formData?.lastName}
                             onChange={onChange}
                         />
                     </div>
@@ -39,16 +41,19 @@ function PaymentForm(){
                             placeholder="example@example.com" 
                             className="w-100  px-2 py-2 border rounded" 
                             nombre="email"
-                            value={formData.email}
+                            value={formData?.email}
                             onChange={onChange}
                         />
                     </div>
                     <div className="my-3">
                         <span className="d-block mb-2">Address :</span>
                         <input 
+                            name = "address"
                             type="text" 
                             placeholder="Room - Street - Locality" 
                             className="w-100 px-2 py-2 border rounded" 
+                            value={formData?.address}
+                            onChange={onChange}
                         />
                     </div>
                     <div className="my-3">

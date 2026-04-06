@@ -6,12 +6,14 @@ import { useListing } from "../../listing/hooks/useListing.js";
 import { useListingContext } from "../../listing/contexts/ListingContext.jsx";
 import { useProductContext } from "../../product/contexts/ProductContext.jsx";
 import { useUserContext } from "../../user/contexts/UserContext.jsx";
+import { useProduct } from "@/features/product/hooks/useProduct.js";
+import { useUser } from "@/features/user/hooks/useUser.js";
 
 const Activity = ({col, container=true}) => {
 
-  const {totalElements: totalPublications} = useListingContext()
-  const {totalElements: totalProducts} = useProductContext()
-  const {totalElements: totalUsers} = useUserContext()
+  const {totalElements: totalPublications} = useListing()
+  const {totalElements: totalProducts} = useProduct()
+  const {totalElements: totalUsers} = useUser()
   
   const imgInfo =  { 
      "dimension":"150x150", 

@@ -19,8 +19,10 @@ import CategoryCarrousel from "../../components/common/CategoryCarrousel.jsx";
 function ProductListing() {
 
   const { error, listings, currentPage,setCurrentPage, totalPages,
-    setFilters ,totalElements, loading, fetchData } = useListingContext()
+    setFilters ,totalElements, loading, fetchData, filters } = useListingContext()
   const [searchParams, setSearchParams] = useSearchParams();
+
+
 
   const [meta, setMeta] = useState({
     title: "Productos",

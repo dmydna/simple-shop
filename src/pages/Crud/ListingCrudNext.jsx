@@ -7,6 +7,7 @@ import DropdownCheck from "../../components/common/DropdownCheck.jsx";
 import {useListingContext} from "../../features/listing/contexts/ListingContext.jsx";
 import {useUIContext} from "../../contexts/UIContext.jsx";
 import {useListingCrud} from "../../features/listing/contexts/ListingCrudContext.jsx";
+import { useListing } from "../../features/listing/hooks/useListing.js";
 import {CRUD} from "../../utils/crud.js";
 import "../../styles/animations.css"
 import "../../styles/dashboard.css"
@@ -20,12 +21,11 @@ function ListingCrudNext() {
     const { listings, setFilters } = useListingContext()
     const { onHideFilter } =  useUIContext();
     const { setCrudMode, crudMode ,setShowCrud, setDataItem,
-        expandx, setExpandx , showCrud} = useListingCrud()
+        expandx, setExpandx , showCrud } = useListingCrud()
 
     const [isCreating, setIsCreating] = useState(false);
     const [search, setSearch] = useState()
 
-    // Carga inicial
 
     useEffect(()=>{
         if(search)  setFilters({page:0, title: search })

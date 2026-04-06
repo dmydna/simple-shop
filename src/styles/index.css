@@ -396,6 +396,17 @@ hr {
     filter: invert(1)!important;
 }
 
+
+.role-pill::before {
+    content: '';
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background: green;
+    border-radius: 100%;
+    margin-right: 5px;
+}
+
 @media (min-width: 1200px) { /* xl */
     .container-xl {
         /* padding-inline: 0!important; */
@@ -426,4 +437,5 @@ hr {
 @media (min-width: 1200px) {
     .h4-5 { font-size: 1.375rem; }
 }
+
 

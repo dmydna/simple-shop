@@ -1,47 +1,58 @@
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, FloatingLabel } from "react-bootstrap";
+import { useProfile } from "../contexts/ProfileContext";
 
-function PasswordProfile({children}){
-    const [value, setValue] = useState("")
 
-    const handleSubmit = () => {
 
+function PasswordProfile({ children }) {
+    const { profile, handleChange, updatePerfil } = useProfile()
+
+    const handleUpdate = (e) => {
+        e.preventDefault()
+        console.log(profile)
+        updatePerfil()
     }
-    const handleChange = () => {
-        (e) => setUser(e.target.value)
-    }
-    return(
-             <div className="">
-                {children}
-                <Form  id='passwordPerfilForm' style={{minHeight :'250px'}} onSubmit={handleSubmit}>
-                <Form.Group className="mb-3 p-2">
-                    <Form.Group className="me-3 w-100">
-                           <Form.Label>Usuario</Form.Label>
-                           <Form.Control
-                               type="text"
-                               placeholder="Ingresa constrañea actual"
-                               value={value}
-                               onChange={handleChange}
-                           />
-                        </Form.Group>
+    return (
+        <div className="">
+            {children}
+            <Form id='passwordPerfilForm' style={{ minHeight: '190px' }} onSubmit={handleUpdate}>
+
+                <Form.Group className="w-100 mb-4">
+                    <FloatingLabel
+                        controlId="floatingPassword"
+                        label="Password"
+                        className="mb-3"
+                    >
+                        <Form.Control
+                            type="text"
+                            name="password"
+                            placeholder="Ingresa constrañea actual"
+                            value={profile?.password || ''}
+                            onChange={handleChange}
+                        />
+                    </FloatingLabel>
                 </Form.Group>
-                <Form.Group className="mb-3 p-2">
-                    <Form.Group className="me-3 w-100">
-                           <Form.Label>Email</Form.Label>
-                           <Form.Control
-                               type="text"
-                               placeholder="Ingrese nueva contraseña"
-                               value={value}
-                               onChange={handleChange}
-                           />
-                        </Form.Group>
+                <Form.Group className="w-100">
+                    <FloatingLabel
+                        controlId="floatingNewPassword"
+                        label="Confirm Password"
+                        className="mb-3"
+                    >
+                        <Form.Control
+                            type="text"
+                            name="newPassword"
+                            placeholder="Ingresa constrañea actual"
+                            value={profile?.password || ''}
+                            onChange={handleChange}
+                        />
+                    </FloatingLabel>
                 </Form.Group>
             </Form>
             <Button form='passwordPerfilForm' variant="primary" type="submit" className="my-2" >
                 Actualizar
             </Button>
-            </div>
-               
+        </div>
+
     )
 
 }

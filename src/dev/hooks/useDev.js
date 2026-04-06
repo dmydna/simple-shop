@@ -3,6 +3,9 @@ import { useFetch } from "../../hooks/useFetch";
 import { useListingContext } from "../../features/listing/contexts/ListingContext";
 import { useProductContext } from "../../features/product/contexts/ProductContext";
 import { useUserContext } from "../../features/user/contexts/UserContext";
+import { useListing } from "@/features/listing/hooks/useListing";
+import { useProduct } from "@/features/product/hooks/useProduct";
+import { useUser } from "@/features/user/hooks/useUser";
 
 export const useDev = () => {
 
@@ -13,9 +16,9 @@ export const useDev = () => {
     const [savedListings, setSavedListings] = useState(null)
     const [savedUsers, setSavedUsers] = useState(null)
 
-    const { fetchData: refreshListings } = useListingContext()
-    const { fetchData: refreshProducts } = useProductContext()
-    const { fetchData: refreshUser} = useUserContext()
+    const { fetchData: refreshListings } = useListing()
+    const { fetchData: refreshProducts } = useProduct()
+    const { fetchData: refreshUser} = useUser()
 
     useEffect(()=>{
         if(savedProducts) refreshProducts()

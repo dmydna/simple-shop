@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Dropdown, Form, InputGroup } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useUIContext } from "../../contexts/UIContext.jsx";
 import { useWindowsWidth } from "../../contexts/useWindowSize.jsx";
-import {useListing} from "../listing/hooks/useListing.js";
+import { useListing } from "../listing/hooks/useListing.js";
 
 function Search({toggle, setToggle}){
     
@@ -26,7 +26,7 @@ function Search({toggle, setToggle}){
     function handleSubmit(e){
       e.preventDefault();
       !! query && 
-      navigate(`/productos?search=${query}`);
+      navigate(`/products?search=${query}`);
       setFilters({title: query})
       setToggle(false);
       setShow(false);
@@ -35,7 +35,7 @@ function Search({toggle, setToggle}){
     function handleFilter(e){
       e.preventDefault();
         onHideFilter(prev => !prev);
-        navigate("/productos")
+        navigate("/products")
       }
     
     
@@ -90,7 +90,7 @@ function Search({toggle, setToggle}){
                     setToggle(false);
                   }}
                   as={Link}
-                  to={`/productos/${p.hash}/${p.title}`}
+                  to={`/products/${p.hash}/${p.title}`}
                   key={p.id}
                 >
                   {p.title}

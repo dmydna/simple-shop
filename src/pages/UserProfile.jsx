@@ -11,6 +11,7 @@ import UploadImageProfile from "../features/profile/components/UploadImageProfil
 import WelcomePerfil from "../features/profile/components/WelcomeProfile.jsx";
 import { useProfile } from "../features/profile/contexts/ProfileContext.jsx";
 import Dashboard from "./Dashboard.jsx";
+import MyOrders from "@/features/profile/components/MyOrders.jsx";
 
 export default function UserProfile() {
     const { page } = useParams()
@@ -42,6 +43,8 @@ export default function UserProfile() {
                 setSecction(page); break;
             case "activity":
                 setSecction(page); break;
+            case "compras":
+                setSecction(page); break;
             default:
                 setSecction(null); break;
         }
@@ -53,7 +56,7 @@ export default function UserProfile() {
     return (
         <Container fluid="xl" className="px-4 px-sm-4 px-md-4 px-lg-5">
             <Row>
-                <Col className={`sticky-md-bottom h-100 col-12 col-sm-12 col-md-12 col-lg-4 px-0 mb-4`}
+                <Col className={`sticky-lg-bottom h-100 col-12 col-sm-12 col-md-12 col-lg-4 px-0 mb-4`}
                     style={{ top: '60px' }} // sin esto no funciona sticky
                 >
                     <CardSmallProfile name={user} />
@@ -103,6 +106,13 @@ export default function UserProfile() {
                             previewImg={[profile?.image]}
                          ></UploadImageProfile>
                     )}
+                    {secction && secction == "compras" && (
+                        <MyOrders> 
+                            <p className="h4">Mis compras</p>
+                            <p style={{ opacity: '.5' }} className="muted mb-5">Puedes ver las ultimas compras realizadas</p>
+                        </MyOrders>
+                    )}
+
 
                 </Col>
 

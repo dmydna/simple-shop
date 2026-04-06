@@ -1,13 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import { Button, Card,Table } from 'react-bootstrap';
+import { useEffect } from 'react';
+import { Card, Table } from 'react-bootstrap';
 import Pagination from '../../features/pagination/components/Pagination.jsx';
-import { Link } from 'react-router-dom';
-import CarritoInput from "../../features/cart/components/CartInput.jsx";
-import { useUIContext } from '../../contexts/UIContext.jsx';
 
-export  const CrudTable = ({children, crudHook, baseHook,  handleclick, iconCrud,className}) => {
+export  const CrudTable = ({children, crudHook, baseHook,  handleclick, iconCrud, className}) => {
 
-    const { content, loading ,currentPage, setCurrentPage, totalPages } = baseHook
+    const { content, loading ,currentPage, setCurrentPage, totalPages, setFilters } = baseHook
     const { currentItem } = crudHook
 
     useEffect(() => {

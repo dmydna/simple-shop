@@ -1,5 +1,5 @@
 import { DevProvider } from "../dev/contexts/DevContext.jsx";
-import { CarritoProvider } from "../features/cart/contexts/CartContext.jsx";
+import { CartProvider } from "../features/cart/contexts/CartContext.jsx";
 import { CrudProvider } from "../features/crud/CrudContext.jsx";
 import { ListingProvider } from "../features/listing/contexts/ListingContext.jsx";
 import { ListingCrudProvider } from "../features/listing/contexts/ListingCrudContext.jsx";
@@ -15,27 +15,11 @@ import { UIProvider } from "./UIContext";
 export const CRUDWrapper = ({ children }) => {
   return (
     <UIProvider>
-      <CrudProvider>
-        <ListingProvider>
-          <ProductProvider>
-            <ProductCrudProvider>
-              <CarritoProvider>
-                <ListingCrudProvider>
-                  <UserProvider>
-                    <UserCrudProvider>
-                    <ProfileProvider>
-                      <DevProvider>
-                      {children}
-                      </DevProvider>
-                    </ProfileProvider>
-                    </UserCrudProvider>
-                  </UserProvider>
-                </ListingCrudProvider>
-              </CarritoProvider>
-            </ProductCrudProvider>
-          </ProductProvider>
-        </ListingProvider>
-      </CrudProvider>
+      <ListingProvider>
+        <CartProvider>
+            {children}
+        </CartProvider>
+      </ListingProvider>
     </UIProvider>
   );
 };

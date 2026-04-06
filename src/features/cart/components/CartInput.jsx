@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { useCart } from "../contexts/CartContext.jsx";
 
-function CarritoInput({ producto, className }) {
+function CartInput({ producto, className }) {
 
 
   const { removeFromCart,
@@ -14,7 +14,7 @@ function CarritoInput({ producto, className }) {
   const [cantidad, setCantidad] = useState(!producto.cantidad ? 0 : producto.cantidad)
 
 
-  const incCarrito = (producto)=>{
+  const incCart = (producto)=>{
     setCantidad((prev)=> 
       prev >= 0 && prev <= producto.stock ? 
     (!producto.cantidad ? prev : producto.cantidad) + 1 : 0)
@@ -23,7 +23,7 @@ function CarritoInput({ producto, className }) {
     } 
   }
 
-  const decCarrito = (producto)=>{
+  const decCart = (producto)=>{
     setCantidad((prev)=> prev > 0 && prev <= producto.stock ?  
     (!producto.cantidad ? prev : producto.cantidad)  - 1 : 0 )
     if(producto.cantidad){
@@ -42,7 +42,7 @@ function CarritoInput({ producto, className }) {
 
 
   const handleChange = (e) => {
-     // actCarrito(producto,e);
+     // actCart(producto,e);
      const inputValue = e.target.value;
      const val = parseInt(inputValue );
 
@@ -79,7 +79,7 @@ function CarritoInput({ producto, className }) {
         {/* Boton + */}
         <Button
           className="btn p-1 border-0 ps-3"
-          onClick={() =>  decCarrito(producto) }
+          onClick={() =>  decCart(producto) }
           variant
         ><i className="bi bi-dash-lg"></i>
         </Button>
@@ -97,7 +97,7 @@ function CarritoInput({ producto, className }) {
         {/* Boton - */}
         <Button
           className="btn p-1 border-0 pe-3"
-          onClick={() => incCarrito(producto)}
+          onClick={() => incCart(producto)}
           variant
         ><i className="bi bi-plus-lg"></i>
         </Button>
@@ -108,4 +108,4 @@ function CarritoInput({ producto, className }) {
   );
 }
 
-export default CarritoInput;
+export default CartInput;

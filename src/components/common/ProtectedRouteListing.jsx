@@ -3,6 +3,6 @@ import { useListingCrud } from "../../features/listing/contexts/ListingCrudConte
 
 export default function ProtectedRouteListing({ children }){
     const { showModal } = useListingCrud();
-    return showModal ? children : <Navigate to="/productos" />;
+    return showModal ? children : <Navigate to="/products" />;
 }
 

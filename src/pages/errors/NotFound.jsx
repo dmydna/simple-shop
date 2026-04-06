@@ -1,8 +1,6 @@
-import React from "react";
+import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Button, Card, Container } from "react-bootstrap";
-import warningIMG from "/src/assets/404.png"
-import Img1 from "/src/assets/web_404_crop.png"
+import Img1 from "/src/assets/web_404_crop.png";
 
 function NotFound(){
 
@@ -29,7 +27,7 @@ function NotFound(){
           </div>
         </div>
 
-        <Button style={{maxWidth:"300px"}} as={Link} to={'/productos'}  
+        <Button style={{maxWidth:"300px"}} as={Link} to={'/products'}  
         className="col w-100 col-md-2 p-2 d-block mx-auto my-2" variant="outline-primary">
         <i className="bi bi-chevron-left"></i>
         <b className="mx-2 fw-bold">

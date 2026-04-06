@@ -1,6 +1,5 @@
-import React from "react";
 import { Card, Col } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function ProductCard({title, image, hash ,price, stock, id, children, className, cols, discount, imgSize, visibility = 'PUBLIC'}){
 
@@ -10,7 +9,7 @@ function ProductCard({title, image, hash ,price, stock, id, children, className,
            <Card className={`${className || 'm-2'}`}>
               <Link 
                 className="text-decoration-none text-reset p-0"
-                to={`/productos/${hash}/${encodeURIComponent(title)}`}
+                to={`/products/${hash}/${encodeURIComponent(title)}`}
               >
               <Card.Img   
                     src={image || "https://dummyimage.com/300x300/fff/000&text=Image+not+found"}

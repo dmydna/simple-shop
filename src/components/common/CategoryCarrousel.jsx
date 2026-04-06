@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import CategoryItem from "./CategoryItem";
 import Img3 from "../../assets/dressing-table.png";
 import Img4 from '../../assets/grocery.png';
 import Img1 from "../../assets/lipstick.png";
 import Img2 from '../../assets/perfume.png';
 import { category } from "../../utils/posts.js";
+import CategoryItem from "./CategoryItem";
 
 function CategoryCarrousel({className}){
   const [index, setIndex] = useState(0);
@@ -23,7 +23,7 @@ function CategoryCarrousel({className}){
           image={Img1} 
           category={category.BEAUTY}
           description='salud e higiene' 
-          link={`/productos?category=${category.BEAUTY}`}
+          link={`/products?category=${category.BEAUTY}`}
           handleClick={() => handleClick(category.BEAUTY)}
         />
       </Carousel.Item>  
@@ -35,7 +35,7 @@ function CategoryCarrousel({className}){
           image={Img2} 
           description='perfumeria' 
           category={category.FRAGRANCE} 
-          link={`/productos?category=${category.FRAGRANCE}`}
+          link={`/products?category=${category.FRAGRANCE}`}
           handleClick={() => handleClick(category.FRAGRANCE)}
         />
       </Carousel.Item>
@@ -47,7 +47,7 @@ function CategoryCarrousel({className}){
           image={Img3} 
           category={category.FURNITURE} 
           description='oficina y hogar' 
-          link={`/productos?category=${category.FURNITURE}`}
+          link={`/products?category=${category.FURNITURE}`}
           handleClick={() => handleClick(category.FURNITURE)}
         />
       </Carousel.Item>
@@ -59,7 +59,7 @@ function CategoryCarrousel({className}){
           image={Img4} 
           description='comercio y almacen' 
           category={category.GROCERIES} 
-          link={`/productos?category=${category.GROCERIES}`}
+          link={`/products?category=${category.GROCERIES}`}
           handleClick={() => handleClick(category.GROCERIES)}
         />
       </Carousel.Item>

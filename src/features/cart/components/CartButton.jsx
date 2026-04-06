@@ -1,9 +1,8 @@
-import React from "react";
 import { Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useCart } from "../contexts/CartContext.jsx";
 import { HoverProvider } from "../../../contexts/HoverContext.jsx";
 import HoverWrapper from "../../../contexts/HoverWrapper.jsx";
+import { useCart } from "../contexts/CartContext.jsx";
 
 function CartButton(){
 
@@ -20,7 +19,7 @@ function CartButton(){
 
     return(
       <HoverProvider>
-        <HoverWrapper id="carrito-btn">
+        <HoverWrapper id="cart-btn">
         {(isHovered) => (
          <Button 
          onClick={ toggleRoute } 

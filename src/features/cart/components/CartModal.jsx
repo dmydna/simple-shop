@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Card, Container, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useCart } from "../contexts/CartContext.jsx";
-import CarritoItem from "../components/CartItem";
+import CartItem from "../components/CartItem";
 import ProductBuyModal from "../components/ProductBuyModal";
 import { useWindowsHeight } from "../components/useWindowSize";
+import { useCart } from "../contexts/CartContext.jsx";
 import emptyCaryImg from "/src/assets/empty-cart.png";
 
 function CartModal({show,onHide}) {
@@ -32,8 +32,8 @@ function CartModal({show,onHide}) {
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           {cartItems.length != 0 ? 
-          <div className="">Carrito</div> : 
-          <div className="">Carrito Vacio</div>}
+          <div className="">Cart</div> : 
+          <div className="">Cart Vacio</div>}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ maxHeight: "calc(80vh - 140px)", overflowY: "auto", boxSizing: 'border-box' }}>
@@ -42,14 +42,14 @@ function CartModal({show,onHide}) {
 
 cartItems.length != 0 ? 
     <Container className="mt-4 p-0">
-      <CarritoItem/>
+      <CartItem/>
       <div className="my-3 mx-2 d-flex flex-row-reverse">
           <Button
             type="button"
             className="btn btn-danger"
             onClick={() => clearCart()}
           >
-            <i className="bi bi-trash3" /> Vaciar carrito
+            <i className="bi bi-trash3" /> Vaciar cart
           </Button>
       </div>
 
@@ -68,7 +68,7 @@ cartItems.length != 0 ?
     }} 
       src={emptyCaryImg} />
     <h3 className="text-muted fw-bolder m-4">
-      Tu carrito esta vacio!
+      Tu cart esta vacio!
     </h3>
     </div>
   </Container>
@@ -94,7 +94,7 @@ cartItems.length != 0 ?
           </Card>
             :
           <Button variant="danger" className="col w-100 col-md-2 p-2 " 
-              onClick={onHide} as={Link} to={'/productos'} 
+              onClick={onHide} as={Link} to={'/products'} 
           >
             <i className="bi bi-house-door-fill"></i>
             <b className="mx-2"> ir a Comprar </b>   

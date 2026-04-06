@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Nav as BootstrapNav, Container, Navbar } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useCart } from "../../features/cart/contexts/CartContext.jsx";
 import { HoverProvider } from "../../contexts/HoverContext.jsx";
+import { useCart } from "../../features/cart/contexts/CartContext.jsx";
 import CartButton from "./CartButton";
 
 
@@ -21,8 +21,8 @@ function Nav({items, onSeleccion}) {
 
 
   const toggleRoute = () => { 
-    location.pathname == '/carrito' ? 
-    navigate(-1) || navigate('/') : navigate('/carrito')
+    location.pathname == '/cart' ? 
+    navigate(-1) || navigate('/') : navigate('/cart')
   }
 
   // Desactiva nav sticky top mientra dropdown se muestra dropdown

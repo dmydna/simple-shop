@@ -1,8 +1,8 @@
+import { useState } from "react";
+import { Card } from "react-bootstrap";
+import { useCart } from "../contexts/CartContext.jsx";
 import CartClearModal from "./CartClearModal.jsx";
-import CarritoItem from "./CartItem.jsx";
-import {Card} from "react-bootstrap";
-import React, {useState} from "react";
-import {useCart} from "../contexts/CartContext.jsx";
+import CartItem from "./CartItem.jsx";
 
 export const MyCart = ({children, className}) => {
 
@@ -28,7 +28,7 @@ export const MyCart = ({children, className}) => {
         />
         <hr/>
         {cartItems.map((item, index) => (
-            <CarritoItem
+            <CartItem
                 item={item}
                 index={index}
             />

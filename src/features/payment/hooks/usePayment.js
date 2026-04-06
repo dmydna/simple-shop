@@ -1,42 +1,43 @@
-import { useState } from "react";
+import { useCart } from "@/features/cart/contexts/CartContext.jsx";
 import { useFetch } from "@hooks/useFetch.js";
-import { useCart } from "@features/cart/contexts/CartContext.jsx";
-import { useProfile } from "@features/profile/contexts/ProfileContext.jsx";
+import { useState } from "react";
 import { useGateway } from '../hooks/useGateway.js';
 import { usePurchaseOrder } from './usePurchaseOrder.js';
 
 export const usePayment = () => {
 
-    const { profile } = useProfile()
-    const { orderData } = useCart()
+    const {clearCart} = useCart()
     const [step, setStep] = useState(0)
     const [success, setSuccess] = useState(false)
+    const [canceled, setCanceled] = useState(false)
     const {loading, setLoading, error, setError} = useFetch();
 
-    const { handleCheckOrder, validOrder, validPay , create, orderResponse, setOrderResponse, buy, handleConfirmOrder }
-        = usePurchaseOrder({ orderData, setStep, setLoading, setError })
 
-    const { handleConfirmPay }  = useGateway({ 
-       "orderId": orderResponse?.id || 2, 
-       "clientId": profile?.id || 2, 
-       buy, 
-       setLoading, 
-       setError,
-       setSuccess 
-      })
+    const onSuccess = () => {
+        if(canceled) clearCart();
+        if(step === 1 && !canceled) {
+            setSuccess(true)
+            clearCart()
+        }
+        if(step !== 1) setStep(1)
+    }
+
+    const { handleConfirmOrder, buy, orderResponse, handleCancel }
+        = usePurchaseOrder({ onSuccess, setLoading, setError })
+
+    const { handleConfirmPay }  = useGateway({ buy, setLoading, setError, onSuccess, orderResponse })
 
 
 
 
 
     return ({
-        validOrder, validPay,
-        create,
-        buy,
         loading, error, setLoading, setError,
         step, setStep,
         handleConfirmOrder, // handleFinal purchar Order
         handleConfirmPay, // handleFinal paymentForm
-        success
+        handleCancel,
+        canceled,
+        success,
     })
 }

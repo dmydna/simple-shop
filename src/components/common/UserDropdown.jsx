@@ -9,7 +9,7 @@ import { useUIContext } from "../../contexts/UIContext";
 function UserDropdown({className}) {
 
 
-  const { user, isAuth, logout } = useAuth();
+  const { user, isAuth, logout, isAdmin } = useAuth();
   const {setShowLoginModal, showLoginModal} = useUIContext()
 
   const [isActive, setIsActive] = useState(false)
@@ -49,7 +49,7 @@ function UserDropdown({className}) {
             {/* Perfil info */}
             <Dropdown.Item
               as={Link}
-              to={`/user/information`}
+              to={`/user/general`}
               className="border-bottom py-2"
             >
               <div>
@@ -59,17 +59,21 @@ function UserDropdown({className}) {
             </Dropdown.Item>
   
             {/* Links de navegación */}
-            <Dropdown.Item as={Link} to={`/user/general`}>
-              <i className="bi bi-person me-2"></i> Perfil
-            </Dropdown.Item>
+            {isAdmin && (
             <Dropdown.Item as={Link} to="/dashboard">
               <i className="bi bi-gear me-2"></i> Dashboard
             </Dropdown.Item>
+            )}
 
-            <Dropdown.Item as={Link} to="/dashboard">
+            <Dropdown.Item as={Link} to="user/favoritos">
               <i className="bi bi-heart me-2"></i> favoritos
             </Dropdown.Item>
+
+            <Dropdown.Item as={Link} to="/user/compras">
+              <i className="bi bi-handbag me-2"></i> compras
+            </Dropdown.Item>
   
+
             <Dropdown.Divider />
   
             {/* Logout */}

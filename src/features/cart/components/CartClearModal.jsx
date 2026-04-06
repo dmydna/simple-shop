@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Button, Modal,Card, Container } from "react-bootstrap";
-import cartImg from "../../../assets/shopping-cart.png"
+import { Button, Modal } from "react-bootstrap";
+import cartImg from "@assets/shopping-cart.png";
 
 function CartClearModal({show, onHide, handle}) {
 
@@ -14,14 +13,14 @@ function CartClearModal({show, onHide, handle}) {
 >
   <Modal.Header closeButton>
     <Modal.Title id="clear-cart-modal-title">
-      Vaciar carrito
+      Vaciar cart
     </Modal.Title>
   </Modal.Header>
 
   <Modal.Body className="text-center">
 
     <img  className="fs-1 mb-3" src={cartImg} alt="" />
-    <h5>¿Vaciar el carrito?</h5>
+    <h5>¿Vaciar el cart?</h5>
     <p>Se eliminarán todos los productos. 
       Esta acción no se puede deshacer.</p>
   </Modal.Body>
@@ -31,7 +30,7 @@ function CartClearModal({show, onHide, handle}) {
       Cancelar
     </Button>
     <Button variant="danger" onClick={handle}>
-      Vaciar carrito
+      Vaciar cart
     </Button>
   </Modal.Footer>
 </Modal>

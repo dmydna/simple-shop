@@ -5,168 +5,173 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import ProtectedRouteAdmin from "./components/common/ProtectedRouteAdmin.jsx";
-import { TagsList } from "./components/common/TagsList.jsx";
 import Footer from "./components/layout/Footer.jsx";
 import NavHeader from "./components/layout/NavHeader.jsx";
 import { CRUDWrapper } from "./contexts/CRUDWrapper";
 import DevDash from "./dev/components/DevDash.jsx";
-import { listingDataList } from "./dev/data/listingDataList.js";
 import { AuthProvider } from "./features/auth/hooks/AuthContext.jsx";
-import { FormCreater } from "./components/common/FormCreater.jsx";
-import FormProductSearch from "./features/listing/components/FormProductSearch.jsx";
-import Admin from "./pages/Admin";
-import Carrito from "./pages/Cart/Cart.jsx";
+import Cart from "./pages/Cart/Cart.jsx";
 import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Page404NotFound from "./pages/errors/Page404NotFound.jsx";
-import PageLoading from "./components/common/PageLoading.jsx";
 import ProductDetails from "./pages/Product/ProductDetails";
 import Products from "./pages/Product/ProductListing";
 import Register from "./pages/Register.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
+import Page404NotFound from "./pages/errors/Page404NotFound.jsx";
 import "./styles/index.css";
 
+import ProductLayout from "./components/layout/ProductLayout.jsx";
+import UploadService from "./dev/components/UploadService";
+import { DevProvider } from "./dev/contexts/DevContext.jsx";
+import CompleteRegisterForm from "./features/auth/components/CompleteRegisterForm.jsx";
+import { ListingProvider } from "./features/listing/contexts/ListingContext.jsx";
+import { ListingCrudProvider } from "./features/listing/contexts/ListingCrudContext.jsx";
 import PaymentForm from "./features/payment/components/PaymentForm.jsx";
+import { ProductProvider } from "./features/product/contexts/ProductContext";
+import { ProductCrudProvider } from "./features/product/contexts/ProductCrudContex";
+import { ProfileProvider } from "./features/profile/contexts/ProfileContext.jsx";
+import { UserProvider } from "./features/user/contexts/UserContext.jsx";
+import { UserCrudProvider } from "./features/user/contexts/UserCrudContext.jsx";
 import ListingCrudNext from "./pages/Crud/ListingCrudNext.jsx";
 import ProductCrudNext from "./pages/Crud/ProductCrudNext.jsx";
 import UserCrudNext from "./pages/Crud/UserCrudNext.jsx";
-import FileUploader from "./dev/components/FileUploader";
-import UploadService from "./dev/components/UploadService";
+import CompleteRegister from "./pages/CompleteRegister";
 
 
 
 
 function App() {
 
-  const navItems = ["Inicio", "Productos", "Contacto"];
+  const navItems = ["Inicio", "Products", "Contacto"];
   const [seccion, setSeccion] = useState("Inicio");
 
   const navFix = 'mt-5 pt-5';
 
   const location = useLocation()
 
-  useEffect(()=>{
-    if(
-        location.pathname.startsWith('/login') ||
-        location.pathname.startsWith('/contacto') ||
-        location.pathname.startsWith('/auth') ||
-        location.pathname.startsWith('/register')
-      )
-     {
+  useEffect(() => {
+    if (
+      location.pathname.startsWith('/login') ||
+      location.pathname.startsWith('/contacto') ||
+      location.pathname.startsWith('/auth') ||
+      location.pathname.startsWith('/register') ||
+      location.pathname.startsWith('/register/complete')
+    ) {
       document.querySelector('body')?.classList.add('bg-full-heaven')
-    }else{
+    } else {
       document.querySelector('body')?.classList.remove('bg-full-heaven')
     }
-  },[location])
+  }, [location])
 
 
 
   return (
     <AuthProvider>
-    <CRUDWrapper>
-    <div className="d-flex flex-column min-vh-100 pt-3">
-        
+      <CRUDWrapper>
+        <div className="d-flex flex-column min-vh-100 pt-3">
 
-     <NavHeader  items={navItems} onSeleccion={setSeccion} />
-        {/* <Header />
-        <Nav items={navItems} seccion={seccion} onSeleccion={setSeccion}/> */}
-      <main className={`flex-grow-1 p-3 px-0 ${navFix}`}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/inicio" element={<Home />} />
-          <Route path="/user/:page" element={
-            <ProtectedRoute>
-              <UserProfile />
-            </ProtectedRoute>}>
-          </Route>
-          <Route path="/user" element={
-            <ProtectedRoute>
-              <UserProfile />
-            </ProtectedRoute>}>
-          </Route>
-          <Route path="/admin" element={
-            <ProtectedRoute>
-              <Admin />
-            </ProtectedRoute>}>
-          </Route>
-          <Route path="/contacto" element={<Contact />} />
+          <NavHeader items={navItems} onSeleccion={setSeccion} />
+          <main className={`flex-grow-1 p-3 px-0 ${navFix}`}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/inicio" element={<Home />} />
 
+              <Route path="/user" element={
+                <ProtectedRoute>
+                  <ProfileProvider>
+                    <UserProfile />
+                  </ProfileProvider>
+                </ProtectedRoute>
+              }>
+                <Route index element={<UserProfile />} />
+                <Route path=":page" element={<UserProfile />} />
+              </Route>
 
-
-         <Route path="/test" element={ <PageLoading /> }></Route>
-         <Route path="/test/uploader" element={ <UploadService/> } />
+              <Route path="/contacto" element={<Contact />} />
+              <Route path="/register/complete" element={
+                <ProfileProvider>
+                  <CompleteRegister />
+                </ProfileProvider>
+              }></Route>
+              <Route path="/test/uploader" element={<UploadService />} />
 
 
-          <Route path="/productos/category/:category" element={
-            <>
-            <Products/>
-            </>
-          }
-          />  
-          <Route path="/productos/search/:product" element={
-            <> 
-            <Products/>
-            </>
-          }
-          />         
-          <Route path="/productos/:hash/:name" element={
-              <ProductDetails /> 
-            } 
-          />
-          <Route path="/dev" element={
-              <>
-                 <ProductCrudNext />
-              </> 
-            } 
-          />
-          <Route path="/cart" element={<Carrito/>} />
-          <Route path="/cart/:buy" element={ 
-            <PaymentForm />} 
-          />
-          <Route path="/productos" element={
-              <Products/>
-            }
-          />
-          <Route path="/dashboard/" element={
-            <ProtectedRouteAdmin>
-              <Dashboard />
-            </ProtectedRouteAdmin>
-          } />
+              <Route path="/products" element={<ProductLayout />}>
+                <Route index element={<Products />} />
+                <Route path="category/:category" element={<Products />} />
+                <Route path="search/:product" element={<Products />} />
+                <Route path=":hash/:name" element={<ProductDetails />} />
+              </Route>
 
 
-          <Route path="/dashboard/listing" element={
-             <>
-                <ListingCrudNext /> 
-             </> 
-            } 
-          />
-            <Route path="/dashboard/dev/uploader" element={ <UploadService />} />
-            <Route path="/dashboard/dev" element={
-                <>
-                   <DevDash />
-                </>
-            }
-            />
-            <Route path="/dashboard/product" element={
-                  <>
-                     <ProductCrudNext />
-                  </>
-            }
-            />
-          <Route path="/dashboard/clients" element={ <UserCrudNext/>} />
-          {/* Ruta para no coincidencias */}
-          <Route path="*" element={<Page404NotFound />} />
+              <Route path="/cart" element={
+                <ProtectedRoute>
+                  <ProfileProvider>
+                    <Cart />
+                  </ProfileProvider>
+                </ProtectedRoute>
+              }>
+                <Route index element={<Cart />} />
+                <Route path=":buy" element={<PaymentForm />} />
+              </Route>
 
-        </Routes>
-        <ToastContainer limit={3} />
-      </main>
-      <Footer />
-    </div>
-    </CRUDWrapper>
+
+              <Route path="/dashboard/dev/uploader" element={<UploadService />} />
+
+              {/** -- DASHBOARD CRUD -- */}
+
+
+              <Route path="/dashboard/" element={
+                <ProtectedRouteAdmin>
+                  <Dashboard />
+                </ProtectedRouteAdmin>
+              } />
+
+              <Route path="/dashboard/listing" element={
+                <ListingProvider>
+                  <ListingCrudProvider>
+                    <ListingCrudNext />
+                  </ListingCrudProvider>
+                </ListingProvider>
+              }
+              />
+
+              <Route path="/dashboard/product" element={
+                <ProductProvider>
+                  <ProductCrudProvider>
+                    <ProductCrudNext />
+                  </ProductCrudProvider>
+                </ProductProvider>
+              }
+              />
+              <Route path="/dashboard/clients" element={
+                <UserProvider>
+                  <UserCrudProvider>
+                    <UserCrudNext />
+                  </UserCrudProvider>
+                </UserProvider>
+              } />
+
+              <Route path="/dashboard/dev" element={
+                <DevProvider>
+                  <DevDash />
+                </DevProvider>
+              }
+              />
+
+              {/** -- PAGE 404 -- */}
+              <Route path="*" element={<Page404NotFound />} />
+
+            </Routes>
+            <ToastContainer limit={3} />
+          </main>
+          <Footer />
+        </div>
+      </CRUDWrapper>
     </AuthProvider>
   );
 }

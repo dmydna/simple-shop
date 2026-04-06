@@ -1,8 +1,7 @@
-import {useNavigate} from "react-router-dom";
-import {FeedbackMessage} from "@common/FeedbackMessage.jsx";
-import React from "react";
+import { FeedbackMessage } from "@common/FeedbackMessage.jsx";
+import { useNavigate } from "react-router-dom";
 
-function PageNotConected(){
+function PageIsOffline(){
 
     const navigate = useNavigate();
     const reload = () => {window.location.reload()}
@@ -18,4 +17,4 @@ function PageNotConected(){
     )
 }
 
-export default PageNotConected;
+export default PageIsOffline;

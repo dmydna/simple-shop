@@ -1,8 +1,8 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { useCart } from "../contexts/CartContext.jsx";
 import { useListingContext } from "../../listing/contexts/ListingContext.jsx";
+import { useCart } from "../contexts/CartContext.jsx";
 
 
 
@@ -22,7 +22,7 @@ function AddToCartButton({id, variant='success', children}){
       if (toast.isActive()) {
         return;
       }
-      toast.success("Producto agregado al carrito!");
+      toast.success("Producto agregado al cart!");
     };
 
     return (
@@ -48,7 +48,7 @@ function AddToCartButton({id, variant='success', children}){
                           </div> : ''
               )}
               <i className="bi bi-plus-lg me-2"></i>
-              {children ? children : 'Agregar al Carrito'}
+              {children ? children : 'Agregar al Cart'}
           </Button>
       </>
     )

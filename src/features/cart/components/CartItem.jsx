@@ -1,10 +1,9 @@
-import React from "react";
 import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useCart } from "../contexts/CartContext.jsx";
-import CarritoInput from "./CartInput.jsx";
+import CartInput from "./CartInput.jsx";
 
-function CarritoItem({item, index}) {
+function CartItem({item, index}) {
 
     const {cartItems} = useCart()
 
@@ -21,12 +20,12 @@ function CarritoItem({item, index}) {
                   <Card.Body className="ps-3 p-1">
                     <Card.Title as={Link}
                     className="d-block text-decoration-none fw-medium"
-                    to={"../productos/details/" + encodeURIComponent(item.title)} >
+                    to={"../products/details/" + encodeURIComponent(item.title)} >
                       {item.title}
                     </Card.Title>
 
                     <div className="d-flex flex-wrap justify-content-between align-items-center">
-                    <CarritoInput className={'order-1 order-md-2'} producto={item}/>
+                    <CartInput className={'order-1 order-md-2'} producto={item}/>
                       <Card.Text className="text-secondary small m-0 d-none d-md-block">
                         <i className="bi bi-eye me-1"></i> 
                         stock: 
@@ -52,4 +51,4 @@ function CarritoItem({item, index}) {
     )
 }
 
-export default CarritoItem
+export default CartItem

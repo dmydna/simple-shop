@@ -7,6 +7,7 @@ export const buyService = {
 
     // POST: Crear un nuevo pedido
     create: async (buyData) => {
+        console.log("BUY DATA: ",buyData)
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
             method: 'POST',

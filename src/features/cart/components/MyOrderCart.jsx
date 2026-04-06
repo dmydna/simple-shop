@@ -1,15 +1,14 @@
-import BuyNowButton from "../../../components/common/BuyNowButton.jsx";
-import {Card, Button} from "react-bootstrap";
-import {useWindowsHeight, useWindowsWidth} from "../../../contexts/useWindowSize.jsx";
-import {useCart} from "../contexts/CartContext.jsx";
-import React, {useMemo, useState} from "react";
-import {useMatch} from "react-router-dom";
+import { useMemo } from "react";
+import { Card } from "react-bootstrap";
+import { useMatch } from "react-router-dom";
+import { useWindowsWidth } from "../../../contexts/useWindowSize.jsx";
+import { useCart } from "../contexts/CartContext.jsx";
 
 export const MyOrderCart = ({check, oncheck, handle}) => {
 
     const {totalPrice, cartItems, couponDiscount} = useCart()
 
-    const buyMatch = useMatch("/carrito/:buy")
+    const buyMatch = useMatch("/cart/:buy")
 
     const width = useWindowsWidth()
 

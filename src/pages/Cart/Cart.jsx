@@ -103,7 +103,7 @@ function Cart() {
             <MyOrderCartPlaceHoder />
           )}
           {!error && !loading  && (
-            <div className="sticky-md-top">
+            <div style={{top: '66px'}} className="sticky-md-top">
               <MyOrderCart
                 handle={handleConfirmOrder}
                 oncheck={setCuponCheck}

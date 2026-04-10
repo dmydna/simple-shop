@@ -2,9 +2,9 @@ import { useRef, useState } from 'react';
 import { Button, Form } from "react-bootstrap";
 import "../../../styles/animations.css";
 import { useProfile } from "../contexts/ProfileContext.jsx";
+import { ProfileHeader } from './ProfileHeader';
 
-
-const UploadImageProfile = ({ title, className, multiple = true, previewImg }) => {
+const MyPhotoProfile = ({ title, className, multiple = true, previewImg }) => {
 
   const [selectedFile, setSelectedFile] = useState([]);
   const [preview, setPreview] = useState(["http://localhost:8080/api/image/150x150?&background=cccc&icon=F429&fontSize=70&textColor=fff"]);
@@ -47,8 +47,13 @@ const UploadImageProfile = ({ title, className, multiple = true, previewImg }) =
     <>
         <Form  
           id='userPerfilForm' 
-          className={`upload-form rounded ${className}`}>
-      <div className='h4 mb-3'>{title}</div>
+          className={`upload-form rounded ${className} m-0`}>
+      
+                  <ProfileHeader 
+                      className='mb-0'
+                      title="Imagen de Cuenta"
+                      subtitle="Cambiar tu imagen de cuenta"
+                  />
       
       <Form.Group className="mb-3">
         <Form.Label>Selecciona una imagen</Form.Label>
@@ -93,4 +98,4 @@ const UploadImageProfile = ({ title, className, multiple = true, previewImg }) =
   );
 };
 
-export default UploadImageProfile;
+export default MyPhotoProfile;

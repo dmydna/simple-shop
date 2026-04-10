@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { usePageable } from "../features/pagination/hook/usePageable.js";
 import { useFetch } from "./useFetch.js";
 
-export const useFetchData = ({service}) => {
+export const useFetchData = ({service, size, methodName = 'getPage'}) => {
 
     const [filters, setFilters] = useState({})
 
@@ -17,9 +17,9 @@ export const useFetchData = ({service}) => {
         setError(null)
         try {
             // Enviamos TODO al backend
-            const data = await service?.getPage({
+            const data = await service?.[methodName]({
                 page: page-1,
-                size: 8,
+                size: size || 8,
                 ...currentFilters
             });
             setContent(data.content);
@@ -35,12 +35,15 @@ export const useFetchData = ({service}) => {
         }
     };
 
+    const refreshData = () => fetchData(currentPage, filters);
+
     useEffect(() => {
         fetchData(currentPage, filters);
     },[currentPage, JSON.stringify(filters)]);
 
 
     return ({
+        refreshData,
         loading,
         setLoading,
         error,

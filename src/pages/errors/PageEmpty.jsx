@@ -2,22 +2,18 @@ import {useNavigate} from "react-router-dom";
 import {FeedbackMessage} from "../../components/common/FeedbackMessage.jsx";
 import React from "react";
 
-function PageNotContent(){
+function PageEmpty({ico}){
 
     const navigate = useNavigate();
-    const addContent = () => {
-        navigate('/dashboard/dev/uploader/')
-    }
+
     const msg = 'No hay elementos en esta sección. Agrega alguno para comenzar.';
     return (
         <FeedbackMessage
             title="Sin contenido"
             message={msg}
-            icon="bi-journal-plus"
-            actionLabel="+ Agregar Contenido"
-            onAction={addContent}
+            icon={ico || "bi-journal-plus"}
         />
     )
 }
 
-export default PageNotContent;
+export default PageEmpty;

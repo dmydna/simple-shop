@@ -1,9 +1,10 @@
-import { Button, Form, FloatingLabel } from "react-bootstrap";
+import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useProfile } from "../contexts/ProfileContext.jsx";
+import { ProfileHeader } from "./ProfileHeader.jsx";
 
 
 
-function GeneralProfile({ children }) {
+function MyProfile({ children }) {
 
     const { profile, handleChange, updatePerfil } = useProfile()
 
@@ -15,7 +16,11 @@ function GeneralProfile({ children }) {
 
     return (
         <div>
-            {children}
+            <ProfileHeader
+                title="Informacion general"
+                subtitle="Puedes ver o cambiar tu informacion"
+            />
+
             <Form id='informationPerfilForm' style={{ minHeight: '370px' }} onSubmit={handleUpdate}>
 
                 <Form.Group className="mb-4 w-100">
@@ -52,22 +57,6 @@ function GeneralProfile({ children }) {
 
                 <Form.Group className="mb-4 w-100">
                     <FloatingLabel
-                        controlId="floatingEmail"
-                        label="Email"
-                        className="mb-3"
-                    >
-                        <Form.Control
-                            type="text"
-                            name="email"
-                            placeholder="Ingrese usuario"
-                            value={profile?.email || ''}
-                            onChange={handleChange}
-                        />
-                    </FloatingLabel>
-                </Form.Group>
-
-                <Form.Group className="mb-4 w-100">
-                    <FloatingLabel
                         controlId="floatingAddress"
                         label="Address"
                         className="mb-3"
@@ -81,14 +70,33 @@ function GeneralProfile({ children }) {
                     />
                    </FloatingLabel>
                 </Form.Group>
+
+                <Form.Group className="mb-4 w-100">
+                    <FloatingLabel
+                        controlId="floatingPhone"
+                        label="Phone"
+                        className="mb-3"
+                    >
+                    <Form.Control
+                        type="text"
+                        name="phone"
+                        placeholder="Ingrese Telefono"
+                        value={profile?.phone || ''}
+                        onChange={handleChange}
+                    />
+                   </FloatingLabel>
+                </Form.Group>
+
             </Form>
-            <Button form='informationPerfilForm' variant="primary" type="submit" className="my-2" >
-                Actualizar
-            </Button>
+            <div className='w-100 d-flex justify-content-center'> 
+               <Button form='informationPerfilForm' variant="primary" type="submit" className="my-2" >
+                   Actualizar
+               </Button>
+           </div>
         </div>
 
     )
 
 }
 
-export default GeneralProfile;
+export default MyProfile;

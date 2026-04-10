@@ -18,14 +18,23 @@ import Login from "./pages/Login";
 import ProductDetails from "./pages/Product/ProductDetails";
 import Products from "./pages/Product/ProductListing";
 import Register from "./pages/Register.jsx";
-import UserProfile from "./pages/UserProfile.jsx";
 import Page404NotFound from "./pages/errors/Page404NotFound.jsx";
 import "./styles/index.css";
+
+import MyAccount from "@features/profile/components/MyAccount";
+import MyActivity from "@features/profile/components/MyActivity";
+import MyDashboard from "@features/profile/components/MyDashboard";
+import MyFavorites from "@features/profile/components/MyFavorites";
+import MyPhotoProfile from "@features/profile/components/MyPhotoProfile";
+import MyProfile from "@features/profile/components/MyProfile";
+import MyPurchases from "@features/profile/components/MyPurchases";
+import MyReviews from "@features/profile/components/MyReviews";
+import UserLayout from "@features/profile/components/UserLayout";
+import WelcomePerfil from "@features/profile/components/WelcomeProfile";
 
 import ProductLayout from "./components/layout/ProductLayout.jsx";
 import UploadService from "./dev/components/UploadService";
 import { DevProvider } from "./dev/contexts/DevContext.jsx";
-import CompleteRegisterForm from "./features/auth/components/CompleteRegisterForm.jsx";
 import { ListingProvider } from "./features/listing/contexts/ListingContext.jsx";
 import { ListingCrudProvider } from "./features/listing/contexts/ListingCrudContext.jsx";
 import PaymentForm from "./features/payment/components/PaymentForm.jsx";
@@ -34,10 +43,11 @@ import { ProductCrudProvider } from "./features/product/contexts/ProductCrudCont
 import { ProfileProvider } from "./features/profile/contexts/ProfileContext.jsx";
 import { UserProvider } from "./features/user/contexts/UserContext.jsx";
 import { UserCrudProvider } from "./features/user/contexts/UserCrudContext.jsx";
+import CompleteRegister from "./pages/CompleteRegister";
 import ListingCrudNext from "./pages/Crud/ListingCrudNext.jsx";
 import ProductCrudNext from "./pages/Crud/ProductCrudNext.jsx";
 import UserCrudNext from "./pages/Crud/UserCrudNext.jsx";
-import CompleteRegister from "./pages/CompleteRegister";
+import WriteReview from "./features/profile/components/WriteReview";
 
 
 
@@ -66,7 +76,6 @@ function App() {
   }, [location])
 
 
-
   return (
     <AuthProvider>
       <CRUDWrapper>
@@ -80,16 +89,16 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/inicio" element={<Home />} />
 
-              <Route path="/user" element={
+              {/* <Route path="/user" element={
                 <ProtectedRoute>
                   <ProfileProvider>
                     <UserProfile />
                   </ProfileProvider>
                 </ProtectedRoute>
-              }>
-                <Route index element={<UserProfile />} />
+              }> */}
+              {/* <Route index element={<UserProfile />} />
                 <Route path=":page" element={<UserProfile />} />
-              </Route>
+              </Route> */}
 
               <Route path="/contacto" element={<Contact />} />
               <Route path="/register/complete" element={
@@ -107,6 +116,26 @@ function App() {
                 <Route path=":hash/:name" element={<ProductDetails />} />
               </Route>
 
+              <Route path="/user" element={
+                <ProtectedRoute>
+                  <UserProvider>
+                    <ProfileProvider>
+                      <UserLayout />
+                    </ProfileProvider>
+                  </UserProvider>
+                </ProtectedRoute>
+              }>
+                <Route index element={<WelcomePerfil />} />
+                <Route path="account" element={<MyAccount />} />
+                <Route path="profile" element={<MyProfile />} />
+                <Route path="favorites" element={<MyFavorites />} />
+                <Route path="photo" element={<MyPhotoProfile />} />
+                <Route path="activity" element={<MyActivity />} />
+                <Route path="purchases" element={<MyPurchases />} />
+                <Route path="reviews" element={<MyReviews />} />
+                <Route path="dashboard" element={<MyDashboard />} />
+                <Route path="write-review" element={<WriteReview />} />
+              </Route>
 
               <Route path="/cart" element={
                 <ProtectedRoute>

@@ -21,6 +21,8 @@ export const ENDPOINTS = Object.freeze({
     AUTH:      'api/auth',
     PROFILE:   'api/profile',
     BUY:       'api/buy',
+    REVIEWS:   'api/reviews',
+    FAVORITE:  'api/profile/favorite',
     GATEWAY:   'toy-gateway', // pasarela de pago falsa.
     IMAGES:    'images',      // generador de imagen
     UPLOADS:   'uploads'      

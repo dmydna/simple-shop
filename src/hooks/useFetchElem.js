@@ -1,17 +1,14 @@
-import { useEffect, useState } from "react";
-import { useFetch } from "./useFetch.js";
-
-export const useFetchById = ({ service, methodName = 'getById' }) => {
+export const useFetchElem = ({ fetchMethod }) => {
     const { loading, setLoading, error, setError } = useFetch();
     const [currentItem, setCurrentItem] = useState({});
-    const [itemId, setItemId] = useState(null);
+    const [identifier, setIdentifier] = useState(null);
 
-    const fetchDataById = async (id) => {
+    const fetchData = async (id) => {
         setLoading(true);
         setError(null);
 
         try {
-            const data = await service?.[methodName](id);
+            const data = await fetchMethod(id);
             setCurrentItem(data);
         } catch (err) {
             console.error("Error de carga de API", err);
@@ -22,16 +19,16 @@ export const useFetchById = ({ service, methodName = 'getById' }) => {
     };
 
     useEffect(() => {
-        if (itemId) {
-            fetchDataById(itemId);
+        if (identifier) {
+            fetchData(identifier);
         }
-    }, [itemId]);
+    }, [identifier]);
 
     return {
         loading, setLoading,
         error, setError,
         currentItem, setCurrentItem,
-        itemId, setItemId,
-        fetchDataById
+        identifier, setIdentifier,
+        fetchData
     };
 };

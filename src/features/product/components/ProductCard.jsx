@@ -1,11 +1,28 @@
 import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useFavorite} from "@/features/favorite/hooks/useFavorite.js"
+import { toast } from "react-toastify";
 
 function ProductCard({title, image, hash ,price, stock, id, children, className, cols, discount, imgSize, visibility = 'PUBLIC'}){
+
+    const { createFavorite } = useFavorite()
+
+    const handleAddFavorite = () => {
+      createFavorite(id) 
+      if (toast.isActive()) {
+        return;
+      }
+      toast.success("agregado favoritos");
+    };
 
     return(
         <Col className={`d-flex flex-column p-0 ${visibility != 'PUBLIC' ? 'disabled' : ''}
           ${cols ? cols : 'col-12 col-sm-6 col-md-4 col-lg-3'}`}>
+           <span onClick={handleAddFavorite} 
+                style={{lineHeight:'0px', padding: '10px'}}
+                className='btn rounded-circle white-dark-btn border position-absolute z-index-10 mt-4 ms-4'>
+                <i className='bi-heart'></i> 
+           </span>
            <Card className={`${className || 'm-2'}`}>
               <Link 
                 className="text-decoration-none text-reset p-0"

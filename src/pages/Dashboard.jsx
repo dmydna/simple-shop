@@ -64,16 +64,19 @@ const Dashboard = ({ col, preview = false }) => {
         <CategoryItem
           // variant="dark"
           col={col}
-          className="border pe-0"
+          className="border rounded-4 pe-0"
           category="Dev Panel"
           description="cosas de dev"
           image={Img6}
           link={`/dashboard/dev`}
         />
         {preview && (
-          <Button as={Link} to={'/dashboard'} variant="outline-secondary rounded-4 mt-3" className="w-auto mx-auto">
-            ver mas
-          </Button>
+          <div className='w-100 d-flex justify-content-center'>
+             <Button as={Link} to={'/dashboard'} variant="outline-secondary rounded-4 mt-3">
+                ver mas
+            </Button>
+          </div>
+
         )}
 
       </Row>

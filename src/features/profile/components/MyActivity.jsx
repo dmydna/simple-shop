@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Button, Container, Row, Form, Modal } from "react-bootstrap";
-import CategoryItem from "../../../components/common/CategoryItem.jsx";
-import { handleBulk, ImgGenApi, color, symbol } from "../../../dev/utils.js";
-import { useListing } from "../../listing/hooks/useListing.js";
-import { useListingContext } from "../../listing/contexts/ListingContext.jsx";
-import { useProductContext } from "../../product/contexts/ProductContext.jsx";
-import { useUserContext } from "../../user/contexts/UserContext.jsx";
 import { useProduct } from "@/features/product/hooks/useProduct.js";
 import { useUser } from "@/features/user/hooks/useUser.js";
+import { Row } from "react-bootstrap";
+import CategoryItem from "../../../components/common/CategoryItem.jsx";
+import { ImgGenApi } from "../../../dev/utils.js";
+import { useListing } from "../../listing/hooks/useListing.js";
+import UserLayout from "./UserLayout";
 
-const Activity = ({col, container=true}) => {
+const MyActivity = ({col='col-12 col-md-12 col-lg-6', container=true}) => {
 
   const {totalElements: totalPublications} = useListing()
   const {totalElements: totalProducts} = useProduct()
@@ -17,10 +14,9 @@ const Activity = ({col, container=true}) => {
   
   const imgInfo =  { 
      "dimension":"150x150", 
-     "textColor": "melon", 
+     "text": "0",
      "fontSize": "70",
      "fontWeight":"normal",
-     "text": "0",
    }
 
     return (
@@ -42,7 +38,7 @@ const Activity = ({col, container=true}) => {
                link={`/dashboard/listing`}
                image={
                 ImgGenApi({ ...imgInfo, "background": ".melon", 
-                  "text": (totalPublications && totalPublications > 99 ? '%2B99' : totalPublications) || "0"} )
+                  "text": (totalPublications > 99 ? '%2B99' : totalPublications) || "0"} )
                 } 
              />
              <CategoryItem 
@@ -64,7 +60,8 @@ const Activity = ({col, container=true}) => {
                category="usuarios"
                description="cantidad de usuarios"
                image={ ImgGenApi(
-                { ...imgInfo, "background": ".cielo",  "text": (totalUsers && totalUsers > 99 ? '%2B99' : totalUsers) || 0 } 
+                { ...imgInfo, "background": ".cielo",  
+                   "text": (totalUsers > 99 ? '%2B99' : totalUsers) || "0" } 
                 )}
                link={`/dashboard/clients`}
              />
@@ -82,4 +79,4 @@ const Activity = ({col, container=true}) => {
     )
 }
 
-export default Activity;
+export default MyActivity;

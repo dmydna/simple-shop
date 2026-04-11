@@ -6,7 +6,7 @@ import { ImgGenApi } from "../../../dev/utils.js";
 import { useListing } from "../../listing/hooks/useListing.js";
 import UserLayout from "./UserLayout";
 
-const MyActivity = ({col='col-12 col-md-12 col-lg-6', container=true}) => {
+const MyActivity = ({col='col-12 col-md-12 col-lg-6', container=false}) => {
 
   const {totalElements: totalPublications} = useListing()
   const {totalElements: totalProducts} = useProduct()

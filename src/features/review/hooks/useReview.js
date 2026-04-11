@@ -9,22 +9,22 @@ export const useReview = () => {
     const { loading: loadingList, error: errorList, content, setContent, totalElements, setFilters, ...props }
         = useFetchData({ service: reviewService, size: 8 })
 
-    const { loading: loadingItem, error: errorItem, currentItem, setCurrentItem, itemHash, setItemHash }
+    const { loading: loadingItem, error: errorItem, currentItem, setCurrentItem, itemId, setItemId }
         = useFetchById({ service: reviewService })
 
-    const { Delete: deleteFavorite } = useService({service: reviewService})
+    const { createReview, 
+      loading: loadingCreate, 
+      setError: setErrorCreate, 
+      error: errorCreate, success: successCreate, setSuccess: setSuccessCreate } = useService({service: reviewService})
 
 
     return ({
         ...props,
+        setFilters,
         content,
         loading: loadingList || loadingItem,
         error: errorList || errorItem,
-        orders: content,
-        setOrders: setContent,
-        currenOrder: currentItem,
-        setCurrenOrder: setCurrentItem,
-        orderHash: itemHash,
-        setOrderHash: setItemHash,
+        createReview, loadingCreate, setErrorCreate, errorCreate, 
+        successCreate, setSuccessCreate
     })
 }

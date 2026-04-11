@@ -51,9 +51,9 @@ function MyReviews({ children }) {
                                   </span> 
                                   <div className='d-flex gap-3'>
                                   <span 
-                                   onClick={()=> navigate('/user/write-review')}
+                                   onClick={()=> navigate(`/user/write-review?pkey=${item?.id}`)}
                                    className='small btn btn-sm  btn-light border'>
-                                      escribir reseña
+                                      evaluar producto
                                   </span>
                                   <span onClick={handleDelete} className='small btn btn-sm   btn-light border'>
                                      cancelar
@@ -65,7 +65,7 @@ function MyReviews({ children }) {
                         </div>
                 </div> )}
            {content?.length == 0 && (
-               <PageEmpty ico='bi-handbag'/>
+               <PageEmpty ico='bi-star'/>
            )}
             <Pagination
                 currentPage={currentPage}

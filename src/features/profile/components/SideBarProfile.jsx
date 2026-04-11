@@ -12,7 +12,7 @@ function SideBarProfile({ role }) {
                     <li className="list-group-item">
                         <Link className="simple-link" to={`/user/profile`}>
                             <i className="bi bi-person-check fs-5 ps-0 p-2"></i>
-                            <span> Personal </span>
+                            <span> Profile </span>
                         </Link>
                     </li>
                 )}
@@ -43,7 +43,7 @@ function SideBarProfile({ role }) {
                         <Link className="simple-link" to={`/user/purchases`}>
                             <div className="item">
                                 <i className="bi bi-handbag fs-5 ps-0 p-2"></i>
-                                <span> mis compras</span>
+                                <span> compras</span>
                             </div>
                         </Link>
                     </li>

@@ -3,16 +3,18 @@ export const FeedbackMessage = ({
                              title,
                              message,
                              actionLabel,
-                             onAction
+                             onAction,
+                             children
                          }) => {
     return (
         <div className="container my-5">
             <div className="row justify-content-center">
                 <div className="col-12 col-md-6 text-center">
                     {/* Icono sutil */}
+                     {children?.icon || 
                     <div className="mb-3 text-secondary" style={{ opacity: 0.3 }}>
-                        <i className={`bi ${icon}`} style={{ fontSize: "3.5rem" }}></i>
-                    </div>
+                       <i className={`bi ${icon}`} style={{ fontSize: "3.5rem" }}></i> 
+                    </div> }
 
                     {/* Texto refinado */}
                     <h3 className="fs-5 fw-light text-dark mb-2">{title}</h3>

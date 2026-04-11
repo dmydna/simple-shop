@@ -48,7 +48,7 @@ import ListingCrudNext from "./pages/Crud/ListingCrudNext.jsx";
 import ProductCrudNext from "./pages/Crud/ProductCrudNext.jsx";
 import UserCrudNext from "./pages/Crud/UserCrudNext.jsx";
 import WriteReview from "./features/profile/components/WriteReview";
-
+import PageEmpty from "@pages/errors/PageEmpty"
 
 
 
@@ -107,7 +107,7 @@ function App() {
                 </ProfileProvider>
               }></Route>
               <Route path="/test/uploader" element={<UploadService />} />
-
+              <Route path="/faqs" element={<PageEmpty />} />
 
               <Route path="/products" element={<ProductLayout />}>
                 <Route index element={<Products />} />

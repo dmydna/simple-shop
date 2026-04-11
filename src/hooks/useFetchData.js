@@ -7,7 +7,8 @@ export const useFetchData = ({service, size, methodName = 'getPage'}) => {
 
     const [filters, setFilters] = useState({})
 
-    const {loading, setLoading, error, setError, content, setContent} = useFetch()
+    const {loading, setLoading, error, setError, content, setContent, 
+      success, setSuccess} = useFetch()
     const {currentPage,setCurrentPage, setTotalElements, setTotalPages,
         totalPages,totalElements} = usePageable()
 
@@ -25,6 +26,7 @@ export const useFetchData = ({service, size, methodName = 'getPage'}) => {
             setContent(data.content);
             setTotalElements(data.totalElements);
             setTotalPages(data.totalPages)
+            setSuccess(true)
             console.log(data)
         } catch (err) {
             console.error("Error de carga de API", err);
@@ -58,6 +60,7 @@ export const useFetchData = ({service, size, methodName = 'getPage'}) => {
         totalElements,
         fetchData,
         filters,
-        setFilters
+        setFilters,
+        success, setSuccess
     })
 }

@@ -37,6 +37,40 @@ export const reviewService = {
         return await response;
     },
 
+    // solo admin
+    deleteReview: async (productId) => {
+        const TOKEN = localStorage.getItem("token")
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${productId}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ` + TOKEN},
+        });
+        if (!response.ok) throw new Error("Error al borrar review");
+        return await response;
+    },
+
+
+    // user
+    createReview: async (reviewData) => {
+        const formatData = { 
+           "id": 0, 
+           "reviewerName": "", 
+           "reviewerEmail": "", 
+           "rating": reviewData.rating,
+           "comment": reviewData.comment, 
+           "productId": reviewData.productId
+         }
+        console.log(formatData)
+        const TOKEN = localStorage.getItem("token")
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ` + TOKEN, 'Content-Type': 'application/json' },
+
+            body: JSON.stringify(formatData) 
+        });
+        if (!response.ok) throw new Error("Error al crear review");
+        return await response;
+    },
+
 }
 
 

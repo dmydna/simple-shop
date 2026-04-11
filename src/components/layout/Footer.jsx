@@ -16,7 +16,7 @@ function Footer() {
              <p className='small border rounded-pill mb-0 mx-2 py-1 px-3'  
              style={{cursor:"pointer"}} >Contacto</p>
            </Link>
-           <Link to={'/auth'} className='text-decoration-none text-reset'>
+           <Link to={'/faqs'} className='text-decoration-none text-reset'>
              <p className='small border rounded-pill mb-0 mx-2 py-1 px-3' 
              style={{cursor:"pointer"}}>Mas informacion</p>
            </Link>

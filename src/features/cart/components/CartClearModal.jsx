@@ -1,5 +1,6 @@
 import { Button, Modal } from "react-bootstrap";
 import cartImg from "@assets/shopping-cart.png";
+import CartIcon from "@features/cart/components/CartIcon.jsx"
 
 function CartClearModal({show, onHide, handle}) {
 
@@ -11,28 +12,47 @@ function CartClearModal({show, onHide, handle}) {
   aria-labelledby="clear-cart-modal-title"
   centered
 >
-  <Modal.Header closeButton>
-    <Modal.Title id="clear-cart-modal-title">
-      Vaciar cart
-    </Modal.Title>
-  </Modal.Header>
 
   <Modal.Body className="text-center">
 
-    <img  className="fs-1 mb-3" src={cartImg} alt="" />
-    <h5>¿Vaciar el cart?</h5>
-    <p>Se eliminarán todos los productos. 
-      Esta acción no se puede deshacer.</p>
-  </Modal.Body>
+    <div className='d-flex justify-content-between'>
+     <span className='fs-5 fw-semibold'>
+        Vaciar cart
+     </span>
+      <span onClick={()=>onHide(false)} className='btn btn-light rounded-circle'>
+          <i className='bi-x-lg fw-semibold'></i>
+      </span>
+    </div>
 
-  <Modal.Footer>
-    <Button variant="secondary" onClick={onHide}>
+   <div className='d-block py-4'>
+    {/*<i className='bi bi-trash3 disabled icn-lg'></i>*/}
+
+
+
+        <CartIcon icon="bi-exclamation-circle-fill"/>
+
+
+
+
+    <p className='fw-bold'>¿Vaciar el carrito?</p>
+    <p className='text-secondary small'>
+        Se eliminarán todos los productos. <br></br>
+        Esta acción no se puede deshacer.</p>
+   </div>
+
+    <div className='d-flex gap-3 justify-content-center my-2'>
+    <Button className='btn-sm rounded-3' variant="light" onClick={()=>onHide(false)}>
       Cancelar
     </Button>
-    <Button variant="danger" onClick={handle}>
-      Vaciar cart
+    <Button className='btn-sm rounded-3' variant="dark" onClick={handle}>
+      Vaciar carrito
     </Button>
-  </Modal.Footer>
+    </div>
+
+
+  </Modal.Body>
+
+
 </Modal>
 
   );

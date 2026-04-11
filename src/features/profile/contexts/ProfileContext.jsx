@@ -9,10 +9,13 @@ const ProfileContext = createContext();
 
 export function ProfileProvider({ children }) {
 
+    const [sharedContext, setSharedContext] = useState()
     const [ loading, setLoading ] = useState(true);
     const [ profile, setProfile ] = useState({})
     const [ error, setError ] = useState(null);
     const { isAuth } = useAuth()
+
+
 
     const fetchData = async () => {
         nprogress.start();
@@ -82,7 +85,7 @@ export function ProfileProvider({ children }) {
 
     return (
         <ProfileContext.Provider
-            value={{ fetchData, profile, loading, profileService, handleChange, updatePerfil , updateImage }}>
+            value={{ fetchData, profile, loading, profileService, handleChange, updatePerfil , updateImage, sharedContext, setSharedContext }}>
             {children}
         </ProfileContext.Provider>
     );

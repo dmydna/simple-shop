@@ -17,7 +17,7 @@ function MyProfile({ children }) {
     return (
         <div>
             <ProfileHeader
-                title="Informacion general"
+                title="Informacion Personal"
                 subtitle="Puedes ver o cambiar tu informacion"
             />
 

@@ -49,7 +49,7 @@ function UserDropdown({className}) {
             {/* Perfil info */}
             <Dropdown.Item
               as={Link}
-              to={`/user/profile`}
+              to={`/user`}
               className="border-bottom py-2"
             >
               <div>

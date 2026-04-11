@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useFetch } from "./useFetch.js";
 
 export const useFetchById = ({ service, methodName = 'getById' }) => {
-    const { loading, setLoading, error, setError } = useFetch();
+    const { loading, setLoading, error, setError, success, setSuccess } = useFetch();
     const [currentItem, setCurrentItem] = useState({});
     const [itemId, setItemId] = useState(null);
 
@@ -13,6 +13,7 @@ export const useFetchById = ({ service, methodName = 'getById' }) => {
         try {
             const data = await service?.[methodName](id);
             setCurrentItem(data);
+            setSuccess(true)
         } catch (err) {
             console.error("Error de carga de API", err);
             setError(err.message || "Error al cargar el elemento");
@@ -32,6 +33,6 @@ export const useFetchById = ({ service, methodName = 'getById' }) => {
         error, setError,
         currentItem, setCurrentItem,
         itemId, setItemId,
-        fetchDataById
+        fetchDataById, success, setSuccess
     };
 };

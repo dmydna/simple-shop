@@ -1,5 +1,7 @@
 import { FeedbackMessage } from "@common/FeedbackMessage.jsx";
 import { useNavigate } from "react-router-dom";
+import CartIcon from "@features/cart/components/CartIcon.jsx"
+
 
 function PageCartEmpty(){
 
@@ -15,7 +17,8 @@ function PageCartEmpty(){
             icon="bi-cart-x icn-xl"
             actionLabel="agregar al cart"
             onAction={goToHome}
-        />
+        > {{ "icon" : <CartIcon scale=".7" opacity=".3" />  }}
+       </FeedbackMessage>
     )
 }
 

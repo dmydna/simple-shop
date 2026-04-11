@@ -5,7 +5,7 @@ export const useService = ({service, onSuccess, onError, onRefresh}) => {
 
 
     const {loading, setLoading, content ,
-        setContent, error, setError} = useFetch()
+        setContent, error, setError, success, setSuccess} = useFetch()
 
     const serviceCrud = useMemo(() => {
         const wrapper = {};
@@ -28,6 +28,7 @@ export const useService = ({service, onSuccess, onError, onRefresh}) => {
             const result = await service[action](...args)
             onSuccess?.(result);
             onRefresh?.();
+            setSuccess(true)
             return result;
         } catch (err) {
             setError(err);
@@ -40,6 +41,6 @@ export const useService = ({service, onSuccess, onError, onRefresh}) => {
 
     return {
         ...serviceCrud, execute, loading, setLoading, content ,
-        setContent, error, setError
+        setContent, error, setError, success, setSuccess
     }
 }

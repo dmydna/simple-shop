@@ -52,7 +52,7 @@ function UserDropdown({className}) {
               to={`/user`}
               className="border-bottom py-2"
             >
-              <div>
+              <div className="active-fix">
                 <b className="fw-semibold">{user}</b>
                 <p className="m-0 small text-secondary">Ver perfil completo</p>
               </div>

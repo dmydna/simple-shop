@@ -1,9 +1,8 @@
 import Accordion from 'react-bootstrap/Accordion';
-import AccordionEdit from "./AccordionEdit.jsx";
-import {useListingCrud} from "../contexts/ListingCrudContext.jsx";
+import { useListingCrudContext } from "../contexts/ListingCrudContext.jsx";
 
 function AccordionInfo({children, eventKey, className}) {
-    const {currentListing} = useListingCrud();
+    const {currentListing} = useListingCrudContext();
 
     return (
     <Accordion.Item className={className} eventKey={eventKey || "0"}>

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import {Button, Container, Table} from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Table } from 'react-bootstrap';
 import Pagination from '../../pagination/components/Pagination.jsx';
+import { useProduct } from "../../product/hooks/useProduct.js";
 import SearchLive from '../../search/SearchLive.jsx';
-import {useProduct} from "../../product/hooks/useProduct.js";
-import {Link} from "react-router-dom";
-import {useListingCrud} from "../contexts/ListingCrudContext.jsx";
+import { useListingCrudContext } from "../contexts/ListingCrudContext.jsx";
 
 
 function FormProductSearch({ className, children, onSelect }) {
@@ -13,7 +12,7 @@ function FormProductSearch({ className, children, onSelect }) {
         setFilters, filters ,totalElements, loading,
         setCurrentFilter, fetchData, content } = useProduct()
 
-    const {setIsSelectedProduct, setDataItem, dataItem} = useListingCrud()
+    const {setIsSelectedProduct, setDataItem, dataItem} = useListingCrudContext()
 
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState()

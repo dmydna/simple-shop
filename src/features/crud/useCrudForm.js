@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from '../../hooks/useForm.js'
 
-export const useCrudForm = ({dataItem}) => {
+export const useCrudForm = ({dataItem = {}}) => {
     
     const [selectedFile, setSelectedFile] = useState()
     const [editableFields, setEditableFields] = useState({});
@@ -10,6 +10,7 @@ export const useCrudForm = ({dataItem}) => {
 
     useEffect(()=>{
         setFormData(dataItem)
+        console.log("FORM DATA:", dataItem )
     },[dataItem])
 
     const handleEnableEdit = (field) => {
@@ -28,6 +29,7 @@ export const useCrudForm = ({dataItem}) => {
         selectedFile,
         setSelectedFile,
         formData,
-        onChange
+        onChange,
+        setFormData
     };
 };

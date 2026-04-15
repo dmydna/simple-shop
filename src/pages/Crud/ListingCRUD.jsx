@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import ListingCrudTable from "../../features/listing/components/ListingCrudTable.jsx";
-import FilterBar from "../../features/filters/components/FilterBar.jsx";
-import SearchLive from "../../features/search/SearchLive.jsx";
-import { useListingContext } from "../../features/listing/contexts/ListingContext.jsx";
-import { useListingCrud } from "../../features/listing/contexts/ListingCrudContext.jsx";
-import { useUIContext } from "../../contexts/UIContext.jsx";
-import { CRUD } from "../../utils/crud.js";
 import DropdownCheck from "../../components/common/DropdownCheck.jsx";
+import { useUIContext } from "../../contexts/UIContext.jsx";
+import FilterBar from "../../features/filters/components/FilterBar.jsx";
+import ListingCrudTable from "../../features/listing/components/ListingCrudTable.jsx";
+import { useListingContext } from "../../features/listing/contexts/ListingContext.jsx";
+import { useListingCrudContext } from "../../features/listing/contexts/ListingCrudContext.jsx";
+import SearchLive from "../../features/search/SearchLive.jsx";
+import { CRUD } from "../../utils/crud.js";
 
 
 
@@ -22,7 +22,7 @@ const ListingCRUD = () => {
 
 
     const { setShowModal, setModalMode, setCurrentItem,
-        handleDelete, handleVisibility } = useListingCrud()
+        handleDelete, handleVisibility } = useListingCrudContext()
 
     const [isCreating, setIsCreating] = useState(false);
     const [search, setSearch] = useState()

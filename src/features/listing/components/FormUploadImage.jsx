@@ -1,12 +1,12 @@
-import React, {useEffect, useRef, useState} from 'react';
-import { Button, Form } from "react-bootstrap";
+import { useEffect, useRef, useState } from 'react';
+import { Form } from "react-bootstrap";
 
+import { useListingContext } from "../contexts/ListingContext.jsx";
+import { useListingCrudContext } from '../contexts/ListingCrudContext.jsx';
 import { listingService } from '../services/listingService.js';
-import { useListingCrud } from '../contexts/ListingCrudContext.jsx';
-import {useListingContext} from "../contexts/ListingContext.jsx";
 
 const FormUploadImage = ({ productId, title, className, multiple = true }) => {
-  const {selectedFile, setSelectedFile, currentItem, setDataItem, dataItem} = useListingCrud();
+  const {selectedFile, setSelectedFile, currentItem, setDataItem, dataItem} = useListingCrudContext();
   const [preview, setPreview] = useState([]);
   const fileInputRef = useRef(null);
   const {fetchDataByHash} = useListingContext()

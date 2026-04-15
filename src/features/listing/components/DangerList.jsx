@@ -1,13 +1,11 @@
 
-import {useCallback, useEffect, useMemo} from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import {useWizard} from "../../wizardCrud/contexts/WisardContext.jsx";
-import {useListingCrud} from "../contexts/ListingCrudContext.jsx";
+import { Link } from "react-router-dom";
+import { useWizard } from "../../wizardCrud/contexts/WisardContext.jsx";
+import { useListingCrudContext } from "../contexts/ListingCrudContext.jsx";
 
 function DangerList() {
 
-    const {handleDelete, handleVisibility, currentItem} = useListingCrud()
+    const {handleDelete, handleVisibility, currentItem} = useListingCrudContext()
     const { goTo } = useWizard()
 
     const visibilityHandler = (item)=>{

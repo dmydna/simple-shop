@@ -32,7 +32,10 @@ import MyReviews from "@features/profile/components/MyReviews";
 import UserLayout from "@features/profile/components/UserLayout";
 import WelcomePerfil from "@features/profile/components/WelcomeProfile";
 
+import PageNotReady from "@pages/errors/PageNotReady";
+import NavHeaderAdmin from "./components/layout/NavbarHeaderAdmin";
 import ProductLayout from "./components/layout/ProductLayout.jsx";
+import SiderbarAdmin from "./components/layout/SiderbarAdmin";
 import UploadService from "./dev/components/UploadService";
 import { DevProvider } from "./dev/contexts/DevContext.jsx";
 import { ListingProvider } from "./features/listing/contexts/ListingContext.jsx";
@@ -40,6 +43,8 @@ import { ListingCrudProvider } from "./features/listing/contexts/ListingCrudCont
 import PaymentForm from "./features/payment/components/PaymentForm.jsx";
 import { ProductProvider } from "./features/product/contexts/ProductContext";
 import { ProductCrudProvider } from "./features/product/contexts/ProductCrudContex";
+import DashProductForm from "./features/profile/components/DashProductForm";
+import WriteReview from "./features/profile/components/WriteReview";
 import { ProfileProvider } from "./features/profile/contexts/ProfileContext.jsx";
 import { UserProvider } from "./features/user/contexts/UserContext.jsx";
 import { UserCrudProvider } from "./features/user/contexts/UserCrudContext.jsx";
@@ -47,13 +52,14 @@ import CompleteRegister from "./pages/CompleteRegister";
 import ListingCrudNext from "./pages/Crud/ListingCrudNext.jsx";
 import ProductCrudNext from "./pages/Crud/ProductCrudNext.jsx";
 import UserCrudNext from "./pages/Crud/UserCrudNext.jsx";
-import WriteReview from "./features/profile/components/WriteReview";
-import PageEmpty from "@pages/errors/PageEmpty"
+import { NewListingCrudProvider } from "./features/listing/contexts/newListingCrudContext";
 
 
 
 function App() {
 
+
+  const [appMode, setAppMode] = useState("user") 
   const navItems = ["Inicio", "Products", "Contacto"];
   const [seccion, setSeccion] = useState("Inicio");
 
@@ -81,24 +87,21 @@ function App() {
       <CRUDWrapper>
         <div className="d-flex flex-column min-vh-100 pt-3">
 
-          <NavHeader items={navItems} onSeleccion={setSeccion} />
-          <main className={`flex-grow-1 p-3 px-0 ${navFix}`}>
+          {appMode === "admin" ? 
+              (<NavHeaderAdmin />) : 
+              (<NavHeader items={navItems} onSeleccion={setSeccion} />) 
+          }
+
+          <main style={{marginLeft:`${appMode == "admin" ? '250px': ''}`}} className={`flex-grow-1 p-3 px-0 ${navFix} `}>
+            {appMode == "admin" && (
+              <SiderbarAdmin />
+            )}
+
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/inicio" element={<Home />} />
-
-              {/* <Route path="/user" element={
-                <ProtectedRoute>
-                  <ProfileProvider>
-                    <UserProfile />
-                  </ProfileProvider>
-                </ProtectedRoute>
-              }> */}
-              {/* <Route index element={<UserProfile />} />
-                <Route path=":page" element={<UserProfile />} />
-              </Route> */}
 
               <Route path="/contacto" element={<Contact />} />
               <Route path="/register/complete" element={
@@ -107,7 +110,7 @@ function App() {
                 </ProfileProvider>
               }></Route>
               <Route path="/test/uploader" element={<UploadService />} />
-              <Route path="/faqs" element={<PageEmpty />} />
+              <Route path="/faqs" element={<PageNotReady />} />
 
               <Route path="/products" element={<ProductLayout />}>
                 <Route index element={<Products />} />
@@ -135,6 +138,7 @@ function App() {
                 <Route path="reviews" element={<MyReviews />} />
                 <Route path="dashboard" element={<MyDashboard />} />
                 <Route path="write-review" element={<WriteReview />} />
+                
               </Route>
 
               <Route path="/cart" element={
@@ -197,8 +201,9 @@ function App() {
 
             </Routes>
             <ToastContainer limit={3} />
+  
           </main>
-          <Footer />
+          { appMode !== "admin" && <Footer />}
         </div>
       </CRUDWrapper>
     </AuthProvider>

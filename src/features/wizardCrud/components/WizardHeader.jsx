@@ -1,11 +1,8 @@
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import React, {useEffect} from "react";
-import {CRUD} from "../../../utils/crud.js";
-import {useWizard} from "../contexts/WisardContext.jsx";
-import StepNavbar from "./StepNavbar"
+import { CRUD } from "../../../utils/crud.js";
+import { useWizard } from "../contexts/WisardContext.jsx";
 
 
-function WizardBreadcrumb({onClose}) {
+function WizardHeader({onClose}) {
 
     const { visibleSteps, mode, currentStep, 
             firstStep, goTo, currentStepData, reset, prev } = useWizard();
@@ -32,7 +29,7 @@ function WizardBreadcrumb({onClose}) {
 
                 <div className='normalize-breadcrumb '>
                     <div style={{maxWidth:'270px', fontSize: '1rem'}}
-                         className='p-1 px-0 fw-semibold m-0'>
+                         className='p-1 px-0 fw-medium m-0'>
                         {handleGetCurrentName()}
                     </div>
                 </div>
@@ -53,4 +50,4 @@ function WizardBreadcrumb({onClose}) {
     )
 }
 
-export default WizardBreadcrumb;
+export default WizardHeader;

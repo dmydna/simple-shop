@@ -88,13 +88,15 @@ function WriteReview(){
         className="mb-3"
     >
         <Form.Control
-            as="textarea"
+            style={{ minHeight: '100px', resize: 'vertical' }}
+            as={"textarea"}
+            rows={8}
             name="comment"
             placeholder="Ingresa tu comentario"
             value={formData?.comment || ''}
             onChange={onChange}
-            rows={8}
-style={{ minHeight: '100px', resize: 'vertical' }}
+
+
         />
     </FloatingLabel>
 </Form.Group>

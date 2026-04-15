@@ -1,10 +1,9 @@
-import {WizardProvider} from "../contexts/WisardContext.jsx";
-import WizardItem from "./WizardItem.jsx";
-import WizardBreadcrumb from "./WizardBreadcrumb.jsx";
-import WizardNavigation from "./WizardNavigation.jsx";
-import React from "react";
+import { WizardProvider } from "../contexts/WisardContext.jsx";
 import WizardButtons from "./WizardButtons.jsx";
 import WizardFeedback from "./WizardFeedback.jsx";
+import WizardHeader from "./WizardHeader.jsx";
+import WizardItem from "./WizardItem.jsx";
+import WizardNavigation from "./WizardNavigation.jsx";
 
 function WizardCrud({
       children,
@@ -23,7 +22,7 @@ function WizardCrud({
             getVisibleSteps={getVisibleSteps}
             updateRef={currentItem}
         >
-        <WizardBreadcrumb mode={showCrud} onClose={onCancel} />
+        <WizardHeader mode={showCrud} onClose={onCancel} />
                 {children}
             <WizardCrud.Item eventKey={-1000}>
                 <WizardFeedback
@@ -42,7 +41,7 @@ function WizardCrud({
 }
 
 WizardCrud.Item = WizardItem;
-WizardCrud.Breadcrumb = WizardBreadcrumb;
+WizardCrud.Breadcrumb = WizardHeader;
 WizardCrud.Navigation = WizardNavigation;
 WizardCrud.Buttons= WizardButtons;
 export default WizardCrud;

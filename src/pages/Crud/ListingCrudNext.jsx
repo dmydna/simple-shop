@@ -1,18 +1,17 @@
-import React, {useEffect, useMemo, useState} from "react";
-import {Button, Card, Col, Container, Row} from "react-bootstrap";
-import ListingCrudTable from "../../features/listing/components/ListingCrudTable.jsx";
-import FilterBar from "../../features/filters/components/FilterBar.jsx";
-import SearchLive from "../../features/search/SearchLive.jsx";
-import DropdownCheck from "../../components/common/DropdownCheck.jsx";
-import {useListingContext} from "../../features/listing/contexts/ListingContext.jsx";
-import {useUIContext} from "../../contexts/UIContext.jsx";
-import {useListingCrud} from "../../features/listing/contexts/ListingCrudContext.jsx";
-import { useListing } from "../../features/listing/hooks/useListing.js";
-import {CRUD} from "../../utils/crud.js";
-import "../../styles/animations.css"
-import "../../styles/dashboard.css"
+import { useEffect, useState } from "react";
+import { Button, Card, Container } from "react-bootstrap";
 import CrudHeader from "../../components/common/CrudHeader.jsx";
+import DropdownCheck from "../../components/common/DropdownCheck.jsx";
+import { useUIContext } from "../../contexts/UIContext.jsx";
+import FilterBar from "../../features/filters/components/FilterBar.jsx";
+import ListingCrudTable from "../../features/listing/components/ListingCrudTable.jsx";
 import ListingCrudWizard from "../../features/listing/components/ListingCrudWizard.jsx";
+import { useListingContext } from "../../features/listing/contexts/ListingContext.jsx";
+import { useListingCrudContext } from "../../features/listing/contexts/ListingCrudContext.jsx";
+import SearchLive from "../../features/search/SearchLive.jsx";
+import "../../styles/animations.css";
+import "../../styles/dashboard.css";
+import { CRUD } from "../../utils/crud.js";
 
 
 
@@ -21,7 +20,7 @@ function ListingCrudNext() {
     const { listings, setFilters } = useListingContext()
     const { onHideFilter } =  useUIContext();
     const { setCrudMode, crudMode ,setShowCrud, setDataItem,
-        expandx, setExpandx , showCrud } = useListingCrud()
+        expandx, setExpandx , showCrud } = useListingCrudContext()
 
     const [isCreating, setIsCreating] = useState(false);
     const [search, setSearch] = useState()

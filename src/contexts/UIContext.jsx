@@ -8,6 +8,7 @@ const UIContext = createContext(null)
 
 export function UIProvider({ children }) {
 
+    const [appMode, setAppMode] = useState("admin") 
     const [showLoginModal, setShowLoginModal] = useState(false)
     const [showRegisterModal, setShowRegisterModal] = useState(false)
     const [showContact, onHideContact] = useState(false)
@@ -45,7 +46,8 @@ export function UIProvider({ children }) {
             showFilter, 
             onHideFilter,
             selectedTags, setSelectedTags,
-            iconCrud, setIconCrud
+            iconCrud, setIconCrud,
+            appMode, setAppMode
           }}>
           {children}
           <LoginModal 

@@ -1,24 +1,21 @@
+import CrudAccordion from "../../../components/common/CrudAccordion.jsx";
+import { CRUD } from "../../../utils/crud.js";
 import WizardCrud from "../../wizardCrud/components/WizardCrud.jsx";
 import WizardItem from "../../wizardCrud/components/WizardItem.jsx";
-import SearchProductForCreate from "./SearchProductForCreate.jsx";
-import CrudAccordion from "../../../components/common/CrudAccordion.jsx";
-import AccordionInfo from "./AccordionInfo.jsx";
-import AccordionEdit from "./AccordionEdit.jsx";
-import AccordionDanger from "./AccordionDanger.jsx";
-import FormBasic from "./FormBasic.jsx";
-import FormProducts from "./FormProduct.jsx";
-import {CRUD} from "../../../utils/crud.js";
-import {Alert} from "react-bootstrap";
-import {Link} from "react-router-dom";
-import FormDetails from "./FormDetails.jsx";
-import FormUploadImage from "./FormUploadImage.jsx";
-import React, {useMemo, useState} from "react";
-import {useListingCrud} from "../contexts/ListingCrudContext.jsx";
+import { useListingCrudContext } from "../contexts/ListingCrudContext.jsx";
 import { WIZARD_CONFIG } from "../hooks/wizardConfig.js";
+import AccordionDanger from "./AccordionDanger.jsx";
+import AccordionEdit from "./AccordionEdit.jsx";
+import AccordionInfo from "./AccordionInfo.jsx";
+import FormBasic from "./FormBasic.jsx";
+import FormDetails from "./FormDetails.jsx";
+import FormProducts from "./FormProduct.jsx";
+import FormUploadImage from "./FormUploadImage.jsx";
+import SearchProductForCreate from "./SearchProductForCreate.jsx";
 
 function ListingCrudWizard(){
 
-    const crudHook = useListingCrud()
+    const crudHook = useListingCrudContext()
     const {crudMode, handleUpdate, handleCreate,setExpandx, showCrud,
      currentItem, selectedFile, formData} = crudHook
 

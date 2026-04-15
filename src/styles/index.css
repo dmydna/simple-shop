@@ -469,5 +469,13 @@ hr {
 .tail-dark { background: transparent; }
 .tail-dark::after {border-top: 10px solid #212529; bottom: 6px;}
 
+.active-fix:active p {
+   color: #fff;
+}
 
 
+
+.form-floating:hover .bi-check,
+.form-floating:focus-within .bi-check {
+    visibility: hidden !important;
+}

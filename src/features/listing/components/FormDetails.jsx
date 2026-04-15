@@ -1,84 +1,30 @@
-import React from "react";
-import { Form, InputGroup } from "react-bootstrap";
-import { useListingCrud } from "../contexts/ListingCrudContext.jsx";
-import { CRUD } from "../../../utils/crud.js";
+import InputCrudFloating from "@/features/crud/components/InputCrudFloating.jsx";
+import { useListingCrudContext } from "../contexts/ListingCrudContext.jsx";
 
 function FormDetails({children, className}){
 
     const {dataItem, handleChange, crudMode,
-    isDisabledField, editableFields, handleEnableEdit} = useListingCrud();
+    isDisabledField, editableFields, handleEnableEdit} = useListingCrudContext();
 
     return (
         <>
             {/* Detalles */}
             {children}
-            <Form.Group className={`${className || ''} mb-3`} controlId="formWarrantyInformation">
-              <InputGroup size="xs" className="shadow-sm border rounded overflow-hidden pagination-input-group">
-                <InputGroup.Text className="fw-semibold bg-light border-0 text-muted px-3" style={{ fontSize: "0.95rem" }}>
-                  Garantia
-                </InputGroup.Text>
-                <Form.Control
-                  style={{ fontSize: "1rem", boxShadow: 'none', borderColor: '#ced4da' }}
-                  className="border-0 no-arrows"
-                  spellCheck="false"
-                  type="text"
-                  placeholder="Ingrese nombre"
-                  name="warrantyInformation"
-                  value={dataItem.warrantyInformation}
-                  onChange={handleChange}
-                  disabled={isDisabledField("warrantyInformation")}
-                  />
-                  {crudMode !== CRUD.CREATE && (
-                  <InputGroup.Text
-                    className="fw-semibold border-0 text-muted px-3"
-                    style={{
-                      fontSize: "0.95rem", 
-                      backgroundColor: 'rgb(233, 236, 239)', 
-                      cursor: editableFields["warrantyInformation"] ? 'default' : 'pointer'
-                    }}
-                    onClick={() => handleEnableEdit("warrantyInformation")}
-                  >
-                    <i className={`bi ${editableFields["warrantyInformation"] ? "bi-check text-primary" : "bi-pencil"}`}
-                      style={{ opacity: '.8' }}>
-                    </i>
-                  </InputGroup.Text>
-                  )}
-              </InputGroup>
-            </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formShippingInformation">
-              <InputGroup size="xs" className="shadow-sm border rounded overflow-hidden pagination-input-group">
-                <InputGroup.Text className="fw-semibold bg-light border-0 text-muted px-3" style={{ fontSize: "0.95rem" }}>
-                  Envio
-                </InputGroup.Text>
-                <Form.Control
-                  style={{ fontSize: "1rem", boxShadow: 'none', borderColor: '#ced4da' }}
-                  className="border-0 no-arrows"
-                  spellCheck="false"
-                  type="text"
-                  placeholder="Ingrese nombre"
-                  name="shippingInformation"
-                  value={dataItem.shippingInformation}
-                  onChange={handleChange}
-                  disabled={isDisabledField("shippingInformation")}
-                  />
-                  {crudMode !== CRUD.CREATE && (
-                  <InputGroup.Text
-                    className="fw-semibold border-0 text-muted px-3"
-                    style={{
-                      fontSize: "0.95rem", 
-                      backgroundColor: 'rgb(233, 236, 239)', 
-                      cursor: editableFields["shippingInformation"] ? 'default' : 'pointer'
-                    }}
-                    onClick={() => handleEnableEdit("shippingInformation")}
-                  >
-                    <i className={`bi ${editableFields["shippingInformation"] ? "bi-check text-primary" : "bi-pencil"}`}
-                      style={{ opacity: '.8' }}>
-                    </i>
-                  </InputGroup.Text>
-                  )}
-              </InputGroup>
-            </Form.Group>
+          <InputCrudFloating
+            name={"warrantyInformation"}
+            label={"Waranty"}
+            value={dataItem}
+            useHookCrud={useListingCrudContext}
+          />
+
+          <InputCrudFloating
+            name={"shippingInformation"}
+            label={"Shipping"}
+            value={dataItem}
+            useHookCrud={useListingCrudContext}
+          />
+
           </>
     )
 }

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import FileUploader from "./FileUploader"
-import { userService } from "@/features/user/service/userService";
+import { authService } from "@/features/auth/services/authService";
 import { productService } from "@/features/product/service/productService";
 import { listingService } from "@/features/listing/services/listingService";
 import { useService } from "@/hooks/useService";
@@ -25,7 +25,7 @@ function UploadService() {
     const [data, setData] = useState(null);
 
     const selectedService = useMemo(() => {
-        if (selected == "1" || selected == "4") return userService
+        if (selected == "1" || selected == "4") return authService
         if (selected == "2" || selected == "5") return productService
         if (selected == "3" || selected == "6") return listingService
     }, [selected])

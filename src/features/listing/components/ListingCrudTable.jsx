@@ -1,16 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import { Button, Table } from 'react-bootstrap';
-import { useListingContext } from '../contexts/ListingContext.jsx';
-import { useListingCrud } from '../contexts/ListingCrudContext.jsx';
+import { Button } from 'react-bootstrap';
 import CrudTable from "../../../components/common/CrudTable.jsx";
-import {CRUD} from "../../../utils/crud.js";
-import {useWizard} from "../../wizardCrud/contexts/WisardContext.jsx";
+import { useListingContext } from '../contexts/ListingContext.jsx';
+import { useListingCrudContext } from '../contexts/ListingCrudContext.jsx';
 
 
 export  const ListingCrudTable = ({children}) => {
 
     const baseHook = useListingContext()
-    const crudHook = useListingCrud()
+    const crudHook = useListingCrudContext()
     // const {setCurrentStep, step} = useWizard()
 
     const { setShowCrud, setCrudMode, setItemHash, setItemId, 

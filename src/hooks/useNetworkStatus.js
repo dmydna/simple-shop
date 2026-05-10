@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
+
+//FIXME este hook es muy agresivo
 const useNetworkStatus = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 

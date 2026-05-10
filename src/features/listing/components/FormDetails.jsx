@@ -11,6 +11,7 @@ function FormDetails({children, className}){
             {/* Detalles */}
             {children}
 
+        <div className="d-flex gap-2 flex-column flex-lg-row">
           <InputCrudFloating
             name={"warrantyInformation"}
             label={"Waranty"}
@@ -25,6 +26,7 @@ function FormDetails({children, className}){
             useHookCrud={useListingCrudContext}
           />
 
+        </div>
           </>
     )
 }

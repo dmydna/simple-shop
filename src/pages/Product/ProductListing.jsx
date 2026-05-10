@@ -78,7 +78,7 @@ function ProductListing() {
         <>
           <Container fluid="xl" className="bg-white rounded mt-2 mb-5 pb-5">
             <div className="w-100 d-flex flex-wrap mt-2 mb-4">
-              <span style={{ fontSize: '1.4rem' }} className="text-capitalize fw-semibold me-3" >
+              <span className="text-capitalize fw-semibold me-3 fs-5 fw-medium" >
                 {meta.title}
               </span>
               <span style={{ lineHeight: '2.3rem' }} className="text-secondary">

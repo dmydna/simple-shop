@@ -1,15 +1,17 @@
+import CopyButton from "@/components/common/CopyButton";
+import LockButton from "@/components/common/LockButton";
 import { CRUD } from "@utils/crud.js";
 import { useEffect } from "react";
 import { FloatingLabel, Form, InputGroup } from "react-bootstrap";
 
 
-function InputCrudFloating({ name, label, type, placeholder, as, rows,useHookCrud }) {
+function InputCrudFloating({ name, label, type, placeholder, as, rows, useHookCrud }) {
 
-    const { formData, handleChange, modalMode,
+    const { formData, handleChange, crudMode,
         isDisabledField, editableFields, handleEnableEdit } = useHookCrud()
 
-    
-    useEffect(()=>{console.log("formadata desde input", formData)},[formData])
+
+    useEffect(() => { console.log("formadata desde input", formData) }, [formData])
 
     return (
         <Form.Group className="w-100">
@@ -30,25 +32,23 @@ function InputCrudFloating({ name, label, type, placeholder, as, rows,useHookCru
                     as={as || "input"}
                     rows={rows || 8}
                 />
-                {modalMode !== CRUD.CREATE && (
-                    <InputGroup.Text
-                        className="btn-input-edit fw-semibold border-0 text-muted px-3 position-absolute"
-                        style={{
-                            top: "10px",
-                            right: "0",
-                            fontSize: "0.95rem",
-                            backgroundColor: 'transparent',
-                            cursor: editableFields[name] ?
-                                'default' : 'pointer'
-                        }}
-                        onClick={() => handleEnableEdit(name)}
-                    >
-                        <i  style={{ opacity: '.8' }}
-                            className={`${editableFields[name] ?
-                                "bi bi-check text-primary" : "bi bi-pencil"}`}
-                        >
-                        </i>
-                    </InputGroup.Text>
+
+                {crudMode == CRUD.UPDATE && (
+                    <LockButton
+                        style={{ top: 11, right: 3, opacity: '.7' }}
+                        className="pointer position-absolute"
+                        locked={editableFields[name]}
+                        handle={() => handleEnableEdit(name)}
+                    />
+                )}
+                {crudMode === CRUD.READ && (
+                    <CopyButton
+                        style={{ top: 10, right: 3, opacity: '.7' }}
+                        className="pointer position-absolute"
+                        showMessage={false}
+                        value={formData?.[name]}
+                    />
+
                 )}
             </FloatingLabel>
         </Form.Group>

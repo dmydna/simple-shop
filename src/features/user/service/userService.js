@@ -38,6 +38,16 @@ export const userService = {
     },
 
 
+    getProfileById: async (id) => {
+        const TOKEN = localStorage.getItem("token")
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/profile`, {
+            headers: { 'Authorization': `Bearer ${TOKEN}` },
+        });
+        if (!response.ok) throw new Error("usuario no encontrado");
+        return await response.json();
+    },
+
+
     // DELETE: Eliminar un usuario por ID
     delete: async (id) => {
         const TOKEN = localStorage.getItem("token")
@@ -67,4 +77,22 @@ export const userService = {
             return await response.json();
     },
 
+    updateStatus: async (id, status) => {
+        // Pasa  visibilidad como un Query Parameter (?visibility=...)
+        const TOKEN = localStorage.getItem("token")
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/status?status=${status}`, {
+            method: 'PATCH',
+            headers: {
+                // Agrega el header de autorización
+                'Authorization': `Bearer ` + TOKEN
+                // Nota: No es necesario 'Content-Type' porque no hay 'body'
+            }
+        });
+    
+        if (!response.ok) {
+            const errorMsg = await response.text();
+            throw new Error(errorMsg || "No se actualizó status");
+        }
+        return await response.json();
+    },
 };

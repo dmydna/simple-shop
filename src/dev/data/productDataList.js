@@ -1,5 +1,5 @@
 
-import { productService } from "../../features/product/service/productService.js";
+import { productService } from "../../features/product/services/productService.js";
 import { handleBulk } from "../utils.js";
 
 

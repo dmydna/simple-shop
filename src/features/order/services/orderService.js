@@ -1,5 +1,6 @@
 // src/services/orderService.js
-import {mapToURLSearchParams, ENDPOINTS, ROLE, BASE_URL, TOKEN} from "../../../utils/config.js";
+import { toCreateOrder } from "@/utils/mapper.js";
+import { BASE_URL, ENDPOINTS, mapToURLSearchParams } from "../../../utils/config.js";
 const ENDPOINT = ENDPOINTS.ORDER
 
 export const orderService = {
@@ -24,8 +25,11 @@ export const orderService = {
     },
 
     // POST: Crear un nuevo pedido
-    // solo recibe List<OrderDetailDTO>
-    create: async (orderData, clientId) => {
+    // recibe CartItems
+    create: async (data, clientId) => {
+
+        const orderData = toCreateOrder(data)
+
         console.log("orderData:", JSON.stringify(orderData))
         const TOKEN = localStorage.getItem("token")
         const client = (clientId ? `?clientId=${clientId}` : '')

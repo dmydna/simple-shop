@@ -1,15 +1,19 @@
+import { useEffect, useState, useCallback } from "react";
+import { useFetch } from "./useFetch";
+
 export const useFetchElem = ({ fetchMethod }) => {
     const { loading, setLoading, error, setError } = useFetch();
     const [currentItem, setCurrentItem] = useState({});
-    const [identifier, setIdentifier] = useState(null);
+    const [id, setId] = useState(null);
 
-    const fetchData = async (id) => {
+    const fetchElem = async (ID) => {
         setLoading(true);
         setError(null);
 
         try {
-            const data = await fetchMethod(id);
+            const data = await fetchMethod(ID);
             setCurrentItem(data);
+            console.log("desde fetchElem data",data)
         } catch (err) {
             console.error("Error de carga de API", err);
             setError(err.message || "Error al cargar el elemento");
@@ -18,17 +22,24 @@ export const useFetchElem = ({ fetchMethod }) => {
         }
     };
 
+    const refreshElem = useCallback(() => {
+          fetchElem(id)
+    },[id])
+
     useEffect(() => {
-        if (identifier) {
-            fetchData(identifier);
+        if (id) {
+            fetchElem(id);
         }
-    }, [identifier]);
+    }, [id]);
 
     return {
-        loading, setLoading,
+        loading, 
+        setLoading,
         error, setError,
-        currentItem, setCurrentItem,
-        identifier, setIdentifier,
-        fetchData
+        currentItem, 
+        setCurrentItem,
+        id, setId,
+        fetchElem,
+        refreshElem
     };
 };

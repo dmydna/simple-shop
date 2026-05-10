@@ -3,6 +3,7 @@ import {BASE_URL,ENDPOINTS,TOKEN} from "../../utils/config.js";
 
 const ENDPOINT = ENDPOINTS.CLIENT
 
+// FIXME el metdo getAll esta en deshuso, reemplazar por pageable
 export const clientService = {
     // GET ALL: Obtener todos los clientes
     getAll: async () => {

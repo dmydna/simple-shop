@@ -1,20 +1,45 @@
+import { CRUD } from "@/utils/crud.js";
 import { useEffect, useState } from "react";
-import { useCrudActions } from "../../crud/useCrudActions.js";
-import { useCrudForm } from "../../crud/useCrudForm.js";
+import { useCrudForm } from "@/features/crud/hooks/useCrudForm.js";
+import { useCrudActions } from "@/features/crud/hooks/useCrudActions.js";
 import { listingService } from '../services/listingService.js';
 import { useListing } from "./useListing";
 
 export const useListingCrud = () => {
-    const { setListingHash, listingHash, currentListing } = useListing();
 
-    const [modalMode, setModalMode]  = useState();
-    const { editableFields, setEditableFields, handleEnableEdit,
+    const { currentListing, setId, id, loading: loadingItem, error: errorItem, refreshElem } = useListing();
+
+    const [showModal, setShowModal] = useState(false)
+    const [dataItem, setDataItem] = useState({});
+    const [crudMode, setCrudMode] = useState()
+    
+    const { editableFields, setEditableFields, handleEnableEdit, setEnableEditableField,
         isDisabledField, selectedFile, setSelectedFile, onChange, formData, setFormData }
-        = useCrudForm({});
+        = useCrudForm();
 
-    const { handleCreate, handleUpdate, handleDelete,
-        handleVisibility, loading: loadingCrud, error: errorCrud }
+    const { handleCreate, handleUpdate, handleDelete, handleStatus, 
+        loading, setLoading, error, setError, success, setSuccess }
         = useCrudActions({ service: listingService });
+
+    useEffect(()=>{
+        setFormData(currentListing)
+        setEnableEditableField(true)
+        if (
+            crudMode == CRUD.DRAFT || 
+            crudMode == CRUD.CREATE
+        ) {
+            setEnableEditableField(false)
+            if(Object.keys(currentListing).length != 0){
+                setFormData(prev => ({ ...prev }))
+            }
+            setFormData({...currentListing})
+        };
+      if(crudMode == CRUD.COPY){
+         setEnableEditableField(false)
+       }
+
+
+    },[crudMode,currentListing])
 
     return ({
 
@@ -28,24 +53,36 @@ export const useListingCrud = () => {
         onChange,
         handleChange: onChange,
         formData,
+        setFormData,
+        
+        setEnableEditableField,
 
         // Actions
         handleCreate,
         handleUpdate,
         handleDelete,
-        handleVisibility,
-        loadingCrud,
-        errorCrud,
+        handleStatus,
+
+        loading: loading || loadingItem,
+        setLoading,
+        error,
+        setError,
+        success,
+        setSuccess,
+        errorItem,
 
         // Listing
         currentListing,
-        setListingHash,
-        listingHash,
-        itemHash: listingHash,
-        setItemHash: setListingHash,
         currentItem: currentListing,
+        dataItem,
+        setDataItem,
 
-        modalMode, setModalMode, setFormData
-
+        crudMode, 
+        setCrudMode,
+        showModal, 
+        setShowModal,
+        setId, 
+        id,
+        refreshElem
     })
 }

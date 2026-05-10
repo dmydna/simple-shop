@@ -1,18 +1,18 @@
-import { useMemo, useState } from "react";
-import FileUploader from "./FileUploader"
 import { authService } from "@/features/auth/services/authService";
-import { productService } from "@/features/product/service/productService";
 import { listingService } from "@/features/listing/services/listingService";
+import { devService } from "@/dev/services/devService";
 import { useService } from "@/hooks/useService";
-import { Button, Form, InputGroup, Modal, Container } from "react-bootstrap";
+import { useMemo, useState } from "react";
+import { Button, Container, Form } from "react-bootstrap";
+import FileUploader from "./FileUploader";
 
-import { listingDataList, listingSaveAll } from "../data/listingDataList.js";
-import { productDataList, productSaveAll } from "../data/productDataList.js";
-import { userDataList, userSaveAll } from "../data/userDataList.js";
-import { ImgGenApi } from "../utils";
 import PageLoading from "@/components/common/PageLoading";
 import PageError from "@/pages/errors/PageError";
 import PageSuccess from "@/pages/errors/PageSuccess";
+import { listingDataList } from "../data/listingDataList.js";
+import { productDataList } from "../data/productDataList.js";
+import { userDataList } from "../data/userDataList.js";
+import { ImgGenApi } from "../utils";
 
 
 
@@ -25,9 +25,9 @@ function UploadService() {
     const [data, setData] = useState(null);
 
     const selectedService = useMemo(() => {
-        if (selected == "1" || selected == "4") return authService
-        if (selected == "2" || selected == "5") return productService
-        if (selected == "3" || selected == "6") return listingService
+        if (selected == "1" || selected == "4") return "auth"
+        if (selected == "2" || selected == "5") return "products"
+        if (selected == "3" || selected == "6") return "listings"
     }, [selected])
 
     const selectedContent = useMemo(() => {
@@ -36,10 +36,10 @@ function UploadService() {
         if (selected == "3" || selected == "6") return "publicaciones"
     }, [selected])
 
-    const { loading, error, setError, createBulk } = useService({ service: selectedService, onSuccess: ()=>setSuccess(true) })
+    const { loading, error, setError, createBulk } = useService({ service: devService, onSuccess: ()=>setSuccess(true) })
 
     const handleSubmit = () => {
-        createBulk(data)
+        createBulk(selectedService, data)
     }
 
     const imgInfo = {
@@ -58,7 +58,7 @@ function UploadService() {
 
     return (
         <Container>
-            <div className="d-block mx-auto rounded island p-3 border mb-3" style={{ maxWidth: '500px' }}>
+            <div className="d-block mx-auto rounded island p-4 border mb-3" style={{ maxWidth: '500px' }}>
                 {loading && (
                     <PageLoading></PageLoading>
                 )}

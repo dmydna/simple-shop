@@ -27,7 +27,7 @@ export const useFetchData = ({service, size, methodName = 'getPage'}) => {
             setTotalElements(data.totalElements);
             setTotalPages(data.totalPages)
             setSuccess(true)
-            console.log(data)
+            //console.log(data)
         } catch (err) {
             console.error("Error de carga de API", err);
             setError("No pudimos cargar los elemento. Revisa tu conexión.")

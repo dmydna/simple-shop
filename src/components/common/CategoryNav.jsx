@@ -8,7 +8,7 @@ import Img1 from "../../assets/lipstick.png";
 import Img2 from '../../assets/perfume.png';
 import { useUIContext } from "../../contexts/UIContext";
 import { useListingContext } from "../../features/listing/contexts/ListingContext.jsx";
-import { category } from "../../utils/posts.js";
+import { category } from "../../utils/enums.js";
 
 function CategoryNav({className}){
 

@@ -18,22 +18,25 @@ const UserLayout = () => {
     }, [])
 
     return (
-         <Container fluid="xl" className="px-4 px-sm-4 px-md-4 px-lg-5">
+         <Container fluid="xl" className="px-sm-4 px-md-4 px-lg-5">
             <Row>
-                <Col className={`sticky-lg-bottom h-100 col-12 col-sm-12 col-md-12 col-lg-4 px-0 mb-4`}
+                <Col className={`sticky-lg-bottom h-100 col-12 col-sm-12 col-md-12 col-lg-3 px-0 mb-2`}
                     style={{ top: '60px' }} 
                 >
                     <CardProfile name={user} />
-                    <div className="border rounded p-4 island">
-                        <SideBarProfile
+                    <div className="border rounded p-3 island d-none d-md-block">
+                        <SideBarProfile 
                             role={profile?.role}
                         />
                     </div>
                 </Col>
 
 
-                <Col className="h-100 col-12 col-sm-12 col-md-12 col-lg-7 mx-auto rounded border pt-5 p-5 mb-4 island">
-                    <Outlet/>
+                <Col className="h-100 col-12 col-sm-12 col-md-12 col-lg-9 px-0 px-md-2">
+                    <div className="col-12 rounded border p-4 mb-4 island">
+                           <Outlet/>
+                    </div>
+
                 </Col>
 
             </Row>

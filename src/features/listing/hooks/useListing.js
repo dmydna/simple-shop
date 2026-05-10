@@ -1,16 +1,19 @@
-import {useState} from "react";
-import {listingService} from "../services/listingService.js";
-import {useFetchByHash} from "../../../hooks/useFetchByHash.js";
-import {useFetchData} from "../../../hooks/useFetchData.js";
+import { useState } from "react";
+import { useFetchData } from "../../../hooks/useFetchData.js";
+import { listingService } from "../services/listingService.js";
+import { useFetchElem } from "@/hooks/useFetchElem.js";
 
 export const useListing = () => {
+    
 
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([])
+
     const {loading: loadingList, error: errorList, content,setContent, ...props}
         = useFetchData({service: listingService})
 
-    const {loading: loadingItem, error: errorItem, currentItem, setCurrentItem, itemHash, setItemHash }
-        = useFetchByHash({service: listingService})
+    const {loading: loadingItem, error: errorItem, currentItem, setCurrentItem, id, setId, refreshElem }
+        = useFetchElem({fetchMethod: listingService.getByHash})
+
 
     return ({
         ...props ,
@@ -21,8 +24,13 @@ export const useListing = () => {
         setListings: setContent,
         currentListing: currentItem,
         setCurrentListing: setCurrentItem,
-        listingHash: itemHash,
-        setListingHash: setItemHash,
+        listingHash: id,
+        itemHash: id,
+        setItemHash: setId,
+        setListingHash: setId,
+        setId, 
+        id,
         products, setProducts,
+        refreshElem
     })
 }

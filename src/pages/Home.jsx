@@ -95,16 +95,16 @@ function Home() {
                             image={Img10}
                             btnText={'ver ofertas'}
                         >
-                            <h3> Increibles Descuentos </h3>
-                            <h3> usando la <b>App</b> </h3>
+                            <h5 className="mb-0"> Increibles Descuentos </h5>
+                            <h5> usando la <b>App</b> </h5>
                         </BannerAds>
                         <BannerAds
                             image={Img3}
                             className={"bg-wave-0 my-3 ms-md-2 ms-0"}
                             btnText={'ver marcas'}
                         >
-                            <h3> Temporada Invierno </h3>
-                            <h3> con <b>precios congelados</b> </h3>
+                            <h5 className="mb-0"> Temporada Invierno </h5>
+                            <h5> con <b>precios congelados</b> </h5>
                         </BannerAds>
                     </Row>
                 </Container>
@@ -134,7 +134,7 @@ function Home() {
                                 className="border p-4 m-0 me-lg-3 island"
                                 filter={{ tags : ["vegetables"] }}
                             >
-                                <p className="fs-4 fw-medium pb-0 m-0 ">Oferton del día</p>
+                                <p className="fs-5 fw-medium pb-0 m-0 ">Oferton del día</p>
                                 <Link to="/products" className="text-decoration-none fw-bold">ver más</Link>
                             </ProductSection>
                         </Col>
@@ -146,7 +146,7 @@ function Home() {
                                 className="border p-4 island"
                                 filter={{ categories : ["furniture"] }}
                             >
-                                <p className="fs-4 fw-medium pb-0 m-0 ">Para llevar más de uno</p>
+                                <p className="fs-5 fw-medium pb-0 m-0 ">Para llevar más de uno</p>
                                 <Link to="/products" className="text-decoration-none fw-bold">ver más</Link>
                             </ProductSection>
                         </Col>
@@ -162,7 +162,7 @@ function Home() {
                             filter={{ categories : ["furniture"] }}
                             maxCols={3}
                         >
-                            <h3 className="fs-4 fw-medium pb-0 m-0 ">Con envio gratis</h3>
+                            <h3 className="fs-5 fw-medium pb-0 m-0 ">Con envio gratis</h3>
                             <Link to={'/products?category=groceries'}
                                   className="text-decoration-none fw-bold">
                                 Ver mas
@@ -177,7 +177,7 @@ function Home() {
                             filter={{ categories : ["beauty"] }}
                             maxCols={4}
                             maxElems={4}>
-                            <h3 className="fs-4 fw-medium pb-0 m-0 ">Ofertas</h3>
+                            <h3 className="fs-5 fw-medium pb-0 m-0 ">Ofertas</h3>
                             <Link to={'/products?category=groceries'}
                                   className="text-decoration-none fw-bold">
                                 ver mas

@@ -1,3 +1,4 @@
+import StarRating from "@/components/common/StarRating.jsx";
 import { useState } from "react";
 import { Card, InputGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +24,7 @@ function ProductBuyCard({ title, rating, ship, id, stock, price, discount, class
     <Card className={`${className}`}>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
-        <img className="mb-2" src={`/rating${Math.round(rating || 1)}.png`} />
+        <StarRating value={rating} size={17}/>
         <Card.Text className="h3">$ {price?.toFixed(2)}
           <span className="mx-2 text-success fw-medium fs-6">
             {discount ? discount + '% OFF' : ''}

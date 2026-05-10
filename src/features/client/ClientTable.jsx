@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
-import { useClients } from './ClientContext.jsx';
 import { useUIContext } from '../../contexts/UIContext.jsx';
 import Pagination from '../pagination/components/Pagination.jsx';
+import { useClients } from './ClientContext.jsx';
 
+
+// @deprecated
 function ClientTable({openEditModal, handleDelete,  handleInfo}) {
 
   const { currentItems, setVisibleClients, setItems, setItemsPerPage, currentPage, setCurrentPage, totalPages } = useUIContext()

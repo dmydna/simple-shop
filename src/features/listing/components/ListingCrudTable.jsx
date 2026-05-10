@@ -13,14 +13,6 @@ export  const ListingCrudTable = ({children}) => {
     const { setShowCrud, setCrudMode, setItemHash, setItemId, 
         setExpandx, setDataItem, currentItem ,openEdit : openEditModal }  = crudHook
 
-    // const openEditModal = (item) => {
-    //     setCrudMode(CRUD.UPDATE); //  cambia a modo editar de wizard
-    //     setItemHash?.(item?.hash); // <- hash de item actual
-    //     setItemId?.(item?.id)
-    //     setDataItem(item);       // <- datos de item actual
-    //     setShowCrud(true);       // <- muestra wizard crud
-    // };
-
   return (
       <CrudTable
           className='shadow-sm border rounded p-3 island'

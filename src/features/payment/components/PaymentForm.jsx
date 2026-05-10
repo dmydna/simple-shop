@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import payment from "../../../assets/payment.png";
 import { useForm } from "../../../hooks/useForm";
@@ -8,8 +7,6 @@ function PaymentForm(){
 
     const {profile} = useProfile()
     const {onChange, formData} = useForm(profile)
-
-    useEffect(()=>{ console.log(profile)},[])
 
     return (
     <div

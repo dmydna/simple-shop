@@ -1,8 +1,9 @@
-import React from "react";
+import StarRating from "@common/StarRating.jsx";
+import { useState } from "react";
 import { Card } from "react-bootstrap";
 
 function CardReview({id, comment, rating, date}){
-
+    const [p, setPunt] = useState()
 
     return(
         <Card key={id} className="my-2 overflow-hidden border-0">
@@ -14,8 +15,8 @@ function CardReview({id, comment, rating, date}){
                   margin: "10px"}}
           />
           <Card.Body>
-            <img src={`/rating${rating}.png`}/>
-            <Card.Text className="text-truncate">{comment}</Card.Text>
+            <StarRating value={rating} size={17}/>
+            <Card.Text className="small text-truncate">{comment}</Card.Text>
           </Card.Body>
         </div>
       </Card>

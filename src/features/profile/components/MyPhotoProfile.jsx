@@ -1,98 +1,62 @@
-import { useRef, useState } from 'react';
-import { Button, Form } from "react-bootstrap";
-import "../../../styles/animations.css";
+import PageLoading from '@/components/common/PageLoading';
+import PageError from '@/pages/errors/PageError';
+import PageSuccess from '@/pages/errors/PageSuccess';
+import ImageUploader from "@common/ImageUploader.jsx";
+import { useEffect, useState } from 'react';
+import { Button } from "react-bootstrap";
 import { useProfile } from "../contexts/ProfileContext.jsx";
-import { ProfileHeader } from './ProfileHeader';
+import { ProfileHeader } from './ProfileHeader.jsx';
 
-const MyPhotoProfile = ({ title, className, multiple = true, previewImg }) => {
 
-  const [selectedFile, setSelectedFile] = useState([]);
-  const [preview, setPreview] = useState(["http://localhost:8080/api/image/150x150?&background=cccc&icon=F429&fontSize=70&textColor=fff"]);
-  const fileInputRef = useRef(null);
-  const { updateImage, loading } = useProfile();
+const MyPhotoProfile = ({ title, className }) => {
 
-  // Manejar el cambio del input
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-    if (files && files.length != 0) {
-      setSelectedFile(files[0]);
-      // Crear una URL temporal para ver la imagen antes de subirla
-      for(let i=0; i < files.length; i++){
-        setPreview([URL.createObjectURL(files[i]) ])
-      }
-    }
-  };
+  const [preview, setPreview] = useState(null);
+  const [image, setImage] = useState([]);
+  const { updateImage, loading, profile, success, setSuccess, error, setError } = useProfile();
 
-  const handleRemove = (index) => {
-    const newPreview = preview.filter((_, idx) => idx !== index);
-    const newSelectedFiles = selectedFile.filter((_, idx) => idx !== index);
-    
-    setPreview(newPreview);
-    setSelectedFile(newSelectedFiles);
-  
-    // Si borras todas las fotos, reseteamos el input físicamente
-    if (newSelectedFiles.length === 0 && fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-  }
+  useEffect(() => {
+    setPreview(profile?.image || '')
+  }, [profile])
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const selectedFile = image
     updateImage(selectedFile)
   }
 
   return (
-    // CAMBIO: Usamos Form de react-bootstrap que renderiza una etiqueta <form> real
     <>
-        <Form  
-          id='userPerfilForm' 
-          className={`upload-form rounded ${className} m-0`}>
-      
-                  <ProfileHeader 
-                      className='mb-0'
-                      title="Imagen de Cuenta"
-                      subtitle="Cambiar tu imagen de cuenta"
-                  />
-      
-      <Form.Group className="mb-3">
-        <Form.Label>Selecciona una imagen</Form.Label>
-        <Form.Control 
-          ref={fileInputRef}
-          type="file" 
-          accept="image/*" 
-          multiple={multiple}
-          onChange={handleFileChange} 
-        />
-      </Form.Group>
-
-      {/* Vista previa */}
-      <div className='my-5' style={{transform: '300px'}} >
-      {preview && (
-        <div className="d-flex mb-3 text-center justify-content-center">
-          {preview.map( (url, index) => 
-            ( <div 
-                key={url} 
-                className={`img-container-nn ${loading ? 'border-glow rounded-circle' : '' }`}
-                title="Click para eliminar"
-                style={{width: "170px",height: "170px"}}
-              >
-                  <img 
-                    src={url} 
-                    alt={`Vista previa ${index}`} 
-                    className="img-thumbnail" 
-                  />
-              </div>
-               )
+      {loading && <PageLoading />}
+      {error && <PageError handle={() => setError(null)} />}
+      {success && <PageSuccess handle={() => setSuccess(false)} />}
+      {!success && !error && !loading && (
+        <>
+          <ProfileHeader
+            className='mb-0'
+            title="Imagen de Cuenta"
+            subtitle="Cambiar tu imagen de cuenta"
+          />
+          <ImageUploader
+            preview={preview}
+            setPreview={setPreview}
+            setImage={setImage}
+            image={image}
+          />
+          {/* Usamos el Button de Bootstrap para mejor estética */}
+          {image !== null && (
+            <div className='w-100 d-flex justify-content-center'>
+              <Button onClick={handleSubmit} variant="outline-dark" disabled={loading}>
+                <i className='bi bi-floppy me-2'></i>
+                Guardar cambios
+              </Button>
+            </div>
           )}
-        </div>
+
+
+        </>
       )}
-      </div>
-        </Form>
-      {/* Usamos el Button de Bootstrap para mejor estética */}
-      <Button form="userPerfilForm" onClick={handleSubmit} variant="primary" disabled={loading}>
-        Subir Imagen
-      </Button>
+
     </>
 
   );

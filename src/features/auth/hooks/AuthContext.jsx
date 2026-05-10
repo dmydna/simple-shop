@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import nprogress from "nprogress";
-import {authService} from "../services/authService.js";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { authService } from "../services/authService.js";
 
 const AuthContext = createContext();
 
@@ -13,7 +13,8 @@ export function AuthProvider({ children })
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
   const [error, setError] = useState(null);
-  const [reset, setReset] = useState(false)
+  const [reset, setReset] = useState(false);
+  const [logged, setLogged] = useState(false)
 
   const isAuth = useMemo(()=>{
     return token && user ? true : false
@@ -52,11 +53,13 @@ export function AuthProvider({ children })
     nprogress.start();
     setLoading(true);
     setError(null)
+    setLogged(false)
     try {
       const data = await authService.login(userData);
       setToken(data.accessToken)
       setRole(data.role)
       setUser(data.username || '')
+      setLogged(true);
     } catch (err) {
       console.error("Error de carga de API", err);
       setError("No se inicio session. Revisa tus credenciales.")
@@ -87,6 +90,7 @@ export function AuthProvider({ children })
     const logout = () => {
     setToken(null);
     setUser(null);
+    setLogged(false)
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     localStorage.removeItem("role");
@@ -104,7 +108,9 @@ export function AuthProvider({ children })
            register, 
            loading, 
            error,
-           setReset 
+           setReset,
+           logged,
+           setLogged 
     }}>
       {children}
     </AuthContext.Provider>

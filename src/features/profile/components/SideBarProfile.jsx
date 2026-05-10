@@ -2,44 +2,48 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-function SideBarProfile({ role }) {
+function SideBarProfile({ role, border=false }) {
 
 
     return (
         <>
             <ul class="list-group list-group-flush">
-                {role === 'CLIENT' && (
-                    <li className="list-group-item">
-                        <Link className="simple-link" to={`/user/profile`}>
-                            <i className="bi bi-person-check fs-5 ps-0 p-2"></i>
-                            <span> Profile </span>
-                        </Link>
-                    </li>
-                )}
+ 
+
                 {role === 'ADMIN' && (
-                    <li className="list-group-item">
+                    <li className={`list-group-item ${border ? '': 'border-0'}`}>
                         <Link className="simple-link" to={`/user/activity`}>
                             <i className="bi bi-person-check fs-5 ps-0 p-2"></i>
                             <span> Actividad </span>
                         </Link>
                     </li>
                 )}
+
                 {role === 'ADMIN' && (
-                    <li className="list-group-item">
+                    <li className={`list-group-item ${border ? '': 'border-bottom'}`}>
                         <Link className="simple-link" to={`/user/dashboard`}>
                             <i className="bi bi-sliders fs-5 ps-0 p-2"></i>
                             <span> Dashboard </span>
                         </Link>
                     </li>
                 )}
-                <li className="list-group-item">
+
+                    <li className={`list-group-item ${border ? '': 'border-0'}`}>
+                        <Link className="simple-link" to={`/user/profile`}>
+                            <i className="bi bi-person-check fs-5 ps-0 p-2"></i>
+                            <span> Profile </span>
+                        </Link>
+                    </li>
+
+
+                <li className={`list-group-item ${border ? '': 'border-0'}`}>
                     <Link className="simple-link" to={`/user/account`}>
                         <i className="bi bi-person fs-5 ps-0 p-2"></i>
                         <span> Cuenta </span>
                     </Link>
                 </li>
-                {role === 'CLIENT' && (
-                    <li className="list-group-item">
+
+                    <li className={`list-group-item ${border ? '': 'border-0'}`}>
                         <Link className="simple-link" to={`/user/purchases`}>
                             <div className="item">
                                 <i className="bi bi-handbag fs-5 ps-0 p-2"></i>
@@ -47,9 +51,8 @@ function SideBarProfile({ role }) {
                             </div>
                         </Link>
                     </li>
-                )}
-                {role === 'CLIENT' && (
-                    <li className="list-group-item">
+                
+                    <li className={`list-group-item ${border ? '': 'border-0'}`}>
                         <Link className="simple-link" to={`/user/reviews`}>
                             <div className="item">
                                 <i className="bi bi-star fs-5 ps-0 p-2"></i>
@@ -57,9 +60,8 @@ function SideBarProfile({ role }) {
                             </div>
                         </Link>
                     </li>
-                )}
-                {role === 'CLIENT' && (
-                    <li className="list-group-item">
+               
+                    <li className={`list-group-item ${border ? '': 'border-0'}`}>
                         <Link className="simple-link" to={`/user/favorites`}>
                             <div className="item">
                                 <i className="bi bi-heart fs-5 ps-0 p-2"></i>
@@ -67,7 +69,7 @@ function SideBarProfile({ role }) {
                             </div>
                         </Link>
                     </li>
-                )}
+               
 
             </ul>
         </>

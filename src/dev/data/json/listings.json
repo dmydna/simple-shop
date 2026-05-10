@@ -48,12 +48,6 @@
       ],
       "returnPolicy": "No return policy",
       "minimumOrderQuantity": 48,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "5784719087687",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/beauty/essence-mascara-lash-princess/1.webp"
       ],
@@ -108,12 +102,6 @@
       ],
       "returnPolicy": "7 days return policy",
       "minimumOrderQuantity": 20,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "9170275171413",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/beauty/eyeshadow-palette-with-mirror/1.webp"
       ],
@@ -168,12 +156,6 @@
       ],
       "returnPolicy": "No return policy",
       "minimumOrderQuantity": 22,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "8418883906837",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/beauty/powder-canister/1.webp"
       ],
@@ -228,12 +210,6 @@
       ],
       "returnPolicy": "7 days return policy",
       "minimumOrderQuantity": 40,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "9467746727219",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/beauty/red-lipstick/1.webp"
       ],
@@ -288,12 +264,6 @@
       ],
       "returnPolicy": "No return policy",
       "minimumOrderQuantity": 22,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "4063010628104",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/beauty/red-nail-polish/1.webp"
       ],
@@ -348,12 +318,6 @@
       ],
       "returnPolicy": "90 days return policy",
       "minimumOrderQuantity": 9,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "2451534060749",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/fragrances/calvin-klein-ck-one/1.webp",
         "http://localhost:8080/uploads/product-images/fragrances/calvin-klein-ck-one/2.webp",
@@ -410,12 +374,6 @@
       ],
       "returnPolicy": "No return policy",
       "minimumOrderQuantity": 1,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "4091737746820",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/fragrances/chanel-coco-noir-eau-de/1.webp",
         "http://localhost:8080/uploads/product-images/fragrances/chanel-coco-noir-eau-de/2.webp",
@@ -472,12 +430,6 @@
       ],
       "returnPolicy": "7 days return policy",
       "minimumOrderQuantity": 10,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "1445086097250",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/fragrances/dior-j'adore/1.webp",
         "http://localhost:8080/uploads/product-images/fragrances/dior-j'adore/2.webp",
@@ -534,12 +486,6 @@
       ],
       "returnPolicy": "7 days return policy",
       "minimumOrderQuantity": 2,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "3023868210708",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/fragrances/dolce-shine-eau-de/1.webp",
         "http://localhost:8080/uploads/product-images/fragrances/dolce-shine-eau-de/2.webp",
@@ -596,12 +542,6 @@
       ],
       "returnPolicy": "No return policy",
       "minimumOrderQuantity": 2,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "3170832177880",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/fragrances/gucci-bloom-eau-de/1.webp",
         "http://localhost:8080/uploads/product-images/fragrances/gucci-bloom-eau-de/2.webp",
@@ -658,12 +598,6 @@
       ],
       "returnPolicy": "No return policy",
       "minimumOrderQuantity": 1,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "3610757456581",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/furniture/annibale-colombo-bed/1.webp",
         "http://localhost:8080/uploads/product-images/furniture/annibale-colombo-bed/2.webp",
@@ -720,12 +654,6 @@
       ],
       "returnPolicy": "7 days return policy",
       "minimumOrderQuantity": 1,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "1777662847736",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/furniture/annibale-colombo-sofa/1.webp",
         "http://localhost:8080/uploads/product-images/furniture/annibale-colombo-sofa/2.webp",
@@ -782,12 +710,6 @@
       ],
       "returnPolicy": "7 days return policy",
       "minimumOrderQuantity": 3,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "6441287925979",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/furniture/bedside-table-african-cherry/1.webp",
         "http://localhost:8080/uploads/product-images/furniture/bedside-table-african-cherry/2.webp",
@@ -844,12 +766,6 @@
       ],
       "returnPolicy": "60 days return policy",
       "minimumOrderQuantity": 5,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "8919386859966",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/furniture/knoll-saarinen-executive-conference-chair/1.webp",
         "http://localhost:8080/uploads/product-images/furniture/knoll-saarinen-executive-conference-chair/2.webp",
@@ -906,12 +822,6 @@
       ],
       "returnPolicy": "60 days return policy",
       "minimumOrderQuantity": 2,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "1958104402873",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/furniture/wooden-bathroom-sink-with-mirror/1.webp",
         "http://localhost:8080/uploads/product-images/furniture/wooden-bathroom-sink-with-mirror/2.webp",
@@ -966,12 +876,6 @@
       ],
       "returnPolicy": "90 days return policy",
       "minimumOrderQuantity": 7,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "7962803553314",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/apple/1.webp"
       ],
@@ -1024,12 +928,6 @@
       ],
       "returnPolicy": "60 days return policy",
       "minimumOrderQuantity": 43,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "5640063409695",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/beef-steak/1.webp"
       ],
@@ -1083,12 +981,6 @@
       ],
       "returnPolicy": "No return policy",
       "minimumOrderQuantity": 18,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "1483991328610",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/cat-food/1.webp"
       ],
@@ -1141,12 +1033,6 @@
       ],
       "returnPolicy": "7 days return policy",
       "minimumOrderQuantity": 22,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "8829514594521",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/chicken-meat/1.webp",
         "http://localhost:8080/uploads/product-images/groceries/chicken-meat/2.webp"
@@ -1200,12 +1086,6 @@
       ],
       "returnPolicy": "30 days return policy",
       "minimumOrderQuantity": 46,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "4874727824518",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/cooking-oil/1.webp"
       ],
@@ -1258,12 +1138,6 @@
       ],
       "returnPolicy": "7 days return policy",
       "minimumOrderQuantity": 2,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "5300066378225",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/cucumber/1.webp"
       ],
@@ -1317,12 +1191,6 @@
       ],
       "returnPolicy": "60 days return policy",
       "minimumOrderQuantity": 43,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "5906686116469",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/dog-food/1.webp"
       ],
@@ -1375,12 +1243,6 @@
       ],
       "returnPolicy": "No return policy",
       "minimumOrderQuantity": 32,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "3478638588469",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/eggs/1.webp"
       ],
@@ -1433,12 +1295,6 @@
       ],
       "returnPolicy": "60 days return policy",
       "minimumOrderQuantity": 50,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "9595036192098",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/fish-steak/1.webp"
       ],
@@ -1491,12 +1347,6 @@
       ],
       "returnPolicy": "30 days return policy",
       "minimumOrderQuantity": 12,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "2365227493323",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/green-bell-pepper/1.webp"
       ],
@@ -1549,12 +1399,6 @@
       ],
       "returnPolicy": "30 days return policy",
       "minimumOrderQuantity": 39,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "9335000538563",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/green-chili-pepper/1.webp"
       ],
@@ -1607,12 +1451,6 @@
       ],
       "returnPolicy": "90 days return policy",
       "minimumOrderQuantity": 47,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "6354306346329",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/honey-jar/1.webp"
       ],
@@ -1665,12 +1503,6 @@
       ],
       "returnPolicy": "No return policy",
       "minimumOrderQuantity": 42,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "0788954559076",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/ice-cream/1.webp",
         "http://localhost:8080/uploads/product-images/groceries/ice-cream/2.webp",
@@ -1726,12 +1558,6 @@
       ],
       "returnPolicy": "No return policy",
       "minimumOrderQuantity": 25,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "6936112580956",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/juice/1.webp"
       ],
@@ -1784,12 +1610,6 @@
       ],
       "returnPolicy": "7 days return policy",
       "minimumOrderQuantity": 30,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "2530169917252",
-        "qrCode": "http://localhost:8080/uploads/public/qr-code.png"
-      },
       "images": [
         "http://localhost:8080/uploads/product-images/groceries/kiwi/1.webp"
       ],

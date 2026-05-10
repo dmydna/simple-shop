@@ -1,13 +1,12 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import Logo from '../common/Logo.jsx';
+import { Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Logo from '../common/Logo.jsx';
 
 
 function Footer() {
 
   return (
-    <footer style={{backgroundColor: "var(--bs-gray-100)"}} className="border-top text-center py-5 mt-5">
+    <footer id="footer" style={{backgroundColor: "var(--bs-gray-100)"}} className="border-top text-center py-5 mt-5">
       <Container fluid="xl">
         <Row>
          <Col className='order-2 mt-4' xs={12} md={6}>

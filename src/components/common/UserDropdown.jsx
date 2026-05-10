@@ -10,7 +10,7 @@ function UserDropdown({className}) {
 
 
   const { user, isAuth, logout, isAdmin } = useAuth();
-  const {setShowLoginModal, showLoginModal} = useUIContext()
+  const {setShowLoginModal, showLoginModal, setAppMode} = useUIContext()
 
   const [isActive, setIsActive] = useState(false)
   
@@ -39,7 +39,7 @@ function UserDropdown({className}) {
           className="border-0 bg-transparent p-0 no-caret"
 
         >
-          <i className={`d-none d-md-block h3 bi bi-person${isAuth ? '-fill' : ''} hover-icon m-0`}></i>
+          <i className={`d-none d-md-block h4 bi bi-person${isAuth ? '-fill' : ''} hover-icon m-0`}></i>
         </Dropdown.Toggle>
 
           <Dropdown.Menu
@@ -73,6 +73,9 @@ function UserDropdown({className}) {
               <i className="bi bi-handbag me-2"></i> compras
             </Dropdown.Item>
   
+            <Dropdown.Item onClick={()=>setAppMode("admin")}>
+              <i className="bi bi-star me-2"></i> mode admin
+            </Dropdown.Item>
 
             <Dropdown.Divider />
   

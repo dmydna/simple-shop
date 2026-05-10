@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Container, Modal, Table } from 'react-bootstrap';
 import OrderViewModal from '../../components/common/OrderViewModal.jsx';
 
+// @legacy
 function ClientViewModal({client, show ,onHide}){
 
 

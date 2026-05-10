@@ -2,6 +2,8 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { useScrollY } from "../../contexts/useWindowScroll.jsx";
 import UserDropdown from "../common/UserDropdown.jsx";
 import MobileMenu from "./MobileMenu.jsx";
+import { useProfile } from "@/features/profile/contexts/ProfileContext.jsx";
+import UserDropdownAdmin from "./UserDropdownAdmin.jsx";
 
 function NavHeaderAdmin({onSeleccion, items}) {
 
@@ -11,7 +13,7 @@ function NavHeaderAdmin({onSeleccion, items}) {
     <Navbar
     bg="light" 
     expand="md"       
-    className={`fixed-top transition bg-body-tertiary`} 
+    className={`navheader fixed-top transition bg-body-tertiary`} 
     >
       <Container fluid="xxl" className="align-items-center"> 
         <MobileMenu>
@@ -24,7 +26,8 @@ function NavHeaderAdmin({onSeleccion, items}) {
         {/* <Logo/> */}
         {/* <ActionBar/> */}
         <Nav className={`align-items-center flex-row order-md-2`}>
-            <UserDropdown />
+            <UserDropdownAdmin />
+
         </Nav>
         <Nav className="d-none d-md-block order-md-1" id="basic-navbar-nav">
           {/* <NavItems 

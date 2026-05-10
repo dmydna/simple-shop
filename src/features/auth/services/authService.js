@@ -53,17 +53,21 @@ export const authService = {
         return localStorage.getItem("token");
     },
 
-    createBulk: async (userDataList) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/bulk`, {
+
+    // Registro: Crea el usuario y el profile de cliente
+    changePassword: async (data) => {
+        // data = {newPassword, oldPassword}
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/change-password`, {
             method: 'POST',
-            headers: {
+            headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ` + TOKEN
+                'Authorization': `Bearer ${TOKEN}`
             },
-            body: JSON.stringify(userDataList)
+            body: JSON.stringify(data)
         });
-        if (!response.ok) throw new Error("Error al registar lista de usuarios");
-        return await response.json();
+        if (!response.ok) throw new Error("Error en el registro");
+        return await response.text();
     }
+
+
 };

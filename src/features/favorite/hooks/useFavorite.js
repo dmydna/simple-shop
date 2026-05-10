@@ -1,16 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { favoriteService } from "../services/favoriteService.js";
-import { useFetchById } from "@hooks/useFetchById.js";
 import { useFetchData } from "@hooks/useFetchData.js";
 import { useService } from "@hooks/useService.js";
+import { useFetchElem } from "@/hooks/useFetchElem.js";
 
 export const useFavorite = () => {
 
     const { loading: loadingList, error: errorList, content, setContent, totalElements, setFilters, ...props }
         = useFetchData({ service: favoriteService, size: 8 })
 
-    const { loading: loadingItem, error: errorItem, currentItem, setCurrentItem, itemHash, setItemHash }
-        = useFetchById({ service: favoriteService })
+    const { loading: loadingItem, error: errorItem, currentItem, setCurrentItem, id, setId}
+        = useFetchElem({ service: favoriteService })
 
     const { Delete: deleteFavorite, create :createFavorite } = useService({service: favoriteService})
 
@@ -25,7 +25,7 @@ export const useFavorite = () => {
         setOrders: setContent,
         currenOrder: currentItem,
         setCurrenOrder: setCurrentItem,
-        orderHash: itemHash,
-        setOrderHash: setItemHash,
+        orderHash: id,
+        setOrderHash: setId,
     })
 }

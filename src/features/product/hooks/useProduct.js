@@ -1,15 +1,14 @@
-import React from "react";
-import {productService} from "../service/productService.js";
-import {useFetchData} from "../../../hooks/useFetchData.js";
-import {useFetchById} from "../../../hooks/useFetchById.js";
+import { useFetchElem } from "@/hooks/useFetchElem.js";
+import { useFetchData } from "../../../hooks/useFetchData.js";
+import { productService } from "../services/productService.js";
 
 export const useProduct = () => {
 
-    const {loading: loadingList, error: errorList, content,setContent, ...props}
+    const {loading: loadingList, error: errorList, content, setContent, ...props}
         = useFetchData({service: productService})
 
-    const {loading: loadingItem, error: errorItem, currentItem, setCurrentItem, itemId, setItemId }
-        = useFetchById({service: productService})
+    const {loading: loadingItem, error: errorItem, currentItem, setCurrentItem, id, setId, fetchElem, refreshElem }
+        = useFetchElem({fetchMethod: productService.getById})
 
     return ({
         ...props,
@@ -20,7 +19,10 @@ export const useProduct = () => {
         setProducts: setContent,
         currentProduct: currentItem,
         setCurrentProduct: setCurrentItem,
-        productId: itemId,
-        setProductId: setItemId,
+        productId: id,
+        setProductId: setId,
+        setId, id,
+        fetchElem,
+        refreshElem
     })
 }

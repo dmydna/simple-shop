@@ -1,6 +1,8 @@
 // src/services/listingService.js
+import {toUpdateListing, toCreateListing} from '@utils/mapper.js'
 
-import {mapToURLSearchParams, ENDPOINTS, ROLE, BASE_URL, TOKEN} from "../../../utils/config.js";
+
+import { BASE_URL, ENDPOINTS, mapToURLSearchParams, ROLE, TOKEN } from "../../../utils/config.js";
 const ENDPOINT = ENDPOINTS.LISTENING;
 const CREDENTIALS = ROLE == 'ADMIN' ? { 'Authorization': `Bearer ${TOKEN}`} : {}
 
@@ -16,20 +18,6 @@ export const listingService = {
 
     /* ----------- OBSOLETOS  ----------------- */
 
-    // POST: Crear un nuevo producto
-    create: async (listingData) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${TOKEN}`
-            },
-            body: JSON.stringify(listingData)
-        });
-        if (!response.ok) throw new Error("Error al crear producto");
-        return await response.json();
-    },
 
     // GET ALL: Obtener todos las publicaciones (anuncios)
     getAll: async () => {
@@ -48,13 +36,13 @@ export const listingService = {
     },
 
     getByHash: async (hash) => {
-
+        console.log("obtiene por hash", hash)
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/hash/${hash}`);
         if (!response.ok) throw new Error("Producto no encontrado");
-        return await response.json();
+        const data = await response.json();
+        return data?.listing
     },
 
-    // TODO: renombrar a GET ALL
     // Cambiamos la firma para recibir un objeto desestructurado
     getPage : async ({ page = 0, size = 10, ...filters } = {}) => {
 
@@ -80,22 +68,21 @@ export const listingService = {
 
     /* ------------- ACCESO CON TOKEN ------------------ */
 
-    // TODO: renombrar a create
     // POST: crear listing con imagenes (permite sin imagenes)
-    createWithImage: async (listingDTO, selectedFile) => {
+    create: async (data, selectedFile) => {
 
-        const TOKEN = localStorage.getItem("token")
-
+        const listingData = toCreateListing(data);
+        const TOKEN = localStorage.getItem("token");
         const formData = new FormData();
 
         // Parte 1: JSON con tipo explícito
-        formData.append('listing', new Blob([JSON.stringify(listingDTO)], {
+        formData.append('listing', new Blob([JSON.stringify(listingData)], {
             type: 'application/json'
         }));
     
         // Parte 2: Archivo
-        if (selectedFile.length !== 0) {
-            selectedFile.forEach((file) => {
+        if (selectedFile && selectedFile?.length !== 0) {
+            selectedFile?.forEach((file) => {
                 formData.append('files', file); // 'images' es el nombre que recibirá tu backend
             });
         }
@@ -118,10 +105,11 @@ export const listingService = {
         return await response.json();
     },
 
-    updateVisibility: async (id, visibility) => {
+    updateStatus: async (id, status) => {
         // Pasa  visibilidad como un Query Parameter (?visibility=...)
         const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/visibility?visibility=${visibility}`, {
+        const encodedStatus = encodeURIComponent(status);
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/status?status=${encodedStatus}`, {
             method: 'PATCH',
             headers: {
                 // Agrega el header de autorización
@@ -159,24 +147,10 @@ export const listingService = {
         return await response.text();
       },
 
-    // POST: Crear a partir de una lista
-    createBulk: async (listingDataList) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/bulk`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ` + TOKEN
-            },
-            body: JSON.stringify(listingDataList)
-        });
-        if (!response.ok) throw new Error("Error al crear producto");
-        return await response.json();
-    },
-
     // PUT: Actualiza producto por ID
-    update: async (id, listingData, selectedFiles) => {
+    update: async (data, selectedFiles = null) => {
         const TOKEN = localStorage.getItem("token")
+        const listingData = toUpdateListing(data);
         const formData = new FormData();
 
         formData.append('data', new Blob([JSON.stringify(listingData)], {
@@ -189,7 +163,7 @@ export const listingService = {
             });
         }
 
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${data.id}`, {
             method: 'PUT',
             headers: {
                 // SOLO agregar el TOKEN.

@@ -3,20 +3,23 @@ import { useMediaQuery } from 'react-responsive';
 import { useLocation } from "react-router-dom";
 import LoginModal from "../features/auth/components/LoginModal.jsx";
 import ContactModal from "../features/contact/ContactModal.jsx";
+import { useAdminUI } from "@/hooks/useAdminUI.js";
 
 const UIContext = createContext(null)
 
 export function UIProvider({ children }) {
 
-    const [appMode, setAppMode] = useState("admin") 
     const [showLoginModal, setShowLoginModal] = useState(false)
     const [showRegisterModal, setShowRegisterModal] = useState(false)
     const [showContact, onHideContact] = useState(false)
     const [showMenu, onHideMenu] = useState(false)
     const [showFilter, onHideFilter] = useState(false)
     const [selectedTags, setSelectedTags] = useState([]);
-
     const [iconCrud, setIconCrud] = useState()
+    
+    const { appMode, setAppMode,  showSidebar,  setShowsider } = useAdminUI()
+
+  
 
     const isDesktop = useMediaQuery({ minWidth: 768 });
     useEffect(() => {
@@ -47,7 +50,7 @@ export function UIProvider({ children }) {
             onHideFilter,
             selectedTags, setSelectedTags,
             iconCrud, setIconCrud,
-            appMode, setAppMode
+            appMode, setAppMode,  showSidebar,  setShowsider
           }}>
           {children}
           <LoginModal 

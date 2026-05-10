@@ -21,11 +21,11 @@ import Register from "./pages/Register.jsx";
 import Page404NotFound from "./pages/errors/Page404NotFound.jsx";
 import "./styles/index.css";
 
+import MyPhotoProfile from "@/features/profile/components/MyPhotoProfile";
 import MyAccount from "@features/profile/components/MyAccount";
 import MyActivity from "@features/profile/components/MyActivity";
 import MyDashboard from "@features/profile/components/MyDashboard";
 import MyFavorites from "@features/profile/components/MyFavorites";
-import MyPhotoProfile from "@features/profile/components/MyPhotoProfile";
 import MyProfile from "@features/profile/components/MyProfile";
 import MyPurchases from "@features/profile/components/MyPurchases";
 import MyReviews from "@features/profile/components/MyReviews";
@@ -33,37 +33,39 @@ import UserLayout from "@features/profile/components/UserLayout";
 import WelcomePerfil from "@features/profile/components/WelcomeProfile";
 
 import PageNotReady from "@pages/errors/PageNotReady";
-import NavHeaderAdmin from "./components/layout/NavbarHeaderAdmin";
 import ProductLayout from "./components/layout/ProductLayout.jsx";
 import SiderbarAdmin from "./components/layout/SiderbarAdmin";
 import UploadService from "./dev/components/UploadService";
 import { DevProvider } from "./dev/contexts/DevContext.jsx";
-import { ListingProvider } from "./features/listing/contexts/ListingContext.jsx";
-import { ListingCrudProvider } from "./features/listing/contexts/ListingCrudContext.jsx";
+import WelcomeDashboard from "./features/dashboard/common/WelcomeDashboard";
+import ListingListCrud from "./features/dashboard/components/listing/LisitingListCrud";
+import ListingFormCrud from "./features/dashboard/components/listing/ListingFormCrud";
+import ListingFormLayout from "./features/dashboard/components/listing/ListingFormLayout";
+import ListingListLayout from "./features/dashboard/components/listing/ListingListLayout";
+import ProductFormLayout from "./features/dashboard/components/product/ProductFormLayout";
+import ProductListLayout from "./features/dashboard/components/product/ProductListLayout";
+import UserFormLayout from "./features/dashboard/components/user/UserFormLayout";
+import UserListLayout from "./features/dashboard/components/user/UserListLayout";
+import DashboardLayout from "./features/dashboard/layout/DashboardLayout";
+import { ListingCrudProvider } from "./features/listing/contexts/ListingCrudContext";
 import PaymentForm from "./features/payment/components/PaymentForm.jsx";
-import { ProductProvider } from "./features/product/contexts/ProductContext";
 import { ProductCrudProvider } from "./features/product/contexts/ProductCrudContex";
-import DashProductForm from "./features/profile/components/DashProductForm";
 import WriteReview from "./features/profile/components/WriteReview";
 import { ProfileProvider } from "./features/profile/contexts/ProfileContext.jsx";
 import { UserProvider } from "./features/user/contexts/UserContext.jsx";
-import { UserCrudProvider } from "./features/user/contexts/UserCrudContext.jsx";
+import { UserCrudProvider } from "./features/user/contexts/UserCrudContext";
 import CompleteRegister from "./pages/CompleteRegister";
-import ListingCrudNext from "./pages/Crud/ListingCrudNext.jsx";
-import ProductCrudNext from "./pages/Crud/ProductCrudNext.jsx";
-import UserCrudNext from "./pages/Crud/UserCrudNext.jsx";
-import { NewListingCrudProvider } from "./features/listing/contexts/newListingCrudContext";
+
 
 
 
 function App() {
 
 
-  const [appMode, setAppMode] = useState("user") 
   const navItems = ["Inicio", "Products", "Contacto"];
   const [seccion, setSeccion] = useState("Inicio");
 
-  const navFix = 'mt-5 pt-5';
+  const navFix = 'pt-5';
 
   const location = useLocation()
 
@@ -85,17 +87,14 @@ function App() {
   return (
     <AuthProvider>
       <CRUDWrapper>
-        <div className="d-flex flex-column min-vh-100 pt-3">
+        <div id="content" className="d-flex flex-column min-vh-100 pt-3">
 
-          {appMode === "admin" ? 
-              (<NavHeaderAdmin />) : 
-              (<NavHeader items={navItems} onSeleccion={setSeccion} />) 
-          }
 
-          <main style={{marginLeft:`${appMode == "admin" ? '250px': ''}`}} className={`flex-grow-1 p-3 px-0 ${navFix} `}>
-            {appMode == "admin" && (
-              <SiderbarAdmin />
-            )}
+          (<NavHeader items={navItems} onSeleccion={setSeccion} />)
+
+          <main className={`flex-grow-1 p-3 px-0 ${navFix} `}>
+
+            <SiderbarAdmin />
 
             <Routes>
               <Route path="/" element={<Home />} />
@@ -138,8 +137,61 @@ function App() {
                 <Route path="reviews" element={<MyReviews />} />
                 <Route path="dashboard" element={<MyDashboard />} />
                 <Route path="write-review" element={<WriteReview />} />
-                
+
+
               </Route>
+              <Route path="/dashboard">
+                
+                <Route index element={
+                  <DashboardLayout>
+                    <WelcomeDashboard />
+                  </DashboardLayout>
+                } />
+
+                <Route path="dev" element={<UploadService />} />
+
+
+                {/* LISTING  */}
+                <Route path="listing-form" element={
+                  <ListingCrudProvider>
+                    <ListingFormLayout />
+                  </ListingCrudProvider>
+                } />
+
+                <Route path="listing-list" element={
+                  <ListingCrudProvider>
+                    <ListingListLayout />
+                  </ListingCrudProvider>
+                } />
+
+
+                {/* PRODUCT  */}
+                <Route path="product-form" element={
+                  <ProductCrudProvider>
+                    <ProductFormLayout />
+                  </ProductCrudProvider>
+                }/>
+                <Route path="product-list" element={
+                  <ProductCrudProvider>
+                    <ProductListLayout />
+                  </ProductCrudProvider>
+                }/>
+
+                {/* USER  */}
+                <Route path="user-form" element={
+                  <UserCrudProvider>
+                    <UserFormLayout />
+                  </UserCrudProvider>
+                }/>
+                <Route path="user-list" element={
+                  
+                    <UserListLayout />
+                }/>
+
+              </Route>
+
+
+
 
               <Route path="/cart" element={
                 <ProtectedRoute>
@@ -153,9 +205,24 @@ function App() {
               </Route>
 
 
-              <Route path="/dashboard/dev/uploader" element={<UploadService />} />
+
 
               {/** -- DASHBOARD CRUD -- */}
+
+              <Route path="/dashboardmode" element={<DashboardLayout />}>
+                <Route index element={<ListingFormCrud />} />
+                <Route path="product-crud" element={
+                  <ListingCrudProvider>
+                    <ListingFormCrud />
+                  </ListingCrudProvider>
+                } />
+                <Route path="product-table" element={
+                  <ListingCrudProvider>
+                    <ListingListCrud />
+                  </ListingCrudProvider>
+                } />
+              </Route>
+
 
 
               <Route path="/dashboard/" element={
@@ -164,30 +231,6 @@ function App() {
                 </ProtectedRouteAdmin>
               } />
 
-              <Route path="/dashboard/listing" element={
-                <ListingProvider>
-                  <ListingCrudProvider>
-                    <ListingCrudNext />
-                  </ListingCrudProvider>
-                </ListingProvider>
-              }
-              />
-
-              <Route path="/dashboard/product" element={
-                <ProductProvider>
-                  <ProductCrudProvider>
-                    <ProductCrudNext />
-                  </ProductCrudProvider>
-                </ProductProvider>
-              }
-              />
-              <Route path="/dashboard/clients" element={
-                <UserProvider>
-                  <UserCrudProvider>
-                    <UserCrudNext />
-                  </UserCrudProvider>
-                </UserProvider>
-              } />
 
               <Route path="/dashboard/dev" element={
                 <DevProvider>
@@ -196,14 +239,27 @@ function App() {
               }
               />
 
+            <Route path="/dashboard/test-form" element={
+                 <ListingCrudProvider>
+                   <ListingFormLayout />
+                 </ListingCrudProvider>
+              }
+              />
+
+              <Route path="/dashboard/test-list" element={
+                  <ListingListLayout />
+              }
+              />
+
+
               {/** -- PAGE 404 -- */}
               <Route path="*" element={<Page404NotFound />} />
 
             </Routes>
             <ToastContainer limit={3} />
-  
+
           </main>
-          { appMode !== "admin" && <Footer />}
+          <Footer />
         </div>
       </CRUDWrapper>
     </AuthProvider>

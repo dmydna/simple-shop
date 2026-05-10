@@ -130,8 +130,9 @@ function Cart() {
                  )}
                 {success && (
                 <Button
-                   variant="success" className="small w-100 d-block border rounded-4 disabled">        <i className='bi bi-check-circle me-2'></i>
-                  <span className=''>PAGADO</span>
+                   variant="success" className="small w-100 d-block border rounded-4 disabled">        
+                   <i className='bi bi-check-circle me-2'></i>
+                   <span className=''>PAGADO</span>
                 </Button>
                  )}
               </div>

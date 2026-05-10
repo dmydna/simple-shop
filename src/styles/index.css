@@ -63,6 +63,9 @@ hr {
     background-color: #6c757d24;
 }
 
+
+
+
 .z-index-10 {z-index: 10}
 .z-index-20 {z-index: 20}
 
@@ -479,3 +482,165 @@ hr {
 .form-floating:focus-within .bi-check {
     visibility: hidden !important;
 }
+
+
+/*  Responsive Table  */
+
+ table {
+    display: block;
+    max-width: 1200px;
+    overflow-x: scroll;
+}
+
+
+
+
+
+th:nth-child(1) { width: 35%; }
+th:last-child { width: 60px!important; }
+
+td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
+
+.table-container {
+  overflow-x: auto;
+  position: relative;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* o auto, según necesites */
+}
+
+/* Última columna fija */
+th:last-child,
+td:last-child {
+  position: sticky;
+  right: 0;
+  background-color: white; /* necesario para tapar las celdas detrás */
+  z-index: 1;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* separación visual */
+}
+
+th:last-child {
+  z-index: 2; /* encima de las celdas del body */
+}
+
+tr:last-child {
+    border-bottom: transparent;
+}
+
+
+
+.accordion-button {
+    padding: 5px;
+}
+
+
+.status-success {
+    background-color: rgb(25 135 84 / 17%);
+    padding: 3px 7px;
+    border-radius: 10px;
+    color: rgba(25, 135, 84);
+    font-weight: 500;
+}
+
+.status-danger {
+    background-color: #dc354529;
+    padding: 3px 7px;
+    border-radius: 10px;
+    color: #dc3545;
+    font-weight: 500;
+}
+
+.status-primary{
+    background-color: #359cdc29;
+    padding: 3px 7px;
+    border-radius: 10px;
+    color: #29d;
+    font-weight: 500;
+}
+
+.badge-tooltip {
+  position: relative;
+  background-color: white;
+  border: 1px solid #dee2e6;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+/* Borde de la cola */
+.badge-tooltip::before {
+  content: '';
+  position: absolute;
+  top: 51px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 8px 11px 8px;
+  border-style: solid;
+  border-color: transparent transparent #dee2e6 transparent; /* color del borde */
+  z-index: 10000000;
+}
+
+/* Relleno de la cola (tapa el borde de abajo) */
+.badge-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 54px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 8px 10px 8px;
+  border-style: solid;
+  border-color: transparent transparent white transparent; /* color del badge */
+  z-index: 10000000;
+}
+
+.pointer {
+   cursor: pointer;
+}
+
+.border-dashed {
+   border-style: dashed!important
+}
+.border-dotted {
+   border-style: dotted!important
+}
+
+.upload-img:hover{
+    border-color: black!important;
+    cursor:pointer;
+}
+
+
+
+
+/* dashbar */
+
+.active-bar #dashbar {
+    display: block;
+}
+.active-bar #navbar,
+.active-bar #content {
+    margin-left: 60px;
+}
+
+@media (max-width: 991.98px)  { /* md */
+    .active-bar  #navbar,
+    .active-bar #content {
+         margin-left: auto;
+    }
+    #dashbar {
+        display: none!important;
+    }
+} 
+
+
+
+

@@ -1,21 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
 import { Form } from "react-bootstrap";
-
-import { useListingContext } from "../contexts/ListingContext.jsx";
 import { useListingCrudContext } from '../contexts/ListingCrudContext.jsx';
+import { useListing } from '../hooks/useListing.js';
 import { listingService } from '../services/listingService.js';
 
+
+
 const FormUploadImage = ({ productId, title, className, multiple = true }) => {
+
+
   const {selectedFile, setSelectedFile, currentItem, setDataItem, dataItem} = useListingCrudContext();
   const [preview, setPreview] = useState([]);
   const fileInputRef = useRef(null);
-  const {fetchDataByHash} = useListingContext()
+  const {fetchDataByHash} = useListing()
 
 
   // actualizamos el preview con las imagenes del item
   useEffect(() => {
      setPreview(currentItem?.images || [])
-    setDataItem({...dataItem, "images": preview})
+     setDataItem({...dataItem, "images": preview})
   }, [currentItem]);
 
 
@@ -56,7 +59,7 @@ const FormUploadImage = ({ productId, title, className, multiple = true }) => {
 
     try {
       // Aquí llamas a tu función imageUpload del servicio
-      await listingService.createWithImage(productId, selectedFile);
+      await listingService.create(productId, selectedFile);
       alert("Imagen subida con éxito");
     } catch (error) {
       alert("Error al subir: " + error.message);

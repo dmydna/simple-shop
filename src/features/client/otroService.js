@@ -3,6 +3,7 @@ import {BASE_URL,ENDPOINTS,TOKEN} from "../../utils/config.js";
 
 const ENDPOINT = ENDPOINTS.PERFIL
 
+// @deprecated
 export const clientService = {
 
     getMyPerfil: async () => {

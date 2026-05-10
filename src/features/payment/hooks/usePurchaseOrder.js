@@ -6,18 +6,19 @@ import { useState } from "react";
 
 export const usePurchaseOrder = ({onSuccess, setLoading, setError }) => {
 
-       const { orderData } = useCart()
+     const { cartItems } = useCart()
     
     const [orderResponse, setOrderResponse] = useState()
     const {create: createOrder, cancelOrder: cancel } = useService({service: orderService})
     const {create: buy }  = useService({service: buyService})
 
 
+    // FIXME implementar usando  useCrudAction (handleCreate)
     const handleConfirmOrder = async() => {
        setError(null)
        setLoading(true)
        try {
-          const order = await  createOrder(orderData);
+          const order = await  createOrder(cartItems);
           setOrderResponse(order)
           onSuccess() // <-- muestra formPayData
           console.log(order, "-- ORDER VALIDA! --")

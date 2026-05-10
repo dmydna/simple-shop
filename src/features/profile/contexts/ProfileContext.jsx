@@ -10,9 +10,10 @@ const ProfileContext = createContext();
 export function ProfileProvider({ children }) {
 
     const [sharedContext, setSharedContext] = useState()
-    const [ loading, setLoading ] = useState(true);
-    const [ profile, setProfile ] = useState({})
-    const [ error, setError ] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [profile, setProfile] = useState({})
+    const [success, setSuccess] = useState(false)
+    const [error, setError] = useState(null);
     const { isAuth } = useAuth()
 
 
@@ -21,11 +22,12 @@ export function ProfileProvider({ children }) {
         nprogress.start();
         setLoading(true)
         setError(null)
-        try{
+        try {
             const data = await profileService.getMyUser();
             setProfile(data)
+            setSuccess(true)
             return data
-        } catch (err){
+        } catch (err) {
             console.error("Error de carga de API", err);
             setError("No se realizo ninguna accion.")
             throw err;
@@ -36,34 +38,34 @@ export function ProfileProvider({ children }) {
     }
 
 
-   const updateImage = async (selectedFile) => {
-    if (!selectedFile) return alert("Por favor selecciona un archivo");
+    const updateImage = async (selectedFile) => {
+        if (!selectedFile) return alert("Por favor selecciona un archivo");
 
-    try {
-      // Aquí llamas a tu función imageUpload del servicio
-        setLoading(true)
-        setError(null)
-        nprogress.start();
-        await profileService.imageUpload(selectedFile);
-        toast.success("Imagen subida con éxito");
-        fetchData();
-    } catch (err) {
-       alert("Error al subir: " + error.message);
-       setError(err.message);
-       throw err
-    } finally {
-        setLoading(false)
-    }
+        try {
+            // Aquí llamas a tu función imageUpload del servicio
+            setLoading(true)
+            setError(null)
+            nprogress.start();
+            await profileService.imageUpload(selectedFile);
+            toast.success("Imagen subida con éxito");
+            fetchData();
+        } catch (err) {
+            alert("Error al subir: " + error.message);
+            setError(err.message);
+            throw err
+        } finally {
+            setLoading(false)
+        }
     }
 
     const updatePerfil = async () => {
         nprogress.start();
         setLoading(true)
         setError(null)
-        try{
+        try {
             await profileService.update(profile);
             toast.success("Se actualizo profile!");
-        } catch (err){
+        } catch (err) {
             console.error("Error de carga de API", err);
             setError("No se realizo ninguna accion.")
             toast.error("Error No se realizo ninguna accion.");
@@ -79,13 +81,16 @@ export function ProfileProvider({ children }) {
         setProfile({ ...profile, [name]: val });
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchData()
-    },[isAuth])
+    }, [isAuth])
 
     return (
         <ProfileContext.Provider
-            value={{ fetchData, profile, loading, profileService, handleChange, updatePerfil , updateImage, sharedContext, setSharedContext }}>
+            value={{ 
+                fetchData, profile, loading, profileService, handleChange, updatePerfil, updateImage, sharedContext, setSharedContext ,
+                error, setError, success, setSuccess
+                }}>
             {children}
         </ProfileContext.Provider>
     );

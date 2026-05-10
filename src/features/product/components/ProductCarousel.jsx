@@ -2,12 +2,14 @@ import { useEffect, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
 import { useWindowsWidth } from '../../../contexts/useWindowSize.jsx';
+import { useListing } from "../../listing/hooks/useListing.js";
 import ProductCard from './ProductCard.jsx';
-import {useListing} from "../../listing/hooks/useListing.js";
 
 
 
 
+
+// TODO: actualizar filtro 
 function ProductCarousel({children, filter, maxCols, maxElems, className, imgSize = 180}) {
 
   const [index, setIndex] = useState(0);

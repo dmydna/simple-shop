@@ -1,15 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
 import { orderService } from "../services/orderService.js";
-import { useFetchById } from "@hooks/useFetchById.js";
 import { useFetchData } from "@hooks/useFetchData.js";
+import { useFetchElem } from "@/hooks/useFetchElem.js";
 
 export const useOrder = () => {
 
     const { loading: loadingList, error: errorList, content, setContent, totalElements, setFilters, ...props }
         = useFetchData({ service: orderService, size: 2 })
 
-    const { loading: loadingItem, error: errorItem, currentItem, setCurrentItem, itemHash, setItemHash }
-        = useFetchById({ service: orderService })
+    const { loading: loadingItem, error: errorItem, currentItem, setCurrentItem, id, setId }
+        = useFetchElem({ service: orderService })
 
 
 
@@ -22,7 +22,7 @@ export const useOrder = () => {
         setOrders: setContent,
         currenOrder: currentItem,
         setCurrenOrder: setCurrentItem,
-        orderHash: itemHash,
-        setOrderHash: setItemHash,
+        orderHash: id,
+        setOrderHash: setId,
     })
 }

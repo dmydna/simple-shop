@@ -1,6 +1,4 @@
-import {useState} from "react";
-import nprogress from "nprogress";
-import {productService} from "../features/product/service/productService.js";
+import { useState } from "react";
 
 export const useFetch = () => {
     const [ loading, setLoading ] = useState(false);

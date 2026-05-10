@@ -1,4 +1,5 @@
 import { useListing } from "@/features/listing/hooks/useListing.js";
+import { toCreateOrder } from "@/utils/mapper";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const CartContext = createContext();
@@ -239,16 +240,9 @@ export function CartProvider({ children }) {
   }, [cartItems]);
   
 
-  const orderData = useMemo(()=>({
-        "details" : cartItems.map((item)=> ({
-            "productId": item?.productId,
-            "listingId": item?.id,
-            "name": item?.productName,
-            "quantity": item?.cantidad,
-            "priceAtPurchase": item?.price
-        })),
-        "totalAmount": totalPrice,
-  }),[totalPrice, cartItems]) 
+  const orderData = useMemo( () =>
+    toCreateOrder(cartItems) 
+  ,[totalPrice, cartItems]) 
 
 
   return (
@@ -270,7 +264,6 @@ export function CartProvider({ children }) {
          couponDiscount,
          setCantidadCartItem, 
          setCouponDiscount, 
-         orderData
          }}>
       {children}
     </CartContext.Provider>

@@ -23,7 +23,7 @@ function CartButton(){
         {(isHovered) => (
          <Button 
          onClick={ toggleRoute } 
-         className='fw-bold fs-3 d-flex' variant="outline-black">
+         className='fw-bold fs-4 d-flex' variant="outline-black">
             <i className={`bi bi-${ 
               isHovered && location.pathname == '/cart' ?
               'x' : 'cart3'  }`}>

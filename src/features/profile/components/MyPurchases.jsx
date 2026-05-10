@@ -1,5 +1,6 @@
 import PageLoading from "@/components/common/PageLoading";
 import { ImgGenApi } from "@/dev/utils";
+import { formatDate } from "@/features/dashboard/util";
 import { useOrder } from "@/features/order/hooks/useOrder";
 import Pagination from '@features/pagination/components/Pagination.jsx';
 import PageEmpty from '@pages/errors/PageEmpty.jsx';
@@ -27,9 +28,9 @@ function MyPurchases({ children }) {
             {content?.length !== 0 && content.map(order =>
                 <div className="mb-5">
                     <span className="text-secondary border-bottom d-block w-100 pb-2 my-3">
-                        <i className="bi-calendar me-2"></i>Dec 11, 2020, 13:20
+                        <i className="bi-calendar me-2"></i>{formatDate(order?.meta.createdAt, true)}
                     </span>
-                    {order.details.map(p =>
+                    {order?.items?.map(p =>
                         <div className="d-flex mb-3">
                             <img
                                 className="rounded"

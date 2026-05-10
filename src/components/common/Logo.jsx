@@ -7,8 +7,8 @@ function Logo(){
     const subLogo = {color: '#dc3545', fontSize: 'medium', fontWeight: '800'}
 
     return(
-        <Navbar.Brand as={Link} to="/" className={`p-0`}>
-          <b className="h3 fw-bolder text-black">Simple</b>
+        <Navbar.Brand as={Link} to="/" className={`Logo-0 p-0`}>
+          <b className={`h4 fw-bolder text-black`}>Simple</b>
           <b className="text-danger" style={subLogo}> SHOP</b>
         </Navbar.Brand>
     )

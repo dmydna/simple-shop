@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useListingCrudContext } from "../contexts/ListingCrudContext.jsx";
+import { useListingCrudContext } from "../legacy/ListingCrudContext.jsx";
 import FormProductSearch from "./FormProductSearch.jsx";
 
 

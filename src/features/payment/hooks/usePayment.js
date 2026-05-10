@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useGateway } from '../hooks/useGateway.js';
 import { usePurchaseOrder } from './usePurchaseOrder.js';
 
+// HACK esta hook necesito revisarse para simplificar logica.
 export const usePayment = () => {
 
     const {clearCart} = useCart()

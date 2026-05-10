@@ -1,7 +1,9 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { clientService } from './clientService.js';
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useUIContext } from "../../contexts/UIContext.jsx";
+import { clientService } from './clientService.js';
 
+
+// @deprecated
 export const ClientContext = createContext(null)
 
 export function ClientProvider({ children }){

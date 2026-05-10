@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {userService} from "../service/userService.js";
 import {useFetchData} from "../../../hooks/useFetchData.js";
-import {useFetchById} from "../../../hooks/useFetchById.js";
+import { useFetchElem } from "@/hooks/useFetchElem.js";
 
-export const useUser = () => {
+export const useUser = (fetchElemMethod=null) => {
 
     const {loading: loadingList, error: errorList, content,setContent, ...props}
         = useFetchData({service: userService})
 
-    const {loading: loadingItem, error: errorItem, currentItem, setCurrentItem, itemId, setItemId }
-        = useFetchById({service: userService})
+    const {loading: loadingItem, error: errorItem, currentItem, setCurrentItem, id, setId, fetchElem, refreshElem }
+        = useFetchElem({fetchMethod: fetchElemMethod || userService.getById})
 
     return ({
         ...props,
@@ -20,7 +20,10 @@ export const useUser = () => {
         setUsers: setContent,
         currentUser: currentItem,
         setCurrentUser: setCurrentItem,
-        userId: itemId,
-        setUserId: setItemId,
+        userId: id,
+        setUserId: setId,
+        setId, id,
+        fetchElem,
+        refreshElem
     })
 }

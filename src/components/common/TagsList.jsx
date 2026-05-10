@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Col, Form, Badge, InputGroup, Button } from 'react-bootstrap';
+import { useEffect, useRef, useState } from 'react';
+import { Badge, Button, Col, Form, InputGroup } from 'react-bootstrap';
 
-export const TagsList = ({ array = [], className = "", style = {} }) => {
+export const TagsList = ({ array = [], onChange, className = "", style = {} }) => {
 
     const [list, setList] = useState(array);
     const [tag, setTag] = useState("");
@@ -12,6 +12,18 @@ export const TagsList = ({ array = [], className = "", style = {} }) => {
     useEffect(() => {
         if (isAdding) inputRef.current?.focus();
     }, [isAdding]);
+
+    useEffect(()=>{
+        if(array.length !== 0){
+             setList(array)
+        }
+
+    },[array])
+
+    useEffect(()=>{
+        onChange(list)
+    },[list])
+
 
     const deleteTag = (indexToDelete) => {
         setList(prev => prev.filter((_, index) => index !== indexToDelete));

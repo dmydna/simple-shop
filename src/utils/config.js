@@ -13,6 +13,7 @@ export const TOKEN = (() => localStorage.getItem("token"))();
 export const ROLE  = (() => localStorage.getItem("role"))();
 
 export const ENDPOINTS = Object.freeze({
+    DEV:       'dev',
     LISTENING: 'api/listing',
     PRODUCT:   'api/products',
     CLIENT:    'api/client',

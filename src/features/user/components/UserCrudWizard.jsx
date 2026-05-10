@@ -6,6 +6,7 @@ import WizardItem from "../../wizardCrud/components/WizardItem.jsx";
 import CrudAccordion from "../../../components/common/CrudAccordion.jsx";
 
 
+//@deprecated 
 function UserCrudWizard() {
 
     const crudHook = useUserCrud()

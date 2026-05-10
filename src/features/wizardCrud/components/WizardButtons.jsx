@@ -3,6 +3,7 @@ import React from "react";
 import {useWizard} from "../contexts/WisardContext.jsx";
 import StepNavbar from "./StepNavbar.jsx";
 
+// @deprecated 
 function WizardButtons({ configButtons, onCancel, onSubmit, prev, next }) {
 
     const {

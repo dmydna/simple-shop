@@ -11,7 +11,7 @@ import CrudAccordion from "../../../components/common/CrudAccordion.jsx";
 import AccordionDanger from "./AccordionDanger.jsx";
 import AccordionEdit from "./AccordionEdit.jsx";
 
-
+// @deprecated 
 function ProductCrudWizard() {
 
     const crudHook = useProductCrud()

@@ -4,6 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {useWizard} from "../../wizardCrud/contexts/WisardContext.jsx";
 
+// @deprecated
 function EditList() {
 
     const {setCurrentStep, step, steps, visibleSteps} = useWizard()

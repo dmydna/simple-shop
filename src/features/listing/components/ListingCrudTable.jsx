@@ -3,7 +3,7 @@ import CrudTable from "../../../components/common/CrudTable.jsx";
 import { useListingContext } from '../contexts/ListingContext.jsx';
 import { useListingCrudContext } from '../contexts/ListingCrudContext.jsx';
 
-
+// @deprecated
 export  const ListingCrudTable = ({children}) => {
 
     const baseHook = useListingContext()

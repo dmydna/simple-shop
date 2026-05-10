@@ -2,6 +2,8 @@ import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 
+
+// @deprecated 
 function StepBadge({children, trigger = 'click',ico, position = 'top', style, className}) {
     return (
         <div style={style} className={className}>

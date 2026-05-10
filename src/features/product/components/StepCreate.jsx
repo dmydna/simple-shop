@@ -3,7 +3,7 @@ import { Form, InputGroup } from "react-bootstrap";
 import { CRUD } from "../../../utils/crud.js";
 import {useProductCrud} from "../context/ProductCrudContex.jsx";
 
-
+// @deprecated 
 function StepProductos({children, className}){
 
     const {currentItem, handleChange, crudMode,

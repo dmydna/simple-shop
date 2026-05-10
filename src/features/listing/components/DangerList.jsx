@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useWizard } from "../../wizardCrud/contexts/WisardContext.jsx";
 import { useListingCrudContext } from "../contexts/ListingCrudContext.jsx";
 
+// @deprecated
 function DangerList() {
 
     const {handleDelete, handleVisibility, currentItem} = useListingCrudContext()

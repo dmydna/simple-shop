@@ -5,6 +5,7 @@ import CrudTable from "@common/CrudTable.jsx";
 import { useUserCrud } from '../contexts/UserCrudContext.jsx';
 import { ImgGenApi } from '../../../dev/utils.js';
 
+//@deprecated 
 export  const UserCrudTable = ({children}) => {
 
   const baseHook = useUserContext()

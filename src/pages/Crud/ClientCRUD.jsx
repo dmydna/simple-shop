@@ -8,7 +8,7 @@ import { useClients } from "../../features/client/ClientContext.jsx";
 import { useUIContext } from "../../contexts/UIContext.jsx";
 import { clientService } from '../../features/client/clientService.js';
 
-
+// @deprecated
 const ClientCRUD = () => {
 
     const {onHideFilter, currentItems} =  useUIContext();

@@ -2,6 +2,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import {useProductCrud} from "../contexts/ProductCrudContex.jsx";
 import StepBadge from '../../wizardCrud/components/StepBadge.jsx';
 
+//@deprecated
 function AccordionInfo({children, eventKey, className}) {
     const {currentItem} = useProductCrud();
 

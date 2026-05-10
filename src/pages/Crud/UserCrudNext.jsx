@@ -12,7 +12,7 @@ import UserCrudWizard from "../../features/user/components/UserCrudWizard.jsx";
 import { useUserCrud } from "../../features/user/contexts/UserCrudContext.jsx"
 import { useUserContext } from "../../features/user/contexts/UserContext.jsx";
 
-
+// @deprecated
 function UserCrudNext() {
 
     const { users, setFilters } = useUserContext()

@@ -4,6 +4,7 @@ import { useProducts } from '../product/context/ProductContext.jsx';
 import { useUIContext } from '../../contexts/UIContext.jsx';
 import Pagination from '../pagination/components/Pagination.jsx';
 
+// @legacy
 function OrderTable({openEditModal, handleDelete,  handleInfo}){
 
     const { currentItems, setVisibleClients, setItems, setItemsPerPage, currentPage, setCurrentPage, totalPages } = useUIContext()

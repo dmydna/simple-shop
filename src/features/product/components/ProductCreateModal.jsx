@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Container, Modal, Form } from 'react-bootstrap';
 
+
+// @legacy
 function ProductCreateModal({showModal, handleChange, handleCloseModal, handleUpdate, handleCreate, currentItem, modalMode}){
 
 

@@ -1,5 +1,6 @@
 import {useState} from "react";
 
+// @deprecated 
 function useWizardButtons(){
 
     const [isVisibleCancel, setIsVisibleCancel] = useState(false)

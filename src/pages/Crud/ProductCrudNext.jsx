@@ -12,7 +12,7 @@ import ProductCrudWizard from "../../features/product/components/ProductCrudWiza
 import {useProductCrud} from "../../features/product/contexts/ProductCrudContex.jsx";
 import {useProductContext} from "../../features/product/contexts/ProductContext.jsx";
 
-
+// @deprecated
 function ProductCrudNext() {
 
     const { products, setFilters } = useProductContext()

@@ -5,7 +5,7 @@ import { useWindowsWidth } from "../../contexts/useWindowSize.jsx";
 import Search from "../Search";
 import UserDropdown from "../UserDropdown";
 
-
+// @deprecated
 function Header() {
 
   const location = useLocation();

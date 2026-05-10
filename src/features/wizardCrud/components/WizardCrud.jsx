@@ -5,6 +5,7 @@ import WizardHeader from "./WizardHeader.jsx";
 import WizardItem from "./WizardItem.jsx";
 import WizardNavigation from "./WizardNavigation.jsx";
 
+// @deprecated 
 function WizardCrud({
       children,
       steps,

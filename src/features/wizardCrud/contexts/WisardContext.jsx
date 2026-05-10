@@ -2,7 +2,7 @@ import {createContext, useContext, useEffect, useMemo, useState} from "react";
 import useWizardButtons from "../hooks/useWizardButtons.js";
 import {CRUD} from "../../../utils/crud.js";
 
-
+// @deprecated 
 export const stepIndex = (WIZARD_CONFIG) => Object.freeze(
     WIZARD_CONFIG?.reduce((acc, curr, index) => {
         acc[curr.key] = index;

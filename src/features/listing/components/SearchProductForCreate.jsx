@@ -3,7 +3,6 @@ import { useListingCrudContext } from "../legacy/ListingCrudContext.jsx";
 import FormProductSearch from "./FormProductSearch.jsx";
 
 
-
 function SearchProductForCreate({children, handleProductMode, className}) {
 
     const [selected, setSelected] = useState(false);

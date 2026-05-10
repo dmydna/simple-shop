@@ -16,6 +16,8 @@ import React, {useMemo, useState} from "react";
 import {useListingCrud} from "../contexts/ListingCrudContext.jsx";
 import { WIZARD_CONFIG } from "../hooks/wizardConfig.js";
 
+
+// @deprecated
 function ListingCrudWizard(){
 
     const crudHook = useListingCrud()

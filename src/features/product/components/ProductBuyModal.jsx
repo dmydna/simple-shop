@@ -8,6 +8,8 @@ import Img2 from "/src/assets/check-crop.gif";
 import Img1 from "/src/assets/online-store.png";
 import Img3 from "/src/assets/purchasing.png";
 
+
+// @deprecated
 function ProductBuyModal({show,onHide}) {
 
     const { cartItems, addToCart} = useCart()

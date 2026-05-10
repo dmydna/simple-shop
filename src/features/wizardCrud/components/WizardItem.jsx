@@ -1,6 +1,6 @@
 import {useWizard} from "../contexts/WisardContext.jsx";
 
-
+// @deprecated 
 function WizardItem({children, eventKey}){
 
 

@@ -33,7 +33,11 @@ export const CRUD = Object.freeze({
     CREATE: 'create',
     READ:   'read',
     UPDATE: 'update',
-    DELETE: 'delete'
+    DELETE: 'delete',
+    EDIT:   'update',
+    DRAFT:  'draft',
+    VIEW:   'read',
+    COPY:   'copy'
 });
 
 export const mode = Object.freeze({

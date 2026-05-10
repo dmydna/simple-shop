@@ -2,6 +2,7 @@ import { useWizard } from "../contexts/WisardContext.jsx";
 import WizardButtons from "./WizardButtons.jsx";
 import { useWizardButtonsUI } from "./useWizardButtonsUI.js";
 
+// @deprecated 
 function WizardNavigation({onSubmit, onClose, crudHook}) {
 
     const config = useWizardButtonsUI({crudHook})

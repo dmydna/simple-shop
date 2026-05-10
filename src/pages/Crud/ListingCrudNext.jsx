@@ -15,7 +15,7 @@ import CrudHeader from "../../components/common/CrudHeader.jsx";
 import ListingCrudWizard from "../../features/listing/components/ListingCrudWizard.jsx";
 
 
-
+// @deprecated
 function ListingCrudNext() {
 
     const { listings, setFilters } = useListingContext()

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Container, Modal, Table } from 'react-bootstrap';
 
-
+// @legacy
 function OrderViewModal({order, show ,onHide, openEditModal, handleDelete,  handleInfo}) {
 
   const items = order?.details;

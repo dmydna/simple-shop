@@ -1,6 +1,7 @@
 import Accordion from 'react-bootstrap/Accordion';
 import { useListingCrudContext } from "../contexts/ListingCrudContext.jsx";
 
+// @deprecated
 function AccordionInfo({children, eventKey, className}) {
     const {currentListing} = useListingCrudContext();
 

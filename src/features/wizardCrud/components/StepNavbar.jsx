@@ -2,6 +2,7 @@ import {useWizard} from "../contexts/WisardContext.jsx";
 import {CRUD} from "../../../utils/crud.js";
 import StepBadge from "./StepBadge"
 
+// @deprecated 
 function  StepNavbar({className}) {
 
     const { currentStep, visibleSteps, mode, goTo, prev, firstStep, lastStep } = useWizard()

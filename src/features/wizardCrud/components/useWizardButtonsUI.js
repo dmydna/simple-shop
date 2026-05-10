@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react";
 import { CRUD } from "../../../utils/crud.js";
 import { useWizard } from "../contexts/WisardContext.jsx";
 
+// @deprecated 
 export const useWizardButtonsUI = ({crudHook}) => {
 
     const { crudMode, dataItem, editableFields } = crudHook;

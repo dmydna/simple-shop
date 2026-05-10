@@ -1,5 +1,6 @@
 import {CRUD} from "../../../utils/crud.js";
 
+// @deprecated
 export const WIZARD_CONFIG = [
     { key: 'OPTIONS_CREATE', url: 'Crear  Listing' ,
         skipIf: (mode) => mode === CRUD.UPDATE },

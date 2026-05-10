@@ -1,6 +1,7 @@
 import PageLoading from "../../../components/common/PageLoading.jsx";
 import {FeedbackMessage} from "../../../components/common/FeedbackMessage.jsx";
 
+// @deprecated 
 function WizardFeedback({loading, error, onAction}){
 
     if(loading){

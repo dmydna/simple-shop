@@ -1,7 +1,7 @@
 import { CRUD } from "../../../utils/crud.js";
 import { useWizard } from "../contexts/WisardContext.jsx";
 
-
+// @deprecated 
 function WizardHeader({onClose}) {
 
     const { visibleSteps, mode, currentStep, 

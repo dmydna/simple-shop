@@ -1,6 +1,6 @@
 import {CRUD} from "../../../utils/crud.js";
 
-
+// @deprecated 
 export const getVisibleSteps = (steps, modalMode) => {
     return steps.filter(s => !s.skipIf?.(modalMode))
 }

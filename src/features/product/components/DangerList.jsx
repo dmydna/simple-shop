@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {useWizard} from "../../wizardCrud/contexts/WisardContext.jsx";
 import { useProductCrud } from "../contexts/ProductCrudContex.jsx";
 
+// @deprecated
 function DangerList() {
 
     const {handleDelete, currentItem} = useProductCrud()

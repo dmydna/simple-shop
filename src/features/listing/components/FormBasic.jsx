@@ -2,10 +2,8 @@ import InputCrudFloating from "@/features/crud/components/InputCrudFloating.jsx"
 import { useListingCrudContext } from "../contexts/ListingCrudContext.jsx";
 
 
-function FormBasic({ children, className }) {
+function FormBasic({ children, className, baseHook }) {
 
-    const {dataItem, handleChange, crudMode,
-    isDisabledField, editableFields, handleEnableEdit} = useListingCrudContext();
 
     return (
         <>
@@ -14,7 +12,8 @@ function FormBasic({ children, className }) {
             <InputCrudFloating
                 name={"title"}
                 label={"Title"}
-                useHookCrud={ useListingCrudContext}
+                useHookCrud={useListingCrudContext}
+                baseHook={baseHook}
             />
 
             <div className="my-1 d-flex gap-2 flex-column flex-lg-row">
@@ -23,14 +22,16 @@ function FormBasic({ children, className }) {
                     name={"price"}
                     type={"number"}
                     label={"Price"}
-                useHookCrud={useListingCrudContext}
+                    useHookCrud={useListingCrudContext}
+                    baseHook={baseHook}
                 />
 
                 <InputCrudFloating
                     name={"discountPercentage"}
                     type={"number"}
                     label={"Discount Percentage"}
-                useHookCrud={useListingCrudContext}
+                    useHookCrud={useListingCrudContext}
+                    baseHook={baseHook}
                 />
 
             </div>
@@ -40,6 +41,7 @@ function FormBasic({ children, className }) {
                 label={"Description"}
                 useHookCrud={useListingCrudContext}
                 as={"textarea"}
+                baseHook={baseHook}
             />
 
 

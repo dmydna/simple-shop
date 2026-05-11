@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../features/auth/hooks/AuthContext.jsx";
-import { useUIContext } from "../../contexts/UIContext";
+import { useUIContext } from "../../../contexts/UIContext.jsx";
+import { useAuth } from "../../auth/hooks/AuthContext.jsx";
 
 
 function UserDropdown({className}) {
 
 
   const { user, isAuth, logout, isAdmin } = useAuth();
-  const {setShowLoginModal, showLoginModal, setAppMode} = useUIContext()
+  const {setShowLoginModal, showLoginModal} = useUIContext()
 
   const [isActive, setIsActive] = useState(false)
   
@@ -73,10 +73,6 @@ function UserDropdown({className}) {
               <i className="bi bi-handbag me-2"></i> compras
             </Dropdown.Item>
   
-            <Dropdown.Item onClick={()=>setAppMode("admin")}>
-              <i className="bi bi-star me-2"></i> mode admin
-            </Dropdown.Item>
-
             <Dropdown.Divider />
   
             {/* Logout */}

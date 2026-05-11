@@ -1,41 +1,31 @@
-
+import { useListing } from "@/features/listing/hooks/useListing";
 import SearchLive from "@/features/search/SearchLive";
-import { useUser } from "@/features/user/hooks/useUser";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ModalCrud from "../../../crud/components/ModalCrud";
-import UserListConfig from "./UserListConfig";
-import { UserTable } from "./UserTable";
+import ListingActions from "./ListingActions";
+import ListingFilter from "./ListingFilter";
+import { ListingTable } from "./ListingTable";
 
-export const UserListCrud = ({currentItem, setCurrentItem}) => {
+export const ListingList = ({}) => {
 
-    const baseHook = useUser()
+    const baseHook = useListing()
+    const {listings, setFilters} = baseHook
     const [search, setSearch] = useState()
     const navigate = useNavigate()
     const [showCrudActions, setShowCrudActions] = useState()
     const [showFilter, setShowFilter] = useState()
 
-    // const [currentItem, setCurrentItem] = useState()
+
 
     useEffect(() => {
         if (search) setFilters({ page: 0, title: search })
     }, [search])
 
-    const { setFilters, Users } = baseHook;
 
     const handleOpenEdit = (item) => {
-        setCurrentItem(item)
         setShowCrudActions(true)
-    }
-
-    const handleclick = (item) => {
-        console.log(item)
-        if(currentItem && currentItem.id == item.id){
-            setCurrentItem({})
-        }else{
-            setCurrentItem(item)
-        }
     }
 
     return (
@@ -44,41 +34,39 @@ export const UserListCrud = ({currentItem, setCurrentItem}) => {
 
                 <div className="mx-auto p-4 rounded island border">
 
-                    <div>
-                        <div>
-                            <p className="h5  mb-3">
-                                Usuarios
-                            </p>
-                        </div>
-                        <div className="d-flex justify-content-between my-4 flex-wrap" >
-                            <Button
-                                variant="light"
-                                onClick={() => navigate('/dashboard/user-form?mode=create')}
-                                className="my-2 flex-fill flex-md-grow-0">
-                                <i className="bi bi-plus-lg"></i>
-                                <span className="fw-medium ms-2">Create new</span>
-                            </Button>
-                            <SearchLive
-                                className='flex-fill flex-md-grow-0'
-                                items={Users}
-                                handleSearch={setSearch}
-                                handleFilter={() => setShowFilter(prev => !prev)}
-                            />
+<div>
+                                        <div>
+                                            <p className="h5 mb-3">
+                                                Publicaciones
+                                            </p>
+                                        </div>
+                                        <div className="d-flex justify-content-between my-4 flex-wrap" >
+                                            <Button
+                                                variant="light"
+                                                onClick={() => navigate('/dashboard/listing-crud?edit=false')}
+                                                className="my-2 flex-fill flex-md-grow-0">
+                                                <i className="bi bi-plus-lg"></i>
+                                                <span className="fw-medium ms-2">Create new</span>
+                                            </Button>
+                                            <SearchLive
+                                                className='flex-fill flex-md-grow-0'
+                                                items={listings}
+                                                handleSearch={setSearch}
+                                                handleFilter={() => setShowFilter(prev => !prev)}
+                                            />
 
-                        </div>
-                        {/* <UserFilterCrud
+                                        </div>
+                                        <ListingFilter
                                             show={showFilter}
                                             onHide={setShowFilter}
-                                            dataSource={Users}
+                                            dataSource={listings}
                                             onApply={setFilters}
-                                        ></UserFilterCrud> */}
-                    </div>
+                                        ></ListingFilter>
+                                    </div>
 
-                    <UserTable
+                    <ListingTable
                         className=''
-                        currentItem={currentItem}
                         baseHook={baseHook}
-                        handleclick={handleclick}
                     >
                         {(key, item) => {
                             if (key === 'title') {
@@ -102,7 +90,7 @@ export const UserListCrud = ({currentItem, setCurrentItem}) => {
                             }
 
                         }}
-                    </UserTable>
+                    </ListingTable>
                 </div>
             </div>
 
@@ -111,9 +99,8 @@ export const UserListCrud = ({currentItem, setCurrentItem}) => {
                 show={showCrudActions}
                 onHide={setShowCrudActions}
             >
-                <UserListConfig
+                <ListingActions
                     close={() => setShowCrudActions(false)}
-                    item={currentItem}
                 />
             </ModalCrud>
 
@@ -123,4 +110,4 @@ export const UserListCrud = ({currentItem, setCurrentItem}) => {
     );
 }
 
-export default UserListCrud;
+export default ListingList;

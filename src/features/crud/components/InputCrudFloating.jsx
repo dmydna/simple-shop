@@ -5,13 +5,12 @@ import { useEffect } from "react";
 import { FloatingLabel, Form, InputGroup } from "react-bootstrap";
 
 
-function InputCrudFloating({ name, label, type, placeholder, as, rows, useHookCrud }) {
+// NOTA este componente es multi-contexto, 
+// hay que mandar un crud-hook compatible.
+function InputCrudFloating({ name, label, type, placeholder, as, rows, baseHook }) {
 
     const { formData, handleChange, crudMode,
-        isDisabledField, editableFields, handleEnableEdit } = useHookCrud()
-
-
-    useEffect(() => { console.log("formadata desde input", formData) }, [formData])
+        isDisabledField, editableFields, handleEnableEdit } = baseHook
 
     return (
         <Form.Group className="w-100">

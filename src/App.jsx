@@ -1,3 +1,4 @@
+import Dashboard from "@features/dashboard/Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
@@ -12,7 +13,6 @@ import DevDash from "./dev/components/DevDash.jsx";
 import { AuthProvider } from "./features/auth/hooks/AuthContext.jsx";
 import Cart from "./pages/Cart/Cart.jsx";
 import Contact from "./pages/Contact";
-import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ProductDetails from "./pages/Product/ProductDetails";
@@ -33,30 +33,20 @@ import UserLayout from "@features/profile/components/UserLayout";
 import WelcomePerfil from "@features/profile/components/WelcomeProfile";
 
 import PageNotReady from "@pages/errors/PageNotReady";
-import ProductLayout from "./components/layout/ProductLayout.jsx";
 import SiderbarAdmin from "./components/layout/SiderbarAdmin";
 import UploadService from "./dev/components/UploadService";
 import { DevProvider } from "./dev/contexts/DevContext.jsx";
 import WelcomeDashboard from "./features/dashboard/common/WelcomeDashboard";
-import ListingListCrud from "./features/dashboard/components/listing/LisitingListCrud";
-import ListingFormCrud from "./features/dashboard/components/listing/ListingFormCrud";
-import ListingFormLayout from "./features/dashboard/components/listing/ListingFormLayout";
-import ListingListLayout from "./features/dashboard/components/listing/ListingListLayout";
-import ProductFormLayout from "./features/dashboard/components/product/ProductFormLayout";
-import ProductListLayout from "./features/dashboard/components/product/ProductListLayout";
-import UserFormLayout from "./features/dashboard/components/user/UserFormLayout";
-import UserListLayout from "./features/dashboard/components/user/UserListLayout";
+import ListingList from "./features/dashboard/components/listing/LisitingList";
+import ListingForm from "./features/dashboard/components/listing/ListingForm";
 import DashboardLayout from "./features/dashboard/layout/DashboardLayout";
 import { ListingCrudProvider } from "./features/listing/contexts/ListingCrudContext";
 import PaymentForm from "./features/payment/components/PaymentForm.jsx";
-import { ProductCrudProvider } from "./features/product/contexts/ProductCrudContex";
 import WriteReview from "./features/profile/components/WriteReview";
 import { ProfileProvider } from "./features/profile/contexts/ProfileContext.jsx";
 import { UserProvider } from "./features/user/contexts/UserContext.jsx";
-import { UserCrudProvider } from "./features/user/contexts/UserCrudContext";
 import CompleteRegister from "./pages/CompleteRegister";
-
-
+import CatalogeLayout from "@/components/layout/CatalogeLayout";
 
 
 function App() {
@@ -111,7 +101,7 @@ function App() {
               <Route path="/test/uploader" element={<UploadService />} />
               <Route path="/faqs" element={<PageNotReady />} />
 
-              <Route path="/products" element={<ProductLayout />}>
+              <Route path="/products" element={<CatalogeLayout/>}>
                 <Route index element={<Products />} />
                 <Route path="category/:category" element={<Products />} />
                 <Route path="search/:product" element={<Products />} />
@@ -153,39 +143,42 @@ function App() {
 
                 {/* LISTING  */}
                 <Route path="listing-form" element={
-                  <ListingCrudProvider>
-                    <ListingFormLayout />
-                  </ListingCrudProvider>
+                  <Dashboard.ListingLayout>
+                      <Dashboard.ListingForm />
+                  </Dashboard.ListingLayout>
                 } />
 
                 <Route path="listing-list" element={
-                  <ListingCrudProvider>
-                    <ListingListLayout />
-                  </ListingCrudProvider>
+                  <Dashboard.ListingLayout>
+                    <Dashboard.ListingList />
+                  </Dashboard.ListingLayout>
                 } />
 
 
                 {/* PRODUCT  */}
                 <Route path="product-form" element={
-                  <ProductCrudProvider>
-                    <ProductFormLayout />
-                  </ProductCrudProvider>
+                  <Dashboard.ProductLayout>
+                    <Dashboard.ProductForm/>
+                  </Dashboard.ProductLayout>
                 }/>
                 <Route path="product-list" element={
-                  <ProductCrudProvider>
-                    <ProductListLayout />
-                  </ProductCrudProvider>
+                  <Dashboard.ProductLayout>
+                    <Dashboard.ProductList />
+                  </Dashboard.ProductLayout>
                 }/>
 
                 {/* USER  */}
                 <Route path="user-form" element={
-                  <UserCrudProvider>
-                    <UserFormLayout />
-                  </UserCrudProvider>
+                    <Dashboard.UserLayout>
+                      <Dashboard.UserForm/>
+                    </Dashboard.UserLayout>
+
                 }/>
                 <Route path="user-list" element={
-                  
-                    <UserListLayout />
+                    <Dashboard.UserLayout >
+                       <Dashboard.UserList />
+                    </Dashboard.UserLayout>
+
                 }/>
 
               </Route>
@@ -210,15 +203,15 @@ function App() {
               {/** -- DASHBOARD CRUD -- */}
 
               <Route path="/dashboardmode" element={<DashboardLayout />}>
-                <Route index element={<ListingFormCrud />} />
+                <Route index element={<ListingForm />} />
                 <Route path="product-crud" element={
                   <ListingCrudProvider>
-                    <ListingFormCrud />
+                    <ListingForm />
                   </ListingCrudProvider>
                 } />
                 <Route path="product-table" element={
                   <ListingCrudProvider>
-                    <ListingListCrud />
+                    <ListingList />
                   </ListingCrudProvider>
                 } />
               </Route>
@@ -236,18 +229,6 @@ function App() {
                 <DevProvider>
                   <DevDash />
                 </DevProvider>
-              }
-              />
-
-            <Route path="/dashboard/test-form" element={
-                 <ListingCrudProvider>
-                   <ListingFormLayout />
-                 </ListingCrudProvider>
-              }
-              />
-
-              <Route path="/dashboard/test-list" element={
-                  <ListingListLayout />
               }
               />
 

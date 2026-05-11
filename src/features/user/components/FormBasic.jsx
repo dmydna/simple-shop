@@ -4,10 +4,9 @@ import { useEffect } from "react";
 import { data } from "react-router-dom";
 
 
-export default function FormBasic({ children, className }) {
+export default function FormBasic({ children, className, crudHook }) {
 
- const {dataItem, handleChange, crudMode, formData,
-    isDisabledField, editableFields, handleEnableEdit} = useUserCrudContext();
+ const {formData} = crudHook
 
 
   return (
@@ -36,13 +35,13 @@ export default function FormBasic({ children, className }) {
           <InputCrudFloating
             name={"username"}
             label={"Username"}
-            useHookCrud={useUserCrudContext}
+            baseHook={crudHook}
           />
 
           <InputCrudFloating
             name={"email"}
             label={"Email"}
-            useHookCrud={useUserCrudContext}
+            baseHook={crudHook}
           />
 
         </div>
@@ -51,7 +50,7 @@ export default function FormBasic({ children, className }) {
           <InputCrudFloating
             name={"role"}
             label={"Role"}
-            useHookCrud={useUserCrudContext}
+            baseHook={crudHook}
           />
           </div>
 

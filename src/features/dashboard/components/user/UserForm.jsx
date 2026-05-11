@@ -2,35 +2,38 @@ import ModalCrud from "@/features/crud/components/ModalCrud";
 import FormCrud from "../../../crud/components/FormCrud";
 import FormBasic from "@/features/user/components/FormBasic";
 import FormAccount from "@/features/user/components/FormAccount";
-import UserFormConfig from "./UserFormConfig";
-import { useUserCrudContext } from "@/features/user/contexts/UserCrudContext";
+import UserActions from "./UserActions";
+import { useUserCrud } from "@/features/user/hooks/useUserCrud";
 
-function UserFormCrud() {
+function UserForm() {
 
-    const { showModal, setShowModal, ...props } = useUserCrudContext()
+    const crudHook = useUserCrud()
+    const { showModal, setShowModal } = crudHook
+
 
     return (
         <FormCrud
             type="user"
-            useCrudHook={useUserCrudContext}
+            crudHook={crudHook}
         >
 
             <p className="fw-medium">
                 User Information
             </p>
 
-            <FormBasic />
+            <FormBasic crudHook={crudHook} />
             
             <p className="fw-medium">
                 Personal Information
             </p>
-            <FormAccount />
+            
+            <FormAccount crudHook={crudHook} />
             
             <ModalCrud
                 show={showModal}
                 onHide={setShowModal}
             >
-                <UserFormConfig
+                <UserActions
                     close={() => setShowModal(false)}
                 />
             </ModalCrud>
@@ -38,4 +41,4 @@ function UserFormCrud() {
     )
 }
 
-export default UserFormCrud;
+export default UserForm;

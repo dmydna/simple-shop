@@ -1,20 +1,43 @@
 import CopyButton from '@/components/common/CopyButton';
 import { color, ImgGenApi } from '@/dev/utils';
 import { formatDate, statusColor } from '@/features/dashboard/util.js';
+import { useNavParams } from '@/hooks/useNavParams';
 import Pagination from '@features/pagination/components/Pagination.jsx';
 import { useEffect } from 'react';
 import { Card, Form, Table } from 'react-bootstrap';
-export default function ProductTable({ children, currentItem, baseHook, handleclick, className }){
+export default function ProductTable({ children, baseHook, className }) {
 
     const { content, loading, currentPage, setCurrentPage, totalPages, setFilters } = baseHook
-  
+
+    const { searchParams, setSearchParams, idParam } = useNavParams({ baseHook: baseHook })
+
     useEffect(() => {
         // Lógica de paginación
-        setCurrentPage(0)
+        setCurrentPage(1)
     }, [])
 
-    const selected =   (item) => {
-        return (item.id === currentItem?.id ? 'selected' : '')
+
+    const handleSelect = (item) => {
+
+        // Selecciona
+        setSearchParams(prev => {
+            const nuevosParams = new URLSearchParams(prev);
+            nuevosParams.set('id', item.id);
+            return nuevosParams;
+        });
+
+        // Deselecciona
+        if (idParam == item.id) {
+            setSearchParams(prev => {
+                const nuevosParams = new URLSearchParams(prev);
+                nuevosParams.delete('id');
+                return nuevosParams;
+            });
+        }
+    }
+
+    const selected = (item) => {
+        return (item.id == idParam ? 'selected' : '')
     }
 
 
@@ -40,16 +63,15 @@ export default function ProductTable({ children, currentItem, baseHook, handlecl
                         {content?.length !== 0 && (
                             <tr className='border-bottom'>
                                 {/**Selection */}
-                                 <th style={{ width: '150px' }} className='d-none  d-md-table-cell text-secondary'></th>
+                                <th style={{ width: '150px' }} className='d-none  d-md-table-cell text-secondary'></th>
                                 {/**Item */}
                                 <th className='text-secondary'>Name</th>
-                                <th style={{width: '200px'}} className='text-secondary'>Sku</th>
-                                <th style={{width: '150px'}} className='text-secondary'>Created at</th>
-                                <th style={{width: '150px'}} className='text-secondary'>Brand</th>
-                                <th style={{width: '150px'}} className='text-secondary'>Status</th>
+                                <th style={{ width: '200px' }} className='text-secondary'>Sku</th>
+                                <th style={{ width: '150px' }} className='text-secondary'>Created at</th>
+                                <th style={{ width: '150px' }} className='text-secondary'>Brand</th>
+                                <th style={{ width: '150px' }} className='text-secondary'>Status</th>
                                 {/** Action */}
-                                <th style={{width: '150px'}} 
-                                className='d-block d-table-cell d-md-none text-secondarytext-secondary'></th>
+                                <th style={{ width: '150px' }} className='d-block d-table-cell d-md-none text-secondary'></th>
                             </tr>
                         )}
                     </thead>
@@ -70,24 +92,22 @@ export default function ProductTable({ children, currentItem, baseHook, handlecl
                             content?.map((item) => (
 
                                 <tr className={`onhover ${selected(item)}`}
-                                    // onClick={() => handleclick(item)}
                                     style={{ overflow: "visible", height: "70px" }} key={item.id}>
                                     {/* Selection */}
-  
 
-                                    <td 
-                                        onClick={() => handleclick(item)}
+                                    <td
+                                        onClick={() => handleSelect(item)}
                                         className='text-secondary d-none  d-md-table-cell'>
-                                            <Form.Check // prettier-ignore
-                                                type='checkbox'
-                                                id={`default-radio`}
-                                                className='mt-3'
-                                                checked={currentItem?.id === item.id}
-                                                onChange={(e) => {
-                                                   e.stopPropagation();
-                                                    handleclick(item);  
-                                                }}
-                                            />
+                                        <Form.Check // prettier-ignore
+                                            type='checkbox'
+                                            id={`default-radio`}
+                                            className='mt-3'
+                                            checked={idParam == item.id}
+                                            onChange={(e) => {
+                                                e.stopPropagation();
+                                                handleSelect(item);
+                                            }}
+                                        />
                                     </td>
 
 
@@ -109,7 +129,7 @@ export default function ProductTable({ children, currentItem, baseHook, handlecl
                                     </td>
 
                                     {/* Created At */}
-                                    <td className='text-secondary' style={{ lineHeight: '4.2'}}  >
+                                    <td className='text-secondary' style={{ lineHeight: '4.2' }}  >
                                         <i className='bi bi-calendar me-2'></i>
                                         {item?.meta.createdAt ? formatDate(item?.meta.createdAt || []) : 'n/a'}
                                     </td>
@@ -127,8 +147,9 @@ export default function ProductTable({ children, currentItem, baseHook, handlecl
                                         </span>
                                     </td>
 
-                                   {/**Action */}
-                                    <td className='small'
+                                    {/**Action */}
+                                    <td
+                                        className='small d-table-cell d-md-none'
                                         style={{ lineHeight: '4.2', textAlign: 'end' }}  >
                                         {children('buttons', item)}
                                     </td>
@@ -147,8 +168,6 @@ export default function ProductTable({ children, currentItem, baseHook, handlecl
 
             <Pagination
                 className="mb-0"
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
                 totalPages={totalPages}
             />
 

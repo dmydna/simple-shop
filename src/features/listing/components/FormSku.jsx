@@ -1,10 +1,8 @@
 import InputCrudFloating from "@/features/crud/components/InputCrudFloating.jsx";
 import { useListingCrudContext } from "../contexts/ListingCrudContext.jsx";
 
-function FormSku({children, className}){
+function FormSku({children, className, baseHook}){
 
-    const {dataItem, handleChange, crudMode,
-    isDisabledField, editableFields, handleEnableEdit} = useListingCrudContext();
 
     return (
         <>
@@ -16,8 +14,7 @@ function FormSku({children, className}){
           <InputCrudFloating
             name={"sku"}
             label={"Sku"}
-            value={dataItem}
-            useHookCrud={useListingCrudContext}
+            baseHook={baseHook}
           />
 
         </div>

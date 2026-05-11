@@ -1,11 +1,8 @@
-import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import UserListConfig from "./UserListConfig";
-import UserListCrud from "./UserListCrud";
+import ProductActions from "./ProductActions";
 
-export default function UserListLayout({children}) {
+function ProductLayout({children}) {
 
-    const [currentItem, setCurrentItem] = useState()
 
     return (
         <Container fluid="xl" className="px-sm-4 px-md-4 px-lg-5">
@@ -15,20 +12,16 @@ export default function UserListLayout({children}) {
                     className={`sticky-lg-bottom h-100 p-0 mb-2 d-none d-md-block`}
                 >
                     <div className="border rounded p-0 island">
-                        <UserListConfig
-                            item={currentItem}
-                        ></UserListConfig>
+                       <ProductActions />
                     </div>
                 </Col>
 
                 <Col lg={9} className="p-0">
-                    <UserListCrud 
-                        currentItem={currentItem}
-                        setCurrentItem={setCurrentItem}
-                    />
+                    {children}
                 </Col>
             </Row>
         </Container>
     )
 }
 
+export default ProductLayout;

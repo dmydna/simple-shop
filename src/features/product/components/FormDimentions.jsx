@@ -4,7 +4,7 @@ import { useProductCrudContext } from "../contexts/ProductCrudContex";
 import FormCategory from "./FormCategory";
 
 
-function FormProduct({ children, className, crudHook }) {
+function FormDimentions({ children, className, crudHook }) {
 
   return (
     <>
@@ -14,38 +14,34 @@ function FormProduct({ children, className, crudHook }) {
 
       <>
 
-        <div className="d-flex gap-2 flex-column flex-lg-row">
-        <InputCrudFloating
-          name={"name"}
-          label={"Name"}
-          baseHook={crudHook}
-        />
-        
-
-       </div> 
+       <p className='fw-medium'>Dimentions:</p>
 
         <div className="d-flex gap-2 flex-column flex-lg-row">
+
           <InputCrudFloating
-            name={"brand"}
-            label={"Brand"}
+            name={"width"}
+            label={"width (cm)"}
+            baseHook={crudHook}
+          />
+
+          <InputCrudFloating
+            name={"height"}
+            label={"height (cm)"}
             baseHook={crudHook}
           />
           <InputCrudFloating
-            name={"sku"}
-            label={"Sku"}
+            name={"depth"}
+            label={"depth (cm)"}
             baseHook={crudHook}
           />
+
         </div>
 
-          <InputCrudFloating
-            name={"weight"}
-            label={"Weight (kg)"}
-            baseHook={crudHook}
-          />
+
 
       </>
 
     </>
   )
 }
-export default FormProduct
+export default FormDimentions

@@ -16,6 +16,8 @@ export const DataHandler = (
       isEmpty = false 
     }) => {
 
+      
+
     const { isOnline } = useNetworkStatus();
     const { serverStatus } = useCheckServer()
 

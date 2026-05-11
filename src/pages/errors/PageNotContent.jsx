@@ -1,22 +1,35 @@
-import {useNavigate} from "react-router-dom";
-import {FeedbackMessage} from "../../components/common/FeedbackMessage.jsx";
+import { useNavigate } from "react-router-dom";
+import { FeedbackMessage } from "../../components/common/FeedbackMessage.jsx";
 import React from "react";
+import { useAdminUI } from "@/hooks/useAdminUI.js";
 
-function PageNotContent(){
+function PageNotContent() {
 
+    const { appMode, isAdmin } = useAdminUI();
     const navigate = useNavigate();
     const addContent = () => {
         navigate('/dashboard/dev/uploader/')
     }
-    const msg = 'No hay elementos en esta sección. Agrega alguno para comenzar.';
+    const msg_user = 'No hay elementos en esta sección. Estamos trabajando en eso.';
+    const msg_admin = 'No hay elementos en esta sección. Agrega alguno para comenzar.'
     return (
-        <FeedbackMessage
-            title="Sin contenido"
-            message={msg}
-            icon="bi-journal-plus"
-            actionLabel="+ Agregar Contenido"
-            onAction={addContent}
-        />
+        <>
+            {isAdmin ? (
+                <FeedbackMessage
+                    title="Sin contenido"
+                    message={msg_admin}
+                    icon="bi-journal-plus"
+                    actionLabel="+ Agregar Contenido"
+                    onAction={addContent}
+                />) : (
+                <FeedbackMessage
+                    title="Sin contenido"
+                    message={msg_user}
+                    icon="bi-journal-plus"
+                />)}
+        </>
+
+
     )
 }
 

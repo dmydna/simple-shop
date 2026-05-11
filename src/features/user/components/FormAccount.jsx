@@ -3,13 +3,11 @@ import { useUserCrudContext } from "../contexts/UserCrudContext";
 
 
 
-function FormAccount({ children, className }) {
-
-  const { dataItem, ...props } = useUserCrudContext();
+function FormAccount({ children, className, crudHook }) {
 
   return (
     <>
-      {/* Producto */}
+      {/* User */}
 
       {children}
 
@@ -19,14 +17,12 @@ function FormAccount({ children, className }) {
           <InputCrudFloating
             name={"firstName"}
             label={"FirstName"}
-            value={dataItem}
-            useHookCrud={useUserCrudContext}
+            baseHook={crudHook}
           />
           <InputCrudFloating
             name={"lastName"}
             label={"LastName"}
-            value={dataItem}
-            useHookCrud={useUserCrudContext}
+            baseHook={crudHook}
           />
 
         </div>
@@ -34,15 +30,13 @@ function FormAccount({ children, className }) {
         <InputCrudFloating
           name={"address"}
           label={"address"}
-          value={dataItem}
-          useHookCrud={useUserCrudContext}
+          baseHook={crudHook}
         />
 
         <InputCrudFloating
           name={"phone"}
           label={"phone"}
-          value={dataItem}
-          useHookCrud={useUserCrudContext}
+          baseHook={crudHook}
         />
 
       </>

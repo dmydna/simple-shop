@@ -1,47 +1,52 @@
 import ModalCrud from "@/features/crud/components/ModalCrud";
 import MultiImageUploaderCrud from "@/features/crud/components/MultiImageUploaderCrud";
-import ListingFormConfig from "@/features/dashboard/components/listing/ListingFormConfig";
 import FormBasic from "@/features/listing/components/FormBasic";
 import FormDetails from "@/features/listing/components/FormDetails";
-import { useListingCrudContext } from "@/features/listing/contexts/ListingCrudContext";
+import { useListingCrud } from "@/features/listing/hooks/useListingCrud";
 import FormCrud from "../../../crud/components/FormCrud";
 import FormSku from "../../../listing/components/FormSku";
+import ListingActions from "./ListingActions";
 
 
 
-function ListingFormCrud() {
+function ListingForm() {
 
-    const { showModal, setShowModal, ...props } = useListingCrudContext()
+    const baseHook = useListingCrud()
+    const { showModal, setShowModal } = baseHook
 
 
     return (
         <FormCrud
             type="listing"
-            useCrudHook={useListingCrudContext}
+            crudHook = {baseHook}
         >
             <>
                 <div className="mb-4">
                     <p className="fw-medium">Post & description</p>
                     <FormBasic 
-                       useCrudHook={useListingCrudContext}
+                       baseHook={baseHook}
                     />
                 </div>
 
                 <div className="mb-4">
                     <p className="fw-medium">Details & Shipping</p>
-                    <FormDetails />
+                    <FormDetails 
+                       baseHook={baseHook}
+                    />
                 </div>
 
                 <div className="mb-4">
                     <p className="fw-medium">Product Specs</p>
-                    <FormSku />
+                    <FormSku 
+                       baseHook={baseHook}
+                    />
                 </div>
 
 
                 <div className="mb-4">
                     <p className="fw-medium">Product Images</p>
                    <MultiImageUploaderCrud
-                       useCrudHook={useListingCrudContext}
+                       baseHook={baseHook}
                    />
                 </div>
 
@@ -50,7 +55,7 @@ function ListingFormCrud() {
                     show={showModal}
                     onHide={setShowModal}
                 >
-                    <ListingFormConfig
+                    <ListingActions
                         close={() => setShowModal(false)}
                     />
                 </ModalCrud>
@@ -62,4 +67,4 @@ function ListingFormCrud() {
     )
 }
 
-export default ListingFormCrud;
+export default ListingForm;

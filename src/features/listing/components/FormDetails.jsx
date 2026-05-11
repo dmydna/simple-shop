@@ -1,10 +1,10 @@
 import InputCrudFloating from "@/features/crud/components/InputCrudFloating.jsx";
 import { useListingCrudContext } from "../contexts/ListingCrudContext.jsx";
 
-function FormDetails({children, className}){
+function FormDetails({children, className, baseHook}){
 
-    const {dataItem, handleChange, crudMode,
-    isDisabledField, editableFields, handleEnableEdit} = useListingCrudContext();
+    // const {dataItem, handleChange, crudMode,
+    // isDisabledField, editableFields, handleEnableEdit} = useListingCrudContext();
 
     return (
         <>
@@ -15,15 +15,13 @@ function FormDetails({children, className}){
           <InputCrudFloating
             name={"warrantyInformation"}
             label={"Waranty"}
-            value={dataItem}
-            useHookCrud={useListingCrudContext}
+            baseHook={baseHook}
           />
 
           <InputCrudFloating
             name={"shippingInformation"}
             label={"Shipping"}
-            value={dataItem}
-            useHookCrud={useListingCrudContext}
+            baseHook={baseHook}
           />
 
         </div>

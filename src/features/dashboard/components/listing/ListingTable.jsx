@@ -1,12 +1,19 @@
 import CopyButton from '@/components/common/CopyButton';
 import { formatDate, statusColor } from '@/features/dashboard/util.js';
 import Pagination from '@/features/pagination/components/Pagination.jsx';
+import { useNavParams } from '@/hooks/useNavParams';
 import { useEffect } from 'react';
 import { Card, Form, Table } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
-export const ListingTable = ({ children, crudHook, baseHook, handleclick, iconCrud, className, currentItem }) => {
+export const ListingTable = ({ children, useHook, baseHook, iconCrud, className, }) => {
 
-    const { content, loading, currentPage, setCurrentPage, totalPages, setFilters } = baseHook
+
+    const { content, loading, currentPage, setCurrentPage, totalPages, setFilters } = baseHook;
+
+    const navigate = useNavigate()
+    const { searchParams, setSearchParams, hashParam } = useNavParams({ baseHook: baseHook })
+
 
 
     useEffect(() => {
@@ -14,9 +21,27 @@ export const ListingTable = ({ children, crudHook, baseHook, handleclick, iconCr
         setCurrentPage(1)
     }, [])
 
+    const handleSelect = (item) => {
 
-    const selected =   (item) => {
-        return (item.id === currentItem?.id ? 'selected' : '')
+        // Selecciona
+        setSearchParams(prev => {
+            const nuevosParams = new URLSearchParams(prev);
+            nuevosParams.set('hash', item.hash);
+            return nuevosParams;
+        });
+
+        // Deselecciona
+        if (hashParam == item.hash) {
+            setSearchParams(prev => {
+                const nuevosParams = new URLSearchParams(prev);
+                nuevosParams.delete('hash');
+                return nuevosParams;
+            });
+        }
+    }
+
+    const selected = (item) => {
+        return (item.hash === hashParam ? 'selected' : '')
     }
 
 
@@ -65,19 +90,19 @@ export const ListingTable = ({ children, crudHook, baseHook, handleclick, iconCr
                                     // onClick={() => handleclick(item)}
                                     style={{ overflow: "visible", height: "70px" }} key={item.id}>
 
-                                    <td 
-                                        onClick={() => handleclick(item)}
+                                    <td
+                                        onClick={() => handleSelect(item)}
                                         className='text-secondary d-none  d-md-table-cell'>
-                                            <Form.Check // prettier-ignore
-                                                type='checkbox'
-                                                id={`default-radio`}
-                                                className='mt-3'
-                                                checked={currentItem?.id === item.id}
-                                                onChange={(e) => {
-                                                   e.stopPropagation();
-                                                    handleclick(item);  
-                                                }}
-                                            />
+                                        <Form.Check // prettier-ignore
+                                            type='checkbox'
+                                            id={`default-radio`}
+                                            className='mt-3'
+                                            checked={hashParam === item.hash}
+                                            onChange={(e) => {
+                                                e.stopPropagation();
+                                                handleSelect(item);
+                                            }}
+                                        />
                                     </td>
 
                                     {item?.thumbnail && (
@@ -130,8 +155,9 @@ export const ListingTable = ({ children, crudHook, baseHook, handleclick, iconCr
                                     {/**Action */}
 
 
-                                    <td 
-                                         className='small d-table-cell d-md-none'
+                                    <td
+                                         onClick={() => handleSelect(item)}
+                                        className='small d-table-cell d-md-none'
                                         style={{ lineHeight: '4.2', textAlign: 'end' }}  >
                                         {children('buttons', item)}
                                     </td>
@@ -146,8 +172,6 @@ export const ListingTable = ({ children, crudHook, baseHook, handleclick, iconCr
 
             <Pagination
                 className="mb-0"
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
                 totalPages={totalPages}
             />
 

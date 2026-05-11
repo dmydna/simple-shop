@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ModalCrud from "../../../crud/components/ModalCrud";
-import ProductListConfig from "./ProductListConfig";
+import ProductActions from "./ProductActions";
 import ProductTable from "./ProductTable.jsx";
 
 
-export const ProductListCrud = ({ currentItem, setCurrentItem }) => {
+export const ProductList = ({ }) => {
 
     const baseHook = useProduct()
     const [search, setSearch] = useState()
@@ -23,17 +23,7 @@ export const ProductListCrud = ({ currentItem, setCurrentItem }) => {
     const { setFilters, products } = baseHook;
 
     const handleOpenEdit = (item) => {
-        setCurrentItem(item)
         setShowCrudActions(true)
-    }
-
-    const handleclick = (item) => {
-        console.log(item)
-        if(currentItem && currentItem.id == item.id){
-            setCurrentItem({})
-        }else{
-            setCurrentItem(item)
-        }
     }
 
 
@@ -46,9 +36,7 @@ export const ProductListCrud = ({ currentItem, setCurrentItem }) => {
 
                     <ProductTable
                         className=''
-                        currentItem={currentItem}
                         baseHook={baseHook}
-                        handleclick={handleclick}
                     >
                         {(key, item) => {
                             if (key === 'title') {
@@ -103,9 +91,8 @@ export const ProductListCrud = ({ currentItem, setCurrentItem }) => {
                 show={showCrudActions}
                 onHide={setShowCrudActions}
             >
-                <ProductListConfig
+                <ProductActions
                     close={() => setShowCrudActions(false)}
-                    item={currentItem}
                 />
             </ModalCrud>
 
@@ -114,4 +101,4 @@ export const ProductListCrud = ({ currentItem, setCurrentItem }) => {
     );
 }
 
-export default ProductListCrud;
+export default ProductList;

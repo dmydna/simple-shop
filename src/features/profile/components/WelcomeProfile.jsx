@@ -3,23 +3,14 @@ import { Alert, Button, FloatingLabel, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useProfile } from "../contexts/ProfileContext.jsx";
 import { ProfileHeader } from "./ProfileHeader";
+import { useWarning } from "@/hooks/useWarning.js";
 
 function WelcomePerfil({children}){
 
    const navigate = useNavigate()
    const { updateImage, loading, profile } = useProfile();
-   const [ completeRegistration, setCompleteRegistration ] = useState(false)
+   const {completeRegistration} = useWarning()
    
-   useEffect(()=>{
-     if(
-        profile?.firstName?.trim() || 
-        profile?.lastName?.trim() ||
-        profile?.address?.trim() ||
-        profile?.phone?.trim()
-     )  { setCompleteRegistration(true) } 
-     else { setCompleteRegistration(false) }
-   },[profile])
-
 
     return(
         <div>
@@ -31,7 +22,9 @@ function WelcomePerfil({children}){
                 { !completeRegistration && ( 
                  <div className="h-100">
                       <Alert variant="danger">
-                         Completa el proceso de registro para poder continuar.
+                        <i className="bi bi-exclamation-triangle me-3"></i>
+                         Completa el proceso de registro haciendo click  
+                          <b onClick={()=>navigate('/register/complete')} className="text-dark mx-2" href="/complete-register">aqui.</b>   
                       </Alert>
                  </div> 
                 )}

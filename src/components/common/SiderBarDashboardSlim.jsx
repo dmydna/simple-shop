@@ -5,12 +5,14 @@ export default function SideBarDashboardSlim({ onShow, expandable = true }) {
 
     const BASE_URL ='/dashboard'
     const navigate = useNavigate();
+    const safeHandle = typeof handle === 'function' ? handle : () => {};
+
 
     return (
         <ul className="list-group list-group-flush">
 
             {expandable && (
-                <i onClick={() => onShow(true)} className="pointer bi bi-list mx-3 fs-4 mb-3"></i>
+                <i onClick={ safeHandle } className="pointer bi bi-list mx-3 fs-4 mb-3"></i>
             )}
             
             {!expandable && (

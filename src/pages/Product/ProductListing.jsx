@@ -1,27 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { useSearchParams } from "react-router-dom";
-import AddToCartButton from "../../features/cart/components/AddToCartButton.jsx";
+import { useServiceParams } from "@/hooks/useServiceParams.js";
+import { useState } from "react";
+import { Container, Row } from "react-bootstrap";
+import CategoryCarrousel from "../../components/common/CategoryCarrousel.jsx";
 import CategoryNav from "../../components/common/CategoryNav.jsx";
-import Pagination from "../../features/pagination/components/Pagination.jsx";
-import ProductCard from "../../features/product/components/ProductCard.jsx";
+import DropdownCheck from "../../components/common/DropdownCheck.jsx";
+import DropdownRange from "../../components/common/DropdownRange.jsx";
+import { DataHandler } from "../../contexts/DataHandler.jsx";
+import { useUIContext } from "../../contexts/UIContext.jsx";
+import AddToCartButton from "../../features/cart/components/AddToCartButton.jsx";
 import FilterBar from "../../features/filters/components/FilterBar.jsx";
 import { useListingContext } from "../../features/listing/contexts/ListingContext.jsx";
-import { useUIContext } from "../../contexts/UIContext.jsx";
-import {ListingPlaceholder} from "../../features/placeholder/ListingPlaceholder.jsx";
-import {DataHandler} from "../../contexts/DataHandler.jsx";
-import DropdownRange from "../../components/common/DropdownRange.jsx";
-import DropdownCheck from "../../components/common/DropdownCheck.jsx";
-import CategoryCarrousel from "../../components/common/CategoryCarrousel.jsx";
+import Pagination from "../../features/pagination/components/Pagination.jsx";
+import { ListingPlaceholder } from "../../features/placeholder/ListingPlaceholder.jsx";
+import ProductCard from "../../features/product/components/ProductCard.jsx";
 
 
+// FIXME no agrega searchparams de paginacion
 
-function ProductListing() {
+  function ProductListing() {
 
-  const { error, listings, currentPage,setCurrentPage, totalPages,
-    setFilters ,totalElements, loading, fetchData, filters } = useListingContext()
-  const [searchParams, setSearchParams] = useSearchParams();
-
+  const { error, listings, totalPages, setFilters ,totalElements, loading, fetchData } = useListingContext()
 
 
   const [meta, setMeta] = useState({
@@ -30,37 +28,7 @@ function ProductListing() {
     description: "",
   });
 
-  const tagsParam = searchParams.get('tags');
-  const pageParam = searchParams.get('page');
-  const searchParam = searchParams.get('search')
-  const categoryParam = searchParams.get('category')
-
-  useEffect(() => {
-    if (!searchParam) {
-      setMeta({ title: "Productos" });
-      setFilters({});
-    }
-    if (!isNaN(pageParam)) {setCurrentPage(pageParam);}
-    if (tagsParam) {setFilters({ tags: tagsParam });}
-    if (categoryParam) {
-      setFilters({ page: 0, categories: categoryParam });
-      if (categoryParam.split(',').length == 1) {
-        setMeta((prev) => ({ ...prev, title: categoryParam }));
-      }
-    }
-    if (searchParam) {
-      setFilters({ title: searchParam });
-      setMeta((prev) => ({
-        ...prev,
-        title: "Resultados",
-        message: `encontrados: ${totalElements}`
-      }
-      ));
-    }
-
-
-  }, [tagsParam, pageParam, categoryParam,
-    searchParam, setFilters, setCurrentPage, totalElements])
+  const navParams = useServiceParams({ useHook: useListingContext, onMeta: setMeta});
 
   const { showFilter } = useUIContext()
 
@@ -121,8 +89,6 @@ function ProductListing() {
           </Container>
           <Pagination
               className={`container-xl`}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
               totalPages={totalPages}
           />
         </>

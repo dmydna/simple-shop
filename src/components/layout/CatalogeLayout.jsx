@@ -1,7 +1,7 @@
 // ProductLayout.jsx
 import { Outlet } from 'react-router-dom';
 
-const ProductLayout = () => {
+export default function CatalogeLayout(){
   return (
     <div>
       {/* Componentes comunes a todas las rutas de productos */}
@@ -9,5 +9,3 @@ const ProductLayout = () => {
     </div>
   );
 };
-
-export default ProductLayout;

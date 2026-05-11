@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useState } from "react";
 
 // Usa backend para la logica de paginacion
 export const usePageable = () => {

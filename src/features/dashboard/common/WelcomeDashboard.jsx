@@ -1,7 +1,10 @@
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 
 function WelcomeDashboard() {
+
+    const navigate = useNavigate()
 
     return (
         <div className="border island p-4 mb-3 mx-0 mx-md-2">
@@ -12,7 +15,7 @@ function WelcomeDashboard() {
             <div className="d-flex flex-column justify-content-between gap-2 flex-wrap">
                 <div className="my-3">
                     <p className="fw-medium">Get Started</p>
-                    <p onClick={() => navigate('/faqs')}
+                    <p  onClick={() => navigate('/dashboard/listing-form?mode=create')}
                         className="btn bg-light border py-2 mb-3 text-start w-100 d-flex justify-content-between">
                         <div className="small">
                             <i className="bi-plus-lg me-3"></i>
@@ -20,14 +23,14 @@ function WelcomeDashboard() {
                         </div>
                     </p>
                     <p onClick={() => navigate('/faqs')}
-                        className="btn bg-light border py-2 mb-3 text-start w-100 d-flex justify-content-between">
+                        className="btn disabled bg-light border py-2 mb-3 text-start w-100 d-flex justify-content-between">
                         <div className="small">
                             <i className="bi-chat me-3"></i>
                             <span>Look notifications</span>
                         </div>
                     </p>
                     <p onClick={() => navigate('/faqs')}
-                        className="btn bg-light border py-2 mb-3 text-start w-100 d-flex justify-content-between">
+                        className="btn disabled bg-light border py-2 mb-3 text-start w-100 d-flex justify-content-between">
                         <div className="small">
                             <i className="bi-bag me-3"></i>
                             <span>Admin purchases</span>

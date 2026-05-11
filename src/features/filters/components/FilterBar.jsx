@@ -1,17 +1,20 @@
 import { useMemo } from "react";
 import { Button, Col, Form } from "react-bootstrap";
-import { useUIContext } from "../../../contexts/UIContext.jsx";
+import { useSearchParams } from "react-router-dom";
 import { FilterTags } from "../../../components/common/FilterTags.jsx";
+import { useUIContext } from "../../../contexts/UIContext.jsx";
 import { FilterBarProvider } from "../context/FilterBarContext.jsx";
 import { useUrlFilters } from "../hooks/useUrlFilters.jsx";
 
 
 
 
-
+// TODO hacer que cada filtro sea autonomo.
 function FilterBar({className, children, dataSource, onApply, concealable = true, fix=false }) {
 
     const { showFilter, setSelectedTags } =  useUIContext();
+    const [searchParams, setSearchParams] = useSearchParams();
+
 
     const {
         filterDraft,
@@ -23,10 +26,11 @@ function FilterBar({className, children, dataSource, onApply, concealable = true
 
     const handleSubmit = () => {
         // 1. Actualiza la URL
-        applyFilters(filterDraft);
-        console.log(filterDraft);
+        applyFilters({...filterDraft, "page": 1});
+        console.log("useUrlFilters",filterDraft);
         // 2. Actualiza el contexto global de listados
         onApply(filterDraft);
+
     };
 
     const handleReset = () => {

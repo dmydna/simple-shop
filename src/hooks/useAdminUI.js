@@ -41,6 +41,7 @@ export const useAdminUI = (mode) => {
     }, [appMode, showSidebar])
 
     return { 
+        isAdmin,
         appMode, 
         setAppMode, 
         showSidebar, 

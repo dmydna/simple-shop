@@ -1,9 +1,9 @@
 import DropdownCheck from "@/components/common/DropdownCheck";
 import DropdownRange from "@/components/common/DropdownRange";
 import FilterBar from "@/features/filters/components/FilterBar";
-import { Dropdown, Modal } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 
-function ListingFilterCrud({show, onHide ,dataSource, onApply, className}) {
+function ListingFilter({show, onHide ,dataSource, onApply, className}) {
 
     return (
         <div className={`position-relative d-block  ${show ? 'opacity-1' : 'opacity-0' }`}>
@@ -38,4 +38,4 @@ function ListingFilterCrud({show, onHide ,dataSource, onApply, className}) {
     )
 }
 
-export default ListingFilterCrud;
+export default ListingFilter;

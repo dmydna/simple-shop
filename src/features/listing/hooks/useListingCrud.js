@@ -7,7 +7,7 @@ import { useListing } from "./useListing";
 
 export const useListingCrud = () => {
 
-    const { currentListing, setId, id, loading: loadingItem, error: errorItem, refreshElem } = useListing();
+    const { setCurrentItem, currentListing, setId, id, loading: loadingItem, error: errorItem, refreshElem } = useListing();
 
     const [showModal, setShowModal] = useState(false)
     const [dataItem, setDataItem] = useState({});
@@ -54,7 +54,7 @@ export const useListingCrud = () => {
         handleChange: onChange,
         formData,
         setFormData,
-        
+        setCurrentItem,
         setEnableEditableField,
 
         // Actions

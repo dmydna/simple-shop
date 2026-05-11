@@ -1,58 +1,37 @@
 import PageLoading from "@/components/common/PageLoading";
 import FormWarning from "@/features/dashboard/common/FormWarning";
+import { useCrudParams } from "@/hooks/useCrudParams";
 import PageError from "@/pages/errors/PageError";
 import PageSuccess from "@/pages/errors/PageSuccess";
-import { CRUD } from "@/utils/crud";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
-import { useSearchParams } from "react-router-dom";
 import ModalCrud from "./ModalCrud";
 
+// NOTA este componente es multi-contexto, 
+// hay que mandar un crud-hook compatible.
+function FormCrud({ children, type, useCrudHook, crudHook }) {
 
-function FormCrud({ children, type, useCrudHook }) {
-
-    const [searchParams] = useSearchParams();
-    const itemId = searchParams.get('hash') || searchParams.get('id');
-    const copyMode = searchParams.get('mode') === 'copy';
-    const editMode = searchParams.get('mode') === 'edit';
-    const draftMode = searchParams.get('mode') === 'draft';
-    const viewMode = searchParams.get('mode') === 'view';
-    const createMode = searchParams.get('mode') === 'create';
 
     const { handleUpdate, handleStatus,handleCreate, setShowModal,
-        currentItem, setId, formData, setFormData, setCrudMode,
-        setEnableEditableField,
-        loading,
-        setLoading,
-        error,
-        errorItem,
-        setError,
-        success,
-        setSuccess, refreshElem,fetchElem, ...props } = useCrudHook()
+        currentItem, setId, formData, setFormData, setEnableEditableField,
+        loading, setLoading, error, errorItem, setError, success,
+        setSuccess, refreshElem,fetchElem, ...props } = crudHook
 
-    const [showWarn, setShowWarn] = useState(false)
+  
 
-    useEffect(() => {
-        if (copyMode) { setCrudMode(CRUD.COPY) }
-        if (createMode) { setCrudMode(CRUD.CREATE) }
-        if (editMode) { setCrudMode(CRUD.UPDATE) }
-        if (viewMode) { 
-            setEnableEditableField(true) 
-            setCrudMode(CRUD.READ) 
-        }
-        if (draftMode) { setEnableEditableField(false) }
-        if (itemId) { setId(itemId) }
-        if (editMode && !itemId) {setShowWarn(true)}
-    }, [itemId, formData, createMode, viewMode, draftMode, editMode])
+    const {editMode, viewMode, createMode, copyMode, draftMode} = useCrudParams(crudHook)
 
     const title = useMemo(() => {
         let action = null;
         if (editMode) action = `Edit ${type}`;
         if (createMode || copyMode) action = `Add ${type}`;
         if (viewMode) action = `${type} Summary`;
-        if (draftMode) action = `Edit ${type} Draft`
+        if (draftMode) action = `Add ${type} Draft`
         return action;
     }, [editMode, viewMode, createMode, type])
+
+
+    const [showWarn, setShowWarn] = useState(false)
 
     const handleConfig = () => {
         setShowModal(true)
@@ -62,9 +41,6 @@ function FormCrud({ children, type, useCrudHook }) {
         handleCreate()
     }
 
-    const handleSave = () => {
-        
-    }
 
 
 

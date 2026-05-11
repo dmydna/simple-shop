@@ -1,14 +1,17 @@
 import { color, ImgGenApi } from '@/dev/utils';
 import { statusColor } from '@/features/dashboard/util.js';
 import Pagination from '@/features/pagination/components/Pagination.jsx';
+import { useNavParams } from '@/hooks/useNavParams';
 import { useEffect } from 'react';
 import { Card, Form, Table } from 'react-bootstrap';
 
 
 // TODO resolver filtro crud de usuarios 
-export const UserTable = ({ children, baseHook, handleclick, className, currentItem }) => {
+export const UserTable = ({ children, baseHook, className }) => {
 
     const { content, loading, currentPage, setCurrentPage, totalPages, setFilters } = baseHook
+
+    const { searchParams, setSearchParams, idParam } = useNavParams({ baseHook: baseHook })
 
 
     useEffect(() => {
@@ -17,8 +20,27 @@ export const UserTable = ({ children, baseHook, handleclick, className, currentI
     }, [])
 
 
-    const selected = (item) => {
-        return (item.id === currentItem?.id ? 'selected' : '')
+    const handleSelect = (item) => {
+
+        // Selecciona
+        setSearchParams(prev => {
+            const nuevosParams = new URLSearchParams(prev);
+            nuevosParams.set('id', item.id);
+            return nuevosParams;
+        });
+
+        // Deselecciona
+        if (idParam == item.id) {
+            setSearchParams(prev => {
+                const nuevosParams = new URLSearchParams(prev);
+                nuevosParams.delete('id');
+                return nuevosParams;
+            });
+        }
+    }
+
+    const selected =   (item) => {
+        return (item.id == idParam ? 'selected' : '')
     }
 
 
@@ -51,7 +73,7 @@ export const UserTable = ({ children, baseHook, handleclick, className, currentI
                                 <th style={{ width: '200px' }} className='text-secondary'>Email</th>
                                 <th style={{ width: '200px' }} className='text-secondary'>Status</th>
                                 {/* Action */}
-                                <th style={{ width: '200px' }} className='text-secondary'></th>
+                                <th style={{ width: '200px' }} className='d-block d-table-cell d-md-none text-secondary'></th>
                             </tr>
                         )}
 
@@ -74,23 +96,23 @@ export const UserTable = ({ children, baseHook, handleclick, className, currentI
 
 
                                 <tr className={`onhover`}
-                                    onClick={() => handleclick(item)}
+                                    onClick={() => handleSelect(item)}
                                     style={{ overflow: "visible", height: "70px" }} key={item.id}>
 
                                     {/* Selection */}
 
 
                                     <td
-                                        onClick={() => handleclick(item)}
+                                        onClick={() => handleSelect(item)}
                                         className='text-secondary d-none  d-md-table-cell'>
                                         <Form.Check // prettier-ignore
                                             type='checkbox'
                                             id={`default-radio`}
                                             className='mt-3'
-                                            checked={currentItem?.id === item.id}
+                                           checked={idParam == item.id}
                                             onChange={(e) => {
                                                 e.stopPropagation();
-                                                handleclick(item);
+                                                handleSelect(item);
                                             }}
                                         />
                                     </td>
@@ -133,7 +155,7 @@ export const UserTable = ({ children, baseHook, handleclick, className, currentI
                                     </td>
 
                                     {/* Action */}
-                                    <td className='small'
+                                    <td className='small d-table-cell d-md-none'
                                         style={{ lineHeight: '4.2', textAlign: 'end' }}  >
                                         {children('buttons', item)}
                                     </td>
@@ -148,8 +170,6 @@ export const UserTable = ({ children, baseHook, handleclick, className, currentI
 
             <Pagination
                 className="mb-0"
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
                 totalPages={totalPages}
             />
 

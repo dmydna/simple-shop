@@ -2,9 +2,9 @@ import MultiImageUploader from "@/components/common/MultiImageUploader";
 import { useEffect, useState } from "react";
 
 
-function MultiImageUploaderCrud({useCrudHook, title}) {
+function MultiImageUploaderCrud({useCrudHook, title, baseHook}) {
 
-   const { currentItem, setFormData, setSelectedFile } = useCrudHook()
+   const { currentItem, setFormData, setSelectedFile } = baseHook
    const [images, setImages] = useState([]); // Array de objetos { id, url, file }
    const createInitialImage = (url, index) => {
       return {

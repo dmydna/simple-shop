@@ -6,7 +6,7 @@ import { userService } from "../service/userService.js";
 
 export const useUserCrud = () => {
 
-    const { setId, id, currentUser, loading: loadingItem, error: errorItem, refreshElem } = useUser(userService.getProfileById);
+    const { setId, id, currentUser, loading: loadingItem, error: errorItem, refreshElem, setCurrentItem } = useUser(userService.getProfileById);
 
     const [showModal, setShowModal] = useState(false)
     const [dataItem, setDataItem] = useState({});
@@ -56,6 +56,7 @@ export const useUserCrud = () => {
         currentUser,
         currentItem: currentUser,
         dataItem,
+        setCurrentItem,
         setDataItem,
         setId, id,
         crudMode,

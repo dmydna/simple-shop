@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Alert, Button, Col, Form, Row } from 'react-bootstrap';
 
+// @legacy
 function FormBasic({ onSubmit, productoAEditar, onCancel,  }) {
 
   const [title, setNombre] = useState('');

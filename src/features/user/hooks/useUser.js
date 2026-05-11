@@ -21,6 +21,7 @@ export const useUser = (fetchElemMethod=null) => {
         currentUser: currentItem,
         setCurrentUser: setCurrentItem,
         userId: id,
+        setCurrentItem,
         setUserId: setId,
         setId, id,
         fetchElem,

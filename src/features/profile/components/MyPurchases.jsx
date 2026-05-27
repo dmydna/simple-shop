@@ -1,30 +1,37 @@
-import PageLoading from "@/components/common/PageLoading";
-import { ImgGenApi } from "@/dev/utils";
+import { ImgGenApi } from "@/dev/imageJS";
 import { formatDate } from "@/features/dashboard/util";
 import { useOrder } from "@/features/order/hooks/useOrder";
+import DataView from "@common/DataView";
 import Pagination from '@features/pagination/components/Pagination.jsx';
-import PageEmpty from '@pages/errors/PageEmpty.jsx';
 import { useEffect } from "react";
 import { ProfileHeader } from "./ProfileHeader";
 
 function MyPurchases({ children }) {
 
 
-    const { content, loading, currentPage, setCurrentPage, totalPages, setFilters } = useOrder()
+    const { loading, error, setError ,content, currentPage, setCurrentPage, totalPages, 
+    setFilters, refreshData } = useOrder()
 
     useEffect(() => {
         // Lógica de paginación
         setCurrentPage(0)
     }, [])
 
-    return (loading ? (<PageLoading />) : (
+    return (
+        <DataView
+            data={content}
+            loading={loading}
+            emptyMessage={"No tienes compras aún"}
+            emptyIcon="bi bi-handbag"
+            error={error}
+            onRetry={refreshData}
+        >
         <>
-        {content?.length !== 0 && (
             <ProfileHeader
                 title="Mis compras"
                 subtitle="Puedes ver las ultimas compras realizadas"
             />
-        )}
+        
             {content?.length !== 0 && content.map(order =>
                 <div className="mb-5">
                     <span className="text-secondary border-bottom d-block w-100 pb-2 my-3">
@@ -51,17 +58,15 @@ function MyPurchases({ children }) {
 
                         </div>)}
                 </div> )}
-           {content?.length == 0 && (
-               <PageEmpty ico='bi-handbag'/>
-           )}
+           {/*TODO: actualizar paginacion por params*/}           
             <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 totalPages={totalPages}
             />
         </>
-
-    ))
+    </DataView>    
+    )
 };
 
 export default MyPurchases;

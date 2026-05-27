@@ -1,6 +1,6 @@
 import { Card } from "react-bootstrap";
+import { ImgGenApi } from "../../../dev/imageJS.js";
 import { useUser } from "../hooks/ProfileContext.jsx";
-import { ImgGenApi } from "../../../dev/utils.js";
 
 function CardProfileRounded({ name, image, children, className, imgSize }) {
 

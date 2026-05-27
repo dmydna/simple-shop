@@ -24,7 +24,7 @@ export const color ={
      ".melon"    : "FFE5B4",
      ".menta"    : "B2F2BB",
      ".lavanda"  : "C7CEEA",
-     ".limon"    : "FFFACD",
+//     ".limon"    : "FFFACD",
      ".rosa"     : "FFD6E0",
      ".cielo"    : "B5D8F7",
      ".lila"     : "E6CCFF",
@@ -87,3 +87,6 @@ export const handleBulk = async (service, dataList) => {
         throw error
       }
   };
+
+  
+

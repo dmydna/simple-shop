@@ -8,6 +8,7 @@ import { useAuth } from "../../features/auth/hooks/AuthContext.jsx";
 
 function MobileMenu({ children }) {
 
+  // TODO: usar searchParams para MobileMenu
   const { showMenu, onHideMenu } = useUIContext()
 
   const location = useLocation()
@@ -39,7 +40,7 @@ function MobileMenu({ children }) {
 
   return (
     <>
-      <Button className="d-md-none" variant="light" onClick={handleShow}>
+      <Button className="d-none" variant="light" onClick={handleShow}>
         <span className="navbar-toggler-icon"></span>
       </Button>
       <Offcanvas show={showMenu} onHide={handleClose}>
@@ -94,7 +95,7 @@ function MobileMenu({ children }) {
                   </div>
                 )}
 
-
+                {/*HACK: agregar acordion en menu mobile*/}
                 <Nav.Link
                   key={'/dashboard'}
                   onClick={handleClose}

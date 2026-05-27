@@ -1,4 +1,37 @@
+export function toLocalDateTime(selectedDate){
+    const dateObj = new Date(selectedDate);
+    // Construcción manual del array
+    const dateArray = [
+        dateObj.getFullYear(),           // Año (ej: 2026)
+        dateObj.getMonth() + 1,          // Mes (1-12). Nota: getMonth() devuelve 0-11
+        dateObj.getDate(),               // Día (1-31)
+        dateObj.getHours(),              // Hora (0-23)
+        dateObj.getMinutes(),            // Minuto (0-59)
+        dateObj.getSeconds(),            // Segundo (0-59)
+        dateObj.getMilliseconds()        // Milisegundo (0-999)
+    ];
+   return dateArray
+}
 
+
+
+export function toBanUser(data){
+    return ({
+        banReason: toLocalDateTime(data.banReason),
+        banExpiresAt: data.banExpiresAt,
+    
+    })
+}
+
+
+
+
+export const toPasswordChangeRequest = (passwData) => {
+   return{
+    "oldPassword" : passwData.oldPassword,
+    "newPassword" : passwData.newPassword
+   }
+}
 
 export const toCreateOrder = (cartItems) => {
     let totalAmount = 0;
@@ -37,7 +70,8 @@ export function toCreateProduct(data) {
         weight: data.weight,
         dimensions: dimensions,
         category: data.category,
-        tags: data.tags
+        tags: data.tags,
+        status: data.status
     }
 }
 
@@ -65,6 +99,7 @@ export function toUpdateProduct(data) {
 
 
 export function toCreateListing(data) {
+
     return {
         title: data.title,
         description: data.description,
@@ -74,13 +109,15 @@ export function toCreateListing(data) {
         shippingInformation: data.shippingInformation,
         returnPolicy: data.returnPolicy,
         minimumOrderQuantity: data.minimumOrderQuantity,
-        images: data.images,
+        images: [],
         thumbnail: data.thumbnail,
-        sku: data.sku
+        sku: data.sku,
+        status: data.status
     }
 }
 
 
+// FIXME: data.images deberia ser una lista de strings, no files 
 export function toUpdateListing(data) {
     return {
         title: data.title,
@@ -96,4 +133,37 @@ export function toUpdateListing(data) {
         images: data.images,
         thumbnail: data.thumbnail
     }
+}
+
+
+
+
+export function arrayToDate(arr){
+    if(!arr || arr?.length == 0){
+        return null
+    }
+    const [yy, mm, dd, hh, xx] = arr;
+    return new Date(
+        yy,       // Año
+        mm - 1,   // Mes (ajustado a 0-11)
+        dd,       // Día
+        hh,       // Hora
+        xx,       // Minuto
+    );        
+}
+
+
+export const mapToURLSearchParams = (urlParams, filters) => {
+    Object.entries(filters).forEach(([key, value]) => {
+        console.log(key, value);
+        // Solo agregamos si el valor existe y no es un objeto/array vacío
+        if (value !== undefined && value !== null && value !== '') {
+            if (Array.isArray(value) && value.length > 0) {
+                urlParams.append(key, value.join(','));
+            } else if (!Array.isArray(value)) {
+                urlParams.append(key, value);
+            }
+        }
+    })
+
 }

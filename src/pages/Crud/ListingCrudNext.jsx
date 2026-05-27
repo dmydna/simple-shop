@@ -8,7 +8,7 @@ import {useListingContext} from "../../features/listing/contexts/ListingContext.
 import {useUIContext} from "../../contexts/UIContext.jsx";
 import {useListingCrud} from "../../features/listing/contexts/ListingCrudContext.jsx";
 import { useListing } from "../../features/listing/hooks/useListing.js";
-import {CRUD} from "../../utils/crud.js";
+import {CRUD} from "../../utils"@utils/enums.js";
 import "../../styles/animations.css"
 import "../../styles/dashboard.css"
 import CrudHeader from "../../components/common/CrudHeader.jsx";

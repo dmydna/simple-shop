@@ -1,6 +1,6 @@
-import {useWizard} from "../contexts/WisardContext.jsx";
-import {CRUD} from "../../../utils/crud.js";
-import StepBadge from "./StepBadge"
+import { CRUD } from "@utils/enums.js";
+import { useWizard } from "../contexts/WisardContext.jsx";
+import StepBadge from "./StepBadge";
 
 // @deprecated 
 function  StepNavbar({className}) {

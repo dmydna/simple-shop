@@ -2,9 +2,8 @@ import { useProduct } from "@/features/product/hooks/useProduct.js";
 import { useUser } from "@/features/user/hooks/useUser.js";
 import { Row } from "react-bootstrap";
 import CategoryItem from "../../../components/common/CategoryItem.jsx";
-import { ImgGenApi } from "../../../dev/utils.js";
+import { ImgGenApi } from "../../../dev/imageJS.js";
 import { useListing } from "../../listing/hooks/useListing.js";
-import UserLayout from "./UserLayout";
 
 const MyActivity = ({col='col-12 col-md-12 col-lg-6', container=false}) => {
 

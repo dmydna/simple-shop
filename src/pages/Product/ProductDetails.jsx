@@ -1,16 +1,16 @@
-import { listingService } from "@/features/listing/services/listingService.js";
-import CarrouselReviews from "@/features/review/components/CarrouselReviews.jsx";
-import { useFetchElem } from "@/hooks/useFetchElem.js";
 import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import CarouselImages from "../../components/common/CarouselImages.jsx";
-import BreadCrumb from "../../components/layout/BreadCrumb.jsx";
-import { DataHandler } from "../../contexts/DataHandler.jsx";
-import { DetailsPlaceholder } from "../../features/placeholder/DetailsPlaceholder.jsx";
-import ProductBuyCard from "../../features/product/components/ProductBuyCard.jsx";
-import ProductCarousel from "../../features/product/components/ProductCarousel.jsx";
-import ProductSpecs from "../../features/product/components/ProductSpecs.jsx";
+import { listingService } from "@/features/listing/services/listingService.js";
+import CarrouselReviews from "@/features/review/components/CarrouselReviews.jsx";
+import { useFetchElem } from "@/hooks/useFetchElem.js";
+import { AppStatus } from "@components/common/AppStatus.jsx";
+import CarouselImages from "@components/common/CarouselImages.jsx";
+import BreadCrumb from "@/components/layout/BreadCrumb.jsx";
+import { DetailsPlaceholder } from "@features/placeholder/DetailsPlaceholder.jsx";
+import ProductBuyCard from "@features/product/components/ProductBuyCard.jsx";
+import ProductCarousel from "@features/product/components/ProductCarousel.jsx";
+import ProductSpecs from "@features/product/components/ProductSpecs.jsx";
 
 
 
@@ -33,7 +33,7 @@ function ProductDetails() {
 
 
    return (
-      <DataHandler
+      <AppStatus
          loading={loading}
          onRetry={fetchDataByHash}
          error={error}
@@ -130,7 +130,7 @@ function ProductDetails() {
                }
             </>
          </Container>
-      </DataHandler>
+      </AppStatus>
    );
 }
 

@@ -1,109 +1,70 @@
-import { color, ImgGenApi } from '@/dev/utils';
-import { statusColor } from '@/features/dashboard/util.js';
+import { pillColor } from '@/features/dashboard/util.js';
 import Pagination from '@/features/pagination/components/Pagination.jsx';
+import { useCustomParams } from '@/hooks/useCustomParams';
 import { useNavParams } from '@/hooks/useNavParams';
-import { useEffect } from 'react';
-import { Card, Form, Table } from 'react-bootstrap';
+import DataView from '@common/DataView';
+import React from 'react';
+import { Button, Card, Form, Table } from 'react-bootstrap';
+import { placeholderURL } from "@utils/image"
 
+// TODO: resolver filtro crud de usuarios 
+export const UserTable = ({  baseHook, className }) => {
 
-// TODO resolver filtro crud de usuarios 
-export const UserTable = ({ children, baseHook, className }) => {
+    const { content, loading,  totalPages, ...props } = baseHook
 
-    const { content, loading, currentPage, setCurrentPage, totalPages, setFilters } = baseHook
+    const { setSearchParams } = useCustomParams()
+    const { idParam } = useNavParams({ baseHook: baseHook })
 
-    const { searchParams, setSearchParams, idParam } = useNavParams({ baseHook: baseHook })
-
-
-    useEffect(() => {
-        // Lógica de paginación
-        setCurrentPage(1)
-    }, [])
-
-
-    const handleSelect = (item) => {
-
-        // Selecciona
-        setSearchParams(prev => {
-            const nuevosParams = new URLSearchParams(prev);
-            nuevosParams.set('id', item.id);
-            return nuevosParams;
-        });
-
-        // Deselecciona
-        if (idParam == item.id) {
-            setSearchParams(prev => {
-                const nuevosParams = new URLSearchParams(prev);
-                nuevosParams.delete('id');
-                return nuevosParams;
-            });
-        }
+    const toggleSelect = (item) => {
+        setSearchParams(prev => ({...prev, 
+            id: idParam != item?.id ? item?.id : null  
+        }))
     }
 
-    const selected =   (item) => {
-        return (item.id == idParam ? 'selected' : '')
+    const openDialogActions = (item)=>{
+        setSearchParams(prev => ({ ...prev, dialog: 'action', id: item?.id  })) 
     }
 
-
-    const baseImg = (index) => ({
-        "icon": "bi-person",
-        "dimension": "150x150",
-        "fontSize": "60",
-        "fontWeight": "light",
-        "textColor": "fff",
-        "background": Object.values(color)[index % Object.values(color).length],
-    })
-
-
-    const role_cases = ["ADMIN", "CLIENT", ""]
 
     return (
+        <DataView 
+            loading={loading}
+            data={content}
+            emptyIcon={"bi bi-smail"}
+            emptyMessage={"No hay items"}
+        >
         <>
             <div className={`${className} small w-100`}>
-                {children('title')}
+                
 
                 <Table style={{ overflowX: 'auto' }} className="mb-0 w-100" striped={false} bordered={false} hover={true}>
                     <thead className=''>
-                        {content?.length !== 0 && (
+
                             <tr className='border-bottom'>
                                 {/* Selection */}
-                                <th style={{ width: '150px' }} className='d-none  d-md-table-cell text-secondary'></th>
+                                <th style={{ width: '50px' }} className='d-none  d-md-table-cell text-secondary'></th>
                                 {/* Item */}
-                                <th className='text-secondary'>Username</th>
+                                <th style={{ width: '250px' }}  className='text-secondary'>Username</th>
                                 <th style={{ width: '200px' }} className='text-secondary'>Role</th>
                                 <th style={{ width: '200px' }} className='text-secondary'>Email</th>
                                 <th style={{ width: '200px' }} className='text-secondary'>Status</th>
                                 {/* Action */}
-                                <th style={{ width: '200px' }} className='d-block d-table-cell d-md-none text-secondary'></th>
+                                <th style={{ width: '50px' }} className='d-block d-table-cell d-md-none text-secondary'></th>
                             </tr>
-                        )}
 
                     </thead>
                     <tbody>
-                        {loading ? (
-                            // Mientras carga, mostramos una fila de carga elegante
-                            <tr>
-                                <td colSpan="3" className="text-center py-5">
-                                    <div className="spinner-border text-primary" role="status"></div>
-                                    <p className="mt-2">Cargando datos...</p>
-                                </td>
-                            </tr>
-                        ) : content?.length === 0 ? (
-                            <tr>
-                                <td colSpan="3" className="text-center">No hay items</td>
-                            </tr>
-                        ) : (
-                            content?.map((item) => (
+                        { content?.map((item) => (
 
 
-                                <tr className={`onhover`}
-                                    onClick={() => handleSelect(item)}
+                                <tr className={`onhover ${item?.id === idParam ? 'selected' : ''}`}
                                     style={{ overflow: "visible", height: "70px" }} key={item.id}>
 
                                     {/* Selection */}
 
 
                                     <td
-                                        onClick={() => handleSelect(item)}
+                                        onClick={() => toggleSelect(item)}
                                         className='text-secondary d-none  d-md-table-cell'>
                                         <Form.Check // prettier-ignore
                                             type='checkbox'
@@ -112,7 +73,7 @@ export const UserTable = ({ children, baseHook, className }) => {
                                            checked={idParam == item.id}
                                             onChange={(e) => {
                                                 e.stopPropagation();
-                                                handleSelect(item);
+                                                toggleSelect(item);
                                             }}
                                         />
                                     </td>
@@ -122,12 +83,11 @@ export const UserTable = ({ children, baseHook, className }) => {
                                     {item?.username && (
                                         <td>
 
-                                            <Card.Img
+                                            <img
                                                 style={{ objectFit: 'contain', width: '60px', height: '60px' }} // Altura fija igual al texto
                                                 className="border border-1 rounded flex-shrink-0"
-                                                src={item?.image || ImgGenApi({ ...baseImg(item.id) })}
+                                                src={item?.image || placeholderURL.user(item?.id) }
                                             />
-
 
                                             <span className='mx-3 fw-medium'>{item?.username}</span>
                                         </td>
@@ -137,7 +97,7 @@ export const UserTable = ({ children, baseHook, className }) => {
 
                                     <td style={{ lineHeight: '4.2', textAlign: 'start' }}  >
                                         <span
-                                            className={`text-lowercase fw-medium ${statusColor(role_cases, item?.role)}`}>
+                                            className={`text-lowercase fw-medium ${pillColor[item?.role]}`}>
                                             {item?.role || '-.-'}
                                         </span>
                                     </td>
@@ -148,19 +108,27 @@ export const UserTable = ({ children, baseHook, className }) => {
                                     </td>
 
 
-                                    <td style={{ lineHeight: '4.2', textAlign: 'start' }}  >
-                                        <span>
+                                    <td style={{ lineHeight: '4.2', textAlign: 'start' }} >
+                                        <span 
+                                           className={`text-lowercase ${pillColor[item?.meta?.status]}`} >
                                             {item?.meta?.status || '-.-'}
                                         </span>
                                     </td>
 
-                                    {/* Action */}
-                                    <td className='small d-table-cell d-md-none'
-                                        style={{ lineHeight: '4.2', textAlign: 'end' }}  >
-                                        {children('buttons', item)}
-                                    </td>
+                                        {/**Action */}
+                                        <td className='small d-table-cell d-md-none'
+                                            style={{ lineHeight: '4.2', textAlign: 'end' }}  >
+                                            <Button
+                                                variant="border-0 ligth"
+                                                size="sm"
+                                                onClick={ () => openDialogActions(item) }
+                                            >
+                                                <i className="bi bi-three-dots h5"></i>
+                                            </Button>
+
+                                        </td>
                                 </tr>
-                            ))
+                            )
                         )}
                     </tbody>
                 </Table>
@@ -174,7 +142,10 @@ export const UserTable = ({ children, baseHook, className }) => {
             />
 
         </>
+     </DataView>   
     );
 }
 
-export default UserTable;
+
+export default React.memo(UserTable);
+

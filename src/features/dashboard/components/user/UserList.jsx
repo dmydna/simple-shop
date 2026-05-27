@@ -7,25 +7,24 @@ import { useNavigate } from "react-router-dom";
 import ModalCrud from "../../../crud/components/ModalCrud";
 import { UserTable } from "./UserTable";
 import UserActions from "./UserActions";
+import BanUser from "./BanUser"
+
+
 
 export const UserList = ({}) => {
 
-    const baseHook = useUser()
-    const [search, setSearch] = useState()
     const navigate = useNavigate()
-    const [showCrudActions, setShowCrudActions] = useState()
-    const [showFilter, setShowFilter] = useState()
+    const baseHook = useUser()
+    const { setFilters, Users } = baseHook;
+    const [search, setSearch] = useState()
+
+
+   const FORM_URL = "/dashboard/user-form";
+   const CURRENT_URL = "/dashboard/user-list";
 
     useEffect(() => {
         if (search) setFilters({ page: 0, username: search })
     }, [search])
-
-    const { setFilters, Users } = baseHook;
-
-    const handleOpenEdit = (item) => {
-        setShowCrudActions(true)
-    }
-
 
     return (
         <>
@@ -40,6 +39,7 @@ export const UserList = ({}) => {
                             </p>
                         </div>
                         <div className="d-flex justify-content-between my-4 flex-wrap" >
+                            <div className="d-flex gap-3">
                             <Button
                                 variant="light"
                                 onClick={() => navigate('/dashboard/user-form?mode=create')}
@@ -47,62 +47,20 @@ export const UserList = ({}) => {
                                 <i className="bi bi-plus-lg"></i>
                                 <span className="fw-medium ms-2">Create new</span>
                             </Button>
+                            </div>
                             <SearchLive
                                 className='flex-fill flex-md-grow-0'
                                 items={Users}
                                 handleSearch={setSearch}
-                                handleFilter={() => setShowFilter(prev => !prev)}
+                                handleFilter={() => navigate(`${CURRENT_URL}?dialog=filter`)}
                             />
 
                         </div>
-                        {/* <UserFilterCrud
-                                            show={showFilter}
-                                            onHide={setShowFilter}
-                                            dataSource={Users}
-                                            onApply={setFilters}
-                                        ></UserFilterCrud> */}
                     </div>
 
-                    <UserTable
-                        className=''
-                        baseHook={baseHook}
-                    >
-                        {(key, item) => {
-                            if (key === 'title') {
-                                return (
-                                    <></>
-                                )
-                            }
-                            if (key === 'buttons') {
-                                return (
-                                    <>  {/** Editar */}
-                                        <Button
-                                            variant="border-0 ligth"
-                                            size="sm"
-                                            onClick={() => handleOpenEdit(item)}
-                                        >
-                                            <i className="bi bi-three-dots h5"></i>
-                                        </Button>
-
-                                    </>
-                                )
-                            }
-
-                        }}
-                    </UserTable>
+                    <UserTable baseHook={baseHook} />
                 </div>
             </div>
-
-
-            <ModalCrud
-                show={showCrudActions}
-                onHide={setShowCrudActions}
-            >
-                <UserActions
-                    close={() => setShowCrudActions(false)}
-                />
-            </ModalCrud>
-
 
         </>
 

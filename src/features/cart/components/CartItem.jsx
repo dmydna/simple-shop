@@ -26,20 +26,20 @@ function CartItem({item, index}) {
 
                     <div className="d-flex flex-wrap justify-content-between align-items-center">
                     <CartInput className={'order-1 order-md-2'} producto={item}/>
-                      <Card.Text className="text-secondary small m-0 d-none d-md-block">
+                      <div className="text-secondary small m-0 d-none d-md-block">
                         <i className="bi bi-eye me-1"></i> 
                         stock: 
                         {item.stock - item.cantidad || 0}
-                      </Card.Text>
-                      <Card.Text className="text-secondary small m-0 d-none d-md-block">
+                      </div>
+                      <div className="text-secondary small m-0 d-none d-md-block">
                         p.u: 
                         <i className="bi bi-currency-dollar"></i>
                         {(item.price).toFixed(2)}
-                      </Card.Text>
-                      <Card.Text className="h5 m-0 order-2 order-md-1 mt-2 mt-sm-0">
+                      </div>
+                      <div className="h5 m-0 order-2 order-md-1 mt-2 mt-sm-0">
                         <i className="bi bi-currency-dollar"></i> 
                         {(item.price*item.cantidad).toFixed(2)}
-                      </Card.Text>
+                      </div>
                     </div>
                     
                   </Card.Body>

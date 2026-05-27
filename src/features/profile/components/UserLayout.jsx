@@ -32,8 +32,8 @@ const UserLayout = () => {
                 </Col>
 
 
-                <Col className="h-100 col-12 col-sm-12 col-md-12 col-lg-9 px-0 px-md-2">
-                    <div className="col-12 rounded border p-4 mb-4 island">
+                <Col className="col-12 col-sm-12 col-md-12 col-lg-9 px-0 px-md-2">
+                    <div className="h-100 col-12 rounded border p-4 mb-4 island">
                            <Outlet/>
                     </div>
 

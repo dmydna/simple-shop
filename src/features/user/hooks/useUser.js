@@ -16,15 +16,18 @@ export const useUser = (fetchElemMethod=null) => {
         content,
         loading: loadingList || loadingItem,
         error:   errorList || errorItem,
-        users: content,
-        setUsers: setContent,
+        id, setId,
+        currentItem, 
+        setCurrentItem,
+        fetchElem,
+        refreshElem,
+        /* Custom Name */
+        userId: id,
+        setUserId: setId,
         currentUser: currentItem,
         setCurrentUser: setCurrentItem,
-        userId: id,
-        setCurrentItem,
-        setUserId: setId,
-        setId, id,
-        fetchElem,
-        refreshElem
+        users: content,
+        setUsers: setContent,
+
     })
 }

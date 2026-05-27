@@ -1,10 +1,11 @@
 import MultiImageUploader from "@/components/common/MultiImageUploader";
+import { CRUD } from "@/utils/enums";
 import { useEffect, useState } from "react";
 
 
-function MultiImageUploaderCrud({useCrudHook, title, baseHook}) {
+function MultiImageUploaderCrud({useCrudHook, title, baseHook, locked}) {
 
-   const { currentItem, setFormData, setSelectedFile } = baseHook
+   const { currentItem, crudMode,setFormData, setSelectedFile } = baseHook
    const [images, setImages] = useState([]); // Array de objetos { id, url, file }
    const createInitialImage = (url, index) => {
       return {
@@ -37,6 +38,7 @@ function MultiImageUploaderCrud({useCrudHook, title, baseHook}) {
 
     return (
     <MultiImageUploader 
+       locked={crudMode == CRUD.UPDATE || crudMode == CRUD.CREATE}
        setImages={setImages}
        images={images}
     />

@@ -1,11 +1,11 @@
 import { useServiceParams } from "@/hooks/useServiceParams.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
+import { AppStatus } from "../../components/common/AppStatus.jsx";
 import CategoryCarrousel from "../../components/common/CategoryCarrousel.jsx";
 import CategoryNav from "../../components/common/CategoryNav.jsx";
 import DropdownCheck from "../../components/common/DropdownCheck.jsx";
 import DropdownRange from "../../components/common/DropdownRange.jsx";
-import { DataHandler } from "../../contexts/DataHandler.jsx";
 import { useUIContext } from "../../contexts/UIContext.jsx";
 import AddToCartButton from "../../features/cart/components/AddToCartButton.jsx";
 import FilterBar from "../../features/filters/components/FilterBar.jsx";
@@ -18,8 +18,9 @@ import ProductCard from "../../features/product/components/ProductCard.jsx";
 // FIXME no agrega searchparams de paginacion
 
   function ProductListing() {
-
-  const { error, listings, totalPages, setFilters ,totalElements, loading, fetchData } = useListingContext()
+    
+  const baseHook = useListingContext()
+  const { error, listings, totalPages, setFilters ,filters,totalElements, loading, fetchData , ...props} = baseHook;
 
 
   const [meta, setMeta] = useState({
@@ -28,7 +29,23 @@ import ProductCard from "../../features/product/components/ProductCard.jsx";
     description: "",
   });
 
-  const navParams = useServiceParams({ useHook: useListingContext, onMeta: setMeta});
+  const serviceParams = useServiceParams({ baseHook: baseHook});
+
+  useEffect(()=>{
+        if (filters && Object.keys(filters).length == 0) {
+          setMeta({ title: "Productos" });  
+        }
+        if (filters?.category) {
+            setMeta((prev) => ({ ...prev, title: filters?.category }));
+        }
+        if (filters?.title) {
+            setMeta((prev) => ({
+                ...prev,
+                title: "Resultados",
+                message: `encontrados: ${totalElements}`
+            }));
+        }
+  },[filters])
 
   const { showFilter } = useUIContext()
 
@@ -36,7 +53,7 @@ import ProductCard from "../../features/product/components/ProductCard.jsx";
   return (
     <>
 
-      <DataHandler
+      <AppStatus
           loading={loading}
           onRetry={fetchData}
           error={error}
@@ -92,7 +109,7 @@ import ProductCard from "../../features/product/components/ProductCard.jsx";
               totalPages={totalPages}
           />
         </>
-      </DataHandler>
+      </AppStatus>
     </>
   )
 }

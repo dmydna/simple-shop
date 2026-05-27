@@ -5,7 +5,7 @@ import { useDevContext } from "../contexts/DevContext.jsx";
 import { listingDataList, listingSaveAll } from "../data/listingDataList.js";
 import { productDataList, productSaveAll } from "../data/productDataList.js";
 import { userDataList, userSaveAll } from "../data/userDataList.js";
-import { ImgGenApi } from "../utils.js";
+import { ImgGenApi } from "../imageJS.js";
 import DevItem from "./DevItem.jsx";
 
 

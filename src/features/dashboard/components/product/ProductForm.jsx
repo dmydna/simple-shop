@@ -10,7 +10,7 @@ import ProductActions from "./ProductActions";
 function ProductForm(){
 
     const crudHook = useProductCrud()
-    const { showModal, setShowModal } = crudHook
+
 
     return (
         <FormCrud
@@ -28,14 +28,7 @@ function ProductForm(){
 
                     <FormTags crudHook={crudHook}/>
                 </div>
-                <ModalCrud
-                    show={showModal}
-                    onHide={setShowModal}
-                >
-                    <ProductActions
-                        close={() => setShowModal(false)}
-                    />
-                </ModalCrud>
+
         </FormCrud>
     )
 }

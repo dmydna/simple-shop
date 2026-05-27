@@ -1,13 +1,12 @@
 
-import { Col, Container, Row } from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SideBarProfile({ role, border=false }) {
 
 
     return (
         <>
-            <ul class="list-group list-group-flush">
+            <ul className="list-group list-group-flush">
  
 
                 {role === 'ADMIN' && (

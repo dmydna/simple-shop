@@ -38,13 +38,13 @@ function CartCupon({title, check, onCheck}){
 
     return(
         <Card className={`m-2 p-4  island  ${hide ? 'd-none': ''}`} >
-        <Card.Text className="h5 fw-bold text-secondary">
+        <div className="h5 fw-bold text-secondary">
             <div className="d-flex justify-content-between">
                 <span>{title}</span>
                 <i onClick={()=>setHide(prev=>!prev) } className="btn bi bi-x-lg"></i>
             </div>
 
-        </Card.Text>
+        </div>
         <Form onSubmit={handleSubmit} className={(error ? 'form-error': '')}>
         <InputGroup className="align-items-center">
         <input

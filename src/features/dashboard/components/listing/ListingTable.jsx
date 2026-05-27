@@ -1,61 +1,49 @@
 import CopyButton from '@/components/common/CopyButton';
-import { formatDate, statusColor } from '@/features/dashboard/util.js';
+import { formatDate, pillColor } from '@/features/dashboard/util.js';
 import Pagination from '@/features/pagination/components/Pagination.jsx';
+import { useCustomParams } from '@/hooks/useCustomParams';
 import { useNavParams } from '@/hooks/useNavParams';
-import { useEffect } from 'react';
-import { Card, Form, Table } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-
-export const ListingTable = ({ children, useHook, baseHook, iconCrud, className, }) => {
-
-
-    const { content, loading, currentPage, setCurrentPage, totalPages, setFilters } = baseHook;
-
-    const navigate = useNavigate()
-    const { searchParams, setSearchParams, hashParam } = useNavParams({ baseHook: baseHook })
+import DataView from '@common/DataView';
+import React from 'react';
+import { Button, Form, Table } from 'react-bootstrap';
+import { placeholderURL } from '@utils/image'
 
 
+export const ListingTable = ({ baseHook, className, }) => {
 
-    useEffect(() => {
-        // Lógica de paginación
-        setCurrentPage(1)
-    }, [])
 
-    const handleSelect = (item) => {
+    // eslint-disable-next-line no-unused-vars
+    const { content, loading, totalPages, ...props } = baseHook;
 
-        // Selecciona
-        setSearchParams(prev => {
-            const nuevosParams = new URLSearchParams(prev);
-            nuevosParams.set('hash', item.hash);
-            return nuevosParams;
-        });
+    const { setSearchParams } = useCustomParams()
 
-        // Deselecciona
-        if (hashParam == item.hash) {
-            setSearchParams(prev => {
-                const nuevosParams = new URLSearchParams(prev);
-                nuevosParams.delete('hash');
-                return nuevosParams;
-            });
-        }
+    const { hashParam } = useNavParams({ baseHook: baseHook })
+
+    const toggleSelect = (item) => {
+        setSearchParams(prev => ({
+            ...prev, hash:
+                hashParam != item?.hash ? item?.hash : null
+        }))
     }
 
-    const selected = (item) => {
-        return (item.hash === hashParam ? 'selected' : '')
+    const openDialogActions = (item) => {
+        setSearchParams(prev => ({ ...prev, dialog: 'action', hash: item?.hash }))
     }
 
 
-    const stock_cases = ["Low Stock", "In Stock", "Out Stock"]
-    const status_cases = ["ACTIVE", "INACTIVE", "DRAFT"]
 
     return (
-        <>
-            <div className={`${className} small w-100`}>
-                {children('title')}
+        <DataView
+            loading={loading}
+            data={content}
+            emptyIcon={"bi bi-smail"}
+            emptyMessage={"No hay items"}
+        >
+            <>
+                <div className={`${className} small w-100`}>
 
-                <Table style={{ overflowX: 'auto' }} className="mb-0 w-100" striped={false} bordered={false} hover={true}>
-                    <thead className=''>
-                        {content?.length !== 0 && (
+                    <Table style={{ overflowX: 'auto' }} className="mb-0 w-100" striped={false} bordered={false} hover={true}>
+                        <thead className=''>
                             <tr className='border-bottom'>
                                 <th style={{ width: '150px' }} className='d-none  d-md-table-cell text-secondary'></th>
                                 <th style={{ width: '150px' }} className='text-secondary'>Title</th>
@@ -66,32 +54,15 @@ export const ListingTable = ({ children, useHook, baseHook, iconCrud, className,
                                 <th style={{ width: '150px' }} className='text-secondary'>Availability</th>
                                 <th style={{ width: '150px' }} className='d-block d-table-cell d-md-none text-secondary'></th>
                             </tr>
-                        )}
+                        </thead>
+                        <tbody>
+                            {content?.map((item) => (
 
-                    </thead>
-                    <tbody>
-                        {loading ? (
-                            // Mientras carga, mostramos una fila de carga elegante
-                            <tr>
-                                <td colSpan="3" className="text-center py-5">
-                                    <div className="spinner-border text-primary" role="status"></div>
-                                    <p className="mt-2">Cargando datos...</p>
-                                </td>
-                            </tr>
-                        ) : content?.length === 0 ? (
-                            <tr>
-                                <td colSpan="3" className="text-center d-block">No hay items</td>
-                            </tr>
-                        ) : (
-                            content?.map((item) => (
-
-
-                                <tr className={`onhover ${selected(item)}`}
-                                    // onClick={() => handleclick(item)}
+                                <tr className={`onhover ${item.hash === hashParam ? 'selected' : ''}`}
                                     style={{ overflow: "visible", height: "70px" }} key={item.id}>
 
                                     <td
-                                        onClick={() => handleSelect(item)}
+                                        onClick={() => toggleSelect(item)}
                                         className='text-secondary d-none  d-md-table-cell'>
                                         <Form.Check // prettier-ignore
                                             type='checkbox'
@@ -100,24 +71,21 @@ export const ListingTable = ({ children, useHook, baseHook, iconCrud, className,
                                             checked={hashParam === item.hash}
                                             onChange={(e) => {
                                                 e.stopPropagation();
-                                                handleSelect(item);
+                                                toggleSelect(item);
                                             }}
                                         />
                                     </td>
 
-                                    {item?.thumbnail && (
-                                        <td>
+                                    <td>
 
-                                            {(item?.thumbnail || item?.image || iconCrud) && (
-                                                <Card.Img
-                                                    style={{ objectFit: 'contain', width: '60px', height: '60px' }} // Altura fija igual al texto
-                                                    className="border border-1 rounded flex-shrink-0"
-                                                    src={item?.thumbnail || item?.image || iconCrud}
-                                                />
-                                            )}
-                                            <span className='mx-3 fw-medium'>{item?.title}</span>
-                                        </td>
-                                    )}
+                                        <img
+                                            style={{ objectFit: 'contain', width: '60px', height: '60px' }} // Altura fija igual al texto
+                                            className="bg-white border border-1 rounded flex-shrink-0"
+                                            src={item?.thumbnail || placeholderURL.listing(item?.id)}
+                                        />
+
+                                        <span className='mx-3 fw-medium'>{item?.title}</span>
+                                    </td>
 
                                     <td className='text-secondary'>
                                         <div style={{ lineHeight: '4.2' }} className='btn btn-sm p-0'>
@@ -133,20 +101,20 @@ export const ListingTable = ({ children, useHook, baseHook, iconCrud, className,
 
                                     <td style={{ lineHeight: '4.2', textAlign: 'start' }}  >
                                         <span
-                                            className={`text-lowercase ${statusColor(status_cases, item?.status)}`}>
-                                            {item?.status}
+                                            className={`text-lowercase ${pillColor[item?.meta?.status]}`}>
+                                            {item?.meta?.status}
                                         </span>
                                     </td>
 
                                     <td className='fw-medium' style={{ lineHeight: '4.2', textAlign: 'start' }}  >
                                         <i className='bi bi-currency-dollar'></i>
-                                        {item?.price}
+                                        {item?.price || 0}
                                     </td>
 
 
                                     <td style={{ lineHeight: '4.2', textAlign: 'start' }} >
                                         <span
-                                            className={`${statusColor(stock_cases, item?.availabilityStatus)}`}>
+                                            className={`${pillColor[item?.availabilityStatus]}`}>
                                             {item?.availabilityStatus}
                                         </span>
                                     </td>
@@ -155,28 +123,35 @@ export const ListingTable = ({ children, useHook, baseHook, iconCrud, className,
                                     {/**Action */}
 
 
-                                    <td
-                                         onClick={() => handleSelect(item)}
-                                        className='small d-table-cell d-md-none'
+                                    <td className='small d-table-cell d-md-none'
                                         style={{ lineHeight: '4.2', textAlign: 'end' }}  >
-                                        {children('buttons', item)}
+                                        <Button
+                                            size="sm"
+                                            variant="border-0 ligth"
+                                            onClick={() => openDialogActions(item)}
+                                        >
+                                            <i className="bi bi-three-dots h5"></i>
+                                        </Button>
+
                                     </td>
                                 </tr>
-                            ))
-                        )}
-                    </tbody>
-                </Table>
+                                )
+                            )}
+                        </tbody>
+                    </Table>
 
 
-            </div>
+                </div>
 
-            <Pagination
-                className="mb-0"
-                totalPages={totalPages}
-            />
+                <Pagination
+                    className="mb-0"
+                    totalPages={totalPages}
+                />
 
-        </>
+            </>
+        </DataView>
     );
 }
 
-export default ListingTable;
+
+export default React.memo(ListingTable);

@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Button, InputGroup } from "react-bootstrap";
 
-function SearchLive({className, items, handleSearch, handleActive, handleFilter, tail=true}) {
+function SearchLive({
+  className, 
+  items, 
+  handleSearch, 
+  handleActive, 
+  handleFilter, 
+  tail=true}) {
   const [query, setQuery] = useState(""); 
 //   const {setSearch, clients} = useController();
 
@@ -37,8 +43,8 @@ function SearchLive({className, items, handleSearch, handleActive, handleFilter,
                   value={query}
                   onChange={handleChange}
               />
-               <span className={`${showtail ? 'badge-tooltip' : ''} p-0 m-0 border-0`}>
-              <span onClick={handleClickFilter} className="btn opacity-50" >
+               <span className={`p-0 m-0 border-0`}>
+              <span onClick={handleClickFilter} className="d-inline-block d-md-none btn opacity-50" >
                 <i className="bi-sliders"></i>
               </span>
               </span>

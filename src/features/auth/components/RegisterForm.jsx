@@ -35,7 +35,7 @@ function RegisterForm({ children, style, className}){
 
     return (
         <Col className={`${className} mx-auto`} style={ {...style, minHeight: '400px'}}>
-            {!registerSuccess && (children)}
+            {!registerSuccess && children}
             {registerSuccess ? (
               <div 
                  className="d-flex flex-column align-items-center justify-content-center w-100 h-100 my-2">
@@ -87,7 +87,7 @@ function RegisterForm({ children, style, className}){
                      ></div> 
                         Cargando...
                   </Button> :
-                  <Button variant="dark" type="submit" className="w-100 my-2" >
+                  <Button variant="outline-success" type="submit" className="w-100 my-2" >
                      Registrar
                   </Button> 
                  }

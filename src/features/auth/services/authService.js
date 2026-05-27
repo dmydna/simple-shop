@@ -1,5 +1,5 @@
 // src/services/authService.js
-import { BASE_URL, TOKEN, ENDPOINTS } from "../../../utils/config.js";
+import { BASE_URL, ENDPOINTS } from "@utils/config.js";
 
 const ENDPOINT = ENDPOINTS.AUTH
 
@@ -57,6 +57,7 @@ export const authService = {
     // Registro: Crea el usuario y el profile de cliente
     changePassword: async (data) => {
         // data = {newPassword, oldPassword}
+        console.log(data)
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/change-password`, {
             method: 'POST',
             headers: { 

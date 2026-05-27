@@ -1,7 +1,6 @@
 import { useUIContext } from "@/contexts/UIContext";
-import SideBarDashboard from "@/features/dashboard/layout/SiderbarDashboard";
+import SidebarDashboard from "@/features/sidebar/components/SidebarDashboard";
 import Logo from "@common/Logo.jsx";
-import SideBarDashboardSlim from "../common/SiderBarDashboardSlim";
 
 export default function SiderbarExpandable({  }) {
 
@@ -21,13 +20,13 @@ export default function SiderbarExpandable({  }) {
                   <i onClick={() => setShowsider(false)} className="pointer bi bi-list mx-3 fs-4"></i>
                   <Logo />
                 </div>
-                <SideBarDashboard showHearder={false} />
+                <SidebarDashboard showHearder={false} />
               </>
 
             )}
 
             {!showSidebar && (
-              <SideBarDashboardSlim onShow={setShowsider} />
+              <SidebarDashboard onShow={setShowsider} />
             )}
 
 

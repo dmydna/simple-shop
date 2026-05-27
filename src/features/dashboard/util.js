@@ -15,6 +15,24 @@ export function formatDate([year, month, day, hour, min], time=false) {
 }
 
 
+export const pillColor = {
+   "ADMIN":   "pill-dark",
+   "CLIENT":  "pill-success",
+/* --------------------------------- */
+   "ACTIVE":   "pill-primary",
+   "INACTIVE": "pill-secondary",
+   "BANNED":   "pill-danger",
+   "DRAFT":    "pill-dark",
+/* --------------------------------- */
+   "In Stock": "pill-success",
+   "Low Stock": "pill-warning",
+   "Out Stock": "pill-danger",
+   "Pending":   "pill-secondary"
+}
+
+
+
+// @deprecated
 export function statusColor([primary, success, danger], key){
 
   switch(key){

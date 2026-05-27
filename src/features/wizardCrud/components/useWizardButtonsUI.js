@@ -1,5 +1,5 @@
+import { CRUD } from "@utils/enums.js";
 import { useEffect, useMemo } from "react";
-import { CRUD } from "../../../utils/crud.js";
 import { useWizard } from "../contexts/WisardContext.jsx";
 
 // @deprecated 

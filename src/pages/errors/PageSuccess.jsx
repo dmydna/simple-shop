@@ -1,6 +1,5 @@
-import {useNavigate} from "react-router-dom";
-import {FeedbackMessage} from "@common/FeedbackMessage.jsx";
 import React from "react";
+import {FeedbackMessage} from "@common/FeedbackMessage.jsx";
 
 function PageSuccess({handle}){
 

@@ -1,7 +1,7 @@
-import { ImgGenApi } from "@/dev/utils.js";
+import { ImgGenApi } from "@/dev/imageJS.js";
+import { useProfile } from "@features/profile/contexts/ProfileContext.jsx";
 import { useEffect } from "react";
 import { Card } from "react-bootstrap";
-import { useProfile } from "@features/profile/contexts/ProfileContext.jsx";
 
 function CardProfile({ name, image, children, className, imgSize }) {
 

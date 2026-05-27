@@ -1,5 +1,7 @@
 import { useMemo } from "react";
 import { useFetch } from "./useFetch.js";
+import nprogress from "nprogress";
+
 
 export const useService = ({service, onSuccess, onError, onRefresh}) => {
 
@@ -22,6 +24,7 @@ export const useService = ({service, onSuccess, onError, onRefresh}) => {
 
     // Acciones Genéricas
     const execute = async (action, ...args) => {
+        nprogress.start();
         setLoading(true)
         setError(null)
         try {
@@ -36,6 +39,7 @@ export const useService = ({service, onSuccess, onError, onRefresh}) => {
             throw err;
         } finally {
             setLoading(false)
+            nprogress.done();
         }
     };
 

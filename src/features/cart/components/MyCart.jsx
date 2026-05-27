@@ -40,6 +40,7 @@ export const MyCart = ({ children, className }) => {
                 <hr />
                 {cartItems.map((item, index) => (
                     <CartItem
+                        key={item.id}
                         item={item}
                         index={index}
                     />

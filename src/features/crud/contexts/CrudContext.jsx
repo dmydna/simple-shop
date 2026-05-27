@@ -3,7 +3,7 @@ import {createContext, useContext, useEffect, useState} from "react";
 
 const CrudContext = createContext(null)
 
-// TODO unificar la logica de componente compatibles con useHookCrud
+// TODO: unificar la logica de componente compatibles con useHookCrud
 export function CrudProvider({ children }) {
 
     const [crudHook,setCrudHook] = useState()

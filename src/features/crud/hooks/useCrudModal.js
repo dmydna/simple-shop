@@ -1,5 +1,5 @@
+import { CRUD } from "@utils/enums.js";
 import { useState } from 'react';
-import { CRUD } from "@utils/crud.js";
 
 export const useCrudModal = () => {
     

@@ -1,6 +1,6 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Logo from '../common/Logo.jsx';
+import Logo from '@common/Logo.jsx';
 
 
 function Footer() {

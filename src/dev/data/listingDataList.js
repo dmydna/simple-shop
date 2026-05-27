@@ -1,6 +1,6 @@
 import { listingService } from "../../features/listing/services/listingService.js";
-import { handleBulk } from "../utils.js";
-import { BASE_URL_IMG } from "../../utils/config.js"
+import { BASE_URL_IMG } from "../../utils/config.js";
+import { handleBulk } from "../imageJS.js";
 
 
 export const listingDataList = [

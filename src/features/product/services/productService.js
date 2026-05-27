@@ -1,6 +1,8 @@
 // src/services/productService.js
-import { mapToURLSearchParams, BASE_URL } from "../../../utils/config.js";
-import { toUpdateProduct, toCreateProduct } from "@/utils/mapper.js";
+
+import { responseError } from "@utils/service";
+import { toUpdateProduct, toCreateProduct, mapToURLSearchParams } from "@/utils/mappers.js";
+import { BASE_URL } from "@utils/config.js";
 
 const ENDPOINT = "api/products"
 
@@ -20,7 +22,10 @@ export const productService = {
              },
             body: JSON.stringify(productData)
         });
-        if (!response.ok) throw new Error("Error al crear producto");
+
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.json();
     },
 
@@ -42,7 +47,10 @@ export const productService = {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}`, {
             headers: { 'Authorization': `Bearer ${TOKEN}` },
         });
-        if (!response.ok) throw new Error("Error en la API");
+
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.json();
     },
 
@@ -53,17 +61,20 @@ export const productService = {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             headers: { 'Authorization': `Bearer ${TOKEN}` },
         });
-        if (!response.ok) throw new Error("Producto no encontrado");
+        if (!response.ok) {
+            return responseError(response)
+        }
         const data = await response.json();
         return {...data, ...data.dimensions};
     },
 
 
+   // TODO: borrar id de firma de productService.update
     // PUT: Actualiza producto.
     update: async (id, data) => {
         const productData = toUpdateProduct(data);
         const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${data.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -71,7 +82,9 @@ export const productService = {
             },
             body: JSON.stringify(productData)
         });
-        if (!response.ok) throw new Error("Error al actualizar producto");
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.json();
     },
 
@@ -84,7 +97,7 @@ export const productService = {
         });
 
         if (!response.ok) {
-            throw new Error("No se pudo eliminar el producto");
+            return responseError(response)
         }
         return response.status === 204 ?
             { success: true } : await response.json();
@@ -103,8 +116,7 @@ export const productService = {
         });
 
         if (!response.ok) {
-            const errorMsg = await response.text();
-            throw new Error(errorMsg || "No se actualizó status");
+            return responseError(response)
         }
         return await response.json();
     },

@@ -33,6 +33,11 @@ function MyAccount({ children }) {
             </p>
 
 
+             <p onClick={()=> navigate('/change-password')} className="btn bg-light border py-3 mb-4 text-start w-100 d-flex justify-content-between">
+                <span>Cambiar de contraseña</span>
+               <i className="bi-chevron-right"></i>
+            </p>
+
             
 
 
@@ -54,36 +59,23 @@ function MyAccount({ children }) {
                     </FloatingLabel>
                 </Form.Group>
 
-                 <Form.Group className="mb-4 w-100">
+
+                <Form.Group className="mb-4 w-100">
                     <FloatingLabel
-                        controlId="floatingPassword"
-                        label="Current password"
+                        controlId="floatingEmail"
+                        label="Username"
                         className="mb-3"
                     >
                         <Form.Control
+                            className="disabled"
                             type="text"
-                            name="password"
-                            placeholder="Ingresa constrañea actual"
-                            value={profile?.password || ''}
+                            name="email"
+                            placeholder="Ingrese usuario"
+                            value={profile?.username || ''}
                             onChange={handleChange}
                         />
                     </FloatingLabel>
                 </Form.Group>
-                <Form.Group className="mb-4 w-100">
-                    <FloatingLabel
-                        controlId="floatingNewPassword"
-                        label="New password"
-                        className="mb-3"
-                    >
-                        <Form.Control
-                            type="text"
-                            name="newPassword"
-                            placeholder="Ingresa constrañea actual"
-                            value={profile?.password || ''}
-                            onChange={handleChange}
-                        />
-                    </FloatingLabel>
-                </Form.Group> 
 
             </Form>
             <div className='w-100 d-flex justify-content-center'>

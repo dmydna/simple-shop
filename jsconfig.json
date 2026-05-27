@@ -14,7 +14,8 @@
       "@utils/*": ["src/utils/*"],
       "@hooks/*": ["src/hooks/*"],
       "@contexts/*": ["src/contexts/*"],
-      "@pages/*": ["src/pages/*"]
+      "@pages/*": ["src/pages/*"],
+      "@dashboard/*": ["src/features/dashboard/*"]
     }
   },
   "include": ["src/**/*"],

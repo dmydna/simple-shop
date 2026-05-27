@@ -17,6 +17,9 @@ export function UIProvider({ children }) {
     const [selectedTags, setSelectedTags] = useState([]);
     const [iconCrud, setIconCrud] = useState()
     
+
+    const [siderbarMode, setSidebarMode] = useState()
+
     const { appMode, setAppMode,  showSidebar,  setShowsider } = useAdminUI()
 
   
@@ -50,7 +53,8 @@ export function UIProvider({ children }) {
             onHideFilter,
             selectedTags, setSelectedTags,
             iconCrud, setIconCrud,
-            appMode, setAppMode,  showSidebar,  setShowsider
+            appMode, setAppMode,  showSidebar,  setShowsider,
+            siderbarMode, setSidebarMode,
           }}>
           {children}
           <LoginModal 

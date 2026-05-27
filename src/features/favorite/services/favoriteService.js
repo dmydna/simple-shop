@@ -1,4 +1,6 @@
-import {mapToURLSearchParams, ENDPOINTS, ROLE, BASE_URL, TOKEN} from "../../../utils/config.js";
+
+import { mapToURLSearchParams } from "@utils/mappers.js";
+import { ENDPOINTS, BASE_URL} from "../../../utils/config.js";
 const ENDPOINT = ENDPOINTS.FAVORITE
 
 export const favoriteService = {

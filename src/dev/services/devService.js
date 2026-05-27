@@ -1,7 +1,9 @@
 // src/dev/services/devService.js
 
-import {mapToURLSearchParams, ENDPOINTS, ROLE, BASE_URL, TOKEN} from "@/utils/config.js";
+import { mapToURLSearchParams } from "@utils/mappers";
+import {ENDPOINTS, BASE_URL} from "@/utils/config.js";
 const ENDPOINT = ENDPOINTS.DEV;
+import { responseError } from '@utils/service.js';
 
 /* ========= HTTP ==========
   - 1XX (Información)
@@ -30,7 +32,9 @@ export const devService = {
             },
             body: JSON.stringify(productData)
         });
-        if (!response.ok) throw new Error(`Error los ${type}s no fueron creados`);
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.json();
     },
 
@@ -47,12 +51,12 @@ export const devService = {
         // 2. Agregamos los filtros dinámicamente
         mapToURLSearchParams(cleanParams, filters);
 
-        console.log("URL Corregida:", cleanParams.toString());
-
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${type}?${cleanParams.toString()}`,    
-             { 'Authorization': `Bearer ${TOKEN}`}
-            );
-        if (!response.ok) throw new Error("Error en la API");
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${type}?${cleanParams.toString()}`, 
+             {headers: TOKEN ? { 'Authorization': `Bearer ${TOKEN}`} : {} }
+        );
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.json();
     },
 

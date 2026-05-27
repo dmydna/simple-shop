@@ -1,16 +1,15 @@
-import {useNavigate} from "react-router-dom";
-import {FeedbackMessage} from "../../components/common/FeedbackMessage.jsx";
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import { FeedbackMessage } from "../../components/common/FeedbackMessage.jsx";
 
-function PageEmpty({ico}){
+function PageEmpty({ico, message}){
 
     const navigate = useNavigate();
 
-    const msg = 'No hay elementos en esta sección. Agrega alguno para comenzar.';
+    const defaultMsg = 'No hay elementos en esta sección. Agrega alguno para comenzar.';
     return (
         <FeedbackMessage
             title="Sin contenido"
-            message={msg}
+            message={message || defaultMsg}
             icon={ico || "bi-journal-plus"}
         />
     )

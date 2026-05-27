@@ -1,5 +1,5 @@
 import { authService } from "../../features/auth/services/authService.js";
-import { handleBulk, ImgGenApi, color, symbol } from "../utils.js";
+import { handleBulk, ImgGenApi } from "../imageJS.js";
 
 
 const baseImg = {

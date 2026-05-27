@@ -19,6 +19,7 @@ export const useProduct = () => {
         setProducts: setContent,
         currentProduct: currentItem,
         setCurrentProduct: setCurrentItem,
+        setCurrentItem,
         productId: id,
         setProductId: setId,
         setId, id,

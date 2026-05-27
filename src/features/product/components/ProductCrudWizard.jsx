@@ -1,15 +1,14 @@
+import { CRUD } from "@utils/enums.js";
 import { useEffect } from "react";
-import { CRUD } from "../../../utils/crud.js";
-import StepBadge from '../../wizardCrud/components/StepBadge.jsx';
+import CrudAccordion from "../../../components/common/CrudAccordion.jsx";
 import WizardCrud from "../../wizardCrud/components/WizardCrud.jsx";
 import WizardItem from "../../wizardCrud/components/WizardItem.jsx";
 import { useProductCrud } from "../contexts/ProductCrudContex.jsx";
 import { WIZARD_CONFIG } from "../hooks/wizardProductConfig.js";
-import AccordionInfo from "./AccordionInfo.jsx";
-import FormProduct from "./FormProduct.jsx";
-import CrudAccordion from "../../../components/common/CrudAccordion.jsx";
 import AccordionDanger from "./AccordionDanger.jsx";
 import AccordionEdit from "./AccordionEdit.jsx";
+import AccordionInfo from "./AccordionInfo.jsx";
+import FormProduct from "./FormProduct.jsx";
 
 // @deprecated 
 function ProductCrudWizard() {

@@ -2,9 +2,12 @@ import { CRUD } from "@/utils/enums";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-export const useCrudParams = (baseHook) => {
 
-    const [searchParams] = useSearchParams();
+export const useDashboardParams = (baseHook) => {
+
+
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const itemId = searchParams.get('hash') || searchParams.get('id');
     const copyMode = searchParams.get('mode') === 'copy';
     const editMode = searchParams.get('mode') === 'edit';
@@ -19,6 +22,7 @@ export const useCrudParams = (baseHook) => {
         if (copyMode) { setCrudMode(CRUD.COPY) }
         if (createMode) { setCrudMode(CRUD.CREATE) }
         if (editMode) { setCrudMode(CRUD.UPDATE) }
+
         if (viewMode) { 
             setEnableEditableField(true) 
             setCrudMode(CRUD.READ) 
@@ -27,6 +31,8 @@ export const useCrudParams = (baseHook) => {
         if (itemId) { setId(itemId) }
         if (editMode && !itemId) {setShowWarn(true)}
     }, [itemId, formData, createMode, viewMode, draftMode, editMode])
+
+
 
     return {
        editMode, viewMode, createMode, copyMode, draftMode

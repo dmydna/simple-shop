@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useState } from 'react';
+import DownloadFileButton from './DownloadFileButton';
 
-function MultiImageUploader({ maxImages = 10, maxSizeMB = 1, setImages, images }) {
+function MultiImageUploader({ maxImages = 10, maxSizeMB = 1, setImages, images, locked = false }) {
 
   // const [images, setImages] = useState([]); // Array de objetos { id, url, file }
   const [error, setError] = useState('');
@@ -48,7 +49,7 @@ function MultiImageUploader({ maxImages = 10, maxSizeMB = 1, setImages, images }
           url: e.target.result,
           file: file
         };
-        
+
         setImages((prev) => [...prev, newImageObj]);
       };
       reader.readAsDataURL(file);
@@ -61,7 +62,7 @@ function MultiImageUploader({ maxImages = 10, maxSizeMB = 1, setImages, images }
       handleFiles(e.target.files);
     }
     // Limpiar el input para permitir subir el mismo archivo de nuevo si se eliminó
-    e.target.value = null; 
+    e.target.value = null;
   };
 
   const handleDrop = (e) => {
@@ -93,27 +94,40 @@ function MultiImageUploader({ maxImages = 10, maxSizeMB = 1, setImages, images }
         style={{ display: 'none' }}
       />
 
-      
+
 
       {/* Lista de imágenes cargadas */}
       {images?.length > 0 && (
         <div className="row g-3 mb-4">
-          { images.map((img) => (
+          {images.map((img) => (
             <div key={img.id} className="col-6 col-md-4 col-lg-3">
               <div className="position-relative rounded overflow-hidden border shadow-sm bg-light">
-                <img 
-                  src={img.url} 
-                  alt="Preview" 
+                <img
+                  src={img.url}
+                  alt="Preview"
                   className="w-100 d-block"
                   style={{ height: '120px', objectFit: 'contain' }}
                 />
-                <button
-                  className="btn btn-sm btn-danger position-absolute top-0 end-0 m-1 rounded-circle"
-                  style={{ width: '24px', height: '24px', padding: 0, zIndex: 10 }}
-                  onClick={() => removeImage(img.id)}
-                >
-                  &times;
-                </button>
+                {locked && (
+                  <button
+                    className="btn btn-sm btn-danger position-absolute top-0 end-0 m-1 rounded-circle"
+                    style={{ width: '24px', height: '24px', padding: 0, zIndex: 10 }}
+                    onClick={() => removeImage(img.id)}
+                  >
+                    &times;
+                  </button>
+                )}
+                {!locked && (
+                  <button
+                    className="btn btn-sm btn-dark position-absolute top-0 end-0 m-1 rounded-circle"
+                    style={{ width: '24px', height: '24px', padding: 0, zIndex: 10 }}
+                  >
+                       <DownloadFileButton  urlFile={img.url} />
+                  </button>
+                     
+                )}
+
+
                 <div className="position-absolute bottom-0 start-0 w-100 bg-dark bg-opacity-50 text-white text-center py-1" style={{ fontSize: '0.7rem' }}>
                   {img?.file?.name?.length > 15 ? img?.file?.name?.substring(0, 12) + '...' : img?.file?.name}
                 </div>
@@ -124,14 +138,14 @@ function MultiImageUploader({ maxImages = 10, maxSizeMB = 1, setImages, images }
       )}
 
       {/* Área de carga (solo visible si no se ha alcanzado el límite) */}
-      {images?.length < maxImages && (
-        <div 
+      {images?.length < maxImages && locked && (
+        <div
           className="p-5 border-3 border border-dashed rounded-4 upload-img mb-3"
           onDragOver={(e) => e.preventDefault()}
           onDrop={handleDrop}
           onClick={handleClick}
-          style={{ 
-            cursor: 'pointer', 
+          style={{
+            cursor: 'pointer',
             transition: 'border-color 0.3s',
             minHeight: '150px',
             display: 'flex',

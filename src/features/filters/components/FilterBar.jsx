@@ -9,7 +9,7 @@ import { useUrlFilters } from "../hooks/useUrlFilters.jsx";
 
 
 
-// TODO hacer que cada filtro sea autonomo.
+// TODO: hacer que cada filtro sea autonomo.
 function FilterBar({className, children, dataSource, onApply, concealable = true, fix=false }) {
 
     const { showFilter, setSelectedTags } =  useUIContext();

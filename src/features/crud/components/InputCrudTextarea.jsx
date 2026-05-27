@@ -1,5 +1,5 @@
+import { CRUD } from "@utils/enums.js";
 import { Form, InputGroup } from "react-bootstrap";
-import { CRUD } from "../../../utils/crud.js";
 
 
 

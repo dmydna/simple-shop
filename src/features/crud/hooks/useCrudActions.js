@@ -1,9 +1,15 @@
 import { useService } from "@hooks/useService";
 
+
+// NOTA: La idea de este componente era agregar una capa antes de service, 
+// para verificaciones, alerts, etc.
+// Pero no es posible, sin saber que service esta siendo invocado.
+
+
 export const useCrudActions = ({ service, onRefresh }) => {
     
     const { create, update, Delete, updateStatus, 
-        loading, setLoading, error, success, setError, setSuccess
+        loading, setLoading, error, success, setError, setSuccess, ...props
      } = useService({ service, onRefresh });
 
 
@@ -12,6 +18,7 @@ export const useCrudActions = ({ service, onRefresh }) => {
     };
 
     const handleUpdate = async (...args) => {
+        console.log("update: ", ...args)
         await update(...args);
     };
 
@@ -39,6 +46,7 @@ export const useCrudActions = ({ service, onRefresh }) => {
         error,
         success,
         setError, 
-        setSuccess
+        setSuccess,
+        ...props // todos los campos del service sin handle.
     };
 };

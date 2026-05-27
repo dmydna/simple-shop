@@ -1,4 +1,7 @@
-import {mapToURLSearchParams, ENDPOINTS, ROLE, BASE_URL, TOKEN} from "../../../utils/config.js";
+import { mapToURLSearchParams } from "@utils/mappers.js"
+import { ENDPOINTS, BASE_URL} from "@utils/config.js";
+import {responseError} from "@utils/service"
+
 const ENDPOINT = ENDPOINTS.REVIEWS
 
 export const reviewService = {
@@ -22,7 +25,9 @@ export const reviewService = {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/pending-review?${cleanParams.toString()}`,
             { headers: { 'Authorization': `Bearer ${TOKEN}`} }
         );
-        if (!response.ok) throw new Error("Error en la API");
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.json();
     },
 
@@ -33,7 +38,9 @@ export const reviewService = {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ` + TOKEN},
         });
-        if (!response.ok) throw new Error("Error al borrar request review");
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response;
     },
 
@@ -44,7 +51,9 @@ export const reviewService = {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ` + TOKEN},
         });
-        if (!response.ok) throw new Error("Error al borrar review");
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response;
     },
 
@@ -59,16 +68,17 @@ export const reviewService = {
            "comment": reviewData.comment, 
            "productId": reviewData.productId
          }
-        console.log(formatData)
+
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
             method: 'POST',
             headers: { 'Authorization': `Bearer ` + TOKEN, 'Content-Type': 'application/json' },
-
             body: JSON.stringify(formatData) 
         });
-        if (!response.ok) throw new Error("Error al crear review");
-        return await response;
+        if (!response.ok) {
+            return responseError(response)
+        }
+        return await response.json();
     },
 
 }

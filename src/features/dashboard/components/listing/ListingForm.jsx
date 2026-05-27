@@ -3,9 +3,9 @@ import MultiImageUploaderCrud from "@/features/crud/components/MultiImageUploade
 import FormBasic from "@/features/listing/components/FormBasic";
 import FormDetails from "@/features/listing/components/FormDetails";
 import { useListingCrud } from "@/features/listing/hooks/useListingCrud";
-import FormCrud from "../../../crud/components/FormCrud";
-import FormSku from "../../../listing/components/FormSku";
-import ListingActions from "./ListingActions";
+import FormCrud from "@/features/crud/components/FormCrud";
+import FormSku from "@/features/listing/components/FormSku";
+import ListingActions from "@dashboard/components/listing/ListingActions";
 
 
 

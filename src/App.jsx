@@ -1,25 +1,31 @@
-import Dashboard from "@features/dashboard/Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./styles/index.css";
+
+import Dashboard from "@features/dashboard/Dashboard";
+import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import ProtectedRouteAdmin from "./components/common/ProtectedRouteAdmin.jsx";
 import Footer from "./components/layout/Footer.jsx";
 import NavHeader from "./components/layout/NavHeader.jsx";
 import { CRUDWrapper } from "./contexts/CRUDWrapper";
 import DevDash from "./dev/components/DevDash.jsx";
-import { AuthProvider } from "./features/auth/hooks/AuthContext.jsx";
+
 import Cart from "./pages/Cart/Cart.jsx";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
 import ProductDetails from "./pages/Product/ProductDetails";
 import Products from "./pages/Product/ProductListing";
+
+import ChangePassword from "@pages/ChangePassword";
+import CompleteRegister from "./pages/CompleteRegister";
+import Login from "./pages/Login";
 import Register from "./pages/Register.jsx";
+
+import PageNotReady from "@pages/errors/PageNotReady";
 import Page404NotFound from "./pages/errors/Page404NotFound.jsx";
-import "./styles/index.css";
 
 import MyPhotoProfile from "@/features/profile/components/MyPhotoProfile";
 import MyAccount from "@features/profile/components/MyAccount";
@@ -31,23 +37,26 @@ import MyPurchases from "@features/profile/components/MyPurchases";
 import MyReviews from "@features/profile/components/MyReviews";
 import UserLayout from "@features/profile/components/UserLayout";
 import WelcomePerfil from "@features/profile/components/WelcomeProfile";
-
-import PageNotReady from "@pages/errors/PageNotReady";
-import SiderbarAdmin from "./components/layout/SiderbarAdmin";
-import UploadService from "./dev/components/UploadService";
-import { DevProvider } from "./dev/contexts/DevContext.jsx";
-import WelcomeDashboard from "./features/dashboard/common/WelcomeDashboard";
-import ListingList from "./features/dashboard/components/listing/LisitingList";
-import ListingForm from "./features/dashboard/components/listing/ListingForm";
-import DashboardLayout from "./features/dashboard/layout/DashboardLayout";
-import { ListingCrudProvider } from "./features/listing/contexts/ListingCrudContext";
-import PaymentForm from "./features/payment/components/PaymentForm.jsx";
 import WriteReview from "./features/profile/components/WriteReview";
+
+import { DevProvider } from "./dev/contexts/DevContext.jsx";
+import { AuthProvider } from "./features/auth/hooks/AuthContext.jsx";
+import { ListingCrudProvider } from "./features/listing/contexts/ListingCrudContext";
 import { ProfileProvider } from "./features/profile/contexts/ProfileContext.jsx";
 import { UserProvider } from "./features/user/contexts/UserContext.jsx";
-import CompleteRegister from "./pages/CompleteRegister";
+
+import SmartSidebarApp from "@components/layout/SmartSidebarApp"
+import SiderbarAdmin from "./components/layout/SiderbarAdmin";
+import UploadService from "./dev/components/UploadService";
+import WelcomeDashboard from "./features/dashboard/common/WelcomeDashboard";
+import ListingForm from "./features/dashboard/components/listing/ListingForm";
+import ListingList from "./features/dashboard/components/listing/ListingList";
+import DashboardLayout from "./features/dashboard/layout/DashboardLayout";
+import PaymentForm from "./features/payment/components/PaymentForm.jsx";
+
 import CatalogeLayout from "@/components/layout/CatalogeLayout";
 
+// DONE: update listing
 
 function App() {
 
@@ -65,7 +74,8 @@ function App() {
       location.pathname.startsWith('/contacto') ||
       location.pathname.startsWith('/auth') ||
       location.pathname.startsWith('/register') ||
-      location.pathname.startsWith('/register/complete')
+      location.pathname.startsWith('/register/complete') ||
+      location.pathname.startsWith('/change-password')
     ) {
       document.querySelector('body')?.classList.add('bg-full-heaven')
     } else {
@@ -77,19 +87,20 @@ function App() {
   return (
     <AuthProvider>
       <CRUDWrapper>
-        <div id="content" className="d-flex flex-column min-vh-100 pt-3">
+        <div id="content" className="d-flex flex-column min-vh-100 pt-4 mt-4">
 
 
-          (<NavHeader items={navItems} onSeleccion={setSeccion} />)
+          <NavHeader items={navItems} onSeleccion={setSeccion} />
 
           <main className={`flex-grow-1 p-3 px-0 ${navFix} `}>
 
-            <SiderbarAdmin />
+            <SmartSidebarApp />
 
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/change-password" element={<ChangePassword />} />
               <Route path="/inicio" element={<Home />} />
 
               <Route path="/contacto" element={<Contact />} />
@@ -140,7 +151,6 @@ function App() {
 
                 <Route path="dev" element={<UploadService />} />
 
-
                 {/* LISTING  */}
                 <Route path="listing-form" element={
                   <Dashboard.ListingLayout>
@@ -149,9 +159,12 @@ function App() {
                 } />
 
                 <Route path="listing-list" element={
+                  <ListingCrudProvider>
                   <Dashboard.ListingLayout>
                     <Dashboard.ListingList />
                   </Dashboard.ListingLayout>
+                  </ListingCrudProvider>
+
                 } />
 
 
@@ -237,7 +250,12 @@ function App() {
               <Route path="*" element={<Page404NotFound />} />
 
             </Routes>
-            <ToastContainer limit={3} />
+            <ToastContainer 
+               hideProgressBar={true} 
+               autoClose={1000} 
+               position="bottom-left"
+               limit={3} 
+            />
 
           </main>
           <Footer />

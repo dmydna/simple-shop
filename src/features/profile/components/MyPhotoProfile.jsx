@@ -1,6 +1,4 @@
-import PageLoading from '@/components/common/PageLoading';
-import PageError from '@/pages/errors/PageError';
-import PageSuccess from '@/pages/errors/PageSuccess';
+import FetchState from '@/components/common/FetchState.jsx';
 import ImageUploader from "@common/ImageUploader.jsx";
 import { useEffect, useState } from 'react';
 import { Button } from "react-bootstrap";
@@ -26,38 +24,36 @@ const MyPhotoProfile = ({ title, className }) => {
   }
 
   return (
-    <>
-      {loading && <PageLoading />}
-      {error && <PageError handle={() => setError(null)} />}
-      {success && <PageSuccess handle={() => setSuccess(false)} />}
-      {!success && !error && !loading && (
-        <>
-          <ProfileHeader
-            className='mb-0'
-            title="Imagen de Cuenta"
-            subtitle="Cambiar tu imagen de cuenta"
-          />
-          <ImageUploader
-            preview={preview}
-            setPreview={setPreview}
-            setImage={setImage}
-            image={image}
-          />
-          {/* Usamos el Button de Bootstrap para mejor estética */}
-          {image !== null && (
-            <div className='w-100 d-flex justify-content-center'>
-              <Button onClick={handleSubmit} variant="outline-dark" disabled={loading}>
-                <i className='bi bi-floppy me-2'></i>
-                Guardar cambios
-              </Button>
-            </div>
-          )}
+
+    <FetchState
+      hook={{ loading, error, setError, success, setSuccess }}
+    >
+      <>
+        <ProfileHeader
+          className='mb-0'
+          title="Imagen de Cuenta"
+          subtitle="Cambiar tu imagen de cuenta"
+        />
+        <ImageUploader
+          preview={preview}
+          setPreview={setPreview}
+          setImage={setImage}
+          image={image}
+        />
+        {/* Usamos el Button de Bootstrap para mejor estética */}
+        {image !== null && (
+          <div className='w-100 d-flex justify-content-center'>
+            <Button onClick={handleSubmit} variant="outline-dark" disabled={loading}>
+              <i className='bi bi-floppy me-2'></i>
+              Guardar cambios
+            </Button>
+          </div>
+        )}
 
 
-        </>
-      )}
+      </>
+    </FetchState>
 
-    </>
 
   );
 };

@@ -5,6 +5,9 @@ import Logo from "../common/Logo.jsx";
 import NavItems from "../common/NavItems.jsx";
 import MobileMenu from "./MobileMenu.jsx";
 
+
+
+// TODO: renombrar a nav y eliminar legacies similares.
 function NavHeader({onSeleccion, items}) {
 
   const scrollY =  useScrollY()

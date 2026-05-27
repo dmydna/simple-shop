@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-export const useServiceParams = ({ useHook, onMeta }) => {
+/**
+ * Agrega busqueda, paginacion y filtrado basico por searchParams:
+ * - category, tags, search, page
+ */
+export const useServiceParams = ({ baseHook }) => {
 
-
-    const {setFilters, setCurrentPage, currentPage, totalElements} = useHook()
-
+    const {setFilters, setCurrentPage, currentPage, totalElements, ...props} = baseHook;
     const [searchParams, setSearchParams] = useSearchParams();
     const tagsParam = searchParams.get('tags');
     const pageParam = searchParams.get('page');
@@ -13,33 +15,16 @@ export const useServiceParams = ({ useHook, onMeta }) => {
     const categoryParam = searchParams.get('category')
 
     useEffect(() => {
-        if (!searchParam) {
-            onMeta({ title: "Productos" });
-            setFilters({});
-        }
-        if (!pageParam) { setCurrentPage(1) }
-        if (!isNaN(pageParam)) { setCurrentPage(Number(pageParam)); }
-        if (tagsParam) { setFilters({ tags: tagsParam }); }
-        if (categoryParam) {
-            setFilters({ page: 0, categories: categoryParam });
-            if (categoryParam.split(',').length == 1) {
-                onMeta((prev) => ({ ...prev, title: categoryParam }));
-            }
-        }
-        if (searchParam) {
-            setFilters({ title: searchParam });
-            onMeta((prev) => ({
-                ...prev,
-                title: "Resultados",
-                message: `encontrados: ${totalElements}`
-            }
-            ));
-        }
-
+        if (!searchParam)      { setFilters({}) }
+        if (!pageParam)        { setCurrentPage(1) }
+        if (!isNaN(pageParam)) { setCurrentPage(Number(pageParam)) }
+        if (tagsParam)         { setFilters({ tags: tagsParam }) }
+        if (categoryParam)     { setFilters({ category: categoryParam }) }
+        if (searchParam)       { setFilters({ title: searchParam }) }
 
     }, [tagsParam, pageParam, categoryParam,
         searchParam, setFilters, setCurrentPage, totalElements])
 
 
-    return {}
+    return {tagsParam, pageParam, categoryParam, searchParam}
 }

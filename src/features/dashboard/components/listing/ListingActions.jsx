@@ -1,49 +1,82 @@
 import { useListingCrud } from "@/features/listing/hooks/useListingCrud";
-import { useEffect } from "react";
+import { useValidParams } from "@hooks/useValidParams";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import ButtonLink from "../../common/ButtonLink";
-import PageLoading from "@/components/common/PageLoading";
-import PageSuccess from "@/pages/errors/PageSuccess";
-
+import FetchState from "@/components/common/FetchState";
 
 
 export default function ListingActions({ close }) {
 
-    const [searchParams] = useSearchParams();
+    const { setId, currentItem, setCurrentItem, handleStatus, loading, error, setError, 
+    setSuccess, success, refreshData, refreshElem } = useListingCrud()
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    // Params
     const hashParam = searchParams.get('hash');
+    const modeParam = searchParams.get('mode');
 
-
-    const { setId, currentItem, setCurrentItem, handleStatus, loading, error, setError, setSuccess, success } = useListingCrud()
-
-    const navigate = useNavigate()
-    const BASE_URL = "/dashboard/listing-form";
+    // URLs
+    const FORM_URL = "/dashboard/listing-form";
 
     useEffect(() => {
-        if (hashParam) {
-            setId(hashParam)
-        }else{
-            setCurrentItem(null)
-        }
-    }, [hashParam])
+        if (hashParam) { setId(hashParam) } else { setCurrentItem(null) }
+        if (success) { 
+            refreshElem(); // refrescar elemento (local)
+            setSearchParams(prev => { // refrescar lista (global)
+                const newParams = new URLSearchParams(prev);
+                newParams.set('tableVersion', Date.now());
+                return newParams;
+            },{ replace: true });
+       }
+    }, [hashParam, success])
+
+
+   // Handles
+   const isDistincActive = useMemo(()=>{
+       return currentItem?.meta?.status != "ACTIVE";
+   },[currentItem])
+
+   const isStatusActive = useMemo(()=>{
+       return currentItem?.meta?.status === "ACTIVE"
+   },[currentItem])
+
+   const isStatusDraft = useMemo(()=>{
+    console.log("currentItem:", currentItem?.meta?.status )
+       return currentItem?.meta?.status == "DRAFT"
+   },[currentItem])
+
+
+   const isStatusNotActive = useMemo(()=>{
+       return currentItem?.meta?.status === "INACTIVE"
+   },[currentItem])
+
+  // TODO: manejar rutas muertas de ListingList/ListingForm.
+  useValidParams({
+    id: (val) => val && /^[0-9]+$/.test(val), // Solo números
+    mode: (val) => ['view','create', 'edit', 'draft'].includes(val), // Solo valores permitidos
+    status: (val) => ['ACTIVE','INACTIVE','DELETED', 'DRAFT'].includes(val), 
+  }, {redirect: "/dashboard/list-list"});
+
 
 
     return (
         <div className="p-3 island rounded">
-
-            {loading && (<PageLoading />)}
-            {success && (<PageSuccess handle={() => setSuccess(false)} />)}
-            {error && (<PageError handle={() => setError(null)} />)}
-            {!loading && !error && !success && (
-                <>
-
-                    <div style={{ lineHeight: '2.5rem' }}
-                        className="d-flex justify-content-between mb-4">
-                        <p className="fs-6 mb-0 fw-medium">
-                            {hashParam ? "Post Actions" : "Post Config"}
+           
+           <FetchState.Toast
+                hook={{ loading, error, setError, success, setSuccess }} 
+            >
+                 <>
+                    <div className="d-flex justify-content-between mb-4">
+                        <p style={{ lineHeight: '1.25rem' }} className="fs-6 mb-0 fw-medium p-1">
+                            Post Config
                         </p>
                         {close && (
-                            <Button onClick={close} variant="light" className="">
+                            <Button style={{ lineHeight: '1.25rem' }}  onClick={close} variant="light" className="p-1">
                                 <i className="bi-x-lg "></i>
                             </Button>
                         )}
@@ -52,26 +85,98 @@ export default function ListingActions({ close }) {
 
 
                     <ButtonLink
-                        visible={!hashParam}
+                        visible={ !hashParam }
                         icon="bi-plus-lg"
-                        handle={() => navigate('/faqs')}
+                        handle={() => navigate(`${FORM_URL}?mode=create`)}
                     >
                         Create Post
                     </ButtonLink>
 
 
+                    {/** Item Config **/}
+
                     <ButtonLink
-                        visible={!hashParam}
-                        icon="bi-pencil-fill"
-                        handle={() => navigate('/faqs')}
+                        handle={() => handleStatus(currentItem.id, "INACTIVE")}
+                        icon="bi-eye-slash"
+                        visible={ isStatusActive }
                     >
-                        Create Draft
+                        Deactivate  Post 
+                    </ButtonLink>
+
+                    <ButtonLink
+                        handle={() => navigate(`/dashboard/product-form?mode=view&id=${currentItem.productId}`)}
+                        icon="bi-box-arrow-up-right"
+                        visible={ isStatusActive }
+                    >
+                        Linked Product
+                    </ButtonLink>
+
+                    <ButtonLink
+                        handle={() => handleStatus(currentItem.id, "ACTIVE")}
+                        icon="bi-eye"
+                        visible={ isStatusNotActive }
+                    >
+                       Activate Post
                     </ButtonLink>
 
 
                     <ButtonLink
+                        icon="bi-image"
+                        visible={ isStatusActive }
+                    >
+                        Change thumbnail
+                    </ButtonLink>
+
+
+                    <ButtonLink
+                        visible={ isDistincActive }
+                        handle={() => handleStatus(currentItem?.id, "DELETED")}
+                        icon="bi-trash3"
+                    >
+                        Delete Post
+                    </ButtonLink>
+
+                    <ButtonLink
+                        visible={ isStatusDraft }
+                        handle={() => navigate(`${FORM_URL}?mode=draft&hash=${currentItem.hash}`)}
+                        icon="bi-pencil"
+                    >
+                        Edit Post
+                    </ButtonLink>
+
+
+                    <ButtonLink
+                        visible={ isStatusActive }
+                        handle={() => navigate(`${FORM_URL}?mode=edit&hash=${currentItem.hash}`)}
+                        icon="bi-pencil"
+                    >
+                        Edit Post
+                    </ButtonLink>
+
+                    <ButtonLink
+                        visible={ hashParam }
+                        handle={() => navigate(`${FORM_URL}?mode=create&hash=${currentItem.hash}`)}
+                        icon="bi-copy"
+                    >
+                        Clone Post
+                    </ButtonLink>
+
+
+
+                    <ButtonLink
+                        visible={ hashParam }
+                        handle={() => navigate(`${FORM_URL}?mode=view&hash=${currentItem?.hash}`)}
+                        icon="bi-three-dots"
+                    >
+                        Post summary
+                    </ButtonLink>
+
+
+                    {/** List Actions **/}
+
+                    <ButtonLink
                         disabled={true}
-                        visible={!hashParam}
+                        visible={ !hashParam }
                         icon="bi-upload"
                         handle={() => navigate('/faqs')}
                     >
@@ -81,72 +186,16 @@ export default function ListingActions({ close }) {
 
                     <ButtonLink
                         disabled={true}
-                        visible={!hashParam}
+                        visible={ !hashParam }
                         icon="bi bi-download"
                         handle={() => navigate('/faqs')}
                     >
                         Export File
                     </ButtonLink>
 
-                    <ButtonLink
-                        handle={() => handleStatus(currentItem.id, "INACTIVE")}
-                        icon="bi-eye-slash"
-                        visible={currentItem?.status === "INACTIVE"}
-                    >
-                        Hide Post
-                    </ButtonLink>
 
-                    <ButtonLink
-                        handle={() => navigate(`/dashboard/product-form?mode=view&id=${currentItem.productId}`)}
-                        icon="bi-box"
-                        visible={currentItem?.status === "ACTIVE"}
-                    >
-                        View Product
-                    </ButtonLink>
-
-                    <ButtonLink
-                        handle={() => handleStatus(currentItem.id, "ACTIVE")}
-                        icon="bi-eye"
-                        visible={currentItem?.status === "INACTIVE"}
-                    >
-                        Unhide Post
-                    </ButtonLink>
-
-
-                    <ButtonLink
-                        icon="bi-image"
-                        visible={currentItem?.status === "ACTIVE"}
-                    >
-                        Change thumbnail
-                    </ButtonLink>
-
-
-                    <ButtonLink
-                        visible={currentItem?.status === "ACTIVE"}
-                        handle={() => handleDelete(currentItem.id)}
-                        icon="bi-trash3"
-                    >
-                        Delete Post
-                    </ButtonLink>
-
-                    <ButtonLink
-                        visible={currentItem?.status === "ACTIVE"}
-                        handle={() => navigate(`${BASE_URL}?mode=edit&hash=${currentItem.hash}`)}
-                        icon="bi-pencil"
-                    >
-                        Edit Post
-                    </ButtonLink>
-
-
-                    <ButtonLink
-                        visible={currentItem?.status === "ACTIVE"}
-                        handle={() => navigate(`${BASE_URL}?mode=view&hash=${currentItem.hash}`)}
-                        icon="bi-three-dots-vertical"
-                    >
-                        Post summary
-                    </ButtonLink>
                 </>
-            )}
+            </FetchState.Toast>
 
         </div>
     )

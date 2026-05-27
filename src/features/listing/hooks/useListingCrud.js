@@ -1,13 +1,16 @@
-import { CRUD } from "@/utils/crud.js";
 import { useEffect, useState } from "react";
+import { CRUD } from "@utils/enums.js";
 import { useCrudForm } from "@/features/crud/hooks/useCrudForm.js";
 import { useCrudActions } from "@/features/crud/hooks/useCrudActions.js";
 import { listingService } from '../services/listingService.js';
 import { useListing } from "./useListing";
 
+
+
+
 export const useListingCrud = () => {
 
-    const { setCurrentItem, currentListing, setId, id, loading: loadingItem, error: errorItem, refreshElem } = useListing();
+    const { setCurrentItem, currentListing, setId, id, loading: loadingItem, error: errorItem, refreshElem, ...props} = useListing();
 
     const [showModal, setShowModal] = useState(false)
     const [dataItem, setDataItem] = useState({});
@@ -42,6 +45,7 @@ export const useListingCrud = () => {
     },[crudMode,currentListing])
 
     return ({
+       ...props,
 
         // Form
         editableFields,
@@ -83,6 +87,6 @@ export const useListingCrud = () => {
         setShowModal,
         setId, 
         id,
-        refreshElem
+        refreshElem,
     })
 }

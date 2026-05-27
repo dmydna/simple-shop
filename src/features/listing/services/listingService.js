@@ -1,10 +1,10 @@
 // src/services/listingService.js
-import {toUpdateListing, toCreateListing} from '@utils/mapper.js'
+import {toUpdateListing, toCreateListing,  mapToURLSearchParams} from '@utils/mappers.js'
 
-
-import { BASE_URL, ENDPOINTS, mapToURLSearchParams, ROLE, TOKEN } from "../../../utils/config.js";
+import { BASE_URL, ENDPOINTS } from "@utils/config.js";
+import { responseError } from '@utils/service.js';
 const ENDPOINT = ENDPOINTS.LISTENING;
-const CREDENTIALS = ROLE == 'ADMIN' ? { 'Authorization': `Bearer ${TOKEN}`} : {}
+
 
 /* ========= HTTP ==========
   - 1XX (Información)
@@ -16,29 +16,24 @@ const CREDENTIALS = ROLE == 'ADMIN' ? { 'Authorization': `Bearer ${TOKEN}`} : {}
 
 export const listingService = {
 
-    /* ----------- OBSOLETOS  ----------------- */
-
-
-    // GET ALL: Obtener todos las publicaciones (anuncios)
-    getAll: async () => {
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}`);
-        if (!response.ok) throw new Error("Error al obtener productos");
-        return await response.json();
-    },
-
-    /* ---------- FIN OBSOLETOS -------------------  */
-
     // GET: Obtener un producto por ID
     getById: async (id) => {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`);
-        if (!response.ok) throw new Error("Producto no encontrado");
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.json();
     },
 
     getByHash: async (hash) => {
+        const TOKEN = localStorage.getItem("token")
         console.log("obtiene por hash", hash)
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/hash/${hash}`);
-        if (!response.ok) throw new Error("Producto no encontrado");
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/hash/${hash}`,    
+             {headers: TOKEN ? { 'Authorization': `Bearer ${TOKEN}`} : {} }
+        );
+        if (!response.ok) {
+            return responseError(response)
+        }
         const data = await response.json();
         return data?.listing
     },
@@ -47,10 +42,11 @@ export const listingService = {
     getPage : async ({ page = 0, size = 10, ...filters } = {}) => {
 
         const TOKEN = localStorage.getItem("token")
+        console.log(TOKEN)
         // 1. Creamos un objeto plano para los parámetros
         const cleanParams = new URLSearchParams();
 
-        cleanParams.append('page', page);
+        cleanParams.append('page', isNaN(page) ? 0 : page );
         cleanParams.append('size', size);
 
         // 2. Agregamos los filtros dinámicamente
@@ -59,9 +55,11 @@ export const listingService = {
         console.log("URL Corregida:", cleanParams.toString());
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}`,    
-             {headers: CREDENTIALS}
+             {headers: TOKEN ? { 'Authorization': `Bearer ${TOKEN}`} : {} }
             );
-        if (!response.ok) throw new Error("Error en la API");
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.json();
     },
 
@@ -71,6 +69,8 @@ export const listingService = {
     // POST: crear listing con imagenes (permite sin imagenes)
     create: async (data, selectedFile) => {
 
+        console.log(selectedFile)
+
         const listingData = toCreateListing(data);
         const TOKEN = localStorage.getItem("token");
         const formData = new FormData();
@@ -79,14 +79,14 @@ export const listingService = {
         formData.append('listing', new Blob([JSON.stringify(listingData)], {
             type: 'application/json'
         }));
-    
+
         // Parte 2: Archivo
         if (selectedFile && selectedFile?.length !== 0) {
             selectedFile?.forEach((file) => {
                 formData.append('files', file); // 'images' es el nombre que recibirá tu backend
             });
         }
-    
+
         const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
             method: 'POST',
             headers: {
@@ -96,11 +96,9 @@ export const listingService = {
             },
             body: formData
         });
-    
+
         if (!response.ok) {
-            const errorData = await response.json(); // Intentar leer el error del servidor
-            console.error("Detalle del error:", errorData);
-            throw new Error("Error 400: Revisa el formato de los datos");
+            return responseError(response)
         }
         return await response.json();
     },
@@ -119,8 +117,7 @@ export const listingService = {
         });
     
         if (!response.ok) {
-            const errorMsg = await response.text();
-            throw new Error(errorMsg || "No se actualizó la visibilidad");
+            return responseError(response)
         }
         return await response.json();
     },
@@ -141,14 +138,14 @@ export const listingService = {
             }
         });
         if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`Error al subir imagen: ${errorText}`);
+            return responseError(response)
         }
         return await response.text();
       },
 
-    // PUT: Actualiza producto por ID
-    update: async (data, selectedFiles = null) => {
+    // TODO: borra id de firma de metodo UPDATE
+    update: async (id, data, selectedFiles = null) => {
+
         const TOKEN = localStorage.getItem("token")
         const listingData = toUpdateListing(data);
         const formData = new FormData();
@@ -173,7 +170,9 @@ export const listingService = {
             body: formData
         });
 
-        if (!response.ok) throw new Error("Error al actualizar producto");
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.json();
     },
 
@@ -190,7 +189,7 @@ export const listingService = {
         });
 
         if (!response.ok) {
-            throw new Error("No se pudo eliminar el producto");
+            return responseError(response)
         }
         return response.status === 204 ? // HTTP 202 Accepted
         { success: true } : await response.json();

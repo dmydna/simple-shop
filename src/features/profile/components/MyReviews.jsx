@@ -1,17 +1,14 @@
-import { useEffect, useState } from "react";
-import { reviewService } from "@/features/review/services/reviewService.js";
-import PageLoading from "@/components/common/PageLoading";
-import { ImgGenApi } from "@/dev/utils";
 import { useReview } from "@/features/review/hooks/useReview";
+import DataView from "@common/DataView";
 import Pagination from '@features/pagination/components/Pagination.jsx';
-import PageEmpty from '@pages/errors/PageEmpty.jsx'
-import { ProfileHeader } from "./ProfileHeader";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { ProfileHeader } from "./ProfileHeader";
 
 function MyReviews({ children }) {
 
-    const { content, loading, currentPage, setCurrentPage, totalPages, setFilters, refreshData, deleteReview } = useReview()
+    const { loading, error, setError, content, currentPage, setCurrentPage, 
+    totalPages, setFilters, refreshData, deleteReview } = useReview()
 
     const navigate = useNavigate()
 
@@ -25,14 +22,21 @@ function MyReviews({ children }) {
         refreshData()
     }
 
-    return (loading ? (<PageLoading />) : (
+    return (
+
+        <DataView
+            data={content}
+            loading={loading}
+            emptyMessage={"No tienes reseñas pendientes aún"}
+            emptyIcon="bi bi-star"
+            error={error}
+            onRetry={refreshData}
+        >
         <>
-        {content?.length !== 0 && (
             <ProfileHeader
                 title="Mis reseñas"
                 subtitle="Puedes ver tu reseñas pedientes"
             />
-        )}
             {content?.length !== 0 && content.map((item, index) =>
                 <div className="mb-4">
                         <div className={`d-flex mb-2 ${index !== content.length - 1 ? 'border-bottom' : ''}`}>
@@ -64,17 +68,14 @@ function MyReviews({ children }) {
 
                         </div>
                 </div> )}
-           {content?.length == 0 && (
-               <PageEmpty ico='bi-star'/>
-           )}
             <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 totalPages={totalPages}
             />
         </>
-
-    ))
+    </DataView>
+    )
 }
 
 export default MyReviews;

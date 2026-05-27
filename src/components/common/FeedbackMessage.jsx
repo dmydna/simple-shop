@@ -1,15 +1,32 @@
+import FeedbackError from "@common/FeedbackError"
+import {useAuth} from "@features/auth/hooks/AuthContext"
+
+
 export const FeedbackMessage = ({
                              icon = "bi-exclamation-circle",
                              title,
-                             message,
+                             error,
                              actionLabel,
                              onAction,
-                             children
+                             children,
+                             message
                          }) => {
+
+
+
+    const {isAdmin} = useAuth()
+
+
+    const detailedMessage = error?.message || error?.error || "Ocurrió un error desconocido.";
+    const genericMessage = "Hubo un error al procesar la solicitud. Intente nuevamente.";
+    
+    const displayMessage = isAdmin ? detailedMessage : genericMessage;
+    const hasDetails = isAdmin && detailedMessage !== genericMessage;
+
     return (
-        <div className="container my-5">
-            <div className="row justify-content-center">
-                <div className="col-12 col-md-6 text-center">
+        <div style={{maxWidth: '600px'}} className="d-block mx-3 mx-md-auto h-100">
+            <div className="row justify-content-center align-items-center flex-fill h-100">
+                <div className="col-12 text-center">
                     {/* Icono sutil */}
                      {children?.icon || 
                     <div className="mb-3 text-secondary" style={{ opacity: 0.3 }}>
@@ -18,10 +35,17 @@ export const FeedbackMessage = ({
 
                     {/* Texto refinado */}
                     <h3 className="fs-5 fw-light text-dark mb-2">{title}</h3>
-                    <p className="text-muted small mx-auto mb-4" style={{ maxWidth: '280px', lineHeight: '1.4' }}>
-                        {message}
+                    <p 
+                       className="text-muted small mx-auto mb-4" 
+                       style={{ overflow: 'auto', maxWidth: '280px', lineHeight: '1.4' }}>
+                        { error ? displayMessage : message }
                     </p>
-
+                   { error && hasDetails && (
+                       <FeedbackError 
+                           detailedMessage={detailedMessage} 
+                           error={error} 
+                        />
+                    )}
                     {/* Botón condicional (solo aparece si hay una acción) */}
                     {onAction && (
                         <button
@@ -34,6 +58,6 @@ export const FeedbackMessage = ({
                     )}
                 </div>
             </div>
-        </div>
+        </div>    
     );
 };

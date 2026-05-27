@@ -37,7 +37,8 @@ proxy: {
       '@utils': '/src/utils',
       '@hooks': '/src/hooks',
       '@contexts': '/src/hooks',
-      '@pages': '/src/pages'
+      '@pages': '/src/pages',
+      '@dashboard': '/src/features/dashboard'
     }
   }
 })

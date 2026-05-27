@@ -1,13 +1,14 @@
+import { useEffect, useState } from "react";
 import { useProduct } from "@/features/product/hooks/useProduct.js";
 import { productService } from '@/features/product/services/productService.js';
-import { CRUD } from "@/utils/crud.js";
-import { useEffect, useState } from "react";
+import { CRUD } from "@utils/enums.js";
 import { useCrudForm } from "@/features/crud/hooks/useCrudForm.js";
 import { useCrudActions } from "@/features/crud/hooks/useCrudActions.js";
 
 export const useProductCrud = () => {
 
-    const { setId, id, currentProduct, loading: loadingItem, error: errorItem, refreshElem} = useProduct();
+    const { setId, id, setCurrentItem, currentProduct, loading: loadingItem, 
+    error: errorItem , ...props } = useProduct();
 
     const [showModal, setShowModal] = useState(false)
     const [dataItem, setDataItem] = useState({});
@@ -43,7 +44,7 @@ export const useProductCrud = () => {
 
 
     return ({
-
+        ...props,
         // Form
         editableFields,
         setEditableFields,
@@ -72,6 +73,7 @@ export const useProductCrud = () => {
 
         // Product
         currentProduct,
+        setCurrentItem,
         currentItem: currentProduct,
         dataItem,
         setDataItem,
@@ -80,7 +82,7 @@ export const useProductCrud = () => {
         setCrudMode, 
         showModal, 
         setShowModal,
-        refreshElem
+
 
     })
 }

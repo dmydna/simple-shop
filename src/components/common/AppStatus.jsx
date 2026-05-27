@@ -5,8 +5,17 @@ import PageIsOffline from "@/pages/errors/PageIsOffline";
 import PageServerDown from "@/pages/errors/PageServerDown";
 import PageNotContent from "@pages/errors/PageNotContent";
 
-// DataHandler.jsx
-export const DataHandler = (
+
+
+/**
+ * Componente principal que gestiona estados de carga, error, servidor y sin contenido en la App.
+ * Renderiza componentes de estado específicos y muestra los hijos solo cuando
+ * no hay carga, error ni éxito activo.
+ *
+*/
+
+
+export const AppStatus = (
     { 
       children, 
       loading, 
@@ -28,9 +37,9 @@ export const DataHandler = (
     // 3. Servidor caido
     if (serverStatus === 'servidor_caido') return (<PageServerDown />)
     // 2. -- Error de carga de contenido
-    if (error) return <PageError handle={onRetry} />
+    if (error) return <PageError error={error} handle={onRetry} />
     // 3. No hay contenido
     if (isEmpty) return <PageNotContent /> 
 
-    return <>{children}</>;
+    return <>{children}</>
 };

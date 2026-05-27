@@ -8,7 +8,7 @@ export const useOrder = () => {
     const { loading: loadingList, error: errorList, content, setContent, totalElements, setFilters, ...props }
         = useFetchData({ service: orderService, size: 2 })
 
-    const { loading: loadingItem, error: errorItem, currentItem, setCurrentItem, id, setId }
+    const { loading: loadingItem, error: errorItem, setError: setErrorItem ,currentItem, setCurrentItem, id, setId }
         = useFetchElem({ service: orderService })
 
 
@@ -24,5 +24,6 @@ export const useOrder = () => {
         setCurrenOrder: setCurrentItem,
         orderHash: id,
         setOrderHash: setId,
+        setErrorItem,
     })
 }

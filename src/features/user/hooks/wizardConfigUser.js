@@ -1,4 +1,4 @@
-import {CRUD} from "../../../utils/crud.js";
+import { CRUD } from "@utils/enums.js";
 
 export const WIZARD_CONFIG = [
     { key: 'OPTIONS_CREATE', url: 'Crear Producto',

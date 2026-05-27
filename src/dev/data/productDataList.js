@@ -1,6 +1,6 @@
 
 import { productService } from "../../features/product/services/productService.js";
-import { handleBulk } from "../utils.js";
+import { handleBulk } from "../imageJS.js";
 
 
 export const productDataList = 

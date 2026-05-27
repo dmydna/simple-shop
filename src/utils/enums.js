@@ -1,4 +1,36 @@
+export const bi_icons = {
+    "bi-person":       "F4E1",
+    "bi-person-fill":  "F4DA",
+    "bi-braces":       "F1C9",    // { }
+    "bi-code":         "F2C8",    // < > 
+    "bi-code-slash":   "F2C6",    // </>
+    "bi-hash":         "F40A",    // #
+    "bi-at":           "F152",    // @
+    "default":         "F152"
+}
+export const color = {
+    ".melon"    : "FFE5B4",
+    ".menta"    : "B2F2BB",
+    ".lavanda"  : "C7CEEA",
+//  ".limon"    : "FFFACD",
+    ".rosa"     : "FFD6E0",
+    ".cielo"    : "B5D8F7",
+    ".lila"     : "E6CCFF",
+    ".coral"    : "FFCBA4",
+    ".aqua"     : "B2EBF2",
+    ".manteca"  : "FFF5B7",
+    ".salmon"   : "FFB7B2",
+    ".pera"     : "D4F1A0",
+    ".malva"    : "F2C4CE",
+    ".celeste"  : "C9E8FF",
+    ".durazno"  : "FFDAC1",
+} 
 
+
+export const role = Object.freeze({
+    ADMIN: "ADMIN",
+    CLIENT: "CLIENT"
+});
 
 export const category = Object.freeze({
     GROCERIES: "groceries",
@@ -22,11 +54,27 @@ export const tags = Object.freeze({
 });
 
 
+export const availabilityStock = Object.freeze({
+    InStock: "In Stock", 
+    OutStock: "Out Stock", 
+    LowStock: "Low Stock", 
+    Pending: "Pending"
+})
+
+
 export const status = Object.freeze({
-    ACTIVE: "ACTIVE",
+    ACTIVE:   "ACTIVE",
     INACTIVE: "INACTIVE",
-    DRAFT: "DRAFT",
-    DELETED: "DELETED",
+    DRAFT:    "DRAFT",
+    DELETED:  "DELETED",
+});
+
+
+
+export const userStatus = Object.freeze({
+    ACTIVE:   "ACTIVE",
+    INACTIVE: "INACTIVE",
+    DELETED:  "BANNED",
 });
 
 export const CRUD = Object.freeze({

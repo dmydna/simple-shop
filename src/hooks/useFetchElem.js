@@ -16,7 +16,7 @@ export const useFetchElem = ({ fetchMethod }) => {
             console.log("desde fetchElem data",data)
         } catch (err) {
             console.error("Error de carga de API", err);
-            setError(err.message || "Error al cargar el elemento");
+            setError(err || "Error al cargar el elemento");
         } finally {
             setLoading(false);
         }

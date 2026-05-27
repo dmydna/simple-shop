@@ -1,5 +1,7 @@
 // src/services/userService.js
-import {mapToURLSearchParams, ENDPOINTS, ROLE, BASE_URL } from "../../../utils/config.js";
+import { mapToURLSearchParams } from "@utils/mappers.js" 
+import { responseError } from "@/utils/service.js";
+import { ENDPOINTS, BASE_URL } from "@utils/config.js";
 const ENDPOINT = ENDPOINTS.USER;
 
 /* ------ ACCESO SOLO CON TOKEN ------- */
@@ -17,12 +19,12 @@ export const userService = {
         // 2. Agregamos los filtros dinámicamente
         mapToURLSearchParams(cleanParams, filters)
 
-        console.log("-- URL con Parametros:", cleanParams.toString());
-
         const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}` , {
             headers: {'Authorization': `Bearer ${TOKEN}`},
         });
-        if (!response.ok) throw new Error("Error en la API");
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.json();
     },
 
@@ -33,7 +35,9 @@ export const userService = {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             headers: { 'Authorization': `Bearer ${TOKEN}` },
         });
-        if (!response.ok) throw new Error("usuario no encontrado");
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.json();
     },
 
@@ -43,7 +47,9 @@ export const userService = {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/profile`, {
             headers: { 'Authorization': `Bearer ${TOKEN}` },
         });
-        if (!response.ok) throw new Error("usuario no encontrado");
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.json();
     },
 
@@ -57,7 +63,7 @@ export const userService = {
         });
 
         if (!response.ok) {
-            throw new Error("No se pudo eliminar el usuario");
+            return responseError(response)
         }
         return response.status === 204 ? 
         { success: true } : await response.json();
@@ -73,8 +79,10 @@ export const userService = {
                 },
                 body: JSON.stringify(userDataList)
             });
-            if (!response.ok) throw new Error("Error al crear producto");
-            return await response.json();
+        if (!response.ok) {
+            return responseError(response)
+        }
+        return await response.json();
     },
 
     updateStatus: async (id, status) => {
@@ -83,16 +91,51 @@ export const userService = {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/status?status=${status}`, {
             method: 'PATCH',
             headers: {
-                // Agrega el header de autorización
+            // Agrega el header de autorización
                 'Authorization': `Bearer ` + TOKEN
-                // Nota: No es necesario 'Content-Type' porque no hay 'body'
+            // Nota: No es necesario 'Content-Type' porque no hay 'body'
             }
         });
     
         if (!response.ok) {
-            const errorMsg = await response.text();
-            throw new Error(errorMsg || "No se actualizó status");
+            return responseError(response)
         }
         return await response.json();
     },
+
+    banUser: async (id, banRequest) => {
+        console.log(banRequest)
+        const TOKEN = localStorage.getItem("token")
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/ban-user`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ` + TOKEN
+                },
+                body: JSON.stringify(banRequest)
+        });
+
+        if (!response.ok) {
+            return responseError(response)
+        }
+         // El backend siempre devuelve 200 OK con cuerpo vacío en éxito
+        return { success: true };
+    },
+    
+
+    unbanUser: async (id) => {
+        const TOKEN = localStorage.getItem("token")
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/unban-user`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ` + TOKEN
+                },
+        });
+        if (!response.ok) {
+            return responseError(response)
+        }
+         // El backend siempre devuelve 200 OK con cuerpo vacío en éxito
+        return { success: true };
+    },
+    
 };

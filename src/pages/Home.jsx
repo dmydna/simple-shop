@@ -16,8 +16,8 @@ import Img10 from "../assets/online-store.png";
 import Img4 from '../assets/open-store.png';
 import Img5 from "../assets/purchasing.png";
 import Img3 from "../assets/snowman.png";
+import { AppStatus } from "../components/common/AppStatus.jsx";
 import BannerAds from "../components/common/BannerAds";
-import { DataHandler } from "../contexts/DataHandler.jsx";
 import { useAuth } from "../features/auth/hooks/AuthContext.jsx";
 import { useListingContext } from "../features/listing/contexts/ListingContext.jsx";
 import { FeaturesPlaceholder } from "../features/placeholder/FeaturesPlaceholder.jsx";
@@ -36,7 +36,7 @@ function Home() {
     const [showCupon, setShowCupon] = useState()
 
     return (
-        <DataHandler
+        <AppStatus
             loading={loading}
             onRetry={fetchData}
             error={error}
@@ -206,7 +206,7 @@ function Home() {
             </>
             <CouponModal show={showCupon} onHide={setShowCupon}/>
 
-        </DataHandler>
+        </AppStatus>
 
 
     )

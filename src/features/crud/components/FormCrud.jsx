@@ -1,32 +1,39 @@
-import PageLoading from "@/components/common/PageLoading";
+import FetchState from "@/components/common/FetchState";
 import FormWarning from "@/features/dashboard/common/FormWarning";
-import { useCrudParams } from "@/hooks/useCrudParams";
-import PageError from "@/pages/errors/PageError";
-import PageSuccess from "@/pages/errors/PageSuccess";
-import { useMemo, useState } from "react";
-import { Button } from "react-bootstrap";
+import { useDashboardParams } from "@/hooks/useDashboardParams";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import ButtonCrud from "./ButtonCrud";
 import ModalCrud from "./ModalCrud";
+import { useCustomParams } from "@/hooks/useCustomParams";
+
 
 // NOTA este componente es multi-contexto, 
 // hay que mandar un crud-hook compatible.
 function FormCrud({ children, type, useCrudHook, crudHook }) {
 
 
-    const { handleUpdate, handleStatus,handleCreate, setShowModal,
+    const { handleUpdate, handleStatus, handleCreate, setShowModal,
         currentItem, setId, formData, setFormData, setEnableEditableField,
         loading, setLoading, error, errorItem, setError, success,
-        setSuccess, refreshElem,fetchElem, ...props } = crudHook
+        setSuccess, refreshElem, fetchElem, ...props } = crudHook
 
-  
+    const {setSearchParams} = useCustomParams()
 
-    const {editMode, viewMode, createMode, copyMode, draftMode} = useCrudParams(crudHook)
+    const navigate = useNavigate()
+    const location = useLocation();
+
+    const { editMode, viewMode, createMode, copyMode, draftMode } = useDashboardParams(crudHook)
 
     const title = useMemo(() => {
+        // -- Nota: 
+        // 1. El modo draft solo permite editar
+        // 2. El modo create incluye crear draft
         let action = null;
         if (editMode) action = `Edit ${type}`;
         if (createMode || copyMode) action = `Add ${type}`;
         if (viewMode) action = `${type} Summary`;
-        if (draftMode) action = `Add ${type} Draft`
+        if (draftMode) action = `Edit ${type} draft`
         return action;
     }, [editMode, viewMode, createMode, type])
 
@@ -37,82 +44,92 @@ function FormCrud({ children, type, useCrudHook, crudHook }) {
         setShowModal(true)
     }
 
-    const handlePublish = async () => {
-        handleCreate()
-    }
+    const handlePublish = useCallback(() => {
+          handleCreate(formData, props?.selectedFile || null)
+    },[formData, props])
+
+   const handlePublishDraft = useCallback(() => {
+         () => props?.handleStatus(currentItem.id, "ACTIVE")
+    },[currentItem, props])
+
+    const handleEdit = useCallback(() => {
+         handleUpdate(currentItem?.id, formData, props?.selectedFile || null)
+    },[currentItem, formData, props])
+
+    const handleCreateDraft = useCallback(() => {
+        handleCreate(
+          { ...formData, status: "DRAFT" }, 
+          props?.selectedFile || null
+       )
+    },[currentItem, formData, props])
 
 
-
+    useEffect(()=>{
+        if(!createMode){
+            refreshElem()
+        }
+        refreshElem()
+    },[success, createMode])
 
     return (
+
         <div className="border island p-4 mb-3 mx-0 mx-md-2">
 
-            {errorItem && <PageError handle={()=>setShowWarn(true)} />}
-            {loading && <PageLoading />}
-            {error && <PageError handle={()=> setError(null)} />}
-            {success && <PageSuccess handle={()=>{
-               refreshElem()
-               setSuccess(false)} 
-            }/>}
-
-            {!loading && !error && !errorItem && !success && (
+            <FetchState.Modal 
+                hook={{ loading, error, setError, success, setSuccess }} 
+            >
                 <div>
 
                     <div className="d-flex justify-content-between mb-3">
                         <p className="fw-medium text-capitalize fs-5">{title}</p>
-                        <i onClick={handleConfig} className="d-block d-md-none btn btn-light mb-3 bi bi-gear"></i>
+                        <i onClick={() => setSearchParams(prev => ({...prev, dialog: "action"}))} 
+                           className="d-block d-md-none btn btn-light mb-3 bi bi-gear">
+                        </i>
                     </div>
 
                     {children}
 
-                    {editMode && !viewMode && (
-                        <div className="d-flex mt-5 justify-content-center">
-                            <Button 
-                                className="rounded-3 border-1 fw-medium"
-                                onClick={() => handleUpdate(currentItem?.id, formData, props?.selectedFile || null)}
-                                variant="outline-dark">
-                                <i className='bi-floppy'></i>
-                                <span className="mx-3">Save Changes</span>
-                            </Button>
-                        </div>
-                    )}
-                    {createMode && (
-                        <div className="d-flex gap-3 mt-5 justify-content-center">
-                            <Button 
-                                 onClick={() => handleStatus(currentItem?.id, "DRAFT") }
-                                className="border-1 fw-medium" variant="outline-dark">
-                                <i class="bi bi-paperclip me-2"></i>
-                                <span>Draft</span>
-                            </Button>
-                            <Button
-                                onClick={() => handleCreate(formData, props?.selectedFile || null) }
-                                variant="dark">
-                             <i class="bi bi-send me-2"></i>
-                             <span>Publish</span>
-                            </Button>
-                        </div>
-                    )}
+                    <div className="d-flex mt-5 justify-content-center gap-3">
 
-                    {copyMode && (
-                        <div className="d-flex gap-3 mt-5 justify-content-center">
-                            <Button className="border-1 fw-medium" variant="light">
-                                save
-                            </Button>
-                            <Button
-                                onClick={handlePublish}
-                                variant="dark">Publish
-                            </Button>
-                        </div>
-                    )}
+                                <ButtonCrud
+                                    icon="bi-pencil"
+                                    title="Save Changes"
+                                    visible={editMode || draftMode}
+                                    handle={handleEdit}
+                                />
 
+                                <ButtonCrud
+                                    icon="bi-plus"
+                                    title="Draft"
+                                    visible={createMode}
+                                    handle={handleCreateDraft}
+                                />
+
+                                <ButtonCrud
+                                    icon="bi-send"
+                                    title="Publicar"
+                                    variant="dark"
+                                    visible={createMode || copyMode}
+                                    handle={handlePublish}
+                                />
+
+                                <ButtonCrud
+                                    icon="bi-send"
+                                    variant="dark"
+                                    title="Publish Draft"
+                                    visible={draftMode}
+                                    handle={handlePublishDraft}
+                                />
+
+                    </div>
                 </div>
 
-            )}
+            </FetchState.Modal>
 
             <ModalCrud
                 show={showWarn}
             >
-                <FormWarning  close={() => setShowWarn(false)}/>
+                <FormWarning close={() => setShowWarn(false)} />
             </ModalCrud>
 
         </div>

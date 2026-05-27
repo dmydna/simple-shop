@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useProductCrudContext } from "../contexts/ProductCrudContex";
+import { category } from "@/utils/enums";
+import InputCrudFloating from "@/features/crud/components/InputCrudFloating";
 
-// TODO no funciona
+
 function FormCategory({ children, className, crudHook }) {
 
     const { dataItem, handleChange, crudMode, setFormData, formData,
         isDisabledField, handleEnableEdit, editableFields, currentProduct } = crudHook;
 
-    const [selected, setSelected] = useState('4');
 
+    useEffect(() => {
+        console.log(formData?.category)
+    }, [formData])
 
     return (
         <>
@@ -19,13 +23,22 @@ function FormCategory({ children, className, crudHook }) {
 
                 <p className="fw-medium"> Category: </p>
 
-                <Form.Select>
+
+               {editableFields["category"] && (
+                <Form.Select className="p-3" name="category" value={formData?.category} onChange={handleChange}>
                     <option value="">Selecciona una opción</option>
-                    <option value="1">groceries</option>
-                    <option value="2">furnitures</option>
-                    <option value="3">beauty</option>
-                    <option value="1">fagrances</option>
+                    <option value={category.GROCERIES}>groceries</option>
+                    <option value={category.FURNITURE}>furnitures</option>
+                    <option value={category.BEAUTY}>beauty</option>
+                    <option value={category.FRAGRANCE}>fagrances</option>
                 </Form.Select>
+               )}
+               {!editableFields["category"] && (
+                <InputCrudFloating
+                    name={"category"}
+                    label={"Category"}
+                    baseHook={crudHook}
+                />)}
             </div>
 
         </>

@@ -8,22 +8,22 @@ export const useReview = () => {
     const { loading: loadingList, error: errorList, content, setContent, totalElements, setFilters, ...props }
         = useFetchData({ service: reviewService, size: 8 })
 
-    const { loading: loadingItem, error: errorItem, currentItem, setCurrentItem, id, setId }
+    const { loading: loadingItem, error: errorItem, currentItem, setCurrentItem, id, setId, setError: setErrorItem }
         = useFetchElem({ fetchMethod: reviewService.getById })
 
-    const { createReview, 
-      loading: loadingCreate, 
-      setError: setErrorCreate, 
-      error: errorCreate, success: successCreate, setSuccess: setSuccessCreate } = useService({service: reviewService})
+
+    const { createReview, loading, setError, error, success, setSuccess} = useService({service: reviewService})
 
 
     return ({
         ...props,
         setFilters,
-        content,
-        loading: loadingList || loadingItem,
-        error: errorList || errorItem,
-        createReview, loadingCreate, setErrorCreate, errorCreate, 
-        successCreate, setSuccessCreate
+        content, setContent, totalElements, setId, id,
+        currentItem, setCurrentItem,
+        loading: loadingList || loadingItem || loading,
+        error: errorList || errorItem || error,
+        createReview, setError, 
+        success, setSuccess,
+        setErrorItem
     })
 }

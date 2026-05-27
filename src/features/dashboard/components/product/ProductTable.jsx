@@ -1,66 +1,46 @@
 import CopyButton from '@/components/common/CopyButton';
-import { color, ImgGenApi } from '@/dev/utils';
-import { formatDate, statusColor } from '@/features/dashboard/util.js';
+import { formatDate, pillColor } from '@/features/dashboard/util.js';
+import { useCustomParams } from '@/hooks/useCustomParams';
 import { useNavParams } from '@/hooks/useNavParams';
+import DataView from '@common/DataView';
 import Pagination from '@features/pagination/components/Pagination.jsx';
-import { useEffect } from 'react';
-import { Card, Form, Table } from 'react-bootstrap';
-export default function ProductTable({ children, baseHook, className }) {
-
-    const { content, loading, currentPage, setCurrentPage, totalPages, setFilters } = baseHook
-
-    const { searchParams, setSearchParams, idParam } = useNavParams({ baseHook: baseHook })
-
-    useEffect(() => {
-        // Lógica de paginación
-        setCurrentPage(1)
-    }, [])
+import React from 'react';
+import { Button, Card, Form, Table } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { placeholderURL } from '@/utils/image';
 
 
-    const handleSelect = (item) => {
+function ProductTable({ children, baseHook, className }) {
 
-        // Selecciona
-        setSearchParams(prev => {
-            const nuevosParams = new URLSearchParams(prev);
-            nuevosParams.set('id', item.id);
-            return nuevosParams;
-        });
+    const { content, loading, currentPage, setCurrentPage, totalPages, setFilters } = baseHook;
 
-        // Deselecciona
-        if (idParam == item.id) {
-            setSearchParams(prev => {
-                const nuevosParams = new URLSearchParams(prev);
-                nuevosParams.delete('id');
-                return nuevosParams;
-            });
-        }
+    const { setSearchParams } = useCustomParams()
+    const navigate = useNavigate()
+    const { idParam } = useNavParams({ baseHook: baseHook })
+
+    const toggleSelect = (item) => {
+        setSearchParams(prev => ({
+            ...prev, id:
+                idParam != item?.id ? item?.id : null
+        }))
     }
 
-    const selected = (item) => {
-        return (item.id == idParam ? 'selected' : '')
+    const openDialogActions = (item) => {
+        setSearchParams(prev => ({ ...prev, dialog: 'action',  id: item.id }))
     }
-
-
-    const baseImg = (index) => ({
-        "icon": "F7D3",
-        "dimension": "150x150",
-        "fontSize": "60",
-        "fontWeight": "light",
-        "textColor": "fff",
-        "background": Object.values(color)[index % Object.values(color).length],
-    })
-
-
-    const status_cases = ["ACTIVE", "INACTIVE", "DRAFT"]
 
     return (
-        <>
-            <div className={`${className} small w-100`}>
-                {children('title')}
+        <DataView
+            loading={loading}
+            data={content}
+            emptyIcon={"bi bi-smail"}
+            emptyMessage={"No hay items"}
+        >
+            <>
+                <div className={`${className} small w-100`}>
 
-                <Table style={{ overflowX: 'auto' }} className="mb-0 w-100" striped={false} bordered={false} hover={true}>
-                    <thead className=''>
-                        {content?.length !== 0 && (
+                    <Table style={{ overflowX: 'auto' }} className="mb-0 w-100" striped={false} bordered={false} hover={true}>
+                        <thead className=''>
                             <tr className='border-bottom'>
                                 {/**Selection */}
                                 <th style={{ width: '150px' }} className='d-none  d-md-table-cell text-secondary'></th>
@@ -73,30 +53,15 @@ export default function ProductTable({ children, baseHook, className }) {
                                 {/** Action */}
                                 <th style={{ width: '150px' }} className='d-block d-table-cell d-md-none text-secondary'></th>
                             </tr>
-                        )}
-                    </thead>
-                    <tbody>
-                        {loading ? (
-                            // Mientras carga, mostramos una fila de carga elegante
-                            <tr>
-                                <td colSpan="3" className="text-center py-5">
-                                    <div className="spinner-border text-primary" role="status"></div>
-                                    <p className="mt-2">Cargando datos...</p>
-                                </td>
-                            </tr>
-                        ) : content?.length === 0 ? (
-                            <tr>
-                                <td colSpan="3" className="text-center">No hay items</td>
-                            </tr>
-                        ) : (
-                            content?.map((item) => (
+                        </thead>
+                        <tbody>
+                            {content?.map((item) => (
 
-                                <tr className={`onhover ${selected(item)}`}
+                                <tr className={`onhover ${item?.id === idParam ? 'selected' : ''}`}
                                     style={{ overflow: "visible", height: "70px" }} key={item.id}>
                                     {/* Selection */}
-
                                     <td
-                                        onClick={() => handleSelect(item)}
+                                        onClick={() => toggleSelect(item)}
                                         className='text-secondary d-none  d-md-table-cell'>
                                         <Form.Check // prettier-ignore
                                             type='checkbox'
@@ -105,19 +70,21 @@ export default function ProductTable({ children, baseHook, className }) {
                                             checked={idParam == item.id}
                                             onChange={(e) => {
                                                 e.stopPropagation();
-                                                handleSelect(item);
+                                                toggleSelect(item);
                                             }}
                                         />
                                     </td>
 
 
                                     {/** Item */}
+                                    
                                     <td>
-                                        <Card.Img
+                                        <img
                                             style={{ objectFit: 'contain', width: '60px', height: '60px' }} // Altura fija igual al texto
                                             className="border border-1 rounded flex-shrink-0"
-                                            src={ImgGenApi({ ...baseImg(item.id) })}
+                                            src={placeholderURL.product(item?.id)}
                                         />
+
                                         <span className='mx-3 fw-medium'>{item?.name || ''}</span>
                                     </td>
 
@@ -142,36 +109,42 @@ export default function ProductTable({ children, baseHook, className }) {
 
                                     <td style={{ lineHeight: '4.2', textAlign: 'start' }}  >
                                         <span
-                                            className={`text-lowercase ${statusColor(status_cases, item?.status)}`}>
-                                            {item?.status}
+                                            className={`text-lowercase ${pillColor[item?.meta?.status]}`}>
+                                            {item?.meta?.status}
                                         </span>
                                     </td>
 
                                     {/**Action */}
-                                    <td
-                                        className='small d-table-cell d-md-none'
+                                    <td className='small d-table-cell d-md-none'
                                         style={{ lineHeight: '4.2', textAlign: 'end' }}  >
-                                        {children('buttons', item)}
+                                        <Button
+                                            size="sm"
+                                            variant="border-0 ligth"
+                                            onClick={() => openDialogActions(item)}
+                                        >
+                                            <i className="bi bi-three-dots h5"></i>
+                                        </Button>
+
                                     </td>
 
-
-
                                 </tr>
+                            )
+                            )}
+                        </tbody>
+                    </Table>
 
-                            ))
-                        )}
-                    </tbody>
-                </Table>
+                </div>
 
+                <Pagination
+                    className="mb-0"
+                    totalPages={totalPages}
+                />
 
-            </div>
-
-            <Pagination
-                className="mb-0"
-                totalPages={totalPages}
-            />
-
-        </>
+            </>
+        </DataView>
     );
 }
 
+
+
+export default React.memo(ProductTable)

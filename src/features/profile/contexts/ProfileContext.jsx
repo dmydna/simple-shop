@@ -33,6 +33,7 @@ export function ProfileProvider({ children }) {
             throw err;
         } finally {
             setLoading(false)
+            setSuccess(false)
             nprogress.done();
         }
     }
@@ -65,6 +66,7 @@ export function ProfileProvider({ children }) {
         try {
             await profileService.update(profile);
             toast.success("Se actualizo profile!");
+            setSuccess(true)
         } catch (err) {
             console.error("Error de carga de API", err);
             setError("No se realizo ninguna accion.")

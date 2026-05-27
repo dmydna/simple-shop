@@ -1,5 +1,5 @@
 import nprogress from "nprogress";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { usePageable } from "../features/pagination/hook/usePageable.js";
 import { useFetch } from "./useFetch.js";
 
@@ -30,14 +30,18 @@ export const useFetchData = ({service, size, methodName = 'getPage'}) => {
             //console.log(data)
         } catch (err) {
             console.error("Error de carga de API", err);
-            setError("No pudimos cargar los elemento. Revisa tu conexión.")
+            setError(err)
         } finally {
             setLoading(false);
+            setSuccess(false)
             nprogress.done();
         }
     };
 
-    const refreshData = () => fetchData(currentPage, filters);
+
+    const refreshData = useCallback(() => {
+          fetchData(currentPage, {})
+    },[currentPage, filters])
 
     useEffect(() => {
         fetchData(currentPage, filters);

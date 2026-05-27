@@ -4,9 +4,13 @@ import { useCrudActions } from "@/features/crud/hooks/useCrudActions.js";
 import { useUser } from "../hooks/useUser.js";
 import { userService } from "../service/userService.js";
 
-export const useUserCrud = () => {
 
-    const { setId, id, currentUser, loading: loadingItem, error: errorItem, refreshElem, setCurrentItem } = useUser(userService.getProfileById);
+// Se usa profile porque incluye mas datos que user
+export const useUserCrud = (fetchProfile=true) => {
+
+    const { setId, id, currentItem, loading: loadingItem, error: errorItem, 
+    refreshElem, setCurrentItem } 
+    = useUser(userService[fetchProfile ? "getProfileById" : "getById"]);
 
     const [showModal, setShowModal] = useState(false)
     const [dataItem, setDataItem] = useState({});
@@ -17,15 +21,16 @@ export const useUserCrud = () => {
         = useCrudForm();
 
     const { handleCreate, handleUpdate, handleDelete, handleStatus,
-        loading, setLoading, error, success, setError, setSuccess,
+        loading, setLoading, error, success, setError, setSuccess, ...props
     } = useCrudActions({ service: userService });
 
 
     useEffect(()=>{
-        setFormData(currentUser)
-    },[currentUser])
+        setFormData(currentItem)
+    },[currentItem])
 
     return ({
+        ...props, // <-- userServices
         // Form
         editableFields,
         setEditableFields,
@@ -53,8 +58,7 @@ export const useUserCrud = () => {
         errorItem,
 
         // User
-        currentUser,
-        currentItem: currentUser,
+        currentItem,
         dataItem,
         setCurrentItem,
         setDataItem,

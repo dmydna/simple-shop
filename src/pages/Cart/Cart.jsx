@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import PageError from "../errors/PageError";
 import PageSuccess from "../errors/PageSuccess";
 import Img0 from "/src/assets/empty-cart.png";
+import CartNavButton from "@/features/cart/components/CartNavButton";
 
 
 function Cart() {
@@ -65,18 +66,18 @@ function Cart() {
             </Card>
           )}
           {success && (
-            <Card className="p-4 island mt-2">
+            <Card className="p-4 island mb-2 h-100 border align-items-center justify-content-center d-flex">
              <PageSuccess
                handle={()=>navigate('/')}
              />
             </Card>
           )}
           {error && (
-            <Card className="p-4 island mt-2">
+            <div className="p-4 island mb-2 h-100 border align-items-center justify-content-center d-flex">
              <PageError
                handle={()=>setError(null)}
              />
-            </Card>
+            </div>
           )}
           {canceled && (
             <Card className="p-4 island mt-2">
@@ -104,37 +105,41 @@ function Cart() {
           )}
           {!error && !loading  && (
             <div style={{top: '66px'}} className="sticky-md-top">
+              
               <MyOrderCart
                 handle={handleConfirmOrder}
                 oncheck={setCuponCheck}
                 check={cuponCheck}>
               </MyOrderCart>
+
               <div  style={{ marginTop: '10px' }} className="border p-3 mx-2 d-flex justify-content-center gap-3 island">
-                 {!success && (
-                <Button style={{ maxWidth: '200px' }}
-                  onClick={handleCancel} variant="light" className="small w-100 d-block border rounded-4">
-                  Cancelar
-                </Button>
-                )}
-                {step == currentStep.CART && !success && (
-                <Button
-                  onClick={handleConfirmOrder} variant="dark" className="small w-100 d-block border rounded-4">
-                  Continuar
-                </Button>
-                )}
-                {step == currentStep.PAY && !success && (
-                <Button
-                  onClick={handleConfirmPay} variant="dark" className="small w-100 d-block border rounded-4">
-                  Confirma Compra
-                </Button>
-                 )}
-                {success && (
-                <Button
-                   variant="success" className="small w-100 d-block border rounded-4 disabled">        
-                   <i className='bi bi-check-circle me-2'></i>
-                   <span className=''>PAGADO</span>
-                </Button>
-                 )}
+
+                <CartNavButton  
+                     visible={!success} 
+                     handle={handleCancel}
+                     variant="light"
+                     title="Cancelar" 
+                />
+
+                <CartNavButton  
+                     visible={step == currentStep.CART && !success} 
+                     handle={handleConfirmOrder} 
+                     title="Continuar" 
+                />
+
+                <CartNavButton  
+                     visible={step == currentStep.PAY && !success} 
+                     handle={handleConfirmPay} 
+                     title="Confirmar Compra" 
+                />
+
+                <CartNavButton  
+                     visible={success} 
+                     variant="success disabled"
+                     title="PAGADO" 
+                     icon="bi bi-check-circle me-2"
+                />
+
               </div>
             </div>
 

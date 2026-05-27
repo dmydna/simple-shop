@@ -1,5 +1,5 @@
 
-import ListingList from "./components/listing/LisitingList";
+import ListingList from "./components/listing/ListingList";
 import ListingActions from "./components/listing/ListingActions";
 import ListingForm from "./components/listing/ListingForm";
 import ListingLayout from "./components/listing/ListingLayout";

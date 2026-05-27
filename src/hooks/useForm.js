@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {CRUD} from "../utils/crud.js";
+import {CRUD} from "@utils/enums.js";
 
 export const useForm = (initialState = {}) => {
 

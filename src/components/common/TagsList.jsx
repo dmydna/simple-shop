@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Badge, Button, Col, Form, InputGroup } from 'react-bootstrap';
 
-export const TagsList = ({ array = [], onChange, className = "", style = {} }) => {
+export const TagsList = ({ array = [], onChange, className = "", style = {}, locked = false }) => {
 
     const [list, setList] = useState(array);
     const [tag, setTag] = useState("");
@@ -26,7 +26,9 @@ export const TagsList = ({ array = [], onChange, className = "", style = {} }) =
 
 
     const deleteTag = (indexToDelete) => {
-        setList(prev => prev.filter((_, index) => index !== indexToDelete));
+        if(locked){
+            setList(prev => prev.filter((_, index) => index !== indexToDelete));
+        }
     };
 
     const handleSave = () => {
@@ -71,14 +73,17 @@ export const TagsList = ({ array = [], onChange, className = "", style = {} }) =
                     </Button>
                 </InputGroup>
             ) : (
-                <Button
+                <>
+                {locked && (
+                  <Button
                     variant="link"
                     size="sm"
                     className="text-decoration-none mb-2 p-0 text-primary"
                     onClick={() => setIsAdding(true)}
                 >
                     <i className="bi bi-plus-circle-fill me-1"></i> Añadir
-                </Button>
+                </Button>)}
+                </>
             )}
         </Col>
     );

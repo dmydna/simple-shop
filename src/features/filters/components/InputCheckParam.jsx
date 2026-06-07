@@ -56,7 +56,7 @@ function InputCheckParam({ name, array = [] , className, style, variant = "light
     <Dropdown className={className} style={style}>
       <Dropdown.Toggle
         variant={variant}
-        className="border container-fluid d-flex toggle-end align-items-center"
+        className="border bg-tint container-fluid d-flex toggle-end align-items-center"
         id="dropdown-basic"
       >
         <b style={{opacity: '.7'}} >tags :</b>

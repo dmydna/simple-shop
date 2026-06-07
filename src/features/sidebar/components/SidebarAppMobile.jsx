@@ -1,13 +1,13 @@
-import { useAuth } from "@features/auth/hooks/AuthContext";
 import CartButton from "@features/cart/components/CartButton.jsx";
 import SiderbarLink from "./SidebarLink";
-import { useUIContext } from "@/contexts/UIContext";
+import { useAuthContext } from "@/features/auth/contexts/AuthContext";
+
 
 // Nota: esta sidebar es la version normal con navegacion global y admite ambos roles
 export default function SidebarAppMobile({ onShow, expandable = true, toggle }) {
 
     const BASE_URL ='/dashboard'
-    const {isAdmin} = useAuth()
+    const {isAdmin} = useAuthContext()
 
   
 

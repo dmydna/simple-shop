@@ -45,7 +45,7 @@ function FormCrud({ children, type, useCrudHook, crudHook }) {
     }
 
     const handlePublish = useCallback(() => {
-          handleCreate(formData, props?.selectedFile || null)
+          handleCreate({...formData, status: "ACTIVE"}, props?.selectedFile || null)
     },[formData, props])
 
    const handlePublishDraft = useCallback(() => {

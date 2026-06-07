@@ -1,6 +1,6 @@
-import PageError from "@/pages/errors/PageError";
-import PageSuccess from "@/pages/errors/PageSuccess";
-import PageLoading from "@common/PageLoading";
+import PageError from "@/pages/fallback/PageError";
+import PageLoading from "@/pages/fallback/PageLoading";
+import PageSuccess from "@/pages/fallback/PageSuccess";
 import { useEffect, useState } from 'react';
 import { Modal } from "react-bootstrap";
 

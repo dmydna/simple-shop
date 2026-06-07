@@ -1,5 +1,5 @@
+import { useAuthContext } from "@/features/auth/contexts/AuthContext";
 import FeedbackError from "@common/FeedbackError"
-import {useAuth} from "@features/auth/hooks/AuthContext"
 
 
 export const FeedbackMessage = ({
@@ -14,7 +14,7 @@ export const FeedbackMessage = ({
 
 
 
-    const {isAdmin} = useAuth()
+    const {isAdmin} = useAuthContext()
 
 
     const detailedMessage = error?.message || error?.error || "Ocurrió un error desconocido.";
@@ -24,7 +24,7 @@ export const FeedbackMessage = ({
     const hasDetails = isAdmin && detailedMessage !== genericMessage;
 
     return (
-        <div style={{maxWidth: '600px'}} className="d-block mx-3 mx-md-auto h-100">
+        <div style={{maxWidth: '600px'}} className="d-block mx-3 mx-md-auto vh-50 h-100">
             <div className="row justify-content-center align-items-center flex-fill h-100">
                 <div className="col-12 text-center">
                     {/* Icono sutil */}

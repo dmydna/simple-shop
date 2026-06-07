@@ -1,5 +1,5 @@
 // src/services/orderService.js
-import { ENDPOINTS, BASE_URL } from "../../../utils/config.js";
+import { ENDPOINTS, BASE_URL } from "@utils/config.js";
 
 const ENDPOINT = ENDPOINTS.BUY
 

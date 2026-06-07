@@ -29,9 +29,6 @@ export const usePayment = () => {
     const { handleConfirmPay }  = useGateway({ buy, setLoading, setError, onSuccess, orderResponse })
 
 
-
-
-
     return ({
         loading, error, setLoading, setError,
         step, setStep,
@@ -40,5 +37,6 @@ export const usePayment = () => {
         handleCancel,
         canceled,
         success,
+        cartStep: Object.freeze({ CART: 0, PAY: 1 }),
     })
 }

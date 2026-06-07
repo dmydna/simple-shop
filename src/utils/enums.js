@@ -55,10 +55,10 @@ export const tags = Object.freeze({
 
 
 export const availabilityStock = Object.freeze({
-    InStock: "In Stock", 
-    OutStock: "Out Stock", 
-    LowStock: "Low Stock", 
-    Pending: "Pending"
+    InStock: "instock", 
+    OutStock: "outstock", 
+    LowStock: "lowstock", 
+    Pending: "pending"
 })
 
 
@@ -96,3 +96,20 @@ export const mode = Object.freeze({
     DELETE: 'delete',
     SELECT: 'select',
 });
+
+
+
+export const pillColor = Object.freeze({
+   "ADMIN":   "pill-dark",
+   "CLIENT":  "pill-success",
+/* --------------------------------- */
+   "ACTIVE":   "pill-primary",
+   "INACTIVE": "pill-secondary",
+   "BANNED":   "pill-danger",
+   "DRAFT":    "pill-dark",
+/* --------------------------------- */
+   "In Stock": "pill-success",
+   "Low Stock": "pill-warning",
+   "Out Stock": "pill-danger",
+   "Pending":   "pill-secondary"
+})

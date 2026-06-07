@@ -1,7 +1,7 @@
 // src/dev/services/devService.js
 
 import { mapToURLSearchParams } from "@utils/mappers";
-import {ENDPOINTS, BASE_URL} from "@/utils/config.js";
+import { ENDPOINTS, BASE_URL } from "@/utils/config.js";
 const ENDPOINT = ENDPOINTS.DEV;
 import { responseError } from '@utils/service.js';
 
@@ -39,7 +39,7 @@ export const devService = {
     },
 
     // devuelve lista paginada
-    getPage : async (type, { page = 0, size = 10, ...filters } = {}) => {
+    getPage: async (type, { page = 0, size = 10, ...filters } = {}) => {
 
         const TOKEN = localStorage.getItem("token")
         // 1. Creamos un objeto plano para los parámetros
@@ -52,7 +52,7 @@ export const devService = {
         mapToURLSearchParams(cleanParams, filters);
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${type}?${cleanParams.toString()}`, 
-             {headers: TOKEN ? { 'Authorization': `Bearer ${TOKEN}`} : {} }
+            { headers: TOKEN ? { 'Authorization': `Bearer ${TOKEN}` } : {} }
         );
         if (!response.ok) {
             return responseError(response)

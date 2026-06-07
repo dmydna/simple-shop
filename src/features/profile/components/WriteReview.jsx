@@ -1,15 +1,12 @@
-import { ImgGenApi } from "@/dev/imageJS";
+import FetchState from "@/components/common/FetchState";
+import { placeholder } from "@utils/image.js";
 import { useReview } from "@/features/review/hooks/useReview";
 import { useForm } from "@/hooks/useForm.js";
-import PageLoading from "@common/PageLoading.jsx";
 import StarRating from "@common/StarRating.jsx";
-import PageError from "@pages/errors/PageError.jsx";
-import PageSuccess from "@pages/errors/PageSuccess.jsx";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ProfileHeader } from "./ProfileHeader";
-import FetchState from "@/components/common/FetchState";
 
 
 
@@ -17,9 +14,10 @@ function WriteReview() {
 
     const [rating, setRating] = useState(2);
     const [searchParams] = useSearchParams();
-
-    const { createReview, content, loading, setError, error, success, setSuccess } = useReview()
-    const { setFormData, formData, onChange } = useForm({ comment: "", rating: 0 })
+    const pendingId = Number(searchParams.get('id'));
+    
+    const { updateReview, loading, setError, error, success, setSuccess, setId, currentItem } = useReview()
+    const { setFormData, formData, onChange } = useForm()
 
 
     // eslint-disable-next-line no-unused-vars
@@ -27,22 +25,27 @@ function WriteReview() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        createReview(formData)
+        updateReview(currentItem.id, {
+            id: currentItem.id,
+            status: "ACTIVE",
+            comment: formData?.comment, 
+            rating: formData?.rating
+        })
+
     }
   
-    const pendingId = Number(searchParams.get('pkey'));
+    useEffect(()=>{
+        if(pendingId){
+            setId(pendingId)    
+        }
+        if(currentItem){
+           setFormData( prev => ({ ...prev, status: "ACTIVE"}) ) 
+        }
+        if(rating){
+            setFormData( prev => ({ ...prev, rating: rating }) )  
+        }
+    },[pendingId, currentItem, rating])
     
-    
-    const reviewInfo = useMemo(() => {
-        return content.filter(item => item.id == pendingId)[0];
-    }, [content, pendingId])
-
-
-    useEffect(() => setFormData(
-        prev => ({ ...prev, rating: rating, productId: reviewInfo?.productId })), 
-        [rating, reviewInfo, setFormData])
-
-
 
 
     return (
@@ -63,9 +66,12 @@ function WriteReview() {
 
 
                             <div className='d-flex gap-3 mb-3  border-0 rounded-3 p-2 w-100'>  
-                                <img style={{ height: '55px', width: '55px' }} className='rounded' src={reviewInfo?.image || ImgGenApi({ dimension: "45x45", background: ".menta", fontSize: "20", icon: "f244" })} />
+                                <img style={{ height: '55px', width: '55px' }} className='rounded' src={currentItem?.image || placeholder({ dimension: "45x45", background: ".menta", fontSize: "20", icon: "f244" })} />
                                 <div className="flex-fill">
-                                    <p className='small fw-semibold m-0'>{reviewInfo?.title}</p>
+                                    <p onClick={()=> navigate(`/p/${currentItem?.hash}`)} 
+                                       className='small fw-semibold m-0 pointer'>
+                                       {currentItem?.title}
+                                    </p>
                                     <div className='d-flex justify-content-between align-items-center'>
                                         <p className='m-0'>Calificación: {rating} estrellas</p>
                                         <StarRating value={rating} onChange={setRating} />
@@ -109,9 +115,7 @@ function WriteReview() {
                     </div>
                 </>
         </FetchState.Modal>
-
     )
-
 }
 
 export default WriteReview;

@@ -56,7 +56,7 @@ export default function SidebarProfileMobile({  toggle }) {
                 className='border-start position-sticky'
                 style={{zIndex: '100', right: '-9px', bottom: 0}}
                 onclick={() => toggle(null)}
-                icon="bi-chevron-right mt-2"
+                icon="bi-three-dots-vertical mt-2"
             />
 
 

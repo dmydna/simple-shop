@@ -3,16 +3,17 @@ import { useFetchData } from "@/hooks/useFetchData.js";
 import { listingService } from "@features/listing/services/listingService.js";
 import { useFetchElem } from "@/hooks/useFetchElem.js";
 
-export const useListing = () => {
+export const useListing = ({autofetch=false, size=8, ...config}={}) => {
     
 
     const [products, setProducts] = useState([])
 
     const {loading: loadingList, error: errorList, content, setContent, ...props}
-        = useFetchData({service: listingService})
+        = useFetchData({service: listingService, autofetch, size, ...config})
 
     const {loading: loadingItem, error: errorItem, currentItem, setCurrentItem, id, setId, refreshElem }
         = useFetchElem({fetchMethod: listingService.getByHash})
+
 
 
     return ({

@@ -1,11 +1,11 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useAuth } from "../hooks/AuthContext.jsx";
+import { useAuthContext } from "../contexts/AuthContext.jsx";
 
 function LoginMenu(){
 
-    const { user, token, login, logout } = useAuth();
+    const { user } = useAuthContext();
 
     return(
         <Nav className="ms-auto w-100  align-items-left d-md-none">

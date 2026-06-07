@@ -1,9 +1,9 @@
-import PageError from "@/pages/errors/PageError";
-import PageSuccess from "@/pages/errors/PageSuccess";
+import PageError from "@/pages/fallback/PageError";
+import PageSuccess from "@/pages/fallback/PageSuccess";
 import React, { useEffect } from 'react';
-import PageLoading from "./PageLoading";
-import FetchStateToast from "./FetchStateToast";
+import PageLoading from "../../pages/fallback/PageLoading";
 import FetchStateModal from "./FetchStateModal";
+import FetchStateToast from "./FetchStateToast";
 
 /**
  * Componente que gestiona estados de carga, error y éxito en una página.

@@ -1,4 +1,4 @@
-import { BASE_URL , ENDPOINTS } from "../../../utils/config.js";
+import { BASE_URL , ENDPOINTS } from "@utils/config.js";
 
 const ENDPOINT = ENDPOINTS.PROFILE;
 

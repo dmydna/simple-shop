@@ -1,19 +1,15 @@
 import InputSelectParam from "@features/filters/components/InputSelectParam"
 import BadgeParams from "@features/filters/components/BadgeParams"
-import { status, category, availabilityStock } from '@utils/enums.js';
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { useEffect, useState , useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 
 
 function FilterParams({children, close, badgeParams = false}){
 	
 	const [searchParams, setSearchParams] = useSearchParams();
-	const navigate = useNavigate();
-	const location = useLocation();
 	const allParams = searchParams.toString();
 
-	const clearParams = () => setSearchParams(prev => new URLSearchParams() ) ;
+	const clearParams = () => setSearchParams(new URLSearchParams() ) ;
 	return (
 		<div className="p-3 island rounded">
 
@@ -42,12 +38,12 @@ function FilterParams({children, close, badgeParams = false}){
 
 
 			<div className={`my-3 ${!allParams ? '': 'border-top'}`}>
-				<BadgeParams />
+				<BadgeParams blacklist = {['page', 'dialog', 'tableVersion']} />
 			</div>
 			{close && (
 				<div className='d-flex justify-content-center gap-3'>
 					<span onClick={clearParams}
-						className="btn btn-sm  border rounded-3 fw-lighter" >
+						className="btn btn-sm  border rounded-3" >
 						<i className='bi bi-trash3 me-2'> </i>clear filters
 					</span>
 					<span onClick={close}

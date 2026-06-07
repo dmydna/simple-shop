@@ -2,7 +2,7 @@ import { useProduct } from "@/features/product/hooks/useProduct.js";
 import { useUser } from "@/features/user/hooks/useUser.js";
 import { Row } from "react-bootstrap";
 import CategoryItem from "../../../components/common/CategoryItem.jsx";
-import { ImgGenApi } from "../../../dev/imageJS.js";
+import { placeholder } from "@utils/image.js";
 import { useListing } from "../../listing/hooks/useListing.js";
 
 const MyActivity = ({col='col-12 col-md-12 col-lg-6', container=false}) => {
@@ -36,7 +36,7 @@ const MyActivity = ({col='col-12 col-md-12 col-lg-6', container=false}) => {
                description="cantidad de publicaciones"
                link={`/dashboard/listing`}
                image={
-                ImgGenApi({ ...imgInfo, "background": ".melon", 
+                placeholder({ ...imgInfo, "background": ".melon", 
                   "text": (totalPublications > 99 ? '%2B99' : totalPublications) || "0"} )
                 } 
              />
@@ -48,7 +48,7 @@ const MyActivity = ({col='col-12 col-md-12 col-lg-6', container=false}) => {
                description="cantidad de productos"
                link={`/dashboard/product`}
                image={
-                ImgGenApi({ ...imgInfo, "background": ".lila", 
+                placeholder({ ...imgInfo, "background": ".lila", 
                   "text": (totalProducts > 99 ? '%2B99' : totalProducts) || "0"})
                } 
              />
@@ -58,7 +58,7 @@ const MyActivity = ({col='col-12 col-md-12 col-lg-6', container=false}) => {
                className="border rounded-4"
                category="usuarios"
                description="cantidad de usuarios"
-               image={ ImgGenApi(
+               image={ placeholder(
                 { ...imgInfo, "background": ".cielo",  
                    "text": (totalUsers > 99 ? '%2B99' : totalUsers) || "0" } 
                 )}
@@ -71,7 +71,7 @@ const MyActivity = ({col='col-12 col-md-12 col-lg-6', container=false}) => {
                className="border pe-0 rounded-4"
                description="cantidad de ordenes"
                link={`#`}
-               image={ ImgGenApi({ ...imgInfo, "background": ".menta" } )}
+               image={ placeholder({ ...imgInfo, "background": ".menta" } )}
              />
            </Row>
         </div>

@@ -6,7 +6,7 @@ function CartIcon({icon, variant, scale, opacity}){
                 style={{height: '8rem', width: '6rem', opacity:  opacity || '1', scale: scale || '.9'}}>
               <i className="bi bi-cart3 icn-xl "></i>
               <i 
-                style={{transform: 'translate(-135%, -55%)', fontSize: '3rem'}} 
+                style={{transform: 'translate(-144%, -40%)', fontSize: '2.5rem'}} 
                 className={`tail-${variant || 'dark'} z-index-10 position-absolute p-0 ${icon || 'bi-x-circle-fill'}`}></i>
             </span> 
 

@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button, Dropdown, Form, InputGroup } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useUIContext } from "../../contexts/UIContext.jsx";
 import { useWindowsWidth } from "../../contexts/useWindowSize.jsx";
 import { useListing } from "../listing/hooks/useListing.js";
 
@@ -10,10 +9,11 @@ function Search({toggle, setToggle}){
     const width = useWindowsWidth()
     const navigate = useNavigate();
     const location = useLocation();
+    
 
-    const {onHideFilter} = useUIContext();
+
     const [query, setQuery] = useState(""); 
-    const {listings, setFilters} = useListing(4);
+    const {listings, setFilters} = useListing({autofetch: true});
 
     const [show, setShow] = useState(false);
 
@@ -32,11 +32,15 @@ function Search({toggle, setToggle}){
       setShow(false);
     }
 
-    function handleFilter(e){
+
+    const toggleRoute = useMemo(() => {
+      return location.pathname === '/products/filter' ? '/products' : '/products/filter';
+    }, [location.pathname]); // Nota el array []
+
+    function handleFilter(e) {
       e.preventDefault();
-        onHideFilter(prev => !prev);
-        navigate("/products")
-      }
+      navigate(toggleRoute);
+    }
     
     
     // Filtro para la lista de coincidencias
@@ -63,7 +67,7 @@ function Search({toggle, setToggle}){
               onChange={handleChange}
               onClick={() => (!!query ? setShow(true) : {})}
             />
-            {/** FILTERS */}
+            {/** FILTER */}
             <Button
               style={{opacity: .4}}
               variant="ligth"
@@ -79,16 +83,17 @@ function Search({toggle, setToggle}){
           <Dropdown
             show={show}
             onToggle={(isOpen) => setShow(isOpen)}
-            style={{ zIndex: 99999 }}
+            style={{zIndex: 99999 }}
           >
             {/* !! convierte a booleano cualquier expresion */}
-            <Dropdown.Menu className={`w-100`}>
+            <Dropdown.Menu className={`w-100 pe-3`}>
               {listings.map((p) => (
                 <Dropdown.Item
                   onClick={() => {
                     setShow(false);
                     setToggle(false);
                   }}
+                  className="overflow-hidden"
                   as={Link}
                   to={`/products/${p.hash}/${p.title}`}
                   key={p.id}
@@ -96,6 +101,18 @@ function Search({toggle, setToggle}){
                   {p.title}
                 </Dropdown.Item>
               ))}
+                  <Dropdown.Item
+                  onClick={() => {
+                    setShow(false);
+                    setToggle(false);
+                  }}
+                  className="overflow-hidden border-top"
+                  as={Link}
+                  to={`/products/search?q=${query}`}
+                  key={99}
+                >
+                  resultado de busqueda... 
+                </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Form>

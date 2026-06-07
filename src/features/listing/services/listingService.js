@@ -1,6 +1,8 @@
 // src/services/listingService.js
-import {toUpdateListing, toCreateListing,  mapToURLSearchParams} from '@utils/mappers.js'
+import { toUpdateListing, toCreateListing, mapToURLSearchParams } from '@utils/mappers.js'
 
+
+// TODO: text 
 import { BASE_URL, ENDPOINTS } from "@utils/config.js";
 import { responseError } from '@utils/service.js';
 const ENDPOINT = ENDPOINTS.LISTENING;
@@ -29,7 +31,7 @@ export const listingService = {
         const TOKEN = localStorage.getItem("token")
         console.log("obtiene por hash", hash)
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/hash/${hash}`,    
-             {headers: TOKEN ? { 'Authorization': `Bearer ${TOKEN}`} : {} }
+            { headers: TOKEN ? { 'Authorization': `Bearer ${TOKEN}` } : {} }
         );
         if (!response.ok) {
             return responseError(response)
@@ -39,14 +41,13 @@ export const listingService = {
     },
 
     // Cambiamos la firma para recibir un objeto desestructurado
-    getPage : async ({ page = 0, size = 10, ...filters } = {}) => {
+    getPage: async ({ page = 0, size = 10, ...filters } = {}) => {
 
         const TOKEN = localStorage.getItem("token")
-        console.log(TOKEN)
         // 1. Creamos un objeto plano para los parámetros
         const cleanParams = new URLSearchParams();
 
-        cleanParams.append('page', isNaN(page) ? 0 : page );
+        cleanParams.append('page', isNaN(page) ? 0 : page);
         cleanParams.append('size', size);
 
         // 2. Agregamos los filtros dinámicamente
@@ -55,8 +56,8 @@ export const listingService = {
         console.log("URL Corregida:", cleanParams.toString());
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}`,    
-             {headers: TOKEN ? { 'Authorization': `Bearer ${TOKEN}`} : {} }
-            );
+            { headers: TOKEN ? { 'Authorization': `Bearer ${TOKEN}` } : {} }
+        );
         if (!response.ok) {
             return responseError(response)
         }
@@ -141,7 +142,7 @@ export const listingService = {
             return responseError(response)
         }
         return await response.text();
-      },
+    },
 
     // TODO: borra id de firma de metodo UPDATE
     update: async (id, data, selectedFiles = null) => {
@@ -192,7 +193,7 @@ export const listingService = {
             return responseError(response)
         }
         return response.status === 204 ? // HTTP 202 Accepted
-        { success: true } : await response.json();
+            { success: true } : await response.json();
     },
 
 

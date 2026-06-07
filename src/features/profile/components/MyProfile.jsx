@@ -1,10 +1,9 @@
+import PageError from "@/pages/fallback/PageError.jsx";
+import PageLoading from "@/pages/fallback/PageLoading.jsx";
+import PageSuccess from "@/pages/fallback/PageSuccess.jsx";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useProfile } from "../contexts/ProfileContext.jsx";
 import { ProfileHeader } from "./ProfileHeader.jsx";
-import PageLoading from "@/components/common/PageLoading.jsx";
-import PageError from "@/pages/errors/PageError.jsx";
-import PageSuccess from "@/pages/errors/PageSuccess.jsx";
-import SVGGenerator from "@/components/common/SVGGenerator.jsx";
 
 
 

@@ -20,7 +20,7 @@ export default function CarouselItems({ items, title, children, className, chunk
     for (let i = 0; i < items.length; i += chunkSize) {
       const chunk = [];
       for (let j = 0; j < chunkSize; j++) {
-        //FIXME produce chunks completos con repeditos 
+        //FIXME produce chunks completos con repetidos 
         const index = (i + j) % items.length;
         chunk.push(items[index]);
       }

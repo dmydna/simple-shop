@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 
+// TODO: renombrar a useFormParams
+// TODO: mover a @dashboard
 export const useDashboardParams = (baseHook) => {
 
 
@@ -29,7 +31,7 @@ export const useDashboardParams = (baseHook) => {
         }
         if (draftMode) { setEnableEditableField(false) }
         if (itemId) { setId(itemId) }
-        if (editMode && !itemId) {setShowWarn(true)}
+
     }, [itemId, formData, createMode, viewMode, draftMode, editMode])
 
 

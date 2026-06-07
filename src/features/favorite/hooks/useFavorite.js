@@ -4,10 +4,10 @@ import { useFetchData } from "@hooks/useFetchData.js";
 import { useService } from "@hooks/useService.js";
 import { useFetchElem } from "@/hooks/useFetchElem.js";
 
-export const useFavorite = () => {
+export const useFavorite = ({autofetch=false}={}) => {
 
     const { loading: loadingList, error: errorList, content, setContent, totalElements, setFilters, ...props }
-        = useFetchData({ service: favoriteService, size: 8 })
+        = useFetchData({ service: favoriteService, size: 8, autofetch: autofetch})
 
     const { loading: loadingItem, error: errorItem, currentItem, setCurrentItem, id, setId}
         = useFetchElem({ service: favoriteService })

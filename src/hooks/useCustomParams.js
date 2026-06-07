@@ -9,6 +9,7 @@ export const useCustomParams = () => {
 
   // Estado de solo lectura derivado de la URL
   const params = useMemo(() => {
+    console.log(searchParams)
     const obj = {};
     searchParams.forEach((value, key) => {
       obj[key] = value;
@@ -46,7 +47,7 @@ export const useCustomParams = () => {
     console.log(newSearchParams)
       return newSearchParams;
     });
-  }, []);
+  }, [searchParams]);
 
   return { 
     "searchParams":params, 

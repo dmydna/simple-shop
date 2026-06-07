@@ -3,7 +3,8 @@ import { useCallback, useEffect, useState } from "react";
 import { usePageable } from "../features/pagination/hook/usePageable.js";
 import { useFetch } from "./useFetch.js";
 
-export const useFetchData = ({service, size, methodName = 'getPage'}) => {
+
+export const useFetchData = ({service, size, methodName = 'getPage', autofetch=true, ...config}) => {
 
     const [filters, setFilters] = useState({})
 
@@ -21,13 +22,15 @@ export const useFetchData = ({service, size, methodName = 'getPage'}) => {
             const data = await service?.[methodName]({
                 page: page-1,
                 size: size || 8,
+                ...config,
                 ...currentFilters
             });
             setContent(data.content);
             setTotalElements(data.totalElements);
             setTotalPages(data.totalPages)
             setSuccess(true)
-            //console.log(data)
+/*            console.trace('Este efecto se ejecutó',data);*/
+//            console.log(data)
         } catch (err) {
             console.error("Error de carga de API", err);
             setError(err)
@@ -44,7 +47,9 @@ export const useFetchData = ({service, size, methodName = 'getPage'}) => {
     },[currentPage, filters])
 
     useEffect(() => {
-        fetchData(currentPage, filters);
+        if(autofetch){
+            fetchData(currentPage, filters);            
+        }
     },[currentPage, JSON.stringify(filters)]);
 
 

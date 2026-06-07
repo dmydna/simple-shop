@@ -1,7 +1,4 @@
 import InputCrudFloating from "@/features/crud/components/InputCrudFloating";
-import { useUserCrudContext } from "../contexts/UserCrudContext";
-import { useEffect } from "react";
-import { data } from "react-router-dom";
 
 
 export default function FormBasic({ children, className, crudHook }) {

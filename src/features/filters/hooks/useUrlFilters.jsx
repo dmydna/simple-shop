@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+
 export const useUrlFilters = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [filterDraft, setFilterDraft] = useState({});

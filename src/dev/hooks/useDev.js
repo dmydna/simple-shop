@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
-import { useListingContext } from "../../features/listing/contexts/ListingContext";
-import { useProductContext } from "../../features/product/contexts/ProductContext";
-import { useUserContext } from "../../features/user/contexts/UserContext";
 import { useListing } from "@/features/listing/hooks/useListing";
 import { useProduct } from "@/features/product/hooks/useProduct";
 import { useUser } from "@/features/user/hooks/useUser";

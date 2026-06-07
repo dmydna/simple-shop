@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap";
-import { ImgGenApi } from "../../../dev/imageJS.js";
+import { placeholder } from "@utils/image.js";
 import { useUser } from "../hooks/ProfileContext.jsx";
 
 function CardProfileRounded({ name, image, children, className, imgSize }) {
@@ -9,7 +9,7 @@ function CardProfileRounded({ name, image, children, className, imgSize }) {
   return (
     <Card  className={`mb-4 island border text-center`}>
       <div className="d-block mx-auto position-relative">
-        <Card.Img className="perfil-img" src={profile?.image || ImgGenApi("300x300", "limon", "bi-person", "000")}
+        <Card.Img className="perfil-img" src={profile?.image || placeholder("300x300", "limon", "bi-person", "000")}
           style={{
             objectFit: 'cover',
             height: imgSize || '215px',

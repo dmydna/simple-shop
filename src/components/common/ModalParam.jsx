@@ -49,7 +49,7 @@ export default function ModalParam({ children, param, inverse = false }) {
     const close = () => {
         setSearchParams(prev => {
             const next = { ...prev };
-            delete next[key]; 
+            next[key]= null
             return next;
         });
     };

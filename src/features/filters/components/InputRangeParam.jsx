@@ -82,6 +82,13 @@ function InputRangeParam({
 
     return (
         <>
+        <style>{`
+        .range-slider .range-slider__thumb{
+            width: 17px;
+            height: 17px;
+            background: #2196f3;
+        }
+        `}</style>
         <Dropdown style={style} className={`${className} mb-2`}>
             <Dropdown.Toggle
                 variant={variant}

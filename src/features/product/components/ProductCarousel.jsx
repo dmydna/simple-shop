@@ -10,42 +10,57 @@ import ProductCard from './ProductCard.jsx';
 
 
 // TODO: actualizar filtro 
-function ProductCarousel({children, filter, maxCols, maxElems, className, imgSize = 180}) {
+function ProductCarousel({ children, filter, maxCols, maxElems, className, imgSize = 180, blacklist = [] }) {
 
   const [index, setIndex] = useState(0);
   const [chunkSize, setChunkSize] = useState(maxCols || 4)
   const width = useWindowsWidth()
 
-  const {listings, setFilters} = useListing(8) //LOCAL
+  const { listings, setFilters } = useListing({ autofetch: true }) //LOCAL
 
 
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setFilters(filter)
     console.log(filter)
-  },[filter])
+  }, [filter])
 
 
    
   const [visibleProducts, setVisibleProducts] = useState([]);
 
   useEffect(() => {
-    if (width < 576){
-      setVisibleProducts(listings.slice(0,3))
+    if (width < 576) {
+      setVisibleProducts(listings.slice(0, 3))
       setChunkSize(1);
     } 
-    else if(width < 992){
-      setVisibleProducts(listings.slice(0,10))
+    else if (width < 992) {
+      setVisibleProducts(listings.slice(0, 10))
       setChunkSize(2)
     }
-    else{ 
+    else { 
       setVisibleProducts(listings)
       setChunkSize(maxCols);
     }
-  }, [width, listings]);
+
+    if (blacklist && blacklist.length > 0) {
+      setVisibleProducts(prev => prev.filter(
+        (item) => {
+          for (let b of blacklist) {
+            if (b === item.hash) {
+              return false
+            }
+          }
+          return true;
+        }  
+      ))      
+    }
+
+
+  }, [width, listings, blacklist]);
 
   const slides = useMemo(() => {
 
@@ -64,9 +79,9 @@ function ProductCarousel({children, filter, maxCols, maxElems, className, imgSiz
         // el índice vuelva a 0, 1, 2...
         const index = (i + j) % visibleProducts.length;
 
-       // if(currentListing && currentListing.id == visibleProducts[index]?.id){
+        // if(currentListing && currentListing.id == visibleProducts[index]?.id){
         //   continue
-       // }
+        // }
 
         chunk.push(visibleProducts[index]);
 
@@ -80,8 +95,8 @@ function ProductCarousel({children, filter, maxCols, maxElems, className, imgSiz
 
   return (
 
-       <>
-       { slides?.length > 0 && (
+    <>
+      {slides?.length > 0 && (
         <div className={`row ${className} rounded  h-100`}>
           <div className='col-12 d-flex justify-content-between'>
             <div>
@@ -108,16 +123,10 @@ function ProductCarousel({children, filter, maxCols, maxElems, className, imgSiz
                 <div className="row d-flex justify-content-around">
                   {group.map((p) => (
                     <ProductCard
+                      {...p}
                       key={p.id}
                       className={'border-0'}
-                      id={p.id}
-                      hash={p.hash}
-                      image={p.thumbnail}
                       imgSize={imgSize}
-                      title={p.title}
-                      stock={p.stock}
-                      price={p.price}
-                      discount={p.discountPercentage}
                     />
                   ))}
                 </div>
@@ -126,9 +135,9 @@ function ProductCarousel({children, filter, maxCols, maxElems, className, imgSiz
           </Carousel>
         </div>
 
-       )}
+      )}
        
-       </>
+    </>
         
   );
 }

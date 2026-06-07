@@ -1,64 +1,65 @@
 import { useServiceParams } from "@/hooks/useServiceParams.js";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import { AppStatus } from "../../components/common/AppStatus.jsx";
 import CategoryCarrousel from "../../components/common/CategoryCarrousel.jsx";
 import CategoryNav from "../../components/common/CategoryNav.jsx";
 import DropdownCheck from "../../components/common/DropdownCheck.jsx";
 import DropdownRange from "../../components/common/DropdownRange.jsx";
-import { useUIContext } from "../../contexts/UIContext.jsx";
 import AddToCartButton from "../../features/cart/components/AddToCartButton.jsx";
 import FilterBar from "../../features/filters/components/FilterBar.jsx";
-import { useListingContext } from "../../features/listing/contexts/ListingContext.jsx";
 import Pagination from "../../features/pagination/components/Pagination.jsx";
 import { ListingPlaceholder } from "../../features/placeholder/ListingPlaceholder.jsx";
 import ProductCard from "../../features/product/components/ProductCard.jsx";
+import ListingContextLayout from "./ListingContextLayout.jsx";
+import { useListing } from "@/features/listing/hooks/useListing.js";
+import { useParams } from "react-router-dom";
+import { includes } from "zod";
+import { useEffectEvent } from "react";
 
 
-// FIXME no agrega searchparams de paginacion
 
-  function ProductListing() {
+function ProductListing() {
     
-  const baseHook = useListingContext()
-  const { error, listings, totalPages, setFilters ,filters,totalElements, loading, fetchData , ...props} = baseHook;
+  const baseHook = useListing({autofetch: true, includeTags:true })
+  const { listings, totalPages, filters, totalElements, setFilters } = baseHook;
+  const [showFilter, setShowFilter] = useState(false)
 
 
-  const [meta, setMeta] = useState({
-    title: "Productos",
-    message: "",
-    description: "",
-  });
+  const { filter } = useParams()
 
-  const serviceParams = useServiceParams({ baseHook: baseHook});
+  const [meta, setMeta] = useState({ title: "Productos" });
 
-  useEffect(()=>{
-        if (filters && Object.keys(filters).length == 0) {
-          setMeta({ title: "Productos" });  
-        }
-        if (filters?.category) {
-            setMeta((prev) => ({ ...prev, title: filters?.category }));
-        }
-        if (filters?.title) {
-            setMeta((prev) => ({
-                ...prev,
-                title: "Resultados",
-                message: `encontrados: ${totalElements}`
-            }));
-        }
-  },[filters])
+  // eslint-disable-next-line no-unused-vars
+  const serviceParams = useServiceParams({ baseHook: baseHook });
 
-  const { showFilter } = useUIContext()
+
+  useEffect(() => {
+
+    setShowFilter(filter ? true : false)
+    
+
+    if (filters && Object.keys(filters).length == 0) {
+      setMeta({ title: "Productos" });  
+    }
+    if (filters?.category) {
+      setMeta((prev) => ({ ...prev, title: filters?.category }));
+    }
+    if (filters?.title) {
+      setMeta((prev) => ({
+        ...prev,
+        title: "Resultados",
+        message: `encontrados: ${totalElements}`
+      }));
+    }
+  }, [filters, filter])
+
 
 
   return (
     <>
-
-      <AppStatus
-          loading={loading}
-          onRetry={fetchData}
-          error={error}
-          placeholder={<ListingPlaceholder/>}
-          isEmpty={ totalElements === 0 }
+      <ListingContextLayout
+        {...baseHook}
+        placeholder={<ListingPlaceholder />}
       >
         <>
           <Container fluid="xl" className="bg-white rounded mt-2 mb-5 pb-5">
@@ -71,45 +72,39 @@ import ProductCard from "../../features/product/components/ProductCard.jsx";
               </span>
             </div>
             {showFilter ?
-                <>
-                  <CategoryNav className='d-none d-m-block' show={showFilter} />
+              <>
+                <CategoryNav className='d-none d-m-block' show={showFilter} />
+                
+                <CategoryCarrousel className='d-block d-md-none' />
 
-                  <CategoryCarrousel className='d-block d-md-none' />
-
-                  <FilterBar fix={true} dataSource={listings} onApply={setFilters} className="mb-5" >
+                <FilterBar fix={true} dataSource={listings} onApply={setFilters} className="mb-5" >
                         <DropdownCheck variant="light"  className="border rounded my-2 flex-fill">
                             <span className="fw-semibold">etiquetas</span>
                         </DropdownCheck>
                          <DropdownRange variant="light" className="border rounded my-2 flex-fill"  min={0} max={1500} defaultValue={20} type={'$'}>
                               <span className="fw-medium">precio</span>
                          </DropdownRange>
-                  </FilterBar >
-                </> : ''
+                </FilterBar >
+
+              </> : ''
             }
             <Row>
               {listings.map((p) => (
-                  <ProductCard className={'border m-2 p-2 island'}
-                               visibility={p?.visibility}
-                               key={p.id}
-                               id={p.id}
-                               hash={p.hash}
-                               image={p.thumbnail}
-                               title={p.title}
-                               stock={p.stock}
-                               price={p.price}
-                               discount={p.discountPercentage}
-                  >
-                    <AddToCartButton variant="outline-success" id={p.id} />
-                  </ProductCard>
+                <ProductCard className={'border m-2 p-2 island'}
+                  {...p}
+                  key={p.id}
+                >
+                  <AddToCartButton variant="outline-success" product={p} />
+                </ProductCard>
               ))}
             </Row>
           </Container>
           <Pagination
-              className={`container-xl`}
-              totalPages={totalPages}
+            className={`container-xl`}
+            totalPages={totalPages}
           />
         </>
-      </AppStatus>
+      </ListingContextLayout>
     </>
   )
 }

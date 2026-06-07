@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 
+// TODO: (1) mover  useNetworkStatus a @features/health/hooks
 //FIXME este hook es muy agresivo
 const useNetworkStatus = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);

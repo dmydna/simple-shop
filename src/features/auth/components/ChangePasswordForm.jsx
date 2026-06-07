@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {Alert, Button, Col, Form} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-import { useAuth } from "../hooks/AuthContext.jsx";
-import { useUIContext } from "../../../contexts/UIContext.jsx";
 import {useForm} from "../../../hooks/useForm.js";
+import { useAuthContext } from "../contexts/AuthContext.jsx";
 
 
 function ChangePasswordForm({ children, style, className}){
 
-    const { setShowLoginModal} = useUIContext()
-    const { login, loading, error,  setReset, changePassword } = useAuth();
+    const { loading, error,  changePassword } = useAuthContext();
     const { onChange, formData} = useForm()
 
     const navigate = useNavigate();

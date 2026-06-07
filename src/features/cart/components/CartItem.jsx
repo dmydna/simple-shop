@@ -20,7 +20,7 @@ function CartItem({item, index}) {
                   <Card.Body className="ps-3 p-1">
                     <Card.Title as={Link}
                     className="d-block text-decoration-none fw-medium"
-                    to={"../products/details/" + encodeURIComponent(item.title)} >
+                    to={"../products/" + item.hash + "/" + encodeURIComponent(item.title)} >
                       {item.title}
                     </Card.Title>
 
@@ -34,7 +34,7 @@ function CartItem({item, index}) {
                       <div className="text-secondary small m-0 d-none d-md-block">
                         p.u: 
                         <i className="bi bi-currency-dollar"></i>
-                        {(item.price).toFixed(2)}
+                        {(item?.price || 0).toFixed(2)}
                       </div>
                       <div className="h5 m-0 order-2 order-md-1 mt-2 mt-sm-0">
                         <i className="bi bi-currency-dollar"></i> 

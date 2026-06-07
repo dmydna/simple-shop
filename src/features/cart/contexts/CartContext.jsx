@@ -8,7 +8,8 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
 
 
-  const {products, setProducts} = useListing()
+  // const {products, setProducts} = useListing();
+  const [products, setProducts] = useState([])
   const [couponDiscount, setCouponDiscount] = useState(false)
 
   const [cartItems, setCartItems] = useState([]);
@@ -61,13 +62,13 @@ export function CartProvider({ children }) {
     setTotalPrice((prevTotal) => 
       prevTotal - (productoCart.price * productoCart.cantidad))
 
-    setProducts((prevProducts) => // retorno implicito de un array 
+/*    setProducts((prevProducts) => // retorno implicito de un array 
       prevProducts.map((item) => 
         item.id === productoCart.id
         ? { ...item, stock: item.stock + productoCart.cantidad } 
         : item 
       )
-    );
+    );*/
 
     setCartItems((prevProductos) =>
       prevProductos.filter((item) =>
@@ -100,13 +101,13 @@ export function CartProvider({ children }) {
     // Actualizamos el contador global sumando la diferencia
     setCartCount((prevContador) => prevContador + diferencia)
     // 4. Actualizar Productos
-    setProducts((prev) =>
+/*    setProducts((prev) =>
       prev.map((item) =>
         item.id === productoCart.id 
           ? { ...item, stock: nuevoStockRestante } 
           : item
       )
-    );
+    );*/
   };
 
 
@@ -135,14 +136,14 @@ export function CartProvider({ children }) {
       )
     );
 
-    setProducts(
+/*    setProducts(
       (prevProducts) => // retorno implicito de un array
         prevProducts.map((item) =>
           item.id === productoCart.id && item.stock
             ? { ...item, stock: item.stock + 1 }
             : item
       )
-    );
+    );*/
   };
 
   const increaseCartItem = (productoCart) => {
@@ -176,14 +177,14 @@ export function CartProvider({ children }) {
           : item
       )
     );
-
+/*
     setProducts((prevProducts) => // retorno implicito de un array
         prevProducts.map((item) =>
           item.id === productoCart.id && item.stock
             ? { ...item, stock: item.stock - 1 }
             : item
         )
-    );
+    );*/
   };
 
 
@@ -213,13 +214,13 @@ export function CartProvider({ children }) {
       ]);
     }
 
-    setProducts((prevProducts) => // retorno implicito de un array 
+/*    setProducts((prevProducts) => // retorno implicito de un array 
         prevProducts.map((item) => 
         item.id === productoAAgregar.id && item.stock
         ? { ...item, stock: item.stock - 1 } 
         : item 
       )
-    );
+    );*/
 
 
   setCartCount((prevCounter) => (

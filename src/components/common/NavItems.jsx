@@ -1,25 +1,26 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { useUIContext } from "../../contexts/UIContext";
+import { useNavbarContext } from "@/contexts/NavbarContext";
 
 function NavItems({items, onSeleccion, className}){
 
   const navigate = useNavigate()
 
-    const {onHideContact, onHideMenu, showMenu} = useUIContext()
+  
+    const {onHideContact, setShowMenu, showMenu} = useNavbarContext()
 
 
     const handleContact = () =>{ 
       !showMenu ? 
       onHideContact(true) : 
       navigate('/contacto'), 
-      onHideMenu(false)
+      setShowMenu(false)
     }
     const handleClick = (item) => {  
       onSeleccion(item) ;
       showMenu &&
-      onHideMenu(false)
+      setShowMenu(false)
     }
   
     return(

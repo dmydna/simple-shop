@@ -1,7 +1,7 @@
 
 import { mapToURLSearchParams } from "@utils/mappers.js";
-import { ENDPOINTS, BASE_URL} from "../../../utils/config.js";
-const ENDPOINT = ENDPOINTS.FAVORITE
+import { ENDPOINTS, BASE_URL} from "@utils/config.js";
+const ENDPOINT = ENDPOINTS.PROFILE + "/favorites"
 
 export const favoriteService = {
 

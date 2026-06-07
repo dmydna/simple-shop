@@ -1,9 +1,13 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
+
+
+// TODO: renombrar a useTableParams
+// TODO: mover a @dashboard
 export const useNavParams = ({ baseHook }) => {
 
-    const {setFilters, setCurrentPage, currentPage, totalElements, setId, ...props} = baseHook;
+    const {setFilters, setCurrentPage, totalElements, setId, ...props} = baseHook;
 
     const [searchParams, setSearchParams] = useSearchParams();
 

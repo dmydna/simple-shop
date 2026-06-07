@@ -8,9 +8,10 @@ import { useListing } from "./useListing";
 
 
 
-export const useListingCrud = () => {
+export const useListingCrud = ({autofetch=false}={}) => {
 
-    const { setCurrentItem, currentListing, setId, id, loading: loadingItem, error: errorItem, refreshElem, ...props} = useListing();
+    const { setCurrentItem, currentListing, setId, id, 
+    loading: loadingItem, error: errorItem, refreshElem, ...props} = useListing({autofetch});
 
     const [showModal, setShowModal] = useState(false)
     const [dataItem, setDataItem] = useState({});
@@ -21,7 +22,7 @@ export const useListingCrud = () => {
         = useCrudForm();
 
     const { handleCreate, handleUpdate, handleDelete, handleStatus, 
-        loading, setLoading, error, setError, success, setSuccess }
+        loading, setLoading, error, setError, success, setSuccess, ...actions }
         = useCrudActions({ service: listingService });
 
     useEffect(()=>{
@@ -88,5 +89,7 @@ export const useListingCrud = () => {
         setId, 
         id,
         refreshElem,
+
+        ...actions
     })
 }

@@ -34,9 +34,9 @@ export const MyOrderCart = ({check, oncheck, handle}) => {
             {/* SUBTOTAL */}
             <div className="d-flex align-items-center justify-content-between py-2">
                 <Card.Text className="text-secondary small fw-semibold  m-0">
-                    Subtotal ({cartItems.length} unidades)</Card.Text>
+                    Subtotal ({cartItems?.length} unidades)</Card.Text>
                 <Card.Text className="fw-bold">
-                    ${totalPrice.toFixed(2)}
+                    ${totalPrice?.toFixed(2)}
                 </Card.Text>
             </div>
 
@@ -45,7 +45,7 @@ export const MyOrderCart = ({check, oncheck, handle}) => {
                 <Card.Text className="text-secondary small fw-semibold  m-0">
                      Descuento {check && '(1 cupon)'} </Card.Text>
                 <Card.Text className="fw-bold">
-                    ${Order.descuento}
+                    ${Order?.descuento}
                 </Card.Text>
             </div>
 
@@ -54,7 +54,7 @@ export const MyOrderCart = ({check, oncheck, handle}) => {
                 <Card.Text className="text-secondary small fw-semibold  m-0">
                      Envio</Card.Text>
                 <Card.Text className="fw-bold">
-                    ${Order.envio}
+                    ${Order?.envio}
                 </Card.Text>
             </div>
             <hr/>
@@ -63,19 +63,10 @@ export const MyOrderCart = ({check, oncheck, handle}) => {
             <div className="d-flex align-items-center justify-content-between pt-3 pb-4">
                 <Card.Text className="hs-5 fw-bold m-0">TOTAL</Card.Text>
                 <Card.Text className="h5 fw-bold">
-                    ${Order.total.toFixed(2)}
+                    ${Order?.total?.toFixed(2)}
                 </Card.Text>
             </div>
 
-            {/* <BuyNowButton
-                handle={handle}
-                variant={buyMatch ? 'danger' : 'primary'}
-            >
-                {buyMatch ?
-                    "Confirma Compra" :
-                    "Continuar Compra"}
-
-            </BuyNowButton> */}
         </Card>
     );
 }

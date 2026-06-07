@@ -1,23 +1,24 @@
-import SideBarDashboard from "@/features/dashboard/layout/SiderbarDashboard.jsx";
+import { useNavbarContext } from "@/contexts/NavbarContext.jsx";
+import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
+import SideBarDashboard from "@/features/dashboard/common/SiderbarDashboard.jsx";
 import SideBarProfile from "@/features/profile/components/SideBarProfile.jsx";
 import { Button, Nav, Offcanvas } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useUIContext } from "../../contexts/UIContext.jsx";
-import { useAuth } from "../../features/auth/hooks/AuthContext.jsx";
 
 
 function MobileMenu({ children }) {
 
   // TODO: usar searchParams para MobileMenu
-  const { showMenu, onHideMenu } = useUIContext()
+  const {showMenu, setShowMenu} = useNavbarContext()
+
 
   const location = useLocation()
 
   const navigate = useNavigate()
-  const handleClose = () => onHideMenu(false);
-  const handleShow = () => onHideMenu(true);
+  const handleClose = () => setShowMenu(false);
+  const handleShow = () => setShowMenu(true);
 
-  const { isAuth, logout } = useAuth();
+  const { isAuth, logout } = useAuthContext();
 
   const handleLogout = () => {
     logout();
@@ -108,7 +109,7 @@ function MobileMenu({ children }) {
 
                 {location.pathname.startsWith('/dashboard') && (
                   <div className="border-top py-3 pb-4">
-                    <SideBarDashboard /> 
+                    <SideBarDashboard showIcons/> 
                   </div>
                 )}
 

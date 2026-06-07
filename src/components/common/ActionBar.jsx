@@ -2,13 +2,14 @@ import { Nav, Button } from "react-bootstrap";
 import CartButton from "@features/cart/components/CartButton.jsx";
 import SearchOverlay from "@features/search/SearchOverlay";
 import UserDropdown from "@features/user/components/UserDropdown.jsx";
-import { useUIContext } from "../../contexts/UIContext.jsx";
+
+import { useNavbarContext } from "@/contexts/NavbarContext.jsx";
 
 
 
 function ActionBar(){
 
-  const { showMenu, onHideMenu } = useUIContext()
+  const {  setShowMenu } = useNavbarContext()
 
     return(
         <Nav className={`align-items-center flex-row order-md-2`}>
@@ -17,7 +18,7 @@ function ActionBar(){
           <div className="d-none d-md-block">
               <CartButton/>               
           </div>
-          <Button className='d-block d-md-none' onClick={()=> onHideMenu(prev=>!prev)} variant='light'>
+          <Button className='d-block d-md-none' onClick={()=> setShowMenu(prev=>!prev)} variant='light'>
               <i className='bi bi-three-dots'></i>
           </Button>
 

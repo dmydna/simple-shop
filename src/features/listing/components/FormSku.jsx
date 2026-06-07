@@ -17,6 +17,12 @@ function FormSku({children, className, baseHook}){
             baseHook={baseHook}
           />
 
+          <InputCrudFloating
+            name={"stock"}
+            label={"stock"}
+            baseHook={baseHook}
+          />
+
         </div>
           </>
     )

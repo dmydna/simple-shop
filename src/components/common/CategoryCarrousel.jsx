@@ -4,7 +4,7 @@ import Img3 from "../../assets/dressing-table.png";
 import Img4 from '../../assets/grocery.png';
 import Img1 from "../../assets/lipstick.png";
 import Img2 from '../../assets/perfume.png';
-import { category } from "../../utils/enums.js";
+import { category } from "@utils/enums.js";
 import CategoryItem from "./CategoryItem";
 
 function CategoryCarrousel({className}){

@@ -1,9 +1,6 @@
-import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import React from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../auth/hooks/AuthContext.jsx";
-import { useUIContext } from "../../../contexts/UIContext.jsx";
+import { Link } from "react-router-dom";
 
 
 function CrudDropdown({className, onShow, show}) {

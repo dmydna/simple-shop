@@ -1,22 +1,13 @@
-import { useMemo } from "react";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { useListingContext } from "../../listing/contexts/ListingContext.jsx";
 import { useCart } from "../contexts/CartContext.jsx";
 
 
 
-function AddToCartButton({id, variant='success', children}){
+function AddToCartButton({product, variant='success', children}){
 
     const { cartItems, addToCart} = useCart()
 
-    const {listings} = useListingContext()
-
-    const [product] = useMemo(()=>{
-      return listings.filter((p)=> {
-        return p?.id == id
-      })
-    },[listings]) 
 
     const handleAddToCart = () => {
       if (toast.isActive()) {

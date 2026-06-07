@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
-import PageLoading from "@/components/common/PageLoading";
-import PageEmpty from '@pages/errors/PageEmpty.jsx'
-import { useFavorite } from '@/features/favorite/hooks/useFavorite.js'
-import Pagination from '@features/pagination/components/Pagination.jsx';
-import { toast } from "react-toastify";
-import { ProfileHeader } from "./ProfileHeader";
 import DataView from "@/components/common/DataView";
+import { useFavorite } from '@/features/favorite/hooks/useFavorite.js';
+import Pagination from '@features/pagination/components/Pagination.jsx';
+import { useEffect } from "react";
+import { ProfileHeader } from "./ProfileHeader";
+import { Link, useNavigate } from "react-router-dom";
 
 function MyFavorites({ children }) {
 
     const { content, loading, currentPage, setCurrentPage, totalPages, setFilters, 
-    createFavorite, deleteFavorite, refreshData, error } = useFavorite()
+    createFavorite, deleteFavorite, refreshData, error } = useFavorite({autofetch: true})
+
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         // Lógica de paginación
@@ -21,7 +22,9 @@ function MyFavorites({ children }) {
         try {
             await deleteFavorite(id);
             refreshData()
-        } catch (err) { }
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     return (
@@ -46,11 +49,13 @@ function MyFavorites({ children }) {
                                 className="rounded"
                                 width={55}
                                 height={55}
-                                src={item.image}
+                                src={item.thumbnail}
                             />
                             <div className="w-100 m-2 my-2 mx-3">
                                 <div className='d-flex justify-content-between'>
-                                    <span className="d-block fw-bold small mb-2"> {item.title} </span>
+                                    <span
+                                       onClick={()=> navigate(`/p/${item.hash}`)} 
+                                       className="d-block fw-bold small mb-2 pointer"> {item.title} </span>
                                     <span
                                         onClick={() => handleDeleteFavorite(item?.listingId)}
                                         className='small btn btn-sm  btn-light rounded-circle'>

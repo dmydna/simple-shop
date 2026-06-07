@@ -42,8 +42,8 @@ export default function SidebarDashboard() {
             <SiderbarLink
                 className="mb-3"
                 to={`${BASE_URL}/dev`}
-                icon="bi-gear"
-                label="config"
+                icon="bi-terminal"
+                label="demo"
             />
 
 

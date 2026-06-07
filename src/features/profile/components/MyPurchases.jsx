@@ -1,8 +1,8 @@
-import { ImgGenApi } from "@/dev/imageJS";
-import { formatDate } from "@/features/dashboard/util";
+import { formatDate } from "@utils/mappers";
 import { useOrder } from "@/features/order/hooks/useOrder";
 import DataView from "@common/DataView";
 import Pagination from '@features/pagination/components/Pagination.jsx';
+import { placeholder } from "@utils/image.js";
 import { useEffect } from "react";
 import { ProfileHeader } from "./ProfileHeader";
 
@@ -44,7 +44,7 @@ function MyPurchases({ children }) {
                                 width={55}
                                 height={55}
                                 src={
-                                    ImgGenApi({ dimension: "55x55", background: ".menta", fontSize: "30", icon: "f244" })
+                                    placeholder({ dimension: "55x55", background: ".menta", fontSize: "30", icon: "f244" })
                                 }
                             />
                             <div className="w-100 m-2 my-1 mx-3 ">

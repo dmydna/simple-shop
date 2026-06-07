@@ -2,15 +2,15 @@ import { Container, Row, Col } from "react-bootstrap";
 import CardProfile from "./CardProfile";
 import { Outlet } from 'react-router-dom';
 import { useProfile } from "../contexts/ProfileContext";
-import { useAuth } from "@/features/auth/hooks/AuthContext";
 import { useEffect } from "react";
 import SideBarProfile from "./SideBarProfile";
+import { useAuthContext } from "@/features/auth/contexts/AuthContext";
 
 
 
 const UserLayout = () => {
 
-    const { user } = useAuth()
+    const { user } = useAuthContext()
     const { fetchData, profile } = useProfile()
 
     useEffect(() => {

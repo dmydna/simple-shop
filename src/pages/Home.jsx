@@ -18,32 +18,22 @@ import Img5 from "../assets/purchasing.png";
 import Img3 from "../assets/snowman.png";
 import { AppStatus } from "../components/common/AppStatus.jsx";
 import BannerAds from "../components/common/BannerAds";
-import { useAuth } from "../features/auth/hooks/AuthContext.jsx";
-import { useListingContext } from "../features/listing/contexts/ListingContext.jsx";
 import { FeaturesPlaceholder } from "../features/placeholder/FeaturesPlaceholder.jsx";
+import ListingContextLayout from "./Product/ListingContextLayout";
+import { useListing } from "@/features/listing/hooks/useListing";
+
 
 function Home() {
 
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-    }, []);
-
-    const {loading, totalElements, error, fetchData} = useListingContext();
-    const {isAuth} = useAuth()
-
-
-
     const [showCupon, setShowCupon] = useState()
+    const baseHook = useListing({autofetch: true});
 
     return (
-        <AppStatus
-            loading={loading}
-            onRetry={fetchData}
-            error={error}
+        <ListingContextLayout
+            {...baseHook}
             placeholder={<FeaturesPlaceholder/>}
-            isEmpty={  totalElements === 0 }
         >
-            <>
+            <div>
 
                 {/** Features */}
 
@@ -75,16 +65,6 @@ function Home() {
                     </Container>
                 </div>
 
-                {/** Home Banner */}
-                {/*
-                <HeroBanner image={Img3} variant="white">
-                    <h2> Increibles Descuentos </h2>
-                    <h2> en <b>ropa de invierno</b> </h2>
-                    <div className="d-flex align-items-center gap-2">
-                        <p className="border rounded px-3 py-1 small bg-white"
-                            style={{transform: "translateY(28px)"}}>ver marcas</p>
-                    </div>
-                </HeroBanner> */}
 
                 {/** Banner ads */}
 
@@ -203,10 +183,10 @@ function Home() {
 
 
                 </Container>
-            </>
+            </div>
             <CouponModal show={showCupon} onHide={setShowCupon}/>
-
-        </AppStatus>
+        </ListingContextLayout>
+        
 
 
     )

@@ -2,10 +2,10 @@ import { useFetchElem } from "@/hooks/useFetchElem.js";
 import { useFetchData } from "../../../hooks/useFetchData.js";
 import { productService } from "../services/productService.js";
 
-export const useProduct = () => {
+export const useProduct = ({autofetch=false}={}) => {
 
     const {loading: loadingList, error: errorList, content, setContent, ...props}
-        = useFetchData({service: productService})
+        = useFetchData({service: productService, autofetch: autofetch})
 
     const {loading: loadingItem, error: errorItem, currentItem, setCurrentItem, id, setId, fetchElem, refreshElem }
         = useFetchElem({fetchMethod: productService.getById})

@@ -13,6 +13,7 @@ export const productService = {
     // POST: Crear un nuevo producto.
     create: async (data) => {
         const productData = toCreateProduct(data);
+        console.log(data)
         const TOKEN = localStorage.getItem("token");
         const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
             method: 'POST',

@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Alert, Button, Col, Form } from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-import { useAuth } from "../hooks/AuthContext.jsx";
-import { useUIContext } from "../../../contexts/UIContext.jsx";
 import {useForm} from "../../../hooks/useForm.js";
+import { useAuthContext } from "../contexts/AuthContext.jsx";
 
 
 function RegisterForm({ children, style, className}){
 
     const navigate = useNavigate();
-    const { showRegisterModal, setShowRegisterModal } = useUIContext()
     const [ registerSuccess,  setRegisterSuccess ] = useState(false);
-    const { login, loading, error,  register, handleChange, userData, setReset } = useAuth();
+    const { login, loading, error,  register } = useAuthContext();
     const { onChange, formData} = useForm()
 
     const handleSubmit = async (e) => {
@@ -31,7 +29,7 @@ function RegisterForm({ children, style, className}){
        if(registerSuccess){
          autoLogin(formData)
        } 
-    } ,[registerSuccess])
+    } ,[autoLogin, formData, registerSuccess])
 
     return (
         <Col className={`${className} mx-auto`} style={ {...style, minHeight: '400px'}}>

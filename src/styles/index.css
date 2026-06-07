@@ -173,12 +173,9 @@ hr {
 }
 
 
-.simple-link:hover{
-    color: #0d6efd;
-    cursor: pointer;
-}
 
-.simple-link {
+
+.text-normalize {
     text-decoration: none;
     color: initial;
 }
@@ -682,4 +679,17 @@ tr:last-child {
 
 
 
+.ico-hover:hover {
+    background-color: #eaeaea;
+    border-radius: 18%;
+    transition: all .5s;
+}
 
+
+.left-0 { left: 0!important }
+.right-0 { right: 0!important }
+.vh-50 { height: 50vh!important }
+.bg-tint:hover { 
+    background-color: rgba(0, 0, 0, 0.1)!important; 
+    cursor: pointer;
+}

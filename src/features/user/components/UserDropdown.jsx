@@ -3,13 +3,16 @@ import { Button } from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link, useNavigate } from "react-router-dom";
 import { useUIContext } from "../../../contexts/UIContext.jsx";
-import { useAuth } from "../../auth/hooks/AuthContext.jsx";
+import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
+import { Tintify } from "@features/product/components/FloatButton"
+
+
 
 
 function UserDropdown({className}) {
 
 
-  const { user, isAuth, logout, isAdmin } = useAuth();
+  const { user, isAuth, logout, isAdmin } = useAuthContext();
   const {setShowLoginModal, showLoginModal} = useUIContext()
 
   const [isActive, setIsActive] = useState(false)
@@ -39,7 +42,7 @@ function UserDropdown({className}) {
           className="border-0 bg-transparent p-0 no-caret"
 
         >
-          <i className={`d-none d-md-block h4 bi bi-person${isAuth ? '-fill' : ''} hover-icon m-0`}></i>
+            <i className={`d-none d-md-block fs-4 bi bi-person${isAuth ? '-fill' : ''} hover-icon mx-2`}></i> 
         </Dropdown.Toggle>
 
           <Dropdown.Menu

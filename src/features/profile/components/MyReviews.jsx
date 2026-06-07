@@ -44,18 +44,21 @@ function MyReviews({ children }) {
                                 className="rounded"
                                 width={55}
                                 height={55}
-                                src={item.image}
+                                src={item.thumbnail}
                             />
                             <div className="w-100 m-2 my-2 mx-3">
 
-                                <span className="d-block fw-bold small mb-2"> {item.title} </span>
+                                <span onClick={()=> navigate(`/p/${item?.hash}`)} 
+                                    className="d-block fw-bold small mb-2 pointer"> 
+                                    {item.title} 
+                                </span>
                                 <div className="d-flex justify-content-between">
                                   <span className='small btn btn-sm btn-light '>
                                      <i className='bi-calendar me-2'></i> Dec 22, 2020
                                   </span> 
                                   <div className='d-flex gap-3'>
                                   <span 
-                                   onClick={()=> navigate(`/user/write-review?pkey=${item?.id}`)}
+                                   onClick={()=> navigate(`/user/write-review?id=${item?.id}`)}
                                    className='small btn btn-sm  btn-light border'>
                                       evaluar producto
                                   </span>

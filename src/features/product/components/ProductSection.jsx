@@ -4,7 +4,7 @@ import {useListing} from "../../listing/hooks/useListing.js";
 
 function ProductSection({children, maxElems=1 ,filter, maxCols, className, borders}){
 
-    const { listings, setFilters } = useListing(maxCols)
+    const { listings, setFilters } = useListing({autofetch: true, size: maxElems})
 
     useEffect(()=>{
       setFilters(filter)
@@ -27,16 +27,10 @@ function ProductSection({children, maxElems=1 ,filter, maxCols, className, borde
           {children}
         {listings.slice(0, maxElems).map((p) => (
             <ProductCard
+              {...p}
               key={p.id}
               className={'border-0 m-0 p-0'} 
-              id={p.id} 
-              hash={p.hash}
-              image={p.thumbnail} 
-              title={p.title} 
-              stock={p.stock} 
-              price={p.price}
               cols={colClass}
-              discount={p.discountPercentage}
             />
         ))}
         </div>

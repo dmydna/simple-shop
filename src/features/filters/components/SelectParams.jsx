@@ -1,10 +1,9 @@
 import InputSelectParam from "@features/filters/components/InputSelectParam"
 import InputRangeParam  from "@features/filters/components/InputRangeParam"
 import InputCheckParam  from "@features/filters/components/InputCheckParam"
+import InputSelectCheckParam from "@features/filters/components/InputSelectCheckParam"
 import { status, category, availabilityStock, userStatus, role } from '@utils/enums.js';
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { useEffect, useState , useMemo } from "react";
-import { useListing } from "@features/listing/hooks/useListing";
+import { useMemo } from "react";
 
 
 const AvalabilityStock = () => {
@@ -18,8 +17,29 @@ const AvalabilityStock = () => {
 }
 
 
-const Tags = () => {
-  const { content } = useListing();
+
+const SelectByEnum = ({content, name}) => {
+
+  // Extraer etiquetas únicas de los listings
+  const Tags = useMemo(() => {
+    const res = new Set();
+    for(let tag in content){
+        res.add(tag);
+    };
+    return Array.from(res).sort(); // Ordenar alfabéticamente para mejor UX
+  }, [content]);
+
+	return(
+		<InputSelectCheckParam
+			className="mb-2"
+			name={name} 
+			array={Tags}
+		/>
+	)	
+}
+
+
+const Tags = ({content}) => {
 
   // Extraer etiquetas únicas de los listings
   const Tags = useMemo(() => {
@@ -105,5 +125,6 @@ export default {
 	Category, 
 	StatusUser, 
 	RangePrice,
-	Role
+	Role,
+	SelectByEnum
 }

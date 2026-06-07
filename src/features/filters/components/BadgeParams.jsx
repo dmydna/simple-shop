@@ -2,7 +2,7 @@ import { Badge, Col } from "react-bootstrap";
 import React, { useMemo } from "react";
 import { useSearchParams } from 'react-router-dom';
 
-const BadgeParams = ({ className, style }) => {
+const BadgeParams = ({ className, style, blacklist = [] }) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     // 1. Procesar los parámetros: expandir 'tag' en múltiples objetos individuales
@@ -61,24 +61,31 @@ const BadgeParams = ({ className, style }) => {
 
     return (
         <Col 
+            key={'col-1234'}
             className={`${className} ${expandedParams.length !== 0 ? 'mt-3' : ''} d-flex flex-wrap align-items-center mx-auto`} 
             style={style}
         >
-            {expandedParams.map((item, index) => (
+            {expandedParams.map((item, index) => {
+
+                if(blacklist.includes(item.key)){
+                    return <></>
+                }
+
+                return(
                 <Badge
                     key={`${item.key}-${item.value}-${index}`} // Key única basada en valor
                     pill
                     bg="light"
                     text="dark"
-                    className="border me-2 mb-2 p-2 px-3"
+                    className={`${item.value} border me-2 mb-2 p-2 px-3`}
                     style={{ cursor: "pointer" }}
                     onClick={() => deleteTag(item.key, item.value)}
                 >
                     <span className="fw-bold me-1">{item.key}:</span> 
                     <span className="text-lowercase">{item.value}</span>
                     <i className="ms-1 bi bi-x text-muted" />
-                </Badge>
-            ))}
+                </Badge>)
+            })}
         </Col>
     );
 };

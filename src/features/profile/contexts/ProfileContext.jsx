@@ -1,9 +1,10 @@
+/* eslint-disable react-refresh/only-export-components */
 import nprogress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useAuth } from "../../auth/hooks/AuthContext.jsx";
 import { profileService } from "../services/profileService.js";
+import { useAuthContext } from '@/features/auth/contexts/AuthContext.jsx';
 
 const ProfileContext = createContext();
 
@@ -14,7 +15,7 @@ export function ProfileProvider({ children }) {
     const [profile, setProfile] = useState({})
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState(null);
-    const { isAuth } = useAuth()
+    const { isAuth } = useAuthContext()
 
 
 

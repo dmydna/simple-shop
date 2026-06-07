@@ -1,22 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import { Form, Button, Container, Alert, Card, Row } from "react-bootstrap";
-import React, { useContext, useEffect, useState } from "react";
-import { useAuth } from "../features/auth/hooks/AuthContext.jsx";
+import { Container, Row } from "react-bootstrap";
+import React from "react";
 import ChangePasswordForm from "../features/auth/components/ChangePasswordForm.jsx";
 
 
 function ChangePassword(){
-
-    const {token, user, isAuth} = useAuth()
-    
-    const navigate = useNavigate()
-    useEffect(() => {
-        const scrollX = (document.body.scrollWidth - window.innerWidth) / 2;
-        const scrollY = (document.body.scrollHeight - window.innerHeight) / 2;
-        window.scrollTo({top: 0});
-    }, []);
-
-
 
     return (
     <Container fluid="xl">

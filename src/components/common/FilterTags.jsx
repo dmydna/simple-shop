@@ -1,10 +1,10 @@
 import {Badge, Col} from "react-bootstrap";
 import React from "react";
-import { useUIContext } from "../../contexts/UIContext.jsx";
+import { useFilterBarContext } from "@/features/filters/context/FilterBarContext.jsx";
 
 export const FilterTags = ({className, style})  => {
 
-    const {selectedTags, setSelectedTags} = useUIContext();
+    const {selectedTags, setSelectedTags} = useFilterBarContext()
 
     const deleteTag = (indexToDelete) => {
         setSelectedTags(prev => prev.filter((_, index) => index !== indexToDelete));

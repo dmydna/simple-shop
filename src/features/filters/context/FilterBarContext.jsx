@@ -7,18 +7,14 @@ const FilterBarContext = createContext(null);
 // 2. Definimos el Hook personalizado (useFilter)
 // Esto es solo un acceso directo para no escribir useContext(FilterContext) siempre
 // eslint-disable-next-line react-refresh/only-export-components
-export const useFilterBarContext = () => {
-    const context = useContext(FilterBarContext);
-    if (!context) {
-        throw new Error("useFilter debe usarse dentro de un FilterProvider");
-    }
-    return context;
-};
+export const useFilterBarContext = () =>  useContext(FilterBarContext);
 
-export const FilterBarProvider = ({ children, onFilterDraft, array }) => {
-    const value = { onFilterDraft, array };
+
+export const FilterBarProvider = ({ children, ...props }) => {
+
     return (
-        <FilterBarContext.Provider value={value}>
+        <FilterBarContext.Provider 
+            value={{...props}}>
             {children}
         </FilterBarContext.Provider>
     );

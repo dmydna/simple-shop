@@ -1,7 +1,7 @@
 
-import PageLoading from "@/components/common/PageLoading";
+import PageLoading from "@/pages/fallback/PageLoading";
 import { useProfile } from "@features/profile/contexts/ProfileContext.jsx";
-import { Button, FloatingLabel, Form, Col } from "react-bootstrap";
+import { Button, Col, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 

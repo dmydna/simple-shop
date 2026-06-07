@@ -1,4 +1,4 @@
-import { ImgGenApi } from "@/dev/imageJS.js";
+import { placeholder } from "@utils/image.js";
 import { useProfile } from "@features/profile/contexts/ProfileContext.jsx";
 import { useEffect } from "react";
 import { Card } from "react-bootstrap";
@@ -22,7 +22,7 @@ function CardProfile({ name, image, children, className, imgSize }) {
     return (
         <Card  className={`mb-2 island border text-start flex-row`}>
             <div className="d-block mx-auto position-relative">
-                <Card.Img className="perfil-img" src={profile?.image || ImgGenApi({...baseImg})}
+                <Card.Img className="perfil-img" src={profile?.image || placeholder({...baseImg})}
                           style={{
                               objectFit: 'cover',
                               height: imgSize || '120px',

@@ -1,14 +1,12 @@
 import { useEffect } from "react";
 import { Dropdown, Form } from "react-bootstrap";
-import { useUIContext } from "../../contexts/UIContext.jsx";
 import { useFilterBarContext } from "../../features/filters/context/FilterBarContext.jsx";
 
 function DropdownCheck({children ,className, style, variant }){
 
 
-    const {array, onFilterDraft} = useFilterBarContext()
-    const {selectedTags, setSelectedTags} = useUIContext() //<-- campartir seletedTags
-
+    const {array, onFilterDraft, selectedTags, setSelectedTags} = useFilterBarContext()
+ 
     useEffect(()=>{
       if(selectedTags.length != 0){
           onFilterDraft(prev =>  ({

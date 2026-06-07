@@ -11,25 +11,25 @@ import { DetailsPlaceholder } from "@features/placeholder/DetailsPlaceholder.jsx
 import ProductBuyCard from "@features/product/components/ProductBuyCard.jsx";
 import ProductCarousel from "@features/product/components/ProductCarousel.jsx";
 import ProductSpecs from "@features/product/components/ProductSpecs.jsx";
+import { category } from "@/utils/enums";
 
 
 
 function ProductDetails() {
 
 
-   const { name, hash } = useParams()
-   const { loading, setLoading, error, setError, currentItem, setCurrentItem, fetchDataByHash, id, setId }
-      = useFetchElem({ fetchMethod: listingService.getByHash })
+   const { hash } = useParams()
+   const { loading, error, currentItem, fetchDataByHash, setId } = useFetchElem({ fetchMethod: listingService.getByHash })
 
 
    useEffect(() => {
+      console.trace("Trace log:" ,hash)
       setId(hash)
-      console.log("current item by hash: ", currentItem)
       window.scrollTo({
          top: 0,
          behavior: 'instant'
       });
-   }, [hash])
+   }, [hash, setId])
 
 
    return (
@@ -64,14 +64,8 @@ function ProductDetails() {
                         {/**Buy Card */}
                         <Col style={{ top: '60px' }} className="sticky-md-bottom" xs={12} md={5}>
                            <ProductBuyCard
-                              className='p-2 border island h-100'
-                              id={currentItem.id}
-                              title={currentItem.title}
-                              rating={currentItem.rating}
-                              ship={currentItem.shippingInformation}
-                              stock={currentItem.stock}
-                              price={currentItem.price}
-                              discount={currentItem.discountPercentage}
+                              {...currentItem}
+                              className='p-2 border island h-100' 
                            />
                         </Col>
 
@@ -116,7 +110,8 @@ function ProductDetails() {
                      <Row className="g-0">
                         <ProductCarousel
                            className="border mx-0 my-3 p-4 island"
-                           filter={{ categories: [currentItem.category] }}
+                           filter={{ category: currentItem.category }}
+                           blacklist={[currentItem.hash]}
                            maxCols={4}
                            imgSize={140} >
                            <h3 className="fs-5 fw-medium pb-0 m-0 ">Productos similares</h3>

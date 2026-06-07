@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import {Form, Button, Container, Alert, Card, Row} from "react-bootstrap";
 import React, { useContext, useState } from "react";
-import { useAuth } from "../features/auth/hooks/AuthContext.jsx";
+import { useAuth } from "../features/auth/hooks/useAuth.js";
 import LoginForm from "../features/auth/components/LoginForm.jsx";
 import RegisterForm from "../features/auth/components/RegisterForm.jsx";
 

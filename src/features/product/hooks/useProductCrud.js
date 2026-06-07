@@ -5,10 +5,10 @@ import { CRUD } from "@utils/enums.js";
 import { useCrudForm } from "@/features/crud/hooks/useCrudForm.js";
 import { useCrudActions } from "@/features/crud/hooks/useCrudActions.js";
 
-export const useProductCrud = () => {
+export const useProductCrud = ({autofetch=false}={}) => {
 
     const { setId, id, setCurrentItem, currentProduct, loading: loadingItem, 
-    error: errorItem , ...props } = useProduct();
+    error: errorItem , ...props } = useProduct({autofetch: autofetch});
 
     const [showModal, setShowModal] = useState(false)
     const [dataItem, setDataItem] = useState({});

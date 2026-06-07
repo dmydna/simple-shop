@@ -4,12 +4,16 @@ import { useCart } from "../contexts/CartContext.jsx";
 import CartClearModal from "./CartClearModal.jsx";
 import CartItem from "./CartItem.jsx";
 import { useWarning } from "@/hooks/useWarning.js";
+import { useNavigate } from "react-router-dom";
+import {Tintify} from "@features/product/components/FloatButton"
+
 
 export const MyCart = ({ children, className }) => {
 
     const [showClearCart, setShowClearCart] = useState(false)
     const { clearCart, cartItems } = useCart();
     const {completeRegistration} = useWarning();
+    const navigate = useNavigate()
 
     const handleClearCart = () => {
         clearCart()
@@ -28,8 +32,10 @@ export const MyCart = ({ children, className }) => {
             <Card className={`m-2 ${className}`}>
                 <div className="d-flex align-items-center justify-content-between">
                     {children}
+                    <Tintify className="rounded-circle">
                     <i onClick={() => setShowClearCart(true)}
                         style={{ fontSize: "xx-large" }} className="bi bi-x hover-icon"></i>
+                    </Tintify>
                 </div>
 
                 <CartClearModal

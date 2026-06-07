@@ -41,8 +41,8 @@ export default function SidebarDashboardMobile({ toggle }) {
 
             <SiderbarLink
                 to={`${BASE_URL}/dev`}
-                icon="bi-gear"
-                label="config"
+                icon="bi-terminal"
+                label="demo"
             />
 
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button, Container, Row, Form, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CategoryItem from "../components/common/CategoryItem.jsx";
@@ -9,9 +9,6 @@ import Img3 from "../assets/expend.png";
 import Img4 from '../assets/paper.png';
 import Img5 from "../assets/t-shirt.png"
 import Img6 from "../assets/draft.png"
-import { useListingContext } from "../features/listing/contexts/ListingContext.jsx";
-import { useDevContext } from "../dev/contexts/DevContext.jsx";
-
 
 const Dashboard = ({ col, preview = false }) => {
 

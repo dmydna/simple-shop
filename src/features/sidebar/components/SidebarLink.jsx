@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { IconTint, Tintify } from "@features/product/components/FloatButton"
+
 
 const variantClasses = {
   'outline-dark': { bg: 'bg-light', color: 'text-dark' },
@@ -13,6 +15,10 @@ const variantClasses = {
   'dark': { bg: 'bg-dark', color: 'text-white' },
 };
 
+
+
+
+
 export default function SiderbarLink({ label, icon, to, className, style, variant = 'outline-dark', fs ,onclick }) {
   // Obtenemos las clases por defecto o usamos un fallback seguro
   const classes = variantClasses[variant] || variantClasses['outline-dark'];
@@ -22,10 +28,11 @@ export default function SiderbarLink({ label, icon, to, className, style, varian
       onClick={onclick}
       style={style} className={`list-group-item border-0 p-0 ${classes.bg} ${className || ''}`}
     >
-      <Link className="text-center simple-link d-flex flex-column" to={to}>
-        <i 
-          className={`bi ${icon} fs-4 ${classes.color}`}
-        ></i>
+      <Link className="text-center text-normalize px-2 d-flex flex-column" to={to}>
+
+        <Tintify className="rounded-circle">
+          <i className={`bi ${icon} fs-4 ${classes.color}`} ></i>
+        </Tintify>  
         <span 
           className={`${classes.color}`} 
           style={{ fontSize: fs || '.7rem' }}

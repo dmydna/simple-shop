@@ -4,6 +4,8 @@ import CartButton from "@features/cart/components/CartButton.jsx";
 
 export default function SidebarProfileMobile({  toggle }) {
 
+
+
     const BASE_URL ='/user'
 
 

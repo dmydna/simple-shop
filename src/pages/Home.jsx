@@ -21,6 +21,8 @@ import BannerAds from "../components/common/BannerAds";
 import { FeaturesPlaceholder } from "../features/placeholder/FeaturesPlaceholder.jsx";
 import ListingContextLayout from "./Product/ListingContextLayout";
 import { useListing } from "@/features/listing/hooks/useListing";
+import ProductTop from "@/features/product/components/ProductTop";
+import ProductTopCarousel from "@/features/product/components/ProductTopCarrousel";
 
 
 function Home() {
@@ -94,15 +96,15 @@ function Home() {
                     {/** Product Ilands */}
 
                     <Row className="g-0">
-                        <ProductSection
+                        <ProductTop
                             maxElems={4}
                             maxCols={4}
                             className="border p-4 my-3 island"
-                            filter={{ categories : ["fragrances"] }}
+                            top="visits"
                         >
                             <p className="fs-4 fw-medium pb-0 m-0">Lo mas visto</p>
                             <Link to={'/products'} className="text-decoration-none fw-bold">ver mas</Link>
-                        </ProductSection>
+                        </ProductTop>
                     </Row>
 
 
@@ -114,21 +116,21 @@ function Home() {
                                 className="border p-4 m-0 me-lg-3 island"
                                 filter={{ tags : ["vegetables"] }}
                             >
-                                <p className="fs-5 fw-medium pb-0 m-0 ">Oferton del día</p>
+                                <p className="fs-5 fw-medium pb-0 m-0 ">Oferta del día</p>
                                 <Link to="/products" className="text-decoration-none fw-bold">ver más</Link>
                             </ProductSection>
                         </Col>
 
                         <Col className="p-0 my-3" md={12} lg={8}>
-                            <ProductSection
+                            <ProductTop
                                 maxCols={3}
                                 maxElems={3}
                                 className="border p-4 island"
-                                filter={{ categories : ["furniture"] }}
+                                top="onsale"
                             >
-                                <p className="fs-5 fw-medium pb-0 m-0 ">Para llevar más de uno</p>
+                                <p className="fs-5 fw-medium pb-0 m-0 ">Mejores Rebajas</p>
                                 <Link to="/products" className="text-decoration-none fw-bold">ver más</Link>
-                            </ProductSection>
+                            </ProductTop>
                         </Col>
 
                     </Row>
@@ -137,32 +139,17 @@ function Home() {
                     {/** Carousels  */}
 
                     <Row className="g-0">
-                        <ProductCarousel
+                        <ProductTopCarousel
                             className="border mx-0 my-3 p-4 island"
-                            filter={{ categories : ["furniture"] }}
-                            maxCols={3}
-                        >
-                            <h3 className="fs-5 fw-medium pb-0 m-0 ">Con envio gratis</h3>
-                            <Link to={'/products?category=groceries'}
-                                  className="text-decoration-none fw-bold">
-                                Ver mas
-                            </Link>
-                        </ProductCarousel>
-                    </Row>
-
-
-                    <Row className="g-0">
-                        <ProductCarousel
-                            className="border mx-0 my-3 p-4 island"
-                            filter={{ categories : ["beauty"] }}
+                            top="rated"
                             maxCols={4}
-                            maxElems={4}>
-                            <h3 className="fs-5 fw-medium pb-0 m-0 ">Ofertas</h3>
+                            maxElems={8}>
+                            <h3 className="fs-5 fw-medium pb-0 m-0 ">Mejor valorado</h3>
                             <Link to={'/products?category=groceries'}
                                   className="text-decoration-none fw-bold">
                                 ver mas
                             </Link>
-                        </ProductCarousel>
+                        </ProductTopCarousel>
                     </Row>
 
 

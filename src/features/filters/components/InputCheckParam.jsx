@@ -4,7 +4,15 @@ import { useListing } from "@features/listing/hooks/useListing";
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 
-function InputCheckParam({ name, array = [] , className, style, variant = "light" }) {
+export function formatCase(text){
+  // "word(8*)" --> "word"
+  return text.replace(/\s*\(.*?\)/g, '').trim();
+}
+
+function InputCheckParam({ 
+  name, label, array = [] , cols = 1, textStyle = "lowercase",
+  className, style, variant = "light", multiselection
+}) {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedTags, setSelectedTags] = useState([]);
@@ -38,15 +46,21 @@ function InputCheckParam({ name, array = [] , className, style, variant = "light
         return next;
       });
     }
-  }, [selectedTags, setSearchParams]);
+  }, [name, selectedTags, setSearchParams]);
 
 
   const handleTagChange = (tag) => {
     setSelectedTags(prev => {
       if (prev.includes(tag)) {
+        if(!multiselection){
+          return []
+        }
         return prev.filter((t) => t !== tag);
       } else {
-        return [...prev, tag];
+        if(!multiselection){
+          return [tag]
+        }
+        return [...prev, tag ];
       }
     });
   };
@@ -59,7 +73,7 @@ function InputCheckParam({ name, array = [] , className, style, variant = "light
         className="border bg-tint container-fluid d-flex toggle-end align-items-center"
         id="dropdown-basic"
       >
-        <b style={{opacity: '.7'}} >tags :</b>
+        <b style={{opacity: '.7'}} >{label || name} :</b>
         <span className="small text-muted fw-semibold mx-3">
           {selectedTags.length !== 0 ? (
             <span className="">
@@ -70,15 +84,15 @@ function InputCheckParam({ name, array = [] , className, style, variant = "light
           )}
         </span>
       </Dropdown.Toggle>
-      <Dropdown.Menu className="multi-col-dropdown-menu">
+      <Dropdown.Menu style={{ textTransform: textStyle, columnCount: cols }} className="multi-col-dropdown-menu">
         {array.map((t) => (
           <div key={t} className="multi-col-item">
             <Form.Check
               type="checkbox"
               id={`checkbox-${t}`}
               label={t}
-              onChange={() => handleTagChange(t)}
-              checked={selectedTags.includes(t)}
+              onChange={() => handleTagChange(formatCase(t)) }
+              checked={selectedTags.includes(formatCase(t)) }
             />
           </div>
         ))}

@@ -4,6 +4,8 @@ import InputCheckParam  from "@features/filters/components/InputCheckParam"
 import InputSelectCheckParam from "@features/filters/components/InputSelectCheckParam"
 import { status, category, availabilityStock, userStatus, role } from '@utils/enums.js';
 import { useMemo } from "react";
+import { useFetchTrigger } from "@/hooks/useFetchTrigger";
+import { statsService } from "@/features/stats/services/statsService";
 
 
 const AvalabilityStock = () => {
@@ -18,7 +20,7 @@ const AvalabilityStock = () => {
 
 
 
-const SelectByEnum = ({content, name}) => {
+const SelectByEnum = ({content, label, cols, textStyle, multiseleccion}) => {
 
   // Extraer etiquetas únicas de los listings
   const Tags = useMemo(() => {
@@ -30,36 +32,52 @@ const SelectByEnum = ({content, name}) => {
   }, [content]);
 
 	return(
-		<InputSelectCheckParam
+		<InputCheckParam
+			multiselection={multiseleccion}
 			className="mb-2"
-			name={name} 
+			cols={multiseleccion  ? cols : 1}
+			textStyle={multiseleccion  ? textStyle : 'uppercase'}
+			name={label} 
 			array={Tags}
 		/>
 	)	
 }
 
 
-const Tags = ({content}) => {
+
+
+
+
+const SelectByStats = ({type, label, cols, textStyle, multiseleccion}) => {
+
+	const {data, loading, error} = useFetchTrigger({ 
+        fetchMethod: statsService.getTop, 
+        initialTriggers: {limit:15, type: type} 
+  })
 
   // Extraer etiquetas únicas de los listings
   const Tags = useMemo(() => {
     const res = new Set();
-    content.forEach(({ tags }) => {
-      if (tags && Array.isArray(tags)) {
-        tags.forEach(tag => res.add(tag));
-      }
+    data?.forEach( ({name, count}) => {
+        res.add(`${name}(${count})`);
     });
     return Array.from(res).sort(); // Ordenar alfabéticamente para mejor UX
-  }, [content]);
+  }, [data]);
 
 	return(
 		<InputCheckParam
+			multiselection={multiseleccion}
 			className="mb-2"
-			name="tags" 
+			cols={multiseleccion  ? cols : 1}
+			textStyle={multiseleccion  ? textStyle : 'uppercase'}
+			name={label || type} 
 			array={Tags}
 		/>
 	)	
 }
+
+
+
 
 const Status = () => {
 	return(
@@ -120,11 +138,20 @@ const RangePrice = () => {
 
 export default {
   AvalabilityStock, 
-	Tags, 
+	Tags : ()=>SelectByStats({
+	  cols: 2, 
+	  type:"tags", 
+	  multiseleccion: true
+	}),
+	Category : ()=>SelectByStats({ 
+	  cols: 1, 
+	  type:"categories", 
+	  textStyle: "uppercase",
+	}),
 	Status, 
-	Category, 
 	StatusUser, 
 	RangePrice,
 	Role,
-	SelectByEnum
+	SelectByEnum,
+  SelectByStats
 }

@@ -62,7 +62,7 @@ export default function  ProductButtonBar({item}){
 	return(
              <div className="d-flex gap-2 position-absolute w-100 left-0 justify-content-between px-2">
   
-                  <div className='d-flex gap-2'>
+                <div className='d-flex gap-2'>
                     {hide && (
                         <>
                             <IconFill
@@ -83,10 +83,10 @@ export default function  ProductButtonBar({item}){
                                 inactive
                             </span>)}
                         </>
-                      )}
+                    )}
 
-                      {!hide && (
-                          <>
+                    {!hide && (
+                        <>
                             <IconFill
                                className="border rounded-circle" 
                                action={handleDelete}
@@ -98,23 +98,19 @@ export default function  ProductButtonBar({item}){
                                action={handleToggle}
                                icon={`eye${item?.meta?.status != "ACTIVE"? "-slash":""}`}
                             />
-                          </>
-                      )}
+                        </>
+                    )}
 
-        
-                  </div>
-                  
+                </div>
+                    
+                {isAdmin && (
+                    <IconTint
+                      className="rounded-circle align-selft-end" 
+                      action={handleHide}
+                      icon={`three-dots${hide ? '' : '-vertical'}`}
+                    />
+                )}
 
-                  
-                  {isAdmin && (
-                  <IconTint
-                    className="rounded-circle align-selft-end" 
-                    action={handleHide}
-                    icon={`three-dots${hide ? '' : '-vertical'}`}
-                  />
-                  )}
-
-  
               </div>
 	)
 }

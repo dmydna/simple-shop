@@ -1,15 +1,17 @@
-import { useProduct } from "@/features/product/hooks/useProduct.js";
-import { useUser } from "@/features/user/hooks/useUser.js";
 import { Row } from "react-bootstrap";
 import CategoryItem from "../../../components/common/CategoryItem.jsx";
 import { placeholder } from "@utils/image.js";
-import { useListing } from "../../listing/hooks/useListing.js";
+import { statsService } from "@/features/stats/services/statsService.js";
+import { useFetchTrigger } from "@/hooks/useFetchTrigger.js";
 
 const MyActivity = ({col='col-12 col-md-12 col-lg-6', container=false}) => {
 
-  const {totalElements: totalPublications} = useListing()
-  const {totalElements: totalProducts} = useProduct()
-  const {totalElements: totalUsers} = useUser()
+
+  const { data } = useFetchTrigger({ 
+        fetchMethod: statsService.getStats, 
+        initialTriggers: {init: true} 
+  })
+
   
   const imgInfo =  { 
      "dimension":"150x150", 
@@ -37,7 +39,7 @@ const MyActivity = ({col='col-12 col-md-12 col-lg-6', container=false}) => {
                link={`/dashboard/listing`}
                image={
                 placeholder({ ...imgInfo, "background": ".melon", 
-                  "text": (totalPublications > 99 ? '%2B99' : totalPublications) || "0"} )
+                  "text": (data?.totalListings > 99 ? '%2B99' : data?.totalListings) || "0"} )
                 } 
              />
              <CategoryItem 
@@ -49,7 +51,7 @@ const MyActivity = ({col='col-12 col-md-12 col-lg-6', container=false}) => {
                link={`/dashboard/product`}
                image={
                 placeholder({ ...imgInfo, "background": ".lila", 
-                  "text": (totalProducts > 99 ? '%2B99' : totalProducts) || "0"})
+                  "text": (data?.products?.total > 99 ? '%2B99' : data?.products?.total) || "0"})
                } 
              />
              <CategoryItem 
@@ -60,7 +62,7 @@ const MyActivity = ({col='col-12 col-md-12 col-lg-6', container=false}) => {
                description="cantidad de usuarios"
                image={ placeholder(
                 { ...imgInfo, "background": ".cielo",  
-                   "text": (totalUsers > 99 ? '%2B99' : totalUsers) || "0" } 
+                   "text": (data?.users?.total > 99 ? '%2B99' : data?.users?.total) || "0" } 
                 )}
                link={`/dashboard/clients`}
              />

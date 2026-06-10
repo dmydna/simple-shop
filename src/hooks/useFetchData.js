@@ -10,6 +10,7 @@ export const useFetchData = ({service, size, methodName = 'getPage', autofetch=t
 
     const {loading, setLoading, error, setError, content, setContent, 
       success, setSuccess} = useFetch()
+
     const {currentPage,setCurrentPage, setTotalElements, setTotalPages,
         totalPages,totalElements} = usePageable()
 
@@ -29,8 +30,6 @@ export const useFetchData = ({service, size, methodName = 'getPage', autofetch=t
             setTotalElements(data.totalElements);
             setTotalPages(data.totalPages)
             setSuccess(true)
-/*            console.trace('Este efecto se ejecutó',data);*/
-//            console.log(data)
         } catch (err) {
             console.error("Error de carga de API", err);
             setError(err)

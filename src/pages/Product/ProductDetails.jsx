@@ -11,7 +11,7 @@ import { DetailsPlaceholder } from "@features/placeholder/DetailsPlaceholder.jsx
 import ProductBuyCard from "@features/product/components/ProductBuyCard.jsx";
 import ProductCarousel from "@features/product/components/ProductCarousel.jsx";
 import ProductSpecs from "@features/product/components/ProductSpecs.jsx";
-import { category } from "@/utils/enums";
+
 
 
 
@@ -19,7 +19,8 @@ function ProductDetails() {
 
 
    const { hash } = useParams()
-   const { loading, error, currentItem, fetchDataByHash, setId } = useFetchElem({ fetchMethod: listingService.getByHash })
+   const { loading, error, currentItem, fetchDataByHash, setId } 
+   = useFetchElem({ fetchMethod: (id) => listingService.getByHash(id, true) })
 
 
    useEffect(() => {

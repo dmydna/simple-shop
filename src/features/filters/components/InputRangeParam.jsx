@@ -96,16 +96,16 @@ function InputRangeParam({
                 id="dropdown-basic"
             >
                 <b style={{ opacity: '.7' }}>{label || name}: </b>
-                <span className="small text-muted fw-semibold mx-3">
+                <span  className="small text-muted fw-semibold mx-3">
                     {range.maxValue !== max || range.minValue !== min ? toggleText : 'Seleccionar'}
                 </span>
             </Dropdown.Toggle>
-            <Dropdown.Menu>
-                <Row style={{ minWidth: "320px" }} className="p-3 align-items-center">
+            <Dropdown.Menu className="w-100">
+                <div style={{ width: "100%" }} className="p-3 align-items-center">
                     <Col className="mb-2" xs={12}>
                         <div className="d-flex align-items-center justify-content-between">
                             <div className="d-flex align-items-center p-0 m-0">
-                                <small className="text-muted">Min: {type}</small>
+                                <small style={{textWrap: 'nowrap'}} className="text-muted">Min: {type}</small>
                                 <div style={{ maxWidth: "60px" }} className="p-0 me-2">
                                     <Form.Control
                                         style={{ fontSize: ".875em" }}
@@ -145,7 +145,7 @@ function InputRangeParam({
                             step={1}
                         />
                     </Col>
-                </Row>
+                </div>
             </Dropdown.Menu>
         </Dropdown>
         </>

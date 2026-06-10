@@ -5,13 +5,12 @@ import { availabilityStock, category, status } from '@utils/enums.js'
 
 
 function ListingFilter({close}){
-	const {content} = useListing()
 	return(
 		<FilterParams close={close} badgeParams={true}>
-			<SelectParams.Tags content={content}/>
-			<SelectParams.SelectByEnum name="status"      content={status} />
-			<SelectParams.SelectByEnum name="avalability" content={availabilityStock}/>
-			<SelectParams.SelectByEnum name="category"    content={category}/>
+			<SelectParams.Tags/>
+			<SelectParams.SelectByEnum label="status" content={status} />
+			<SelectParams.SelectByEnum label="avalability" content={availabilityStock}/>
+			<SelectParams.SelectByEnum label="category"    content={category}/>
 			<SelectParams.RangePrice />
 		</FilterParams>
 		)

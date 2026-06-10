@@ -2,31 +2,35 @@ import { useEffect, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
 import { useWindowsWidth } from '../../../contexts/useWindowSize.jsx';
-import { useListing } from "../../listing/hooks/useListing.js";
 import ProductCard from './ProductCard.jsx';
-
+import PageLoading from '@/pages/fallback/PageLoading.jsx';
+import PageError from '@/pages/fallback/PageError.jsx';
+import { useFetchTrigger } from '@/hooks/useFetchTrigger.js';
+import { statsService } from '@/features/stats/services/statsService.js';
 
 
 
 
 // TODO: actualizar filtro 
-function ProductCarousel({ children, filter, maxCols, maxElems, className, imgSize = 180, blacklist = [] }) {
+function TopCarousel({ children, top,maxCols, maxElems, className, imgSize = 180, blacklist = [] }) {
+
+
+  const {data, loading, error} = useFetchTrigger({ 
+    fetchMethod: statsService.getTop, 
+    initialTriggers: {limit:maxElems, type:top} 
+  })
+
 
   const [index, setIndex] = useState(0);
   const [chunkSize, setChunkSize] = useState(maxCols || 4)
   const width = useWindowsWidth()
-
-  const { listings, setFilters } = useListing({ autofetch: true }) //LOCAL
 
 
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
 
-  useEffect(() => {
-    setFilters(filter)
-    console.log(filter)
-  }, [filter])
+
 
 
    
@@ -34,15 +38,15 @@ function ProductCarousel({ children, filter, maxCols, maxElems, className, imgSi
 
   useEffect(() => {
     if (width < 576) {
-      setVisibleProducts(listings.slice(0, 3))
+      setVisibleProducts(data?.slice(0, 3))
       setChunkSize(1);
     } 
     else if (width < 992) {
-      setVisibleProducts(listings.slice(0, 10))
+      setVisibleProducts(data?.slice(0, 10))
       setChunkSize(2)
     }
     else { 
-      setVisibleProducts(listings)
+      setVisibleProducts(data || [])
       setChunkSize(maxCols);
     }
 
@@ -59,16 +63,16 @@ function ProductCarousel({ children, filter, maxCols, maxElems, className, imgSi
       ))      
     }
 
-  }, [width, listings, maxCols]);
+  }, [width, data, maxCols]);
 
   const slides = useMemo(() => {
 
 
-    if (visibleProducts.length === 0) return [];
+    if (visibleProducts?.length === 0) return [];
     
     const arr = [];
     // Recorremos la lista original de i en i según el chunkSize
-    for (let i = 0; i < visibleProducts.length; i += chunkSize) {
+    for (let i = 0; i < visibleProducts?.length; i += chunkSize) {
 
       const chunk = [];
       // Para cada grupo, tomamos exactamente 'chunkSize' elementos
@@ -76,7 +80,7 @@ function ProductCarousel({ children, filter, maxCols, maxElems, className, imgSi
 
         // (i + j) % length hace que cuando lleguemos al final, 
         // el índice vuelva a 0, 1, 2...
-        const index = (i + j) % visibleProducts.length;
+        const index = (i + j) % visibleProducts?.length;
 
         // if(currentListing && currentListing.id == visibleProducts[index]?.id){
         //   continue
@@ -90,6 +94,23 @@ function ProductCarousel({ children, filter, maxCols, maxElems, className, imgSi
 
     return arr;
   }, [visibleProducts, chunkSize]);
+
+
+    if (loading) {
+        return (
+        <div className={className}>
+          <PageLoading />
+        </div>
+        );
+    }
+
+    if (error) {
+        return (
+        <div className={className}>
+          <PageError error={error} />
+        </div>
+        );
+    }
 
 
   return (
@@ -141,4 +162,4 @@ function ProductCarousel({ children, filter, maxCols, maxElems, className, imgSi
   );
 }
 
-export default ProductCarousel;
+export default TopCarousel;

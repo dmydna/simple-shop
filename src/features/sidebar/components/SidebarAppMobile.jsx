@@ -6,6 +6,7 @@ import { useAuthContext } from "@/features/auth/contexts/AuthContext";
 // Nota: esta sidebar es la version normal con navegacion global y admite ambos roles
 export default function SidebarAppMobile({ onShow, expandable = true, toggle }) {
 
+    const { isAuth } = useAuthContext()
     const BASE_URL ='/dashboard'
     const {isAdmin} = useAuthContext()
 
@@ -29,18 +30,18 @@ export default function SidebarAppMobile({ onShow, expandable = true, toggle }) 
 
             <SiderbarLink
                 onclick={()=>toggle("/user")}
-                to={`/user`}
+                to={`${isAuth ? '/user' : '/login'}`}
                 icon="bi-person"
                 label="account"
             />
 
-           {isAdmin && (
-            <SiderbarLink
-                onclick={()=>toggle("/dashboard")}
-                to={`/dashboard`}
-                icon="bi-list-nested"
-                label="dashboard"
-            />
+            {isAdmin && (
+                <SiderbarLink
+                    onclick={()=>toggle("/dashboard")}
+                    to={`/dashboard`}
+                    icon="bi-list-nested"
+                    label="dashboard"
+                />
             )}
 
             <CartButton/> 

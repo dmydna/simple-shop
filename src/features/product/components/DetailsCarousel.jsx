@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useWindowsWidth } from '../../../contexts/useWindowSize.jsx';
 
-function ProductDetailsCarousel({children, filterFn, count, className, images}){
+function DetailsCarousel({children, filterFn, count, className, images}){
 
 
 
@@ -20,12 +20,12 @@ function ProductDetailsCarousel({children, filterFn, count, className, images}){
       <div className={`${className} rounded  h-100 p-4`}>
         <div className='row'>
           {children}
-        {images.map((p, i) => (
-            <img src={p.thumbnail} />
-        ))}
+          {images.map((p) => (
+              <img key={p.id} src={p.thumbnail} />
+          ))}
         </div>
         </div>
 
     )
 }
-export default ProductDetailsCarousel;
+export default DetailsCarousel;

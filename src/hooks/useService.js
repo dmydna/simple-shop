@@ -27,15 +27,18 @@ export const useService = ({service, onSuccess, onError, onRefresh}) => {
         nprogress.start();
         setLoading(true)
         setError(null)
+        setContent(null)
         try {
             const result = await service[action](...args)
             onSuccess?.(result);
             onRefresh?.();
             setSuccess(true)
+            setContent(result);
             return result;
         } catch (err) {
             setError(err);
             onError?.(err);
+            setContent(null)
             throw err;
         } finally {
             setLoading(false)

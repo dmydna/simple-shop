@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {FeedbackMessage} from "../../components/common/FeedbackMessage.jsx";
+import {FeedbackMessage} from "@common/FeedbackMessage.jsx";
 import React from "react";
 
 function Page404NotFound(){

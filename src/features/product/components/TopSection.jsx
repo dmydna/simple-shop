@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import ProductCard from './ProductCard.jsx';
 import { useStats } from "@features/stats/hooks/useStats.js";
-import PageLoading from '@/pages/fallback/PageLoading.jsx';
+import PageLoading from '@features/fallback/PageLoading.jsx';
 import { statsService } from '@/features/stats/services/statsService.js';
 import { useFetchTrigger } from '@/hooks/useFetchTrigger.js';
 

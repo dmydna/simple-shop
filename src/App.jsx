@@ -24,8 +24,8 @@ import CompleteRegister from "@pages/CompleteRegister";
 import Login from "@pages/Login";
 import Register from "@pages/Register.jsx";
 
-import PageNotReady from "@/pages/fallback/PageNotReady";
-import Page404NotFound from "./pages/fallback/Page404NotFound.jsx";
+import PageNotReady from "@features/fallback/PageNotReady";
+import Page404NotFound from "@features/fallback/Page404NotFound.jsx";
 
 import MyPhotoProfile from "@features/profile/components/MyPhotoProfile";
 import MyAccount from "@features/profile/components/MyAccount";

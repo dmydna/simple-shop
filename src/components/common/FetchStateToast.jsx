@@ -1,4 +1,4 @@
-import PageLoading from "@/pages/fallback/PageLoading";
+import PageLoading from "@features/fallback/PageLoading";
 import { useEffect } from 'react';
 import toast from 'react-hot-toast'; // Asegúrate de tener instalado el paquete o importar tu componente
 

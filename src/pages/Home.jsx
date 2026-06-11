@@ -21,8 +21,8 @@ import BannerAds from "../components/common/BannerAds";
 import { FeaturesPlaceholder } from "../features/placeholder/FeaturesPlaceholder.jsx";
 import ListingContextLayout from "./Product/ListingContextLayout";
 import { useListing } from "@/features/listing/hooks/useListing";
-import ProductTop from "@/features/product/components/ProductTop";
-import ProductTopCarousel from "@/features/product/components/ProductTopCarrousel";
+import TopSection from "@/features/product/components/TopSection";
+import TopCarousel from "@/features/product/components/TopCarrousel";
 
 
 function Home() {
@@ -96,7 +96,7 @@ function Home() {
                     {/** Product Ilands */}
 
                     <Row className="g-0">
-                        <ProductTop
+                        <TopSection
                             maxElems={4}
                             maxCols={4}
                             className="border p-4 my-3 island"
@@ -104,7 +104,7 @@ function Home() {
                         >
                             <p className="fs-4 fw-medium pb-0 m-0">Lo mas visto</p>
                             <Link to={'/products'} className="text-decoration-none fw-bold">ver mas</Link>
-                        </ProductTop>
+                        </TopSection>
                     </Row>
 
 
@@ -122,7 +122,7 @@ function Home() {
                         </Col>
 
                         <Col className="p-0 my-3" md={12} lg={8}>
-                            <ProductTop
+                            <TopSection
                                 maxCols={3}
                                 maxElems={3}
                                 className="border p-4 island"
@@ -130,7 +130,7 @@ function Home() {
                             >
                                 <p className="fs-5 fw-medium pb-0 m-0 ">Mejores Rebajas</p>
                                 <Link to="/products" className="text-decoration-none fw-bold">ver más</Link>
-                            </ProductTop>
+                            </TopSection>
                         </Col>
 
                     </Row>
@@ -139,7 +139,7 @@ function Home() {
                     {/** Carousels  */}
 
                     <Row className="g-0">
-                        <ProductTopCarousel
+                        <TopCarousel
                             className="border mx-0 my-3 p-4 island"
                             top="rated"
                             maxCols={4}
@@ -149,7 +149,7 @@ function Home() {
                                   className="text-decoration-none fw-bold">
                                 ver mas
                             </Link>
-                        </ProductTopCarousel>
+                        </TopCarousel>
                     </Row>
 
 

@@ -1,7 +1,7 @@
 import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
 import { Navigate } from "react-router-dom";
-import PageLoading from "../../pages/fallback/PageLoading.jsx";
-import RouteLayout from "./RouteLayout.jsx";
+import PageLoading from "@features/fallback/PageLoading.jsx";
+import RouteLayout from "@common/RouteLayout.jsx";
 
 export default function ProtectedRoute({ children }) {
     

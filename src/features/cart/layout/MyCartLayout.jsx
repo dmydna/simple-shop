@@ -1,7 +1,7 @@
 import { usePaymentContext } from "@/features/payment/contexts/PaymentContext";
-import PageError from "@/pages/fallback/PageError";
-import PageLoading from "@/pages/fallback/PageLoading";
-import PageSuccess from "@/pages/fallback/PageSuccess";
+import PageError from "@features/fallback/PageError";
+import PageLoading from "@features/fallback/PageLoading";
+import PageSuccess from "@features/fallback/PageSuccess";
 import { MyCart } from "@features/cart/components/MyCart";
 import { useCart } from "@features/cart/contexts/CartContext";
 import PaymentForm from "@features/payment/components/PaymentForm";

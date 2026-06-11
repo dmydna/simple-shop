@@ -1,5 +1,8 @@
 // src/services/authService.js
 import { BASE_URL, ENDPOINTS } from "@utils/config.js";
+import { responseError } from '@utils/service.js';
+
+
 
 const ENDPOINT = ENDPOINTS.AUTH
 
@@ -13,8 +16,7 @@ export const authService = {
         });
 
         if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.message || "Credenciales inválidas");
+            return responseError(response)
         }
 
         const data = await response.json(); // Recibimos { token: "..." }
@@ -37,7 +39,9 @@ export const authService = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData)
         });
-        if (!response.ok) throw new Error("Error en el registro");
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.text();
     },
 
@@ -58,6 +62,7 @@ export const authService = {
     changePassword: async (data) => {
         // data = {newPassword, oldPassword}
         console.log(data)
+        const TOKEN = localStorage.getItem("token");
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/change-password`, {
             method: 'POST',
             headers: { 
@@ -66,7 +71,9 @@ export const authService = {
             },
             body: JSON.stringify(data)
         });
-        if (!response.ok) throw new Error("Error en el registro");
+        if (!response.ok) {
+            return responseError(response)
+        }
         return await response.text();
     }
 

@@ -10,6 +10,7 @@ export async function responseError(response) {
     // Intentamos JSON primero
     try {
         errorData = await response.json();
+        console.log(errorData)
         // Extraemos mensaje si existe
         if (errorData.message) errorMessage = errorData.message;
         else if (errorData.error) errorMessage = errorData.error;
@@ -31,6 +32,7 @@ export async function responseError(response) {
     // 3. Inyectar metadatos de forma SEGURA
     customError.status = response.status;
     customError.path = response.url;
+    customError.code = response.code;
     
     // Formatear timestamp SOLO si existe y es un array válido
     if (errorData.timestamp && Array.isArray(errorData.timestamp)) {

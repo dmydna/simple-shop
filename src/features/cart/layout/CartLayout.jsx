@@ -1,7 +1,7 @@
-import PageError from "@/pages/fallback/PageError";
+import PageError from "@features/fallback/PageError";
 import { useEffect } from "react";
-import CartEmpty from "../components/CartEmpty";
-import PageSuccess from "../../../pages/fallback/PageSuccess";
+import CartEmpty from "@features/cart/components/CartEmpty";
+import PageSuccess from "@features/fallback/PageSuccess";
 
 
 /**

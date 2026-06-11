@@ -1,12 +1,11 @@
 // src/services/listingService.js
 import { toUpdateListing, toCreateListing, mapToURLSearchParams } from '@utils/mappers.js'
-
-
-// TODO: text 
 import { BASE_URL, ENDPOINTS } from "@utils/config.js";
 import { responseError } from '@utils/service.js';
-const ENDPOINT = ENDPOINTS.LISTENING;
 
+
+
+const ENDPOINT = ENDPOINTS.LISTENING;
 
 /* ========= HTTP ==========
   - 1XX (Información)

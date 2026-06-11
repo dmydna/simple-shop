@@ -4,7 +4,7 @@ import { Button, Card, Container } from "react-bootstrap";
 import warningIMG from "/src/assets/404.png"
 import Img1 from "/src/assets/web_404_crop.png"
 import '/src/styles/animations.css'
-import {FeedbackMessage} from "../../components/common/FeedbackMessage.jsx";
+import {FeedbackMessage} from "@common/FeedbackMessage.jsx";
 
 
 function Page403Forbidden(){

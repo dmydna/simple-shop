@@ -1,7 +1,7 @@
 // export const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 
-export const BASE_URL = "http://localhost:8080"
+export const BASE_URL = import.meta.env.VITE_API_URL; 
 export const BASE_URL_IMG = `${BASE_URL}/uploads` // https://cdn.dummyjson.com
 
 export const ENDPOINTS = Object.freeze({

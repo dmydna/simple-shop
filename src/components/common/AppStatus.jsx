@@ -1,9 +1,9 @@
 import useCheckServer from "@/hooks/useCheckServer";
 import useNetworkStatus from "@/hooks/useNetworkStatus";
-import PageError from "@/pages/fallback/PageError";
-import PageIsOffline from "@/pages/fallback/PageIsOffline";
-import PageServerDown from "@/pages/fallback/PageServerDown";
-import PageNotContent from "@/pages/fallback/PageNotContent";
+import PageError from "@features/fallback/PageError";
+import PageIsOffline from "@features/fallback/PageIsOffline";
+import PageServerDown from "@features/fallback/PageServerDown";
+import PageNotContent from "@features/fallback/PageNotContent";
 import { useEffect } from "react";
 
 

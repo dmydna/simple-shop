@@ -4,9 +4,9 @@ import {  useMemo, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import FileUploader from "./FileUploader";
 
-import PageError from "@/pages/fallback/PageError";
-import PageLoading from "@/pages/fallback/PageLoading";
-import PageSuccess from "@/pages/fallback/PageSuccess";
+import PageError from "@features/fallback/PageError";
+import PageLoading from "@features/fallback/PageLoading";
+import PageSuccess from "@features/fallback/PageSuccess";
 import { placeholder } from "@utils/image.js";
 
 

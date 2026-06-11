@@ -1,4 +1,4 @@
-import PageLoading from "@/pages/fallback/PageLoading.jsx";
+import PageLoading from "@features/fallback/PageLoading.jsx";
 import { useEffect } from "react";
 import { AppStatus } from "../../components/common/AppStatus.jsx";
 

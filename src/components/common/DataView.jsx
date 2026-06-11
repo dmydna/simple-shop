@@ -1,6 +1,6 @@
-import PageEmpty from '@/pages/fallback/PageEmpty.jsx';
-import PageError from '@/pages/fallback/PageError';
-import PageLoading from '../../pages/fallback/PageLoading';
+import PageEmpty from '@features/fallback/PageEmpty.jsx';
+import PageError from '@features/fallback/PageError';
+import PageLoading from '@features/fallback/PageLoading';
 
 export default function DataView({ 
     children, 

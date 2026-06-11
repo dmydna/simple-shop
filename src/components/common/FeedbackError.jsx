@@ -45,6 +45,9 @@ function FeedbackError({ error, detailedMessage }) {
 					{error?.timestamp && 
 					    <p className='small'><strong>Fecha:</strong> {error?.timestamp.toLocaleString()}</p>
 				    }
+				    {error?.code && 
+					    <p className='small'><strong>Code:</strong> {error?.code}</p>
+				    }
 				    {error?.rawData && 
 				        <p className='small'><strong>Debug:</strong> {JSON.stringify(error.rawData)} </p>
 				    }

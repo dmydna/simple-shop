@@ -1,6 +1,6 @@
-import PageError from "@/pages/fallback/PageError.jsx";
-import PageLoading from "@/pages/fallback/PageLoading.jsx";
-import PageSuccess from "@/pages/fallback/PageSuccess.jsx";
+import PageError from "@features/fallback/PageError.jsx";
+import PageLoading from "@features/fallback/PageLoading.jsx";
+import PageSuccess from "@features/fallback/PageSuccess.jsx";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useProfile } from "../contexts/ProfileContext.jsx";
 import { ProfileHeader } from "./ProfileHeader.jsx";

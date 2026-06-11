@@ -1,4 +1,4 @@
-import PageLoading from "@/pages/fallback/PageLoading";
+import PageLoading from "@features/fallback/PageLoading";
 import { AppStatus } from "@common/AppStatus";
 
 // Nota: Restringuir el acceso basado en el estado de listingContext.

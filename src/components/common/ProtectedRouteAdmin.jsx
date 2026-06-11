@@ -1,6 +1,6 @@
 import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
-import Page403Forbidden from "@/pages/fallback/Page403Forbidden.jsx";
-import PageLoading from "../../pages/fallback/PageLoading.jsx";
+import Page403Forbidden from "@features/fallback/Page403Forbidden.jsx";
+import PageLoading from "@features/fallback/PageLoading.jsx";
 import RouteLayout from "./RouteLayout.jsx";
 
 export default function ProtectedRouteAdmin({ children }) {

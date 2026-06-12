@@ -32,7 +32,6 @@ export async function responseError(response) {
     // 3. Inyectar metadatos de forma SEGURA
     customError.status = response.status;
     customError.path = response.url;
-    customError.code = response.code;
     
     // Formatear timestamp SOLO si existe y es un array válido
     if (errorData.timestamp && Array.isArray(errorData.timestamp)) {
@@ -43,8 +42,10 @@ export async function responseError(response) {
 
     customError.rawData = errorData;
     customError.cause = errorData;
+    customError.code = errorData.code
 
     console.error("Error capturado en service:", customError);
+    console.log("Error capturado en service:", response);
     
     // 4. Lanzar el error (esto interrumpe el flujo de banUser)
     throw customError;

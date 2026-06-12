@@ -16,7 +16,6 @@ export const FeedbackMessage = ({
 
     const {isAdmin} = useAuthContext()
 
-
     const detailedMessage = error?.message || error?.error || "Ocurrió un error desconocido.";
     const genericMessage = "Hubo un error al procesar la solicitud. Intente nuevamente.";
     

@@ -5,7 +5,9 @@ import PageIsOffline from "@features/fallback/PageIsOffline";
 import PageServerDown from "@features/fallback/PageServerDown";
 import PageNotContent from "@features/fallback/PageNotContent";
 import { useEffect } from "react";
-
+import { useAuthContext } from "@/features/auth/contexts/AuthContext";
+import { toast } from "react-toastify";
+import ExpiredSession from "@/features/fallback/ExpiredSession";
 
 
 /**
@@ -16,8 +18,6 @@ import { useEffect } from "react";
 */
 
 
-
-// TODO: este componente va a trabajar solo con /api/health
 export const AppStatus = (
     { 
       children, 
@@ -28,13 +28,19 @@ export const AppStatus = (
       isEmpty = false,
     }) => {
 
-      
 
+    const { logout }  = useAuthContext();
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { isOnline } = useNetworkStatus();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { serverStatus } = useCheckServer()
 
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(()=>{
 
+      // Agrega estilos al main de la App para centrar los Fallbacks
       if(!isOnline || serverStatus == 'servidor_caido' || isEmpty || error){
         if(document.querySelector('main')){ 
           document.querySelector('main')
@@ -54,6 +60,9 @@ export const AppStatus = (
       };
     },[isOnline,serverStatus, error, isEmpty, loading])
 
+
+    
+
     // 1. -- Cargando contenido.
     if (loading) return (
       <div className="rounded mt-2 mb-5 pb-5 w-100">
@@ -66,6 +75,8 @@ export const AppStatus = (
     if (serverStatus === 'servidor_caido') 
       return (<PageServerDown />)
     // 2. -- Error de carga de contenido
+    if (error?.code === 'TOKEN_EXPIRED')
+        return  <ExpiredSession  handle={()=> logout()} />;
     if (error) 
       return <PageError error={error} handle={onRetry} />
     // 3. No hay contenido

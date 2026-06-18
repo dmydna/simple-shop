@@ -7,13 +7,25 @@ import InputCrudFloating from "@/features/crud/components/InputCrudFloating";
 
 function FormCategory({ children, className, crudHook }) {
 
-    const { dataItem, handleChange, crudMode, setFormData, formData,
-        isDisabledField, handleEnableEdit, editableFields, currentProduct } = crudHook;
+    const {
+        register,
+        isFieldDisabled,
+        handleEnableField,
+        mode,
+        lockedFields,
+        showEditButton,
+        showCopyButton,
+        watch,
+        errors,
+        currentSchema,
+    } = crudHook;
 
 
-    useEffect(() => {
-        console.log(formData?.category)
-    }, [formData])
+
+
+    const isDisabled = isFieldDisabled("category");
+
+
 
     return (
         <>
@@ -24,8 +36,8 @@ function FormCategory({ children, className, crudHook }) {
                 <p className="fw-medium"> Category: </p>
 
 
-               {editableFields["category"] && (
-                <Form.Select className="p-3" name="category" value={formData?.category} onChange={handleChange}>
+               {!isDisabled && (
+                <Form.Select {...register("category")}  className="p-3" name="category" >
                     <option value="">Selecciona una opción</option>
                     <option value={category.GROCERIES}>groceries</option>
                     <option value={category.FURNITURE}>furnitures</option>
@@ -33,7 +45,7 @@ function FormCategory({ children, className, crudHook }) {
                     <option value={category.FRAGRANCE}>fagrances</option>
                 </Form.Select>
                )}
-               {!editableFields["category"] && (
+               {isDisabled && (
                 <InputCrudFloating
                     name={"category"}
                     label={"Category"}

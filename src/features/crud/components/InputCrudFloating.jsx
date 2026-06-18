@@ -1,56 +1,90 @@
 import CopyButton from "@/components/common/CopyButton";
 import LockButton from "@/components/common/LockButton";
 import { CRUD } from "@utils/enums.js";
+import { useEffect } from "react";
 import { FloatingLabel, Form } from "react-bootstrap";
-
 
 // NOTA este componente es multi-contexto, 
 // hay que mandar un crud-hook compatible.
-function InputCrudFloating({ name, label, type, placeholder, as, rows, baseHook: crudHook }) {
+function InputCrudFloating({ 
+    name, 
+    label, 
+    type = "text", 
+    placeholder, 
+    as, 
+    rows, 
+    baseHook: crudHook 
+}) {
+    const {
+        register,
+        isFieldDisabled,
+        handleEnableField,
+        mode,
+        lockedFields,
+        showEditButton,
+        showCopyButton,
+        watch,
+        errors,
+        currentSchema,
+    } = crudHook;
 
-    const { formData, handleChange, crudMode,
-        isDisabledField, editableFields, handleEnableEdit } = crudHook;
+    // Obtener el valor actual para el botón de copiar
+    const currentValue = watch(name);
+    const isDisabled = isFieldDisabled(name);
 
     return (
-        <Form.Group className="w-100">
+        <Form.Group className="w-100 position-relative">
             <FloatingLabel
                 controlId={`floating-${name}`}
                 label={label || name || ''}
                 className="mb-3"
             >
                 <Form.Control
-                    type={type || "text"}
+                    type={type}
                     name={name}
                     placeholder={placeholder || `Ingrese ${name}`}
-                    value={formData?.[name] || ""}
-                    onChange={handleChange}
-                    disabled={isDisabledField(name)}
+                    // React Hook Form maneja el valor y el onChange automáticamente
+                    {...register(name)} 
+                    disabled={isDisabled}
                     spellCheck="false"
-                    style={as == "textarea" ? { minHeight: '100px', resize: 'vertical' } : {}}
+                    style={as === "textarea" ? { minHeight: '100px', resize: 'vertical' } : {}}
                     as={as || "input"}
                     rows={rows || 8}
+                    // Si el campo tiene error, añadimos clase visual (opcional)
+                    isInvalid={!!errors[name]}
                 />
+                
+                {/* Mensaje de error de Zod */}
+                {errors[name] && (
+                    <div className="invalid-feedback d-block">
+                        {errors[name].message}
+                    </div>
+                )}
 
-                {crudMode == CRUD.UPDATE && (
+                {/* Botón Editar: Solo en modo UPDATE y si el campo NO está bloqueado */}
+                {showEditButton && isDisabled && !lockedFields[name] && (
                     <LockButton
                         style={{ top: 11, right: 3, opacity: '.7' }}
                         className="pointer position-absolute"
-                        locked={editableFields[name]}
-                        handle={() => handleEnableEdit(name)}
+                        locked={false} // Visualmente desbloqueado porque el campo está habilitado
+                        handle={() => handleEnableField(name)}
+                        title="Editar campo"
                     />
                 )}
-                {crudMode === CRUD.READ && (
+
+                {/* Botón Copiar: Solo en modo READ */}
+                {showCopyButton && (
                     <CopyButton
                         style={{ top: 10, right: 3, opacity: '.7' }}
                         className="pointer position-absolute"
                         showMessage={false}
-                        value={formData?.[name]}
+                        value={currentValue}
+                        title="Copiar valor"
                     />
-
                 )}
             </FloatingLabel>
         </Form.Group>
-    )
+    );
 }
 
-export default InputCrudFloating
+export default InputCrudFloating;

@@ -27,7 +27,7 @@ export const listingService = {
     },
 
     getByHash: async (hash, fallow=false) => {
-        const TOKEN = localStorage.getItem("token")
+   /**/     const TOKEN = localStorage.getItem("token")
         console.log("obtiene por hash", hash)
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/hash/${hash}?fallow=${fallow}`,    
             { headers: TOKEN ? { 'Authorization': `Bearer ${TOKEN}` } : {} }

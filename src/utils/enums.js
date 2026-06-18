@@ -85,7 +85,9 @@ export const CRUD = Object.freeze({
     EDIT:   'update',
     DRAFT:  'draft',
     VIEW:   'read',
-    COPY:   'copy'
+    COPY:   'copy',
+    CREATE_DRAFT: 'create.draft',
+    EDIT_DRAFT: 'edit.draft'
 });
 
 export const mode = Object.freeze({

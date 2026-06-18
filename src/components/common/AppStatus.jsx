@@ -76,7 +76,10 @@ export const AppStatus = (
       return (<PageServerDown />)
     // 2. -- Error de carga de contenido
     if (error?.code === 'TOKEN_EXPIRED')
-        return  <ExpiredSession  handle={()=> logout()} />;
+        return  <ExpiredSession  handle={()=> {
+          logout()
+          window.location.reload()
+        } } />;
     if (error) 
       return <PageError error={error} handle={onRetry} />
     // 3. No hay contenido

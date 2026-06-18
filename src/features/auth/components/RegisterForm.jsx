@@ -26,9 +26,7 @@ function RegisterForm({ children, style, className}){
     }
     
     useEffect( () => { 
-       if(registerSuccess){
-         autoLogin(formData)
-       } 
+       if(registerSuccess){ autoLogin(formData) } 
     } ,[autoLogin, formData, registerSuccess])
 
     return (

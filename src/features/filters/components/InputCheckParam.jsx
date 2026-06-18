@@ -70,10 +70,11 @@ function InputCheckParam({
     <Dropdown className={className} style={style}>
       <Dropdown.Toggle
         variant={variant}
+        style={{opacity: '.6'}}
         className="border bg-tint container-fluid d-flex toggle-end align-items-center"
         id="dropdown-basic"
       >
-        <b style={{opacity: '.7'}} >{label || name} :</b>
+        <b>{label || name} :</b>
         <span className="small text-muted fw-semibold mx-3">
           {selectedTags.length !== 0 ? (
             <span className="">

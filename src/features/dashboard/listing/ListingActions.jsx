@@ -58,7 +58,7 @@ export default function ListingActions({ close }) {
   // TODO: manejar rutas muertas de ListingList/ListingForm.
   useValidParams({
     id: (val) => val && /^[0-9]+$/.test(val), // Solo números
-    mode: (val) => ['view','create', 'edit', 'draft'].includes(val), // Solo valores permitidos
+    mode: (val) => ['view','create', 'edit', 'draft', 'edit.draft'].includes(val), // Solo valores permitidos
     status: (val) => ['ACTIVE','INACTIVE','DELETED', 'DRAFT'].includes(val), 
   }, {redirect: "/dashboard/list-list"});
 
@@ -129,7 +129,7 @@ export default function ListingActions({ close }) {
 
 
                     <ButtonLink
-                        visible={ isDistincActive }
+                        visible={ true }
                         handle={() => handleStatus(currentItem?.id, "DELETED")}
                         icon="bi-trash3"
                     >
@@ -138,7 +138,7 @@ export default function ListingActions({ close }) {
 
                     <ButtonLink
                         visible={ isStatusDraft }
-                        handle={() => navigate(`${FORM_URL}?mode=draft&hash=${currentItem.hash}`)}
+                        handle={() => navigate(`${FORM_URL}?mode=edit.draft&hash=${currentItem.hash}`)}
                         icon="bi-pencil"
                     >
                         Edit Post

@@ -6,21 +6,25 @@ import FormBasic from "@/features/listing/components/FormBasic";
 import FormDetails from "@/features/listing/components/FormDetails";
 import FormSku from "@/features/listing/components/FormSku";
 import { useListingCrud } from "@/features/listing/hooks/useListingCrud";
-
+import {ListingDTO} from "@/utils/schemas"
 
 
 function ListingForm() {
 
     const baseHook = useListingCrud()
-    const { showModal, setShowModal } = baseHook
-
+    const { showModal, setShowModal} = baseHook
 
     return (
+        <>
+
+
+
         <FormCrud
             type="listing"
             crudHook = {baseHook}
         >
             <>
+
                 <div className="mb-4">
                     <p className="fw-medium">Post & description</p>
                     <FormBasic 
@@ -62,7 +66,7 @@ function ListingForm() {
 
             </>
         </FormCrud>
-
+         </>
 
     )
 }

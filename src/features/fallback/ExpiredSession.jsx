@@ -10,7 +10,7 @@ function ExpiredSession({handle, message}){
 
     return (
         <FeedbackMessage
-            title="Tu Sesion Expiro"
+            title="Sesion expirada"
             message={message || "vuelve a iniciar session, para acceder a tu cuenta."}
             icon="bi-x-circle"
             actionLabel={handle ? "aceptar" : null}

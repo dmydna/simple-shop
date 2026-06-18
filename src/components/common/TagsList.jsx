@@ -74,7 +74,7 @@ export const TagsList = ({ array = [], onChange, className = "", style = {}, loc
                 </InputGroup>
             ) : (
                 <>
-                {locked && (
+                {!locked && (
                   <Button
                     variant="link"
                     size="sm"

@@ -25,11 +25,11 @@ export default function FetchStateModal({ children, hook }) {
                 keyboard={false}
                 show={show}
                 onHide={setShow}
-                size="sm"
+                size="md"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Body className="p-3">
+                <Modal.Body style={{overflowY: 'auto'}} className="p-3">
                     <>
                         {loading && <PageLoading />}
                         {error && !loading && 

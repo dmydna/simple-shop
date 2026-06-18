@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 function MultiImageUploaderCrud({useCrudHook, title, baseHook, locked}) {
 
-   const { currentItem, crudMode,setFormData, setSelectedFile } = baseHook
+   const { currentItem, mode, setValue, setSelectedFile } = baseHook
    const [images, setImages] = useState([]); // Array de objetos { id, url, file }
    const createInitialImage = (url, index) => {
       return {
@@ -25,10 +25,7 @@ function MultiImageUploaderCrud({useCrudHook, title, baseHook, locked}) {
 
    useEffect(() => {
 // Actualiza lista de imagen del elemento actual
-    setFormData((prev) => ({
-      ...prev,
-      images: images?.map(getImageUrl)
-    }));
+      setValue("images", images?.map(getImageUrl), { shouldValidate: true });
 // Actualiza lista de archivos a subir
     setSelectedFile(
        // Se descarta las imagenes iniciales
@@ -38,7 +35,7 @@ function MultiImageUploaderCrud({useCrudHook, title, baseHook, locked}) {
 
     return (
     <MultiImageUploader 
-       locked={crudMode == CRUD.UPDATE || crudMode == CRUD.CREATE}
+       locked={mode != CRUD.READ}
        setImages={setImages}
        images={images}
     />

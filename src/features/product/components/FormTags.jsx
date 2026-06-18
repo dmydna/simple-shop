@@ -3,7 +3,7 @@ import { CRUD } from "@utils/enums.js";
 
 function FormTags({ children, className, crudHook }) {
 
-  const { setFormData, crudMode, currentProduct,  editableFields } = crudHook;
+  const { crudMode, currentProduct,  setValue } = crudHook;
 
   return (
     <>
@@ -16,9 +16,9 @@ function FormTags({ children, className, crudHook }) {
          <div className="d-block">
             <p className="fw-medium">Tags</p>
             <TagsList  
-               locked={crudMode == CRUD.UPDATE || crudMode == CRUD.CREATE}
+               locked={crudMode == CRUD.READ}
                array={currentProduct.tags || []} 
-               onChange={(tg)=> setFormData(prev=>({...prev, tags: tg})) } 
+               onChange={(tg)=> setValue("tags",tg) } 
             />
          </div>
 

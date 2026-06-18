@@ -60,12 +60,12 @@ export function ProfileProvider({ children }) {
         }
     }
 
-    const updatePerfil = async () => {
+    const updatePerfil = async (data=null) => {
         nprogress.start();
         setLoading(true)
         setError(null)
         try {
-            await profileService.update(profile);
+            await profileService.update({...profile, ...data});
             toast.success("Se actualizo profile!");
             setSuccess(true)
         } catch (err) {

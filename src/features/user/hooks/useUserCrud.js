@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useCrudForm } from "@features/crud/hooks/useCrudForm.js";
 import { useCrudActions } from "@/features/crud/hooks/useCrudActions.js";
 import { useUser } from "../hooks/useUser.js";
 import { userService } from "../service/userService.js";
+import { ListingDTO } from "@/utils/schemas.js";
 
 
 // Se usa profile porque incluye mas datos que user
@@ -16,33 +17,18 @@ export const useUserCrud = (fetchProfile=true) => {
     const [dataItem, setDataItem] = useState({});
     const [crudMode, setCrudMode] = useState();
 
-    const { editableFields, setEditableFields, handleEnableEdit, setEnableEditableField,
-        isDisabledField, selectedFile, setSelectedFile, onChange, formData, setFormData }
-        = useCrudForm();
+    const { ... formCrud } = useCrudForm(currentItem);
 
     const { handleCreate, handleUpdate, handleDelete, handleStatus,
         loading, setLoading, error, success, setError, setSuccess, ...props
     } = useCrudActions({ service: userService });
 
 
-    useEffect(()=>{
-        setFormData(currentItem)
-    },[currentItem])
 
     return ({
         ...props, // <-- userServices
         // Form
-        editableFields,
-        setEditableFields,
-        handleEnableEdit,
-        isDisabledField,
-        selectedFile,
-        setSelectedFile,
-        onChange,
-        handleChange: onChange,
-        formData,
-        setFormData,
-        setEnableEditableField,
+        ...formCrud,
 
         // Actions
         handleCreate,

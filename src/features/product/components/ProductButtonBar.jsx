@@ -66,7 +66,7 @@ export default function  ProductButtonBar({item}){
                     {hide && (
                         <>
                             <IconFill
-                               className="border rounded-circle" 
+                               className="border rounded-circle bg-wh01" 
                                action={handleAddFavorite}
                                icon="heart"
                             />
@@ -88,13 +88,13 @@ export default function  ProductButtonBar({item}){
                     {!hide && (
                         <>
                             <IconFill
-                               className="border rounded-circle" 
+                               className="border rounded-circle bg-wh01" 
                                action={handleDelete}
                                icon="trash3"
                             />
         
                             <IconFill
-                               className="border rounded-circle" 
+                               className="border rounded-circle bg-wh01" 
                                action={handleToggle}
                                icon={`eye${item?.meta?.status != "ACTIVE"? "-slash":""}`}
                             />

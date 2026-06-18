@@ -1,66 +1,35 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { CRUD } from "@utils/enums.js";
 import { useCrudForm } from "@/features/crud/hooks/useCrudForm.js";
 import { useCrudActions } from "@/features/crud/hooks/useCrudActions.js";
 import { listingService } from '../services/listingService.js';
 import { useListing } from "./useListing";
+import { ListingDTO } from "@/utils/schemas.js";
 
 
 
 
 export const useListingCrud = ({autofetch=false}={}) => {
 
-    const { setCurrentItem, currentListing, setId, id, 
-    loading: loadingItem, error: errorItem, refreshElem, ...props} = useListing({autofetch});
+    const { setCurrentItem, currentListing, setId, id, loading: loadingItem, 
+    error: errorItem, refreshElem, ...props} = useListing({autofetch});
 
     const [showModal, setShowModal] = useState(false)
     const [dataItem, setDataItem] = useState({});
     const [crudMode, setCrudMode] = useState()
     
-    const { editableFields, setEditableFields, handleEnableEdit, setEnableEditableField,
-        isDisabledField, selectedFile, setSelectedFile, onChange, formData, setFormData }
-        = useCrudForm();
+    const { ... formCrud } = useCrudForm(currentListing, ListingDTO, "create" ,{sku: true});
 
     const { handleCreate, handleUpdate, handleDelete, handleStatus, 
         loading, setLoading, error, setError, success, setSuccess, ...actions }
         = useCrudActions({ service: listingService });
 
-    useEffect(()=>{
-        setFormData(currentListing)
-        setEnableEditableField(true)
-        if (
-            crudMode == CRUD.DRAFT || 
-            crudMode == CRUD.CREATE
-        ) {
-            setEnableEditableField(false)
-            if(Object.keys(currentListing).length != 0){
-                setFormData(prev => ({ ...prev }))
-            }
-            setFormData({...currentListing})
-        };
-      if(crudMode == CRUD.COPY){
-         setEnableEditableField(false)
-       }
-
-
-    },[crudMode,currentListing])
 
     return ({
        ...props,
 
         // Form
-        editableFields,
-        setEditableFields,
-        handleEnableEdit,
-        isDisabledField,
-        selectedFile,
-        setSelectedFile,
-        onChange,
-        handleChange: onChange,
-        formData,
-        setFormData,
-        setCurrentItem,
-        setEnableEditableField,
+        ...formCrud,
 
         // Actions
         handleCreate,
@@ -77,6 +46,7 @@ export const useListingCrud = ({autofetch=false}={}) => {
         errorItem,
 
         // Listing
+         setCurrentItem,
         currentListing,
         currentItem: currentListing,
         dataItem,

@@ -3,7 +3,7 @@ import InputCrudFloating from "@/features/crud/components/InputCrudFloating";
 
 export default function FormBasic({ children, className, crudHook }) {
 
- const {formData} = crudHook
+ const {currentItem} = crudHook
 
 
   return (
@@ -21,7 +21,7 @@ export default function FormBasic({ children, className, crudHook }) {
              className="rounded mb-3 border" 
              height={140} 
              width={140} 
-             src={formData?.image} 
+             src={currentItem?.image} 
            />
           </div>
 

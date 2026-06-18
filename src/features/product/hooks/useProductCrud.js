@@ -4,6 +4,7 @@ import { productService } from '@/features/product/services/productService.js';
 import { CRUD } from "@utils/enums.js";
 import { useCrudForm } from "@/features/crud/hooks/useCrudForm.js";
 import { useCrudActions } from "@/features/crud/hooks/useCrudActions.js";
+import { ProductDTO } from "@/utils/schemas";
 
 export const useProductCrud = ({autofetch=false}={}) => {
 
@@ -14,49 +15,19 @@ export const useProductCrud = ({autofetch=false}={}) => {
     const [dataItem, setDataItem] = useState({});
     const [crudMode, setCrudMode]  = useState();
     
-    const { editableFields, setEditableFields, handleEnableEdit, setEnableEditableField,
-        isDisabledField, selectedFile, setSelectedFile, onChange, formData, setFormData }
-        = useCrudForm();
+    const { ... formCrud } = useCrudForm(currentProduct, ProductDTO, "create");
 
     const { handleCreate, handleUpdate, handleDelete,  handleStatus, 
         loading, setLoading, error, success, setError, setSuccess,
     } = useCrudActions({ service: productService });
 
-    useEffect(()=>{
-        setFormData(currentProduct)
-        setEnableEditableField(true)
-        if (
-            crudMode == CRUD.DRAFT || 
-            crudMode == CRUD.CREATE
-        ) {
-            setEnableEditableField(false)
-            if(Object.keys(currentProduct).length != 0){
-                setFormData(prev => ({ ...prev }))
-            }
-            setFormData({...currentProduct})
-        };
-      if(crudMode == CRUD.COPY){
-         setEnableEditableField(false)
-       }
 
-
-    },[crudMode,currentProduct])
 
 
     return ({
         ...props,
         // Form
-        editableFields,
-        setEditableFields,
-        handleEnableEdit,
-        isDisabledField,
-        selectedFile,
-        setSelectedFile,
-        onChange,
-        handleChange: onChange,
-        formData,
-        setFormData,
-        setEnableEditableField,
+        ...formCrud,
 
         // Actions
         handleCreate,

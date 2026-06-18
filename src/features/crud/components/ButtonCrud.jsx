@@ -4,6 +4,7 @@ export default function ButtonCreate ({visible=true, handle, title, variant, ico
     return ( 
     <> {visible && (
            <Button
+             type="button"
              className="rounded-3 border-1 fw-medium"
              onClick={handle}
              variant={ variant || "outline-dark"}

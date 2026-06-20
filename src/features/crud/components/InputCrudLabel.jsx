@@ -1,7 +1,6 @@
 import CopyButton from "@/components/common/CopyButton";
 import LockButton from "@/components/common/LockButton";
 import { CRUD } from "@utils/enums.js";
-import { useEffect } from "react";
 import { FloatingLabel, Form } from "react-bootstrap";
 
 // NOTA este componente es multi-contexto, 
@@ -19,13 +18,11 @@ function InputCrudLabel({
         register,
         isFieldDisabled,
         handleEnableField,
-        mode,
         lockedFields,
         showEditButton,
         showCopyButton,
         watch,
         errors,
-        currentSchema,
     } = crudHook;
 
     // Obtener el valor actual para el botón de copiar

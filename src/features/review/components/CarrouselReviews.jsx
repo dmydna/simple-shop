@@ -11,10 +11,7 @@ export default function CarrouselReviews({title, size, reviews}) {
             {(item) => (
                 <CardReview
                     key={item.id}
-                    id={item.id}
-                    comment={item.comment}
-                    rating={item.rating}
-                    date={item.date}
+                    {...item}
                 />
             )}
         </CarouselItems>

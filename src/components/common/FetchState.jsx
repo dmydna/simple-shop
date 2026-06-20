@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import PageLoading from "@features/fallback/PageLoading";
 import FetchStateModal from "@common/FetchStateModal";
 import FetchStateToast from "@common/FetchStateToast";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Componente que gestiona estados de carga, error y éxito en una página.
@@ -23,7 +24,9 @@ import FetchStateToast from "@common/FetchStateToast";
  * @returns {React.ReactElement} El componente renderizado.
  */
 function FetchState({ children, hook }) {
+    
     const { loading, error, setError, success, setSuccess } = hook;
+    const navigate = useNavigate();
 
     useEffect(()=>{
         setSuccess(false);
@@ -32,6 +35,12 @@ function FetchState({ children, hook }) {
 
 
     if(loading) {return <PageLoading />};
+
+    if (error?.code === 'TOKEN_EXPIRED'){
+      navigate(`${window.location.pathname}?dialog=expiredsession`)
+      return  <>{children}</>
+    }
+    
     if(error)   {
         return (
             <PageError error={error}  handle={() => setError(null)} />

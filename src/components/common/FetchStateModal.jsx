@@ -3,6 +3,7 @@ import PageLoading from "@features/fallback/PageLoading";
 import PageSuccess from "@features/fallback/PageSuccess";
 import { useEffect, useState } from 'react';
 import { Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -10,12 +11,21 @@ export default function FetchStateModal({ children, hook }) {
     const { loading, error, setError, success, setSuccess } = hook;
 
     const [show, setShow] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
+        
+        if (error?.code === 'TOKEN_EXPIRED'){
+            navigate(`${window.location.pathname}?dialog=expiredsession`)
+            return  <>{children}</>
+        }
+
         if (success == true || error){
             setShow(true)
         }
     }, [error, success]);
+
+
 
     return (
         <>

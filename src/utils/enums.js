@@ -35,7 +35,7 @@ export const role = Object.freeze({
 export const category = Object.freeze({
     GROCERIES: "groceries",
     FURNITURE: "furniture",
-    FRAGRANCE:"fragrances",
+    FRAGRANCES:"fragrances",
     BEAUTY:"beauty"
 });
 

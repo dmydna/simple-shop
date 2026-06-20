@@ -1,13 +1,21 @@
 import PageLoading from "@features/fallback/PageLoading";
 import { useEffect } from 'react';
 import toast from 'react-hot-toast'; // Asegúrate de tener instalado el paquete o importar tu componente
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function FetchStateToast({ children, hook }) {
     const { loading, error, setError, success, setSuccess } = hook;
+    const navigate = useNavigate()
 
+    // FIXME: hace falta useEffect en este caso?
     useEffect(() => {
+        if (error?.code === 'TOKEN_EXPIRED'){
+            navigate(`${window.location.pathname}?dialog=expiredsession`)
+            return  <>{children}</>
+        }
+
         if (error) {
             toast.error(error.message || 'Ocurrió un error');
             setError(null); // Limpiar el error después de mostrarlo

@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext";
 import { toast } from "react-toastify";
 import ExpiredSession from "@/features/fallback/ExpiredSession";
+import ModalParam from "./ModalParam";
+import { useNavigate } from "react-router-dom";
 
 
 /**
@@ -16,8 +18,6 @@ import ExpiredSession from "@/features/fallback/ExpiredSession";
  * no hay carga, error ni éxito activo.
  *
 */
-
-
 export const AppStatus = (
     { 
       children, 
@@ -29,7 +29,7 @@ export const AppStatus = (
     }) => {
 
 
-    const { logout }  = useAuthContext();
+    const navigate = useNavigate()
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { isOnline } = useNetworkStatus();
@@ -75,11 +75,11 @@ export const AppStatus = (
     if (serverStatus === 'servidor_caido') 
       return (<PageServerDown />)
     // 2. -- Error de carga de contenido
-    if (error?.code === 'TOKEN_EXPIRED')
-        return  <ExpiredSession  handle={()=> {
-          logout()
-          window.location.reload()
-        } } />;
+    if (error?.code === 'TOKEN_EXPIRED'){
+      navigate(`${window.location.pathname}?dialog=expiredsession`)
+      return  <>{children}</>
+    }
+
     if (error) 
       return <PageError error={error} handle={onRetry} />
     // 3. No hay contenido

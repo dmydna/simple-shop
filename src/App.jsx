@@ -45,7 +45,7 @@ import { ProfileProvider } from "@features/profile/contexts/ProfileContext.jsx";
 import { UserProvider } from "@features/user/contexts/UserContext.jsx";
 
 import SmartSidebarApp from "@components/layout/SmartSidebarApp";
-import UploadService from "@dev/components/UploadService";
+import DemoUploader from "@/dev/components/DemoUploader";
 import WelcomeDashboard from "@features/dashboard/common/WelcomeDashboard";
 import DashboardLayout from "@features/dashboard/layout/DashboardLayout";
 import ListingForm from "@features/dashboard/listing/ListingForm";
@@ -107,7 +107,7 @@ function App() {
                 <CompleteRegister />
               </ProfileProvider>
             }></Route>
-            <Route path="/test/uploader" element={<UploadService />} />
+            <Route path="/test/uploader" element={<DemoUploader />} />
             <Route path="/faqs" element={<PageNotReady />} />
             
             <Route path="/p/:hash" element={<ProductDetails />} />
@@ -150,7 +150,7 @@ function App() {
                 </DashboardLayout>
               } />
 
-              <Route path="dev" element={<UploadService />} />
+              <Route path="dev" element={<DemoUploader />} />
 
               {/* LISTING  */}
               <Route path="listing-form" element={

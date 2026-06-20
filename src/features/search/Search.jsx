@@ -35,7 +35,7 @@ function Search({toggle, setToggle}){
 
     const toggleRoute = useMemo(() => {
       return location.pathname === '/products/filter' ? '/products' : '/products/filter';
-    }, [location.pathname]); // Nota el array []
+    }, [location.pathname]); 
 
     function handleFilter(e) {
       e.preventDefault();
@@ -108,7 +108,7 @@ function Search({toggle, setToggle}){
                   }}
                   className="overflow-hidden border-top"
                   as={Link}
-                  to={`/products/search?q=${query}`}
+                  to={`/products?search=${query}`}
                   key={99}
                 >
                   resultado de busqueda... 

@@ -26,7 +26,7 @@ export const useCrudModal = () => {
     const close = () => {
          setShowCrud(false)
          setDataItem({});
-         setSelectedFile(null);
+//         setSelectedFile(null);
     };
 
     

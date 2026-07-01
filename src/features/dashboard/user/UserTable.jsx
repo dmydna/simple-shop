@@ -1,8 +1,9 @@
-import { pillColor } from '@utils/enums';
+import SortByParam from '@/components/common/SortButton';
 import Pagination from '@/features/pagination/components/Pagination.jsx';
-import { useCustomParams } from '@/hooks/useCustomParams';
 import { useNavParams } from '@/hooks/useNavParams';
+import { useUrlState } from '@/hooks/useUrlState';
 import DataView from '@common/DataView';
+import { pillColor } from '@utils/enums';
 import { placeholderURL } from "@utils/image";
 import React from 'react';
 import { Button, Form, Table } from 'react-bootstrap';
@@ -12,7 +13,7 @@ export const UserTable = ({  baseHook, className }) => {
 
     const { content, loading,  totalPages, ...props } = baseHook
 
-    const { setSearchParams } = useCustomParams()
+    const { setSearchParams } = useUrlState()
     const { idParam } = useNavParams({ baseHook: baseHook })
 
     const toggleSelect = (item) => {
@@ -42,9 +43,13 @@ export const UserTable = ({  baseHook, className }) => {
 
                             <tr className='border-bottom'>
                                 {/* Selection */}
-                                <th style={{ width: '50px' }} className='d-none  d-md-table-cell text-secondary'></th>
+                                <th style={{ width: '50px' }} className='d-none  d-md-table-cell text-secondary'>
+                                    <i class="bi bi-grip-vertical"></i>
+                                </th>
                                 {/* Item */}
-                                <th style={{ width: '250px' }}  className='text-secondary'>Username</th>
+                                <th style={{ width: '250px' }}  className='text-secondary'>
+                                    <SortByParam name="username"> Username </SortByParam>
+                                </th>
                                 <th style={{ width: '200px' }} className='text-secondary'>Role</th>
                                 <th style={{ width: '200px' }} className='text-secondary'>Email</th>
                                 <th style={{ width: '200px' }} className='text-secondary'>Status</th>

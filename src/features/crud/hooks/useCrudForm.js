@@ -6,8 +6,13 @@ import * as z from 'zod';
 import { ListingDTO } from '@/utils/schemas';
 
 
-
-export const useCrudForm = (initialData, initialSchema, initialMode = CRUD.CREATE, lockedFieldsConfig = {}) => {
+// FIXME: en modo draft, se debe ignorar lockedFieldsConfig
+export const useCrudForm = (
+    initialData, 
+    initialSchema, 
+    initialMode = CRUD.CREATE, 
+    lockedFieldsConfig = {}
+    ) => {
     
     const [selectedFile, setSelectedFile] = useState(null);
     const [mode, setMode] = useState(initialMode);
@@ -22,7 +27,7 @@ export const useCrudForm = (initialData, initialSchema, initialMode = CRUD.CREAT
     // Solo actualizamos el schema si la referencia cambia realmente o si es la primera vez
     const stableSchema = useMemo(() => {
 
-        if (mode === CRUD.EDIT_DRAFT) { return z.object({}); }
+        // if (mode === CRUD.EDIT_DRAFT) { return z.object({}); }
 
         if (typeof initialSchema === 'function') return initialSchema();
         // Si es objeto, lo usamos directo. Si el padre pasa un objeto nuevo en cada render,
@@ -67,6 +72,15 @@ export const useCrudForm = (initialData, initialSchema, initialMode = CRUD.CREAT
         // reValidateMode: 'onChange'
     });
 
+
+    useEffect(() => {
+        // Obtenemos los valores actuales antes de resetear
+        const currentValues = getValues();
+        // Resetamos con los mismos valores pero con el nuevo esquema
+        reset(currentValues);
+    }, [stableSchema]);
+
+
     // --- Lógica de Modos y Bloqueos ---
     const isFieldDisabled = (field) => {
         if (mode === CRUD.CREATE) return false;
@@ -79,7 +93,8 @@ export const useCrudForm = (initialData, initialSchema, initialMode = CRUD.CREAT
     };
 
     const handleEnableField = (field) => {
-        if (![ CRUD.EDIT_DRAFT,CRUD.UPDATE ].includes(mode) || lockedFieldsConfig[field]) return;
+        if (![ CRUD.EDIT_DRAFT,CRUD.UPDATE ].includes(mode) 
+            || lockedFieldsConfig[field]) return;
         setEnabledFields(prev => ({ ...prev, [field]: true }));
     };
 
@@ -133,6 +148,7 @@ export const useCrudForm = (initialData, initialSchema, initialMode = CRUD.CREAT
         register, watch, setValue, reset, errors, selectedFile, setSelectedFile,
         mode, changeMode, lockedFields: lockedFieldsConfig,
         isFieldDisabled, handleEnableField,
+        getValues,
         showCopyButton: mode === CRUD.READ,
         showEditButton: mode === CRUD.UPDATE || mode == CRUD.EDIT_DRAFT,
         updateSchema: (newSchema) => { /* Lógica si se necesita cambiar schema dinámicamente */ },

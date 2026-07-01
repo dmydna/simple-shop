@@ -1,11 +1,12 @@
 import CopyButton from '@/components/common/CopyButton';
-import { formatDate } from "@utils/mappers"; 
-import { pillColor } from "@utils/enums"
-import { useCustomParams } from '@/hooks/useCustomParams';
+import SortByParam from '@/components/common/SortButton';
 import { useNavParams } from '@/hooks/useNavParams';
+import { useUrlState } from '@/hooks/useUrlState';
 import { placeholderURL } from '@/utils/image';
 import DataView from '@common/DataView';
 import Pagination from '@features/pagination/components/Pagination.jsx';
+import { pillColor } from "@utils/enums";
+import { formatDate } from "@utils/mappers";
 import React from 'react';
 import { Button, Form, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +16,7 @@ function ProductTable({ children, baseHook, className }) {
 
     const { content, loading, currentPage, setCurrentPage, totalPages, setFilters } = baseHook;
 
-    const { setSearchParams } = useCustomParams()
+    const { setSearchParams } = useUrlState()
     const navigate = useNavigate()
     const { idParam } = useNavParams({ baseHook: baseHook })
 
@@ -44,11 +45,17 @@ function ProductTable({ children, baseHook, className }) {
                         <thead className=''>
                             <tr className='border-bottom'>
                                 {/**Selection */}
-                                <th style={{ width: '150px' }} className='d-none  d-md-table-cell text-secondary'></th>
+                                <th style={{ width: '150px' }} className='d-none  d-md-table-cell text-secondary'>
+                                    <i class="bi bi-grip-vertical"></i>
+                                </th>
                                 {/**Item */}
-                                <th className='text-secondary'>Name</th>
+                                <th className='text-secondary'>
+                                    <SortByParam name="name"> Name </SortByParam>
+                                </th>
                                 <th style={{ width: '200px' }} className='text-secondary'>Sku</th>
-                                <th style={{ width: '150px' }} className='text-secondary'>Created at</th>
+                                <th style={{ width: '150px' }} className='text-secondary'>
+                                    <SortByParam name="date"> Created at </SortByParam>
+                                </th>
                                 <th style={{ width: '150px' }} className='text-secondary'>Brand</th>
                                 <th style={{ width: '150px' }} className='text-secondary'>Status</th>
                                 {/** Action */}

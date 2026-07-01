@@ -7,25 +7,8 @@ import InputCrudFloating from "@/features/crud/components/InputCrudFloating";
 
 function FormCategory({ children, className, crudHook }) {
 
-    const {
-        register,
-        isFieldDisabled,
-        handleEnableField,
-        mode,
-        lockedFields,
-        showEditButton,
-        showCopyButton,
-        watch,
-        errors,
-        currentSchema,
-    } = crudHook;
-
-
-
-
+    const {register, isFieldDisabled} = crudHook;
     const isDisabled = isFieldDisabled("category");
-
-
 
     return (
         <>
@@ -49,7 +32,7 @@ function FormCategory({ children, className, crudHook }) {
                 <InputCrudFloating
                     name={"category"}
                     label={"Category"}
-                    baseHook={crudHook}
+                    {...crudHook}
                 />)}
             </div>
 

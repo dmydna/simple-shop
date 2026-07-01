@@ -49,5 +49,11 @@ export const ListingDTO = z.object({
 });
 
 
+export const ListingDraftDTO = z.object({
+  title: z.string().min(1, "Título requerido").default(""),
+  sku: z.string().min(1, "sku requerido").default(""),
+});
+
+
 // Opcional: Inferir el tipo si usas TypeScript
 // export type ProductDTO = z.infer<typeof ProductDTO>;

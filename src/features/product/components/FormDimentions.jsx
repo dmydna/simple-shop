@@ -21,18 +21,18 @@ function FormDimentions({ children, className, crudHook }) {
           <InputCrudFloating
             name={"width"}
             label={"width (cm)"}
-            baseHook={crudHook}
+            {...crudHook}
           />
 
           <InputCrudFloating
             name={"height"}
             label={"height (cm)"}
-            baseHook={crudHook}
+            {...crudHook}
           />
           <InputCrudFloating
             name={"depth"}
             label={"depth (cm)"}
-            baseHook={crudHook}
+            {...crudHook}
           />
 
         </div>

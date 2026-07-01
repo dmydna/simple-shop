@@ -63,7 +63,6 @@ export const listingService = {
         return await response.json();
     },
 
-
     /* ------------- ACCESO CON TOKEN ------------------ */
 
     // POST: crear listing con imagenes (permite sin imagenes)
@@ -143,13 +142,14 @@ export const listingService = {
         return await response.text();
     },
 
+
     // TODO: borra id de firma de metodo UPDATE
     update: async (id, data, selectedFiles = null) => {
 
         const TOKEN = localStorage.getItem("token")
         const listingData = toUpdateListing(data);
         const formData = new FormData();
-
+        console.log("listingService.update : ",data)
         formData.append('data', new Blob([JSON.stringify(listingData)], {
             type: 'application/json'
         }));
@@ -174,6 +174,10 @@ export const listingService = {
             return responseError(response)
         }
         return await response.json();
+    },
+
+    updateDraft: async (id, data, selectedFile = null) => {
+
     },
 
     // DELETE: Eliminar un producto por ID

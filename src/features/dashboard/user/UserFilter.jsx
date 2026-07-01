@@ -1,3 +1,4 @@
+import { role, userStatus } from '@/utils/enums';
 import FilterParams from '@features/filters/components/FilterParams'
 import SelectParams from "@features/filters/components/SelectParams"
 
@@ -5,8 +6,10 @@ import SelectParams from "@features/filters/components/SelectParams"
 function UserFilter({close}){
 	return(
 		<FilterParams close={close} badgeParams={true}>
-			<SelectParams.StatusUser/>
-			<SelectParams.Role />
+			<SelectParams.SelectByEnum 
+				label="status" content={userStatus} />
+			<SelectParams.SelectByEnum 
+				label="role" content={role} />
 		</FilterParams>
 		)
 }

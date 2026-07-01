@@ -1,6 +1,6 @@
+import { useUrlState } from "@/hooks/useUrlState";
+import { useMemo } from "react";
 import { Modal } from "react-bootstrap";
-import {   useMemo } from "react";
-import {useCustomParams} from "@hooks/useCustomParams"
 
 
 
@@ -8,7 +8,7 @@ import {useCustomParams} from "@hooks/useCustomParams"
 export default function ModalParam({ children, param, inverse = false }) {
 
 
-    const { searchParams, setSearchParams } = useCustomParams();
+    const { searchParams, setSearchParams } = useUrlState();
 
     // 1. Extraer Key y Valores Esperados en un solo paso
     const { key, expectedValues } = useMemo(() => {

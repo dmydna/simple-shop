@@ -85,7 +85,9 @@ function ProductDetails() {
                         <Col className="small mt-3 mx-0" xs={12} md={7}  >
                            <Col md={12} style={{ minHeight: "220px" }} className='rounded p-4 border island' >
                               <div className="fs-5 fw-medium mb-5">Descripcion</div>
-                              <p>{currentItem.description || 'N/A'}</p>
+                              <p className="text-secondary">
+                                 {currentItem.description || '...'}
+                              </p>
                            </Col>
                         </Col >
 

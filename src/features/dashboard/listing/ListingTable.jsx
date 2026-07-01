@@ -1,11 +1,12 @@
 import CopyButton from '@/components/common/CopyButton';
-import { formatDate } from "@utils/mappers"; 
-import { pillColor } from "@utils/enums"
+import SortByParam from '@/components/common/SortButton';
 import Pagination from '@/features/pagination/components/Pagination.jsx';
-import { useCustomParams } from '@/hooks/useCustomParams';
 import { useNavParams } from '@/hooks/useNavParams';
+import { useUrlState } from '@/hooks/useUrlState';
 import DataView from '@common/DataView';
+import { pillColor } from "@utils/enums";
 import { placeholderURL } from '@utils/image';
+import { formatDate } from "@utils/mappers";
 import React from 'react';
 import { Button, Form, Table } from 'react-bootstrap';
 
@@ -16,7 +17,7 @@ export const ListingTable = ({ baseHook, className, }) => {
     // eslint-disable-next-line no-unused-vars
     const { content, loading, totalPages, ...props } = baseHook;
 
-    const { setSearchParams } = useCustomParams()
+    const { setSearchParams } = useUrlState()
 
     const { hashParam } = useNavParams({ baseHook: baseHook })
 
@@ -47,12 +48,20 @@ export const ListingTable = ({ baseHook, className, }) => {
                     <Table style={{ overflowX: 'auto' }} className="mb-0 w-100" striped={false} bordered={false} hover={true}>
                         <thead className=''>
                             <tr className='border-bottom'>
-                                <th style={{ width: '150px' }} className='d-none  d-md-table-cell text-secondary'></th>
+                                <th style={{ width: '150px' }} className='d-none  d-md-table-cell text-secondary'>
+                                    <i class="bi bi-grip-vertical"></i>
+                                </th>
                                 <th style={{ width: '150px' }} className='text-secondary'>Title</th>
                                 <th style={{ width: '150px' }} className='text-secondary'>Hash</th>
-                                <th style={{ width: '150px' }} className='text-secondary'>Created at</th>
-                                <th style={{ width: '150px' }} className='text-secondary'>Status</th>
-                                <th style={{ width: '150px' }} className='text-secondary'>Price</th>
+                                <th style={{ width: '150px' }} className='text-secondary'>
+                                    <SortByParam name='date' >Created at</SortByParam>
+                                </th>
+                                <th style={{ width: '150px' }} className='text-secondary'>
+                                    <SortByParam>Status</SortByParam>
+                                </th>
+                                <th style={{ width: '150px' }} className='text-secondary'>
+                                    <SortByParam>Price</SortByParam>
+                                </th>
                                 <th style={{ width: '150px' }} className='text-secondary'>Availability</th>
                                 <th style={{ width: '150px' }} className='d-block d-table-cell d-md-none text-secondary'></th>
                             </tr>
@@ -63,7 +72,7 @@ export const ListingTable = ({ baseHook, className, }) => {
                                 <tr className={`onhover ${item.hash === hashParam ? 'selected' : ''}`}
                                     style={{ overflow: "visible", height: "70px" }} key={item.id}>
 
-                                    <td
+                                    <td 
                                         onClick={() => toggleSelect(item)}
                                         className='text-secondary d-none  d-md-table-cell'>
                                         <Form.Check // prettier-ignore

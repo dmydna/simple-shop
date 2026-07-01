@@ -14,13 +14,13 @@ function FormSku({children, className, baseHook}){
           <InputCrudFloating
             name={"sku"}
             label={"Sku"}
-            baseHook={baseHook}
+            {...baseHook}
           />
 
           <InputCrudFloating
             name={"stock"}
             label={"stock"}
-            baseHook={baseHook}
+            {...baseHook}
           />
 
         </div>

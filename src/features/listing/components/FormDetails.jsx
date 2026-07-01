@@ -15,13 +15,13 @@ function FormDetails({children, className, baseHook}){
           <InputCrudFloating
             name={"warrantyInformation"}
             label={"Waranty"}
-            baseHook={baseHook}
+            {...baseHook}
           />
 
           <InputCrudFloating
             name={"shippingInformation"}
             label={"Shipping"}
-            baseHook={baseHook}
+            {...baseHook}
           />
 
         </div>

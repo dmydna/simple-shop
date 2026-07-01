@@ -1,23 +1,33 @@
 import FetchState from "@/components/common/FetchState";
 import FormWarning from "@/features/dashboard/common/FormWarning";
-import { useDashboardParams } from "@/hooks/useDashboardParams";
-import {  useEffect, useMemo, useState } from "react";
+import { useDashboardSync } from "@/hooks/useDashboardSync";
+import { useUrlState } from "@/hooks/useUrlState";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ButtonCrud from "./ButtonCrud";
 import ModalCrud from "./ModalCrud";
-import { useCustomParams } from "@/hooks/useCustomParams";
 
 
 // NOTA este componente es multi-contexto, 
 // hay que mandar un crud-hook compatible.
-function FormCrud({ children, type, crudHook }) {
+function FormCrud({ 
+    children, 
+    type, 
+    enableDraft = false, 
+    enableEdit = false, 
+    enableCreate = false,
+    ...crudHook 
 
+}) {
 
     const { handleUpdate, handleCreate, loading, error, setError, success,
         setSuccess, refreshElem, handleAction, ...props }  = crudHook
 
-    const { setSearchParams } = useCustomParams()
+    const navigate = useNavigate()
+    const { setSearchParams } = useUrlState()
 
-    const { editMode, viewMode, createMode, copyMode, edit_draftMode, draftMode } = useDashboardParams(crudHook)
+    const { editMode, viewMode, createMode, copyMode, edit_draftMode, draftMode } 
+    = useDashboardSync({...crudHook})
 
     const title = useMemo(() => {
         // -- Nota: 
@@ -48,6 +58,11 @@ function FormCrud({ children, type, crudHook }) {
 
 
     const handleEdit = async (data, selectedFile = null) => {
+        await handleUpdate(data.id, data, selectedFile)
+    }
+
+    const handleEditDraft = async (data, selectedFile = null) => {
+        console.log("handleEditDraft:",  data);
         await handleUpdate(data.id, data, selectedFile)
     }
 
@@ -84,14 +99,22 @@ function FormCrud({ children, type, crudHook }) {
                         <ButtonCrud
                             icon="bi-pencil"
                             title="Save Changes"
-                            visible={editMode || draftMode}
+                            visible={editMode && enableEdit}
                             handle={async () => await handleAction(handleEdit)}
+                        />
+
+
+                        <ButtonCrud
+                            icon="bi-pencil"
+                            title="Save Changes"
+                            visible={edit_draftMode && enableDraft}
+                            handle={async () => await handleAction(handleEditDraft)}
                         />
 
                         <ButtonCrud
                             icon="bi-plus"
                             title="Draft"
-                            visible={createMode}
+                            visible={createMode && enableDraft}
                             handle={() => handleAction(handleCreateDraft)}
                         />
 
@@ -99,7 +122,7 @@ function FormCrud({ children, type, crudHook }) {
                             icon="bi-send"
                             title="Publicar"
                             variant="dark"
-                            visible={createMode || copyMode}
+                            visible={(createMode || copyMode) && enableCreate}
                             handle={() => handleAction(handlePublish)}
                         />
 
@@ -107,7 +130,7 @@ function FormCrud({ children, type, crudHook }) {
                             icon="bi-send"
                             variant="dark"
                             title="Publish Draft"
-                            visible={draftMode}
+                            visible={(draftMode || edit_draftMode) && enableDraft}
                             handle={() => handleAction(handlePublishDraft)}
                         />
 

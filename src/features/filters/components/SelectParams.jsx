@@ -59,7 +59,7 @@ const SelectByStats = ({type, label, cols, textStyle, multiseleccion}) => {
   const Tags = useMemo(() => {
     const res = new Set();
     data?.forEach( ({name, count}) => {
-        res.add(`${name}(${count})`);
+        res.add(`${name || 'sin categoria'}(${count})`);
     });
     return Array.from(res).sort(); // Ordenar alfabéticamente para mejor UX
   }, [data]);

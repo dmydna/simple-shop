@@ -32,13 +32,13 @@ export default function FormBasic({ children, className, crudHook }) {
           <InputCrudFloating
             name={"username"}
             label={"Username"}
-            baseHook={crudHook}
+            {...crudHook}
           />
 
           <InputCrudFloating
             name={"email"}
             label={"Email"}
-            baseHook={crudHook}
+            {...crudHook}
           />
 
         </div>
@@ -47,23 +47,11 @@ export default function FormBasic({ children, className, crudHook }) {
           <InputCrudFloating
             name={"role"}
             label={"Role"}
-            baseHook={crudHook}
+            {...crudHook}
           />
           </div>
-
-
         </div>
-
-
-
-
-
-
-
-
-      
       </>
-
     </>
   )
 }

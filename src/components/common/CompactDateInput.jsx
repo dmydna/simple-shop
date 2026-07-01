@@ -7,8 +7,8 @@ import {CRUD} from "@utils/enums"
 
 const CompactDateInput = ({hook, name, label, crudHook}) => {
 
-  const { formData, handleChange, crudMode,
-  isDisabledField, editableFields, handleEnableEdit } = crudHook
+  const { formData, handleChange, watch,crudMode, register,
+  isFieldDisabled, editableFields, handleEnableEdit } = crudHook
 
 
   const inputRef = useRef(null);
@@ -41,23 +41,22 @@ const CompactDateInput = ({hook, name, label, crudHook}) => {
         width: '100%',
         minWidth: '250px',
         border: '1px solid #ced4da',
-        backgroundColor: `${isDisabledField(name) ? '#eeee': '#fff'}`, 
+        backgroundColor: `${isFieldDisabled(name) ? '#eeee': '#fff'}`, 
         userSelect: 'none' // Evita que se seleccione el texto al hacer clic rápido
       }}
       onMouseEnter={(e) => e.currentTarget.style.borderColor = '#ced4da'}
       onMouseLeave={(e) => e.currentTarget.style.borderColor = '#ced4da'}
     >
 
-      <span className={`small ${isDisabledField(name) ? 'text-secondary' : 'fw-semibold'}  m-0 me-1`}>{label}: </span>
+      <span className={`small ${isFieldDisabled(name) ? 'text-secondary' : 'fw-semibold'}  m-0 me-1`}>{label}: </span>
       
       {/* Input invisible pero funcional */}
       <Form.Control
         name={name}
-        disabled={isDisabledField(name)}
+        disabled={isFieldDisabled(name)}
         ref={inputRef}
         type="datetime-local"
-        value={formData?.[name] || ""}
-        onChange={handleChange}
+        {...register(name)} 
         style={{
           position: 'absolute',
           top: 0,
@@ -75,12 +74,12 @@ const CompactDateInput = ({hook, name, label, crudHook}) => {
       />
 
       {/* Texto visible */}
-      <span className={`small ${isDisabledField(name) ? 'text-reset' : 'text-secondary'}  mx-2`}>
-        {formData?.[name] ? new Date(formData?.[name]).toLocaleString() : "PERMANENT"}
+      <span className={`small ${isFieldDisabled(name) ? 'text-reset' : 'text-secondary'}  mx-2`}>
+        {watch(name) ? new Date(watch(name)).toLocaleString() : "PERMANENT"}
       </span>
 
       <i style={{right: "4px"}} 
-        className={`${isDisabledField(name) ? 'd-none' : 'd-inline'} position-absolute bi bi-chevron-expand`}></i>
+        className={`${isFieldDisabled(name) ? 'd-none' : 'd-inline'} position-absolute bi bi-chevron-expand`}></i>
 
       {crudMode == CRUD.UPDATE && (
         <LockButton
@@ -95,7 +94,7 @@ const CompactDateInput = ({hook, name, label, crudHook}) => {
           style={{ top: 0, right: 0, opacity: '.7', zIndex: 999 }}
           className="pointer position-absolute"
           showMessage={false}
-          value={formData?.[name]}
+          value={watch(name)}
           />
           )}
 

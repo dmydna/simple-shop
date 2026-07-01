@@ -9,7 +9,6 @@ function ProductFilter({close}){
 	const {content} = useProduct()
 	return(
 		<FilterParams close={close} badgeParams={true}>
-			<SelectParams.Status/>
 			<SelectParams.Tags  content={content}/>
 			<SelectParams.Category />
 		</FilterParams>

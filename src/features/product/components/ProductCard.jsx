@@ -38,7 +38,7 @@ function ProductCard({ children, className, cols, imgSize, ...item}){
                    {item.title || "N/A"}
                 </Card.Title>
                 <Card.Text className="fs-4 fw-semibold  mb-1">
-                  $ {item?.price || "N/A"}  
+                  $ {item?.price || "..."}  
                   <span className="mx-2 text-success fw-medium fs-6">
                     {item?.discountPercentage ? item.discountPercentage + '% OFF' : ''}
                   </span>

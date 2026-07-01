@@ -18,7 +18,7 @@ function FormProduct({ children, className, crudHook }) {
         <InputCrudFloating
           name={"name"}
           label={"Name"}
-          baseHook={crudHook}
+          {...crudHook}
         />
         
 
@@ -28,19 +28,19 @@ function FormProduct({ children, className, crudHook }) {
           <InputCrudFloating
             name={"brand"}
             label={"Brand"}
-            baseHook={crudHook}
+            {...crudHook}
           />
           <InputCrudFloating
             name={"sku"}
             label={"Sku"}
-            baseHook={crudHook}
+            {...crudHook}
           />
         </div>
 
           <InputCrudFloating
             name={"weight"}
             label={"Weight (kg)"}
-            baseHook={crudHook}
+            {...crudHook}
           />
 
       </>

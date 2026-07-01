@@ -32,7 +32,7 @@ export const useCrudActions = ({ service, onRefresh }) => {
     const handleStatus = async (...args) => {
         let MSG_ALERT = "Atencion. Esta accion puede ser irreversible. Esta seguro de continuar?";
         if (MSG_ALERT && window.confirm(MSG_ALERT)) {
-            await updateStatus(...args);
+            return await updateStatus(...args);
         }
     };
 

@@ -14,7 +14,7 @@ function UserForm() {
     return (
         <FormCrud
             type="user"
-            crudHook={crudHook}
+            {...crudHook}
         >
 
             <p className="fw-medium">

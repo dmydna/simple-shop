@@ -13,20 +13,17 @@ function InputCrudFloating({
     placeholder, 
     as, 
     rows, 
-    baseHook: crudHook 
+    baseHook: crudHook,
+    // crudHook
+    watch,
+    errors,
+    register,
+    isFieldDisabled,
+    handleEnableField,
+    lockedFields,
+    showEditButton,
+    showCopyButton,
 }) {
-    const {
-        register,
-        isFieldDisabled,
-        handleEnableField,
-        mode,
-        lockedFields,
-        showEditButton,
-        showCopyButton,
-        watch,
-        errors,
-        currentSchema,
-    } = crudHook;
 
     // Obtener el valor actual para el botón de copiar
     const currentValue = watch(name);

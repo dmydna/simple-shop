@@ -10,7 +10,7 @@ function ListingFilter({close}){
 			<SelectParams.Tags/>
 			<SelectParams.SelectByEnum label="status"      content={status} />
 			<SelectParams.SelectByEnum label="avalability" content={availabilityStock}/>
-			<SelectParams.SelectByEnum label="category"    content={category}/>
+			<SelectParams.Category/>
 			<SelectParams.RangePrice />
 		</FilterParams>
 		)

@@ -10,80 +10,69 @@ function ProductSpecs({ producto, children }) {
     <>
       {children}
 
-      <Table style={{ overflowX: 'hidden' }} className="small border rounded" striped hover>
+      <div className="d-flex gap-3 my-2">
 
+        <div className="w-100">
+          <p className="fw-medium small mb-2">Caracteristicas principales</p>
+          <Table style={{ overflowX: 'hidden' }} className="small rounded" striped hover>
         <tbody className="rounded">
-          <tr className="border-0">
+          <tr className="small border-0">
             <td className="fw-medium border-0">Brand</td>
-            <td className="fw-medium text-secondary border-0">
+            <td style={{background: 'var(--bs-table-bg-type)'}} 
+              className="border-0 w-100">
               {producto.brand || ''}
             </td>
           </tr>
 
 
-          <tr className="border-0">
+          <tr className="border-0 small" >
             <td className="fw-medium border-0">Weight</td>
-            <td className="fw-medium text-secondary border-0"> 
-              {producto.weight || ''}kg 
+            <td  className="border-0"> 
+              {producto.weight  || '0'} kg 
             </td>
           </tr>
-          <tr className="border-0">
+          <tr className="border-0 small">
             <td className="fw-medium border-0">Warranty</td>
-            <td className="fw-medium text-secondary border-0"> 
+            <td style={{background: 'var(--bs-table-bg-type)'}} 
+              className="border-0"> 
               {producto.warrantyInformation || ''} 
             </td>
           </tr>
-{/*          <tr className="border-0">
-            <td className="fw-medium border-0">Return Policy</td>
-            <td className="fw-medium text-secondary border-0"> 
-              {producto.returnPolicy || ''} 
-            </td>
-          </tr>
-          <tr className="border-0">
-            <td className="fw-medium border-0">minimum Order</td>
-            <td className="fw-medium text-secondary border-0"> 
-              {producto.minimumOrderQuantity || ''} 
-            </td>
-          </tr>
-          <tr className="border-0">
-            <td className="fw-medium border-0">envio</td>
-            <td className="fw-medium text-secondary border-0"> 
-              {producto.shippingInformation || ''} 
-            </td>
-          </tr>*/}
-
-
 
         </tbody>
-      </Table>
-
-      <p className="fw-medium">dimensions</p>
-
-      <Table style={{ overflowX: 'auto' }} className="small border rounded" striped hover>
+          </Table>
+        </div>
+        
+        <div className="w-100">
+          <p className="fw-medium small mb-2">Dimensiones</p>
+          <Table style={{ overflowX: 'auto' }} className="small rounded" striped hover>
         <tbody className="rounded">
 
-          <tr className="border-0">
-            <td className="fw-medium border-0">width</td>
-            <td className="fw-medium text-secondary border-0">
-              {producto.dimensions?.width || ''}cm 
+          <tr className="border-0 small">
+            <td className="fw-medium border-0">Width</td>
+            <td style={{background: 'var(--bs-table-bg-type)'}} className="border-0 w-100">
+              {producto.dimensions?.width || '0'} cm 
             </td>
           </tr>
-          <tr className="border-0">
-            <td className="fw-medium border-0">height</td>
-            <td className="fw-medium text-secondary border-0">
-              {producto.dimensions?.height || ''}cm  
+          <tr className="border-0 small">
+            <td className="fw-medium border-0">Height</td>
+            <td className="border-0">
+              {producto.dimensions?.height || '0'} cm  
             </td>
           </tr>
 
-          <tr className="border-0">
-            <td className="fw-medium border-0">depth</td>
-            <td className="fw-medium text-secondary border-0">
-              {producto.dimensions?.depth || ''}cm 
+          <tr className="border-0 small">
+            <td className="fw-medium border-0">Depth</td>
+            <td style={{background: 'var(--bs-table-bg-type)'}} className="border-0">
+              {producto.dimensions?.depth || '0'} cm 
             </td>
           </tr>
 
         </tbody>
-      </Table>
+          </Table>
+        </div>
+
+      </div>
     </>
     
   );

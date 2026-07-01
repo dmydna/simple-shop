@@ -13,7 +13,9 @@ function ProductForm(){
     return (
         <FormCrud
             type="product"
-            crudHook={crudHook}
+            {...crudHook}
+            enableEdit
+            enableCreate
         >
                 <div className="mb-3">
                     <p className="fw-medium">Product</p>

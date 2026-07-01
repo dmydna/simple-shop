@@ -36,18 +36,10 @@ export default function ListingActions({ close }) {
     }, [hashParam, success])
 
 
-   // Handles
-   const isDistincActive = useMemo(()=>{
-       return currentItem?.meta?.status != "ACTIVE";
-   },[currentItem])
+   // VISIBLE BUTTONS
 
    const isStatusActive = useMemo(()=>{
        return currentItem?.meta?.status === "ACTIVE"
-   },[currentItem])
-
-   const isStatusDraft = useMemo(()=>{
-    console.log("currentItem:", currentItem?.meta?.status )
-       return currentItem?.meta?.status == "DRAFT"
    },[currentItem])
 
 
@@ -55,7 +47,34 @@ export default function ListingActions({ close }) {
        return currentItem?.meta?.status === "INACTIVE"
    },[currentItem])
 
-  // TODO: manejar rutas muertas de ListingList/ListingForm.
+
+
+  // FORM LINKs
+
+  const EDIT_LINK = useMemo(()=>{
+    if(currentItem?.meta?.status === 'DRAFT'){
+        return `${FORM_URL}?mode=edit.draft&hash=${currentItem?.hash}`
+    }
+    return `${FORM_URL}?mode=edit&hash=${currentItem?.hash}`
+  },[currentItem])
+
+
+  const CREATE_LINK = `${FORM_URL}?mode=create`
+
+  const CLONE_LINK = useMemo(()=>{
+    return `${FORM_URL}?mode=create&hash=${currentItem?.hash}`
+  },[currentItem])
+
+  const VIEW_LINK = useMemo(()=>{
+    return `${FORM_URL}?mode=view&hash=${currentItem?.hash}`
+  },[currentItem])
+
+  const PRODUCT_SPECS_LINK = useMemo(()=>{
+    return `/dashboard/product-form?mode=view&id=${currentItem?.productId}`
+  },[currentItem])
+
+
+  // PARAMs VALIDATIONS
   useValidParams({
     id: (val) => val && /^[0-9]+$/.test(val), // Solo números
     mode: (val) => ['view','create', 'edit', 'draft', 'edit.draft'].includes(val), // Solo valores permitidos
@@ -85,9 +104,9 @@ export default function ListingActions({ close }) {
 
 
                     <ButtonLink
-                        visible={ !hashParam }
+                        visible={ !currentItem }
                         icon="bi-plus-lg"
-                        handle={() => navigate(`${FORM_URL}?mode=create`)}
+                        handle={() => navigate(CREATE_LINK)}
                     >
                         Create Post
                     </ButtonLink>
@@ -95,20 +114,30 @@ export default function ListingActions({ close }) {
 
                     {/** Item Config **/}
 
+
+
+                    <ButtonLink
+                        handle={() => navigate(PRODUCT_SPECS_LINK)}
+                        icon="bi-box-arrow-up-right"
+                        visible={ isStatusActive }
+                    >
+                        Product Specs
+                    </ButtonLink>
+
+                    <ButtonLink
+                        handle={() => navigate(`/p/${currentItem.hash}`)}
+                        icon="bi-box-arrow-up-right"
+                        visible={ isStatusActive }
+                    >
+                        View Online
+                    </ButtonLink>
+
                     <ButtonLink
                         handle={() => handleStatus(currentItem.id, "INACTIVE")}
                         icon="bi-eye-slash"
                         visible={ isStatusActive }
                     >
                         Deactivate  Post 
-                    </ButtonLink>
-
-                    <ButtonLink
-                        handle={() => navigate(`/dashboard/product-form?mode=view&id=${currentItem.productId}`)}
-                        icon="bi-box-arrow-up-right"
-                        visible={ isStatusActive }
-                    >
-                        Linked Product
                     </ButtonLink>
 
                     <ButtonLink
@@ -136,26 +165,24 @@ export default function ListingActions({ close }) {
                         Delete Post
                     </ButtonLink>
 
+
+
                     <ButtonLink
-                        visible={ isStatusDraft }
-                        handle={() => navigate(`${FORM_URL}?mode=edit.draft&hash=${currentItem.hash}`)}
+                        visible={ currentItem }
+                        handle={() => navigate(EDIT_LINK) }
                         icon="bi-pencil"
                     >
                         Edit Post
                     </ButtonLink>
 
-
+                    {/*  
+                        FIXME: Imagenes se crashean al eliminar listing original.  
+                        Nota: Actualmente solo copia los enlaces. 
+                        se debe re-subir archivo de imagenes.
+                    */}
                     <ButtonLink
-                        visible={ isStatusActive }
-                        handle={() => navigate(`${FORM_URL}?mode=edit&hash=${currentItem.hash}`)}
-                        icon="bi-pencil"
-                    >
-                        Edit Post
-                    </ButtonLink>
-
-                    <ButtonLink
-                        visible={ hashParam }
-                        handle={() => navigate(`${FORM_URL}?mode=create&hash=${currentItem.hash}`)}
+                        visible={ currentItem }
+                        handle={() => navigate(CLONE_LINK)}
                         icon="bi-copy"
                     >
                         Clone Post
@@ -165,7 +192,7 @@ export default function ListingActions({ close }) {
 
                     <ButtonLink
                         visible={ hashParam }
-                        handle={() => navigate(`${FORM_URL}?mode=view&hash=${currentItem?.hash}`)}
+                        handle={() => navigate(VIEW_LINK)}
                         icon="bi-three-dots"
                     >
                         Post summary

@@ -12,8 +12,7 @@ function FormBasic({ children, className, baseHook }) {
             <InputCrudFloating
                 name={"title"}
                 label={"Title"}
-                useHookCrud={useListingCrudContext}
-                baseHook={baseHook}
+                {...baseHook}
             />
 
             <div className="my-1 d-flex gap-2 flex-column flex-lg-row">
@@ -22,16 +21,14 @@ function FormBasic({ children, className, baseHook }) {
                     name={"price"}
                     type={"number"}
                     label={"Price"}
-                    useHookCrud={useListingCrudContext}
-                    baseHook={baseHook}
+                    {...baseHook}
                 />
 
                 <InputCrudFloating
                     name={"discountPercentage"}
                     type={"number"}
                     label={"Discount Percentage"}
-                    useHookCrud={useListingCrudContext}
-                    baseHook={baseHook}
+                    {...baseHook}
                 />
 
             </div>
@@ -39,9 +36,8 @@ function FormBasic({ children, className, baseHook }) {
             <InputCrudFloating
                 name={"description"}
                 label={"Description"}
-                useHookCrud={useListingCrudContext}
                 as={"textarea"}
-                baseHook={baseHook}
+                {...baseHook}
             />
 
 

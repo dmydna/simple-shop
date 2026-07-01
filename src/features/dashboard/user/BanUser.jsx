@@ -26,16 +26,16 @@ function BanUser({ close }) {
 
     const crudHook = useUserCrud(false);
 
-    const { setCurrentItem, currentItem, setId, id, loading, error, crudMode, setFormData
-        , success, setError, setSuccess, formData, onChange, banUser, unbanUser, setCrudMode,
-        setEnableEditableField, refreshElem } = crudHook;
+    const { setCurrentItem, currentItem, setId, 
+          loading, error, crudMode, reset, success, setError, 
+          setSuccess, formData, banUser, unbanUser, setCrudMode } = crudHook;
 
 
     useEffect(() => {
         if (idParam) { 
             setId(idParam) 
             // Inicializa los campos del formulario
-            setFormData({
+            reset({
                 banExpiresAt: arrayToDate(currentItem?.meta?.banExpiresAt),
                 banReason: currentItem?.meta?.banReason
             })
@@ -45,8 +45,8 @@ function BanUser({ close }) {
 
         if (createMode) {
             setCrudMode(CRUD.CREATE);
-            setFormData({})
-            setEnableEditableField(false);
+            reset({})
+            //setEnableEditableField(false);
         }
 
         if (updateMode) { setCrudMode(CRUD.READ) }

@@ -17,8 +17,9 @@ export const useListingCrud = ({autofetch=false}={}) => {
     const [showModal, setShowModal] = useState(false)
     const [dataItem, setDataItem] = useState({});
     const [crudMode, setCrudMode] = useState()
+    const [scheme, setScheme] = useState(ListingDTO)
     
-    const { ... formCrud } = useCrudForm(currentListing, ListingDTO, "create" ,{sku: true});
+    const { ... formCrud } = useCrudForm(currentListing, scheme, "create" ,{});
 
     const { handleCreate, handleUpdate, handleDelete, handleStatus, 
         loading, setLoading, error, setError, success, setSuccess, ...actions }
@@ -60,6 +61,9 @@ export const useListingCrud = ({autofetch=false}={}) => {
         id,
         refreshElem,
 
+
+        scheme,
+        setScheme,
         ...actions
     })
 }

@@ -124,6 +124,7 @@ export function toUpdateListing(data) {
         description: data.description,
         price: data.price,
         stock: data.stock,
+        sku: data.sku,
         discountPercentage: data.discountPercentage,
         warrantyInformation: data.warrantyInformation,
         shippingInformation: data.shippingInformation,

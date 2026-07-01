@@ -15,12 +15,12 @@ function FormAccount({ children, className, crudHook }) {
           <InputCrudFloating
             name={"firstName"}
             label={"FirstName"}
-            baseHook={crudHook}
+            {...crudHook}
           />
           <InputCrudFloating
             name={"lastName"}
             label={"LastName"}
-            baseHook={crudHook}
+            {...crudHook}
           />
 
         </div>
@@ -28,13 +28,13 @@ function FormAccount({ children, className, crudHook }) {
         <InputCrudFloating
           name={"address"}
           label={"address"}
-          baseHook={crudHook}
+          {...crudHook}
         />
 
         <InputCrudFloating
           name={"phone"}
           label={"phone"}
-          baseHook={crudHook}
+          {...crudHook}
         />
 
       </>

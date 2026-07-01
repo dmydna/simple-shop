@@ -1,5 +1,5 @@
 import { Card, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFavorite } from "@/features/favorite/hooks/useFavorite.js"
 import { useListingCrud } from "@/features/listing/hooks/useListingCrud.js"
 import { toast } from "react-toastify";
@@ -18,6 +18,7 @@ export default function  ProductButtonBar({item}){
     const { handleStatus } = useListingCrud()
     // Hide/Show buttons crud
     const [hide, setHide] = useState(true)
+    const navigate = useNavigate();
 
     const handleAddFavorite = () => {
       createFavorite(item.id) 
@@ -37,6 +38,10 @@ export default function  ProductButtonBar({item}){
       	toast.success("producto eliminado");
     }
 
+
+    const handleEdit = () => {
+        navigate(`/dashboard/listing-form?mode=edit${item.meta.status == 'DRAFT' ? '.draft' : ''}&hash=${item.hash}`)
+    }
 
     // Toggle Active/Inactive
     const handleToggle = async () => {
@@ -65,20 +70,18 @@ export default function  ProductButtonBar({item}){
                 <div className='d-flex gap-2'>
                     {hide && (
                         <>
-                            <IconFill
+                            {/* <IconFill
                                className="border rounded-circle bg-wh01" 
                                action={handleAddFavorite}
                                icon="heart"
-                            />
-        
+                            />*/}
                             {item?.meta?.status == "DRAFT" && (
-                            <span style={{lineHeight:'10px', padding: '5px', fontSize: '.9rem'}}
+                            <span style={{borderRadius:'6px', lineHeight:'10px', padding: '6px', fontSize: '.8rem'}}
                                 className='pill-dark my-2 z-index-10'>
                                 draft
                             </span>)}
-        
                             {item?.meta?.status == "INACTIVE" && (
-                            <span style={{lineHeight:'10px', padding: '5px', fontSize: '.9rem'}}
+                            <span style={{borderRadius:'6px', lineHeight:'10px', padding: '6px', fontSize: '.8rem'}}
                                 className='pill-danger my-2 z-index-10'>
                                 inactive
                             </span>)}
@@ -87,6 +90,12 @@ export default function  ProductButtonBar({item}){
 
                     {!hide && (
                         <>
+                            <IconFill
+                               className="border rounded-circle bg-wh01" 
+                               action={handleEdit}
+                               icon="pencil"
+                            />
+                            
                             <IconFill
                                className="border rounded-circle bg-wh01" 
                                action={handleDelete}
@@ -98,6 +107,7 @@ export default function  ProductButtonBar({item}){
                                action={handleToggle}
                                icon={`eye${item?.meta?.status != "ACTIVE"? "-slash":""}`}
                             />
+
                         </>
                     )}
 

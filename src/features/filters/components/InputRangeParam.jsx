@@ -89,7 +89,7 @@ function InputRangeParam({
             background: #2196f3;
         }
         `}</style>
-        <Dropdown style={style} className={`${className} mb-2`}>
+        <Dropdown style={style} className={`${className} mb-2 w-100`}>
             <Dropdown.Toggle
                 variant={variant}
                 style={{opacity: '.8'}}

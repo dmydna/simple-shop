@@ -40,6 +40,7 @@ function FilterParams({children, close, badgeParams = false}){
 			<div className={`my-3 ${!allParams ? '': 'border-top'}`}>
 				<BadgeParams blacklist = {['page', 'dialog', 'tableVersion']} />
 			</div>
+			
 			{close && (
 				<div className='d-flex justify-content-center gap-3'>
 					<span onClick={clearParams}

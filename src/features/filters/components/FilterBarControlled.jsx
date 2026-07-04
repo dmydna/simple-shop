@@ -7,8 +7,8 @@ import { useUrlFilters } from "../hooks/useUrlFilters.jsx";
 
 
 
-// TODO: hacer que cada filtro sea autonomo.
-function FilterBar({ className, children, dataSource, onApply }) {
+// Ex-Componetente FilterBar, fue reemplazado por FilterBarParams
+function FilterBarControlled({ className, children, dataSource, onApply }) {
 
     const [selectedTags, setSelectedTags] = useState([]);
 
@@ -87,4 +87,4 @@ function FilterBar({ className, children, dataSource, onApply }) {
     )
 }
 
-export default FilterBar;
+export default FilterBarControlled;

@@ -1,14 +1,11 @@
 import useCheckServer from "@/hooks/useCheckServer";
 import useNetworkStatus from "@/hooks/useNetworkStatus";
+import { useUrlState } from "@/hooks/useUrlState";
 import PageError from "@features/fallback/PageError";
 import PageIsOffline from "@features/fallback/PageIsOffline";
-import PageServerDown from "@features/fallback/PageServerDown";
 import PageNotContent from "@features/fallback/PageNotContent";
+import PageServerDown from "@features/fallback/PageServerDown";
 import { useEffect } from "react";
-import { useAuthContext } from "@/features/auth/contexts/AuthContext";
-import { toast } from "react-toastify";
-import ExpiredSession from "@/features/fallback/ExpiredSession";
-import ModalParam from "./ModalParam";
 import { useNavigate } from "react-router-dom";
 
 
@@ -34,7 +31,7 @@ export const AppStatus = (
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { isOnline } = useNetworkStatus();
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { serverStatus } = useCheckServer()
+    const { serverStatus } = useCheckServer();
 
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -75,8 +72,8 @@ export const AppStatus = (
     if (serverStatus === 'servidor_caido') 
       return (<PageServerDown />)
     // 2. -- Error de carga de contenido
-    if (error?.code === 'TOKEN_EXPIRED'){
-      navigate(`${window.location.pathname}?dialog=expiredsession`)
+    if (error?.code === 'TOKEN_EXPIRED') {
+      navigate('/home?dialog=expiredsession')
       return  <>{children}</>
     }
 

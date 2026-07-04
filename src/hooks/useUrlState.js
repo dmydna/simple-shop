@@ -7,6 +7,8 @@ export const useUrlState = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const allParams = useMemo(() => searchParams.toString(),[searchParams])
+
   // Estado de solo lectura derivado de la URL
   const params = useMemo(() => {
     console.log(searchParams)
@@ -46,10 +48,13 @@ export const useUrlState = () => {
 
     console.log(newSearchParams)
       return newSearchParams;
-    });
+      
+    },{ replace: true });
   }, [searchParams]);
 
   return { 
     "searchParams":params, 
-    "setSearchParams":updateParams };
+    "setSearchParams":updateParams, 
+    allParams
+  };
 };

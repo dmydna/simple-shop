@@ -5,6 +5,8 @@ import { useEffect, useMemo } from "react";
 import { Button } from "react-bootstrap";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import ButtonLink from "../common/ButtonLink";
+import { useUrlState } from "@/hooks/useUrlState";
+import { useUrlParams } from "@/hooks/useUrlParams";
 
 
 
@@ -15,15 +17,13 @@ export default function UserActions({ close }) {
     const { setId, currentItem, setCurrentItem, handleStatus, loading, error, setError,
      setSuccess, success, refreshElem } = useUserCrud()
 
-
-    const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const location = useLocation();
 
+    const {setSearchParams} = useUrlState();
+
     //Params
-    const idParam = searchParams.get('id');
-    const modeParam = searchParams.get('mode');
-    const tableParam = searchParams.get('tableVersion');
+    const {modeParam, idParam, tableParam} = useUrlParams()
 
     //URLs
     const FORM_URL = "/dashboard/user-form";
@@ -32,12 +32,10 @@ export default function UserActions({ close }) {
     useEffect(() => {
         if (idParam) { setId(idParam) } else { setCurrentItem(null) }
         if (success) { 
-            refreshElem(); // refrescar elemento (local)
-            setSearchParams(prev => { // refrescar lista (global)
-                const newParams = new URLSearchParams(prev);
-                newParams.set('tableVersion', Date.now());
-                return newParams;
-            },{ replace: true });
+            // refrescar elemento (local)
+            refreshElem(); 
+            // refrescar lista (global)
+            setSearchParams(prev => ({...prev, tableVersion: Date.now()}))
        }
     }, [idParam, success])
 

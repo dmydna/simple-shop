@@ -28,7 +28,7 @@ function CategoryNav({className}){
           image={Img2} 
           description='perfumeria' 
           category={category.FRAGRANCES} 
-          link={`/products?category=${category.FRAGRANCE}`}
+          link={`/products?category=${category.FRAGRANCES}`}
         />
         <CategoryItem 
           // variant="success"

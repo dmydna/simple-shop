@@ -1,6 +1,6 @@
 import FetchState from "@/components/common/FetchState";
+import { useFormSync } from "@/features/crud/hooks/useFormSync";
 import FormWarning from "@/features/dashboard/common/FormWarning";
-import { useDashboardSync } from "@/hooks/useDashboardSync";
 import { useUrlState } from "@/hooks/useUrlState";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,7 @@ function FormCrud({
     const { setSearchParams } = useUrlState()
 
     const { editMode, viewMode, createMode, copyMode, edit_draftMode, draftMode } 
-    = useDashboardSync({...crudHook})
+    = useFormSync({...crudHook})
 
     const title = useMemo(() => {
         // -- Nota: 

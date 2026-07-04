@@ -1,7 +1,7 @@
 import CopyButton from '@/components/common/CopyButton';
 import SortByParam from '@/components/common/SortButton';
 import Pagination from '@/features/pagination/components/Pagination.jsx';
-import { useNavParams } from '@/hooks/useNavParams';
+import { useTableSync } from '@/hooks/useTableSync';
 import { useUrlState } from '@/hooks/useUrlState';
 import DataView from '@common/DataView';
 import { pillColor } from "@utils/enums";
@@ -19,7 +19,7 @@ export const ListingTable = ({ baseHook, className, }) => {
 
     const { setSearchParams } = useUrlState()
 
-    const { hashParam } = useNavParams({ baseHook: baseHook })
+    const { hashParam } = useTableSync({ baseHook: baseHook })
 
     const toggleSelect = (item) => {
         console.log(setSearchParams)
@@ -51,10 +51,12 @@ export const ListingTable = ({ baseHook, className, }) => {
                                 <th style={{ width: '150px' }} className='d-none  d-md-table-cell text-secondary'>
                                     <i class="bi bi-grip-vertical"></i>
                                 </th>
-                                <th style={{ width: '150px' }} className='text-secondary'>Title</th>
+                                <th style={{ width: '150px' }} className='text-secondary'>
+                                   <SortByParam>Title</SortByParam>
+                                </th>
                                 <th style={{ width: '150px' }} className='text-secondary'>Hash</th>
                                 <th style={{ width: '150px' }} className='text-secondary'>
-                                    <SortByParam name='date' >Created at</SortByParam>
+                                    <SortByParam name='createdAt' >Created at</SortByParam>
                                 </th>
                                 <th style={{ width: '150px' }} className='text-secondary'>
                                     <SortByParam>Status</SortByParam>

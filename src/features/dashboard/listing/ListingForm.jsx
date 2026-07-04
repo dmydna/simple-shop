@@ -6,7 +6,7 @@ import FormBasic from "@/features/listing/components/FormBasic";
 import FormDetails from "@/features/listing/components/FormDetails";
 import FormSku from "@/features/listing/components/FormSku";
 import { useListingCrud } from "@/features/listing/hooks/useListingCrud";
-import { useUrlModes } from "@/hooks/useUrlModes";
+import { useUrlParams } from "@/hooks/useUrlParams";
 import { ListingDraftDTO, ListingDTO } from "@/utils/schemas";
 import { useEffect } from "react";
 
@@ -15,7 +15,7 @@ function ListingForm() {
     const baseHook = useListingCrud()
     const { showModal, setShowModal, setScheme } = baseHook
 
-    const { edit_draftMode, create_draftMode, createMode } = useUrlModes()
+    const { edit_draftMode, create_draftMode, createMode } = useUrlParams()
 
     // Validaciones Zod Especificas:
     useEffect(()=>{

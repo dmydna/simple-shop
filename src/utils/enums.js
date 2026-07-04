@@ -55,10 +55,10 @@ export const tags = Object.freeze({
 
 
 export const availabilityStock = Object.freeze({
-    InStock: "instock", 
-    OutStock: "outstock", 
-    LowStock: "lowstock", 
-    Pending: "pending"
+    InStock: "In Stock", 
+    OutStock: "Out Stock", 
+    LowStock: "Low Stock", 
+    Pending: "Pending"
 })
 
 

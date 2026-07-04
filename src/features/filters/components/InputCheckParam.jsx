@@ -67,7 +67,7 @@ function InputCheckParam({
 
   return (
     <>
-    <Dropdown className={className} style={style}>
+    <Dropdown className={className + ' w-100'} style={style}>
       <Dropdown.Toggle
         variant={variant}
         style={{opacity: '.6'}}

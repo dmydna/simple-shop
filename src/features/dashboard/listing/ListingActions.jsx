@@ -5,6 +5,7 @@ import { useEffect, useMemo } from "react";
 import { Button } from "react-bootstrap";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import ButtonLink from "../common/ButtonLink";
+import { useUrlParams } from "@/hooks/useUrlParams";
 
 
 export default function ListingActions({ close }) {
@@ -16,9 +17,9 @@ export default function ListingActions({ close }) {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Params
-    const hashParam = searchParams.get('hash');
-    const modeParam = searchParams.get('mode');
+    //Params
+    const {modeParam, hashParam} = useUrlParams()
+
 
     // URLs
     const FORM_URL = "/dashboard/listing-form";

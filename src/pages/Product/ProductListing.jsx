@@ -1,20 +1,16 @@
-import { useServiceParams } from "@/hooks/useServiceParams.js";
-import { useEffect, useLayoutEffect, useState } from "react";
+import FilterListing from "@/features/filters/components/FilterListing.jsx";
+import { useListing } from "@/features/listing/hooks/useListing.js";
+import { useListingSync } from "@/features/listing/hooks/useListingSync.js";
+import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import CategoryCarrousel from "../../components/common/CategoryCarrousel.jsx";
 import CategoryNav from "../../components/common/CategoryNav.jsx";
-import DropdownCheck from "../../components/common/DropdownCheck.jsx";
-import DropdownRange from "../../components/common/DropdownRange.jsx";
 import AddToCartButton from "../../features/cart/components/AddToCartButton.jsx";
-import FilterBar from "../../features/filters/components/FilterBar.jsx";
 import Pagination from "../../features/pagination/components/Pagination.jsx";
 import { ListingPlaceholder } from "../../features/placeholder/ListingPlaceholder.jsx";
 import ProductCard from "../../features/product/components/ProductCard.jsx";
 import ListingContextLayout from "./ListingContextLayout.jsx";
-import { useListing } from "@/features/listing/hooks/useListing.js";
-import { useParams } from "react-router-dom";
-import { includes } from "zod";
-import { useEffectEvent } from "react";
 
 
 
@@ -30,7 +26,7 @@ function ProductListing() {
   const [meta, setMeta] = useState({ title: "Productos" });
 
   // eslint-disable-next-line no-unused-vars
-  const serviceParams = useServiceParams({ baseHook: baseHook });
+  const serviceParams = useListingSync({ ...baseHook });
 
 
   useEffect(() => {
@@ -77,14 +73,16 @@ function ProductListing() {
                 
                 <CategoryCarrousel className='d-block d-md-none' />
 
-                <FilterBar fix={true} dataSource={listings} onApply={setFilters} className="mb-5" >
+{/*                <FilterBarControlled fix={true} dataSource={listings} onApply={setFilters} className="mb-5" >
                         <DropdownCheck variant="light"  className="border rounded my-2 flex-fill">
                             <span className="fw-semibold">etiquetas</span>
                         </DropdownCheck>
                          <DropdownRange variant="light" className="border rounded my-2 flex-fill"  min={0} max={1500} defaultValue={20} type={'$'}>
                               <span className="fw-medium">precio</span>
                          </DropdownRange>
-                </FilterBar >
+                </FilterBarControlled >*/}
+
+                <FilterListing />
 
               </> : ''
             }

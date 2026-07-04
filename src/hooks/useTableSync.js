@@ -1,31 +1,25 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useUrlParams } from "./useUrlParams";
 
 
 
 // TODO: renombrar a useTableParams
 // TODO: mover a @dashboard
-export const useNavParams = ({ baseHook }) => {
+export const useTableSync = ({ baseHook }) => {
 
     const {setFilters, setCurrentPage, totalElements, setId, ...props} = baseHook;
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const tableVersion = searchParams.get('tableVersion');
-    const tagsParam = searchParams.get('tags');
-    const hashParam = searchParams.get('hash'); 
-    const pageParam = searchParams.get('page');
-    const idParam = searchParams.get('id');
-    const searchParam = searchParams.get('search');
-    const categoryParam = searchParams.get('category');
-    const statusParam = searchParams.get('status');
-    const roleParam = searchParams.get('role');
-    const skuParam = searchParams.get('sku');
-
-
+    const {availabilityParam, tableVersion, tagsParam, hashParam, pageParam,
+       idParam, searchParam, categoryParam, statusParam, roleParam, skuParam, 
+       sortParam } = useUrlParams()
+    
 
     useEffect(() => {
         if (!searchParam)   { setFilters({}) }
+        if (availabilityParam) {setFilters({ availability: availabilityParam })}
         if (pageParam)      { setCurrentPage(Number(pageParam))}
         if (!pageParam)     { setCurrentPage(1) }
         if (isNaN(Number(pageParam))) { setCurrentPage(1) }
@@ -36,10 +30,12 @@ export const useNavParams = ({ baseHook }) => {
         if (hashParam)      { setId( hashParam || idParam ) } else { setId( null ) }
         if (tableVersion)   { props?.refreshData() }
         if (statusParam)    { setFilters({ status: statusParam }) }
-
+        if (sortParam)      { setFilters({ sort: sortParam }) }
 
     }, [tagsParam, pageParam, categoryParam, tableVersion, statusParam,
-        searchParam, setFilters, setCurrentPage, totalElements])
+        searchParam, setFilters, setCurrentPage, totalElements,availabilityParam,setId,
+        sortParam
+    ])
 
 
     return {

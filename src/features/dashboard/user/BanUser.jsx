@@ -2,33 +2,31 @@ import { useEffect } from "react";
 
 
 import FetchState from "@/components/common/FetchState";
-import { pillColor } from '@utils/enums.js';
 import CompactDateInput from "@common/CompactDateInput";
 import InputCrudFloating from "@features/crud/components/InputCrudFloating";
 import { useUserCrud } from '@features/user/hooks/useUserCrud';
 import { CRUD } from "@utils/enums";
+import { pillColor } from '@utils/enums.js';
 import { placeholder } from "@utils/image.js";
 import { arrayToDate } from "@utils/mappers.js";
 import { Button, Form } from "react-bootstrap";
-import { useSearchParams } from "react-router-dom";
 
 
+import { useUrlParams } from "@/hooks/useUrlParams";
+import { useUrlState } from "@/hooks/useUrlState";
 import 'react-datepicker/dist/react-datepicker.css';
 
 
 function BanUser({ close }) {
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const idParam = searchParams.get('id');
-    const createMode = searchParams.get('dialog') == "ban.create";
-    const updateMode = searchParams.get('dialog') == "ban.update";
-
+    const {create_banMode, update_banMode, idParam} = useUrlParams()
+    const {setSearchParams} = useUrlState();
 
     const crudHook = useUserCrud(false);
 
-    const { setCurrentItem, currentItem, setId, 
+    const { setCurrentItem, currentItem, setId, handleAction,
           loading, error, crudMode, reset, success, setError, 
-          setSuccess, formData, banUser, unbanUser, setCrudMode } = crudHook;
+          setSuccess, banUser, unbanUser, setCrudMode } = crudHook;
 
 
     useEffect(() => {
@@ -43,39 +41,32 @@ function BanUser({ close }) {
             setCurrentItem(null) 
         }
 
-        if (createMode) {
+        if (create_banMode) {
             setCrudMode(CRUD.CREATE);
             reset({})
             //setEnableEditableField(false);
         }
 
-        if (updateMode) { setCrudMode(CRUD.READ) }
+        if (update_banMode) { setCrudMode(CRUD.READ) }
 
        //NOTA: al aceptar success se convierte en null (por FetchState)
-       if(success == null){
-             // Actualizacion de estados:
-             // 1. Cierra el Modal.
-             // 2. Deselecciona elemento de tabla.
-             // 3. Refresca (refetch) tabla y sidebar.
-            setSearchParams(prev => { 
-                const newParams = new URLSearchParams(prev);
-                newParams.delete('dialog');// (1*)
-                newParams.delete('id');    // (2*)
-                newParams.set('tableVersion', Date.now()); // (3*)
-                return newParams;
-            },{ replace: true }); 
-       }
-    }, [createMode, updateMode, idParam, currentItem, success])
+        if(success == null){
+            // Actualizacion de estados:
+            setSearchParams(prev => ({...prev, 
+                dialog: null,            // 1. Cierra el Modal.
+                id: null,                // 2. Deselecciona elemento de tabla.
+                tableVersion: Date.now() // 3. Refresca (refetch) tabla y sidebar.
+            }))
+        }
+    }, [create_banMode, update_banMode, idParam, currentItem, success])
 
 
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        await banUser(currentItem?.id, formData);
+    const handleSubmit = async (data) => {
+        await banUser(currentItem?.id, data);
     }
 
-    const handleUnbanUser = async (e) => {
-        e.preventDefault()
+    const handleUnbanUser = async () => {
         await unbanUser(currentItem?.id);
     }
 
@@ -102,7 +93,8 @@ function BanUser({ close }) {
 
                     </div>
 
-                    <Form id='reviewForm' style={{ minHeight: '190px' }} onSubmit={handleSubmit}>
+                    <Form id='reviewForm' style={{ minHeight: '190px' }} 
+                        onSubmit={async () => await handleAction(handleSubmit)}>
                         <Form.Group className="mb-3 w-100">
                             <div className='d-flex gap-3 mb-3  border-0 rounded-3'>
                                 <img
@@ -132,7 +124,7 @@ function BanUser({ close }) {
                                 name={"banReason"}
                                 label={"Motivo del baneo"}
                                 as={"textarea"}
-                                baseHook={crudHook}
+                                {...crudHook}
                             />
 
 
@@ -146,7 +138,9 @@ function BanUser({ close }) {
                             </Button>
                         )}
                         {crudMode !== CRUD.CREATE && (
-                            <Button variant="dark" onClick={handleUnbanUser} className="my-2 btn-sm" >
+                            <Button variant="dark" 
+                            onClick={async () => await handleAction(handleUnbanUser)} 
+                            className="my-2 btn-sm" >
                                 <i className="bi bi-unlock"></i>  Unban
                             </Button>
                         )}

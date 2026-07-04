@@ -23,6 +23,7 @@ const AvalabilityStock = () => {
 const SelectByEnum = ({content, label, cols, textStyle, multiseleccion}) => {
 
   // Extraer etiquetas únicas de los listings
+	console.log(content)
   const Tags = useMemo(() => {
     const res = new Set();
     for(let tag in content){
@@ -48,7 +49,7 @@ const SelectByEnum = ({content, label, cols, textStyle, multiseleccion}) => {
 
 
 
-const SelectByStats = ({type, label, cols, textStyle, multiseleccion}) => {
+const SelectByStats = ({type, label, cols, textStyle, multiseleccion, className}) => {
 
 	const {data, loading, error} = useFetchTrigger({ 
         fetchMethod: statsService.getTop, 
@@ -67,7 +68,7 @@ const SelectByStats = ({type, label, cols, textStyle, multiseleccion}) => {
 	return(
 		<InputCheckParam
 			multiselection={multiseleccion}
-			className="mb-2"
+			className={"mb-2"}
 			cols={multiseleccion  ? cols : 1}
 			textStyle={multiseleccion  ? textStyle : 'uppercase'}
 			name={label || type} 
@@ -146,6 +147,7 @@ export default {
 	Category : ()=>SelectByStats({ 
 	  cols: 1, 
 	  type:"categories", 
+	  label: "category",
 	  textStyle: "uppercase",
 	}),
 	Status, 

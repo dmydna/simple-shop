@@ -15,10 +15,9 @@ export default function ProductActions({ close }) {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const location = useLocation();
-
+    
     //Params
-    const idParam = searchParams.get('id');
-    const modeParam = searchParams.get('mode');
+    const {modeParam, idParam} = useUrlParams()
 
     // URLs
     const FORM_URL = "/dashboard/product-form";

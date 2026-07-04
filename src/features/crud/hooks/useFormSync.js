@@ -1,16 +1,13 @@
 import { CRUD } from "@/utils/enums";
 import { useEffect } from "react";
-import { useUrlModes } from "./useUrlModes";
+import { useUrlParams } from "../../../hooks/useUrlParams";
 
 
-// TODO: renombrar a useFormParams
-// TODO: mover a @dashboard
-export const useDashboardSync = ({setId, changeMode}) => {
-
+// TODO: Mover a @f/dashboard o @f/crud
+export const useFormSync = ({setId, changeMode}) => {
 
     const { editMode, viewMode, createMode, copyMode, draftMode, 
-    edit_draftMode,create_draftMode,itemId} = useUrlModes();
-    
+    edit_draftMode,create_draftMode,itemId} = useUrlParams();
 
     useEffect(() => {
         

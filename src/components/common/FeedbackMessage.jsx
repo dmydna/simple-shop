@@ -48,8 +48,8 @@ export const FeedbackMessage = ({
                     {/* Botón condicional (solo aparece si hay una acción) */}
                     {onAction && (
                         <button
-                            className="btn btn-sm px-4 py-2 border-secondary-subtle text-secondary fw-medium shadow-sm"
-                            style={{ fontSize: '0.75rem', letterSpacing: '0.05rem', borderRadius: '20px' }}
+                            className="btn btn-sm btn-dark px-4 py-2 border-secondary-subtle fw-medium shadow-sm"
+                            style={{ fontSize: '0.55rem', letterSpacing: '0.05rem', borderRadius: '20px' }}
                             onClick={onAction}
                         >
                             {actionLabel?.toUpperCase()}

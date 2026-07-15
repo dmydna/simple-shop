@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { IconFill } from "./FloatButton"
+import { HoverIcon } from "./FloatButton"
 
 export default function EditFloatButton({item}){
 	
@@ -10,7 +10,7 @@ export default function EditFloatButton({item}){
 
 
 	return (
-        <IconFill
+        <HoverIcon
            className="border rounded-circle bg-wh01" 
            action={handleEdit}
            icon="pencil"

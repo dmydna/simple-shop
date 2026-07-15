@@ -7,6 +7,7 @@ import { useSearchParams } from "react-router-dom";
 // TODO: cambiar de nombre pendiente
 // TODO: mover a @dashboard
 
+/** Este componete  declara todos los parametros busquedas que se usaran en la app*/
 export const useUrlParams = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();

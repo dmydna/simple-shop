@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { Card, Col } from "react-bootstrap";
 import { useListingCrud } from "@/features/listing/hooks/useListingCrud.js"
-import { IconFill } from "./FloatButton"
+import { HoverIcon } from "./FloatButton"
 import React, { } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -40,7 +40,7 @@ export default function StatusFloatButton({item, style, onSuccess, className}){
 
 	return (
 
-         <IconFill
+         <HoverIcon
             style={style}
             className={`border rounded-circle bg-wh01 ${className}`} 
             action={handleToggle}

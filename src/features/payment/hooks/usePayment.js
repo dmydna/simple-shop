@@ -24,7 +24,7 @@ export const usePayment = () => {
     }
 
     const { handleConfirmOrder, buy, orderResponse, handleCancel }
-        = usePurchaseOrder({ onSuccess, setLoading, setError })
+        = usePurchaseOrder({ onSuccess, setLoading, setError, canceled, setCanceled })
 
     const { handleConfirmPay }  = useGateway({ buy, setLoading, setError, onSuccess, orderResponse })
 

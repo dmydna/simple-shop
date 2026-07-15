@@ -4,12 +4,11 @@ import { buyService } from '@features/payment/service/buyService.js';
 import { useService } from "@hooks/useService.js";
 import { useState } from "react";
 
-export const usePurchaseOrder = ({onSuccess, setLoading, setError }) => {
+export const usePurchaseOrder = ({onSuccess, setLoading, setError, canceled , setCanceled }) => {
 
-     const { cartItems } = useCart()
-    
+    const { cartItems } = useCart()
     const [orderResponse, setOrderResponse] = useState()
-    const {create: createOrder, cancelOrder: cancel } = useService({service: orderService})
+    const {create: createOrder, cancel: cancelOrder } = useService({service: orderService})
     const {create: buy }  = useService({service: buyService})
 
 
@@ -22,8 +21,8 @@ export const usePurchaseOrder = ({onSuccess, setLoading, setError }) => {
           setOrderResponse(order)
           onSuccess() // <-- muestra formPayData
           console.log(order, "-- ORDER VALIDA! --")
-       } catch (error) {
-          setError(true)
+       } catch (err) {
+          setError(err)
        } finally {
           setLoading(false)
        }
@@ -36,14 +35,14 @@ export const usePurchaseOrder = ({onSuccess, setLoading, setError }) => {
           await cancelOrder(orderResponse.orderId);
           setCanceled(true)
           onSuccess()
-          console.log(order, "-- CANCELED ORDER --")
+          console.log(orderResponse, "-- CANCELED ORDER --")
       }catch(err){
-          setError(true)
+          setError(err)
       } finally {
           setLoading(false)
        }
     }
 
 
-    return ({handleConfirmOrder, buy, orderResponse, handleCancel})
+    return ({handleConfirmOrder, buy, orderResponse, handleCancel, canceled})
 }

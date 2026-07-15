@@ -1,7 +1,11 @@
 
+import { BASE_URL, ENDPOINTS } from "@utils/config.js";
 import { mapToURLSearchParams } from "@utils/mappers.js";
-import { ENDPOINTS, BASE_URL} from "@utils/config.js";
+import { responseError } from '@utils/service.js';
 const ENDPOINT = ENDPOINTS.PROFILE + "/favorites"
+
+
+
 
 export const favoriteService = {
 
@@ -37,6 +41,22 @@ export const favoriteService = {
         if (!response.ok) throw new Error("Error al agregar favorito");
         return await response.json();
     },
+
+
+    isFavoriteProduct: async (listingId) => {
+        console.log(listingId)
+        const TOKEN = localStorage.getItem("token")
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${listingId}/check`, {
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ` + TOKEN},
+        });
+        if (!response.ok) {
+            return responseError(response)
+        }
+        const data = await response.json();
+
+        return data?.isFavorite;
+    },    
 
     Delete: async (listingId) => {
         const TOKEN = localStorage.getItem("token")

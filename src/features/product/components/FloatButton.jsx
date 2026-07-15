@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { useMemo, useState } from "react";
 
-export function IconFill({action, children, icon, className}){
-	
+/**
+ * Muestra el ícono con fill solo cuando se hace hover.
+ */
+export function HoverIcon({action, children, icon, className}){
 	
 	const [isHovered, setIsHovered] = useState(false);
 	const iconClass = isHovered ? `bi-${icon}-fill` : `bi-${icon}`
@@ -19,9 +21,44 @@ export function IconFill({action, children, icon, className}){
 }
 
 
+/**
+ * Muestra el ícono con fill basado en el estado (status).
+ * Si está activo (status=true), siempre se ve 'fill'.
+ * Si está inactivo, muestra 'fill' solo al hacer hover.
+ */
+export function ToggleIcon({action, children, icon, status, className}){
+  
+  const [isHovered, setIsHovered] = useState(false);
+
+  const iconClass =  useMemo(()=>{
+     console.log("status", status)
+     if(status) return `bi-${icon}-fill`
+     if(isHovered) return `bi-${icon}-fill`
+     return `bi-${icon}`
+  },[isHovered, status, icon])
+
+  return (
+     // desactiva hover effect si el status es true.
+      <span onClick={action} 
+          onMouseEnter={()=>{
+            if(!status) setIsHovered(true)
+          }} 
+          onMouseLeave={()=>{
+            if(!status) setIsHovered(false)
+          }} 
+            style={{lineHeight:'0px', padding: '10px'}}
+            className={`btn ${className || ''} z-index-10`}>
+            <i className={iconClass}></i> 
+            {children}
+        </span>
+     )
+}
 
 
 
+/**
+ * Muestra el ícono con effecto sombreado al hacer hover.
+ */
 export function IconTint({ action, children, icon, className }) {
   const [isHovered, setIsHovered] = useState(false);
   const iconClass = `bi-${icon}`
@@ -68,7 +105,9 @@ export function IconTint({ action, children, icon, className }) {
 }
 
 
-
+/**
+ * Muestra un elemento hijo con effecto sombreado tinta al hacer hover.
+ */
 export function Tintify({ action, children, className }) {
   const [isHovered, setIsHovered] = useState(false);
   return (

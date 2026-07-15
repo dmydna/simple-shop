@@ -6,7 +6,7 @@ import { useCart } from "../contexts/CartContext.jsx";
 
 export const MyOrderCart = ({check, oncheck, handle}) => {
 
-    const {totalPrice, cartItems, couponDiscount} = useCart()
+    const {totalPrice,totalDiscount, cartItems, couponDiscount} = useCart()
 
     const buyMatch = useMatch("/cart/:buy")
 
@@ -14,14 +14,14 @@ export const MyOrderCart = ({check, oncheck, handle}) => {
 
     const Order = useMemo(() => {
         const descuento = couponDiscount ? 5.0 : 0;
-        const envio = 10.30;
+        const envio = 0.0;
         return ({
             envio: envio,
-            descuento: descuento,
+            descuento: totalDiscount,
             subtotal: totalPrice,
             total: totalPrice + envio - descuento
         });
-    }, [check, totalPrice]);
+    }, [check, totalPrice, totalDiscount]);
 
     return (
         <Card // style={{top: (width > 900 ? "55px" : 0)  }}
@@ -45,7 +45,7 @@ export const MyOrderCart = ({check, oncheck, handle}) => {
                 <Card.Text className="text-secondary small fw-semibold  m-0">
                      Descuento {check && '(1 cupon)'} </Card.Text>
                 <Card.Text className="fw-bold">
-                    ${Order?.descuento}
+                    ${Order?.descuento.toFixed(2)}
                 </Card.Text>
             </div>
 

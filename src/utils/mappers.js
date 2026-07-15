@@ -36,19 +36,22 @@ export const toPasswordChangeRequest = (passwData) => {
 export const toCreateOrder = (cartItems) => {
     let totalAmount = 0;
     let totalQuantity = 0;
+    // Nota: priceAtPurchase y totalAmount 
+    // deben ser enviados como string para 
+    // mantener precision.
     return {
         "items": cartItems.map((item) => {
-            totalAmount += item?.price;
+            totalAmount += item?.finalPrice;
             totalQuantity += item?.cantidad;
             return {
                 "productId": item?.productId,
                 "listingId": item?.id,
                 "name": item?.productName,
                 "quantity": item?.cantidad,
-                "priceAtPurchase": item?.price
+                "priceAtPurchase": `${item?.finalPrice}`
             }
         }),
-        "totalAmount": totalAmount,
+        "totalAmount": `${totalAmount}`,
         "totalQuantity": totalQuantity,
     }
 

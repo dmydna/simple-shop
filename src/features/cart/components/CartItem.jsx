@@ -34,11 +34,11 @@ function CartItem({item, index}) {
                       <div className="text-secondary small m-0 d-none d-md-block">
                         p.u: 
                         <i className="bi bi-currency-dollar"></i>
-                        {(item?.price || 0).toFixed(2)}
+                        {(item?.finalPrice || 0).toFixed(2)}
                       </div>
                       <div className="h5 m-0 order-2 order-md-1 mt-2 mt-sm-0">
                         <i className="bi bi-currency-dollar"></i> 
-                        {(item.price*item.cantidad).toFixed(2)}
+                        {(item.finalPrice*item.cantidad).toFixed(2)}
                       </div>
                     </div>
                     

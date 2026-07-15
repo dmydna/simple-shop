@@ -1,6 +1,6 @@
 import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { IconFill, IconTint } from "./FloatButton"
+import { HoverIcon, IconTint } from "./FloatButton"
 import ProductButtonBar from "./ProductButtonBar"
 
 
@@ -37,8 +37,13 @@ function ProductCard({ children, className, cols, imgSize, ...item}){
                 >
                    {item.title || "N/A"}
                 </Card.Title>
+                {item?.finalPrice != item?.price &&
+                  <Card.Text style={{marginTop: '-15px'}} className="mb-0 small text-secondary position-absolute">
+                    <strike>$ {item?.price}</strike>
+                  </Card.Text> 
+                }
                 <Card.Text className="fs-4 fw-semibold  mb-1">
-                  $ {item?.price || "..."}  
+                  $ {item?.finalPrice || "..."}  
                   <span className="mx-2 text-success fw-medium fs-6">
                     {item?.discountPercentage ? item.discountPercentage + '% OFF' : ''}
                   </span>

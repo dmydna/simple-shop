@@ -1,9 +1,10 @@
-import { useEffect, useMemo } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import FetchState from "@/components/common/FetchState";
 import { useProductCrud } from "@/features/product/hooks/useProductCrud";
-import FetchState  from "@/components/common/FetchState";
+import { useUrlParams } from "@/hooks/useUrlParams";
 import ButtonLink from "@dashboard/common/ButtonLink";
+import { useEffect, useMemo } from "react";
+import { Button } from "react-bootstrap";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
   // TODO: manejar rutas muertas de ProductList/ProductForm.
 export default function ProductActions({ close }) {

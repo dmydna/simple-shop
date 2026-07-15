@@ -11,20 +11,21 @@ export const useListingSync = ({
     totalElements 
     }) => {
 
-    const {tagsParam, categoryParam, pageParam, searchParam, filterParam, allParams} = useUrlParams();
+    const {tagsParam, pageParam, searchParam, filterParam, categoryParam, allParams} 
+    = useUrlParams();
 
     useEffect(() => {
-        console.log("filterParam", filterParam)
+
         if (filterParam){
-            if (tagsParam)         { setFilters( prev => ({ ...prev, tags: tagsParam }) ) }
-            if (categoryParam)     { setFilters( prev => ({ ...prev, category: categoryParam }) ) }            
+            if (tagsParam)         { setFilters( prev => ({ ...prev, tags: tagsParam }) ) }            
         }
-       //if (!searchParam)      { setFilters({}) }
+
         if (!pageParam)        { setCurrentPage(1) }
         if (!isNaN(pageParam)) { setCurrentPage(Number(pageParam)) }
         if (searchParam)       { setFilters({ title: searchParam }) }
+        if (categoryParam)     { setFilters({category: categoryParam}) }
 
-        if(!allParams){setFilters({})}
+        if (!allParams){setFilters({})}
 
     }, [tagsParam, pageParam, categoryParam, filterParam, allParams,
         searchParam, setFilters, setCurrentPage, totalElements])

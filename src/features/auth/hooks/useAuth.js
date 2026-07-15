@@ -21,8 +21,8 @@ export function useAuth() {
   }, [token, user])
 
   const isAdmin = useMemo(() => {
-    return role == 'ADMIN' ? true : false
-  }, [token, user, role])
+    return role == 'ADMIN' && isAuth ? true : false
+  }, [token, user, role, isAuth])
 
   useEffect(() => {
     if (reset) {

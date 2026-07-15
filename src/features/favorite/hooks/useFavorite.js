@@ -12,10 +12,11 @@ export const useFavorite = ({autofetch=false}={}) => {
     const { loading: loadingItem, error: errorItem, currentItem, setCurrentItem, id, setId}
         = useFetchElem({ service: favoriteService })
 
-    const { Delete: deleteFavorite, create :createFavorite } = useService({service: favoriteService})
+    const { Delete: deleteFavorite, create :createFavorite, ...service } = useService({service: favoriteService})
 
     return ({
         ...props,
+        ...service,
         deleteFavorite,
         createFavorite,
         content,

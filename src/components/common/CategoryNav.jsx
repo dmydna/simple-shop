@@ -9,9 +9,11 @@ import { category } from "@utils/enums.js";
 import { useParams } from "react-router-dom";
 
 
+
 function CategoryNav({className}){
 
     const {filter} = useParams();
+    const BASE_URL = '/products/filter'
 
     return(
        <Row className={`mb-3 ${className} ${filter ? 'd-md-flex' : ''}`}> 
@@ -20,7 +22,7 @@ function CategoryNav({className}){
           image={Img1} 
           category={category.BEAUTY}
           description='salud e higiene' 
-          link={`/products?category=${category.BEAUTY}`}
+          link={`${BASE_URL}?category=${category.BEAUTY}`}
         />
         <CategoryItem 
           // variant="primary"
@@ -28,7 +30,7 @@ function CategoryNav({className}){
           image={Img2} 
           description='perfumeria' 
           category={category.FRAGRANCES} 
-          link={`/products?category=${category.FRAGRANCES}`}
+          link={`${BASE_URL}?category=${category.FRAGRANCES}`}
         />
         <CategoryItem 
           // variant="success"
@@ -36,7 +38,7 @@ function CategoryNav({className}){
           image={Img3} 
           category={category.FURNITURE} 
           description='oficina y hogar' 
-          link={`/products?category=${category.FURNITURE}`}
+          link={`${BASE_URL}?category=${category.FURNITURE}`}
         />
         <CategoryItem 
           // variant="dark"
@@ -44,7 +46,7 @@ function CategoryNav({className}){
           image={Img4} 
           description='comercio y almacen' 
           category={category.GROCERIES} 
-          link={`/products?category=${category.GROCERIES}`}
+          link={`${BASE_URL}?category=${category.GROCERIES}`}
         />
       </Row>
          

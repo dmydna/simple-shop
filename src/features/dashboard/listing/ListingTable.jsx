@@ -1,7 +1,7 @@
 import CopyButton from '@/components/common/CopyButton';
 import SortByParam from '@/components/common/SortButton';
+import { useListSync } from '@/features/dashboard/hooks/useListSync';
 import Pagination from '@/features/pagination/components/Pagination.jsx';
-import { useTableSync } from '@/hooks/useTableSync';
 import { useUrlState } from '@/hooks/useUrlState';
 import DataView from '@common/DataView';
 import { pillColor } from "@utils/enums";
@@ -19,7 +19,7 @@ export const ListingTable = ({ baseHook, className, }) => {
 
     const { setSearchParams } = useUrlState()
 
-    const { hashParam } = useTableSync({ baseHook: baseHook })
+    const { hashParam } = useListSync({ baseHook: baseHook })
 
     const toggleSelect = (item) => {
         console.log(setSearchParams)

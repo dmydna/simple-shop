@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFavorite } from "@/features/favorite/hooks/useFavorite.js"
 import { useListingCrud } from "@/features/listing/hooks/useListingCrud.js"
 import { toast } from "react-toastify";
-import { IconFill, IconTint } from "./FloatButton"
+import { HoverIcon, IconTint } from "./FloatButton"
 import {useAuthContext} from "@features/auth/contexts/AuthContext"
 import React, { useState } from "react";
 
@@ -90,19 +90,19 @@ export default function  ProductButtonBar({item}){
 
                     {!hide && (
                         <>
-                            <IconFill
+                            <HoverIcon
                                className="border rounded-circle bg-wh01" 
                                action={handleEdit}
                                icon="pencil"
                             />
                             
-                            <IconFill
+                            <HoverIcon
                                className="border rounded-circle bg-wh01" 
                                action={handleDelete}
                                icon="trash3"
                             />
         
-                            <IconFill
+                            <HoverIcon
                                className="border rounded-circle bg-wh01" 
                                action={handleToggle}
                                icon={`eye${item?.meta?.status != "ACTIVE"? "-slash":""}`}

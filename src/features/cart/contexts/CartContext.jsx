@@ -15,65 +15,64 @@ export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [totalDiscount, setTotalDiscount] = useState(0)
 
  
   const clearCart = () => {
     setCartItems([])
     setTotalPrice(0)
+    setTotalDiscount(0)
     setCartCount(0)
     localStorage.removeItem("cartItems");
+    localStorage.removeItem("cartTotalDiscount");
     localStorage.removeItem("cartTotalPrice");
     localStorage.removeItem("cartCount");
   }
 
 
   useEffect(() => {
-    const savedCartItems  = localStorage.getItem("cartItems");
+    const savedCartItems = localStorage.getItem("cartItems");
+    const savedTotalDiscount = localStorage.getItem("cartTotalDiscount");
     const savedTotalPrice = localStorage.getItem("cartTotalPrice");
-    const savedCartCount  = localStorage.getItem("cartCount");
+    const savedCartCount = localStorage.getItem("cartCount");
 
-    if (savedCartItems && savedTotalPrice && savedCartCount) {
-        setCartItems(JSON.parse(savedCartItems));
-        setTotalPrice(JSON.parse(savedTotalPrice));
-        setCartCount(JSON.parse(savedCartCount));
+    if (savedCartItems && savedTotalPrice && savedCartCount && totalDiscount) {
+      setCartItems(JSON.parse(savedCartItems));
+      setTotalPrice(JSON.parse(savedTotalPrice));
+      setCartCount(JSON.parse(savedCartCount));
+      setCartCount(JSON.parse(savedTotalDiscount));
     }
   }, []);
 
 
-  useEffect(()=>{
-    if(cartItems && cartItems.length > 0){
+  useEffect(() => {
+    if (cartItems && cartItems.length > 0) {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }
-    if(totalPrice && totalPrice > 0) {
+    if (totalPrice && totalPrice > 0) {
       localStorage.setItem("cartTotalPrice", JSON.stringify(totalPrice));
     }
-    if(cartCount && cartCount > 0) {
-      localStorage.setItem("cartCount",  JSON.stringify(cartCount));
+    if (cartCount && cartCount > 0) {
+      localStorage.setItem("cartCount", JSON.stringify(cartCount));
     }
 
-  },[cartItems, totalPrice, cartCount]);
+  }, [cartItems, totalPrice, cartCount]);
 
 
 
-  const  removeFromCart = (productoCart) => {
+  const removeFromCart = (productoCart) => {
 
     setCartCount((prevContador) => 
       prevContador - productoCart.cantidad)
     setTotalPrice((prevTotal) => 
-      prevTotal - (productoCart.price * productoCart.cantidad))
-
-/*    setProducts((prevProducts) => // retorno implicito de un array 
-      prevProducts.map((item) => 
-        item.id === productoCart.id
-        ? { ...item, stock: item.stock + productoCart.cantidad } 
-        : item 
-      )
-    );*/
+      prevTotal - (productoCart.finalPrice * productoCart.cantidad))
+    setTotalDiscount((prevTotal) => 
+      prevTotal - (productoCart.price * productoCart.cantidad - productoCart.finalPrice * productoCart.cantidad))
 
     setCartItems((prevProductos) =>
       prevProductos.filter((item) =>
         item.id !== productoCart.id 
-    ))
+      ))
 
   }
 
@@ -101,13 +100,6 @@ export function CartProvider({ children }) {
     // Actualizamos el contador global sumando la diferencia
     setCartCount((prevContador) => prevContador + diferencia)
     // 4. Actualizar Productos
-/*    setProducts((prev) =>
-      prev.map((item) =>
-        item.id === productoCart.id 
-          ? { ...item, stock: nuevoStockRestante } 
-          : item
-      )
-    );*/
   };
 
 
@@ -124,9 +116,6 @@ export function CartProvider({ children }) {
       productoCart.stock ? prevContador - 1 : prevContador
     );
     
-    // setTotalPrice((prevTotal) =>
-    //   productoCart.stock ? prevTotal - 1 : prevTotal
-    // );
 
     setCartItems((prevProductos) =>
       prevProductos.map((item) =>
@@ -136,19 +125,11 @@ export function CartProvider({ children }) {
       )
     );
 
-/*    setProducts(
-      (prevProducts) => // retorno implicito de un array
-        prevProducts.map((item) =>
-          item.id === productoCart.id && item.stock
-            ? { ...item, stock: item.stock + 1 }
-            : item
-      )
-    );*/
   };
 
   const increaseCartItem = (productoCart) => {
 
-    const esProductoDisponible = productoCart.stock - productoCart.cantidad  != 0;
+    const esProductoDisponible = productoCart.stock - productoCart.cantidad != 0;
 
     if (!esProductoDisponible) {
       return;
@@ -161,14 +142,10 @@ export function CartProvider({ children }) {
 
 
 
-    if(productoCart.id )
-    setCartCount((prevContador) =>
-      productoCart.stock ? prevContador + 1 : prevContador
-    );
-
-    // setTotalPrice((prevTotal) =>
-    //   productoCart.stock ? prevTotal + 1 : prevTotal
-    // );
+    if (productoCart.id)
+      setCartCount((prevContador) =>
+        productoCart.stock ? prevContador + 1 : prevContador
+      );
 
     setCartItems((prevProductos) =>
       prevProductos.map((item) =>
@@ -177,98 +154,90 @@ export function CartProvider({ children }) {
           : item
       )
     );
-/*
-    setProducts((prevProducts) => // retorno implicito de un array
-        prevProducts.map((item) =>
-          item.id === productoCart.id && item.stock
-            ? { ...item, stock: item.stock - 1 }
-            : item
-        )
-    );*/
-  };
-
-
-  const addToCart = (productoAAgregar) => {
- 
-    if(productoAAgregar.stock <= 0){
-      return
-    }
-    
-    const productoExiste = cartItems.find(
-      (item) => item.id === productoAAgregar.id 
-    );
-
-    if (productoExiste) {
-      //  actualiza la cantidad del producto
-      setCartItems((prevProductos) =>
-        prevProductos.map((item) =>
-          item.id === productoAAgregar.id && item.stock 
-            ? { ...item, cantidad: item.cantidad + 1 } // Incrementa la cantidad
-            : item
-        )
-      );
-    } else {
-      setCartItems((prevProductos) => [ // retorno implicito de un array 
-        ...prevProductos,
-        { ...productoAAgregar, cantidad: 1 },
-      ]);
-    }
-
-/*    setProducts((prevProducts) => // retorno implicito de un array 
-        prevProducts.map((item) => 
-        item.id === productoAAgregar.id && item.stock
-        ? { ...item, stock: item.stock - 1 } 
-        : item 
-      )
-    );*/
-
-
-  setCartCount((prevCounter) => (
-    productoAAgregar.stock ?  prevCounter + 1 : prevCounter
-  ));
-
   }
 
-  useEffect(() => {
-    console.log(cartItems)
-    if (cartItems.length != 0) {
-      setTotalPrice(
-        cartItems.reduce(
-         (accumulator, item) => accumulator + item.price * item.cantidad
-         ,0)
+    const addToCart = (productoAAgregar) => {
+ 
+      if (productoAAgregar.stock <= 0) {
+        return
+      }
+    
+      const productoExiste = cartItems.find(
+        (item) => item.id === productoAAgregar.id 
       );
+
+      if (productoExiste) {
+        //  actualiza la cantidad del producto
+        setCartItems((prevProductos) =>
+          prevProductos.map((item) =>
+            item.id === productoAAgregar.id && item.stock 
+              ? { ...item, cantidad: item.cantidad + 1 } // Incrementa la cantidad
+              : item
+          )
+        );
+      } else {
+        setCartItems((prevProductos) => [ // retorno implicito de un array 
+          ...prevProductos,
+          { ...productoAAgregar, cantidad: 1 },
+        ]);
+      }
+
+
+
+
+      setCartCount((prevCounter) => (
+        productoAAgregar.stock ? prevCounter + 1 : prevCounter
+      ));
+
     }
-  }, [cartItems]);
+
+
+    useEffect(() => {
+      console.log(cartItems)
+      if (cartItems.length != 0) {
+        setTotalPrice(
+          cartItems.reduce(
+            (accumulator, item) => accumulator + item.finalPrice * item.cantidad
+            , 0)
+        );
+        setTotalDiscount(
+          cartItems.reduce(
+            (accumulator, item) => accumulator + item.price * item.cantidad - item.finalPrice * item.cantidad
+            , 0)
+        );
+      }
+    }, [cartItems]);
   
 
-  const orderData = useMemo( () =>
-    toCreateOrder(cartItems) 
-  ,[totalPrice, cartItems]) 
 
+    const orderData = useMemo(() =>
+      toCreateOrder(cartItems), [totalPrice, cartItems]) 
+    
 
-  return (
-    <CartContext.Provider 
-    value={{  
-         increaseCartItem,  
-         decreaseCartItem, 
-         removeFromCart, 
-         cartItems, 
-         setCartItems, 
-         cartCount, 
-         setCartCount,  
-         totalPrice, 
-         setTotalPrice, 
-         setProducts, 
-         products,
-         clearCart,
-         addToCart,
-         couponDiscount,
-         setCantidadCartItem, 
-         setCouponDiscount, 
-         }}>
-      {children}
-    </CartContext.Provider>
-  )
-}
+    return (
+      <CartContext.Provider 
+        value={{  
+          increaseCartItem,  
+          decreaseCartItem, 
+          removeFromCart, 
+          cartItems, 
+          setCartItems, 
+          cartCount, 
+          setCartCount,  
+          totalPrice, 
+          setTotalPrice, 
+          setProducts, 
+          products,
+          clearCart,
+          addToCart,
+          couponDiscount,
+          setCantidadCartItem, 
+          setCouponDiscount, 
+          totalDiscount
+        }}>
+        {children}
+      </CartContext.Provider>
+    )
+  }
 
 export const useCart = () => useContext(CartContext);

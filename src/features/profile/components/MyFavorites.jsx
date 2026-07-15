@@ -57,7 +57,7 @@ function MyFavorites({ children }) {
                                        onClick={()=> navigate(`/p/${item.hash}`)} 
                                        className="d-block fw-bold small mb-2 pointer"> {item.title} </span>
                                     <span
-                                        onClick={() => handleDeleteFavorite(item?.listingId)}
+                                        onClick={() => handleDeleteFavorite(item?.id)}
                                         className='small btn btn-sm  btn-light rounded-circle'>
                                         <i className='bi-x-lg'></i>
                                     </span>

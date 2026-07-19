@@ -44,7 +44,7 @@ function ProductListing() {
       setMeta((prev) => ({
         ...prev,
         title: "Resultados",
-        message: `encontrados: ${totalElements}`
+        message: `${totalElements} encontrados`
       }));
     }
   }, [filters, filter])
@@ -59,7 +59,7 @@ function ProductListing() {
       >
         <>
           <Container fluid="xl" className="bg-white rounded mt-2 mb-5 pb-5">
-            <div className="w-100 d-flex flex-wrap mt-2 mb-4">
+            <div className="w-100 d-flex flex-column mt-2 mb-4">
               <span className="text-capitalize fw-semibold me-3 fs-5 fw-medium" >
                 {meta.title}
               </span>

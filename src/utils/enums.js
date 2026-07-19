@@ -26,6 +26,24 @@ export const color = {
     ".durazno"  : "FFDAC1",
 } 
 
+export const hexColor = {
+    ".melon"    : "#FFE5B4",
+    ".menta"    : "#B2F2BB",
+    ".lavanda"  : "#C7CEEA",
+//  ".limon"    : "#FFFACD",
+    ".rosa"     : "#FFD6E0",
+    ".cielo"    : "#B5D8F7",
+    ".lila"     : "#E6CCFF",
+    ".coral"    : "#FFCBA4",
+    ".aqua"     : "#B2EBF2",
+    ".manteca"  : "#FFF5B7",
+    ".salmon"   : "#FFB7B2",
+    ".pera"     : "#D4F1A0",
+    ".malva"    : "#F2C4CE",
+    ".celeste"  : "#C9E8FF",
+    ".durazno"  : "#FFDAC1", 
+}
+
 
 export const role = Object.freeze({
     ADMIN: "ADMIN",
@@ -74,7 +92,7 @@ export const status = Object.freeze({
 export const userStatus = Object.freeze({
     ACTIVE:   "ACTIVE",
     INACTIVE: "INACTIVE",
-    DELETED:  "BANNED",
+    BANNED:  "BANNED",
 });
 
 export const CRUD = Object.freeze({

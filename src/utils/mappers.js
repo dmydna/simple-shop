@@ -41,7 +41,7 @@ export const toCreateOrder = (cartItems) => {
     // mantener precision.
     return {
         "items": cartItems.map((item) => {
-            totalAmount += item?.finalPrice;
+            totalAmount += item?.finalPrice * item?.cantidad;
             totalQuantity += item?.cantidad;
             return {
                 "productId": item?.productId,

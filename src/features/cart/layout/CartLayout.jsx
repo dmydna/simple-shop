@@ -23,7 +23,9 @@ export const CartLayout = (
     }) => {
 
       
-
+    // Nota: 
+    // - El fallback solo responde en caso de Carrito Vacio. 
+    // - Para fallbacks Success y Error se usa `MyCartLayout`.
 
     useEffect(()=>{
       if(isEmpty){
@@ -39,7 +41,7 @@ export const CartLayout = (
 
 
     if (success) return <PageSuccess handle={()=> setSuccess(null)} />
-    if (error) return <PageError error={error} handle={ ()=> setError(null)} />
+    if (error) return   <PageError error={error} handle={ ()=> setError(null)} />
     if (isEmpty) return <CartEmpty /> 
 
 

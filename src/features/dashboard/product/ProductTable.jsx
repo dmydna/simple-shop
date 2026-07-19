@@ -10,7 +10,7 @@ import { formatDate } from "@utils/mappers";
 import React from 'react';
 import { Button, Form, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-
+import PlaceholderIcon from "@common/PlaceholderIcon"
 
 function ProductTable({ children, baseHook, className }) {
 
@@ -72,6 +72,7 @@ function ProductTable({ children, baseHook, className }) {
                                     <td
                                         onClick={() => toggleSelect(item)}
                                         className='text-secondary d-none  d-md-table-cell'>
+                                        
                                         <Form.Check // prettier-ignore
                                             type='checkbox'
                                             id={`default-radio`}
@@ -82,19 +83,22 @@ function ProductTable({ children, baseHook, className }) {
                                                 toggleSelect(item);
                                             }}
                                         />
+
                                     </td>
 
 
                                     {/** Item */}
                                     
                                     <td>
-                                        <img
+{/*                                        <img
                                             style={{ objectFit: 'contain', width: '60px', height: '60px' }} // Altura fija igual al texto
                                             className="border border-1 rounded flex-shrink-0"
                                             src={placeholderURL.product(item?.id)}
-                                        />
-
-                                        <span className='mx-3 fw-medium'>{item?.name || ''}</span>
+                                        /> */}
+                                            <div className='my-2'>
+                                                <PlaceholderIcon fontSize='fs-5' variant={'primary flex-glow'} icon={'bi-box-seam'} />
+                                                <span className='flex-grow-1 mx-3 fw-medium'>{item?.name || ''}</span>
+                                            </div>
                                     </td>
 
                                     {/* Sku */}

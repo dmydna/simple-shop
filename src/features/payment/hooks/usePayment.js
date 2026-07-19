@@ -18,7 +18,7 @@ export const usePayment = () => {
         if(canceled) clearCart();
         if(step === 1 && !canceled) {
             setSuccess(true)
-            clearCart()
+            //clearCart()
         }
         if(step !== 1) setStep(1)
     }

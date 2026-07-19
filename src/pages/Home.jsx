@@ -23,6 +23,7 @@ import ListingContextLayout from "./Product/ListingContextLayout";
 import { useListing } from "@/features/listing/hooks/useListing";
 import TopSection from "@/features/product/components/TopSection";
 import TopCarousel from "@/features/product/components/TopCarrousel";
+import {PATHS} from "@utils/paths"
 
 
 function Home() {
@@ -156,12 +157,14 @@ function Home() {
                     {/** Card Promos */}
 
                     <Row className="g-0">
-                        <CardPromo className="my-3 me-md-1 me-0" Img={Img1} variant="primary" to={'/products/category/beauty'} cta="comprar ahora">
+                        <CardPromo className="my-3 me-md-1 me-0" Img={Img1} variant="primary" 
+                            to={'/products/filter?category=beauty'} cta="comprar ahora">
                             <p className="mb-1">6 cuotas sin interés</p>
                             <p className="h5 fw-bold mb-1">HASTA 40% OFF EN</p>
                             <p className="h5 fw-bold">PERFUMES Y BELLEZA</p>
                         </CardPromo>
-                        <CardPromo className="my-3 ms-md-1 ms-0" Img={Img2} variant="success" to={'/products/category/furniture'} cta="ver ofertas">
+                        <CardPromo className="my-3 ms-md-1 ms-0" Img={Img2} variant="success" 
+                            to={`${PATHS.products.filter}?category=furniture`} cta="ver ofertas">
                             <p className="mb-1">6 cuotas sin interés</p>
                             <p className="h5 fw-bold mb-1">2X1 EN ARTICULOS</p>
                             <p className="h5 fw-bold">PARA EL HOGAR</p>

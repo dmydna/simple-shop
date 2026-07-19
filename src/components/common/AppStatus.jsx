@@ -1,3 +1,4 @@
+import NotSearchResults from "@/features/fallback/NotSearchResults";
 import useCheckServer from "@/hooks/useCheckServer";
 import useNetworkStatus from "@/hooks/useNetworkStatus";
 import { useUrlState } from "@/hooks/useUrlState";
@@ -22,6 +23,7 @@ export const AppStatus = (
       error, 
       onRetry, 
       placeholder, 
+      notSearchResults = false,
       isEmpty = false,
     }) => {
 
@@ -79,6 +81,10 @@ export const AppStatus = (
 
     if (error) 
       return <PageError error={error} handle={onRetry} />
+
+    if(notSearchResults)
+      return <NotSearchResults />
+
     // 3. No hay contenido
     if (isEmpty) 
       return <PageNotContent /> 

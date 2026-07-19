@@ -12,8 +12,8 @@ function SideBarProfile({ role, border=false }) {
                 {role === 'ADMIN' && (
                     <li className={`list-group-item ${border ? '': 'border-0'}`}>
                         <Link className="text-normalize" to={`/user/activity`}>
-                            <i className="bi bi-person-check fs-5 ps-0 p-2"></i>
-                            <span> Actividad </span>
+                            <i className="bi bi-bar-chart fs-5 ps-0 p-2"></i>
+                            <span> Overview </span>
                         </Link>
                     </li>
                 )}

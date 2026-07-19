@@ -10,9 +10,15 @@ import { useNavigate } from "react-router-dom";
 
 function MyCartLayout() {
 	
-	const { cartItems } = useCart()
+	const { cartItems, clearCart } = useCart()
 	const navigate = useNavigate();
-	const { loading, error, setError, step, success, canceled, cartStep } = usePaymentContext()
+	const { loading, error, setError, step, success, canceled, cartStep } 
+	= usePaymentContext()
+
+	const handleSucess = () => {
+		navigate('/')
+		clearCart()
+	}
 
 
 	return (<>
@@ -43,23 +49,17 @@ function MyCartLayout() {
 		)}
 		{success && (
 			<Card className="p-4 island mb-2 h-100 border align-items-center justify-content-center d-flex">
-				<PageSuccess
-					handle={() => navigate('/')}
-				/>
+				<PageSuccess handle={handleSucess} />
 			</Card>
 		)}
 		{error && (
 			<div className="p-4 island mb-2 h-100 border align-items-center justify-content-center d-flex">
-				<PageError
-					handle={() => setError(null)}
-				/>
+				<PageError  handle={() => setError(null)} />
 			</div>
 		)}
 		{canceled && (
 			<Card className="p-4 island mt-2">
-				<PageSuccess
-					handle={() => navigate('/')}
-				/>
+				<PageSuccess handle={() => navigate('/')} />
 			</Card>
 		)}
 	</>)

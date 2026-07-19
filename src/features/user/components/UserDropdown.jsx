@@ -63,9 +63,14 @@ function UserDropdown({className}) {
   
             {/* Links de navegación */}
             {isAdmin && (
+            <>  
             <Dropdown.Item as={Link} to="/dashboard">
               <i className="bi bi-gear me-2"></i> Dashboard
             </Dropdown.Item>
+            <Dropdown.Item as={Link} to="user/activity">
+              <i className="bi bi-bar-chart  me-2"></i> Overview
+            </Dropdown.Item>
+            </>
             )}
 
             <Dropdown.Item as={Link} to="user/favorites">

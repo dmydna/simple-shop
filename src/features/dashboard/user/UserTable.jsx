@@ -1,3 +1,4 @@
+import PlaceholderIcon from '@/components/common/PlaceholderIcon';
 import SortByParam from '@/components/common/SortButton';
 import { useListSync } from '@/features/dashboard/hooks/useListSync';
 import Pagination from '@/features/pagination/components/Pagination.jsx';
@@ -88,13 +89,29 @@ export const UserTable = ({  baseHook, className }) => {
                                     {item?.username && (
                                         <td>
 
-                                            <img
+                                            {/*<img
                                                 style={{ objectFit: 'contain', width: '60px', height: '60px' }} // Altura fija igual al texto
                                                 className="border border-1 rounded flex-shrink-0"
                                                 src={item?.image || placeholderURL.user(item?.id) }
-                                            />
+                                            />*/}
+                                            {item?.image ? 
+                                            <>
+                                                <img
+                                                    style={{ objectFit: 'contain', width: '40px', height: '40px' }} // Altura fija igual al texto
+                                                    className="border border-1 rounded flex-shrink-0 my-2 me-3"
+                                                    src={item?.image}
+                                                /> 
+                                                <span className='flex-grow-1 mx-3 fw-medium'>{item?.username}</span>
+                                            </>
+                                            :
+                                            <div className='d-flex align-items-center my-2'>
+                                                <PlaceholderIcon fontSize='fs-5' variant={'primary'} icon={'bi-person'} />
+                                                <span className='flex-grow-1 mx-3 fw-medium'>{item?.username}</span>
+                                            </div>
+                                            
+                                            }
 
-                                            <span className='mx-3 fw-medium'>{item?.username}</span>
+                            
                                         </td>
                                     )}
 

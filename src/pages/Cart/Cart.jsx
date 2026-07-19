@@ -10,11 +10,16 @@ import MyCartLayout from "../../features/cart/layout/MyCartLayout";
 
 function Cart() {
 
-  const { cartItems } = useCart()
+  const { cartItems, clearCart } = useCart()
   const methods  = usePayment()
+  const successHandle = () => {
+    clearCart()
+    methods?.setSuccess(null)
+  }
 
   return (
     <PaymentProvider { ...methods } >
+
       <CartLayout
         isEmpty={!methods?.success && cartItems?.length == 0}
       >

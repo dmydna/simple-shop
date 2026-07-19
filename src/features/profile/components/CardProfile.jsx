@@ -37,16 +37,15 @@ function CardProfile({ name, image, children, className, imgSize }) {
 
             <Card.Body className="rounded mt-2 ps-1 overflow-hidden me-3">
                 <Card.Title className='fs-6 mb-0'>
-                    { profile?.name || profile?.username || profile?.clientName || "N/A" }
+                    { profile?.name || profile?.username || profile?.clientName || "" }
                 </Card.Title>
                 <Card.Text className="mb-0">
                 <span style={{whiteSpace: 'nowrap'}} className="text-secondary mb-0 small">
                     {  profile?.role == 'ADMIN' ? 'admin@mail.com' : (profile?.email || '') }
                 </span>
                 </Card.Text>
-                <Card.Text className="small" >
-                <span style={{width:'50px', height:'50px' }} className="rounded-circle bg-primary"></span>
-                <span className="text-secondary fs-6 role-pill">
+                <Card.Text style={{width: '65px', fontSize: '0.75rem'}} className="text-center pill-success" >
+                <span>
                     {  profile?.role  == 'CLIENT'? 'user' : 'admin' }
                 </span>
                 </Card.Text>

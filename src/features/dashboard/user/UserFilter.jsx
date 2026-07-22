@@ -6,10 +6,11 @@ import SelectParams from "@features/filters/components/SelectParams"
 function UserFilter({close}){
 	return(
 		<FilterParams close={close} badgeParams={true}>
-			<SelectParams.SelectByEnum 
-				label="status" content={userStatus} />
+{/*			<SelectParams.SelectByEnum 
+				label="status" content={userStatus} />*/}
 			<SelectParams.SelectByEnum 
 				label="role" content={role} />
+			<SelectParams.UserStatus />
 		</FilterParams>
 		)
 }

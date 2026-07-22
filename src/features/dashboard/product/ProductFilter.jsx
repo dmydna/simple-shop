@@ -10,7 +10,8 @@ function ProductFilter({close}){
 	return(
 		<FilterParams close={close} badgeParams={true}>
 			<SelectParams.Tags  content={content}/>
-			<SelectParams.Category />
+			<SelectParams.Category />			
+			<SelectParams.ProductStatus />
 		</FilterParams>
 		)
 }

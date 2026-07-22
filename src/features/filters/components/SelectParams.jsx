@@ -150,6 +150,35 @@ export default {
 	  label: "category",
 	  textStyle: "uppercase",
 	}),
+
+	ProductStatus: ()=>SelectByStats({ 
+	  cols: 1, 
+	  type:"product-status", 
+	  label: "status",
+	  textStyle: "uppercase",
+	}),
+
+	AvailabilityStatus: ()=>SelectByStats({ 
+	  cols: 1, 
+	  type:"availability-status", 
+	  label: "availability",
+	  textStyle: "uppercase",
+	}),
+
+	UserStatus: ()=>SelectByStats({ 
+	  cols: 1, 
+	  type:"user-status", 
+	  label: "status",
+	  textStyle: "uppercase",
+	}),
+
+	ListingStatus: ()=>SelectByStats({ 
+	  cols: 1, 
+	  type:"listing-status", 
+	  label: "status",
+	  textStyle: "uppercase",
+	}),
+
 	Status, 
 	StatusUser, 
 	RangePrice,

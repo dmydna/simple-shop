@@ -7,11 +7,13 @@ function ListingFilter({close}){
 	return(
 		<FilterParams close={close} badgeParams={true}>
 			<SelectParams.Tags/>
-			<SelectParams.SelectByEnum 
-				label="status" content={status} />
-			<SelectParams.SelectByEnum 
-				label="availability" content={availabilityStock}/>
+{/*			<SelectParams.SelectByEnum 
+				label="status" content={status} />*/}
+{/*			<SelectParams.SelectByEnum 
+				label="availability" content={availabilityStock}/>*/}
 			<SelectParams.Category />
+			<SelectParams.AvailabilityStatus />
+			<SelectParams.ListingStatus />
 			<SelectParams.RangePrice />
 		</FilterParams>
 		)

@@ -30,7 +30,10 @@ export const listingService = {
    /**/     const TOKEN = localStorage.getItem("token")
         console.log("obtiene por hash", hash)
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/hash/${hash}?fallow=${fallow}`,    
-            { headers: TOKEN ? { 'Authorization': `Bearer ${TOKEN}` } : {} }
+            {   
+                credentials: 'include',
+                ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
+            }
         );
         if (!response.ok) {
             return responseError(response)
@@ -55,7 +58,10 @@ export const listingService = {
         console.log("URL Corregida:", cleanParams.toString());
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}`,    
-            { headers: TOKEN ? { 'Authorization': `Bearer ${TOKEN}` } : {} }
+            {   
+                credentials: 'include',
+                ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
+            }
         );
         if (!response.ok) {
             return responseError(response)
@@ -88,12 +94,9 @@ export const listingService = {
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
             method: 'POST',
-            headers: {
-                // SOLO agregar el TOKEN.
-                'Authorization': `Bearer ${TOKEN}`
-                // Nota: no se agrega 'Content-Type', el navegador lo hara solo.
-            },
-            body: formData
+            body: formData,
+            credentials: 'include',
+            ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
         });
 
         if (!response.ok) {
@@ -108,11 +111,8 @@ export const listingService = {
         const encodedStatus = encodeURIComponent(status);
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/status?status=${encodedStatus}`, {
             method: 'PATCH',
-            headers: {
-                // Agrega el header de autorización
-                'Authorization': `Bearer ` + TOKEN
-                // Nota: No es necesario 'Content-Type' porque no hay 'body'
-            }
+            credentials: 'include',
+            ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
         });
     
         if (!response.ok) {
@@ -130,11 +130,8 @@ export const listingService = {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/upload-image`, {
             method: 'POST',
             body: formData,
-            headers: {
-                // Agrega el header de autorización
-                'Authorization': `Bearer ${TOKEN}`
-                // Nota: No es necesario 'Content-Type' porque no hay 'body'
-            }
+            credentials: 'include',
+            ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
         });
         if (!response.ok) {
             return responseError(response)
@@ -162,12 +159,9 @@ export const listingService = {
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${data.id}`, {
             method: 'PUT',
-            headers: {
-                // SOLO agregar el TOKEN.
-                'Authorization': `Bearer ${TOKEN}`
-                // Nota: no se agrega 'Content-Type', el navegador lo hara solo.
-            },
-            body: formData
+            body: formData,
+            credentials: 'include',
+            ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
         });
 
         if (!response.ok) {
@@ -176,20 +170,14 @@ export const listingService = {
         return await response.json();
     },
 
-    updateDraft: async (id, data, selectedFile = null) => {
-
-    },
 
     // DELETE: Eliminar un producto por ID
     Delete: async (id) => {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'DELETE',
-            headers: {
-                // Agrega el header de autorización
-                'Authorization': `Bearer ${TOKEN}`
-                // Nota: No es necesario 'Content-Type' porque no hay 'body'
-            }
+            credentials: 'include',
+            ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
         });
 
         if (!response.ok) {

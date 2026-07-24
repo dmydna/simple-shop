@@ -10,9 +10,10 @@ export const gatewayService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/initiate`, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ` + TOKEN
+                ...(TOKEN && {'Authorization': `Bearer ${TOKEN}`})
             },
             body: JSON.stringify(paymentData)
         });

@@ -17,9 +17,10 @@ export const productService = {
         const TOKEN = localStorage.getItem("token");
         const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
             method: 'POST',
+            credentials: 'include',
             headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${TOKEN}`
+                ...(TOKEN && {'Authorization': `Bearer ${TOKEN}`} )
              },
             body: JSON.stringify(productData)
         });
@@ -45,9 +46,12 @@ export const productService = {
 
         console.log("-- URL con Parametros:", cleanParams.toString());
 
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}`, {
-            headers: { 'Authorization': `Bearer ${TOKEN}` },
-        });
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}`, 
+            { 
+                credentials: 'include',
+                ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` }})
+            }
+        );
 
         if (!response.ok) {
             return responseError(response)
@@ -59,9 +63,12 @@ export const productService = {
     // GET: Obtener un producto.
     getById: async (id) => {
         const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
-            headers: { 'Authorization': `Bearer ${TOKEN}` },
-        });
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, 
+            {
+                credentials: 'include',
+                ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` }})
+            }
+        );
         if (!response.ok) {
             return responseError(response)
         }
@@ -77,9 +84,10 @@ export const productService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${data.id}`, {
             method: 'PUT',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${TOKEN}`
+                ...(TOKEN && {'Authorization':`Bearer ${TOKEN}`})
             },
             body: JSON.stringify(productData)
         });
@@ -94,7 +102,8 @@ export const productService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'DELETE',
-            headers: { 'Authorization': `Bearer ${TOKEN}` }
+            credentials: 'include',
+            ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } })
         });
 
         if (!response.ok) {
@@ -109,11 +118,8 @@ export const productService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/status?status=${status}`, {
             method: 'PATCH',
-            headers: {
-                // Agrega el header de autorización
-                'Authorization': `Bearer ` + TOKEN
-                // Nota: No es necesario 'Content-Type' porque no hay 'body'
-            }
+            credentials: 'include',
+            ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } })
         });
 
         if (!response.ok) {

@@ -26,7 +26,10 @@ export const favoriteService = {
         console.log("URL Corregida:", cleanParams.toString());
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}`,
-            { headers: { 'Authorization': `Bearer ${TOKEN}`} }
+            {
+                credentials: 'include',
+                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
+            }
         );
         if (!response.ok) throw new Error("Error en la API");
         return await response.json();
@@ -36,7 +39,8 @@ export const favoriteService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${listingId}`, {
             method: 'POST',
-            headers: { 'Authorization': `Bearer ` + TOKEN },
+            credentials: 'include',
+            ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
         });
         if (!response.ok) throw new Error("Error al agregar favorito");
         return await response.json();
@@ -48,7 +52,8 @@ export const favoriteService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${listingId}/check`, {
             method: 'GET',
-            headers: { 'Authorization': `Bearer ` + TOKEN},
+            credentials: 'include',
+            ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
         });
         if (!response.ok) {
             return responseError(response)
@@ -62,7 +67,8 @@ export const favoriteService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${listingId}`, {
             method: 'DELETE',
-            headers: { 'Authorization': `Bearer ` + TOKEN},
+            credentials: 'include',
+            ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
         });
         if (!response.ok) throw new Error("Error al borrar favorito");
         return await response;

@@ -10,7 +10,10 @@ export const reviewService = {
 
         const TOKEN = localStorage.getItem("token");
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/requests/${id}`,
-            { headers: { 'Authorization': `Bearer ${TOKEN}`} }
+            {
+                credentials: 'include',
+                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } } )
+            }
         );
         if (!response.ok) {
             return responseError(response)
@@ -36,7 +39,10 @@ export const reviewService = {
         console.log("URL Corregida:", cleanParams.toString());
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/requests?${cleanParams.toString()}`,
-            { headers: { 'Authorization': `Bearer ${TOKEN}`} }
+            { 
+                credentials: 'include',
+                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } } ) 
+            }
         );
         if (!response.ok) {
             return responseError(response)
@@ -49,7 +55,8 @@ export const reviewService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/requests/${productId}`, {
             method: 'DELETE',
-            headers: { 'Authorization': `Bearer ` + TOKEN},
+            credentials: 'include',
+            ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } } )
         });
         if (!response.ok) {
             return responseError(response)
@@ -62,7 +69,8 @@ export const reviewService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${productId}`, {
             method: 'DELETE',
-            headers: { 'Authorization': `Bearer ` + TOKEN},
+            credentials: 'include',
+            ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } } )
         });
         if (!response.ok) {
             return responseError(response)
@@ -85,7 +93,11 @@ export const reviewService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
             method: 'POST',
-            headers: { 'Authorization': `Bearer ` + TOKEN, 'Content-Type': 'application/json' },
+            credentials: 'include',
+            headers: { 
+                'Content-Type': 'application/json', 
+                ...( TOKEN && {'Authorization': `Bearer ${TOKEN}`} )
+            }, 
             body: JSON.stringify(formatData) 
         });
         if (!response.ok) {
@@ -101,11 +113,11 @@ export const reviewService = {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'PUT',
             body: JSON.stringify(data), 
+            credentials: 'include',
             headers: {
                 // Agrega el header de autorización
-                'Authorization': `Bearer ` + TOKEN,
-                'Content-Type': 'application/json'
-                // Nota: No es necesario 'Content-Type' porque no hay 'body'
+                'Content-Type': 'application/json',
+                ...( TOKEN && {'Authorization': `Bearer ${TOKEN}`} )
             }
         });
     

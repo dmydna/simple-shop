@@ -10,9 +10,10 @@ export const profileService = {
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/orders`, {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + TOKEN
+                ...( TOKEN && {'Authorization': `Bearer ${TOKEN}`} )
             }
         });
         if (response.ok) {
@@ -32,9 +33,10 @@ export const profileService = {
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/my`, {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + TOKEN, // Esto es lo que llena el objeto 'Authentication' en Java
+                ...(TOKEN && {'Authorization': `Bearer ${TOKEN}`} )
             }
         });
 
@@ -54,9 +56,10 @@ export const profileService = {
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/update`, {
             method: 'PUT',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + TOKEN,
+                ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` }),
             },
             body: JSON.stringify(profileData)
         });
@@ -73,12 +76,9 @@ export const profileService = {
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/upload-image`, {
             method: 'PUT',
-            headers: {
-                // Agrega el header de autorización
-                'Authorization': 'Bearer ' + TOKEN
-                // Nota: No es necesario 'Content-Type' porque no hay 'body'
-            },
-            body: formData
+            body: formData,
+            credentials: 'include',
+            ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } })
         });
         if (!response.ok) {
             const errorText = await response.text();

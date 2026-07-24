@@ -9,11 +9,8 @@ export const heathService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/`, {
             method: 'GET',
-            headers: {
-                // Agrega el header de autorización
-                'Authorization': `Bearer ` + TOKEN
-                // Nota: No es necesario 'Content-Type' porque no hay 'body'
-            }
+            credentials: 'include', // enviar/recibir cookies
+            ...(TOKEN && { headers : {'Authorization': `Bearer ${TOKEN}`} })
         });
     
         if (!response.ok) {

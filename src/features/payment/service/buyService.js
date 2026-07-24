@@ -7,13 +7,14 @@ export const buyService = {
 
     // POST: Crear un nuevo pedido
     create: async (buyData) => {
-        console.log("BUY DATA: ",buyData)
+        console.log("[BUY SERVICES]: ",buyData)
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ` + TOKEN
+                ...(TOKEN && {'Authorization': `Bearer ${TOKEN}`})
             },
             body: JSON.stringify(buyData)
         });

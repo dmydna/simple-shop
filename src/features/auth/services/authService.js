@@ -11,6 +11,7 @@ export const authService = {
     login: async (credentials) => {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/login`, {
             method: 'POST',
+            credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(credentials)
         });
@@ -24,9 +25,9 @@ export const authService = {
 
         if (data) {
             // Guardamos para futuras peticiones
-            localStorage.setItem("token", data.accessToken);
-            localStorage.setItem("user", data.username);
-            localStorage.setItem("role", data.role);
+            localStorage.setItem("token", data?.accessToken);
+            localStorage.setItem("user", data?.username);
+            localStorage.setItem("role", data?.role);
         }
 
         return data;
@@ -65,9 +66,10 @@ export const authService = {
         const TOKEN = localStorage.getItem("token");
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/change-password`, {
             method: 'POST',
+            credentials: 'include',
             headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${TOKEN}`
+                ...(TOKEN && {'Authorization': `Bearer ${TOKEN}`})
             },
             body: JSON.stringify(data)
         });

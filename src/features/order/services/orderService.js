@@ -8,9 +8,12 @@ export const orderService = {
     // GET ALL: Obtener todos los pedidos
     getAll: async () => {
         const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
-            headers: { 'Authorization': `Bearer ${TOKEN}` }
-        });
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}`, 
+           { 
+                credentials: 'include',
+                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
+            }
+        );
         if (!response.ok) {
             return responseError(response)
         }
@@ -20,9 +23,12 @@ export const orderService = {
     // GET: Obtener un pedido por ID
     getById: async (id) => {
         const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
-            headers: { 'Authorization': `Bearer ${TOKEN}` }
-        });
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, 
+            { 
+                credentials: 'include',
+                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
+            }
+        );
         if (!response.ok) {
             return responseError(response)
         }
@@ -37,9 +43,10 @@ export const orderService = {
         const client = (clientId ? `?clientId=${clientId}` : '')
         const response = await fetch(`${BASE_URL}/${ENDPOINT}` + client, {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${TOKEN}`
+                    ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}`} )
                 },
                 body: JSON.stringify(orderData)
         });
@@ -54,9 +61,10 @@ export const orderService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/bulk`, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${TOKEN}`
+                ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}`} )
             },
             body: JSON.stringify(orderDataList)
         });
@@ -71,9 +79,10 @@ export const orderService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'PUT',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${TOKEN}`
+                ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}`} )
             },
             body: JSON.stringify(orderData)
         });
@@ -88,7 +97,8 @@ export const orderService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/api/products/${id}`, {
             method: 'DELETE',
-            headers: { 'Authorization': `Bearer ${TOKEN}` }
+            credentials: 'include',
+            ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
         });
 
         if (!response.ok) {
@@ -124,9 +134,12 @@ export const orderService = {
         // 2. Agregamos los filtros dinámicamente
         mapToURLSearchParams(cleanParams, filters);
 
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}`, { 
-            headers: { 'Authorization': `Bearer ${TOKEN}`} 
-        });
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}`, 
+            { 
+                credentials: 'include',
+                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
+            }
+        );
 
         if (!response.ok) {
             return responseError(response)

@@ -1,3 +1,4 @@
+import RemovableListItem from "@/components/common/RemovableListItem";
 import { useReview } from "@/features/review/hooks/useReview";
 import DataView from "@common/DataView";
 import Pagination from '@features/pagination/components/Pagination.jsx';
@@ -5,20 +6,19 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProfileHeader } from "./ProfileHeader";
 
+
 function MyReviews({ children }) {
 
-    const { loading, error, setError, content, currentPage, setCurrentPage, 
-    totalPages, setFilters, refreshData, deleteReview } = useReview()
-
-    const navigate = useNavigate()
+    const { loading, error, content, currentPage, setCurrentPage, 
+    totalPages,  refreshData, deleteReview } = useReview()
 
     useEffect(() => {
         // Lógica de paginación
         setCurrentPage(0)
     }, [])
 
-    const handleDelete = () => {
-        deleteReview()
+    const handleDelete = async(id) => {
+        await deleteReview(id)
         refreshData()
     }
 
@@ -35,42 +35,18 @@ function MyReviews({ children }) {
         <>
             <ProfileHeader
                 title="Mis reseñas"
-                subtitle="Puedes ver tu reseñas pedientes"
+                subtitle="Administrar lista de reseñas pedientes"
             />
             {content?.length !== 0 && content.map((item, index) =>
-                <div className="mb-4">
-                        <div className={`d-flex mb-2 ${index !== content.length - 1 ? 'border-bottom' : ''}`}>
-                            <img
-                                className="rounded"
-                                width={55}
-                                height={55}
-                                src={item.thumbnail}
-                            />
-                            <div className="w-100 m-2 my-2 mx-3">
-
-                                <span onClick={()=> navigate(`/p/${item?.hash}`)} 
-                                    className="d-block fw-bold small mb-2 pointer"> 
-                                    {item.title} 
-                                </span>
-                                <div className="d-flex justify-content-between">
-                                  <span className='small btn btn-sm btn-light '>
-                                     <i className='bi-calendar me-2'></i> Dec 22, 2020
-                                  </span> 
-                                  <div className='d-flex gap-3'>
-                                  <span 
-                                   onClick={()=> navigate(`/user/write-review?id=${item?.id}`)}
-                                   className='small btn btn-sm  btn-light border'>
-                                      evaluar producto
-                                  </span>
-                                  <span onClick={handleDelete} className='small btn btn-sm   btn-light border'>
-                                     cancelar
-                                  </span>
-                                  </div>
-                                </div>
-                            </div>
-
-                        </div>
-                </div> )}
+                <RemovableListItem
+                    key={index} 
+                    {...item}
+                    description={`Evaluar compra #${item?.id}`}
+                    className={"mb-1 rounded"}
+                    toUrl={`/user/write-review?id=${item?.id}`}
+                    remove={() => handleDelete(item?.id)}
+                />
+            )}
             <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}

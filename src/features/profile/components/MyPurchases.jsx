@@ -1,21 +1,58 @@
 import { formatDate } from "@utils/mappers";
-import { useOrder } from "@/features/order/hooks/useOrder";
 import DataView from "@common/DataView";
 import Pagination from '@features/pagination/components/Pagination.jsx';
-import { placeholder } from "@utils/image.js";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { ProfileHeader } from "./ProfileHeader";
+import RemovableListItem from "@/components/common/RemovableListItem";
+import { usePurchases } from "../hooks/usePurchases";
+import { useUrlParams } from "@/hooks/useUrlParams";
 
-function MyPurchases({ children }) {
+function MyPurchases() {
 
+    // TODO: refactorizar para mostrar detalles (items de cada orden) en otra vista separada.
 
-    const { loading, error, setError ,content, currentPage, setCurrentPage, totalPages, 
-    setFilters, refreshData } = useOrder()
+    const { loading, error, content, currentPage, setCurrentPage, 
+        totalPages, refreshData } = usePurchases()
+
+    // Lógica de paginación
+
+    const { pageParam } = useUrlParams()
 
     useEffect(() => {
-        // Lógica de paginación
-        setCurrentPage(0)
-    }, [])
+        setCurrentPage(pageParam || 0)
+    }, [pageParam])
+
+
+    const buildDescription = (item) => {
+        return `
+            ${buildTime(item?.createdAt)} -- 
+            OrderId #${item?.orderId} -- 
+            ${item?.status} -- 
+            $${item?.priceAtPurchase / item?.quantity} x ${item?.quantity} units 
+        `
+    }
+
+    const buildTime = ([year, month, day, hour, min]) => {
+        return `${hour%12}:${min < 10 ? "0" + min : min} ${hour < 12 ? 'am' : 'pm'}`
+    }
+
+
+    // Separar items por fecha
+    const dateChunck = useMemo(() => {
+        const res = {};
+        if (content && content?.length !== 0) {
+            content.forEach(order => {
+                if (!res[formatDate(order?.createdAt, false)]) {
+                    res[formatDate(order?.createdAt, false)] = [order]
+                } else {
+                    res[formatDate(order?.createdAt, false)].push(order)
+                }
+
+            })            
+        }
+        return res;
+    }, [content])
+
 
     return (
         <DataView
@@ -26,46 +63,35 @@ function MyPurchases({ children }) {
             error={error}
             onRetry={refreshData}
         >
-        <>
-            <ProfileHeader
-                title="Mis compras"
-                subtitle="Puedes ver las ultimas compras realizadas"
-            />
+            <>
+                <ProfileHeader
+                    title="Mis compras"
+                    subtitle="Puedes ver las ultimas compras realizadas"
+                />
         
-            {content?.length !== 0 && content.map(order =>
-                <div className="mb-5">
-                    <span className="text-secondary border-bottom d-block w-100 pb-2 my-3">
-                        <i className="bi-calendar me-2"></i>{formatDate(order?.meta.createdAt, true)}
-                    </span>
-                    {order?.items?.map(p =>
-                        <div className="d-flex mb-3">
-                            <img
-                                className="rounded"
-                                width={55}
-                                height={55}
-                                src={
-                                    placeholder({ dimension: "55x55", background: ".menta", fontSize: "30", icon: "f244" })
-                                }
+                {Object.entries(dateChunck)?.map(([date, orders]) =>
+                    <div className="mb-5">
+                        <span className="text-secondary border-bottom d-block w-100 pb-2 my-3">
+                            <i className="bi-calendar me-2"></i>{date}
+                        </span>
+                        {orders.map((item, index) =>
+                            <RemovableListItem
+                                key={index} 
+                                {...item}
+                                title={item.name}
+                                description={buildDescription(item)}
+                                className={"mb-1 rounded"}
                             />
-                            <div className="w-100 m-2 my-1 mx-3 ">
-
-                                <span className="d-block fw-bold small mb-2"> {p.name} </span>
-                                <div className="d-flex justify-content-between">
-                                    <span className="small disabled"> <b>cantidad :</b> {p.quantity} </span>
-                                    <span className="small disabled"> <b>precio :</b> ${p.priceAtPurchase}</span>
-                                </div>
-                            </div>
-
-                        </div>)}
-                </div> )}
-           {/*TODO: actualizar paginacion por params*/}           
-            <Pagination
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                totalPages={totalPages}
-            />
-        </>
-    </DataView>    
+                        )}
+                    </div>)}
+                {/*TODO: actualizar paginacion por params*/}           
+                <Pagination
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    totalPages={totalPages}
+                />
+            </>
+        </DataView>    
     )
 };
 

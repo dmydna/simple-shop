@@ -1,3 +1,5 @@
+import { mapToURLSearchParams } from "@/utils/mappers";
+import { responseError } from "@/utils/service";
 import { BASE_URL , ENDPOINTS } from "@utils/config.js";
 
 const ENDPOINT = ENDPOINTS.PROFILE;
@@ -87,6 +89,31 @@ export const profileService = {
         return await response.text();
     },
 
+
+    getMyPurchases: async ({ page = 0 , size = 8, ...filters } = {}) => {
+
+        const TOKEN = localStorage.getItem("token")
+        // 1. Creamos un objeto plano para los parámetros
+        const cleanParams = new URLSearchParams();
+
+        cleanParams.append('page', page < 0 ? 0 : page);
+        cleanParams.append('size', size);
+
+        // 2. Agregamos los filtros dinámicamente
+        mapToURLSearchParams(cleanParams, filters);
+
+        const response = await fetch(`${BASE_URL}/api/buy/history?${cleanParams.toString()}`, 
+            { 
+                credentials: 'include',
+                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
+            }
+        );
+
+        if (!response.ok) {
+            return responseError(response)
+        }
+        return await response.json();
+    }
 
 
 }

@@ -27,8 +27,9 @@ function MyPurchases() {
         return `
             ${buildTime(item?.createdAt)} -- 
             OrderId #${item?.orderId} -- 
-            ${item?.status} -- 
-            $${item?.priceAtPurchase / item?.quantity} x ${item?.quantity} units 
+            ${item?.quantity} x $${(item?.priceAtPurchase / item?.quantity).toFixed(2)}
+            (${item?.discountPercentageAtPurchase && 
+            `${item?.discountPercentageAtPurchase}%OFF`})
         `
     }
 
@@ -70,7 +71,7 @@ function MyPurchases() {
                 />
         
                 {Object.entries(dateChunck)?.map(([date, orders]) =>
-                    <div className="mb-5">
+                    <div className="mb-2">
                         <span className="text-secondary border-bottom d-block w-100 pb-2 my-3">
                             <i className="bi-calendar me-2"></i>{date}
                         </span>
@@ -78,13 +79,14 @@ function MyPurchases() {
                             <RemovableListItem
                                 key={index} 
                                 {...item}
+                                toUrl={`/order/${item?.orderId}`}
                                 title={item.name}
                                 description={buildDescription(item)}
                                 className={"mb-1 rounded"}
                             />
                         )}
                     </div>)}
-                {/*TODO: actualizar paginacion por params*/}           
+         
                 <Pagination
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}

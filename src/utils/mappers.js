@@ -48,7 +48,8 @@ export const toCreateOrder = (cartItems) => {
                 "listingId": item?.id,
                 "name": item?.productName,
                 "quantity": item?.cantidad,
-                "priceAtPurchase": `${item?.finalPrice}`
+                "priceAtPurchase": `${item?.finalPrice}`,
+                "discountPercentageAtPurchase": item?.discountPercentage
             }
         }),
         "totalAmount": `${totalAmount}`,

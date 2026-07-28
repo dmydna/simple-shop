@@ -7,10 +7,11 @@ import { useEffect, useState } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ProfileHeader } from "./ProfileHeader";
+import { IconTint } from "@/features/product/components/FloatButton";
 
 
 
-function WriteReview() {
+function WriteReview({className, close}) {
 
     const [rating, setRating] = useState(2);
     const [searchParams] = useSearchParams();
@@ -52,13 +53,22 @@ function WriteReview() {
         <FetchState.Modal
             hook={{loading, error, setError, success, setSuccess}}
         >
-                <>
-                    <ProfileHeader
-                        className='m-0'
-                        title="Califica tu producto"
-                    />
+                <div className={className + " m-2"} >
 
-
+                    <div className="position-relative">
+                        <ProfileHeader
+                            className='m-0'
+                            title="Califica tu producto"
+                        />
+                        {close && (
+                            <IconTint 
+                                style={{marginTop: '-10px'}}
+                                className={'position-absolute top-0 right-0 rounded-circle'} 
+                                action={close}  
+                                icon={'x-lg'} 
+                            />
+                        )}
+                    </div>
                     <Form id='reviewForm' style={{ minHeight: '190px' }} onSubmit={handleSubmit}>
 
 
@@ -113,7 +123,7 @@ function WriteReview() {
                             Enviar
                         </Button>
                     </div>
-                </>
+                </div>
         </FetchState.Modal>
     )
 }

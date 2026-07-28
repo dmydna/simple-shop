@@ -52,6 +52,7 @@ import ListingList from "@features/dashboard/listing/ListingList";
 import PaymentForm from "@features/payment/components/PaymentForm.jsx";
 
 import CatalogeLayout from "@components/layout/CatalogeLayout";
+import OrderDetails from "./pages/OrderDetails";
 
 // DONE: update listing
 
@@ -99,6 +100,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/inicio" element={<Home />} />
+            <Route path="/order/:hash"  element={<OrderDetails />} />
             <Route path="/contacto" element={<Contact />} />
             <Route path="/register/complete" element={
               <ProfileProvider>
@@ -155,9 +157,9 @@ function App() {
               } />
 
               <Route path="listing-list" element={
-                  <Dashboard.ListingLayout>
-                    <Dashboard.ListingList />
-                  </Dashboard.ListingLayout>
+                <Dashboard.ListingLayout>
+                  <Dashboard.ListingList />
+                </Dashboard.ListingLayout>
 
               } />
 

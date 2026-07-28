@@ -99,7 +99,6 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/inicio" element={<Home />} />
-
             <Route path="/contacto" element={<Contact />} />
             <Route path="/register/complete" element={
               <ProfileProvider>
@@ -135,10 +134,7 @@ function App() {
               <Route path="photo" element={<MyPhotoProfile />} />
               <Route path="activity" element={<MyActivity />} />
               <Route path="purchases" element={<MyPurchases />} />
-              <Route path="reviews" element={<MyReviews />} />
               <Route path="dashboard" element={<MyDashboard />} />
-              <Route path="write-review" element={<WriteReview />} />
-
 
             </Route>
             <Route path="/dashboard">

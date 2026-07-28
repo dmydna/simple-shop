@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { ProfileHeader } from "./ProfileHeader";
 
 
+
+//@deprecated
 function MyReviews({ children }) {
 
     const { loading, error, content, currentPage, setCurrentPage, 

@@ -50,16 +50,7 @@ function SideBarProfile({ role, border=false }) {
                             </div>
                         </Link>
                     </li>
-                
-                    <li className={`list-group-item ${border ? '': 'border-0'}`}>
-                        <Link className="text-normalize" to={`/user/reviews`}>
-                            <div className="item">
-                                <i className="bi bi-star fs-5 ps-0 p-2"></i>
-                                <span> reseñas </span>
-                            </div>
-                        </Link>
-                    </li>
-               
+                               
                     <li className={`list-group-item ${border ? '': 'border-0'}`}>
                         <Link className="text-normalize" to={`/user/favorites`}>
                             <div className="item">

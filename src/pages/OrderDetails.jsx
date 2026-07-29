@@ -6,10 +6,10 @@ import { useOrder } from "@/features/order/hooks/useOrder";
 import { OrderDetailProvider } from "@/features/order/contexts/OrderDetailContext";
 import { useUrlParams } from "@/hooks/useUrlParams";
 import { useEffect, useState } from "react";
-import CartNavButton from "@/features/cart/components/CartNavButton";
 import WriteReview from "@/features/profile/components/WriteReview";
 import { useUrlState } from "@/hooks/useUrlState";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { IconTint } from "@/features/product/components/FloatButton";
 
 
 export default function OrderDetails() {
@@ -17,11 +17,11 @@ export default function OrderDetails() {
   const { hash } = useParams()
   const { setOrderHash, currentOrder, refreshElem, setCurrentOrder} = useOrder()
   const { idParam, pageVersion } = useUrlParams()
-  const [showReview, setShowReview] = useState(false)
-  const {searchParams, setSearchParams} = useUrlState()
+  const [ showReview, setShowReview ] = useState(false)
+  const { searchParams, setSearchParams } = useUrlState()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    console.trace("Trace log:" ,hash)
     if (hash){setOrderHash(hash);}
     if (pageVersion){refreshElem()}
   }, [hash, pageVersion])
@@ -34,11 +34,13 @@ export default function OrderDetails() {
   return (
 
     <OrderDetailProvider 
-        setOrderHash={setOrderHash}
-        setShowReview={setShowReview} 
-        showReview={showReview}
-        currentOrder={currentOrder} 
-        setCurrentOrder={setCurrentOrder}
+        {...{
+          showReview,
+          setOrderHash, 
+          setShowReview, 
+          currentOrder, 
+          setCurrentOrder
+        }}
     >
 
       <Container fluid="xl" className="mt-4">
@@ -51,9 +53,16 @@ export default function OrderDetails() {
               
 
             <MyOrderList className="p-4 island">
-              <p className="h5 fw-bold pt-3">
-                My order
-              </p>
+              <div className="d-flex gap-2 align-items-center">
+                < IconTint
+                  className={'rounded-circle'}
+                  action={()=>navigate('/user/purchases')}
+                  icon={'chevron-left'}
+                />
+                <p className="h5 fw-bold pt-2">
+                  My order
+                </p>
+            </div>
             </MyOrderList>
 
 
@@ -68,7 +77,7 @@ export default function OrderDetails() {
               <MyOrderDetail />
             )}
             {idParam && (
-              <WriteReview 
+              <WriteReview
                 close={closeReview} 
                 className={'p-4 island border'}
               />

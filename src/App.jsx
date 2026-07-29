@@ -59,8 +59,8 @@ import OrderDetails from "./pages/OrderDetails";
 function App() {
 
 
-  const navItems = ["Inicio", "Products", "Contacto"];
-  const [seccion, setSeccion] = useState("Inicio");
+  const navItems = ["Home", "Products", "Contact"];
+  const [seccion, setSeccion] = useState("Home");
 
   const navFix = 'pt-5';
 
@@ -69,7 +69,7 @@ function App() {
   useEffect(() => {
     if (
       location.pathname.startsWith('/login') ||
-      location.pathname.startsWith('/contacto') ||
+      location.pathname.startsWith('/contact') ||
       location.pathname.startsWith('/auth') ||
       location.pathname.startsWith('/register') ||
       location.pathname.startsWith('/register/complete') ||
@@ -101,7 +101,7 @@ function App() {
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/inicio" element={<Home />} />
             <Route path="/order/:hash"  element={<OrderDetails />} />
-            <Route path="/contacto" element={<Contact />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/register/complete" element={
               <ProfileProvider>
                 <CompleteRegister />

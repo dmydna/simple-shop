@@ -48,7 +48,7 @@ export const FeedbackMessage = ({
                     {/* Botón condicional (solo aparece si hay una acción) */}
                     {onAction && (
                         <button
-                            className="btn btn-sm btn-dark px-4 py-2 border-secondary-subtle fw-medium shadow-sm"
+                            className="btn btn-sm btn-light px-4 py-2 border-secondary-subtle fw-medium shadow-sm"
                             style={{ fontSize: '0.55rem', letterSpacing: '0.05rem', borderRadius: '20px' }}
                             onClick={onAction}
                         >

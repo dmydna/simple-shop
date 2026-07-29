@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 
-function SideBarProfile({ role, border=false }) {
+function SideBarProfile({ role, border = false }) {
 
 
     return (
@@ -10,7 +10,7 @@ function SideBarProfile({ role, border=false }) {
  
 
                 {role === 'ADMIN' && (
-                    <li className={`list-group-item ${border ? '': 'border-0'}`}>
+                    <li className={`list-group-item ${border ? '' : 'border-0'}`}>
                         <Link className="text-normalize" to={`/user/activity`}>
                             <i className="bi bi-bar-chart fs-5 ps-0 p-2"></i>
                             <span> Overview </span>
@@ -19,7 +19,7 @@ function SideBarProfile({ role, border=false }) {
                 )}
 
                 {role === 'ADMIN' && (
-                    <li className={`list-group-item ${border ? '': 'border-bottom'}`}>
+                    <li className={`list-group-item ${border ? '' : 'border-bottom'}`}>
                         <Link className="text-normalize" to={`/user/dashboard`}>
                             <i className="bi bi-sliders fs-5 ps-0 p-2"></i>
                             <span> Dashboard </span>
@@ -27,38 +27,38 @@ function SideBarProfile({ role, border=false }) {
                     </li>
                 )}
 
-                    <li className={`list-group-item ${border ? '': 'border-0'}`}>
-                        <Link className="text-normalize" to={`/user/profile`}>
-                            <i className="bi bi-person-check fs-5 ps-0 p-2"></i>
-                            <span> Profile </span>
-                        </Link>
-                    </li>
+                <li className={`list-group-item ${border ? '' : 'border-0'}`}>
+                    <Link className="text-normalize" to={`/user/profile`}>
+                        <i className="bi bi-person-check fs-5 ps-0 p-2"></i>
+                        <span> Profile </span>
+                    </Link>
+                </li>
 
 
-                <li className={`list-group-item ${border ? '': 'border-0'}`}>
+                <li className={`list-group-item ${border ? '' : 'border-0'}`}>
                     <Link className="text-normalize" to={`/user/account`}>
                         <i className="bi bi-person fs-5 ps-0 p-2"></i>
                         <span> Cuenta </span>
                     </Link>
                 </li>
 
-                    <li className={`list-group-item ${border ? '': 'border-0'}`}>
-                        <Link className="text-normalize" to={`/user/purchases`}>
-                            <div className="item">
-                                <i className="bi bi-handbag fs-5 ps-0 p-2"></i>
-                                <span> compras</span>
-                            </div>
-                        </Link>
-                    </li>
+                <li className={`list-group-item ${border ? '' : 'border-0'}`}>
+                    <Link className="text-normalize" to={`/user/purchases`}>
+                        <div className="item">
+                            <i className="bi bi-handbag fs-5 ps-0 p-2"></i>
+                            <span> Compras</span>
+                        </div>
+                    </Link>
+                </li>
                                
-                    <li className={`list-group-item ${border ? '': 'border-0'}`}>
-                        <Link className="text-normalize" to={`/user/favorites`}>
-                            <div className="item">
-                                <i className="bi bi-heart fs-5 ps-0 p-2"></i>
-                                <span> favoritos </span>
-                            </div>
-                        </Link>
-                    </li>
+                <li className={`list-group-item ${border ? '' : 'border-0'}`}>
+                    <Link className="text-normalize" to={`/user/favorites`}>
+                        <div className="item">
+                            <i className="bi bi-heart fs-5 ps-0 p-2"></i>
+                            <span> Favoritos </span>
+                        </div>
+                    </Link>
+                </li>
                
 
             </ul>

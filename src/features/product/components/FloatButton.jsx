@@ -59,7 +59,7 @@ export function ToggleIcon({action, children, icon, status, className}){
 /**
  * Muestra el ícono con effecto sombreado al hacer hover.
  */
-export function IconTint({ action, children, icon, className }) {
+export function IconTint({ action, children, icon, className, style }) {
   const [isHovered, setIsHovered] = useState(false);
   const iconClass = `bi-${icon}`
   return (
@@ -74,7 +74,8 @@ export function IconTint({ action, children, icon, className }) {
         cursor: 'pointer',
         display: 'inline-flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        ...style
       }}
       className={`btn ${className || ''}`}
     >
@@ -108,7 +109,7 @@ export function IconTint({ action, children, icon, className }) {
 /**
  * Muestra un elemento hijo con effecto sombreado tinta al hacer hover.
  */
-export function Tintify({ action, children, className }) {
+export function Tintify({ action, children, className, style }) {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <span
@@ -122,7 +123,8 @@ export function Tintify({ action, children, className }) {
         cursor: 'pointer',
         display: 'inline-flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        ...style
       }}
       className={`btn ${className || ''}`}
     >

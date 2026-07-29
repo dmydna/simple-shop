@@ -12,7 +12,7 @@ import { useState } from "react";
 // TODO: renombrar a nav y eliminar legacies similares.
 function Navbar({ onSeleccion, items }) {
 
-  const scrollY = useScrollY()
+  const isScrollY = useScrollY()
   const [showMenu, setShowMenu] = useState()
 
 
@@ -26,7 +26,7 @@ function Navbar({ onSeleccion, items }) {
         bg="light" 
         expand="md"       
         className={`Navbar fixed-top transition bg-body-tertiary p-0
-      ${scrollY >= 100 ? 'py-0 shadow-sm' : 'py-3'}`} 
+      ${ isScrollY ? 'py-0 shadow-sm' : 'py-3'}`} 
       >
         <Container fluid="xl" className="small align-items-center"> 
           <MobileMenu>

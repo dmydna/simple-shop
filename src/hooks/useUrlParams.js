@@ -36,6 +36,7 @@ export const useUrlParams = () => {
     const roleParam = searchParams.get('role');
     const skuParam = searchParams.get('sku');
     const sortParam = searchParams.get('sort');
+    const pageVersion = searchParams.get('pageVersion');
 
 
     const create_banMode = searchParams.get('dialog') == "ban.create";
@@ -50,6 +51,7 @@ export const useUrlParams = () => {
        draftMode, edit_draftMode,create_draftMode,itemId, 
        availabilityParam, tableVersion, tagsParam, hashParam, pageParam,
        idParam, searchParam, categoryParam, statusParam, roleParam, skuParam,
-       sortParam, filterParam, allParams, create_banMode, update_banMode
+       sortParam, filterParam, allParams, create_banMode, update_banMode,
+       pageVersion
     }
 }

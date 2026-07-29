@@ -51,6 +51,7 @@ function WriteReview({className, close}) {
 
     return (
         <FetchState.Modal
+            version={true}
             hook={{loading, error, setError, success, setSuccess}}
         >
                 <div className={className + " m-2"} >

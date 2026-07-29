@@ -12,13 +12,11 @@ import { useUrlParams } from "@/hooks/useUrlParams";
 
 export const MyOrderList = ({ children, className }) => {
 
-    const { currentOrder, setShowReview } = useOrderDetailContext()
+    const { currentOrder, setShowReview, setCurrentOrder } = useOrderDetailContext()
     const {searchParams, setSearchParams } = useUrlState()
-
     const [visibleItems, setVisibleItems] = useState([])
     const [selectedId, setSelectedId] = useState()
-
-    const {idParam} = useUrlParams()
+    const {idParam, pageVersion} = useUrlParams()
     
 
     useEffect(()=>{
@@ -34,6 +32,9 @@ export const MyOrderList = ({ children, className }) => {
       setSelectedId(null)
       setVisibleItems(currentOrder?.items || [])
     } 
+    if(pageVersion){
+        setSearchParams(prev => ({...prev, id: null}))
+    }
   }, [idParam, selectedId, currentOrder])
 
 

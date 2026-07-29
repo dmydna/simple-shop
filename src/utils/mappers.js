@@ -52,7 +52,7 @@ export const toCreateOrder = (cartItems) => {
                 "discountPercentageAtPurchase": item?.discountPercentage
             }
         }),
-        "totalAmount": `${totalAmount}`,
+        "totalAmount": `${totalAmount.toFixed(2)}`,
         "totalQuantity": totalQuantity,
     }
 

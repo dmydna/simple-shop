@@ -3,7 +3,7 @@ import { useUrlState } from "@/hooks/useUrlState"
 
 export default function ReviewButton({reviewId}){
 	
-	const {setSearchParams} = useUrlState()
+	const { setSearchParams } = useUrlState()
 	
 	const handle = () =>{
 		setSearchParams(prev => ({...prev, id:reviewId }))

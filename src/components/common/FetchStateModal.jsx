@@ -1,3 +1,5 @@
+import { useUrlParams } from "@/hooks/useUrlParams";
+import { useUrlState } from "@/hooks/useUrlState";
 import PageError from "@features/fallback/PageError";
 import PageLoading from "@features/fallback/PageLoading";
 import PageSuccess from "@features/fallback/PageSuccess";
@@ -7,8 +9,10 @@ import { useNavigate } from "react-router-dom";
 
 
 
-export default function FetchStateModal({ children, hook }) {
+export default function FetchStateModal({ children, hook, version = false }) {
+
     const { loading, error, setError, success, setSuccess } = hook;
+    const { setSearchParams } = useUrlState()
 
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
@@ -23,8 +27,14 @@ export default function FetchStateModal({ children, hook }) {
         if (success == true || error){
             setShow(true)
         }
+
     }, [error, success]);
 
+
+    const versionHandle = () => {
+        if(version)
+        setSearchParams(prev => ({...prev, pageVersion: Date.now()}))
+    }
 
 
     return (
@@ -51,6 +61,7 @@ export default function FetchStateModal({ children, hook }) {
                             <PageSuccess handle={() => {
                                 setShow(false)
                                 setSuccess(null) 
+                                versionHandle()
                             }} />}
                     </>
                 </Modal.Body>

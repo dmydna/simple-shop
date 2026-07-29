@@ -15,15 +15,16 @@ import { useParams } from "react-router-dom";
 export default function OrderDetails() {
 
   const { hash } = useParams()
-  const { setOrderHash, currentOrder } = useOrder()
-  const { idParam } = useUrlParams()
+  const { setOrderHash, currentOrder, refreshElem, setCurrentOrder} = useOrder()
+  const { idParam, pageVersion } = useUrlParams()
   const [showReview, setShowReview] = useState(false)
   const {searchParams, setSearchParams} = useUrlState()
 
   useEffect(() => {
     console.trace("Trace log:" ,hash)
     if (hash){setOrderHash(hash);}
-  }, [hash])
+    if (pageVersion){refreshElem()}
+  }, [hash, pageVersion])
 
 
   const closeReview = () => {
@@ -33,9 +34,11 @@ export default function OrderDetails() {
   return (
 
     <OrderDetailProvider 
+        setOrderHash={setOrderHash}
         setShowReview={setShowReview} 
         showReview={showReview}
         currentOrder={currentOrder} 
+        setCurrentOrder={setCurrentOrder}
     >
 
       <Container fluid="xl" className="mt-4">

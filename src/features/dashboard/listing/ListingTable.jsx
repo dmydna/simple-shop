@@ -64,7 +64,9 @@ export const ListingTable = ({ baseHook, className, }) => {
                                 <th style={{ width: '150px' }} className='text-secondary'>
                                     <SortByParam>Price</SortByParam>
                                 </th>
-                                <th style={{ width: '150px' }} className='text-secondary'>Availability</th>
+                                <th style={{ width: '150px' }} className='text-secondary'>
+                                    <SortByParam name='availabilityStatus'>Availability</SortByParam>
+                                </th>
                                 <th style={{ width: '150px' }} className='d-block d-table-cell d-md-none text-secondary'></th>
                             </tr>
                         </thead>

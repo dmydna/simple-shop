@@ -82,9 +82,9 @@ export function useAuth() {
     setLogged(false)
     try {
       const data = await authService.login(userData);
-      setToken(data.accessToken)
-      setRole(data.role)
-      setUser(data.username || '')
+      setToken(data?.accessToken || null)
+      setRole(data?.role || null)
+      setUser(data?.username || '')
       setLogged(true);
     } catch (err) {
       console.error("Error de carga de API", err);

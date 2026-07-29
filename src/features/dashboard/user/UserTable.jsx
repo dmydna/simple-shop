@@ -98,7 +98,7 @@ export const UserTable = ({  baseHook, className }) => {
                                             <>
                                                 <img
                                                     style={{ objectFit: 'contain', width: '40px', height: '40px' }} // Altura fija igual al texto
-                                                    className="border border-1 rounded flex-shrink-0 my-2 me-3"
+                                                    className="border border-1 rounded flex-shrink-0 my-2"
                                                     src={item?.image}
                                                 /> 
                                                 <span className='flex-grow-1 mx-3 fw-medium'>{item?.username}</span>

@@ -1,6 +1,7 @@
 import nprogress from "nprogress";
 import { useEffect, useMemo, useState } from "react";
 import { authService } from "../services/authService.js";
+import { userService } from "@/features/user/service/userService.js";
 
 
 export function useAuth() {
@@ -16,9 +17,16 @@ export function useAuth() {
 
 
 
+  useEffect(() => {
+    userService.getMe()
+      .then(response => setUser(response.username))
+      .catch(() => setUser(null)) // Si responde 401, no está autenticado
+      .finally(() => setLoading(false));
+  }, []);
+
   const isAuth = useMemo(() => {
-    return token && user ? true : false
-  }, [token, user])
+    return user ? true : false
+  }, [user])
 
   const isAdmin = useMemo(() => {
     return role == 'ADMIN' && isAuth ? true : false
@@ -39,7 +47,7 @@ export function useAuth() {
     const savedUser = localStorage.getItem("user");
     const savedRole = localStorage.getItem("role");
 
-    if (savedToken && savedUser && savedRole) {
+    if (savedUser && savedRole) {
       setToken(savedToken);
       setUser(savedUser);
       setRole(savedRole);
@@ -81,7 +89,8 @@ export function useAuth() {
     setError(null)
     setLogged(false)
     try {
-      const data = await authService.login(userData);
+      await authService.login(userData);
+      const data = await userService.getMe();
       setToken(data?.accessToken || null)
       setRole(data?.role || null)
       setUser(data?.username || '')

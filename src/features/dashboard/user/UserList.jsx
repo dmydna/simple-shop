@@ -8,7 +8,7 @@ import { UserTable } from "./UserTable";
 
 
 
-export const UserList = ({}) => {
+export const UserList = () => {
 
     const navigate = useNavigate()
     const baseHook = useUser()

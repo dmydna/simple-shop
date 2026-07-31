@@ -52,10 +52,40 @@ export async function responseError(response) {
 }
 
 
+export const responseOK = async (response) => {
+    // 1. Manejar respuestas exitosas sin cuerpo (204 No Content, 205 Reset Content)
+    if (response.status === 204 || response.status === 205) {
+        return { success: true, data: null };
+    }
 
-export const responseFetch = async (response) => {
+    const contentType = response.headers.get("content-type") || "";
+
+    let data = null;
+
+    try {
+        // 2. Parsear el cuerpo según el Content-Type reportado por el servidor
+        if (contentType.includes("application/json")) {
+            data = await response.json();
+        } else if (contentType.includes("text/")) {
+            data = await response.text();
+        } else {
+            // Si es un binario (blob/file) u otro tipo de dato no especificado
+            data = await response.blob();
+        }
+    } catch (parseError) {
+        // Fallback: si falla el parseo (ej: decía ser JSON pero venía vacío o corrupto)
+        data = null;
+    }
+
+    return { success: true, data: data };
+};
+
+
+export const responseHandler = async (response, onSuccess=null, onFail=null) => {
     if (!response.ok) {
+        if(typeof onFail === 'function'){ onSuccess() } 
         return responseError(response); 
     }
-    return await response.json();
+    if(typeof onSuccess === 'function'){ onSuccess() }
+    return responseOK(response);
 };

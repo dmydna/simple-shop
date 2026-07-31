@@ -1,6 +1,6 @@
 // src/services/authService.js
 import { BASE_URL, ENDPOINTS } from "@utils/config.js";
-import { responseError } from '@utils/service.js';
+import {responseHandler} from '@utils/service.js';
 
 
 
@@ -16,21 +16,7 @@ export const authService = {
             body: JSON.stringify(credentials)
         });
 
-        if (!response.ok) {
-            return responseError(response)
-        }
-
-        const data = await response.json(); // Recibimos { token: "..." }
-        console.log(data)
-
-        if (data) {
-            // Guardamos para futuras peticiones
-            localStorage.setItem("token", data?.accessToken);
-            localStorage.setItem("user", data?.username);
-            localStorage.setItem("role", data?.role);
-        }
-
-        return data;
+        return responseHandler(response);
     },
 
     // Registro: Crea el usuario y el profile de cliente
@@ -40,10 +26,8 @@ export const authService = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData)
         });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.text();
+
+        return responseHandler(response);
     },
 
     // Logout: Limpia el storage
@@ -73,10 +57,8 @@ export const authService = {
             },
             body: JSON.stringify(data)
         });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.text();
+        
+        return responseHandler(response);
     }
 
 

@@ -17,11 +17,11 @@ function CartButton(){
 
     return(
         <div onClick={()=> navigate('/cart')} className="position-relative">
-            <Tintify className="rounded-circle">
+            <Tintify style={{padding: '5px'}} className="rounded-circle">
                 <i className={`bi bi-cart3 fs-4`}></i>
             </Tintify>
                {cartCount != 0 ? 
-                    <span className={`position-absolute bg-dark rounded-circle`}
+                    <span className={`position-absolute bg-dark rounded-circle pointer`}
                         style={{
                             fontWeight: 700, 
                             zIndex:100,

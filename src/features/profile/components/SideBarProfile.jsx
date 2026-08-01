@@ -1,8 +1,10 @@
 
-import { Link } from "react-router-dom";
+import { Tintify } from "@/features/product/components/FloatButton";
+import { Link, useNavigate } from "react-router-dom";
 
 function SideBarProfile({ role, border = false }) {
 
+    const navigate = useNavigate()
 
     return (
         <>
@@ -10,56 +12,51 @@ function SideBarProfile({ role, border = false }) {
  
 
                 {role === 'ADMIN' && (
-                    <li className={`list-group-item ${border ? '' : 'border-0'}`}>
-                        <Link className="text-normalize" to={`/user/activity`}>
-                            <i className="bi bi-bar-chart fs-5 ps-0 p-2"></i>
-                            <span> Overview </span>
-                        </Link>
-                    </li>
+                    <Tintify 
+                        className={`${border ? '' : 'border-0'} text-normalize w-100 justify-content-start`} 
+                        action={() => navigate(`/user/dashboard`)}>
+                        <i className="bi bi-gear fs-5 ps-0 p-2"></i>
+                        <span> Dashboard </span>     
+                    </Tintify> 
                 )}
 
                 {role === 'ADMIN' && (
-                    <li className={`list-group-item ${border ? '' : 'border-bottom'}`}>
-                        <Link className="text-normalize" to={`/user/dashboard`}>
-                            <i className="bi bi-sliders fs-5 ps-0 p-2"></i>
-                            <span> Dashboard </span>
-                        </Link>
-                    </li>
+                    <Tintify 
+                        className={`border-bottom text-normalize w-100 justify-content-start`} 
+                        action={() => navigate(`/user/activity`)}>
+                        <i className="bi bi-bar-chart fs-5 ps-0 p-2"></i>
+                        <span> Overview </span>     
+                    </Tintify> 
                 )}
 
-                <li className={`list-group-item ${border ? '' : 'border-0'}`}>
-                    <Link className="text-normalize" to={`/user/profile`}>
-                        <i className="bi bi-person-check fs-5 ps-0 p-2"></i>
-                        <span> Profile </span>
-                    </Link>
-                </li>
+                <Tintify 
+                    className={`${border ? '' : 'border-0'} text-normalize w-100 justify-content-start`} 
+                    action={() => navigate(`/user/profile`)}>
+                    <i className="bi bi-person-check fs-5 ps-0 p-2"></i>
+                    <span> Profile </span>     
+                </Tintify> 
 
 
-                <li className={`list-group-item ${border ? '' : 'border-0'}`}>
-                    <Link className="text-normalize" to={`/user/account`}>
-                        <i className="bi bi-person fs-5 ps-0 p-2"></i>
-                        <span> Cuenta </span>
-                    </Link>
-                </li>
+                <Tintify 
+                    className={`${border ? '' : 'border-0'} text-normalize w-100 justify-content-start`} 
+                    action={() => navigate(`/user/account`)}>
+                    <i className="bi bi-person fs-5 ps-0 p-2"></i>
+                    <span> Cuenta </span>     
+                </Tintify>  
 
-                <li className={`list-group-item ${border ? '' : 'border-0'}`}>
-                    <Link className="text-normalize" to={`/user/purchases`}>
-                        <div className="item">
-                            <i className="bi bi-handbag fs-5 ps-0 p-2"></i>
-                            <span> Compras</span>
-                        </div>
-                    </Link>
-                </li>
-                               
-                <li className={`list-group-item ${border ? '' : 'border-0'}`}>
-                    <Link className="text-normalize" to={`/user/favorites`}>
-                        <div className="item">
-                            <i className="bi bi-heart fs-5 ps-0 p-2"></i>
-                            <span> Favoritos </span>
-                        </div>
-                    </Link>
-                </li>
-               
+                <Tintify 
+                    className={`${border ? '' : 'border-0'} text-normalize w-100 justify-content-start`} 
+                    action={() => navigate(`/user/purchases`)}>
+                    <i className="bi bi-handbag fs-5 ps-0 p-2"></i>
+                    <span> Compras</span>     
+                </Tintify>                   
+              
+                <Tintify 
+                    className={`${border ? '' : 'border-0'} text-normalize w-100 justify-content-start`} 
+                    action={() => navigate(`/user/favorites`)}>
+                    <i className="bi bi-heart fs-5 ps-0 p-2"></i>
+                    <span> Favoritos </span>     
+                </Tintify>                  
 
             </ul>
         </>

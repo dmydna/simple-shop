@@ -4,9 +4,9 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { Link, useNavigate } from "react-router-dom";
 import { useUIContext } from "../../../contexts/UIContext.jsx";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
-import { Tintify } from "@features/product/components/FloatButton"
+import { IconTint, Tintify } from "@features/product/components/FloatButton"
 import ImageWithFallback from "@/components/common/ImageWithFallback.jsx";
-
+import userDefault from "/user-default.png"
 
 
 
@@ -44,20 +44,24 @@ function UserDropdown({ className }) {
       >
         <Dropdown.Toggle
           id="user-dropdown"
-          variant="light"
+          variant=""
           className="border-0 bg-transparent p-0 no-caret"
 
         >
           {!isAuth &&
-            <i className={`d-none d-md-block fs-4 bi bi-person${isAuth ? '-fill' : ''} hover-icon mx-2`}></i> 
+            <IconTint 
+              style={{ padding: '5px'}}
+              icon={'person'}
+              className={'fs-4 rounded-circle d-none d-md-block'}
+            />
           }
           {isAuth && 
             <ImageWithFallback 
-              className="rounded-circle border" 
+              className="rounded-circle border d-none d-md-block" 
               src={imgUrlUser}
-              fallbackSrc={imgUrlFallback}
-              width={35} 
-              height={35}
+              fallbackSrc={userDefault}
+              width={30} 
+              height={30}
               />
 
           }

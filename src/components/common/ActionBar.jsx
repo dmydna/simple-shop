@@ -12,7 +12,7 @@ function ActionBar(){
   const {  setShowMenu } = useNavbarContext()
 
     return(
-        <Nav className={`align-items-center flex-row order-md-2`}>
+        <Nav className={`align-items-center flex-row order-md-2 gap-2`}>
           <SearchOverlay/>
           <UserDropdown />
           <div className="d-none d-md-block">

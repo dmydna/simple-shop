@@ -3,6 +3,7 @@ import { Tintify } from "@/features/product/components/FloatButton";
 import { useNavigate } from "react-router-dom";
 
 export default function RemovableListItem({
+	children,
 	className, 
 	remove, 
 	title,  
@@ -27,6 +28,7 @@ export default function RemovableListItem({
         	    <div class="flex-grow-1">
         	        <h6 class="mb-1">{title}</h6>
         	        <p class="text-muted small mb-0">{description || ''}</p>
+        	        {children}
         	    </div>
         	    {remove && (
         	    	<span

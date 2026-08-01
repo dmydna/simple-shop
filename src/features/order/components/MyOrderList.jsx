@@ -12,7 +12,7 @@ import { useUrlParams } from "@/hooks/useUrlParams";
 
 export const MyOrderList = ({ children, className }) => {
 
-    const { currentOrder, setShowReview, setCurrentOrder } = useOrderDetailContext()
+    const { currentOrder, setShowReview } = useOrderDetailContext()
     const {searchParams, setSearchParams } = useUrlState()
     const [visibleItems, setVisibleItems] = useState([])
     const [selectedId, setSelectedId] = useState()

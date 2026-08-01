@@ -8,9 +8,7 @@ import React from "react";
 //  2. route unprotected: mostrar Feedback y refrescar o mostra contenido. 
 function ExpiredSession({handle, message}){
 
-    const defaultMsg = "Tu sesión ha finalizado por motivos " +
-     "de seguridad. Por favor, inicia sesión nuevamente para " + 
-     "acceder a tu cuenta y continuar con tu compra." 
+    const defaultMsg = "La sesion ha expirado. Por favor, vuelve a iniciar sesion." 
     return (
         <FeedbackMessage
             title="Sesion expirada"

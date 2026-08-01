@@ -99,7 +99,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/change-password" element={<ChangePassword />} />
-            <Route path="/inicio" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/order/:hash"  element={<OrderDetails />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/register/complete" element={

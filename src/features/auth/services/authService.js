@@ -26,15 +26,17 @@ export const authService = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData)
         });
-
         return responseHandler(response);
     },
 
     // Logout: Limpia el storage
-    logout: () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("role");
-        window.location.href = "/auth"; // Redirigir al usuario
+    logout: async () => {
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/logout`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        });
+        return responseHandler(response);
     },
 
     // Helper para obtener el token guardado

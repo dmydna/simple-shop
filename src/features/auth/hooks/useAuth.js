@@ -2,24 +2,27 @@ import nprogress from "nprogress";
 import { useEffect, useMemo, useState } from "react";
 import { authService } from "../services/authService.js";
 import { userService } from "@/features/user/service/userService.js";
+import { useNavigate } from "react-router-dom";
 
 
 export function useAuth() {
 
+  const navigate = useNavigate()
+  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
-  const [role, setRole] = useState(null);
   const [reset, setReset] = useState(false);
   const [logged, setLogged] = useState(true)
 
 
-
   useEffect(() => {
     userService.getMe()
-      .then(response => setUser(response.username))
+      .then(response => {
+        setUser(response)
+        setLocalStorage({...response})
+      })
       .catch(() => setUser(null)) // Si responde 401, no está autenticado
       .finally(() => setLoading(false));
   }, []);
@@ -29,8 +32,8 @@ export function useAuth() {
   }, [user])
 
   const isAdmin = useMemo(() => {
-    return role == 'ADMIN' && isAuth ? true : false
-  }, [token, user, role, isAuth])
+    return user?.role == 'ADMIN' ? true : false
+  }, [user])
 
   useEffect(() => {
     if (reset) {
@@ -43,20 +46,18 @@ export function useAuth() {
 
 
   useEffect(() => {
-    const savedToken = localStorage.getItem("token");
-    const savedUser = localStorage.getItem("user");
-    const savedRole = localStorage.getItem("role");
 
-    if (savedUser && savedRole) {
-      setToken(savedToken);
-      setUser(savedUser);
-      setRole(savedRole);
+    const args = ["username", "token", "role", "expiredAt"]
+    const savedStorage = getLocalStorage(...args)
+
+    if (savedStorage?.user && savedStorage?.role) {
+      setToken(savedStorage?.token);
+      setUser({ ...savedStorage });
       setLoading(false);
-      setLogged(savedToken)
+      setLogged(savedStorage?.token)
     }else{
       setToken(null);
       setUser(null);
-      setRole(null);
       setLoading(false);
       setLogged(false)
     }
@@ -82,7 +83,6 @@ export function useAuth() {
   }
 
 
-
   const login = async (userData) => {
     nprogress.start();
     setLoading(true);
@@ -92,9 +92,10 @@ export function useAuth() {
       await authService.login(userData);
       const data = await userService.getMe();
       setToken(data?.accessToken || null)
-      setRole(data?.role || null)
-      setUser(data?.username || '')
+      setUser(data || null)
       setLogged(true);
+      setLocalStorage({...data})
+      console.log(data)
     } catch (err) {
       console.error("Error de carga de API", err);
       setError("No se inicio session. Revisa tus credenciales.")
@@ -104,6 +105,26 @@ export function useAuth() {
       nprogress.done();
     }
   };
+
+
+  const setLocalStorage = (object) =>{
+      for(const key in object){
+          localStorage.setItem(key, object[key])
+      }
+  }
+
+  const removeLocalStorage = (...args) =>{
+      for (const item of args){
+          localStorage.removeItem(item)
+      }
+  }
+
+  const getLocalStorage = (...args) => {
+    const result = {};
+    for (const item of args){
+        result[item] = localStorage.getItem(item)
+    }
+  }
 
 
   const register = async (userData) => {
@@ -123,12 +144,23 @@ export function useAuth() {
   }
 
   const logout = () => {
-    setToken(null);
-    setUser(null);
-    setLogged(false)
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("role");
+    const args = ["token", "username", "role", "expiredAt"]
+    setLoading(true)
+    setError(null)
+    authService.logout()
+      .then(()=>{
+        setToken(null);
+        setUser(null);
+        setLogged(false)
+        removeLocalStorage(...args)
+        navigate('/login')
+      })
+      .catch((err)=> {
+        setUser(null)
+        setLogged(false)
+        setError(err)
+      })
+      .finally(() => setLoading(false))
   };
 
   return ({ 

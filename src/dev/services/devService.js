@@ -27,6 +27,7 @@ export const devService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${type}/bulk`, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -51,9 +52,10 @@ export const devService = {
         // 2. Agregamos los filtros dinámicamente
         mapToURLSearchParams(cleanParams, filters);
 
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${type}?${cleanParams.toString()}`, 
-            { headers: TOKEN ? { 'Authorization': `Bearer ${TOKEN}` } : {} }
-        );
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${type}?${cleanParams.toString()}`, { 
+            credentials: 'include', 
+            ...(TOKEN && {headers: { 'Authorization': `Bearer ${TOKEN}` }}) 
+        });
         if (!response.ok) {
             return responseError(response)
         }

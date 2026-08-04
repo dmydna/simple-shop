@@ -24,10 +24,11 @@ export function ProfileProvider({ children }) {
         setLoading(true)
         setError(null)
         try {
-            const data = await profileService.getMyUser();
-            setProfile(data)
+            const response = await profileService.getMyUser();
+            setProfile(response.data)
+            console.log(response.data)
             setSuccess(true)
-            return data
+            return response.data
         } catch (err) {
             console.error("Error de carga de API", err);
             setError("No se realizo ninguna accion.")

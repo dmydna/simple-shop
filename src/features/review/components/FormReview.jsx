@@ -1,17 +1,17 @@
 import FetchState from "@/components/common/FetchState";
-import { placeholder } from "@utils/image.js";
+import { IconTint } from "@/features/product/components/FloatButton";
 import { useReview } from "@/features/review/hooks/useReview";
 import { useForm } from "@/hooks/useForm.js";
 import StarRating from "@common/StarRating.jsx";
+import { placeholder } from "@utils/image.js";
 import { useEffect, useState } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ProfileHeader } from "./ProfileHeader";
-import { IconTint } from "@/features/product/components/FloatButton";
+import { ProfileHeader } from "../../profile/components/ProfileHeader";
 
 
 
-function WriteReview({className, close}) {
+function FormReview({className, close}) {
 
     const [rating, setRating] = useState(2);
     const [searchParams] = useSearchParams();
@@ -129,4 +129,4 @@ function WriteReview({className, close}) {
     )
 }
 
-export default WriteReview;
+export default FormReview;

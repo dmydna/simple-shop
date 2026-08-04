@@ -13,7 +13,7 @@ function SmartSidebarApp({}) {
   const location = useLocation();
   const [sidebarMode, setSidebarMode] = useState(null);
 
-  const { isAdmin, logged, isAuth } = useAuthContext()
+  const { isAdmin, isAuth } = useAuthContext()
 
   useEffect(() => {
     // Sidebar Mobile modes
@@ -26,7 +26,7 @@ function SmartSidebarApp({}) {
 
     // Sidebar Dashboard PC
     
-    if (isAdmin && logged) {
+    if (isAdmin) {
       if (document.querySelector("body")) {
         document.querySelector("body")
           .classList.add("active-bar");
@@ -37,7 +37,7 @@ function SmartSidebarApp({}) {
           .classList.remove("active-bar");
       }
     }
-  }, [location.pathname, isAdmin, logged, isAuth])
+  }, [location.pathname, isAdmin, isAuth])
 
 
   const handleToggle = (t) => {
@@ -49,7 +49,7 @@ function SmartSidebarApp({}) {
   return (
     <>
       {/* -- Sidebar PC --*/}
-      {isAdmin && logged && (
+      {isAdmin && (
 
         <>
           <div id="dashbar" style={{ zIndex: "1050", width: "80px", paddingTop: "0px" }} 

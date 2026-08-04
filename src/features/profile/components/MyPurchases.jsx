@@ -83,7 +83,10 @@ function MyPurchases() {
                                 title={item.name}
                                 description={buildDescription(item)}
                                 className={"mb-1 rounded"}
-                            />
+                            >
+                                {!item?.rating && 
+                                <p style={{fontSize:'.7rem'}} className="small pill-success d-inline-block mt-1 mb-0">sin calificar</p>}
+                            </RemovableListItem>
                         )}
                     </div>)}
          

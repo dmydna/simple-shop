@@ -1,5 +1,5 @@
 import { mapToURLSearchParams } from "@/utils/mappers";
-import { responseError } from "@/utils/service";
+import { responseError, responseHandler } from "@/utils/service";
 import { BASE_URL , ENDPOINTS } from "@utils/config.js";
 
 const ENDPOINT = ENDPOINTS.PROFILE;
@@ -18,13 +18,8 @@ export const profileService = {
                 ...( TOKEN && {'Authorization': `Bearer ${TOKEN}`} )
             }
         });
-        if (response.ok) {
-            const orders = await response.json();
-            console.log("My orders: ", orders);
-            return orders;
-        } else {
-            console.error("No autorizado o error de servidor");
-        }
+        
+        return responseHandler(response);
 
     },
 
@@ -41,15 +36,8 @@ export const profileService = {
                 ...(TOKEN && {'Authorization': `Bearer ${TOKEN}`} )
             }
         });
-
-        if (response.ok) {
-            const userDto = await response.json();
-            // console.log("Datos del profile:", userDto);
-            // Aquí userDto ya es un objeto plano, sin recursión
-            return userDto;
-        } else {
-            console.error("No autorizado o error de servidor");
-        }
+        
+        return responseHandler(response);
     },
 
     update: async (profileData) => {
@@ -65,8 +53,8 @@ export const profileService = {
             },
             body: JSON.stringify(profileData)
         });
-        if (!response.ok) throw new Error("Error al actualizar producto");
-        return await response.json();
+
+        return responseHandler(response);
     },
 
     imageUpload: async (selectedFile) => {
@@ -82,11 +70,8 @@ export const profileService = {
             credentials: 'include',
             ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } })
         });
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`Error al subir imagen: ${errorText}`);
-        }
-        return await response.text();
+        
+        return responseHandler(response);
     },
 
 

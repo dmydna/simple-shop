@@ -26,7 +26,7 @@ function NavItems({items, onSeleccion, className}){
     return(
         <Nav className="me-auto w-100 align-items-left">
         {items.map((item) =>
-          item != "Contacto" && 
+          item != "Contact" && 
           <Nav.Link 
             className={className}
             as={Link} to={item.toLowerCase()} key={item} 
@@ -39,7 +39,7 @@ function NavItems({items, onSeleccion, className}){
             className={className}
             onClick={handleContact}
         >
-          Contacto
+          Contact
         </Nav.Link>
       </Nav>
     )

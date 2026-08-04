@@ -20,7 +20,8 @@ export const userService = {
         mapToURLSearchParams(cleanParams, filters)
 
         const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}` , {
-            headers: {'Authorization': `Bearer ${TOKEN}`},
+            credentials: 'include',
+            ...(TOKEN && {headers: {'Authorization': `Bearer ${TOKEN}`}}),
         });
         if (!response.ok) {
             return responseError(response)
@@ -33,6 +34,7 @@ export const userService = {
     getById: async (id) => {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
+            credentials: 'include',
             headers: { 'Authorization': `Bearer ${TOKEN}` },
         });
         if (!response.ok) {
@@ -41,10 +43,24 @@ export const userService = {
         return await response.json();
     },
 
+    getMe: async () => {
+        console.log("AUTHENTICATION!")
+        const TOKEN = localStorage.getItem("token")
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/me`, {
+            credentials: 'include',
+            ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } })
+        });
+        if (!response.ok) {
+            return responseError(response)
+        }
+        return await response.json();        
+    },
+
 
     getProfileById: async (id) => {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/profile`, {
+            credentials: 'include',
             headers: { 'Authorization': `Bearer ${TOKEN}` },
         });
         if (!response.ok) {
@@ -59,7 +75,8 @@ export const userService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'DELETE',
-            headers: {'Authorization': `Bearer ${TOKEN}`}
+            credentials: 'include',
+            ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } })
         });
 
         if (!response.ok) {
@@ -90,6 +107,7 @@ export const userService = {
         const TOKEN = localStorage.getItem("token")
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/status?status=${status}`, {
             method: 'PATCH',
+            credentials: 'include',
             headers: {
             // Agrega el header de autorización
                 'Authorization': `Bearer ` + TOKEN

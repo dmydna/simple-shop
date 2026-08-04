@@ -3,7 +3,7 @@ import CardProfile from "./CardProfile";
 import { Outlet } from 'react-router-dom';
 import { useProfile } from "../contexts/ProfileContext";
 import { useEffect } from "react";
-import SideBarProfile from "./SideBarProfile";
+import SidebarProfile from "./SidebarProfile";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext";
 
 
@@ -25,7 +25,7 @@ const UserLayout = () => {
                 >
                     <CardProfile name={user} />
                     <div className="border rounded p-3 island d-none d-md-block">
-                        <SideBarProfile 
+                        <SidebarProfile 
                             role={profile?.role}
                         />
                     </div>

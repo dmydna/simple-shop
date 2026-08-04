@@ -1,7 +1,7 @@
 import { useNavbarContext } from "@/contexts/NavbarContext.jsx";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
 import SideBarDashboard from "@/features/dashboard/common/SiderbarDashboard.jsx";
-import SideBarProfile from "@/features/profile/components/SideBarProfile.jsx";
+import SidebarProfile from "@/features/profile/components/SidebarProfile.jsx";
 import { Button, Nav, Offcanvas } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -92,7 +92,7 @@ function MobileMenu({ children }) {
 
                 {location.pathname.startsWith('/user') && (
                   <div className="border-top py-3 pb-4 border-bottom">
-                    <SideBarProfile border={false} role={'CLIENT'} />
+                    <SidebarProfile border={false} role={'CLIENT'} />
                   </div>
                 )}
 

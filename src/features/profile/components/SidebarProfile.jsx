@@ -2,7 +2,7 @@
 import { Tintify } from "@/features/product/components/FloatButton";
 import { Link, useNavigate } from "react-router-dom";
 
-function SideBarProfile({ role, border = false }) {
+function SidebarProfile({ role, border = false }) {
 
     const navigate = useNavigate()
 
@@ -64,4 +64,4 @@ function SideBarProfile({ role, border = false }) {
     )
 }
 
-export default SideBarProfile;
+export default SidebarProfile;

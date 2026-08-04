@@ -1,15 +1,15 @@
-import { ToastContainer } from "react-toastify";
-import { Col, Container, Row } from "react-bootstrap";
 import { MyOrderDetail } from "@/features/order/components/MyOrderDetail";
 import { MyOrderList } from "@/features/order/components/MyOrderList";
-import { useOrder } from "@/features/order/hooks/useOrder";
 import { OrderDetailProvider } from "@/features/order/contexts/OrderDetailContext";
-import { useUrlParams } from "@/hooks/useUrlParams";
-import { useEffect, useState } from "react";
-import WriteReview from "@/features/profile/components/WriteReview";
-import { useUrlState } from "@/hooks/useUrlState";
-import { useNavigate, useParams } from "react-router-dom";
+import { useOrder } from "@/features/order/hooks/useOrder";
 import { IconTint } from "@/features/product/components/FloatButton";
+import FormReview from "@/features/review/components/FormReview";
+import { useUrlParams } from "@/hooks/useUrlParams";
+import { useUrlState } from "@/hooks/useUrlState";
+import { useEffect, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 
 export default function OrderDetails() {
@@ -77,7 +77,7 @@ export default function OrderDetails() {
               <MyOrderDetail />
             )}
             {idParam && (
-              <WriteReview
+              <FormReview
                 close={closeReview} 
                 className={'p-4 island border'}
               />

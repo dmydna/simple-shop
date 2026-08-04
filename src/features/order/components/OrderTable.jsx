@@ -1,7 +1,4 @@
-import SortByParam from '@/components/common/SortButton';
-import React from 'react';
-import { Button, Table } from 'react-bootstrap';
-import ReviewButton from './ReviewButton';
+import { Table } from 'react-bootstrap';
 import MyOrderRating from './MyOrderRating';
 
 
@@ -16,17 +13,12 @@ export default function OrderTable({ className, content }) {
                     <thead className=''>
                         <tr style={{height:'0px', visibility:'collapse'}}>
 
-                            <th style={{ width: '250px' }} className='text-secondary'>
-                                <SortByParam>Title</SortByParam>
-                            </th>
-                            <th style={{ width: '150px' }} className='text-secondary'>Hash</th>
-                            <th style={{ width: '150px' }} className='text-secondary'>
-                                <SortByParam name='createdAt'>Created at</SortByParam>
-                            </th>
-                            <th style={{ width: '150px' }} className='text-secondary'>
-                                <SortByParam>Price</SortByParam>
-                            </th>
-                            <th style={{ width: '150px' }} className='d-block d-table-cell d-md-none text-secondary'></th>
+                            <th style={{ width: '50px' }} className='text-secondary'>IMAGE</th>
+                            <th style={{ width: '250px' }} className='text-secondary'>TITLE</th>
+                            <th style={{ width: '150px' }} className='text-secondary'>RATING</th>
+                            <th style={{ width: '150px' }} className='text-secondary'>DESCRIPTION</th>
+                            <th style={{ width: '150px' }} className='d-block d-table-cell d-md-none text-secondary'>PRICE</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -34,37 +26,39 @@ export default function OrderTable({ className, content }) {
 
                             <tr className={`onhover`}
                                 style={{ overflow: "visible", height: "70px" }} key={item.id}>
-
-
+                                
+                                {/* IMAGE */}
                                 <td>
-
                                     <img
                                         style={{ objectFit: 'contain', width: '60px', height: '60px' }} // Altura fija igual al texto
                                         className="bg-white border border-1 rounded flex-shrink-0"
                                         src={item?.thumbnail}
                                     />
-
-                                    <span className='mx-3 fw-medium'>{item?.name}</span>
                                 </td>
 
+                                {/* TTILE */}
+                                <td style={{ lineHeight: '4.2', textAlign: 'start' }}>
+                                    <span className='fw-medium'>{item?.name}</span>
+                                </td>
+
+                                {/* RATING */}
                                 <td className='text-secondary'>
                                     <div style={{ lineHeight: '4.2' }}>
                                             <MyOrderRating  {...item}/>
                                     </div>
                                 </td>
 
-
+                                {/* DESCRIPTION */}
                                 <td className='text-secondary' style={{ lineHeight: '4.2', textAlign: 'start' }}  >
                                     {item?.quantity} x $ {(item?.priceAtPurchase || 0).toFixed(2)} 
                                     {item?.discountPercentageAtPurchase && ` (${item.discountPercentageAtPurchase}%OFF)`}
                                 </td>
 
-                                {/**Action */}
-
+                                {/* PRICE */}
                                 <td className='fw-medium d-table-cell'
                                     style={{ lineHeight: '4.2', textAlign: 'end' }}  >
                                     <i className='bi bi-currency-dollar'></i>
-                                    {item?.priceAtPurchase*item?.quantity || 0}
+                                    {(item?.priceAtPurchase*item?.quantity || 0).toFixed(2)}
                                 </td>
                             </tr>
                         )

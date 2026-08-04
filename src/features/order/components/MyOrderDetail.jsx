@@ -53,7 +53,7 @@ export const MyOrderDetail = ({ check }) => {
                     <Card.Text className="text-secondary small fw-semibold  m-0">
                         Operacion </Card.Text>
                     <Card.Text className="fw-light small">
-                        {currentOrder?.hash || Date.now()}
+                        {currentOrder?.operationNumber}
                     </Card.Text>
                 </div>
 

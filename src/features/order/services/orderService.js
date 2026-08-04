@@ -35,6 +35,20 @@ export const orderService = {
         return await response.json();
     },
 
+    getByHash: async (id) => {
+        const TOKEN = localStorage.getItem("token")
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/hash/${id}`, 
+            { 
+                credentials: 'include',
+                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
+            }
+        );
+        if (!response.ok) {
+            return responseError(response)
+        }
+        return await response.json();
+    },
+
     // POST: Crear un nuevo pedido
     // recibe CartItems
     create: async (data, clientId) => {

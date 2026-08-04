@@ -4,13 +4,13 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "./styles/index.css";
 
-import Dashboard from "@dashboard/common/Dashboard";
-import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "@common/ProtectedRoute";
 import ProtectedRouteAdmin from "@common/ProtectedRouteAdmin.jsx";
+import { ProviderWrapper } from "@contexts/ProviderWrapper";
+import Dashboard from "@dashboard/common/Dashboard";
 import Footer from "@layout/Footer.jsx";
 import Navbar from "@layout/Navbar.jsx";
-import { ProviderWrapper } from "@contexts/ProviderWrapper";
+import { ToastContainer } from "react-toastify";
 
 
 import Cart from "@pages/Cart/Cart.jsx";
@@ -24,27 +24,25 @@ import CompleteRegister from "@pages/CompleteRegister";
 import Login from "@pages/Login";
 import Register from "@pages/Register.jsx";
 
-import PageNotReady from "@features/fallback/PageNotReady";
 import Page404NotFound from "@features/fallback/Page404NotFound.jsx";
+import PageNotReady from "@features/fallback/PageNotReady";
 
-import MyPhotoProfile from "@features/profile/components/MyPhotoProfile";
 import MyAccount from "@features/profile/components/MyAccount";
 import MyActivity from "@features/profile/components/MyActivity";
 import MyDashboard from "@features/profile/components/MyDashboard";
 import MyFavorites from "@features/profile/components/MyFavorites";
+import MyPhotoProfile from "@features/profile/components/MyPhotoProfile";
 import MyProfile from "@features/profile/components/MyProfile";
 import MyPurchases from "@features/profile/components/MyPurchases";
-import MyReviews from "@features/profile/components/MyReviews";
 import UserLayout from "@features/profile/components/UserLayout";
 import WelcomePerfil from "@features/profile/components/WelcomeProfile";
-import WriteReview from "@features/profile/components/WriteReview";
 
 import { ListingCrudProvider } from "@features/listing/contexts/ListingCrudContext";
 import { ProfileProvider } from "@features/profile/contexts/ProfileContext.jsx";
 import { UserProvider } from "@features/user/contexts/UserContext.jsx";
 
-import SmartSidebarApp from "@components/layout/SmartSidebarApp";
 import DemoUploader from "@/dev/components/DemoUploader";
+import SmartSidebarApp from "@components/layout/SmartSidebarApp";
 import WelcomeDashboard from "@features/dashboard/common/WelcomeDashboard";
 import DashboardLayout from "@features/dashboard/layout/DashboardLayout";
 import ListingForm from "@features/dashboard/listing/ListingForm";

@@ -32,7 +32,7 @@ export const listingService = {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/hash/${hash}?fallow=${fallow}`,    
             {   
                 credentials: 'include',
-                ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
+                ...(TOKEN && { header: {'Authorization': `Bearer ${TOKEN}`} })
             }
         );
         if (!response.ok) {
@@ -60,7 +60,7 @@ export const listingService = {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}`,    
             {   
                 credentials: 'include',
-                ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
+                ...(TOKEN && { headers: {'Authorization': `Bearer ${TOKEN}`} })
             }
         );
         if (!response.ok) {
@@ -96,7 +96,7 @@ export const listingService = {
             method: 'POST',
             body: formData,
             credentials: 'include',
-            ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
+            ...(TOKEN && { headers: {'Authorization': `Bearer ${TOKEN}` } })
         });
 
         if (!response.ok) {
@@ -112,7 +112,7 @@ export const listingService = {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/status?status=${encodedStatus}`, {
             method: 'PATCH',
             credentials: 'include',
-            ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
+            ...(TOKEN && { headers: {'Authorization': `Bearer ${TOKEN}` } })
         });
     
         if (!response.ok) {
@@ -131,7 +131,7 @@ export const listingService = {
             method: 'POST',
             body: formData,
             credentials: 'include',
-            ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
+            ...(TOKEN && { headers: {'Authorization': `Bearer ${TOKEN}` } })
         });
         if (!response.ok) {
             return responseError(response)
@@ -161,7 +161,7 @@ export const listingService = {
             method: 'PUT',
             body: formData,
             credentials: 'include',
-            ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
+            ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } })
         });
 
         if (!response.ok) {
@@ -177,7 +177,7 @@ export const listingService = {
         const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
             method: 'DELETE',
             credentials: 'include',
-            ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}` })
+            ...(TOKEN && { headers: {'Authorization': `Bearer ${TOKEN}`} })
         });
 
         if (!response.ok) {

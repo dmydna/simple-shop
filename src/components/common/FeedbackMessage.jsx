@@ -23,7 +23,7 @@ export const FeedbackMessage = ({
     const hasDetails = isAdmin && detailedMessage !== genericMessage;
 
     return (
-        <div style={{maxWidth: '600px'}} className="d-block mx-3 mx-md-auto vh-50 h-100">
+        <div style={{maxWidth: '600px'}} className="d-block mx-3 mx-md-auto my-4">
             <div className="row justify-content-center align-items-center flex-fill h-100">
                 <div className="col-12 text-center">
                     {/* Icono sutil */}
@@ -37,7 +37,7 @@ export const FeedbackMessage = ({
                     <p 
                        className="text-muted small mx-auto mb-4" 
                        style={{ overflow: 'auto', maxWidth: '280px', lineHeight: '1.4' }}>
-                        { error ? displayMessage : message }
+                        { error ? displayMessage.substr(0, 90) + "..." : message }
                     </p>
                    { error && hasDetails && (
                        <FeedbackError 

@@ -12,11 +12,11 @@ function MyCartLayout() {
 	
 	const { cartItems, clearCart } = useCart()
 	const navigate = useNavigate();
-	const { loading, error, setError, step, success, canceled, cartStep } 
+	const { loading, error, setError, step, success, canceled, cartStep, orderResponse } 
 	= usePaymentContext()
 
 	const handleSucess = () => {
-		navigate('/')
+		navigate(`/order/${orderResponse?.orderId}`)
 		clearCart()
 	}
 

@@ -1,11 +1,11 @@
+import { useWarning } from "@/hooks/useWarning.js";
+import { Tintify } from "@features/product/components/FloatButton";
 import { useState } from "react";
 import { Alert, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext.jsx";
 import CartClearModal from "./CartClearModal.jsx";
-import CartItem from "./CartItem.jsx";
-import { useWarning } from "@/hooks/useWarning.js";
-import { useNavigate } from "react-router-dom";
-import {Tintify} from "@features/product/components/FloatButton"
+import MyCartTable from "./MyCartTable.jsx";
 
 
 export const MyCart = ({ children, className }) => {
@@ -44,13 +44,7 @@ export const MyCart = ({ children, className }) => {
                     handle={handleClearCart}
                 />
                 <hr />
-                {cartItems.map((item, index) => (
-                    <CartItem
-                        key={item.id}
-                        item={item}
-                        index={index}
-                    />
-                ))}
+                <MyCartTable content={cartItems} />
             </Card>
         </>)
 

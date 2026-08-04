@@ -6,11 +6,38 @@ import { useCart } from "../contexts/CartContext.jsx";
 
 export const MyOrderCart = ({check, oncheck, handle}) => {
 
-    const {totalPrice,totalDiscount, cartItems, couponDiscount} = useCart()
+    const {totalPrice,totalDiscount, cartItems, cartCount,  couponDiscount} = useCart()
 
     const buyMatch = useMatch("/cart/:buy")
 
     const width = useWindowsWidth()
+
+
+    const totalAmountDiscounts = useMemo(() => {
+        let result = 0;
+
+        for (let { finalPrice, discountPercentage, cantidad } 
+            of cartItems || []) {
+
+            const qty = Number(cantidad) || 0;
+            if (qty === 0) continue;
+
+            const percent = Number(discountPercentage) || 0;
+            if (percent <= 0) continue; 
+
+            const decimalDiscount = percent / 100;
+            if (decimalDiscount >= 1) { continue; }
+
+            const priceOriginal = finalPrice / (1 - decimalDiscount);
+            const totalOriginal = priceOriginal * qty;
+            const totalPaid = finalPrice * qty;
+            const discountAmount = totalOriginal - totalPaid;
+
+            result += discountAmount;
+        }
+
+        return result;
+    }, [cartItems]);
 
     const Order = useMemo(() => {
         const descuento = couponDiscount ? 5.0 : 0;
@@ -34,7 +61,7 @@ export const MyOrderCart = ({check, oncheck, handle}) => {
             {/* SUBTOTAL */}
             <div className="d-flex align-items-center justify-content-between py-2">
                 <Card.Text className="text-secondary small fw-semibold  m-0">
-                    Subtotal ({cartItems?.length} unidades)</Card.Text>
+                    Subtotal ({cartCount} unidades)</Card.Text>
                 <Card.Text className="fw-bold">
                     ${totalPrice?.toFixed(2)}
                 </Card.Text>
@@ -43,9 +70,9 @@ export const MyOrderCart = ({check, oncheck, handle}) => {
             {/* DESCUENTOS */}
             <div className="d-flex align-items-center justify-content-between py-2">
                 <Card.Text className="text-secondary small fw-semibold  m-0">
-                     Descuento {check && '(1 cupon)'} </Card.Text>
+                     Descuentos {check && '(1 cupon)'} </Card.Text>
                 <Card.Text className="fw-bold">
-                    ${Order?.descuento.toFixed(2)}
+                    - ${totalAmountDiscounts.toFixed(2)}
                 </Card.Text>
             </div>
 
@@ -53,8 +80,8 @@ export const MyOrderCart = ({check, oncheck, handle}) => {
             <div className="d-flex align-items-center justify-content-between py-2">
                 <Card.Text className="text-secondary small fw-semibold  m-0">
                      Envio</Card.Text>
-                <Card.Text className="fw-bold">
-                    ${Order?.envio}
+                <Card.Text className="fw-bold small text-success">
+                    Gratis
                 </Card.Text>
             </div>
             <hr/>

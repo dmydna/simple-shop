@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { useCart } from "../contexts/CartContext.jsx";
 
-function CartInput({ producto, className }) {
+function CartInput({ producto, className, style }) {
 
 
   const { removeFromCart,
@@ -64,11 +64,11 @@ function CartInput({ producto, className }) {
 
 
   return (
-    <div className="d-flex gap-2">
+    <div style={style} className="d-flex gap-2">
 
       {/* Boton eliminar */}
       <Button
-        className="btn shadow-sm border rounded overflow-hidden pagination-input-group"
+        className="btn btn-sm shadow-sm border rounded overflow-hidden pagination-input-group"
         onClick={() => elimItem(producto)}
         variant="outline-dark"
       ><i className="bi bi-trash3 smal pe-1"></i>
@@ -78,7 +78,7 @@ function CartInput({ producto, className }) {
 
         {/* Boton + */}
         <Button
-          className="btn p-1 border-0 ps-3"
+          className="btn p-1 border-0 ps-3 btn-sm"
           onClick={() =>  decCart(producto) }
           variant
         ><i className="bi bi-dash-lg"></i>
@@ -96,7 +96,7 @@ function CartInput({ producto, className }) {
 
         {/* Boton - */}
         <Button
-          className="btn p-1 border-0 pe-3"
+          className="btn p-1 border-0 pe-3 btn-sm"
           onClick={() => incCart(producto)}
           variant
         ><i className="bi bi-plus-lg"></i>

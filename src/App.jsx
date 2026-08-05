@@ -98,7 +98,11 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/order/:hash"  element={<OrderDetails />} />
+            <Route path="/order/:hash"  element={
+            <ProtectedRoute>
+              <OrderDetails />
+            </ProtectedRoute>  
+            } />
             <Route path="/contact" element={<Contact />} />
             <Route path="/register/complete" element={
               <ProfileProvider>

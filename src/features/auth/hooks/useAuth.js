@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { authService } from "../services/authService.js";
 import { userService } from "@/features/user/service/userService.js";
 import { useNavigate } from "react-router-dom";
+import { useUrlState } from "@/hooks/useUrlState.js";
 
 
 export function useAuth() {
@@ -15,7 +16,6 @@ export function useAuth() {
   const [user, setUser] = useState(null);
   const [reset, setReset] = useState(false);
   const [logged, setLogged] = useState(true)
-
 
   useEffect(() => {
     userService.getMe()
@@ -34,6 +34,11 @@ export function useAuth() {
   const isAdmin = useMemo(() => {
     return user?.role == 'ADMIN' ? true : false
   }, [user])
+
+  const expiredDate = useMemo(() => {
+      return new Date(user?.expiresAt).getTime() 
+  },[user])
+
 
   useEffect(() => {
     if (reset) {
@@ -165,11 +170,12 @@ export function useAuth() {
 
   return ({ 
     isAdmin, 
+    expiredDate,
+    isAuth,
     token, 
     user, 
     login, 
     logout, 
-    isAuth,
     register, 
     loading, 
     error,

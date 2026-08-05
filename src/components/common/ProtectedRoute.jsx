@@ -2,15 +2,23 @@ import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
 import { Navigate } from "react-router-dom";
 import PageLoading from "@features/fallback/PageLoading.jsx";
 import RouteLayout from "@common/RouteLayout.jsx";
+import ModalParam from "./ModalParam";
+import ExpiredSession from "@/features/fallback/ExpiredSession";
 
 export default function ProtectedRoute({ children }) {
     
-    const { isAuth, loading } = useAuthContext();
-    // Mientras se verifica el token en localStorage, mostramos un spinner o nada
+    const { isAuth, loading, expiredDate, renewSession } = useAuthContext();
+
+
     if (loading) {
         return <PageLoading message='Cargando sesion...' />;
     }
+
+    if(Date.now() > expiredDate){  renewSession(true) }
+
     return isAuth ? 
-        <RouteLayout>{children}</RouteLayout> : 
+        <RouteLayout>
+            {children}
+        </RouteLayout> : 
         <Navigate to="/login" />;
 }

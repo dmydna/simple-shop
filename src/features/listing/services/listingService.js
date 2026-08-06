@@ -5,7 +5,7 @@ import { responseError } from '@utils/service.js';
 
 
 
-const ENDPOINT = ENDPOINTS.LISTENING;
+const ENDPOINT = ENDPOINTS.LISTING;
 
 /* ========= HTTP ==========
   - 1XX (Información)

@@ -3,8 +3,8 @@ import nprogress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { profileService } from "../services/profileService.js";
 import { useAuthContext } from '@/features/auth/contexts/AuthContext.jsx';
+import { userService } from '@features/user/service/userService.js'
 
 const ProfileContext = createContext();
 
@@ -24,9 +24,8 @@ export function ProfileProvider({ children }) {
         setLoading(true)
         setError(null)
         try {
-            const response = await profileService.getMyUser();
-            setProfile(response.data)
-            console.log(response.data)
+            const response = await userService.getMyProfile();
+            setProfile(response)
             setSuccess(true)
             return response.data
         } catch (err) {
@@ -49,7 +48,7 @@ export function ProfileProvider({ children }) {
             setLoading(true)
             setError(null)
             nprogress.start();
-            await profileService.imageUpload(selectedFile);
+            await userService.imageUploadProfile(selectedFile);
             toast.success("Imagen subida con éxito");
             fetchData();
         } catch (err) {
@@ -66,7 +65,7 @@ export function ProfileProvider({ children }) {
         setLoading(true)
         setError(null)
         try {
-            await profileService.update({...profile, ...data});
+            await userService.updateMyProfile({...profile, ...data});
             toast.success("Se actualizo profile!");
             setSuccess(true)
         } catch (err) {
@@ -92,7 +91,7 @@ export function ProfileProvider({ children }) {
     return (
         <ProfileContext.Provider
             value={{ 
-                fetchData, profile, loading, profileService, handleChange, updatePerfil, updateImage, sharedContext, setSharedContext ,
+                fetchData, profile, loading, handleChange, updatePerfil, updateImage, sharedContext, setSharedContext ,
                 error, setError, success, setSuccess
                 }}>
             {children}

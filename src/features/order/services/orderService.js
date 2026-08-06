@@ -2,6 +2,7 @@
 import { toCreateOrder, mapToURLSearchParams } from "@/utils/mappers.js";
 import { BASE_URL, ENDPOINTS } from "@utils/config.js";
 import { responseError } from "@/utils/service.js";
+import { api } from "@/utils/api";
 const ENDPOINT = ENDPOINTS.ORDER
 
 export const orderService = {
@@ -33,6 +34,11 @@ export const orderService = {
             return responseError(response)
         }
         return await response.json();
+    },
+
+    getMyOrder: async (id) => {
+        const response = await api.get(`${ENDPOINT}/me/${id}`)
+        return response
     },
 
     getByHash: async (id) => {
@@ -159,6 +165,18 @@ export const orderService = {
             return responseError(response)
         }
         return await response.json();
+    },
+
+    getMyPurchases: async ({ page = 0 , size = 8, ...filters } = {}) => {
+        const endpoint = `${ENDPOINTS.ORDER}/me/history`;
+        const cleanParams = new URLSearchParams();
+        cleanParams.append('page', page < 0 ? 0 : page);
+        cleanParams.append('size', size);
+        mapToURLSearchParams(cleanParams, filters);
+        const response = await api.get(endpoint, cleanParams)
+        return response;
     }
+
+
 
 }

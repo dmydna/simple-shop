@@ -18,7 +18,7 @@ export function useAuth() {
   const [logged, setLogged] = useState(true)
 
   useEffect(() => {
-    userService.getMe()
+    authService.getMe()
       .then(response => {
         setUser(response)
         setLocalStorage({...response})
@@ -95,7 +95,7 @@ export function useAuth() {
     setLogged(false)
     try {
       await authService.login(userData);
-      const data = await userService.getMe();
+      const data = await authService.getMe();
       setToken(data?.accessToken || null)
       setUser(data || null)
       setLogged(true);

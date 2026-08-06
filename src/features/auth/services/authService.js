@@ -1,6 +1,6 @@
 // src/services/authService.js
 import { BASE_URL, ENDPOINTS } from "@utils/config.js";
-import {responseHandler} from '@utils/service.js';
+import {responseHandler, responseError} from '@utils/service.js';
 
 
 
@@ -61,7 +61,21 @@ export const authService = {
         });
         
         return responseHandler(response);
-    }
+    },
+
+
+    getMe: async () => {
+        console.log("AUTHENTICATION!")
+        const TOKEN = localStorage.getItem("token")
+        const response = await fetch(`${BASE_URL}/${ENDPOINT}/me`, {
+            credentials: 'include',
+            ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } })
+        });
+        if (!response.ok) {
+            return responseError(response)
+        }
+        return await response.json();        
+    },
 
 
 };

@@ -24,7 +24,7 @@ export function AuthProvider({ children }){
 
     return (
 
-        <AuthContext.Provider value={{...authHook, renewSession: setShow}}>
+        <AuthContext.Provider value={{...authHook, renewSession: () => setShow(true)}}>
             {children}
             <ModalLock show={show} close={setShow}>
                 <ExpiredSession  handle={expiredSessionHandle}  />

@@ -2,7 +2,7 @@
 import { BASE_URL, ENDPOINTS } from "@utils/config.js";
 import { mapToURLSearchParams } from "@utils/mappers.js";
 import { responseError } from '@utils/service.js';
-const ENDPOINT = ENDPOINTS.PROFILE + "/favorites"
+const ENDPOINT = ENDPOINTS.FAVORITE;
 
 
 

@@ -77,15 +77,23 @@ export const responseOK = async (response) => {
         data = null;
     }
 
-    return { success: true, data: data };
+    return { success: true, data };
 };
 
 
-export const responseHandler = async (response, onSuccess=null, onFail=null) => {
+export const responseHandler = async (response, debug = null) => {
     if (!response.ok) {
-        if(typeof onFail === 'function'){ onSuccess() } 
+        console.error(
+            `${debug?.path && (`[FAIL]${debug?.method && (`[${debug.method}]`)} ${debug.path}`)}`   
+        ) 
         return responseError(response); 
     }
-    if(typeof onSuccess === 'function'){ onSuccess() }
+    
+    if(debug?.path){          
+        console.info(
+            `${debug?.path && (`[OK]${debug?.method && (`[${debug.method}]`)} ${debug.path}`)}` 
+        ) 
+    } 
+    
     return responseOK(response);
 };

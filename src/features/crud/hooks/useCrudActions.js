@@ -47,6 +47,7 @@ export const useCrudActions = ({ service, onRefresh }) => {
         success,
         setError, 
         setSuccess,
+        updateStatus,
         ...props // todos los campos del service sin handle.
     };
 };

@@ -1,130 +1,54 @@
-import { mapToURLSearchParams } from "@utils/mappers.js"
-import { ENDPOINTS, BASE_URL} from "@utils/config.js";
-import {responseError} from "@utils/service"
+import { api } from "@/utils/api";
+import { ENDPOINT } from "@utils/config.js";
+import { mapToURLSearchParams } from "@utils/mappers.js";
 
-const ENDPOINT = ENDPOINTS.REVIEWS
+const BASE_ENDPOINT = ENDPOINT.REVIEWS
 
+
+/**
+ * Servicio para gestionar las peticiones API de **reseñas**.
+ * - Proporciona metodos **CRUD** para recursos de `api/reviews`.
+ */
 export const reviewService = {
 
+    // GET: Obtener solicitud para escribir reseña
     getById: async (id) => {
-
-        const TOKEN = localStorage.getItem("token");
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/requests/${id}`,
-            {
-                credentials: 'include',
-                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } } )
-            }
-        );
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}/requests/${id}`
+        const response = await api.get(finalEndpoint)
+        return response
     },
 
 
-    // Nota: Obtiene los reviews Pendientes del usuario
-    // no son reviews, son requests de review.
+    // GET: Obtener paginas de solicitud para escribir reseñas
     getPage: async ({ page = 0 , size = 8, ...filters } = {}) => {
-
-        const TOKEN = localStorage.getItem("token")
-        // 1. Creamos un objeto plano para los parámetros
-        const cleanParams = new URLSearchParams();
-
-        cleanParams.append('page', page);
-        cleanParams.append('size', size);
-
-        // 2. Agregamos los filtros dinámicamente
-        mapToURLSearchParams(cleanParams, filters);
-
-        console.log("URL Corregida:", cleanParams.toString());
-
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/requests?${cleanParams.toString()}`,
-            { 
-                credentials: 'include',
-                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } } ) 
-            }
-        );
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+        const params = new URLSearchParams();
+        params.append('page', page);
+        params.append('size', size);
+        mapToURLSearchParams(params, filters);
+        const finalEndpoint = `${BASE_ENDPOINT}/requests`
+        const response = await api.get(finalEndpoint, params);
+        return response;
     },
 
-
+    // DELETE: Eliminar solicitud para escribir reseñas
     Delete: async (productId) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/requests/${productId}`, {
-            method: 'DELETE',
-            credentials: 'include',
-            ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } } )
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response;
+        const finalEndpoint = `${BASE_ENDPOINT}/requests/${productId}`
+        const response = await api.delete(finalEndpoint)
+        return response
     },
 
-    // solo admin
+    // DELETED: Eliminar reseña.
     deleteReview: async (productId) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${productId}`, {
-            method: 'DELETE',
-            credentials: 'include',
-            ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } } )
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response;
+        const finalEndpoint = `${BASE_ENDPOINT}/${productId}`
+        const response = await api.delete(finalEndpoint)
+        return response
     },
 
-
-    // user
-    createReview: async (reviewData) => {
-        const formatData = { 
-           "id": 0, 
-           "reviewerName": "", 
-           "reviewerEmail": "", 
-           "rating": reviewData.rating,
-           "comment": reviewData.comment, 
-           "productId": reviewData.productId
-         }
-
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 
-                'Content-Type': 'application/json', 
-                ...( TOKEN && {'Authorization': `Bearer ${TOKEN}`} )
-            }, 
-            body: JSON.stringify(formatData) 
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
-    },
-
+    // PUT: Actualizar reseña
     updateReview: async (id, data) => {
-        // Pasa  visibilidad como un Query Parameter (?visibility=...)
-        console.log(data)
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
-            method: 'PUT',
-            body: JSON.stringify(data), 
-            credentials: 'include',
-            headers: {
-                // Agrega el header de autorización
-                'Content-Type': 'application/json',
-                ...( TOKEN && {'Authorization': `Bearer ${TOKEN}`} )
-            }
-        });
-    
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}`
+        const response = await api.put(finalEndpoint, data)
+        return response;
     }
 
 

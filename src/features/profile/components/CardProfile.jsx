@@ -22,13 +22,12 @@ function CardProfile({ name, image, children, className, imgSize }) {
     return (
         <Card  className={`mb-2 island border text-start flex-row`}>
             <div className="d-block mx-auto position-relative">
-                <Card.Img className="perfil-img" src={profile?.image || placeholder({...baseImg})}
+                <Card.Img className="perfil-img rounded-circle" src={profile?.image || placeholder({...baseImg})}
                           style={{
                               objectFit: 'cover',
                               height: imgSize || '120px',
                               width: imgSize || '120px',
                               padding: "1rem",
-                              borderRadius: "25%",
                               marginInline: "auto",
                           }}
                 />
@@ -44,11 +43,10 @@ function CardProfile({ name, image, children, className, imgSize }) {
                     {  profile?.role == 'ADMIN' ? 'admin@mail.com' : (profile?.email || '') }
                 </span>
                 </Card.Text>
-                <Card.Text style={{width: '65px', fontSize: '0.75rem'}} className="text-center pill-success" >
-                <span>
+                <p className="small pill-success d-inline-block mb-0" 
+                   style={{fontSize: '0.7rem', borderRadius: '5px', paddingInline: '5px', paddingTop: '2px', lineHeight: '11px'}}>
                     {  profile?.role  == 'CLIENT'? 'user' : 'admin' }
-                </span>
-                </Card.Text>
+                </p>
             </Card.Body>
         </Card>
     )

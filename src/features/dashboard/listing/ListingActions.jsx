@@ -1,19 +1,27 @@
 import FetchState from "@/components/common/FetchState";
 import { useListingCrud } from "@/features/listing/hooks/useListingCrud";
 import { useValidParams } from "@hooks/useValidParams";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import ButtonLink from "../common/ButtonLink";
 import { useUrlParams } from "@/hooks/useUrlParams";
-
+import { ConfirmMessage } from "@/components/common/ConfirmMessage";
+import ModalConfirm from "@/components/common/ModalConfirm";
+import { MSG_LISTING_DELETE, MSG_LISTING_INACTIVE, MSG_LISTING_ACTIVE } from "@/components/common/MsgConfirm"; 
 
 export default function ListingActions({ close }) {
 
-    const { setId, currentItem, setCurrentItem, handleStatus, loading, error, setError, 
-    setSuccess, success, refreshElem } = useListingCrud({autofetch: false})
+    const { setId, currentItem, setCurrentItem, loading, error, setError, 
+    setSuccess, success, refreshElem, updateStatus } = useListingCrud({autofetch: false})
+
+    // ModalConfirm
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [dataConfirm, setDataConfirm] = useState([]);
+    const [msgConfirm, setMsgConfirm ] = useState();
 
     const [searchParams, setSearchParams] = useSearchParams();
+    
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -84,6 +92,24 @@ export default function ListingActions({ close }) {
 
 
 
+    const handleStatus = (...args) => {
+        const [id, status, ...xs] = args;
+
+        if(status == "ACTIVE") 
+            setMsgConfirm(<MSG_LISTING_ACTIVE id={id} />)
+        if(status == "INACTIVE") 
+            setMsgConfirm(<MSG_LISTING_INACTIVE id={id} />)
+        if(status == "DELETED") 
+            setMsgConfirm(<MSG_LISTING_DELETE id={id} />)
+
+        setDataConfirm([...args])
+        setShowConfirm(true)
+    }
+    const handleConfirm = () => {
+        updateStatus(...dataConfirm)
+        setShowConfirm(false)
+    }
+
     return (
         <div className="p-3 island rounded">
            
@@ -134,7 +160,7 @@ export default function ListingActions({ close }) {
                     </ButtonLink>
 
                     <ButtonLink
-                        handle={() => handleStatus(currentItem.id, "INACTIVE")}
+                        handle={ () => handleStatus(currentItem.id, "INACTIVE") }
                         icon="bi-eye-slash"
                         visible={ isStatusActive }
                     >
@@ -221,6 +247,14 @@ export default function ListingActions({ close }) {
                         Export File
                     </ButtonLink>
 
+                    <ModalConfirm show={showConfirm} >
+                        <ConfirmMessage 
+                            title={"Confirmar Accion"}
+                            message={msgConfirm}
+                            onClose={()=>setShowConfirm(false)} 
+                            onAction={()=>handleConfirm()}
+                        />
+                    </ModalConfirm>    
 
                 </>
             </FetchState.Toast>

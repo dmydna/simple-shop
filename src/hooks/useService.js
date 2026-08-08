@@ -34,7 +34,6 @@ export const useService = ({service, onSuccess, onError, onRefresh}) => {
             onRefresh?.();
             setSuccess(true)
             setContent(result);
-            console.log("useService",result)
             return result;
         } catch (err) {
             setError(err);

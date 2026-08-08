@@ -6,7 +6,7 @@ import { useUIContext } from "../../../contexts/UIContext.jsx";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
 import { IconTint, Tintify } from "@features/product/components/FloatButton"
 import ImageWithFallback from "@/components/common/ImageWithFallback.jsx";
-import userDefault from "/user-default.png"
+import userDefault from "/user-default-xs.png"
 
 
 
@@ -28,9 +28,7 @@ function UserDropdown({ className }) {
     navigate("/login");
   };
 
-  const imgUrlFallback = `http://localhost:8080/api/image/95x95?
-  &background=EEEEE&text=${user?.username[0]}
-  &fontWeight=bolder&fontSize=50&textColor=fff`
+
 
   const imgUrlUser = `http://localhost:8080/uploads/users/${user?.username}.png`
 

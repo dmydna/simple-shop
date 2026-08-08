@@ -109,7 +109,7 @@ export const MyOrderDetail = ({ check }) => {
                 <CartNavButton  
                     visible={true} 
                     variant="success disabled"
-                    title="ENTREGADO" 
+                    title={"ENTREGADO"} // currentOrder.status 
                     icon="bi bi-check-circle me-2"
                 />
               

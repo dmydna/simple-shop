@@ -193,7 +193,7 @@ export function CartProvider({ children }) {
 
 
     useEffect(() => {
-      console.log(cartItems)
+      // console.log(cartItems)
       if (cartItems.length != 0) {
         setTotalPrice(
           cartItems.reduce(

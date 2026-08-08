@@ -1,146 +1,82 @@
 // src/services/listingService.js
-import { toUpdateListing, toCreateListing, mapToURLSearchParams } from '@utils/mappers.js'
-import { BASE_URL, ENDPOINTS } from "@utils/config.js";
-import { responseError } from '@utils/service.js';
+import { api } from '@/utils/api';
+import { ENDPOINT } from "@utils/config.js";
+import { mapToURLSearchParams, toCreateListing, toUpdateListing } from '@utils/mappers.js';
 
 
 
-const ENDPOINT = ENDPOINTS.LISTING;
+const BASE_ENDPOINT = ENDPOINT.LISTING;
 
-/* ========= HTTP ==========
-  - 1XX (Información)
-  - 2XX (Éxito)
-  - 3XX (Redirección)
-  - 4XX (Error del cliente)
-  - 5XX (Error del servidor)
- ========================= */
-
+/**
+ * Servicio para gestionar las peticiones API de **publicaciones**.
+ * - Proporciona metodos **CRUD** para recursos de `api/listings`.
+ */
 export const listingService = {
 
-    // GET: Obtener un producto por ID
-    getById: async (id) => {
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`);
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
-    },
 
+    // GET: Obtener un listing por Id
+    getById: async (id) => (await api.get(`${BASE_ENDPOINT}/${id}`)),
+
+    // GET: Obtener un listing por Id
     getByHash: async (hash, fallow=false) => {
-   /**/     const TOKEN = localStorage.getItem("token")
-        console.log("obtiene por hash", hash)
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/hash/${hash}?fallow=${fallow}`,    
-            {   
-                credentials: 'include',
-                ...(TOKEN && { header: {'Authorization': `Bearer ${TOKEN}`} })
-            }
-        );
-        if (!response.ok) {
-            return responseError(response)
-        }
-        const data = await response.json();
-        return data?.listing
+        const finalEndpoint = `${BASE_ENDPOINT}/hash/${hash}?fallow=${fallow}`
+        const  {listing} = await api.get(finalEndpoint)
+        return listing;  
     },
 
-    // Cambiamos la firma para recibir un objeto desestructurado
+    // GET: Obtener paginas de listing 
     getPage: async ({ page = 0, size = 10, ...filters } = {}) => {
 
-        const TOKEN = localStorage.getItem("token")
-        // 1. Creamos un objeto plano para los parámetros
-        const cleanParams = new URLSearchParams();
+        const params = new URLSearchParams();
+        params.append('page', isNaN(page) ? 0 : page);
+        params.append('size', size);
+        mapToURLSearchParams(params, filters);
 
-        cleanParams.append('page', isNaN(page) ? 0 : page);
-        cleanParams.append('size', size);
-
-        // 2. Agregamos los filtros dinámicamente
-        mapToURLSearchParams(cleanParams, filters);
-
-        console.log("URL Corregida:", cleanParams.toString());
-
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}`,    
-            {   
-                credentials: 'include',
-                ...(TOKEN && { headers: {'Authorization': `Bearer ${TOKEN}`} })
-            }
-        );
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}`
+        const response = await api.get(finalEndpoint, params)
+        return response;  
     },
 
-    /* ------------- ACCESO CON TOKEN ------------------ */
-
-    // POST: crear listing con imagenes (permite sin imagenes)
+    // POST: crear listing (admite imagenes)
     create: async (data, selectedFile) => {
 
-        console.log(selectedFile)
-
         const listingData = toCreateListing(data);
-        const TOKEN = localStorage.getItem("token");
         const formData = new FormData();
 
-        // Parte 1: JSON con tipo explícito
         formData.append('listing', new Blob([JSON.stringify(listingData)], {
             type: 'application/json'
         }));
 
-        // Parte 2: Archivo
         if (selectedFile && selectedFile?.length !== 0) {
             selectedFile?.forEach((file) => {
-                formData.append('files', file); // 'images' es el nombre que recibirá tu backend
+                formData.append('files', file);
             });
         }
 
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}`, {
-            method: 'POST',
-            body: formData,
-            credentials: 'include',
-            ...(TOKEN && { headers: {'Authorization': `Bearer ${TOKEN}` } })
-        });
-
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}`
+        const response = await api.post(finalEndpoint, formData)
+        return response;  
     },
 
+
+    // PATCH: actualizar status de listing
     updateStatus: async (id, status) => {
-        // Pasa  visibilidad como un Query Parameter (?visibility=...)
-        const TOKEN = localStorage.getItem("token")
-        const encodedStatus = encodeURIComponent(status);
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/status?status=${encodedStatus}`, {
-            method: 'PATCH',
-            credentials: 'include',
-            ...(TOKEN && { headers: {'Authorization': `Bearer ${TOKEN}` } })
-        });
-    
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}/status`
+        const response = await api.patch(finalEndpoint, {status: status})
+        return response;  
     },
 
+    // POST: Subir imagen para listing
     imageUpload: async (id, selectedFile) => {
-
-        const TOKEN = localStorage.getItem("token")
         const formData = new FormData();
-        formData.append("file", selectedFile); // "file" debe coincidir con el @RequestParam de Java
-      
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/upload-image`, {
-            method: 'POST',
-            body: formData,
-            credentials: 'include',
-            ...(TOKEN && { headers: {'Authorization': `Bearer ${TOKEN}` } })
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.text();
+        formData.append("file", selectedFile); 
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}/upload-image`
+        const response = await api.post(finalEndpoint, formData)
+        return response;  
     },
 
 
-    // TODO: borra id de firma de metodo UPDATE
+    // PUT: Editar Listing (permite editar las imagenes)
     update: async (id, data, selectedFiles = null) => {
 
         const TOKEN = localStorage.getItem("token")
@@ -153,38 +89,21 @@ export const listingService = {
 
         if (selectedFiles?.length !== 0) {
             selectedFiles?.forEach((file) => {
-                formData.append('files', file); // 'images' es el nombre que recibirá tu backend
+                formData.append('files', file); 
             });
         }
 
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${data.id}`, {
-            method: 'PUT',
-            body: formData,
-            credentials: 'include',
-            ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } })
-        });
-
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}/${data.id}`
+        const response = await api.put(finalEndpoint, formData)
+        return response;  
     },
 
 
     // DELETE: Eliminar un producto por ID
-    Delete: async (id) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
-            method: 'DELETE',
-            credentials: 'include',
-            ...(TOKEN && { headers: {'Authorization': `Bearer ${TOKEN}`} })
-        });
-
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return response.status === 204 ? // HTTP 202 Accepted
-            { success: true } : await response.json();
+    delete: async (id) => {
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}`
+        const response = await api.delete(finalEndpoint)
+        return response;  
     },
 
 

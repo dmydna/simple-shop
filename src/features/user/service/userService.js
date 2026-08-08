@@ -1,14 +1,19 @@
 // src/services/userService.js
-import { mapToURLSearchParams } from "@utils/mappers.js" 
-import { ENDPOINTS, BASE_URL } from "@utils/config.js";
 import { api } from "@/utils/api";
-const ENDPOINT = ENDPOINTS.USER;
+import { ENDPOINT } from "@utils/config.js";
+import { mapToURLSearchParams } from "@utils/mappers.js";
 
+const BASE_ENDPOINT = ENDPOINT.USER;
 
+/**
+ * Servicio para gestionar las peticiones API de **usuario**.
+ * - Proporciona metodos **CRUD** para recursos de `api/listings`.
+ */
 export const userService = {
 
+    // GET: Obtener paginas de usuarios
     getPage : async ({ page = 0, size = 10, ...filters } = {}) => {
-        const finalEndpoint = ENDPOINTS.USER
+        const finalEndpoint = `${BASE_ENDPOINT}`
         const params = new URLSearchParams();
         params.append('page', page);
         params.append('size', size);
@@ -17,55 +22,57 @@ export const userService = {
         return response;
     },
 
+    //  GET: Obtener perfil de usuario autenticado
     getMyProfile: async () => {
-        const finalEndpoint = `${ENDPOINT}/me`;
+        const finalEndpoint = `${BASE_ENDPOINT}/me`;
         const response = await api.get(finalEndpoint);
         return response;
     },
 
 
-    /* Requiere ROLE: ADMIN */
+    // (ADMIN) GET: obtener usuario
     getById: async (id) => {
-        const finalEndpoint = `${ENDPOINT}/${id}`;
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}`;
         const response =  await api.get(finalEndpoint);
         return response
     },
 
 
-    /* Requiere ROLE: ADMIN */
+    // (ADMIN) DELETE: eliminar usuario
     delete: async (id) => {
-        const finalEndpoint = `${ENDPOINT}/${id}`;
-        const response =  await api.get(finalEndpoint);
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}`;
+        const response =  await api.delete(finalEndpoint);
         return response;
     },
 
-    /* Requiere ROLE: ADMIN */
+    // (ADMIN) PATCH: actualizar estatus de usuario
     updateStatus: async (id, status) => {
-        const finalEndpoint = `${ENDPOINT}/${id}/status`;
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}/status`;
         const params = new URLSearchParams();
         params.append('status', status);
         const response = await api.patch(finalEndpoint, params)
         return response;
     },
 
-    /* Requiere ROLE: ADMIN */
+    // (ADMIN) PATCH: aplicar baneo de usuario
     banUser: async (id, banRequest) => {
-        const finalEndpoint = `${ENDPOINT}/${id}/ban-user`
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}/ban-user`
         const response = api.patch(finalEndpoint, banRequest)
         return response; // {success: true}
     },
     
 
-    /* Requiere ROLE: ADMIN */
+    // (ADMIN) PATCH: quitar baneo de usuario
     unbanUser: async (id) => {
-        const finalEndpoint = `${ENDPOINT}/${id}/unban-user`
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}/unban-user`
         const response = api.patch(finalEndpoint)
         return response;  // {success: true}
     },
 
 
+    // PUT: subir/cambiar imagen de perfil
     imageUploadProfile: async (selectedFile) => {
-        const endpoint = `${ENDPOINTS.USER}/me/upload-image`;
+        const endpoint = `${BASE_ENDPOINT}/me/upload-image`;
         const formData = new FormData();
         // "file" debe coincidir con el @RequestParam de Java
         formData.append("file", selectedFile); 
@@ -74,8 +81,9 @@ export const userService = {
     },
 
 
+    // PUT: actualizar/editar datos de perfil de usuario
     updateMyProfile: async (profileData) => {
-        const endpoint = `${ENDPOINTS.USER}/me`;
+        const endpoint = `${BASE_ENDPOINT}/me`;
         const response = await api.put(endpoint, profileData)
         return response;
     },

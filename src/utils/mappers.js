@@ -160,7 +160,7 @@ export function arrayToDate(arr){
 
 export const mapToURLSearchParams = (urlParams, filters) => {
     Object.entries(filters).forEach(([key, value]) => {
-        console.log(key, value);
+        // console.log(key, value);
         // Solo agregamos si el valor existe y no es un objeto/array vacío
         if (value !== undefined && value !== null && value !== '') {
             if (Array.isArray(value) && value.length > 0) {

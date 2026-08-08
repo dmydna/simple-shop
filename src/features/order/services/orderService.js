@@ -1,174 +1,91 @@
 // src/services/orderService.js
-import { toCreateOrder, mapToURLSearchParams } from "@/utils/mappers.js";
-import { BASE_URL, ENDPOINTS } from "@utils/config.js";
-import { responseError } from "@/utils/service.js";
 import { api } from "@/utils/api";
-const ENDPOINT = ENDPOINTS.ORDER
+import { mapToURLSearchParams, toCreateOrder } from "@/utils/mappers.js";
+import { ENDPOINT } from "@utils/config.js";
 
+const BASE_ENDPOINT = ENDPOINT.ORDER;
+
+/**
+ * Servicio para gestionar las peticiones API de **pedidos**.
+ * - Proporciona metodos **CRUD** para recursos de `api/orders`.
+ */
 export const orderService = {
-    // GET ALL: Obtener todos los pedidos
-    getAll: async () => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}`, 
-           { 
-                credentials: 'include',
-                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
-            }
-        );
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
-    },
 
-    // GET: Obtener un pedido por ID
+    // (ADMIN) GET: Obtener pedido
     getById: async (id) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, 
-            { 
-                credentials: 'include',
-                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
-            }
-        );
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
-    },
-
-    getMyOrder: async (id) => {
-        const response = await api.get(`${ENDPOINT}/me/${id}`)
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}`
+        const response = await api.get(finalEndpoint)
         return response
     },
 
-    getByHash: async (id) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/hash/${id}`, 
-            { 
-                credentials: 'include',
-                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
-            }
-        );
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+    // GET: Obtener pedido de usuario autenticado 
+    getMyOrder: async (id) => {
+        const finalEndpoint = `${BASE_ENDPOINT}/me/${id}`
+        const response = await api.get(finalEndpoint)
+        return response
     },
 
-    // POST: Crear un nuevo pedido
-    // recibe CartItems
+    // GET: Obtener pedido por HASH
+    getByHash: async (id) => {
+        const finalEndpoint = `${BASE_ENDPOINT}/hash/${id}`
+        const response = await api.get(finalEndpoint)
+        return response;
+    },
+
+    // (ADMIN) POST: Crear pedido para usuario
     create: async (data, clientId) => {
         const orderData = toCreateOrder(data)
-        const TOKEN = localStorage.getItem("token")
-        const client = (clientId ? `?clientId=${clientId}` : '')
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}` + client, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}`} )
-                },
-                body: JSON.stringify(orderData)
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}/${clientId}`
+        const response = await api.post(finalEndpoint, orderData)
+        return response;
     },
 
-    // POST: Crear a partir de una lista pedido
-    createBulk: async (orderDataList) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/bulk`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}`} )
-            },
-            body: JSON.stringify(orderDataList)
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+    // POST: Crear pedido de usuario autenticado
+    createMyOrder: async (data) => {
+        const orderData = toCreateOrder(data)
+        const finalEndpoint = `${BASE_ENDPOINT}/me`
+        const response = await api.post(finalEndpoint, orderData)
+        return response;
     },
 
-    // PUT: Actualiza pedido por ID
+    // PUT: Actualizar pedido por ID
     update: async (id, orderData) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
-            method: 'PUT',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                ...(TOKEN && { 'Authorization': `Bearer ${TOKEN}`} )
-            },
-            body: JSON.stringify(orderData)
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}`
+        const response = await api.put(finalEndpoint, orderData)
+        return response;
     },
 
     // DELETE: Eliminar un pedido por ID
     delete: async (id) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/api/products/${id}`, {
-            method: 'DELETE',
-            credentials: 'include',
-            ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
-        });
-
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return response.status === 204 ?
-            { success: true } : await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}`
+        const response = await api.delete(finalEndpoint)
+        return response;
     },
 
-
+    // PUT: cancelar orden de usuario por id (por default cancela ultima orden registrada)
     cancel: async (id) => {
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/cancel/${id}`, {
-            method: 'PUT'
-        });
-
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return response.status === 204 ?
-            { success: true } : await response.json();
+        const params = new URLSearchParams();
+        params.append('id', id)
+        const finalEndpoint =  `${BASE_ENDPOINT}/me/cancel`
+        const response = await api.put(finalEndpoint, params)
+        return response;
     },
 
 
+    // POST: obtener paginas de ordenes
     getPage: async ({ page = 0 , size = 8, ...filters } = {}) => {
-
-        const TOKEN = localStorage.getItem("token")
-        // 1. Creamos un objeto plano para los parámetros
         const cleanParams = new URLSearchParams();
-
         cleanParams.append('page', page < 0 ? 0 : page);
         cleanParams.append('size', size);
-
-        // 2. Agregamos los filtros dinámicamente
         mapToURLSearchParams(cleanParams, filters);
-
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}`, 
-            { 
-                credentials: 'include',
-                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
-            }
-        );
-
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}`
+        const response = api.get(finalEndpoint, cleanParams);
+        return response;
     },
 
+    // GET: obtener pagina de historial de compras de usuario autenticado
     getMyPurchases: async ({ page = 0 , size = 8, ...filters } = {}) => {
-        const endpoint = `${ENDPOINTS.ORDER}/me/history`;
+        const endpoint = `${BASE_ENDPOINT.ORDER}/me/history`;
         const cleanParams = new URLSearchParams();
         cleanParams.append('page', page < 0 ? 0 : page);
         cleanParams.append('size', size);

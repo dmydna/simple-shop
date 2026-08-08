@@ -20,10 +20,6 @@ function LoginForm({ children, style, className}){
  
     const handleSubmit = async  (e) =>{
         e.preventDefault();
-       // si hay un error no continua.
-
-        console.log('ejecuta fetchdata profile')
-
         await login(formData)
         navigate("/user")
 

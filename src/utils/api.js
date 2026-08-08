@@ -15,18 +15,24 @@ export const apiFetch = async (endpoint, { method = 'GET', body = null, headers 
     url += `?${searchParams}`;
   }
 
+  const isFormData = body instanceof FormData;
+
   // 2. Encabezados por defecto
   const defaultHeaders = {
-    ...(body && { 'Content-Type': 'application/json' }),
+    // Solo agregar JSON si NO es FormData y SÍ hay un body
+    ...(!isFormData && body && { 'Content-Type': 'application/json' }),
     ...(token && { 'Authorization': `Bearer ${token}` }),
     ...headers,
   };
-
+  
   const config = {
     method,
     headers: defaultHeaders,
-    credentials: 'include', // Soporte para cookies HttpOnly / CORS
-    ...(body && { body: typeof body === 'string' ? body : JSON.stringify(body) }),
+    credentials: 'include',
+    // Si es FormData se pasa tal cual, si es objeto JS se convierte a JSON string
+    ...(body && { 
+      body: isFormData ? body : (typeof body === 'string' ? body : JSON.stringify(body)) 
+    }),
   };
 
   try {
@@ -54,8 +60,8 @@ export const api = {
   put: (endpoint, body = null, config = {}) => 
     apiFetch(endpoint, { method: 'PUT', body, ...config }),
 
-  patch: (endpoint, body = null, params = null ,config = {}) => 
-    apiFetch(endpoint, { method: 'PATCH', params, body, ...config }),
+  patch: (endpoint, body = null, config = {}) => 
+    apiFetch(endpoint, { method: 'PATCH', body, ...config }),
 
   delete: (endpoint, config = {}) => 
     apiFetch(endpoint, { method: 'DELETE', ...config }),
@@ -130,12 +136,18 @@ export const responseHandler = async (response, debug = {}) => {
   const logPrefix = `[${debug.method || 'REQ'}] ${debug.endpoint || response.url}`;
 
   if (!response.ok) {
-    console.info(`[FAIL] ${logPrefix}`);
+    console.groupCollapsed(`[FAIL] ${logPrefix}`);
+    console.log(response.url);
+    console.trace();
+    console.groupEnd();
     return await responseError(response);
   }
 
   if (debug.endpoint) {
-    console.info(`[OK] ${logPrefix}`);
+    console.groupCollapsed(`[OK] ${logPrefix}`);
+    console.log(response.url);
+    console.trace();
+    console.groupEnd();
   }
 
   return await responseOK(response);

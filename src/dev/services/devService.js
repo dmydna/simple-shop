@@ -1,9 +1,9 @@
 // src/dev/services/devService.js
 
+import { BASE_URL, ENDPOINT } from "@/utils/config.js";
 import { mapToURLSearchParams } from "@utils/mappers";
-import { ENDPOINTS, BASE_URL } from "@/utils/config.js";
-const ENDPOINT = ENDPOINTS.DEV;
 import { responseError } from '@utils/service.js';
+const BASE_ENDPOINT = ENDPOINT.DEV;
 
 /* ========= HTTP ==========
   - 1XX (Información)
@@ -25,7 +25,7 @@ export const devService = {
     // crea dada una lista
     createBulk: async (type, productData) => {
         const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${type}/bulk`, {
+        const response = await fetch(`${BASE_URL}/${BASE_ENDPOINT}/${type}/bulk`, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -52,7 +52,7 @@ export const devService = {
         // 2. Agregamos los filtros dinámicamente
         mapToURLSearchParams(cleanParams, filters);
 
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${type}?${cleanParams.toString()}`, { 
+        const response = await fetch(`${BASE_URL}/${BASE_ENDPOINT}/${type}?${cleanParams.toString()}`, { 
             credentials: 'include', 
             ...(TOKEN && {headers: { 'Authorization': `Bearer ${TOKEN}` }}) 
         });

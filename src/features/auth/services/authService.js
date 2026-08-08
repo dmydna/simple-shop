@@ -1,42 +1,31 @@
 // src/services/authService.js
-import { BASE_URL, ENDPOINTS } from "@utils/config.js";
-import {responseHandler, responseError} from '@utils/service.js';
+import { api } from "@/utils/api";
+import { ENDPOINT } from "@utils/config.js";
 
 
-
-const ENDPOINT = ENDPOINTS.AUTH
+const BASE_ENDPOINT = ENDPOINT.AUTH
 
 export const authService = {
+
     // Login: Envía credenciales y guarda el token
     login: async (credentials) => {
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/login`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(credentials)
-        });
-
-        return responseHandler(response);
+        const finalEndpoint = `${BASE_ENDPOINT}/login`
+        const response = await api.post(finalEndpoint, credentials)
+        return response;
     },
 
     // Registro: Crea el usuario y el profile de cliente
     register: async (userData) => {
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/register`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(userData)
-        });
-        return responseHandler(response);
+        const finalEndpoint = `${BASE_ENDPOINT}/register`
+        const response = await api.post(finalEndpoint, userData)
+        return response;
     },
 
     // Logout: Limpia el storage
     logout: async () => {
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/logout`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-        });
-        return responseHandler(response);
+        const finalEndpoint = `${BASE_ENDPOINT}/logout`
+        const response = await api.post(finalEndpoint)
+        return response;
     },
 
     // Helper para obtener el token guardado
@@ -48,33 +37,15 @@ export const authService = {
     // Registro: Crea el usuario y el profile de cliente
     changePassword: async (data) => {
         // data = {newPassword, oldPassword}
-        console.log(data)
-        const TOKEN = localStorage.getItem("token");
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/change-password`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 
-                'Content-Type': 'application/json',
-                ...(TOKEN && {'Authorization': `Bearer ${TOKEN}`})
-            },
-            body: JSON.stringify(data)
-        });
-        
-        return responseHandler(response);
+        const finalEndpoint = `${BASE_ENDPOINT}/change-password`
+        const response = await api.post(finalEndpoint, data)
+        return response;    
     },
 
-
     getMe: async () => {
-        console.log("AUTHENTICATION!")
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/me`, {
-            credentials: 'include',
-            ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } })
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();        
+        const finalEndpoint = `${BASE_ENDPOINT}/me`
+        const response = await api.get(finalEndpoint)
+        return response;      
     },
 
 

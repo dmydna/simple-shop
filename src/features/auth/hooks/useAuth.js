@@ -25,7 +25,7 @@ export function useAuth() {
       })
       .catch(() => setUser(null)) // Si responde 401, no está autenticado
       .finally(() => setLoading(false));
-  }, []);
+  },[]);
 
   const isAuth = useMemo(() => {
     return user ? true : false
@@ -36,7 +36,7 @@ export function useAuth() {
   }, [user])
 
   const expiredDate = useMemo(() => {
-      return new Date(user?.expiresAt).getTime() 
+      return user?.expiredAt 
   },[user])
 
 
@@ -100,7 +100,7 @@ export function useAuth() {
       setUser(data || null)
       setLogged(true);
       setLocalStorage({...data})
-      console.log(data)
+      //console.log(data)
     } catch (err) {
       console.error("Error de carga de API", err);
       setError("No se inicio session. Revisa tus credenciales.")

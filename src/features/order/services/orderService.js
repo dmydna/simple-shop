@@ -27,7 +27,7 @@ export const orderService = {
 
     // GET: Obtener pedido por HASH
     getByHash: async (id) => {
-        const finalEndpoint = `${BASE_ENDPOINT}/hash/${id}`
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}`
         const response = await api.get(finalEndpoint)
         return response;
     },
@@ -85,7 +85,7 @@ export const orderService = {
 
     // GET: obtener pagina de historial de compras de usuario autenticado
     getMyPurchases: async ({ page = 0 , size = 8, ...filters } = {}) => {
-        const endpoint = `${BASE_ENDPOINT.ORDER}/me/history`;
+        const endpoint = `${BASE_ENDPOINT}/me/history`;
         const cleanParams = new URLSearchParams();
         cleanParams.append('page', page < 0 ? 0 : page);
         cleanParams.append('size', size);

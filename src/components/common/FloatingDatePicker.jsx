@@ -24,7 +24,7 @@ const FloatingDatePicker = () => {
       // Formato compatible con Java LocalDateTime: "yyyy-MM-dd HH:mm:ss"
       const formatted = date.toISOString().slice(0, 19).replace('T', ' ');
       setSelectedDate(formatted);
-      console.log("Valor para Java:", formatted);
+      // console.log("Valor para Java:", formatted);
     }
   };
 

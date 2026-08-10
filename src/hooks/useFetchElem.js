@@ -13,7 +13,7 @@ export const useFetchElem = ({ fetchMethod }) => {
         try {
             const response = await fetchMethod(ID);
             setCurrentItem(response?.data || response);
-            console.log("desde fetchElem data",response.data)
+            // console.log("desde fetchElem data",response.data)
         } catch (err) {
             console.error("Error de carga de API", err);
             setError(err || "Error al cargar el elemento");

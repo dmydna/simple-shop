@@ -117,14 +117,14 @@ export const useCrudForm = (
         const isValidForm = await trigger(); 
         
         if (!isValidForm) {
-            console.log("❌ Validación fallida. Revisa los campos.");
+            // console.log("❌ Validación fallida. Revisa los campos.");
             console.group("❌ Errores de Validación Detectados");
             console.error("Estado de errores:", errors);
             
             // Recorrer los errores para verlos más limpios en consola
             Object.keys(errors).forEach(key => {
                 const error = errors[key];
-                console.log(`Campo: ${key} | Mensaje: ${error?.message}`);
+                // console.log(`Campo: ${key} | Mensaje: ${error?.message}`);
             });
             console.groupEnd();
             window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -134,11 +134,11 @@ export const useCrudForm = (
 
         // Si es válido, obtenemos los datos
         const data = getValues();
-        console.log("data:",data)
+        // console.log("data:",data)
         
         // Ejecutamos la acción específica (create, update, etc.)
         // Pasamos también el selectedFile si es necesario
-        console.log("selectedFile:", selectedFile)
+        // console.log("selectedFile:", selectedFile)
         await actionCallback(data, selectedFile);
         return true;
     };

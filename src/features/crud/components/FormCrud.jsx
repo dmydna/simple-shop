@@ -62,7 +62,7 @@ function FormCrud({
     }
 
     const handleEditDraft = async (data, selectedFile = null) => {
-        console.log("handleEditDraft:",  data);
+        // console.log("handleEditDraft:",  data);
         await handleUpdate(data.id, data, selectedFile)
     }
 

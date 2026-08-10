@@ -26,14 +26,14 @@ export default function ListingActions({ close }) {
     const location = useLocation();
 
     //Params
-    const {modeParam, hashParam} = useUrlParams()
+    const {modeParam, idParam} = useUrlParams()
 
 
     // URLs
     const FORM_URL = "/dashboard/listing-form";
 
     useEffect(() => {
-        if (hashParam) { setId(hashParam) } else { setCurrentItem(null) }
+        if (idParam) { setId(idParam) } else { setCurrentItem(null) }
         if (success) { 
             refreshElem(); // refrescar elemento (local)
             setSearchParams(prev => { // refrescar lista (global)
@@ -42,7 +42,7 @@ export default function ListingActions({ close }) {
                 return newParams;
             },{ replace: true });
        }
-    }, [hashParam, success])
+    }, [idParam, success])
 
 
    // VISIBLE BUTTONS
@@ -62,20 +62,20 @@ export default function ListingActions({ close }) {
 
   const EDIT_LINK = useMemo(()=>{
     if(currentItem?.meta?.status === 'DRAFT'){
-        return `${FORM_URL}?mode=edit.draft&hash=${currentItem?.hash}`
+        return `${FORM_URL}?mode=edit.draft&hash=${currentItem?.id}`
     }
-    return `${FORM_URL}?mode=edit&hash=${currentItem?.hash}`
+    return `${FORM_URL}?mode=edit&hash=${currentItem?.id}`
   },[currentItem])
 
 
   const CREATE_LINK = `${FORM_URL}?mode=create`
 
   const CLONE_LINK = useMemo(()=>{
-    return `${FORM_URL}?mode=create&hash=${currentItem?.hash}`
+    return `${FORM_URL}?mode=create&hash=${currentItem?.id}`
   },[currentItem])
 
   const VIEW_LINK = useMemo(()=>{
-    return `${FORM_URL}?mode=view&hash=${currentItem?.hash}`
+    return `${FORM_URL}?mode=view&hash=${currentItem?.id}`
   },[currentItem])
 
   const PRODUCT_SPECS_LINK = useMemo(()=>{
@@ -85,7 +85,7 @@ export default function ListingActions({ close }) {
 
   // PARAMs VALIDATIONS
   useValidParams({
-    id: (val) => val && /^[0-9]+$/.test(val), // Solo números
+    id: (val) => val != null, // Solo números
     mode: (val) => ['view','create', 'edit', 'draft', 'edit.draft'].includes(val), // Solo valores permitidos
     status: (val) => ['ACTIVE','INACTIVE','DELETED', 'DRAFT'].includes(val), 
   }, {redirect: "/dashboard/list-list"});
@@ -152,7 +152,7 @@ export default function ListingActions({ close }) {
                     </ButtonLink>
 
                     <ButtonLink
-                        handle={() => navigate(`/p/${currentItem.hash}`)}
+                        handle={() => navigate(`/p/${currentItem.id}`)}
                         icon="bi-box-arrow-up-right"
                         visible={ isStatusActive }
                     >
@@ -218,7 +218,7 @@ export default function ListingActions({ close }) {
 
 
                     <ButtonLink
-                        visible={ hashParam }
+                        visible={ idParam }
                         handle={() => navigate(VIEW_LINK)}
                         icon="bi-three-dots"
                     >
@@ -230,7 +230,7 @@ export default function ListingActions({ close }) {
 
                     <ButtonLink
                         disabled={true}
-                        visible={ !hashParam }
+                        visible={ !idParam }
                         icon="bi-upload"
                         handle={() => navigate('/faqs')}
                     >
@@ -240,7 +240,7 @@ export default function ListingActions({ close }) {
 
                     <ButtonLink
                         disabled={true}
-                        visible={ !hashParam }
+                        visible={ !idParam }
                         icon="bi bi-download"
                         handle={() => navigate('/faqs')}
                     >

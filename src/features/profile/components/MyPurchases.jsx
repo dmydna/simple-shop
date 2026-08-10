@@ -26,7 +26,7 @@ function MyPurchases() {
     const buildDescription = (item) => {
         return `
             ${buildTime(item?.createdAt)} -- 
-            OrderId #${item?.orderId} -- 
+            Order #${item?.orderId} -- 
             ${item?.quantity} x $${(item?.priceAtPurchase / item?.quantity).toFixed(2)}
             (${item?.discountPercentageAtPurchase && 
             `${item?.discountPercentageAtPurchase}%OFF`})

@@ -2,14 +2,14 @@ import { placeholder } from "@utils/image.js";
 import { useProfile } from "@features/profile/contexts/ProfileContext.jsx";
 import { useEffect } from "react";
 import { Card } from "react-bootstrap";
+import userDefaultXL from "/user-default-xl.png"
+import ImgAction from "@/components/common/ImgAction";
+import { useNavigate } from "react-router-dom";
 
 function CardProfile({ name, image, children, className, imgSize }) {
 
     const { profile, fetchData } = useProfile()
-
-    useEffect( ()=> {
-        fetchData()
-    },[])
+    const navigate = useNavigate()
 
     const baseImg = {
         dimension: "150x150",
@@ -22,25 +22,30 @@ function CardProfile({ name, image, children, className, imgSize }) {
     return (
         <Card  className={`mb-2 island border text-start flex-row`}>
             <div className="d-block mx-auto position-relative">
-                <Card.Img className="perfil-img rounded-circle" src={profile?.image || placeholder({...baseImg})}
+                <ImgAction
+                    action={() => navigate('/user/photo')}
+                    icon={'bi-pencil'} 
+                    className="perfil-img rounded-circle" 
+                    src={profile?.image || userDefaultXL}
                           style={{
                               objectFit: 'cover',
                               height: imgSize || '120px',
                               width: imgSize || '120px',
                               padding: "1rem",
                               marginInline: "auto",
-                          }}
+                          }} 
                 />
             </div>
 
 
             <Card.Body className="rounded mt-2 ps-1 overflow-hidden me-3">
                 <Card.Title className='fs-6 mb-0'>
-                    { profile?.name || profile?.username || profile?.clientName || "" }
+                    { profile?.username || "" }
                 </Card.Title>
                 <Card.Text className="mb-0">
-                <span style={{whiteSpace: 'nowrap'}} className="text-secondary mb-0 small">
-                    {  profile?.role == 'ADMIN' ? 'admin@mail.com' : (profile?.email || '') }
+                <span style={{whiteSpace: 'nowrap', maxWidth:'100%'}} 
+                    className="text-secondary mb-0 small d-inline-block text-truncate">
+                    { profile?.email || '' }
                 </span>
                 </Card.Text>
                 <p className="small pill-success d-inline-block mb-0" 

@@ -25,7 +25,7 @@ export const MyCart = ({ children, className }) => {
                     <Alert variant="danger mx-2">
                         <i className="bi bi-exclamation-triangle me-3"></i>
                         Para usar esta caracterisca completa el proceso registro registro.
-                        <b  onClick={() => navigate('/register/complete')} className=" text-decoration-underline pointer mx-2" href="/complete-register">completar</b>  
+                        <b  onClick={() => navigate('/complete-register')} className=" text-decoration-underline pointer mx-2" href="/complete-register">completar</b>  
                     </Alert>
             )}
 

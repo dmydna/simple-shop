@@ -12,7 +12,7 @@ export default function ModalParam({ children, param, inverse = false }) {
 
     // 1. Extraer Key y Valores Esperados en un solo paso
     const { key, expectedValues } = useMemo(() => {
-        console.log(param)
+        // console.log(param)
         if (!param) return { key: null, expectedValues: [] };
 
         const [k, rawValue] = param.split('=');

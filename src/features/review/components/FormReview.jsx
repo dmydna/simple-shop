@@ -79,7 +79,7 @@ function FormReview({className, close}) {
                             <div className='d-flex gap-3 mb-3  border-0 rounded-3 p-2 w-100'>  
                                 <img style={{ height: '55px', width: '55px' }} className='rounded' src={currentItem?.image || placeholder({ dimension: "45x45", background: ".menta", fontSize: "20", icon: "f244" })} />
                                 <div className="flex-fill">
-                                    <p onClick={()=> navigate(`/p/${currentItem?.hash}`)} 
+                                    <p onClick={()=> navigate(`/p/${currentItem?.id}`)} 
                                        className='small fw-semibold m-0 pointer'>
                                        {currentItem?.title}
                                     </p>

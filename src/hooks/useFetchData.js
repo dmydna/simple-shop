@@ -4,7 +4,7 @@ import { usePageable } from "../features/pagination/hook/usePageable.js";
 import { useFetch } from "./useFetch.js";
 
 
-export const useFetchData = ({service, size, methodName = 'getPage', autofetch=true, ...config}) => {
+export const useFetchData = ({service, size = 8, methodName = 'getPage', autofetch=true, ...config}) => {
 
     const [filters, setFilters] = useState({})
 

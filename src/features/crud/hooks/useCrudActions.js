@@ -18,7 +18,7 @@ export const useCrudActions = ({ service, onRefresh }) => {
     };
 
     const handleUpdate = async (...args) => {
-        console.log("update: ", ...args)
+        // console.log("update: ", ...args)
         await update(...args);
     };
 

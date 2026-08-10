@@ -43,7 +43,7 @@ const FormUploadImage = ({ productId, title, className, multiple = true }) => {
 
     // Importante: actualizar lista de imagenes eliminados a enviar.
     setDataItem({...dataItem,"images": newPreview})
-    console.log(dataItem);
+    // console.log(dataItem);
 
     // Si borras todas las fotos, reseteamos el input físicamente
     if (newSelectedFiles.length === 0 && fileInputRef.current) {

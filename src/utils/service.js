@@ -10,7 +10,7 @@ export async function responseError(response) {
     // Intentamos JSON primero
     try {
         errorData = await response.json();
-        console.log(errorData)
+        // console.log(errorData)
         // Extraemos mensaje si existe
         if (errorData.message) errorMessage = errorData.message;
         else if (errorData.error) errorMessage = errorData.error;
@@ -45,7 +45,7 @@ export async function responseError(response) {
     customError.code = errorData.code
 
     console.error("Error capturado en service:", customError);
-    console.log("Error capturado en service:", response);
+    // console.log("Error capturado en service:", response);
     
     // 4. Lanzar el error (esto interrumpe el flujo de banUser)
     throw customError;

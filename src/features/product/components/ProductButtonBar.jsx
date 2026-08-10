@@ -40,7 +40,7 @@ export default function  ProductButtonBar({item}){
 
 
     const handleEdit = () => {
-        navigate(`/dashboard/listing-form?mode=edit${item.meta.status == 'DRAFT' ? '.draft' : ''}&hash=${item.hash}`)
+        navigate(`/dashboard/listing-form?mode=edit${item.meta.status == 'DRAFT' ? '.draft' : ''}&hash=${item.id}`)
     }
 
     // Toggle Active/Inactive

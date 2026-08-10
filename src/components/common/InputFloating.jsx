@@ -1,10 +1,10 @@
 import { placeholder } from "@/utils/image";
 import { FloatingLabel, Form } from "react-bootstrap";
 
-export default function InputFloating({register, errors, name, type, label}) {
+export default function InputFloating({register, errors, name, type, label, className}) {
 	
 	return (   
-		<Form.Group className="mb-4 w-100">
+		<Form.Group className={ className || 'mb-4 w-100' }>
 			<FloatingLabel
 				controlId={`floating-${name}`}
 				label={label || name}

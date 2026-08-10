@@ -32,7 +32,7 @@ export default function CarouselItems({ items, title, children, className, chunk
 
 
   useEffect(() => {
-    console.log("slides:", slides)
+    // console.log("slides:", slides)
   }, [slides])
 
   return (

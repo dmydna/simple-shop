@@ -10,7 +10,7 @@ const NativeDateTimeInput = () => {
     // Añadimos ":00" para asegurar compatibilidad con Java LocalDateTime (segundos).
     const formatted = value ? `${value}:00` : '';
     setSelectedDate(formatted);
-    console.log("Valor para Java:", formatted);
+    // console.log("Valor para Java:", formatted);
   };
 
   return (

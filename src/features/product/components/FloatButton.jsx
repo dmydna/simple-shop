@@ -31,7 +31,7 @@ export function ToggleIcon({action, children, icon, status, className}){
   const [isHovered, setIsHovered] = useState(false);
 
   const iconClass =  useMemo(()=>{
-     console.log("status", status)
+     // console.log("status", status)
      if(status) return `bi-${icon}-fill`
      if(isHovered) return `bi-${icon}-fill`
      return `bi-${icon}`

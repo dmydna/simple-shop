@@ -22,7 +22,7 @@ function RegisterForm({ children, style, className}){
     const autoLogin = async () => {
         const {username, password} = formData;
         await login({username, password});
-        navigate("/register/complete");
+        navigate("/complete-register");
     }
     
     useEffect( () => { 

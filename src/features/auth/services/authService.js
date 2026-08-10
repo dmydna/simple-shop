@@ -42,6 +42,14 @@ export const authService = {
         return response;    
     },
 
+    changeEmail: async (data) => {
+        // data = {password, newEmail}
+        const finalEndpoint = `${BASE_ENDPOINT}/change-email`
+        const response = await api.post(finalEndpoint, data)
+        return response;    
+    },
+
+
     getMe: async () => {
         const finalEndpoint = `${BASE_ENDPOINT}/me`
         const response = await api.get(finalEndpoint)

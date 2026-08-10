@@ -76,7 +76,23 @@ export function useAuth() {
     setLoading(true)
     setError(null)
     try {
-      const data = await authService.changePassword(passwData);
+      await authService.changePassword(passwData);
+    } catch (err) {
+      console.error("Error de carga de API", err);
+      setError("Error. Revisa los campos solicitados.", err)
+      throw err;
+    } finally {
+      setLoading(false)
+      nprogress.done();
+    }
+  }
+
+  const changeEmail = async (data) => {
+    nprogress.start();
+    setLoading(true)
+    setError(null)
+    try {
+      await authService.changeEmail(data);
     } catch (err) {
       console.error("Error de carga de API", err);
       setError("Error. Revisa los campos solicitados.", err)
@@ -100,7 +116,7 @@ export function useAuth() {
       setUser(data || null)
       setLogged(true);
       setLocalStorage({...data})
-      //console.log(data)
+      //// console.log(data)
     } catch (err) {
       console.error("Error de carga de API", err);
       setError("No se inicio session. Revisa tus credenciales.")
@@ -137,7 +153,7 @@ export function useAuth() {
     setLoading(true)
     setError(null)
     try {
-      const data = await authService.register(userData);
+      await authService.register(userData);
     } catch (err) {
       console.error("Error de carga de API", err);
       setError("Error. Revisa los campos solicitados.")
@@ -182,7 +198,8 @@ export function useAuth() {
     setReset,
     logged,
     setLogged,
-    changePassword 
+    changePassword,
+    changeEmail
   });
 }
 

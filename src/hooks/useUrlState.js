@@ -11,7 +11,7 @@ export const useUrlState = () => {
 
   // Estado de solo lectura derivado de la URL
   const params = useMemo(() => {
-    console.log(searchParams)
+    // // console.log(searchParams)
     const obj = {};
     searchParams.forEach((value, key) => {
       obj[key] = value;
@@ -34,7 +34,7 @@ export const useUrlState = () => {
 
       Object.entries(nextObj).forEach(([key, value]) => {
 
-        console.log([key, value])
+          //// console.log([key, value])
 
         if (value === null || value === undefined) {
           // Si es null/undefined, no lo agregamos (efecto de eliminar)
@@ -46,7 +46,7 @@ export const useUrlState = () => {
         }
       });
 
-    console.log(newSearchParams)
+      // // console.log(newSearchParams)
       return newSearchParams;
       
     },{ replace: true });

@@ -45,9 +45,9 @@ function MyFavorites({ children }) {
                         key={index} 
                         {...item}
                         title={`${item?.title} - $${item.price}`}
-                        description={`Publicacion #${item?.hash}`}
+                        description={`Publicacion #${item?.id}`}
                         className={"mb-1 rounded"}
-                        toUrl={`/p/${item.hash}`}
+                        toUrl={`/p/${item.id}`}
                         remove={() => handleDeleteFavorite(item?.id)}
                     />
                 )}

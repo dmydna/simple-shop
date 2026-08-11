@@ -1,77 +1,46 @@
-
-import { BASE_URL, ENDPOINTS } from "@utils/config.js";
+import { api } from "@/utils/api";
+import { ENDPOINT } from "@utils/config.js";
 import { mapToURLSearchParams } from "@utils/mappers.js";
-import { responseError } from '@utils/service.js';
-const ENDPOINT = ENDPOINTS.PROFILE + "/favorites"
 
 
+const BASE_ENDPOINT = ENDPOINT.FAVORITE;
 
 
+/**
+ * Servicio para gestionar las peticiones API de **favoritos**.
+ * - Proporciona metodos **CRUD** para recursos de `api/favorites`.
+ */
 export const favoriteService = {
 
-    // Nota: Obtiene los reviews Pendientes del usuario
-    // no son reviews, son requests de review.
     getPage: async ({ page = 0 , size = 8, ...filters } = {}) => {
-
-        const TOKEN = localStorage.getItem("token")
-        // 1. Creamos un objeto plano para los parámetros
-        const cleanParams = new URLSearchParams();
-
-        cleanParams.append('page', page);
-        cleanParams.append('size', size);
-
-        // 2. Agregamos los filtros dinámicamente
-        mapToURLSearchParams(cleanParams, filters);
-
-        console.log("URL Corregida:", cleanParams.toString());
-
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}`,
-            {
-                credentials: 'include',
-                ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
-            }
-        );
-        if (!response.ok) throw new Error("Error en la API");
-        return await response.json();
+        const params = new URLSearchParams();
+        const finalEndpoint = BASE_ENDPOINT
+        params.append('page', page);
+        params.append('size', size);
+        mapToURLSearchParams(params, filters);
+        const response = await api.get(finalEndpoint, params)
+        return response;
     },
 
     create: async (listingId) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${listingId}`, {
-            method: 'POST',
-            credentials: 'include',
-            ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
-        });
-        if (!response.ok) throw new Error("Error al agregar favorito");
-        return await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}/${listingId}`
+        const response = await api.post(finalEndpoint)
+        return response;  
     },
 
 
     isFavoriteProduct: async (listingId) => {
-        console.log(listingId)
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${listingId}/check`, {
-            method: 'GET',
-            credentials: 'include',
-            ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        const data = await response.json();
-
-        return data?.isFavorite;
+        const finalEndpoint = `${BASE_ENDPOINT}/${listingId}/check`
+        const {isFavorite} = await api.get(finalEndpoint)
+        return isFavorite;  
     },    
 
+
+
     Delete: async (listingId) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${listingId}`, {
-            method: 'DELETE',
-            credentials: 'include',
-            ...( TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}`} } )
-        });
-        if (!response.ok) throw new Error("Error al borrar favorito");
-        return await response;
+        const finalEndpoint = `${BASE_ENDPOINT}/${listingId}`
+        const response = await api.delete(finalEndpoint)
+        return response;   
     },
 
 }

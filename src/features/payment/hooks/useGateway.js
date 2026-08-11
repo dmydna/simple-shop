@@ -18,13 +18,13 @@ export const useGateway = ({buy, setLoading, setError, onSuccess, orderResponse}
                 { "orderId": orderResponse.orderId,  "userEmail": profile.email }
             )
             setTokenGateway(token)
-            console.log(token, "-- GATEWAY REQUEST [OK] --")
+            // console.log(token, "-- GATEWAY REQUEST [OK] --")
             return  (
                 { "orderId": orderResponse.orderId , "paymentToken" : token }
             )
         }catch(error){
             setError(true)
-            console.log(error, "-- GATEWAY REQUEST [FAIL] --")
+            // console.log(error, "-- GATEWAY REQUEST [FAIL] --")
             throw new Error(error);
         }finally{
             setLoading(false)
@@ -36,12 +36,12 @@ export const useGateway = ({buy, setLoading, setError, onSuccess, orderResponse}
         setError(null)
         try{
            const response = await buy(tokenRequest)
-           console.log(response, "-- FINISH BUY [OK] --")
+           // console.log(response, "-- FINISH BUY [OK] --")
            setLoading(false)
            onSuccess()
            setError(false)
         }catch(error){
-           console.log(error, "-- FINISH BUY [FAIL] --")
+           // console.log(error, "-- FINISH BUY [FAIL] --")
            setError(true)
            throw new Error(error);
         }finally{

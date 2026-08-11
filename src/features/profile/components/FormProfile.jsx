@@ -25,30 +25,57 @@ export default function FormProfile({children, id, formHook, submit}) {
 				errors={errors}
 			/>
 
+   		    <div className="d-flex gap-0 gap-md-3 flex-wrap flex-md-nowrap">
+				<InputFloating
+					className={'mb-0 w-100'}
+					placeholder="Ingrese Domicilio"
+					type="text"
+					name="address"
+					register={register}
+					errors={errors}
+				/>
+	
+				<InputFloating
+					className={'mb-0 w-100'}
+					placeholder="Ingrese Telefono"
+					type="text"
+					name="phone"
+					register={register}
+					errors={errors}
+				/>
+			</div>
 			<InputFloating
-				placeholder="Ingrese Email"
+				className={'mb-0 w-100'}
+				placeholder="Ingrese Ciudad"
 				type="text"
-				name="email"
+				name="city"
 				register={register}
 				errors={errors}
 			/>
 
-			<InputFloating
-				placeholder="Ingrese Domicilio"
-				type="text"
-				name="address"
-				register={register}
-				errors={errors}
-			/>
-
-			<InputFloating
-				placeholder="Ingrese Telefono"
-				type="text"
-				name="phone"
-				register={register}
-				errors={errors}
-			/>
     
+    		<div className="d-flex gap-0 gap-md-3 flex-wrap flex-md-nowrap">
+
+				<InputFloating
+					className={'mb-0 w-100'}
+					placeholder="Ingrese Estado"
+					type="text"
+					name="state"
+					register={register}
+					errors={errors}
+				/>
+	
+				<InputFloating
+					className={'mb-0 w-100'}
+					placeholder="Ingrese Codigo Postal"
+					type="number"
+					name="zipCode"
+					register={register}
+					errors={errors}
+				/>
+
+			</div>
+
 		{children}
 
 		</Form >

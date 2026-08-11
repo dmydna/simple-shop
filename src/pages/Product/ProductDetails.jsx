@@ -114,7 +114,7 @@ function ProductDetails() {
                         <ProductCarousel
                            className="border mx-0 my-3 p-4 island"
                            filter={{ category: currentItem.category }}
-                           blacklist={[currentItem.hash]}
+                           blacklist={[currentItem.id]}
                            maxCols={4}
                            imgSize={140} >
                            <h3 className="fs-5 fw-medium pb-0 m-0 ">Productos similares</h3>

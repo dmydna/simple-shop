@@ -8,7 +8,7 @@ export const usePurchaseOrder = ({onSuccess, setLoading, setError, canceled , se
 
     const { cartItems } = useCart()
     const [orderResponse, setOrderResponse] = useState()
-    const {create: createOrder, cancel: cancelOrder } = useService({service: orderService})
+    const {createMyOrder, cancel: cancelOrder } = useService({service: orderService})
     const {create: buy }  = useService({service: buyService})
 
 
@@ -17,10 +17,10 @@ export const usePurchaseOrder = ({onSuccess, setLoading, setError, canceled , se
        setError(null)
        setLoading(true)
        try {
-          const order = await  createOrder(cartItems);
+          const order = await  createMyOrder(cartItems);
           setOrderResponse(order)
           onSuccess() // <-- muestra formPayData
-          console.log(order, "-- ORDER VALIDA! --")
+          // console.log(order, "-- ORDER VALIDA! --")
        } catch (err) {
           setError(err)
        } finally {
@@ -35,7 +35,7 @@ export const usePurchaseOrder = ({onSuccess, setLoading, setError, canceled , se
           await cancelOrder(orderResponse.orderId);
           setCanceled(true)
           onSuccess()
-          console.log(orderResponse, "-- CANCELED ORDER --")
+          // console.log(orderResponse, "-- CANCELED ORDER --")
       }catch(err){
           setError(err)
       } finally {

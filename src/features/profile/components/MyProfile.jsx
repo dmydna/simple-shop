@@ -28,7 +28,6 @@ function MyProfile({ children }) {
     useEffect(()=>{
         // setea valores iniciales
         reset(profile)
-        console.log(profile)
     },[profile])
 
     const onSubmit = async (data) => {

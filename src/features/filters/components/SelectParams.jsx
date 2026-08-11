@@ -23,7 +23,7 @@ const AvalabilityStock = () => {
 const SelectByEnum = ({content, label, cols, textStyle, multiseleccion}) => {
 
   // Extraer etiquetas únicas de los listings
-	console.log(content)
+	// console.log(content)
   const Tags = useMemo(() => {
     const res = new Set();
     for(let tag in content){

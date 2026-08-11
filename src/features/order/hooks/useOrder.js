@@ -2,13 +2,13 @@ import { orderService } from "../services/orderService.js";
 import { useFetchData } from "@hooks/useFetchData.js";
 import { useFetchElem } from "@/hooks/useFetchElem.js";
 
-export const useOrder = () => {
+export const useOrder = (config) => {
 
     const { loading: loadingList, error: errorList, content, setContent, totalElements, setFilters, ...props }
-        = useFetchData({ service: orderService, size: 8 })
+        = useFetchData({ service: orderService, autofetch: false ,...config })
 
     const { loading: loadingItem, error: errorItem, setError: setErrorItem ,currentItem, setCurrentItem, id, setId, refreshElem }
-        = useFetchElem({ fetchMethod: orderService.getById })
+        = useFetchElem({ fetchMethod: orderService.getMyOrder })
 
 
 

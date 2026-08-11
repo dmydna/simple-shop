@@ -4,15 +4,15 @@
 export const BASE_URL = import.meta.env.VITE_API_URL; 
 export const BASE_URL_IMG = `${BASE_URL}/uploads` // https://cdn.dummyjson.com
 
-export const ENDPOINTS = Object.freeze({
+export const ENDPOINT = Object.freeze({
     DEV:       'dev', // incluye: dev/products, dev/listing, dev/users, dev/orders
     HEALTH:    'api/health',
-    LISTENING: 'api/listings',
+    LISTING:   'api/listings',
+    FAVORITE:  'api/favorites',
     PRODUCT:   'api/products',
     USER:      'api/users',
     ORDER:     'api/orders',
     AUTH:      'api/auth',
-    PROFILE:   'api/profile',
     BUY:       'api/buy',
     REVIEWS:   'api/reviews',
     STATS:     'api/stats',

@@ -1,21 +1,15 @@
-import { BASE_URL, ENDPOINTS } from "@utils/config.js";
-import { responseError } from '@utils/service.js';
-const ENDPOINT = ENDPOINTS.HEALTH;
+import { api } from "@/utils/api";
+import { ENDPOINT } from "@utils/config.js";
 
-export const heathService = {
 
+const BASE_ENDPOINT = ENDPOINT.HEALTH;
+
+export const healthService = {
+
+    // GET: Verifica la coneccion con el servidor
 	checkConnection: async () => {
-        // Pasa  visibilidad como un Query Parameter (?visibility=...)
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/`, {
-            method: 'GET',
-            credentials: 'include', // enviar/recibir cookies
-            ...(TOKEN && { headers : {'Authorization': `Bearer ${TOKEN}`} })
-        });
-    
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}`
+        const response = await api.get(finalEndpoint)
+        return response
     },
 }

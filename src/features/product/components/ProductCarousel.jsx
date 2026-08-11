@@ -25,7 +25,7 @@ function ProductCarousel({ children, filter, maxCols, maxElems, className, imgSi
 
   useEffect(() => {
     setFilters(filter)
-    console.log(filter)
+    // console.log(filter)
   }, [filter])
 
 
@@ -50,7 +50,7 @@ function ProductCarousel({ children, filter, maxCols, maxElems, className, imgSi
       setVisibleProducts(prev => prev.filter(
         (item) => {
           for (let b of blacklist) {
-            if (b === item.hash) {
+            if (b === item.id) {
               return false
             }
           }

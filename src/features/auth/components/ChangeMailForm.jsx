@@ -1,53 +1,44 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {Alert, Button, Col, Form} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-import { useUIContext } from "../../../contexts/UIContext.jsx";
 import {useForm} from "../../../hooks/useForm.js";
-import { useAuth } from "../hooks/useAuth.js";
 import { useAuthContext } from "../contexts/AuthContext.jsx";
 
 
-function LoginForm({ children, style, className}){
+function ChangeMailForm({ children, style, className }){
 
-    const { setShowLoginModal} = useUIContext()
-    const { login, loading, error,  setReset } = useAuthContext();
-    const { onChange, formData} = useForm()
+    const { loading, error,  changeEmail } = useAuthContext();
+    const { onChange, formData } = useForm()
 
     const navigate = useNavigate();
-    
-
-    useEffect(()=> setReset(true),[])
  
     const handleSubmit = async  (e) =>{
         e.preventDefault();
-        await login(formData)
+        await changeEmail(formData)
         navigate("/user")
-
-        setShowLoginModal(false)
    };
-
 
     return (
         <Col className={`${className} mx-auto`} style={style}>
                 {children}
             <Form  onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
-                    <Form.Label>Usuario</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="username"
-                        placeholder="username o email"
-                        value={formData.username}
-                        onChange={onChange}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3">
                     <Form.Label>Contraseña</Form.Label>
                     <Form.Control
                         type="password"
                         name="password"
-                        placeholder="password"
+                        placeholder="Ingresa tu contraseña"
                         value={formData.password}
+                        onChange={onChange}
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Nuevo correo electronico</Form.Label>
+                    <Form.Control
+                        type="email"
+                        name="newEmail"
+                        placeholder="Ingrese email"
+                        value={formData.newEmail}
                         onChange={onChange}
                     />
                 </Form.Group>
@@ -64,13 +55,15 @@ function LoginForm({ children, style, className}){
                         Cargando...
                     </Button>
 
-                    : <Button variant="primary" type="submit" className="w-100 my-2" >Acceder</Button>
+                    : <Button variant="primary" type="submit" className="w-100 my-2" >
+                        Confirmar
+                      </Button>
                 }
 
                 <div className="d-flex justify-content-center m-2">
-                   <p className="me-2">¿Aun no tienes una cuenta?</p>
-                    <Link onClick={()=> setShowLoginModal(false)} to={"/register"}>
-                        <p className="text-primary fw-bold">Registrarme</p>
+                   <p className="me-2">¿Olvidaste tu contraseña?</p>
+                    <Link to={"/faqs"}>
+                        <p className="text-primary fw-bold">Restaurar</p>
                     </Link>
                 </div>
 
@@ -82,4 +75,4 @@ function LoginForm({ children, style, className}){
 }
 
 
-export default LoginForm;
+export default ChangeMailForm;

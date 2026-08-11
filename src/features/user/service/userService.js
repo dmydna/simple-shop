@@ -1,159 +1,90 @@
 // src/services/userService.js
-import { mapToURLSearchParams } from "@utils/mappers.js" 
-import { responseError } from "@/utils/service.js";
-import { ENDPOINTS, BASE_URL } from "@utils/config.js";
-const ENDPOINT = ENDPOINTS.USER;
+import { api } from "@/utils/api";
+import { ENDPOINT } from "@utils/config.js";
+import { mapToURLSearchParams } from "@utils/mappers.js";
 
-/* ------ ACCESO SOLO CON TOKEN ------- */
+const BASE_ENDPOINT = ENDPOINT.USER;
+
+/**
+ * Servicio para gestionar las peticiones API de **usuario**.
+ * - Proporciona metodos **CRUD** para recursos de `api/listings`.
+ */
 export const userService = {
 
+    // GET: Obtener paginas de usuarios
     getPage : async ({ page = 0, size = 10, ...filters } = {}) => {
-        // 1. Creamos un objeto plano para los parámetros
-
-        const TOKEN = localStorage.getItem("token")
-        const cleanParams = new URLSearchParams();
-
-        cleanParams.append('page', page);
-        cleanParams.append('size', size);
-
-        // 2. Agregamos los filtros dinámicamente
-        mapToURLSearchParams(cleanParams, filters)
-
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}?${cleanParams.toString()}` , {
-            credentials: 'include',
-            ...(TOKEN && {headers: {'Authorization': `Bearer ${TOKEN}`}}),
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}`
+        const params = new URLSearchParams();
+        params.append('page', page);
+        params.append('size', size);
+        mapToURLSearchParams(params, filters)
+        const response = await api.get(finalEndpoint, params.toString());
+        return response;
     },
 
-    /* ------------------------------------------- */
-    // GET: Obtener un usuario por ID
+    //  GET: Obtener perfil de usuario autenticado
+    getMyProfile: async () => {
+        const finalEndpoint = `${BASE_ENDPOINT}/me`;
+        const response = await api.get(finalEndpoint);
+        return response;
+    },
+
+
+    // (ADMIN) GET: obtener usuario
     getById: async (id) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
-            credentials: 'include',
-            headers: { 'Authorization': `Bearer ${TOKEN}` },
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
-    },
-
-    getMe: async () => {
-        console.log("AUTHENTICATION!")
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/me`, {
-            credentials: 'include',
-            ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } })
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();        
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}`;
+        const response =  await api.get(finalEndpoint);
+        return response
     },
 
 
-    getProfileById: async (id) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/profile`, {
-            credentials: 'include',
-            headers: { 'Authorization': `Bearer ${TOKEN}` },
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
-    },
-
-
-    // DELETE: Eliminar un usuario por ID
+    // (ADMIN) DELETE: eliminar usuario
     delete: async (id) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}`, {
-            method: 'DELETE',
-            credentials: 'include',
-            ...(TOKEN && { headers: { 'Authorization': `Bearer ${TOKEN}` } })
-        });
-
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return response.status === 204 ? 
-        { success: true } : await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}`;
+        const response =  await api.delete(finalEndpoint);
+        return response;
     },
 
-    createBulk: async (userDataList) => {
-            const TOKEN = localStorage.getItem("token")
-            const response = await fetch(`${BASE_URL}/${ENDPOINT}/bulk`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ` + TOKEN
-                },
-                body: JSON.stringify(userDataList)
-            });
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
-    },
-
+    // (ADMIN) PATCH: actualizar estatus de usuario
     updateStatus: async (id, status) => {
-        // Pasa  visibilidad como un Query Parameter (?visibility=...)
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/status?status=${status}`, {
-            method: 'PATCH',
-            credentials: 'include',
-            headers: {
-            // Agrega el header de autorización
-                'Authorization': `Bearer ` + TOKEN
-            // Nota: No es necesario 'Content-Type' porque no hay 'body'
-            }
-        });
-    
-        if (!response.ok) {
-            return responseError(response)
-        }
-        return await response.json();
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}/status`;
+        const params = new URLSearchParams();
+        params.append('status', status);
+        const response = await api.patch(finalEndpoint, params)
+        return response;
     },
 
+    // (ADMIN) PATCH: aplicar baneo de usuario
     banUser: async (id, banRequest) => {
-        console.log(banRequest)
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/ban-user`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ` + TOKEN
-                },
-                body: JSON.stringify(banRequest)
-        });
-
-        if (!response.ok) {
-            return responseError(response)
-        }
-         // El backend siempre devuelve 200 OK con cuerpo vacío en éxito
-        return { success: true };
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}/ban-user`
+        const response = api.patch(finalEndpoint, banRequest)
+        return response; // {success: true}
     },
     
 
+    // (ADMIN) PATCH: quitar baneo de usuario
     unbanUser: async (id) => {
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/${id}/unban-user`, {
-                method: 'PATCH',
-                headers: {
-                    'Authorization': `Bearer ` + TOKEN
-                },
-        });
-        if (!response.ok) {
-            return responseError(response)
-        }
-         // El backend siempre devuelve 200 OK con cuerpo vacío en éxito
-        return { success: true };
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}/unban-user`
+        const response = api.patch(finalEndpoint)
+        return response;  // {success: true}
     },
-    
+
+
+    // PUT: subir/cambiar imagen de perfil
+    imageUploadProfile: async (selectedFile) => {
+        const endpoint = `${BASE_ENDPOINT}/me/upload-image`;
+        const formData = new FormData();
+        // "file" debe coincidir con el @RequestParam de Java
+        formData.append("file", selectedFile); 
+        const response = await api.put(endpoint, formData)
+        return response;
+    },
+
+
+    // PUT: actualizar/editar datos de perfil de usuario
+    updateMyProfile: async (profileData) => {
+        const endpoint = `${BASE_ENDPOINT}/me`;
+        const response = await api.put(endpoint, profileData)
+        return response;
+    },
 };

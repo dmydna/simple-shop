@@ -18,7 +18,7 @@ export const useCrudActions = ({ service, onRefresh }) => {
     };
 
     const handleUpdate = async (...args) => {
-        console.log("update: ", ...args)
+        // console.log("update: ", ...args)
         await update(...args);
     };
 
@@ -47,6 +47,7 @@ export const useCrudActions = ({ service, onRefresh }) => {
         success,
         setError, 
         setSuccess,
+        updateStatus,
         ...props // todos los campos del service sin handle.
     };
 };

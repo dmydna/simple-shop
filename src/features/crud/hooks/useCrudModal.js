@@ -20,7 +20,7 @@ export const useCrudModal = () => {
         setCrudMode(CRUD.UPDATE);
         setDataItem(item);
         setShowCrud(true);
-        console.log(item)
+        // console.log(item)
     };
 
     const close = () => {

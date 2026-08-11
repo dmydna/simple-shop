@@ -11,7 +11,7 @@ export const useUserCrud = (fetchProfile=true) => {
 
     const { setId, id, currentItem, loading: loadingItem, error: errorItem, 
     refreshElem, setCurrentItem } 
-    = useUser(userService[fetchProfile ? "getProfileById" : "getById"]);
+    = useUser(userService.getById);
 
     const [showModal, setShowModal] = useState(false)
     const [dataItem, setDataItem] = useState({});

@@ -1,24 +1,20 @@
-import { BASE_URL, ENDPOINTS  } from "@utils/config.js";
+import { api } from "@/utils/api";
+import { ENDPOINT } from "@utils/config.js";
 
-const ENDPOINT = ENDPOINTS.GATEWAY 
+const BASE_ENDPOINT = ENDPOINT.GATEWAY 
 
+
+/**
+ * Servicio para gestionar las peticiones API de **pasarela de pago falsa**.
+ * - Proporciona metodos **CRUD** para recursos de `api/toy-gateway`.
+ */
 export const gatewayService = {
 
     // POST: Crear un nuevo un nuevo token de la pasarela
     create: async (paymentData) => {
-        console.log(paymentData)
-        const TOKEN = localStorage.getItem("token")
-        const response = await fetch(`${BASE_URL}/${ENDPOINT}/initiate`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                ...(TOKEN && {'Authorization': `Bearer ${TOKEN}`})
-            },
-            body: JSON.stringify(paymentData)
-        });
-        if (!response.ok) throw new Error("Error en la pasarela de pago");
-        return await response.text();
+        const finalEndpoint = `${BASE_ENDPOINT}/initiate`
+        const response = api.post(finalEndpoint, paymentData);
+        return response; 
     }
 
 };

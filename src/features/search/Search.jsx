@@ -95,7 +95,7 @@ function Search({toggle, setToggle}){
                   }}
                   className="overflow-hidden"
                   as={Link}
-                  to={`/products/${p.hash}/${p.title}`}
+                  to={`/products/${p.id}/${p.title}`}
                   key={p.id}
                 >
                   {p.title}

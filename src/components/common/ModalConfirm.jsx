@@ -1,6 +1,6 @@
 import { Modal } from "react-bootstrap";
 
-export default function ModalLock({ children, show, close, size = "sm" }) {
+export default function ModalConfirm({ children, show, close, size = "sm" }) {
 	return (
     <Modal
         show={show}

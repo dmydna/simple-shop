@@ -27,7 +27,6 @@ export const UserTable = ({  baseHook, className }) => {
         setSearchParams(prev => ({ ...prev, dialog: 'action', id: item?.id  })) 
     }
 
-
     return (
         <DataView 
             loading={loading}

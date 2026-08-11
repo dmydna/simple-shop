@@ -5,15 +5,19 @@ import RouteLayout from "./RouteLayout.jsx";
 
 
 export default function ProtectedRouteAdmin({ children }) {
-    const { isAuth, loading, isAdmin, expiredDate, renewSession  } = useAuthContext();
+    const { isAuth, loading, isAdmin, renewSession, expiredDate  } = useAuthContext();
 
     // Mientras se verifica el token en localStorage, mostramos un spinner o nada
     if (loading) {
         return <PageLoading message='Cargando sesion...' />
     }
 
-    if(Date.now() > expiredDate){  renewSession(true) }
-
+    // HACK: ide marca error con useEffect
+    // const expiredDate = localStorage.getItem("expiredDate");
+    
+    if(expiredDate && Date.now() > expiredDate){
+        renewSession();
+    }
 
     return isAuth && isAdmin ? 
     <RouteLayout>

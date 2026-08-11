@@ -19,18 +19,17 @@ export const ListingTable = ({ baseHook, className, }) => {
 
     const { setSearchParams } = useUrlState()
 
-    const { hashParam } = useListSync({ baseHook: baseHook })
+    const { idParam } = useListSync({ baseHook: baseHook })
 
     const toggleSelect = (item) => {
-        console.log(setSearchParams)
+        // console.log(setSearchParams)
         setSearchParams(prev => ({
-            ...prev, hash:
-                hashParam != item?.hash ? item?.hash : null
+            ...prev, id: idParam != item?.id ? item?.id : null
         }))
     }
 
     const openDialogActions = (item) => {
-        setSearchParams(prev => ({ ...prev, dialog: 'action', hash: item?.hash }))
+        setSearchParams(prev => ({ ...prev, dialog: 'action', hash: item?.id }))
     }
 
 
@@ -73,7 +72,7 @@ export const ListingTable = ({ baseHook, className, }) => {
                         <tbody>
                             {content?.map((item) => (
 
-                                <tr className={`onhover ${item.hash === hashParam ? 'selected' : ''}`}
+                                <tr className={`onhover ${item.id === idParam ? 'selected' : ''}`}
                                     style={{ overflow: "visible", height: "70px" }} key={item.id}>
 
                                     <td 
@@ -83,7 +82,7 @@ export const ListingTable = ({ baseHook, className, }) => {
                                             type='checkbox'
                                             id={`default-radio`}
                                             className='mt-3'
-                                            checked={hashParam === item.hash}
+                                            checked={idParam == item.id}
                                             onChange={(e) => {
                                                 e.stopPropagation();
                                                 toggleSelect(item);
@@ -104,7 +103,7 @@ export const ListingTable = ({ baseHook, className, }) => {
 
                                     <td className='text-secondary'>
                                         <div style={{ lineHeight: '4.2' }} className='btn btn-sm p-0'>
-                                            <CopyButton value={item?.hash} />
+                                            <CopyButton value={item?.id} />
                                         </div>
                                     </td>
 

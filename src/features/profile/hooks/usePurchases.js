@@ -1,12 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
-import { profileService } from "@f/profile/services/profileService.js";
 import { useFetchData } from "@hooks/useFetchData.js";
-import { useFetchElem } from "@/hooks/useFetchElem.js";
+import { orderService } from "@/features/order/services/orderService";
+
+
 
 export const usePurchases = () => {
 
     const config = {
-        service: profileService, 
+        service: orderService, 
         methodName: "getMyPurchases",
         size: 8
     } 
@@ -22,5 +22,6 @@ export const usePurchases = () => {
         error: errorList,
         orders: content,
         setOrders: setContent,
+        totalElements, setFilters
     })
 }

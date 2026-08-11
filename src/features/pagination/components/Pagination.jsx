@@ -21,7 +21,6 @@ const Pagination = ({ totalPages, className }) => {
   },[pageParam, searchParams])
 
   const agregarParametro = (numeroPagina) => {
-    console.log('cambia de pagina')
     // 1. Crear una instancia de URLSearchParams basada en la URL actual
     const params = new URLSearchParams(searchParams);
     // 2. Agregar o modificar el parámetro
@@ -36,10 +35,6 @@ const Pagination = ({ totalPages, className }) => {
 
 
   const irAPagina = (numeroPagina) => {
-    console.log('ir a pagina:', currentPage)
-    console.log('esta en rango', numeroPagina >= 1 && numeroPagina <= totalPages)
-    console.log('total de pagina', totalPages)
-    console.log('numero de pagina', numeroPagina)
     if (numeroPagina >= 1 && numeroPagina <= totalPages) {
         window.scrollTo({
           top: 0,
@@ -51,7 +46,6 @@ const Pagination = ({ totalPages, className }) => {
   };
 
     useEffect(() => {
-        console.log("current page:",currentPage);
     }, [currentPage]);
 
   return (

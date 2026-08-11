@@ -13,29 +13,25 @@ import { useUrlParams } from "@/hooks/useUrlParams";
 export const MyOrderList = ({ children, className }) => {
 
     const { currentOrder, setShowReview } = useOrderDetailContext()
-    const {searchParams, setSearchParams } = useUrlState()
+    const { searchParams, setSearchParams } = useUrlState()
     const [visibleItems, setVisibleItems] = useState([])
     const [selectedId, setSelectedId] = useState()
-    const {idParam, pageVersion} = useUrlParams()
+    const { idParam, pageVersion } = useUrlParams()
     
 
-    useEffect(()=>{
-        console.log("currentOrder:" , currentOrder)
-    }, [currentOrder])
 
- 
-  useEffect(() => {
-    if(currentOrder){ setVisibleItems(currentOrder?.items || [])}
-    if (idParam){
-      setVisibleItems(currentOrder?.items?.filter((item)=> idParam == item.reviewId ))
-    }else{
-      setSelectedId(null)
-      setVisibleItems(currentOrder?.items || [])
-    } 
-    if(pageVersion){
-        setSearchParams(prev => ({...prev, id: null}))
-    }
-  }, [idParam, selectedId, currentOrder])
+    useEffect(() => {
+        if (currentOrder) { setVisibleItems(currentOrder?.items || []) }
+        if (idParam) {
+            setVisibleItems(currentOrder?.items?.filter((item) => idParam == item.reviewId))
+        } else {
+            setSelectedId(null)
+            setVisibleItems(currentOrder?.items || [])
+        } 
+        if (pageVersion) {
+            setSearchParams(prev => ({ ...prev, id: null }))
+        }
+    }, [idParam, selectedId, currentOrder])
 
 
 
@@ -47,7 +43,7 @@ export const MyOrderList = ({ children, className }) => {
                     {children}
                 </div>
                 <div className="my-2" />
-                    <OrderTable content={visibleItems}  />
+                <OrderTable content={visibleItems} />
             </Card>
         </>)
 

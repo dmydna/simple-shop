@@ -51,6 +51,7 @@ import PaymentForm from "@features/payment/components/PaymentForm.jsx";
 
 import CatalogeLayout from "@components/layout/CatalogeLayout";
 import OrderDetails from "./pages/OrderDetails";
+import ChangeMail from "./pages/ChangeMail";
 
 // DONE: update listing
 
@@ -64,18 +65,16 @@ function App() {
 
   const location = useLocation()
 
+  const bgPage = ['/login', '/contact', '/auth', '/register', 
+  '/complete-register', '/change-password', '/change-email']
+
   useEffect(() => {
-    if (
-      location.pathname.startsWith('/login') ||
-      location.pathname.startsWith('/contact') ||
-      location.pathname.startsWith('/auth') ||
-      location.pathname.startsWith('/register') ||
-      location.pathname.startsWith('/register/complete') ||
-      location.pathname.startsWith('/change-password')
-    ) {
-      document.querySelector('body')?.classList.add('bg-full-heaven')
+    if ( bgPage.includes(location.pathname) ) {
+      document.querySelector('body')
+         ?.classList.add('bg-full-heaven')
     } else {
-      document.querySelector('body')?.classList.remove('bg-full-heaven')
+      document.querySelector('body')
+        ?.classList.remove('bg-full-heaven')
     }
   }, [location])
 
@@ -97,6 +96,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/change-email" element={<ChangeMail />} />
             <Route path="/home" element={<Home />} />
             <Route path="/order/:hash"  element={
             <ProtectedRoute>
@@ -104,7 +104,7 @@ function App() {
             </ProtectedRoute>  
             } />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/register/complete" element={
+            <Route path="/complete-register" element={
               <ProfileProvider>
                 <CompleteRegister />
               </ProfileProvider>

@@ -54,7 +54,7 @@ function TopCarousel({ children, top,maxCols, maxElems, className, imgSize = 180
       setVisibleProducts(prev => prev.filter(
         (item) => {
           for (let b of blacklist) {
-            if (b === item.hash) {
+            if (b === item.id) {
               return false
             }
           }

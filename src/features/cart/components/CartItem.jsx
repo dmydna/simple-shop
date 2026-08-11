@@ -20,7 +20,7 @@ function CartItem({item, index}) {
                   <Card.Body className="ps-3 p-1">
                     <Card.Title as={Link}
                     className="d-block text-decoration-none fw-medium"
-                    to={"../products/" + item.hash + "/" + encodeURIComponent(item.title)} >
+                    to={"../products/" + item.id + "/" + encodeURIComponent(item.title)} >
                       {item.title}
                     </Card.Title>
 

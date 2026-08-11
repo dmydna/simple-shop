@@ -16,7 +16,7 @@ function ProductCard({ children, className, cols, imgSize, ...item}){
 
               <Link 
                 className="text-decoration-none text-reset p-0"
-                to={`/products/${item?.hash}/${encodeURIComponent(item.title)}`}
+                to={`/products/${item?.id}/${encodeURIComponent(item.title)}`}
               >
               <Card.Img   
                     src={item.thumbnail || "https://dummyimage.com/300x300/fff/000&text=Image+not+found"}

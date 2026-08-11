@@ -10,7 +10,7 @@ function MyAccount({ children }) {
 
     const handleUpdate = (e) => {
         e.preventDefault()
-        console.log(profile)
+        // console.log(profile)
         updatePerfil()
     }
 
@@ -28,61 +28,31 @@ function MyAccount({ children }) {
 
            
              <p onClick={()=> navigate('/user/photo')} className="btn bg-light border py-3 mb-4 text-start w-100 d-flex justify-content-between">
-                <span>Cambiar imagen de usuario</span>
+                <span>Cambiar imagen de perfil</span>
                <i className="bi-chevron-right"></i>
             </p>
 
+
+             <p onClick={()=> navigate('/complete-register')} className="btn bg-light border py-3 mb-4 text-start w-100 d-flex justify-content-between">
+                <span>Proteger cuenta</span>
+                <i className="bi-chevron-right"></i>
+            </p>
 
              <p onClick={()=> navigate('/change-password')} className="btn bg-light border py-3 mb-4 text-start w-100 d-flex justify-content-between">
-                <span>Cambiar de contraseña</span>
+                <span>Cambiar mi contraseña</span>
                <i className="bi-chevron-right"></i>
             </p>
 
-            
+             <p onClick={()=> navigate('/change-email')} className="btn bg-light border py-3 mb-4 text-start w-100 d-flex justify-content-between">
+                <span>Cambiar correo electronico</span>
+               <i className="bi-chevron-right"></i>
+            </p>
 
+            <p onClick={()=> navigate('/#')} className="alert alert-danger pointer py-3 mb-4 text-start w-100 d-flex justify-content-between">
+                <span>Eliminar mi cuenta</span>
+               <i className="bi-chevron-right"></i>
+            </p>
 
-            <Form id='passwordPerfilForm' style={{ minHeight: '190px' }} onSubmit={handleUpdate}>
-
-                <Form.Group className="mb-4 w-100">
-                    <FloatingLabel
-                        controlId="floatingEmail"
-                        label="Email"
-                        className="mb-3"
-                    >
-                        <Form.Control
-                            type="text"
-                            name="email"
-                            placeholder="Ingrese usuario"
-                            value={profile?.email || ''}
-                            onChange={handleChange}
-                        />
-                    </FloatingLabel>
-                </Form.Group>
-
-
-                <Form.Group className="mb-4 w-100">
-                    <FloatingLabel
-                        controlId="floatingEmail"
-                        label="Username"
-                        className="mb-3"
-                    >
-                        <Form.Control
-                            className="disabled"
-                            type="text"
-                            name="email"
-                            placeholder="Ingrese usuario"
-                            value={profile?.username || ''}
-                            onChange={handleChange}
-                        />
-                    </FloatingLabel>
-                </Form.Group>
-
-            </Form>
-            <div className='w-100 d-flex justify-content-center'>
-                <Button form='passwordPerfilForm' variant="primary" type="submit" className="my-2" >
-                    Actualizar
-                </Button>
-            </div>
         </div>
 
     )

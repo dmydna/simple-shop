@@ -16,7 +16,7 @@ export default function JSONFileUploader({ children, file, setFile}) {
 
     const allowedTypes = ['application/json', 'application/json'];
     if (!allowedTypes.includes(file.type)) {
-      console.log("file",file.type)
+      // console.log("file",file.type)
       setError('Solo se permiten archivos JSON o TXT');
       return false;
     }

@@ -34,9 +34,9 @@ function FormWarning({close}){
 
             <InputGroup className="mb-3">
                <Form.Control
-                  placeholder="Hash"
-                  name="hash"
-                  value={formData.hash || ''}
+                  placeholder="id"
+                  name="id"
+                  value={formData.id || ''}
                   onChange={onChange}
                />
             </InputGroup>

@@ -23,7 +23,7 @@ function FilterBarControlled({ className, children, dataSource, onApply }) {
     const handleSubmit = () => {
         // 1. Actualiza la URL
         applyFilters({ ...filterDraft, "page": 1 });
-        console.log("useUrlFilters", filterDraft);
+        // console.log("useUrlFilters", filterDraft);
         // 2. Actualiza el contexto global de listados
         onApply(filterDraft);
 

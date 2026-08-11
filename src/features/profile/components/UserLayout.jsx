@@ -13,9 +13,9 @@ const UserLayout = () => {
     const { user } = useAuthContext()
     const { fetchData, profile } = useProfile()
 
-    useEffect(() => {
+/*    useEffect(() => {
         fetchData()
-    }, [])
+    }, [])*/
 
     return (
          <Container fluid="xl" className="px-sm-4 px-md-4 px-lg-5">

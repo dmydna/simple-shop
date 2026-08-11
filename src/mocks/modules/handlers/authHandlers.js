@@ -1,15 +1,16 @@
-import { http, HttpResponse } from 'msw';
+ import { http, HttpResponse } from 'msw';
 
-import { BASE_URL, ENDPOINTS } from "@utils/config.js";
-import { auth_service } from '../services/auth_services';
+import { BASE_URL, ENDPOINT } from "@utils/config.js";
+import { auth_service } from '../services/auth_service';
+import { currentLoggedUser } from '../db';
 
 
-const ENDPOINT = ENDPOINTS.AUTH
+const BASE_ENDPOINT = `${BASE_URL}/${ENDPOINT.AUTH}`
 
 
 export const authHandlers = [
-  // POST /login
-  http.post(`${BASE_URL}/${ENDPOINT}/login`, async ({ request }) => {
+
+  http.post(`${BASE_ENDPOINT}/login`, async ({ request }) => {
     const body = await request.json();
     console.log('[MOCK-API] Login:', body);
 
@@ -28,8 +29,27 @@ export const authHandlers = [
     );
   }),
 
-  // POST /logout
-  http.post(`${BASE_URL}/auth/logout`, () => {
-    return new HttpResponse(null, { status: 200 });
+  http.get(`${BASE_ENDPOINT}/me`, () => {
+    const auth = auth_service.getAuth();
+    if (!currentLoggedUser || !auth) {
+      return HttpResponse.json({ message: 'No autenticado' }, { status: 401 });
+    }
+    return HttpResponse.json(auth);
   }),
+
+
+  http.post(`${BASE_ENDPOINT}/logout`, () => {
+    localStorage.clear()
+    return HttpResponse.json(
+      { message: 'Logged out successfully' },
+      {
+        headers: {
+          // Elimina la cookie 'session_id' estableciéndola a una fecha pasada
+          'Set-Cookie': 'session_id=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=Strict',
+        },
+      }
+    );
+  }),
+
+
 ];

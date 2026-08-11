@@ -1,13 +1,13 @@
 import { http, HttpResponse } from 'msw';
 
-import { BASE_URL, ENDPOINTS } from "@utils/config.js";
-const ENDPOINT = ENDPOINTS.LISTENING
+import { BASE_URL, ENDPOINT } from "@utils/config.js";
+const BASE_ENDPOINT = ENDPOINT.LISTENING
 
 
 export const listingHandlers = [
 
   // Ejemplo: Obtener listado de productos / listings
-  http.get(`${BASE_URL}/listings`, ({ request }) => {
+  http.get(`${BASE_URL}/${BASE_ENDPOINT}`, ({ request }) => {
     const url = new URL(request.url);
     const category = url.searchParams.get('category');
 

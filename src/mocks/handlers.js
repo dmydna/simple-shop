@@ -1,5 +1,4 @@
 import { http, HttpResponse } from 'msw';
-import { BASE_URL, ENDPOINTS } from "@utils/config.js";
 import { userHandlers } from './modules/handlers/userHandlers';
 import { authHandlers } from './modules/handlers/authHandlers';
 

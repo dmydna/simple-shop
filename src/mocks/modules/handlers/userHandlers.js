@@ -1,30 +1,43 @@
 import { http, HttpResponse } from 'msw';
 
-import { BASE_URL, ENDPOINTS } from "@utils/config.js";
-import { currentLoggedUser, DB } from '../DB';
-const ENDPOINT = ENDPOINTS.AUTH
+import { BASE_URL, ENDPOINT } from "@utils/config.js";
+import { currentLoggedUser, db } from '../db.js';
+import { user_service } from '../services/user_service';
+
+const BASE_ENDPOINT = `${BASE_URL}/${ENDPOINT.USER}`
 
 
 export const userHandlers = [
-  // POST /login
-  http.get(`${BASE_URL}/${ENDPOINTS.USER}/me`, () => {
-    console.log("[MOCK-API] Fetching current user");
 
-    if (!currentLoggedUser || !DB.user[currentLoggedUser]) {
+  http.post(`${BASE_ENDPOINT}`, (user) => {
+    const newUser = user_service.create(user);
+    if (!newUser) {
+      return HttpResponse.json({ message: 'No se pudo crear usuario' }, { status: 500 });
+    }
+    return HttpResponse.json(newUser);
+  }),
+
+
+  http.get(`${BASE_ENDPOINT}/me`, () => {
+    const user = user_service.getMyProfile();
+    if (!currentLoggedUser || !user) {
       return HttpResponse.json({ message: 'No autenticado' }, { status: 401 });
     }
-    const user = DB.user[currentLoggedUser];
     return HttpResponse.json(user);
   }),
 
-  http.get(`${BASE_URL}/${ENDPOINTS.PROFILE}/my`, () => {
-    console.log("[MOCK-API] Fetching current user", currentLoggedUser);
-    if (!currentLoggedUser || !DB.user[currentLoggedUser]) {
-      return HttpResponse.json({ message: 'No autenticado' }, { status: 401 });
-    }
-    const user = DB.user[currentLoggedUser];
+  http.get(`${BASE_ENDPOINT}/:id`, ({ params }) => {
+    const id = Number(params.id);
+    const user = user_service.getById(id);
+    if (!user) return new HttpResponse(null, { status: 404 });
     return HttpResponse.json(user);
   }),
 
+
+  http.get(`${BASE_ENDPOINT}`, ({ request }) => {
+    const users = user_service.filterPage(request);
+    if (!users) return new HttpResponse(null, { status: 404 });
+    return HttpResponse.json(users);
+  }),
 
 ];

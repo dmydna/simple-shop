@@ -14,7 +14,7 @@ export const buyService = {
     // POST: Crear un nuevo pedido
     create: async (buyData) => {
         const finalEndpoint = `${BASE_ENDPOINT}`
-        const response = api.post(finalEndpoint, buyData)
+        const response = await api.post(finalEndpoint, buyData)
         return response;
     }
 };

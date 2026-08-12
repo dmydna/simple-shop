@@ -16,7 +16,7 @@ export const productService = {
     create: async (data) => {
         const productData = toCreateProduct(data);
         const finalEndpoint = `${BASE_ENDPOINT}`
-        const response = api.post(finalEndpoint, productData)
+        const response = await api.post(finalEndpoint, productData)
         return response;
     },
 
@@ -28,15 +28,16 @@ export const productService = {
         params.append('size', size);
         mapToURLSearchParams(params, filters)
         const finalEndpoint = `${BASE_ENDPOINT}`;
-        const response = api.get(finalEndpoint, params)
+        const response = await api.get(finalEndpoint, params)
         return response;
     },
 
 
     // GET: Obtener un producto.
     getById: async (id) => {
+        console.log("PRODUCT ID", id)
         const finalEndpoint = `${BASE_ENDPOINT}/${id}`
-        const response =  api.get(finalEndpoint)
+        const response =  await api.get(finalEndpoint)
         return {...response, ...response.dimensions}
     },
 
@@ -58,7 +59,7 @@ export const productService = {
     // PATCH: Actualizar status = {ACTIVE, INACTIVE, DRAFT, DELETED}
     updateStatus: async (id, status) => {
         const finalEndpoint = `${BASE_ENDPOINT}/${id}`
-        const response = api.patch(finalEndpoint, { status: status })
+        const response = await api.patch(finalEndpoint, { status: status })
         return response;
     },
 }

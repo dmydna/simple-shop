@@ -65,7 +65,7 @@ export const userService = {
     // (ADMIN) PATCH: quitar baneo de usuario
     unbanUser: async (id) => {
         const finalEndpoint = `${BASE_ENDPOINT}/${id}/unban-user`
-        const response = api.patch(finalEndpoint)
+        const response = await api.patch(finalEndpoint)
         return response;  // {success: true}
     },
 

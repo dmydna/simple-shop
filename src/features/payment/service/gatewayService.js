@@ -13,7 +13,7 @@ export const gatewayService = {
     // POST: Crear un nuevo un nuevo token de la pasarela
     create: async (paymentData) => {
         const finalEndpoint = `${BASE_ENDPOINT}/initiate`
-        const response = api.post(finalEndpoint, paymentData);
+        const response = await api.post(finalEndpoint, paymentData);
         return response; 
     }
 

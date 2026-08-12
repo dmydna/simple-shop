@@ -1,25 +1,21 @@
 import { http, HttpResponse } from 'msw';
 
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
-const BASE_ENDPOINT = ENDPOINT.LISTENING
+import { listing_service } from '../services/listing_service';
+import { baseHandlers } from './baseHandler';
 
+const BASE_ENDPOINT = `${BASE_URL}/${ENDPOINT.LISTING}`
+const SERVICES = listing_service;
 
 export const listingHandlers = [
 
-  // Ejemplo: Obtener listado de productos / listings
-  http.get(`${BASE_URL}/${BASE_ENDPOINT}`, ({ request }) => {
-    const url = new URL(request.url);
-    const category = url.searchParams.get('category');
+  ...(baseHandlers(BASE_ENDPOINT, SERVICES)),
+  
 
-    return HttpResponse.json([
-      {
-        hash: 'f47ac10b-58cc-4372-a567-0e02b2c3d4e5',
-        title: 'Producto de prueba MSW',
-        price: 1500,
-        category: category || 'General',
-      },
-    ]);
+    http.get(`${BASE_ENDPOINT}/public/:id`, ({ params }) => {
+    const id = Number(params.id);
+    const user = SERVICES.getById(id);
+    if (!user) return new HttpResponse(null, { status: 404 });
+    return HttpResponse.json(user);
   }),
-
-
 ];

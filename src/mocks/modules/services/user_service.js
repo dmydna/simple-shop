@@ -1,25 +1,14 @@
 import { db, currentLoggedUser } from '../db.js';
+import { baseService } from './baseService.js';
 
 
 const collection = 'users';
 
 export const user_service = {
 
-    create: (data) => {
-        return db.create(collection, data)
-    },
-
-    getById: (id) => {
-        return db.find(collection, item => item.username === id);
-    },
-
-
-    filterPage: (request) => {
-        return db.findPage(collection,request);
-    },
+    ...(baseService(collection)),
 
     getMyProfile: () => {
-        
         return  db.find(collection, item => item.username === currentLoggedUser);
     },
 

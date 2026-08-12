@@ -1,4 +1,6 @@
 import { generatePath } from "react-router-dom";
+import { content } from "./data/listings.json"
+
 
 const DEFAULT_PASSWORD = '1234'
 const DEFAULT_USER = {
@@ -30,14 +32,18 @@ export const db = {
   users: [
     { id: 1, ...userAdmin },
   ],
-	"listing": { },
-	"favorites": {},
-	"orders": {},
+	listings: [ ...content ],
+	favorites: [],
+	orders: [],
 
 
 	generateId(collection){
 		return this[collection].lenght;
 	},
+
+  getIndex(collection, id){
+    return this[collection].findIndex(u => u.id === parseInt(id));
+  },
 
 	save(collection, data){
 		const id = this.generateId(collection);
@@ -65,13 +71,17 @@ export const db = {
     const url = new URL(request.url);
     
     // 1. Extraer parámetros de paginación y ordenamiento
-    const page = parseInt(url.searchParams.get('page') || '0');
+    let page = parseInt(url.searchParams.get('page') || '0');
     const size = parseInt(url.searchParams.get('size') || '10');
     const sortParam = url.searchParams.get('sort');
 
+    if(page < 0){
+      page = 0
+    }
+
     // 2. Filtrar los parámetros de consulta para obtener solo los filtros de negocio
     // Creamos un Set con los nombres de los parámetros que NO son filtros
-    const paginationParams = new Set(['page', 'size', 'sort']);
+    const paginationParams = new Set(['page', 'size', 'sort', 'includeTags']);
     
     // Convertimos todos los params a un objeto para iterar
     const allParams = Object.fromEntries(url.searchParams.entries());

@@ -37,7 +37,6 @@ export const authHandlers = [
     return HttpResponse.json(auth);
   }),
 
-
   http.post(`${BASE_ENDPOINT}/logout`, () => {
     localStorage.clear()
     return HttpResponse.json(

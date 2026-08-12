@@ -1,69 +1,64 @@
 import {  useState } from "react";
 import { CRUD } from "@utils/enums.js";
 import { useCrudForm } from "@/features/crud/hooks/useCrudForm.js";
-import { useCrudActions } from "@/features/crud/hooks/useCrudActions.js";
 import { listingService } from '../services/listingService.js';
-import { useListing } from "./useListing";
 import { ListingDTO } from "@/utils/schemas.js";
+import { useFetchElem } from "@/hooks/useFetchElem.js";
+import { useService } from "@/hooks/useService.js";
 
 
 
 
-export const useListingCrud = ({autofetch=false}={}) => {
 
-    const { setCurrentItem, currentListing, setId, id, loading: loadingItem, 
-    error: errorItem, refreshElem, ...props} = useListing({autofetch});
+// Nota1: 
+// Este hook hace referencia a la instancia de un elemento.
+// No se manejan listas.
+// Nota2:
+// Este hook deberia llamarse useListingAction para hacer referencia
+// al componente listingActions
+
+export const useListingCrud = () => {
 
     const [showModal, setShowModal] = useState(false)
     const [dataItem, setDataItem] = useState({});
     const [crudMode, setCrudMode] = useState()
     const [scheme, setScheme] = useState(ListingDTO)
-    
-    const { ... formCrud } = useCrudForm(currentListing, scheme, "create" ,{});
 
-    const { handleCreate, handleUpdate, handleDelete, handleStatus, 
-        loading, setLoading, error, setError, success, setSuccess, ...actions }
-        = useCrudActions({ service: listingService });
+    // config hooks
+    const configService = {service: listingService}
+    const configElem = {fetchMethod: listingService.getByHash}
+
+    const { id, setId, loading, error: errorItem, currentItem,  setCurrentItem, refreshElem } = useFetchElem({...configElem})
+
+    const { ... formCrud } = useCrudForm(currentItem, scheme, "create" ,{});
+    const { ...servicesMethods} = useService({ ...configService});
 
 
     return ({
-       ...props,
-
+        ...servicesMethods,
         // Form
         ...formCrud,
+        scheme,
+        setScheme,
 
-        // Actions
-        handleCreate,
-        handleUpdate,
-        handleDelete,
-        handleStatus,
-
-        loading: loading || loadingItem,
-        setLoading,
-        error,
-        setError,
-        success,
-        setSuccess,
+        // Fetch state
+        loading,
         errorItem,
 
         // Listing
-         setCurrentItem,
-        currentListing,
-        currentItem: currentListing,
+        id,setId,
+        setCurrentItem,
+        currentListing: currentItem,
+        currentItem,
+        refreshElem,
         dataItem,
         setDataItem,
 
+        // Mode
         crudMode, 
         setCrudMode,
         showModal, 
         setShowModal,
-        setId, 
-        id,
-        refreshElem,
-
-
-        scheme,
-        setScheme,
-        ...actions
+    
     })
 }

@@ -50,7 +50,7 @@ export default function OrderTable({ className, content }) {
 
                                 {/* DESCRIPTION */}
                                 <td className='text-secondary' style={{ lineHeight: '4.2', textAlign: 'start' }}  >
-                                    {item?.quantity} x $ {(item?.priceAtPurchase || 0).toFixed(2)} 
+                                    {item?.quantity} x $ {(Number(item?.priceAtPurchase) || 0).toFixed(2)} 
                                     {item?.discountPercentageAtPurchase && ` (${item.discountPercentageAtPurchase}%OFF)`}
                                 </td>
 
@@ -58,7 +58,7 @@ export default function OrderTable({ className, content }) {
                                 <td className='fw-medium d-table-cell'
                                     style={{ lineHeight: '4.2', textAlign: 'end' }}  >
                                     <i className='bi bi-currency-dollar'></i>
-                                    {(item?.priceAtPurchase*item?.quantity || 0).toFixed(2)}
+                                    {(Number(item?.priceAtPurchase*item?.quantity) || 0).toFixed(2)}
                                 </td>
                             </tr>
                         )

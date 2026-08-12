@@ -2,27 +2,36 @@ import FetchState from "@/components/common/FetchState";
 import { useProductCrud } from "@/features/product/hooks/useProductCrud";
 import { useUrlParams } from "@/hooks/useUrlParams";
 import ButtonLink from "@dashboard/common/ButtonLink";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { ConfirmMessage } from "@/components/common/ConfirmMessage";
+import ModalConfirm from "@/components/common/ModalConfirm";
+import { MSG_LISTING_INACTIVE, MSG_PRODUCT_INACTIVE } from "@/components/common/MsgConfirm";
+
 
   // TODO: manejar rutas muertas de ProductList/ProductForm.
 export default function ProductActions({ close }) {
 
 
-    const { setId, currentItem, setCurrentItem, handleStatus, loading, error, setError,
-     setSuccess, success, refreshData, refreshElem } = useProductCrud();
+    const { setId, currentItem, setCurrentItem, loading, error, setError, 
+    setSuccess, success, refreshElem, updateStatus }  = useProductCrud({autofetch: false});
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    // ModalConfirm
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [dataConfirm, setDataConfirm] = useState([]);
+    const [msgConfirm, setMsgConfirm ] = useState();
+
+    // Navigation
     const navigate = useNavigate();
     const location = useLocation();
-    
+
     //Params
+    const [searchParams, setSearchParams] = useSearchParams();
     const {modeParam, idParam} = useUrlParams()
 
     // URLs
     const FORM_URL = "/dashboard/product-form";
-    const CURRENT_URL = location.pathname;
 
     useEffect(() => {
         if (idParam ) { setId( idParam ) } else { setCurrentItem(null) }
@@ -39,17 +48,33 @@ export default function ProductActions({ close }) {
 
    // Handles
 
+
+
    const isStatusDraft = useMemo(()=>{
        return currentItem?.meta?.status == "DRAFT";
    },[currentItem])
 
    const isStatusActive = useMemo(()=>{
-       return currentItem?.meta?.status === "ACTIVE"
+       return currentItem?.meta?.status == "ACTIVE"
    },[currentItem])
 
    const isStatusNotActive = useMemo(()=>{
        return currentItem?.meta?.status === "INACTIVE"
    },[currentItem])
+
+
+
+   // ModalConfirm
+   const handleStatus = (...args) => {
+    const [id, status, ...xargs] = args;
+    if(status == "INACTIVE") {setMsgConfirm(<MSG_PRODUCT_INACTIVE id={id} />)}
+    setDataConfirm([...args])
+    setShowConfirm(true)    
+   }
+   const handleConfirm = () => {
+        updateStatus(...dataConfirm)
+        setShowConfirm(false)
+   }
 
 
     return (
@@ -88,7 +113,7 @@ export default function ProductActions({ close }) {
                         icon="bi-eye-slash"
                         visible={ isStatusActive }
                     >
-                        Deactivate Product
+                        Deactivate
                     </ButtonLink>
 
 
@@ -97,16 +122,16 @@ export default function ProductActions({ close }) {
                         icon="bi-eye"
                         visible={ isStatusNotActive }
                     >
-                        Activate  Product
+                        Activate
                     </ButtonLink>
 
 
                     <ButtonLink
                         handle={() => handleStatus(currentItem.id, "DELETED")}
                         icon="bi-trash3"
-                        visible={ idParam }
+                        visible={ false }
                     >
-                        Delete Product
+                        Delete
                     </ButtonLink>
 
                     <ButtonLink
@@ -114,7 +139,7 @@ export default function ProductActions({ close }) {
                         icon="bi-pencil"
                         visible={isStatusActive}
                     >
-                        Edit Product
+                        Edit
                     </ButtonLink>
 
                     <ButtonLink
@@ -131,7 +156,7 @@ export default function ProductActions({ close }) {
                         handle={() => navigate(`${FORM_URL}?mode=create&id=${currentItem.id}`)}
                         icon="bi-copy"
                     >
-                        Clone Product
+                        Clone
                     </ButtonLink>
 
 
@@ -139,7 +164,7 @@ export default function ProductActions({ close }) {
                         handle={() => navigate(`/dashboard/product-form?mode=view&id=${currentItem.id}`)}
                         icon="bi-three-dots"
                     >
-                        Product Summary
+                        Summary
                     </ButtonLink>
 
 
@@ -161,6 +186,15 @@ export default function ProductActions({ close }) {
                         Export File
                     </ButtonLink>
 
+
+                    <ModalConfirm show={showConfirm} >
+                        <ConfirmMessage
+                            title={"Confirmar Accion"}
+                            message={msgConfirm}
+                            onClose={()=>setShowConfirm(false)} 
+                            onAction={()=>handleConfirm()}
+                        />
+                    </ModalConfirm>  
 
                 </>
               

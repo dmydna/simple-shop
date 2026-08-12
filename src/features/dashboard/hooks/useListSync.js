@@ -22,7 +22,7 @@ export const useListSync = ({ baseHook }) => {
 
     useEffect(() => {
         if (!searchParam)   { setFilters({}) }
-        if (availabilityParam) {setFilters({ availability: availabilityParam })}
+        if (availabilityParam) {setFilters({ availabilityStatus: availabilityParam })}
         if (pageParam)      { setCurrentPage(Number(pageParam))}
         if (!pageParam)     { setCurrentPage(1) }
         if (isNaN(Number(pageParam))) { setCurrentPage(1) }

@@ -137,7 +137,7 @@ export const responseHandler = async (response, debug = {}) => {
 
   if (!response.ok) {
     console.groupCollapsed(`[FAIL] ${logPrefix}`);
-    // console.log(response.url);
+    console.log(response.url);
     console.trace();
     console.groupEnd();
     return await responseError(response);

@@ -1,51 +1,55 @@
-import { useFavorite } from "@/features/favorite/hooks/useFavorite";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { ToggleIcon } from "./FloatButton";
+import { useAsync } from "@/hooks/useAsync";
+import { favoriteService } from "@/features/favorite/services/favoriteService";
 
 
 
 export default function FavoriteFloatButton({item, style, className}){
 	
-    const { createFavorite, deleteFavorite, isFavoriteProduct } = useFavorite()
+//    const { createFavorite, deleteFavorite, isFavoriteProduct } = useFavorite()
+   const [isFavorite, setIsFavorite] = useState(false)
 
-    const [isFavorite, setIsFavorite] = useState(false)
+   const msg_add = "agregado a favoritos"
+   const msg_del = "removido de favoritos"
+
+   const options = (msg) => ({
+      onSuccess : () => {
+         setIsFavorite(true);
+         toast.success(msg);
+      },
+      onError: (err) =>{
+         toast.warning(err?.menssage || "error en operacion");
+      }
+
+    })
+
+   const createFavorite = useAsync(favoriteService.create, {...options(msg_add)});
+   const deleteFavorite = useAsync(favoriteService.Delete, {...options(msg_del)});
+   const checkFavorite  = useAsync(favoriteService.isFavoriteProduct);
 
    const checkFavoriteStatus = useCallback(async () => { 
       if(item?.id != undefined) 
-         setIsFavorite(await isFavoriteProduct(item.id)) 
-   }, [isFavoriteProduct, item.id])
+         setIsFavorite(await checkFavorite.execute(item.id)) 
+   }, [item])
 
     useEffect(() => {
         checkFavoriteStatus();
     }, [checkFavoriteStatus]);
 
-   const handleAddFavorite = () => {
-      createFavorite(item.id) 
-      setIsFavorite(true);
-      if (toast.isActive()) return;
-      toast.success("agregado a favoritos");
-    };
-
-   const handleDeleteFavorite = () => {
-      deleteFavorite(item.id) 
-      setIsFavorite(false);
-      if (toast.isActive()) return;
-      toast.success("eliminado de favoritos");
-    };
-
-    const toggleFavorite = () => {
+    const toggleFavorite = useCallback( () => {
       if( !isFavorite ) {
-         handleAddFavorite()
+         createFavorite.execute(item.id)
       }else{
-         handleDeleteFavorite()
+         deleteFavorite.execute(item.id)
       }
-    }
-
+    }, [createFavorite, deleteFavorite, isFavorite])
 
 
 	return (
          <ToggleIcon
+            disabled= { createFavorite.loading }
             status={ isFavorite }
          	style={ style }
             className={`border rounded-circle bg-wh01 ${className}`} 

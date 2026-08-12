@@ -1,50 +1,46 @@
 import { toast } from "react-toastify";
 import { Card, Col } from "react-bootstrap";
-import { useListingCrud } from "@/features/listing/hooks/useListingCrud.js"
 import { HoverIcon } from "./FloatButton"
-import React, { } from "react";
+import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAsync } from "@/hooks/useAsync";
+import { listingService } from "@/features/listing/services/listingService";
 
 
-export default function StatusFloatButton({item, style, onSuccess, className}){
+export default function StatusFloatButton({ item, style, className }) {
 	
-    const navigate = useNavigate();
-    const { handleStatus } = useListingCrud();
+   const msg_show = "producto visible"
+   const msg_hide = "producto oculto"
 
 
-    // Toggle Active/Inactive
-    const handleToggle = async () => {
-      let status = item.meta.status;
-      let msg    = "";
-      
-      if(item.meta.status == "ACTIVE"){
-         status = "INACTIVE";
-         msg    = " producto oculto "
-      }else if(item.meta.status == "INACTIVE"){
-         status = "ACTIVE";
-         msg    = " producto visible "
-      }else{
-         return;
+   const onSuccess = (currentStatus) => {
+      if (toast.isActive()) return;  
+      if (currentStatus.status === "ACTIVE") {
+         toast.success(msg_show);
+      } else {
+         toast.success(msg_hide);
       }
-      const data = await handleStatus(item.id, status)
+      item.meta.status = currentStatus.status;
+   } 
+   const onError = (err) => {
+      toast.warning(err?.menssage || "error en la operacion!");
+   }
 
-      if (toast.isActive()) return;
-      toast.success(msg);
+   const updateStatus = useAsync(listingService.updateStatus, { onSuccess, onError });
 
-      if (data?.meta?.status != item.meta.status){
-         // Actualiza estado de forma local
-         item.meta.status = data?.meta?.status;
-         navigate(window.location.pathname)
-      }
-    }
+   const handle = useCallback(()=>{
+      updateStatus.execute(item.id, item.meta.status == "ACTIVE" ? "INACTIVE" : "ACTIVE")
+   },[item.id, item.meta.status, updateStatus])
 
-	return (
 
-         <HoverIcon
-            style={style}
-            className={`border rounded-circle bg-wh01 ${className}`} 
-            action={handleToggle}
-            icon={`eye${item?.meta?.status != "ACTIVE"? "-slash":""}`}
-         />
-	)
+   return (
+
+      <HoverIcon
+         style={style}
+         disabled={updateStatus.loading}
+         className={`border rounded-circle bg-wh01 ${className}`} 
+         action={handle}
+         icon={`eye${updateStatus.data?.status != "ACTIVE" ? "-slash" : ""}`}
+      />
+   )
 }

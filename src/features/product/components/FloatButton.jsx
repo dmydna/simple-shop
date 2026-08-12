@@ -3,17 +3,18 @@ import { useMemo, useState } from "react";
 /**
  * Muestra el ícono con fill solo cuando se hace hover.
  */
-export function HoverIcon({action, children, icon, className}){
+export function HoverIcon({action, children, icon, className, disabled}){
 	
 	const [isHovered, setIsHovered] = useState(false);
 	const iconClass = isHovered ? `bi-${icon}-fill` : `bi-${icon}`
 
 	return (
-	    <span onClick={action} 
+	    <span 
+          onClick={action} 
 	    	  onMouseEnter={()=>setIsHovered(true)} 
 	    	  onMouseLeave={()=>setIsHovered(false)} 
             style={{lineHeight:'0px', padding: '10px'}}
-            className={`btn ${className || ''} z-index-10`}>
+            className={`btn ${className || ''} z-index-10 ${disabled? 'disabled': ''}`}>
             <i className={iconClass}></i> 
             {children}
         </span>
@@ -26,7 +27,7 @@ export function HoverIcon({action, children, icon, className}){
  * Si está activo (status=true), siempre se ve 'fill'.
  * Si está inactivo, muestra 'fill' solo al hacer hover.
  */
-export function ToggleIcon({action, children, icon, status, className}){
+export function ToggleIcon({action, children, icon, status, className, disabled = false}){
   
   const [isHovered, setIsHovered] = useState(false);
 
@@ -47,7 +48,7 @@ export function ToggleIcon({action, children, icon, status, className}){
             if(!status) setIsHovered(false)
           }} 
             style={{lineHeight:'0px', padding: '10px'}}
-            className={`btn ${className || ''} z-index-10`}>
+            className={`btn ${className || ''} z-index-10 ${disabled? 'disabled': ''}`}>
             <i className={iconClass}></i> 
             {children}
         </span>

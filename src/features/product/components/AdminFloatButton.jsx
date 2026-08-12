@@ -27,7 +27,7 @@ export default function AdminFloatButton({item, style}){
 		>
 			{hide && (
 				<div className="d-flex gap-2">
-					<DeleteFloatButton item={item} />
+				  <DeleteFloatButton item={item} />
 					<StatusFloatButton item={item} />
 					<EditFloatButton   item={item} />
 				</div>

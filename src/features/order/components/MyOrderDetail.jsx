@@ -62,7 +62,7 @@ export const MyOrderDetail = ({ check }) => {
                     <Card.Text className="text-secondary small fw-semibold  m-0">
                         fecha y hora</Card.Text>
                     <Card.Text className="small fw-light">
-                        {formatDate(currentOrder?.meta?.createdAt || [])}
+                        {formatDate(currentOrder?.meta?.createdAt || []) || ''}
                     </Card.Text>
                 </div>
 
@@ -72,7 +72,7 @@ export const MyOrderDetail = ({ check }) => {
                     <Card.Text className="text-secondary small fw-semibold  m-0">
                         Subtotal ({currentOrder?.totalQuantity} unidades)</Card.Text>
                     <Card.Text className="fw-bold">
-                        ${currentOrder?.totalAmount?.toFixed(2)}
+                        ${(Number(currentOrder?.totalAmount) || 0).toFixed(2)}
                     </Card.Text>
                 </div>
 
@@ -81,7 +81,7 @@ export const MyOrderDetail = ({ check }) => {
                     <Card.Text className="text-secondary small fw-semibold  m-0">
                         Descuento (total) {check && '(1 cupon)'} </Card.Text>
                     <Card.Text className="fw-bold">
-                        - $ {totalAmountDiscounts.toFixed(2)}
+                        - $ {(Number(totalAmountDiscounts) || 0).toFixed(2)}
                     </Card.Text>
                 </div>
 
@@ -99,7 +99,7 @@ export const MyOrderDetail = ({ check }) => {
                 <div className="d-flex align-items-center justify-content-between pt-3 pb-4">
                     <Card.Text className="hs-5 fw-bold m-0">TOTAL</Card.Text>
                     <Card.Text className="h5 fw-bold">
-                        ${currentOrder?.totalAmount?.toFixed(2)}
+                        ${(Number(currentOrder?.totalAmount) || 0).toFixed(2)}
                     </Card.Text>
                 </div>
 

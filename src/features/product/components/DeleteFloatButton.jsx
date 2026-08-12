@@ -1,46 +1,42 @@
 import { toast } from "react-toastify";
 import { Card, Col } from "react-bootstrap";
-import { useListingCrud } from "@/features/listing/hooks/useListingCrud.js"
 import { HoverIcon } from "./FloatButton"
-import React, { } from "react";
 import { useNavigate } from "react-router-dom";
+import { productService } from "../services/productService";
+import { useAsync } from "@hooks/useAsync"
+import { listingService } from "@/features/listing/services/listingService";
 
 
 export default function DeleteFloatButton({item, style, className}){
 	
     const navigate = useNavigate();
-    const { handleStatus } = useListingCrud()
 
-    const handleDelete= async () => {
-
-      let status = item.meta.status;
-    	const data = await handleStatus(item.id, "DELETED")
-      status = data?.meta?.status
-
-    	if (toast.isActive()) return;
-      	toast.success("producto eliminado");
-
-      if (status != item.meta.status){
+    const onSuccess = (currentStatus) => {
+      if (toast.isActive()) return;  
+      toast.success("producto eliminado");
+      if (currentStatus != item.meta.status){
          // Actualiza estado de forma local
-         item.meta.status = status;
+         item.meta.status = currentStatus.status;
          navigate(window.location.pathname)
       }
+    } 
+
+    const onError = (err) => {
+         toast.warning(err?.mensage || "error en la operacion!");
     }
 
 
-    const toggleStatus = () => {
-      if(item.meta.status == "ACTIVE"){
-         return "INACTIVE";
-      }else{
-         return"ACTIVE";
-      }
-    }
+    const updateStatus = useAsync(listingService.updateStatus, {onSuccess, onError});
+ 
+ 
+
 
 	return (
         <HoverIcon
+           disabled={updateStatus.loading}
            style={style}
            className={`border rounded-circle bg-wh01 ${className}`} 
-           action={handleDelete}
+           action={updateStatus.execute}
            icon="trash3"
         />
 	)

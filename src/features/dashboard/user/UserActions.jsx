@@ -58,7 +58,7 @@ export default function UserActions({ close }) {
   // TODO: manejar rutas muertas de UserList/UserForm.
   useValidParams({
     id: (val) => val != null, // Solo números
-    mode: (val) => ['view'].includes(val), // Solo valores permitidos
+    mode: (val) => ['view', 'edit'].includes(val), // Solo valores permitidos
     status: (val) => ['ACTIVE','INACTIVE','BANNED', 'DELETED'].includes(val), 
   }, {redirect: "/dashboard/user-list"});
 
@@ -129,7 +129,6 @@ export default function UserActions({ close }) {
                     </ButtonLink>
 
                     <ButtonLink
-                        disabled={true}
                         visible={ idParam }
                         handle={() => navigate(`${FORM_URL}?mode=edit&id=${currentItem?.id}`)}
                         icon="bi-pencil"

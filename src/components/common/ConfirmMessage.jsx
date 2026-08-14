@@ -43,8 +43,8 @@ export const ConfirmMessage = ({
                                 style={{ fontSize: '0.75rem', letterSpacing: '0.05rem'}}
                                 onClick={onClose}
                             >
-                                <i className='bi bi-x-lg me-1'></i>
                                 Cancelar
+                                <i className='bi bi-x-lg ms-1'></i>
                             </Button>
                         )}
                     </div>

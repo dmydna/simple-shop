@@ -36,3 +36,15 @@ export const MSG_LISTING_ACTIVE = ({id}) => (
         </ul>
         </div>
     )
+
+
+export const MSG_PRODUCT_INACTIVE = ({id}) => (
+    <div className="mt-2 small">
+    <p  style={{ paddingLeft: "2rem"}} className="mb-2 text-start">
+        <b>desactivar</b> {` el producto ${id ? `#${id}`: ''}`}
+        <br/>
+        <span>causa:</span> 
+    </p>
+     <p style={{ paddingLeft: "2rem"}} className="mb-2 text-start"> Inahabilita ( status: inactive ) todas las publicaciones ( listing ) con el producto asociado </p>
+    </div>
+)

@@ -20,12 +20,12 @@ export default function ListingActions({ close }) {
     const [dataConfirm, setDataConfirm] = useState([]);
     const [msgConfirm, setMsgConfirm ] = useState();
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    
+    // Navigation
     const navigate = useNavigate();
     const location = useLocation();
 
     //Params
+    const [searchParams, setSearchParams] = useSearchParams();
     const {modeParam, idParam} = useUrlParams()
 
 
@@ -92,6 +92,7 @@ export default function ListingActions({ close }) {
 
 
 
+     // ModalConfirm
     const handleStatus = (...args) => {
         const [id, status, ...xs] = args;
 
@@ -135,7 +136,7 @@ export default function ListingActions({ close }) {
                         icon="bi-plus-lg"
                         handle={() => navigate(CREATE_LINK)}
                     >
-                        Create Post
+                        Create
                     </ButtonLink>
 
 
@@ -164,7 +165,7 @@ export default function ListingActions({ close }) {
                         icon="bi-eye-slash"
                         visible={ isStatusActive }
                     >
-                        Deactivate  Post 
+                        Deactivate
                     </ButtonLink>
 
                     <ButtonLink
@@ -172,7 +173,7 @@ export default function ListingActions({ close }) {
                         icon="bi-eye"
                         visible={ isStatusNotActive }
                     >
-                       Activate Post
+                       Activate
                     </ButtonLink>
 
 
@@ -189,7 +190,7 @@ export default function ListingActions({ close }) {
                         handle={() => handleStatus(currentItem?.id, "DELETED")}
                         icon="bi-trash3"
                     >
-                        Delete Post
+                        Delete
                     </ButtonLink>
 
 
@@ -199,7 +200,7 @@ export default function ListingActions({ close }) {
                         handle={() => navigate(EDIT_LINK) }
                         icon="bi-pencil"
                     >
-                        Edit Post
+                        Edit
                     </ButtonLink>
 
                     {/*  
@@ -212,7 +213,7 @@ export default function ListingActions({ close }) {
                         handle={() => navigate(CLONE_LINK)}
                         icon="bi-copy"
                     >
-                        Clone Post
+                        Clone
                     </ButtonLink>
 
 
@@ -222,7 +223,7 @@ export default function ListingActions({ close }) {
                         handle={() => navigate(VIEW_LINK)}
                         icon="bi-three-dots"
                     >
-                        Post summary
+                        Summary
                     </ButtonLink>
 
 

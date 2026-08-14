@@ -1,53 +1,65 @@
-import { useMemo } from "react";
-import { useFetch } from "./useFetch.js";
-import nprogress from "nprogress";
+import { useCallback, useMemo } from 'react';
+import nprogress from 'nprogress';
+import { useFetch } from './useFetch';
 
+export const useService = ({ service, onSuccess, onError, onRefresh } = {}) => {
+    const { 
+        loading, setLoading, 
+        content, setContent, 
+        error, setError, 
+        success, setSuccess 
+    } = useFetch();
 
-export const useService = ({service, onSuccess, onError, onRefresh}) => {
+    const execute = useCallback(async (action, ...args) => {
+        nprogress.start();
+        setLoading(true);
+        setError(null);
+        setSuccess(false);
 
+        try {
+            if (typeof service?.[action] !== 'function') {
+                throw new Error(`El método ${action} no existe en el servicio.`);
+            }
 
-    const {loading, setLoading, content ,
-        setContent, error, setError, success, setSuccess} = useFetch()
+            const result = await service[action](...args);
+            
+            setContent(result);
+            setSuccess(true);
+            onSuccess?.(result);
+            onRefresh?.();
+            
+            return result;
+        } catch (err) {
+            setError(err);
+            onError?.(err);
+            setContent(null);
+            throw err;
+        } finally {
+            setLoading(false);
+            nprogress.done();
+        }
+    }, [service, onSuccess, onError, onRefresh, setLoading, setError, setContent, setSuccess]);
 
     const serviceCrud = useMemo(() => {
+        if (!service) return {};
+        
         const wrapper = {};
-        // Iteramos sobre las propiedades del objeto service
         Object.keys(service).forEach((key) => {
-            // Solo envolvemos si es una función
             if (typeof service[key] === 'function') {
                 wrapper[key] = (...args) => execute(key, ...args);
             }
         });
         return wrapper;
-    }, [service]);
-
-
-    // Acciones Genéricas
-    const execute = async (action, ...args) => {
-        nprogress.start();
-        setLoading(true)
-        setError(null)
-        setContent(null)
-        try {
-            const result = await service[action](...args)
-            onSuccess?.(result);
-            onRefresh?.();
-            setSuccess(true)
-            setContent(result);
-            return result;
-        } catch (err) {
-            setError(err);
-            onError?.(err);
-            setContent(null)
-            throw err;
-        } finally {
-            setLoading(false)
-            nprogress.done();
-        }
-    };
+    }, [service, execute]);
 
     return {
-        ...serviceCrud, execute, loading, setLoading, content ,
-        setContent, error, setError, success, setSuccess
-    }
-}
+        ...serviceCrud,
+        execute,
+        loading,
+        content,
+        error,
+        success,
+        setError,
+        setSuccess
+    };
+};

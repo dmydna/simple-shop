@@ -1,48 +1,38 @@
 import { generatePath } from "react-router-dom";
-import { content } from "./data/listings.json"
+import listingData from "./data/listings.snapshot.json"
+import productData from "./data/products.snapshot.json"
+import userData from "./data/users.snapshot.json"
+import {buildPageResponse, applyFilters, applySorting, extractPaginationParams} from "./utils"
 
-
-const DEFAULT_PASSWORD = '1234'
-const DEFAULT_USER = {
-	image: '/user-default-xl.png',
-  firstName: 'user',
-	lastName: 'default',
-	address: 'st.1234',
-	phone: '9011-1011',
-  password: DEFAULT_PASSWORD,
-  role: 'CLIENT',
-  email: 'user@example.com'
-}
-
-const userAdmin = {
-	...DEFAULT_USER,
-    username: 'admin',
-    role: 'ADMIN',
-    email: 'admin@example.com'
-}
 
 // Variable en memoria para simular el usuario logueado actualmente en el mock
-export let currentLoggedUser = 'admin'; 
 
+export let currentLoggedUser = 'admin'; 
 export const setCurrentLoggedUser = (username) => {
   currentLoggedUser = username;
 };
 
+
+export const processUser = (u) => ({
+  ...u, password: u.username + "1234"
+})
+
+
 export const db = {
-  users: [
-    { id: 1, ...userAdmin },
-  ],
-	listings: [ ...content ],
+
+  users:    [...userData.content.map( processUser )],
+  products: [...productData.content ],
+	listings: [...listingData.content ],
 	favorites: [],
 	orders: [],
 
 
 	generateId(collection){
-		return this[collection].lenght;
+		return this[collection].length;
 	},
 
   getIndex(collection, id){
-    return this[collection].findIndex(u => u.id === parseInt(id));
+    return this[collection].findIndex(i => i.id == id);
   },
 
 	save(collection, data){
@@ -52,129 +42,83 @@ export const db = {
 	},
 
 
-  find(collection, filterFn) {
+  find(collection, filterFn, mapperFn = null) {
+    if(mapperFn){ return mapperFn(this[collection].find(filterFn)) }
     return this[collection].find(filterFn);
   },
   
-  findAll(collection, filterFn) {
+
+  deleteFrom(collection, filterFn){
+    const updated =  this.update(
+      collection, filterFn, data => ({ id: "__" + data.id, deleted: true }) 
+    ) 
+    return updated?.deleted || false
+  },
+
+  findAll(collection, filterFn, mapperFn = null) {
+    if(mapperFn){ 
+      return this[collection]
+       .filter(filterFn || (() => true))
+       .map(mapperFn)  
+     }
     return this[collection].filter(filterFn || (() => true));
   },
 
-  findPage(collection, request) {
-    console.log("LLEGA ACA - Procesando solicitud");
-    
+
+  exists(collection, filterFn){
+    if(this.find(collection, filterFn)){ return true; }
+    return false;
+  },
+
+
+  findPage(collection, request, mapperFn = null) {
+
     if (!request || !request.url) {
-      console.error("Request object missing URL");
       return { content: [], totalElements: 0, totalPages: 0 };
     }
 
     const url = new URL(request.url);
     
-    // 1. Extraer parámetros de paginación y ordenamiento
-    let page = parseInt(url.searchParams.get('page') || '0');
-    const size = parseInt(url.searchParams.get('size') || '10');
-    const sortParam = url.searchParams.get('sort');
-
-    if(page < 0){
-      page = 0
-    }
-
-    // 2. Filtrar los parámetros de consulta para obtener solo los filtros de negocio
-    // Creamos un Set con los nombres de los parámetros que NO son filtros
-    const paginationParams = new Set(['page', 'size', 'sort', 'includeTags']);
+    // 1. Extraer parámetros
+    const { page, size, sortParam, filters } = extractPaginationParams(url);
     
-    // Convertimos todos los params a un objeto para iterar
-    const allParams = Object.fromEntries(url.searchParams.entries());
+    // 2. Obtener datos base (de la colección o del array mapeado)
+    const baseData = this[collection];
     
-    // Creamos el objeto 'filters' con solo los parámetros desconocidos
-    const filters = {};
-    for (const [key, value] of Object.entries(allParams)) {
-      if (!paginationParams.has(key)) {
-        filters[key] = value;
-      }
+    if (!Array.isArray(baseData)) {
+      console.warn(`Datos no son un array en ${collection}`);
+      return { content: [], totalElements: 0, totalPages: 0 };
     }
 
-    console.log("Filtros detectados:", filters);
+    // 3. Aplicar filtros
+    const filteredData = applyFilters(baseData, filters);
 
-    // 3. Aplicar filtros dinámicos (Spec Pattern)
-    let filteredData = [...this[collection]];
+    // 4. Aplicar ordenamiento
+    const sortedData = applySorting(filteredData, sortParam);
 
-    if (Object.keys(filters).length > 0) {
-      filteredData = filteredData.filter(user => {
-        return Object.entries(filters).every(([key, value]) => {
-          const userValue = user[key];
-          
-          // Lógica de comparación flexible
-          if (userValue === undefined) return false; // Campo no existe en el objeto
-
-          // Si el valor del filtro es una cadena, intentamos coincidencia parcial (case-insensitive)
-          // Si es un número o booleano, usamos igualdad estricta
-          if (typeof value === 'string') {
-            return String(userValue).toLowerCase().includes(value.toLowerCase());
-          }
-          
-          // Para números o booleanos
-          return userValue == value; 
-        });
-      });
-    }
-
-    // 4. Aplicar ordenamiento (si existe)
-    let sortedData = filteredData;
-    if (sortParam) {
-      const [field, direction] = sortParam.split(',');
-      if (field && sortedData.length > 0 && Object.prototype.hasOwnProperty.call(sortedData[0], field)) {
-        sortedData.sort((a, b) => {
-          const valA = a[field];
-          const valB = b[field];
-          if (typeof valA === 'string') {
-            return direction === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
-          }
-          if (valA < valB) return direction === 'asc' ? -1 : 1;
-          if (valA > valB) return direction === 'asc' ? 1 : -1;
-          return 0;
-        });
-      }
-    }
-
-    // 5. Calcular índices y paginar
+    // 5. Calcular paginación
+    const totalElements = sortedData.length;
     const start = page * size;
     const end = start + size;
-    const pageContent = sortedData.slice(start, end);
+    let pageContent = sortedData.slice(start, end);
 
-    // 6. Cálculos finales
-    const totalElements = sortedData.length;
-    const totalPages = totalElements === 0 ? 0 : Math.ceil(totalElements / size);
+    if(mapperFn){
+      pageContent = pageContent.map(mapperFn)
+    }
 
-    return {
-      content: pageContent,
-      pageable: {
-        pageNumber: page,
-        pageSize: size,
-        sort: { empty: !sortParam, sorted: !!sortParam, unsorted: !sortParam },
-        offset: start,
-        paged: true,
-        unpaged: false
-      },
-      last: page === totalPages - 1,
-      totalPages: totalPages,
-      totalElements: totalElements,
-      size: size,
-      number: page,
-      sort: { empty: !sortParam, sorted: !!sortParam, unsorted: !sortParam },
-      numberOfElements: pageContent.length,
-      first: page === 0,
-      empty: pageContent.length === 0
-    };
+    // 6. Construir respuesta (Pasamos sortParam explícitamente para evitar scope issues)
+    return { ...buildPageResponse(pageContent, page, size, totalElements, sortParam) };
   },
-  
-  update(collection, id, newData) {
-    const index = this[collection].findIndex(i => i.id === id);
+
+  update(collection, filterFn, updateFn) {
+    const data = this[collection].find(filterFn)
+    const index = this.getIndex(collection, data.id);
+    console.log("DB", index)
     if (index > -1) {
-      this[collection][index] = { ...this[collection][index], ...newData };
+      this[collection][index] = updateFn(this[collection][index])
     }
     return this[collection][index];
-  }
+  },
 
 
 }

@@ -1,0 +1,736 @@
+{
+  "content": [
+    {
+      "id": "DQvnD2ZP",
+      "name": "Kiwi",
+      "sku": "GRO-BRD-KIW-030",
+      "brand": null,
+      "weight": 5,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 25, 39514000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 590384000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 3.33333333333333,
+      "dimensions": {
+        "width": 19.4,
+        "height": 18.67,
+        "depth": 17.13
+      },
+      "category": "groceries",
+      "tags": [
+        "fruits"
+      ]
+    },
+    {
+      "id": "Oy56gveK",
+      "name": "fruit juice",
+      "sku": "GRO-BRD-JUI-029",
+      "brand": null,
+      "weight": 1,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 24, 373238000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 590323000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4.66666666666667,
+      "dimensions": {
+        "width": 18.56,
+        "height": 21.46,
+        "depth": 28.02
+      },
+      "category": "groceries",
+      "tags": [
+        "beverages"
+      ]
+    },
+    {
+      "id": "OQ2zg5DA",
+      "name": "Ice Cream",
+      "sku": "GRO-BRD-CRE-028",
+      "brand": null,
+      "weight": 1,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 24, 116617000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 590274000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4.66666666666667,
+      "dimensions": {
+        "width": 14.83,
+        "height": 15.07,
+        "depth": 24.2
+      },
+      "category": "groceries",
+      "tags": [
+        "desserts"
+      ]
+    },
+    {
+      "id": "8ov105mD",
+      "name": "Honey Jar",
+      "sku": "GRO-BRD-HON-027",
+      "brand": null,
+      "weight": 2,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 23, 896299000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 590189000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 2.33333333333333,
+      "dimensions": {
+        "width": 9.28,
+        "height": 21.72,
+        "depth": 17.74
+      },
+      "category": "groceries",
+      "tags": [
+        "condiments"
+      ]
+    },
+    {
+      "id": "Wz5Q6v6w",
+      "name": "Spicy green chili pepper",
+      "sku": "GRO-BRD-GRE-026",
+      "brand": null,
+      "weight": 7,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 23, 474121000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 590099000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 2.66666666666667,
+      "dimensions": {
+        "width": 15.38,
+        "height": 18.12,
+        "depth": 19.92
+      },
+      "category": "groceries",
+      "tags": [
+        "vegetables"
+      ]
+    },
+    {
+      "id": "7pv3dxkK",
+      "name": "Green Bell Pepper",
+      "sku": "GRO-BRD-GRE-025",
+      "brand": null,
+      "weight": 2,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 22, 965208000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 590017000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4,
+      "dimensions": {
+        "width": 15.33,
+        "height": 26.65,
+        "depth": 14.44
+      },
+      "category": "groceries",
+      "tags": [
+        "vegetables"
+      ]
+    },
+    {
+      "id": "OY2R9x94",
+      "name": "Fish Steak",
+      "sku": "GRO-BRD-FIS-024",
+      "brand": null,
+      "weight": 6,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 22, 11975000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 589914000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 3.66666666666667,
+      "dimensions": {
+        "width": 14.95,
+        "height": 26.31,
+        "depth": 11.27
+      },
+      "category": "groceries",
+      "tags": [
+        "seafood"
+      ]
+    },
+    {
+      "id": "Zl5DzxBN",
+      "name": "Eggs",
+      "sku": "GRO-BRD-EGG-023",
+      "brand": null,
+      "weight": 2,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 21, 366049000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 589844000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 3.33333333333333,
+      "dimensions": {
+        "width": 11.42,
+        "height": 7.44,
+        "depth": 16.95
+      },
+      "category": "groceries",
+      "tags": [
+        "dairy"
+      ]
+    },
+    {
+      "id": "JY5MP2gX",
+      "name": "Dog Food",
+      "sku": "GRO-BRD-FOO-022",
+      "brand": null,
+      "weight": 10,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 20, 433437000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 589778000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4.66666666666667,
+      "dimensions": {
+        "width": 16.93,
+        "height": 27.15,
+        "depth": 9.29
+      },
+      "category": "groceries",
+      "tags": [
+        "pet supplies",
+        "dog food"
+      ]
+    },
+    {
+      "id": "KaxplxdD",
+      "name": "Cucumber",
+      "sku": "GRO-BRD-CUC-021",
+      "brand": null,
+      "weight": 4,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 19, 677313000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 589622000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 3.33333333333333,
+      "dimensions": {
+        "width": 12.8,
+        "height": 28.38,
+        "depth": 21.34
+      },
+      "category": "groceries",
+      "tags": [
+        "vegetables"
+      ]
+    },
+    {
+      "id": "9pxaN2MV",
+      "name": "Cooking Oil",
+      "sku": "GRO-BRD-COO-020",
+      "brand": null,
+      "weight": 5,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 18, 944477000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 588591000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4,
+      "dimensions": {
+        "width": 19.95,
+        "height": 27.54,
+        "depth": 24.86
+      },
+      "category": "groceries",
+      "tags": [
+        "cooking essentials"
+      ]
+    },
+    {
+      "id": "lGxZavE4",
+      "name": "Chicken Meat",
+      "sku": "GRO-BRD-CHI-019",
+      "brand": null,
+      "weight": 1,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 18, 320653000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 588507000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4,
+      "dimensions": {
+        "width": 11.03,
+        "height": 22.11,
+        "depth": 16.01
+      },
+      "category": "groceries",
+      "tags": [
+        "meat"
+      ]
+    },
+    {
+      "id": "XVxgGxkE",
+      "name": "Cat Food",
+      "sku": "GRO-BRD-FOO-018",
+      "brand": null,
+      "weight": 10,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 17, 657197000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 588443000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 2.66666666666667,
+      "dimensions": {
+        "width": 18.08,
+        "height": 9.26,
+        "depth": 21.86
+      },
+      "category": "groceries",
+      "tags": [
+        "pet supplies",
+        "cat food"
+      ]
+    },
+    {
+      "id": "KG5jz5qg",
+      "name": "Beef Steak",
+      "sku": "GRO-BRD-BEE-017",
+      "brand": null,
+      "weight": 10,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 16, 982695000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 588389000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4,
+      "dimensions": {
+        "width": 18.9,
+        "height": 5.77,
+        "depth": 18.57
+      },
+      "category": "groceries",
+      "tags": [
+        "meat"
+      ]
+    },
+    {
+      "id": "G85OB2pV",
+      "name": "Apple",
+      "sku": "GRO-BRD-APP-016",
+      "brand": null,
+      "weight": 9,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 16, 244222000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 588343000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 3,
+      "dimensions": {
+        "width": 13.66,
+        "height": 11.01,
+        "depth": 9.73
+      },
+      "category": "groceries",
+      "tags": [
+        "fruits"
+      ]
+    },
+    {
+      "id": "MdvmZxJE",
+      "name": "Wooden Bathroom Sink with Mirror",
+      "sku": "FUR-BAT-WOO-015",
+      "brand": "Bath Trends",
+      "weight": 10,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 15, 523848000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 588291000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4,
+      "dimensions": {
+        "width": 7.98,
+        "height": 8.88,
+        "depth": 28.46
+      },
+      "category": "furniture",
+      "tags": [
+        "furniture",
+        "bathroom"
+      ]
+    },
+    {
+      "id": "R9xw42JD",
+      "name": "Saarinen Executive Conference Chair",
+      "sku": "FUR-KNO-KNO-014",
+      "brand": "Knoll",
+      "weight": 10,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 15, 44702000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 588163000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 3,
+      "dimensions": {
+        "width": 13.81,
+        "height": 7.5,
+        "depth": 5.62
+      },
+      "category": "furniture",
+      "tags": [
+        "furniture",
+        "office chairs"
+      ]
+    },
+    {
+      "id": "pMx8GvWk",
+      "name": "Bedside Table African Cherry",
+      "sku": "FUR-FUR-BED-013",
+      "brand": "Furniture Co.",
+      "weight": 2,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 14, 337423000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 588049000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4,
+      "dimensions": {
+        "width": 13.47,
+        "height": 24.99,
+        "depth": 27.35
+      },
+      "category": "furniture",
+      "tags": [
+        "furniture",
+        "bedside tables"
+      ]
+    },
+    {
+      "id": "R42Jb2y3",
+      "name": "Annibale Colombo Sofa",
+      "sku": "FUR-ANN-ANN-012",
+      "brand": "Annibale Colombo",
+      "weight": 6,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 13, 635223000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 587898000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 3,
+      "dimensions": {
+        "width": 12.75,
+        "height": 20.55,
+        "depth": 19.06
+      },
+      "category": "furniture",
+      "tags": [
+        "furniture",
+        "sofas"
+      ]
+    },
+    {
+      "id": "ak2krxj0",
+      "name": "Annibale Colombo Bed",
+      "sku": "FUR-ANN-ANN-011",
+      "brand": "Annibale Colombo",
+      "weight": 10,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 12, 647527000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 587792000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 2.33333333333333,
+      "dimensions": {
+        "width": 28.16,
+        "height": 25.36,
+        "depth": 17.28
+      },
+      "category": "furniture",
+      "tags": [
+        "furniture",
+        "beds"
+      ]
+    },
+    {
+      "id": "LlvV15wA",
+      "name": "Gucci Bloom",
+      "sku": "FRA-GUC-GUC-010",
+      "brand": "Gucci",
+      "weight": 7,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 12, 120206000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 587715000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 3.33333333333333,
+      "dimensions": {
+        "width": 20.92,
+        "height": 21.68,
+        "depth": 11.2
+      },
+      "category": "fragrances",
+      "tags": [
+        "fragrances",
+        "perfumes"
+      ]
+    },
+    {
+      "id": "e62eR54z",
+      "name": "Dolce Shine",
+      "sku": "FRA-DOL-DOL-009",
+      "brand": "Dolce & Gabbana",
+      "weight": 6,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 11, 196035000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 587662000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4.33333333333333,
+      "dimensions": {
+        "width": 27.28,
+        "height": 29.88,
+        "depth": 18.3
+      },
+      "category": "fragrances",
+      "tags": [
+        "fragrances",
+        "perfumes"
+      ]
+    },
+    {
+      "id": "872b750O",
+      "name": "J'adore ",
+      "sku": "FRA-DIO-DIO-008",
+      "brand": "Dior",
+      "weight": 4,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 10, 504269000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 587604000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4.33333333333333,
+      "dimensions": {
+        "width": 27.67,
+        "height": 28.28,
+        "depth": 11.83
+      },
+      "category": "fragrances",
+      "tags": [
+        "fragrances",
+        "perfumes"
+      ]
+    },
+    {
+      "id": "372WZxQj",
+      "name": "Coco Noir",
+      "sku": "FRA-CHA-CHA-007",
+      "brand": "Chanel",
+      "weight": 7,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 9, 628460000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 587542000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4.66666666666667,
+      "dimensions": {
+        "width": 24.5,
+        "height": 25.7,
+        "depth": 25.98
+      },
+      "category": "fragrances",
+      "tags": [
+        "fragrances",
+        "perfumes"
+      ]
+    },
+    {
+      "id": "EmvrgxGY",
+      "name": "CK One",
+      "sku": "FRA-CAL-CAL-006",
+      "brand": "Calvin Klein",
+      "weight": 7,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 8, 164409000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 587485000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 3,
+      "dimensions": {
+        "width": 29.36,
+        "height": 27.76,
+        "depth": 20.72
+      },
+      "category": "fragrances",
+      "tags": [
+        "fragrances",
+        "perfumes"
+      ]
+    },
+    {
+      "id": "Z02qr54R",
+      "name": "Red Lipstick",
+      "sku": "BEA-NAI-NAI-005",
+      "brand": "Nail Couture",
+      "weight": 8,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 7, 520094000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 587431000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 2.66666666666667,
+      "dimensions": {
+        "width": 21.63,
+        "height": 16.48,
+        "depth": 29.84
+      },
+      "category": "beauty",
+      "tags": [
+        "beauty",
+        "nail polish"
+      ]
+    },
+    {
+      "id": "LJv01xdR",
+      "name": "Red Lipstick",
+      "sku": "BEA-CHI-LIP-004",
+      "brand": "Chic Cosmetics",
+      "weight": 1,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 6, 766764000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 587379000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4.66666666666667,
+      "dimensions": {
+        "width": 18.11,
+        "height": 28.38,
+        "depth": 22.17
+      },
+      "category": "beauty",
+      "tags": [
+        "beauty",
+        "lipstick"
+      ]
+    },
+    {
+      "id": "NY54K2de",
+      "name": "Powder Canister",
+      "sku": "BEA-VEL-POW-003",
+      "brand": "Velvet Touch",
+      "weight": 8,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 6, 32597000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 587336000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 3.33333333333333,
+      "dimensions": {
+        "width": 29.27,
+        "height": 27.93,
+        "depth": 20.59
+      },
+      "category": "beauty",
+      "tags": [
+        "beauty",
+        "face powder"
+      ]
+    },
+    {
+      "id": "qExKBvbM",
+      "name": "Eyeshadow Palette",
+      "sku": "BEA-GLA-EYE-002",
+      "brand": "Glamour Beauty",
+      "weight": 9,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 4, 744262000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 587270000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 3.33333333333333,
+      "dimensions": {
+        "width": 9.26,
+        "height": 22.47,
+        "depth": 27.67
+      },
+      "category": "beauty",
+      "tags": [
+        "beauty",
+        "eyeshadow"
+      ]
+    },
+    {
+      "id": "7M29M2eV",
+      "name": "Mascara Lash Princess",
+      "sku": "BEA-ESS-ESS-001",
+      "brand": "Essence",
+      "weight": 4,
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 3, 988501000],
+        "updatedAt": [2026, 8, 9, 22, 14, 27, 587175000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      },
+      "rating": 4,
+      "dimensions": {
+        "width": 15.14,
+        "height": 13.08,
+        "depth": 22.99
+      },
+      "category": "beauty",
+      "tags": [
+        "beauty",
+        "mascara"
+      ]
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 100,
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "offset": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "totalPages": 1,
+  "totalElements": 30,
+  "last": true,
+  "size": 100,
+  "number": 0,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "numberOfElements": 30,
+  "first": true,
+  "empty": false
+}

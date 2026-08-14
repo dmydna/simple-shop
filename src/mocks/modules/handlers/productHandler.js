@@ -5,11 +5,11 @@ import { baseHandlers } from './baseHandler';
 
 
 
-const [BASE_ENDPOINT, SERVICES] = [`${BASE_URL}/${ENDPOINT.FAVORITE}`, product_service]
+const [BASE_ENDPOINT, SERVICE] = [`${BASE_URL}/${ENDPOINT.PRODUCT}`, product_service]
 
 
 export const productHandlers = [
 
-  ...(baseHandlers(BASE_ENDPOINT, SERVICES)),
+  ...(baseHandlers(BASE_ENDPOINT, SERVICE)),
   
 ];

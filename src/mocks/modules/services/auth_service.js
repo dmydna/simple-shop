@@ -1,34 +1,32 @@
 import ChangePassword from '@/pages/ChangePassword.jsx';
 import { currentLoggedUser, db, setCurrentLoggedUser } from '../db.js';
 import { user_service } from './user_service.js';
-import { role } from '@/utils/enums.js';
+import { baseService } from './baseService.js';
+
+const COLLECTION = 'users'
 
 export const auth_service = {
 		
+	 ...baseService(COLLECTION),
+
 	 login : (request) => {
-	 	const user = db.find('users', u => u.username === request.username);
+	 	const user = db.find(COLLECTION, u => u.username === request.username);
 	 	console.info("[MOCK API / auth_service]:" ,user)
-	 	if(user && user.password == request.password){
-			setCurrentLoggedUser(request.username)
+	 	if(user && user.password == request.password){ 
+	 		setCurrentLoggedUser(request.username)
 	 		return true;
 	 	}
 	 	return false;
 	 },
 
 	 getAuth: ()=>{
-	 	if(!currentLoggedUser){
-	 		return null
-	 	}
-	 	const {username, role} = db.find('users', u => u.username === currentLoggedUser);
-
-
+	 	if(!currentLoggedUser){return null}
+	 	const {username, role} = db.find(COLLECTION, u => u.username === currentLoggedUser);
 	 	return { username, role, expireAt: Date.now() + 3600 * 24 }
 	 },
 
 	 isAuthUserAdmin: () => {
-	 	if(!currentLoggedUser || currentLoggedUser.role !== 'ADMIN'){
-	 		return false
-	 	}
+	 	if(!currentLoggedUser || currentLoggedUser.role !== 'ADMIN'){ return false }
 	 	return true
 	 },
 
@@ -37,11 +35,12 @@ export const auth_service = {
 	 },
 
 
-	 changeUserEmail: (username, request) => {
-	 	user_service.changeMail(username, request.password, request.newEmail)
-	 }
+	 changeUserEmail: (request) => {
+	 	return user_service.changeEmail(currentLoggedUser, request.password, request.newEmail)
+	 },
 
-	 
+
+
 
 
 }

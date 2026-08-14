@@ -19,7 +19,21 @@ export const user_service = {
 
     updateProfile: (id, update) => {
         return db.update(collection, id, update) 
-    }
+    },
 
+    updateProfileImage: (url) => {
+        return db.update(collection, item => item.username === currentLoggedUser, u => ({...u, image: url}) )   
+    },
+
+    changeEmail: (username, password, newEmail) => {
+        const user = db.find(collection,  u => u.username == username)
+        if(user){
+            if(user.password == password){
+                return db.update(collection, u => u.username == username, u => ({...u, email: newEmail}))
+            }
+            return null;
+        } 
+        return null;
+     },
 
 }

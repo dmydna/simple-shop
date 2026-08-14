@@ -8,7 +8,7 @@ export const baseService =  (collection) => ({
     },
 
     getById: (id) => {
-        return db.find(collection, item => item.id === id);
+        return db.find(collection, item => item.id == id);
     },
 
     getIndexDB: (id) => {
@@ -20,13 +20,28 @@ export const baseService =  (collection) => ({
     },
 
     updateById: (id, update) => {
-        const data = this.getById(id);
-        return db.update(collection, data.id, update); 
+        return db.update(
+            collection, 
+            item => item.id == id , 
+            item => ({ ...item, ...update }) 
+        ); 
+    },
+
+    updateStatus: (id, {status}) => {
+        return db.update(
+            collection, 
+            item => item.id == id , 
+            item => ({ ...item, meta: {...item.meta, "status": status} }) 
+        ); 
     },
 
     deleteById:(id) => {
         console.log(db[collection])
         return db._delete(collection, id)
-    }
+    },
+
+    existsById: (id) => {
+        return db.exists(collection, i => i.id === id)
+    },
 
 })

@@ -1,0 +1,2200 @@
+{
+  "content": [
+    {
+      "id": "DQvnD2ZP",
+      "title": "Kiwi",
+      "description": "Nutrient-rich kiwi, perfect for snacking or adding a tropical twist to your dishes.",
+      "price": 2.49,
+      "finalPrice": 2.12,
+      "discountPercentage": 15,
+      "rating": 3.33333333333333,
+      "warrantyInformation": "6 months warranty",
+      "shippingInformation": "Ships overnight",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "lQ5Glyv0",
+          "username": "emily_brown",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Highly recommended!",
+          "productId": 30,
+          "listingId": 30,
+          "meta": null
+        },
+        {
+          "id": "7M29WMve",
+          "username": "jackson_morales",
+          "userPic": "",
+          "rating": 2,
+          "comment": "Would not buy again!",
+          "productId": 30,
+          "listingId": 30,
+          "meta": null
+        },
+        {
+          "id": "qExKBBvb",
+          "username": "nora_russell",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Fast shipping!",
+          "productId": 30,
+          "listingId": 30,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "7 days return policy",
+      "minimumOrderQuantity": 30,
+      "images": [
+        "/product-images/groceries/kiwi/1.webp"
+      ],
+      "thumbnail": "/product-images/groceries/kiwi/thumbnail.webp",
+      "productId": 30,
+      "productName": "Kiwi",
+      "sku": "GRO-BRD-KIW-030",
+      "brand": null,
+      "weight": 5,
+      "dimensions": {
+        "width": 19.4,
+        "height": 18.67,
+        "depth": 17.13
+      },
+      "stock": 99,
+      "category": "groceries",
+      "tags": [
+        "fruits"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 162763000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 162763000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "Oy56gveK",
+      "title": "Juice",
+      "description": "Refreshing fruit juice, packed with vitamins and great for staying hydrated.",
+      "price": 3.99,
+      "finalPrice": 3.51,
+      "discountPercentage": 12,
+      "rating": 4.66666666666667,
+      "warrantyInformation": "6 months warranty",
+      "shippingInformation": "Ships in 1 week",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "mD2YZG53",
+          "username": "nolan_gonzalez",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Excellent quality!",
+          "productId": 29,
+          "listingId": 29,
+          "meta": null
+        },
+        {
+          "id": "qwx7oMxG",
+          "username": "bella_grant",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Would buy again!",
+          "productId": 29,
+          "listingId": 29,
+          "meta": null
+        },
+        {
+          "id": "eR5PByxV",
+          "username": "aria_flores",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Awesome product!",
+          "productId": 29,
+          "listingId": 29,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "No return policy",
+      "minimumOrderQuantity": 25,
+      "images": [
+        "/product-images/groceries/juice/1.webp"
+      ],
+      "thumbnail": "/product-images/groceries/juice/thumbnail.webp",
+      "productId": 29,
+      "productName": "fruit juice",
+      "sku": "GRO-BRD-JUI-029",
+      "brand": null,
+      "weight": 1,
+      "dimensions": {
+        "width": 18.56,
+        "height": 21.46,
+        "depth": 28.02
+      },
+      "stock": 50,
+      "category": "groceries",
+      "tags": [
+        "beverages"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 159832000],
+        "updatedAt": [2026, 8, 9, 23, 49, 21, 927622000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "OQ2zg5DA",
+      "title": "Ice Cream",
+      "description": "Creamy and delicious ice cream, available in various flavors for a delightful treat.",
+      "price": 5.49,
+      "finalPrice": 5.05,
+      "discountPercentage": 8,
+      "rating": 4.66666666666667,
+      "warrantyInformation": "1 month warranty",
+      "shippingInformation": "Ships in 2 weeks",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "je2XkpxP",
+          "username": "elijah_cruz",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Very pleased!",
+          "productId": 28,
+          "listingId": 28,
+          "meta": null
+        },
+        {
+          "id": "rDvAwZ2P",
+          "username": "jace_smith",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Excellent quality!",
+          "productId": 28,
+          "listingId": 28,
+          "meta": null
+        },
+        {
+          "id": "bG2Bw85W",
+          "username": "sadie_morales",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Highly impressed!",
+          "productId": 28,
+          "listingId": 28,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "No return policy",
+      "minimumOrderQuantity": 42,
+      "images": [
+        "/product-images/groceries/ice-cream/1.webp",
+        "/product-images/groceries/ice-cream/2.webp",
+        "/product-images/groceries/ice-cream/3.webp",
+        "/product-images/groceries/ice-cream/4.webp"
+      ],
+      "thumbnail": "/product-images/groceries/ice-cream/thumbnail.webp",
+      "productId": 28,
+      "productName": "Ice Cream",
+      "sku": "GRO-BRD-CRE-028",
+      "brand": null,
+      "weight": 1,
+      "dimensions": {
+        "width": 14.83,
+        "height": 15.07,
+        "depth": 24.2
+      },
+      "stock": 27,
+      "category": "groceries",
+      "tags": [
+        "desserts"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 107275000],
+        "updatedAt": [2026, 8, 9, 23, 49, 42, 485912000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "8ov105mD",
+      "title": "Honey Jar",
+      "description": "Pure and natural honey in a convenient jar, perfect for sweetening beverages or drizzling over food.",
+      "price": 6.99,
+      "finalPrice": 6.01,
+      "discountPercentage": 14,
+      "rating": 2.33333333333333,
+      "warrantyInformation": "1 month warranty",
+      "shippingInformation": "Ships in 1-2 business days",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "6jvEjmxb",
+          "username": "autumn_gomez",
+          "userPic": "",
+          "rating": 1,
+          "comment": "Very disappointed!",
+          "productId": 27,
+          "listingId": 27,
+          "meta": null
+        },
+        {
+          "id": "1Z5o1jxm",
+          "username": "benjamin_wilson",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Highly impressed!",
+          "productId": 27,
+          "listingId": 27,
+          "meta": null
+        },
+        {
+          "id": "1BxLBK5m",
+          "username": "nicholas_edwards",
+          "userPic": "",
+          "rating": 2,
+          "comment": "Very disappointed!",
+          "productId": 27,
+          "listingId": 27,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "90 days return policy",
+      "minimumOrderQuantity": 47,
+      "images": [
+        "/product-images/groceries/honey-jar/1.webp"
+      ],
+      "thumbnail": "/product-images/groceries/honey-jar/thumbnail.webp",
+      "productId": 27,
+      "productName": "Honey Jar",
+      "sku": "GRO-BRD-HON-027",
+      "brand": null,
+      "weight": 2,
+      "dimensions": {
+        "width": 9.28,
+        "height": 21.72,
+        "depth": 17.74
+      },
+      "stock": 34,
+      "category": "groceries",
+      "tags": [
+        "condiments"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 104606000],
+        "updatedAt": [2026, 8, 9, 23, 51, 30, 977090000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "Wz5Q6v6w",
+      "title": "Green Chili Pepper",
+      "description": "Spicy green chili pepper, ideal for adding heat to your favorite recipes.",
+      "price": 0.99,
+      "finalPrice": 0.98,
+      "discountPercentage": 1,
+      "rating": 2.66666666666667,
+      "warrantyInformation": "2 year warranty",
+      "shippingInformation": "Ships in 1 week",
+      "availabilityStatus": "Low Stock",
+      "reviews": [
+        {
+          "id": "bP2NPjvr",
+          "username": "luna_russell",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Great product!",
+          "productId": 26,
+          "listingId": 26,
+          "meta": null
+        },
+        {
+          "id": "7Lxlba58",
+          "username": "noah_lewis",
+          "userPic": "",
+          "rating": 1,
+          "comment": "Waste of money!",
+          "productId": 26,
+          "listingId": 26,
+          "meta": null
+        },
+        {
+          "id": "6V2dL62m",
+          "username": "clara_berry",
+          "userPic": "",
+          "rating": 3,
+          "comment": "Very disappointed!",
+          "productId": 26,
+          "listingId": 26,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "30 days return policy",
+      "minimumOrderQuantity": 39,
+      "images": [
+        "/product-images/groceries/green-chili-pepper/1.webp"
+      ],
+      "thumbnail": "/product-images/groceries/green-chili-pepper/thumbnail.webp",
+      "productId": 26,
+      "productName": "Spicy green chili pepper",
+      "sku": "GRO-BRD-GRE-026",
+      "brand": null,
+      "weight": 7,
+      "dimensions": {
+        "width": 15.38,
+        "height": 18.12,
+        "depth": 19.92
+      },
+      "stock": 3,
+      "category": "groceries",
+      "tags": [
+        "vegetables"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 102859000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 102859000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "7pv3dxkK",
+      "title": "Green Bell Pepper",
+      "description": "Fresh and vibrant green bell pepper, perfect for adding color and flavor to your dishes.",
+      "price": 1.29,
+      "finalPrice": 1.29,
+      "discountPercentage": 0,
+      "rating": 4,
+      "warrantyInformation": "1 month warranty",
+      "shippingInformation": "Ships in 1 week",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "Oy56Ogve",
+          "username": "avery_carter",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Highly recommended!",
+          "productId": 25,
+          "listingId": 25,
+          "meta": null
+        },
+        {
+          "id": "DQvnVDvZ",
+          "username": "henry_hill",
+          "userPic": "",
+          "rating": 3,
+          "comment": "Would not recommend!",
+          "productId": 25,
+          "listingId": 25,
+          "meta": null
+        },
+        {
+          "id": "gEvywL2K",
+          "username": "addison_wright",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Excellent quality!",
+          "productId": 25,
+          "listingId": 25,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "30 days return policy",
+      "minimumOrderQuantity": 12,
+      "images": [
+        "/product-images/groceries/green-bell-pepper/1.webp"
+      ],
+      "thumbnail": "/product-images/groceries/green-bell-pepper/thumbnail.webp",
+      "productId": 25,
+      "productName": "Green Bell Pepper",
+      "sku": "GRO-BRD-GRE-025",
+      "brand": null,
+      "weight": 2,
+      "dimensions": {
+        "width": 15.33,
+        "height": 26.65,
+        "depth": 14.44
+      },
+      "stock": 33,
+      "category": "groceries",
+      "tags": [
+        "vegetables"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 100904000],
+        "updatedAt": [2026, 8, 9, 22, 19, 33, 843371000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "OY2R9x94",
+      "title": "Fish Steak",
+      "description": "Quality fish steak, suitable for grilling, baking, or pan-searing.",
+      "price": 14.99,
+      "finalPrice": 14.39,
+      "discountPercentage": 4,
+      "rating": 3.66666666666667,
+      "warrantyInformation": "1 month warranty",
+      "shippingInformation": "Ships in 3-5 business days",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "Wz5Qp626",
+          "username": "caleb_perkins",
+          "userPic": "",
+          "rating": 2,
+          "comment": "Would not buy again!",
+          "productId": 24,
+          "listingId": 24,
+          "meta": null
+        },
+        {
+          "id": "8ov1l05m",
+          "username": "isabella_jackson",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Excellent quality!",
+          "productId": 24,
+          "listingId": 24,
+          "meta": null
+        },
+        {
+          "id": "OQ2zMgxD",
+          "username": "nathan_dixon",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Great value for money!",
+          "productId": 24,
+          "listingId": 24,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "60 days return policy",
+      "minimumOrderQuantity": 50,
+      "images": [
+        "/product-images/groceries/fish-steak/1.webp"
+      ],
+      "thumbnail": "/product-images/groceries/fish-steak/thumbnail.webp",
+      "productId": 24,
+      "productName": "Fish Steak",
+      "sku": "GRO-BRD-FIS-024",
+      "brand": null,
+      "weight": 6,
+      "dimensions": {
+        "width": 14.95,
+        "height": 26.31,
+        "depth": 11.27
+      },
+      "stock": 74,
+      "category": "groceries",
+      "tags": [
+        "seafood"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 98343000],
+        "updatedAt": [2026, 8, 9, 23, 54, 45, 387616000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "Zl5DzxBN",
+      "title": "Eggs",
+      "description": "Fresh eggs, a versatile ingredient for baking, cooking, or breakfast.",
+      "price": 2.99,
+      "finalPrice": 2.66,
+      "discountPercentage": 11,
+      "rating": 3.33333333333333,
+      "warrantyInformation": "1 week warranty",
+      "shippingInformation": "Ships in 1 week",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "Zl5DjzxB",
+          "username": "penelope_king",
+          "userPic": "",
+          "rating": 3,
+          "comment": "Disappointing product!",
+          "productId": 23,
+          "listingId": 23,
+          "meta": null
+        },
+        {
+          "id": "OY2RD9v9",
+          "username": "eleanor_tyler",
+          "userPic": "",
+          "rating": 3,
+          "comment": "Poor quality!",
+          "productId": 23,
+          "listingId": 23,
+          "meta": null
+        },
+        {
+          "id": "7pv3Gdvk",
+          "username": "benjamin_foster",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Very pleased!",
+          "productId": 23,
+          "listingId": 23,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "No return policy",
+      "minimumOrderQuantity": 32,
+      "images": [
+        "/product-images/groceries/eggs/1.webp"
+      ],
+      "thumbnail": "/product-images/groceries/eggs/thumbnail.webp",
+      "productId": 23,
+      "productName": "Eggs",
+      "sku": "GRO-BRD-EGG-023",
+      "brand": null,
+      "weight": 2,
+      "dimensions": {
+        "width": 11.42,
+        "height": 7.44,
+        "depth": 16.95
+      },
+      "stock": null,
+      "category": "groceries",
+      "tags": [
+        "dairy"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 93857000],
+        "updatedAt": [2026, 8, 9, 22, 14, 48, 760479000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "JY5MP2gX",
+      "title": "Dog Food",
+      "description": "Specially formulated dog food designed to provide essential nutrients for your canine companion.",
+      "price": 10.99,
+      "finalPrice": 9.89,
+      "discountPercentage": 10,
+      "rating": 4.66666666666667,
+      "warrantyInformation": "No warranty",
+      "shippingInformation": "Ships in 1-2 business days",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "9pxayNxM",
+          "username": "nicholas_edwards",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Excellent quality!",
+          "productId": 22,
+          "listingId": 22,
+          "meta": null
+        },
+        {
+          "id": "KaxpJl5d",
+          "username": "zachary_lee",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Awesome product!",
+          "productId": 22,
+          "listingId": 22,
+          "meta": null
+        },
+        {
+          "id": "JY5MpP2g",
+          "username": "nova_cooper",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Great product!",
+          "productId": 22,
+          "listingId": 22,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "60 days return policy",
+      "minimumOrderQuantity": 43,
+      "images": [
+        "/product-images/groceries/dog-food/1.webp"
+      ],
+      "thumbnail": "/product-images/groceries/dog-food/thumbnail.webp",
+      "productId": 22,
+      "productName": "Dog Food",
+      "sku": "GRO-BRD-FOO-022",
+      "brand": null,
+      "weight": 10,
+      "dimensions": {
+        "width": 16.93,
+        "height": 27.15,
+        "depth": 9.29
+      },
+      "stock": 71,
+      "category": "groceries",
+      "tags": [
+        "pet supplies",
+        "dog food"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 89970000],
+        "updatedAt": [2026, 8, 9, 23, 29, 32, 463898000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "KaxplxdD",
+      "title": "Cucumber",
+      "description": "Crisp and hydrating cucumbers, ideal for salads, snacks, or as a refreshing side.",
+      "price": 1.49,
+      "finalPrice": 1.49,
+      "discountPercentage": 0,
+      "rating": 3.33333333333333,
+      "warrantyInformation": "2 year warranty",
+      "shippingInformation": "Ships in 1-2 business days",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "KG5j1z2q",
+          "username": "lincoln_kelly",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Great product!",
+          "productId": 21,
+          "listingId": 21,
+          "meta": null
+        },
+        {
+          "id": "XVxgWGxk",
+          "username": "savannah_gomez",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Great value for money!",
+          "productId": 21,
+          "listingId": 21,
+          "meta": null
+        },
+        {
+          "id": "lGxZBaxE",
+          "username": "james_davis",
+          "userPic": "",
+          "rating": 2,
+          "comment": "Poor quality!",
+          "productId": 21,
+          "listingId": 21,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "7 days return policy",
+      "minimumOrderQuantity": 2,
+      "images": [
+        "/product-images/groceries/cucumber/1.webp"
+      ],
+      "thumbnail": "/product-images/groceries/cucumber/thumbnail.webp",
+      "productId": 21,
+      "productName": "Cucumber",
+      "sku": "GRO-BRD-CUC-021",
+      "brand": null,
+      "weight": 4,
+      "dimensions": {
+        "width": 12.8,
+        "height": 28.38,
+        "depth": 21.34
+      },
+      "stock": 84,
+      "category": "groceries",
+      "tags": [
+        "vegetables"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 86556000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 86556000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "9pxaN2MV",
+      "title": "Cooking Oil",
+      "description": "Versatile cooking oil suitable for frying, sautéing, and various culinary applications.",
+      "price": 4.99,
+      "finalPrice": 4.54,
+      "discountPercentage": 9,
+      "rating": 4,
+      "warrantyInformation": "Lifetime warranty",
+      "shippingInformation": "Ships in 1-2 business days",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "R9xwp42J",
+          "username": "victoria_mcDonald",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Very happy with my purchase!",
+          "productId": 20,
+          "listingId": 20,
+          "meta": null
+        },
+        {
+          "id": "MdvmlZ5J",
+          "username": "azel_evhans",
+          "userPic": "",
+          "rating": 2,
+          "comment": "Would not recommend!",
+          "productId": 20,
+          "listingId": 20,
+          "meta": null
+        },
+        {
+          "id": "G85OkB5p",
+          "username": "zoe_bennett",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Would buy again!",
+          "productId": 20,
+          "listingId": 20,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "30 days return policy",
+      "minimumOrderQuantity": 46,
+      "images": [
+        "/product-images/groceries/cooking-oil/1.webp"
+      ],
+      "thumbnail": "/product-images/groceries/cooking-oil/thumbnail.webp",
+      "productId": 20,
+      "productName": "Cooking Oil",
+      "sku": "GRO-BRD-COO-020",
+      "brand": null,
+      "weight": 5,
+      "dimensions": {
+        "width": 19.95,
+        "height": 27.54,
+        "depth": 24.86
+      },
+      "stock": 10,
+      "category": "groceries",
+      "tags": [
+        "cooking essentials"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 80769000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 80769000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "lGxZavE4",
+      "title": "Chicken Meat",
+      "description": "Fresh and tender chicken meat, suitable for various culinary preparations.",
+      "price": 9.99,
+      "finalPrice": 8.69,
+      "discountPercentage": 13,
+      "rating": 4,
+      "warrantyInformation": "1 year warranty",
+      "shippingInformation": "Ships in 1 month",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "ak2kLr5j",
+          "username": "mateo_bennett",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Great product!",
+          "productId": 19,
+          "listingId": 19,
+          "meta": null
+        },
+        {
+          "id": "R42JNb2y",
+          "username": "jackson_evans",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Highly recommended!",
+          "productId": 19,
+          "listingId": 19,
+          "meta": null
+        },
+        {
+          "id": "pMx8MG2W",
+          "username": "sadie_morales",
+          "userPic": "",
+          "rating": 3,
+          "comment": "Not worth the price!",
+          "productId": 19,
+          "listingId": 19,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "7 days return policy",
+      "minimumOrderQuantity": 22,
+      "images": [
+        "/product-images/groceries/chicken-meat/1.webp",
+        "/product-images/groceries/chicken-meat/2.webp"
+      ],
+      "thumbnail": "/product-images/groceries/chicken-meat/thumbnail.webp",
+      "productId": 19,
+      "productName": "Chicken Meat",
+      "sku": "GRO-BRD-CHI-019",
+      "brand": null,
+      "weight": 1,
+      "dimensions": {
+        "width": 11.03,
+        "height": 22.11,
+        "depth": 16.01
+      },
+      "stock": 97,
+      "category": "groceries",
+      "tags": [
+        "meat"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 78553000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 78553000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "XVxgGxkE",
+      "title": "Cat Food",
+      "description": "Nutritious cat food formulated to meet the dietary needs of your feline friend.",
+      "price": 8.99,
+      "finalPrice": 8.18,
+      "discountPercentage": 9,
+      "rating": 2.66666666666667,
+      "warrantyInformation": "1 year warranty",
+      "shippingInformation": "Ships overnight",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "872bd7v0",
+          "username": "noah_lewis",
+          "userPic": "",
+          "rating": 3,
+          "comment": "Would not recommend!",
+          "productId": 18,
+          "listingId": 18,
+          "meta": null
+        },
+        {
+          "id": "e62e7Rv4",
+          "username": "ruby_andrews",
+          "userPic": "",
+          "rating": 3,
+          "comment": "Very unhappy with my purchase!",
+          "productId": 18,
+          "listingId": 18,
+          "meta": null
+        },
+        {
+          "id": "LlvVe15w",
+          "username": "ethan_thompson",
+          "userPic": "",
+          "rating": 2,
+          "comment": "Very disappointed!",
+          "productId": 18,
+          "listingId": 18,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "No return policy",
+      "minimumOrderQuantity": 18,
+      "images": [
+        "/product-images/groceries/cat-food/1.webp"
+      ],
+      "thumbnail": "/product-images/groceries/cat-food/thumbnail.webp",
+      "productId": 18,
+      "productName": "Cat Food",
+      "sku": "GRO-BRD-FOO-018",
+      "brand": null,
+      "weight": 10,
+      "dimensions": {
+        "width": 18.08,
+        "height": 9.26,
+        "depth": 21.86
+      },
+      "stock": 46,
+      "category": "groceries",
+      "tags": [
+        "pet supplies",
+        "cat food"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 72041000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 72041000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "KG5jz5qg",
+      "title": "Beef Steak",
+      "description": "High-quality beef steak, great for grilling or cooking to your preferred level of doneness.",
+      "price": 12.99,
+      "finalPrice": 11.82,
+      "discountPercentage": 9,
+      "rating": 4,
+      "warrantyInformation": "3 year warranty",
+      "shippingInformation": "Ships overnight",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "Z02qnr54",
+          "username": "eleanor_tyler",
+          "userPic": "",
+          "rating": 3,
+          "comment": "Would not recommend!",
+          "productId": 17,
+          "listingId": 17,
+          "meta": null
+        },
+        {
+          "id": "Emvrqg5G",
+          "username": "alexander_jones",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Fast shipping!",
+          "productId": 17,
+          "listingId": 17,
+          "meta": null
+        },
+        {
+          "id": "372WDZ5Q",
+          "username": "natalie_harris",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Great value for money!",
+          "productId": 17,
+          "listingId": 17,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "60 days return policy",
+      "minimumOrderQuantity": 43,
+      "images": [
+        "/product-images/groceries/beef-steak/1.webp"
+      ],
+      "thumbnail": "/product-images/groceries/beef-steak/thumbnail.webp",
+      "productId": 17,
+      "productName": "Beef Steak",
+      "sku": "GRO-BRD-BEE-017",
+      "brand": null,
+      "weight": 10,
+      "dimensions": {
+        "width": 18.9,
+        "height": 5.77,
+        "depth": 18.57
+      },
+      "stock": 86,
+      "category": "groceries",
+      "tags": [
+        "meat"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 69994000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 69994000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "G85OB2pV",
+      "title": "Apple",
+      "description": "Fresh and crisp apples, perfect for snacking or incorporating into various recipes.",
+      "price": 1.99,
+      "finalPrice": 1.75,
+      "discountPercentage": 12,
+      "rating": 3,
+      "warrantyInformation": "3 year warranty",
+      "shippingInformation": "Ships in 2 weeks",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "qExKOBxb",
+          "username": "Sophia_rown",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Very satisfied!",
+          "productId": 16,
+          "listingId": 16,
+          "meta": null
+        },
+        {
+          "id": "NY54QKvd",
+          "username": "scarlett_bowman",
+          "userPic": "",
+          "rating": 1,
+          "comment": "Very dissatisfied!",
+          "productId": 16,
+          "listingId": 16,
+          "meta": null
+        },
+        {
+          "id": "LJv0g15d",
+          "username": "william_gonzalez",
+          "userPic": "",
+          "rating": 3,
+          "comment": "Very unhappy with my purchase!",
+          "productId": 16,
+          "listingId": 16,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "90 days return policy",
+      "minimumOrderQuantity": 7,
+      "images": [
+        "/product-images/groceries/apple/1.webp"
+      ],
+      "thumbnail": "/product-images/groceries/apple/thumbnail.webp",
+      "productId": 16,
+      "productName": "Apple",
+      "sku": "GRO-BRD-APP-016",
+      "brand": null,
+      "weight": 9,
+      "dimensions": {
+        "width": 13.66,
+        "height": 11.01,
+        "depth": 9.73
+      },
+      "stock": 8,
+      "category": "groceries",
+      "tags": [
+        "fruits"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 68412000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 68412000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "MdvmZxJE",
+      "title": "Bath Trends - Wooden Bathroom Sink With Mirror",
+      "description": "The Wooden Bathroom Sink with Mirror is a unique and stylish addition to your bathroom, featuring a wooden sink countertop and a matching mirror.",
+      "price": 799.99,
+      "finalPrice": 735.99,
+      "discountPercentage": 8,
+      "rating": 4,
+      "warrantyInformation": "3 year warranty",
+      "shippingInformation": "Ships in 3-5 business days",
+      "availabilityStatus": "Low Stock",
+      "reviews": [
+        {
+          "id": "eR5PyvVZ",
+          "username": "logan_torres",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Fast shipping!",
+          "productId": 15,
+          "listingId": 15,
+          "meta": null
+        },
+        {
+          "id": "lQ5GWy50",
+          "username": "aria_parker",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Very pleased!",
+          "productId": 15,
+          "listingId": 15,
+          "meta": null
+        },
+        {
+          "id": "7M29MM2e",
+          "username": "dylan_wells",
+          "userPic": "",
+          "rating": 3,
+          "comment": "Poor quality!",
+          "productId": 15,
+          "listingId": 15,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "60 days return policy",
+      "minimumOrderQuantity": 2,
+      "images": [
+        "/product-images/furniture/wooden-bathroom-sink-with-mirror/1.webp",
+        "/product-images/furniture/wooden-bathroom-sink-with-mirror/2.webp",
+        "/product-images/furniture/wooden-bathroom-sink-with-mirror/3.webp"
+      ],
+      "thumbnail": "/product-images/furniture/wooden-bathroom-sink-with-mirror/thumbnail.webp",
+      "productId": 15,
+      "productName": "Wooden Bathroom Sink with Mirror",
+      "sku": "FUR-BAT-WOO-015",
+      "brand": "Bath Trends",
+      "weight": 10,
+      "dimensions": {
+        "width": 7.98,
+        "height": 8.88,
+        "depth": 28.46
+      },
+      "stock": 7,
+      "category": "furniture",
+      "tags": [
+        "furniture",
+        "bathroom"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 66712000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 66712000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "R9xw42JD",
+      "title": "Knoll - Saarinen Executive Conference Chair",
+      "description": "The Knoll Saarinen Executive Conference Chair is a modern and ergonomic chair, perfect for your office or conference room with its timeless design.",
+      "price": 499.99,
+      "finalPrice": 489.99,
+      "discountPercentage": 2,
+      "rating": 3,
+      "warrantyInformation": "2 year warranty",
+      "shippingInformation": "Ships overnight",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "bG2B8vWa",
+          "username": "ella_cook",
+          "userPic": "",
+          "rating": 2,
+          "comment": "Waste of money!",
+          "productId": 14,
+          "listingId": 14,
+          "meta": null
+        },
+        {
+          "id": "mD2YGv3A",
+          "username": "clara_berry",
+          "userPic": "",
+          "rating": 2,
+          "comment": "Very dissatisfied!",
+          "productId": 14,
+          "listingId": 14,
+          "meta": null
+        },
+        {
+          "id": "qwx7M5Gz",
+          "username": "elena_long",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Would buy again!",
+          "productId": 14,
+          "listingId": 14,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "60 days return policy",
+      "minimumOrderQuantity": 5,
+      "images": [
+        "/product-images/furniture/knoll-saarinen-executive-conference-chair/1.webp",
+        "/product-images/furniture/knoll-saarinen-executive-conference-chair/2.webp",
+        "/product-images/furniture/knoll-saarinen-executive-conference-chair/3.webp"
+      ],
+      "thumbnail": "/product-images/furniture/knoll-saarinen-executive-conference-chair/thumbnail.webp",
+      "productId": 14,
+      "productName": "Saarinen Executive Conference Chair",
+      "sku": "FUR-KNO-KNO-014",
+      "brand": "Knoll",
+      "weight": 10,
+      "dimensions": {
+        "width": 13.81,
+        "height": 7.5,
+        "depth": 5.62
+      },
+      "stock": 26,
+      "category": "furniture",
+      "tags": [
+        "furniture",
+        "office chairs"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 65034000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 65034000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "pMx8GvWk",
+      "title": "Furniture Co. - Bedside Table African Cherry",
+      "description": "The Bedside Table in African Cherry is a stylish and functional addition to your bedroom, providing convenient storage space and a touch of elegance.",
+      "price": 299.99,
+      "finalPrice": 242.99,
+      "discountPercentage": 19,
+      "rating": 4,
+      "warrantyInformation": "5 year warranty",
+      "shippingInformation": "Ships overnight",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "1BxLKvmp",
+          "username": "aaliyah_hanson",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Excellent quality!",
+          "productId": 13,
+          "listingId": 13,
+          "meta": null
+        },
+        {
+          "id": "je2Xp2PL",
+          "username": "liam_smith",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Excellent quality!",
+          "productId": 13,
+          "listingId": 13,
+          "meta": null
+        },
+        {
+          "id": "rDvAZxPY",
+          "username": "avery_barnes",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Highly recommended!",
+          "productId": 13,
+          "listingId": 13,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "7 days return policy",
+      "minimumOrderQuantity": 3,
+      "images": [
+        "/product-images/furniture/bedside-table-african-cherry/1.webp",
+        "/product-images/furniture/bedside-table-african-cherry/2.webp",
+        "/product-images/furniture/bedside-table-african-cherry/3.webp"
+      ],
+      "thumbnail": "/product-images/furniture/bedside-table-african-cherry/thumbnail.webp",
+      "productId": 13,
+      "productName": "Bedside Table African Cherry",
+      "sku": "FUR-FUR-BED-013",
+      "brand": "Furniture Co.",
+      "weight": 2,
+      "dimensions": {
+        "width": 13.47,
+        "height": 24.99,
+        "depth": 27.35
+      },
+      "stock": 64,
+      "category": "furniture",
+      "tags": [
+        "furniture",
+        "bedside tables"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 63246000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 63246000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "R42Jb2y3",
+      "title": "Annibale Colombo Sofa",
+      "description": "The Annibale Colombo Sofa is a sophisticated and comfortable seating option, featuring exquisite design and premium upholstery for your living room.",
+      "price": 2499.99,
+      "finalPrice": 2149.99,
+      "discountPercentage": 14,
+      "rating": 3,
+      "warrantyInformation": "Lifetime warranty",
+      "shippingInformation": "Ships in 1 week",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "6V2d6vmB",
+          "username": "christian_perez",
+          "userPic": "",
+          "rating": 3,
+          "comment": "Very unhappy with my purchase!",
+          "productId": 12,
+          "listingId": 12,
+          "meta": null
+        },
+        {
+          "id": "6jvEmvbX",
+          "username": "lillian_bishop",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Fast shipping!",
+          "productId": 12,
+          "listingId": 12,
+          "meta": null
+        },
+        {
+          "id": "1Z5oj2mN",
+          "username": "lillian_simmons",
+          "userPic": "",
+          "rating": 1,
+          "comment": "Poor quality!",
+          "productId": 12,
+          "listingId": 12,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "7 days return policy",
+      "minimumOrderQuantity": 1,
+      "images": [
+        "/product-images/furniture/annibale-colombo-sofa/1.webp",
+        "/product-images/furniture/annibale-colombo-sofa/2.webp",
+        "/product-images/furniture/annibale-colombo-sofa/3.webp"
+      ],
+      "thumbnail": "/product-images/furniture/annibale-colombo-sofa/thumbnail.webp",
+      "productId": 12,
+      "productName": "Annibale Colombo Sofa",
+      "sku": "FUR-ANN-ANN-012",
+      "brand": "Annibale Colombo",
+      "weight": 6,
+      "dimensions": {
+        "width": 12.75,
+        "height": 20.55,
+        "depth": 19.06
+      },
+      "stock": 60,
+      "category": "furniture",
+      "tags": [
+        "furniture",
+        "sofas"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 61488000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 61488000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "ak2krxj0",
+      "title": "Annibale Colombo Bed",
+      "description": "The Annibale Colombo Bed is a luxurious and elegant bed frame, crafted with high-quality materials for a comfortable and stylish bedroom.",
+      "price": 1899.99,
+      "finalPrice": 1747.99,
+      "discountPercentage": 8,
+      "rating": 2.33333333333333,
+      "warrantyInformation": "1 year warranty",
+      "shippingInformation": "Ships in 1 month",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "gEvyL5K9",
+          "username": "christopher_west",
+          "userPic": "",
+          "rating": 2,
+          "comment": "Would not recommend!",
+          "productId": 11,
+          "listingId": 11,
+          "meta": null
+        },
+        {
+          "id": "bP2Nj2r0",
+          "username": "vivian_carter",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Highly impressed!",
+          "productId": 11,
+          "listingId": 11,
+          "meta": null
+        },
+        {
+          "id": "7Lxla28X",
+          "username": "mason_wright",
+          "userPic": "",
+          "rating": 1,
+          "comment": "Poor quality!",
+          "productId": 11,
+          "listingId": 11,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "No return policy",
+      "minimumOrderQuantity": 1,
+      "images": [
+        "/product-images/furniture/annibale-colombo-bed/1.webp",
+        "/product-images/furniture/annibale-colombo-bed/2.webp",
+        "/product-images/furniture/annibale-colombo-bed/3.webp"
+      ],
+      "thumbnail": "/product-images/furniture/annibale-colombo-bed/thumbnail.webp",
+      "productId": 11,
+      "productName": "Annibale Colombo Bed",
+      "sku": "FUR-ANN-ANN-011",
+      "brand": "Annibale Colombo",
+      "weight": 10,
+      "dimensions": {
+        "width": 28.16,
+        "height": 25.36,
+        "depth": 17.28
+      },
+      "stock": 88,
+      "category": "furniture",
+      "tags": [
+        "furniture",
+        "beds"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 49771000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 49771000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "LlvV15wA",
+      "title": "Gucci Bloom Eau de",
+      "description": "Gucci Bloom by Gucci is a floral and captivating fragrance, with notes of tuberose, jasmine, and Rangoon creeper. It's a modern and romantic scent.",
+      "price": 79.99,
+      "finalPrice": 68.79,
+      "discountPercentage": 14,
+      "rating": 3.33333333333333,
+      "warrantyInformation": "6 months warranty",
+      "shippingInformation": "Ships overnight",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "OQ2zg5DA",
+          "username": "cameron_perez",
+          "userPic": "",
+          "rating": 1,
+          "comment": "Very dissatisfied!",
+          "productId": 10,
+          "listingId": 10,
+          "meta": null
+        },
+        {
+          "id": "Oy56gveK",
+          "username": "daniel_cook",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Very happy with my purchase!",
+          "productId": 10,
+          "listingId": 10,
+          "meta": null
+        },
+        {
+          "id": "DQvnD2ZP",
+          "username": "addison_wright",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Highly impressed!",
+          "productId": 10,
+          "listingId": 10,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "No return policy",
+      "minimumOrderQuantity": 2,
+      "images": [
+        "/product-images/fragrances/gucci-bloom-eau-de/1.webp",
+        "/product-images/fragrances/gucci-bloom-eau-de/2.webp",
+        "/product-images/fragrances/gucci-bloom-eau-de/3.webp"
+      ],
+      "thumbnail": "/product-images/fragrances/gucci-bloom-eau-de/thumbnail.webp",
+      "productId": 10,
+      "productName": "Gucci Bloom",
+      "sku": "FRA-GUC-GUC-010",
+      "brand": "Gucci",
+      "weight": 7,
+      "dimensions": {
+        "width": 20.92,
+        "height": 21.68,
+        "depth": 11.2
+      },
+      "stock": 91,
+      "category": "fragrances",
+      "tags": [
+        "fragrances",
+        "perfumes"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 48025000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 48025000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "e62eR54z",
+      "title": "Dolce & Gabbana - Dolce Shine Eau de",
+      "description": "Dolce Shine by Dolce & Gabbana is a vibrant and fruity fragrance, featuring notes of mango, jasmine, and blonde woods. It's a joyful and youthful scent.",
+      "price": 69.99,
+      "finalPrice": 69.99,
+      "discountPercentage": 0,
+      "rating": 4.33333333333333,
+      "warrantyInformation": "3 year warranty",
+      "shippingInformation": "Ships in 1 month",
+      "availabilityStatus": "Low Stock",
+      "reviews": [
+        {
+          "id": "7pv3dxkK",
+          "username": "mateo_bennett",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Would buy again!",
+          "productId": 9,
+          "listingId": 9,
+          "meta": null
+        },
+        {
+          "id": "Wz5Q6v6w",
+          "username": "nolan_gonzalez",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Highly recommended!",
+          "productId": 9,
+          "listingId": 9,
+          "meta": null
+        },
+        {
+          "id": "8ov105mD",
+          "username": "aurora_lawson",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Very happy with my purchase!",
+          "productId": 9,
+          "listingId": 9,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "7 days return policy",
+      "minimumOrderQuantity": 2,
+      "images": [
+        "/product-images/fragrances/dolce-shine-eau-de/1.webp",
+        "/product-images/fragrances/dolce-shine-eau-de/2.webp",
+        "/product-images/fragrances/dolce-shine-eau-de/3.webp"
+      ],
+      "thumbnail": "/product-images/fragrances/dolce-shine-eau-de/thumbnail.webp",
+      "productId": 9,
+      "productName": "Dolce Shine",
+      "sku": "FRA-DOL-DOL-009",
+      "brand": "Dolce & Gabbana",
+      "weight": 6,
+      "dimensions": {
+        "width": 27.28,
+        "height": 29.88,
+        "depth": 18.3
+      },
+      "stock": 4,
+      "category": "fragrances",
+      "tags": [
+        "fragrances",
+        "perfumes"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 45663000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 45663000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "872b750O",
+      "title": "Dior - J'adore",
+      "description": "J'adore by Dior is a luxurious and floral fragrance, known for its blend of ylang-ylang, rose, and jasmine. It embodies femininity and sophistication.",
+      "price": 89.99,
+      "finalPrice": 77.39,
+      "discountPercentage": 14,
+      "rating": 4.33333333333333,
+      "warrantyInformation": "1 week warranty",
+      "shippingInformation": "Ships in 2 weeks",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "JY5MP2gX",
+          "username": "nicholas_bailey",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Great value for money!",
+          "productId": 8,
+          "listingId": 8,
+          "meta": null
+        },
+        {
+          "id": "Zl5DzxBN",
+          "username": "penelope_harper",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Great value for money!",
+          "productId": 8,
+          "listingId": 8,
+          "meta": null
+        },
+        {
+          "id": "OY2R9x94",
+          "username": "emma_miller",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Great product!",
+          "productId": 8,
+          "listingId": 8,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "7 days return policy",
+      "minimumOrderQuantity": 10,
+      "images": [
+        "/product-images/fragrances/dior-j'adore/1.webp",
+        "/product-images/fragrances/dior-j'adore/2.webp",
+        "/product-images/fragrances/dior-j'adore/3.webp"
+      ],
+      "thumbnail": "/product-images/fragrances/dior-j'adore/thumbnail.webp",
+      "productId": 8,
+      "productName": "J'adore ",
+      "sku": "FRA-DIO-DIO-008",
+      "brand": "Dior",
+      "weight": 4,
+      "dimensions": {
+        "width": 27.67,
+        "height": 28.28,
+        "depth": 11.83
+      },
+      "stock": 98,
+      "category": "fragrances",
+      "tags": [
+        "fragrances",
+        "perfumes"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 40986000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 40986000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "372WZxQj",
+      "title": "Chanel - Coco Noir Eau De",
+      "description": "Coco Noir by Chanel is an elegant and mysterious fragrance, featuring notes of grapefruit, rose, and sandalwood. Perfect for evening occasions.",
+      "price": 129.99,
+      "finalPrice": 109.19,
+      "discountPercentage": 16,
+      "rating": 4.66666666666667,
+      "warrantyInformation": "3 year warranty",
+      "shippingInformation": "Ships overnight",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "lGxZavE4",
+          "username": "rubya_andrews",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Highly impressed!",
+          "productId": 7,
+          "listingId": 7,
+          "meta": null
+        },
+        {
+          "id": "9pxaN2MV",
+          "username": "leah_henderson",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Awesome product!",
+          "productId": 7,
+          "listingId": 7,
+          "meta": null
+        },
+        {
+          "id": "KaxplxdD",
+          "username": "xavier_wright",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Very happy with my purchase!",
+          "productId": 7,
+          "listingId": 7,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "No return policy",
+      "minimumOrderQuantity": 1,
+      "images": [
+        "/product-images/fragrances/chanel-coco-noir-eau-de/1.webp",
+        "/product-images/fragrances/chanel-coco-noir-eau-de/2.webp",
+        "/product-images/fragrances/chanel-coco-noir-eau-de/3.webp"
+      ],
+      "thumbnail": "/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp",
+      "productId": 7,
+      "productName": "Coco Noir",
+      "sku": "FRA-CHA-CHA-007",
+      "brand": "Chanel",
+      "weight": 7,
+      "dimensions": {
+        "width": 24.5,
+        "height": 25.7,
+        "depth": 25.98
+      },
+      "stock": 58,
+      "category": "fragrances",
+      "tags": [
+        "fragrances",
+        "perfumes"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 37856000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 37856000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "EmvrgxGY",
+      "title": "Calvin Klein - CK One",
+      "description": "CK One by Calvin Klein is a classic unisex fragrance, known for its fresh and clean scent. It's a versatile fragrance suitable for everyday wear.",
+      "price": 49.99,
+      "finalPrice": 49.49,
+      "discountPercentage": 1,
+      "rating": 3,
+      "warrantyInformation": "1 week warranty",
+      "shippingInformation": "Ships overnight",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "G85OB2pV",
+          "username": "layla_young",
+          "userPic": "",
+          "rating": 2,
+          "comment": "Very disappointed!",
+          "productId": 6,
+          "listingId": 6,
+          "meta": null
+        },
+        {
+          "id": "KG5jz5qg",
+          "username": "daniel_cook",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Fast shipping!",
+          "productId": 6,
+          "listingId": 6,
+          "meta": null
+        },
+        {
+          "id": "XVxgGxkE",
+          "username": "jacob_cooper",
+          "userPic": "",
+          "rating": 3,
+          "comment": "Not as described!",
+          "productId": 6,
+          "listingId": 6,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "90 days return policy",
+      "minimumOrderQuantity": 9,
+      "images": [
+        "/product-images/fragrances/calvin-klein-ck-one/1.webp",
+        "/product-images/fragrances/calvin-klein-ck-one/2.webp",
+        "/product-images/fragrances/calvin-klein-ck-one/3.webp"
+      ],
+      "thumbnail": "/product-images/fragrances/calvin-klein-ck-one/thumbnail.webp",
+      "productId": 6,
+      "productName": "CK One",
+      "sku": "FRA-CAL-CAL-006",
+      "brand": "Calvin Klein",
+      "weight": 7,
+      "dimensions": {
+        "width": 29.36,
+        "height": 27.76,
+        "depth": 20.72
+      },
+      "stock": 29,
+      "category": "fragrances",
+      "tags": [
+        "fragrances",
+        "perfumes"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 36063000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 36063000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "Z02qr54R",
+      "title": "Nail Couture - Red Nail Polish",
+      "description": "The Red Nail Polish offers a rich and glossy red hue for vibrant and polished nails. With a quick-drying formula, it provides a salon-quality finish at home.",
+      "price": 8.99,
+      "finalPrice": 8,
+      "discountPercentage": 11,
+      "rating": 2.66666666666667,
+      "warrantyInformation": "1 month warranty",
+      "shippingInformation": "Ships overnight",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "pMx8GvWk",
+          "username": "benjamin_wilson",
+          "userPic": "",
+          "rating": 2,
+          "comment": "Poor quality!",
+          "productId": 5,
+          "listingId": 5,
+          "meta": null
+        },
+        {
+          "id": "R9xw42JD",
+          "username": "liam_smith",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Great product!",
+          "productId": 5,
+          "listingId": 5,
+          "meta": null
+        },
+        {
+          "id": "MdvmZxJE",
+          "username": "clara_berry",
+          "userPic": "",
+          "rating": 1,
+          "comment": "Very unhappy with my purchase!",
+          "productId": 5,
+          "listingId": 5,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "No return policy",
+      "minimumOrderQuantity": 22,
+      "images": [
+        "/product-images/beauty/red-nail-polish/1.webp"
+      ],
+      "thumbnail": "/product-images/beauty/red-nail-polish/thumbnail.webp",
+      "productId": 5,
+      "productName": "Red Lipstick",
+      "sku": "BEA-NAI-NAI-005",
+      "brand": "Nail Couture",
+      "weight": 8,
+      "dimensions": {
+        "width": 21.63,
+        "height": 16.48,
+        "depth": 29.84
+      },
+      "stock": 79,
+      "category": "beauty",
+      "tags": [
+        "beauty",
+        "nail polish"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 33289000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 33289000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "LJv01xdR",
+      "title": "Chic Cosmetics - Red Lipstick",
+      "description": "The Red Lipstick is a classic and bold choice for adding a pop of color to your lips. With a creamy and pigmented formula, it provides a vibrant and long-lasting finish.",
+      "price": 12.99,
+      "finalPrice": 11.43,
+      "discountPercentage": 12,
+      "rating": 4.66666666666667,
+      "warrantyInformation": "3 year warranty",
+      "shippingInformation": "Ships in 1 week",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "LlvV15wA",
+          "username": "liam_garcia",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Great product!",
+          "productId": 4,
+          "listingId": 4,
+          "meta": null
+        },
+        {
+          "id": "ak2krxj0",
+          "username": "ruby_andrews",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Great product!",
+          "productId": 4,
+          "listingId": 4,
+          "meta": null
+        },
+        {
+          "id": "R42Jb2y3",
+          "username": "clara_berry",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Would buy again!",
+          "productId": 4,
+          "listingId": 4,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "7 days return policy",
+      "minimumOrderQuantity": 40,
+      "images": [
+        "/product-images/beauty/red-lipstick/1.webp"
+      ],
+      "thumbnail": "/product-images/beauty/red-lipstick/thumbnail.webp",
+      "productId": 4,
+      "productName": "Red Lipstick",
+      "sku": "BEA-CHI-LIP-004",
+      "brand": "Chic Cosmetics",
+      "weight": 1,
+      "dimensions": {
+        "width": 18.11,
+        "height": 28.38,
+        "depth": 22.17
+      },
+      "stock": 91,
+      "category": "beauty",
+      "tags": [
+        "beauty",
+        "lipstick"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 30684000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 30684000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "NY54K2de",
+      "title": "Velvet Touch - Powder Canister",
+      "description": "The Powder Canister is a finely milled setting powder designed to set makeup and control shine. With a lightweight and translucent formula, it provides a smooth and matte finish.",
+      "price": 14.99,
+      "finalPrice": 13.64,
+      "discountPercentage": 9,
+      "rating": 3.33333333333333,
+      "warrantyInformation": "3 months warranty",
+      "shippingInformation": "Ships in 1-2 business days",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "372WZxQj",
+          "username": "alexander_jones",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Would buy again!",
+          "productId": 3,
+          "listingId": 3,
+          "meta": null
+        },
+        {
+          "id": "872b750O",
+          "username": "elijah_cruz",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Highly impressed!",
+          "productId": 3,
+          "listingId": 3,
+          "meta": null
+        },
+        {
+          "id": "e62eR54z",
+          "username": "avery_perez",
+          "userPic": "",
+          "rating": 1,
+          "comment": "Very dissatisfied!",
+          "productId": 3,
+          "listingId": 3,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "No return policy",
+      "minimumOrderQuantity": 22,
+      "images": [
+        "/product-images/beauty/powder-canister/1.webp"
+      ],
+      "thumbnail": "/product-images/beauty/powder-canister/thumbnail.webp",
+      "productId": 3,
+      "productName": "Powder Canister",
+      "sku": "BEA-VEL-POW-003",
+      "brand": "Velvet Touch",
+      "weight": 8,
+      "dimensions": {
+        "width": 29.27,
+        "height": 27.93,
+        "depth": 20.59
+      },
+      "stock": 89,
+      "category": "beauty",
+      "tags": [
+        "beauty",
+        "face powder"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 27095000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 27095000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "qExKBvbM",
+      "title": "Glamour Beauty - Eyeshadow Palette with Mirror",
+      "description": "The Eyeshadow Palette with Mirror offers a versatile range of eyeshadow shades for creating stunning eye looks. With a built-in mirror, it's convenient for on-the-go makeup application.",
+      "price": 19.99,
+      "finalPrice": 16.39,
+      "discountPercentage": 18,
+      "rating": 3.33333333333333,
+      "warrantyInformation": "1 year warranty",
+      "shippingInformation": "Ships in 2 weeks",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "LJv01xdR",
+          "username": "savannah_gomez",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Great product!",
+          "productId": 2,
+          "listingId": 2,
+          "meta": null
+        },
+        {
+          "id": "Z02qr54R",
+          "username": "christian_perez",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Awesome product!",
+          "productId": 2,
+          "listingId": 2,
+          "meta": null
+        },
+        {
+          "id": "EmvrgxGY",
+          "username": "nicholas_bailey",
+          "userPic": "",
+          "rating": 1,
+          "comment": "Poor quality!",
+          "productId": 2,
+          "listingId": 2,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "7 days return policy",
+      "minimumOrderQuantity": 20,
+      "images": [
+        "/product-images/beauty/eyeshadow-palette-with-mirror/1.webp"
+      ],
+      "thumbnail": "/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp",
+      "productId": 2,
+      "productName": "Eyeshadow Palette",
+      "sku": "BEA-GLA-EYE-002",
+      "brand": "Glamour Beauty",
+      "weight": 9,
+      "dimensions": {
+        "width": 9.26,
+        "height": 22.47,
+        "depth": 27.67
+      },
+      "stock": 34,
+      "category": "beauty",
+      "tags": [
+        "beauty",
+        "eyeshadow"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 26, 9267000],
+        "updatedAt": [2026, 8, 9, 22, 14, 26, 9267000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    },
+    {
+      "id": "7M29M2eV",
+      "title": "Essence - Mascara Lash Princess",
+      "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
+      "price": 9.99,
+      "finalPrice": 8.99,
+      "discountPercentage": 10,
+      "rating": 4,
+      "warrantyInformation": "1 week warranty",
+      "shippingInformation": "Ships in 3-5 business days",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "id": "7M29M2eV",
+          "username": "eleanor_collins",
+          "userPic": "",
+          "rating": 3,
+          "comment": "Would not recommend!",
+          "productId": 1,
+          "listingId": 1,
+          "meta": null
+        },
+        {
+          "id": "qExKBvbM",
+          "username": "lucas_gordon",
+          "userPic": "",
+          "rating": 4,
+          "comment": "Very satisfied!",
+          "productId": 1,
+          "listingId": 1,
+          "meta": null
+        },
+        {
+          "id": "NY54K2de",
+          "username": "eleanor_collins",
+          "userPic": "",
+          "rating": 5,
+          "comment": "Highly impressed!",
+          "productId": 1,
+          "listingId": 1,
+          "meta": null
+        }
+      ],
+      "returnPolicy": "No return policy",
+      "minimumOrderQuantity": 48,
+      "images": [
+        "/product-images/beauty/essence-mascara-lash-princess/1.webp"
+      ],
+      "thumbnail": "/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp",
+      "productId": 1,
+      "productName": "Mascara Lash Princess",
+      "sku": "BEA-ESS-ESS-001",
+      "brand": "Essence",
+      "weight": 4,
+      "dimensions": {
+        "width": 15.14,
+        "height": 13.08,
+        "depth": 22.99
+      },
+      "stock": 99,
+      "category": "beauty",
+      "tags": [
+        "beauty",
+        "mascara"
+      ],
+      "meta": {
+        "createdAt": [2026, 8, 9, 22, 14, 25, 987306000],
+        "updatedAt": [2026, 8, 9, 22, 14, 25, 987306000],
+        "deletedAt": null,
+        "status": "ACTIVE"
+      }
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 100,
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "offset": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "totalPages": 1,
+  "totalElements": 30,
+  "last": true,
+  "size": 100,
+  "number": 0,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "numberOfElements": 30,
+  "first": true,
+  "empty": false
+}

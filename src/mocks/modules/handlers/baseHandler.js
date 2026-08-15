@@ -2,9 +2,11 @@ import { http, HttpResponse } from 'msw';
 
 export const baseHandlers = (BASE_ENDPOINT, SERVICE) => [
 
+  // Metodos comunes para handlers
+
   // POST: CREATE
-  http.post(`${BASE_ENDPOINT}`, (user) => {
-    const newUser = SERVICE.create(user);
+  http.post(`${BASE_ENDPOINT}`, (base) => {
+    const newUser = SERVICE.create(base);
     if (!newUser) {
       return HttpResponse.json(
         { message: 'No se pudo crear el item' }, 
@@ -16,10 +18,18 @@ export const baseHandlers = (BASE_ENDPOINT, SERVICE) => [
   // GET: BY ID 
   http.get(`${BASE_ENDPOINT}/:id`, ({ params }) => {
     const id = String(params.id);
-    const user = SERVICE.getById(id);
-    if (!user) return new HttpResponse(null, { status: 404 });
-    return HttpResponse.json(user);
+    const base = SERVICE.getById(id);
+    if (!base) return new HttpResponse(null, { status: 404 });
+    return HttpResponse.json(base);
   }),
+
+  http.get(`${BASE_ENDPOINT}/me/:id`, ({ params }) => {
+    const id = String(params.id);
+    const base = SERVICE.getById(id);
+    if (!base) return new HttpResponse(null, { status: 404 });
+    return HttpResponse.json(base);
+  }),
+
 
   // GET: PAGE 
   http.get(`${BASE_ENDPOINT}`, ({ request }) => {
@@ -38,26 +48,21 @@ export const baseHandlers = (BASE_ENDPOINT, SERVICE) => [
       return HttpResponse.json({ mensague: 'No file' }, { status: 400 });
     }
 
-    // 1. Generar un ID único para este archivo
     const fileId = crypto.randomUUID();
-    
-    // 2. Crear una URL de objeto para el archivo recibido
-    // Esto crea una URL como "blob:http://localhost:3000/uuid-..."
     const objectUrl = URL.createObjectURL(file);
 
     return HttpResponse.json({
       id: fileId,
       name: file.name,
-      url: objectUrl, // Devolvemos la URL al frontend
+      url: objectUrl,
       message: 'Archivo subido exitosamente'
     }, { status: 201 });
   }),
 
   // PUT: UPDATE BY ID
   http.put(`${BASE_ENDPOINT}/:id`, async ({ params, request }) => {
-    const { id } = params; // El ID viene de la URL (ej: /api/users/1)
     
-    // 1. Extraer los datos del cuerpo de la petición
+    const { id } = params; 
     let updates;
     try {
       updates = await request.json();
@@ -68,9 +73,6 @@ export const baseHandlers = (BASE_ENDPOINT, SERVICE) => [
       );
     }
 
-    console.log(`Actualizando usuario ${id} con datos:`, updates);
-
-    // 2. Buscar el usuario en la "base de datos"
     const existingElem = SERVICE.existsById(id);
 
     if (!existingElem) {
@@ -79,23 +81,15 @@ export const baseHandlers = (BASE_ENDPOINT, SERVICE) => [
         { status: 404 }
       );
     }
-
-    // 3. Realizar la actualización (Merge parcial)
-    // Creamos una copia del usuario existente y le aplicamos los cambios
-
     const updatedData = SERVICE.updateById(id, updates)
-
-    // 5. Devolver la respuesta con el usuario actualizado (status 200 o 204)
-    // Spring Boot suele devolver 200 OK con el cuerpo actualizado
     return HttpResponse.json(updatedData, { status: 200 });
   }),
 
 
     // PATCH: STATUS
   http.patch(`${BASE_ENDPOINT}/:id/status`, async ({ params, request }) => {
-    const { id } = params; // El ID viene de la URL (ej: /api/users/1)
+    const { id } = params; 
     
-    // 1. Extraer los datos del cuerpo de la petición
     let updates;
     try {
       updates = await request.json();
@@ -106,9 +100,6 @@ export const baseHandlers = (BASE_ENDPOINT, SERVICE) => [
       );
     }
 
-    console.log(`Actualizando elemento ${id} con datos:`, updates);
-
-    // 2. Buscar el usuario en la "base de datos"
     const exists = SERVICE.existsById(id);
 
     if (!exists) {
@@ -120,7 +111,7 @@ export const baseHandlers = (BASE_ENDPOINT, SERVICE) => [
 
     const updatedData = SERVICE.updateStatus(id, updates)
 
-    return HttpResponse.json(updatedData, { status: 200 });
+    return HttpResponse.json( {status: updatedData.meta.status }, { status: 200 });
   }),
 
 

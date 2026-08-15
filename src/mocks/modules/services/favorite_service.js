@@ -49,7 +49,6 @@ export const favorite_service = {
 
 
 export const favoriteMapper = ({userId, listingId}) => {
-
     const { id, title, price, stock,  finalPrice, discountPercentage,
         availabilityStatus, thumbnail } 
         = listing_service.getById(listingId)

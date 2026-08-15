@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw';
 
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
 import { currentLoggedUser, db } from '../db.js';
-import { user_service } from '../services/user_service';
+import { user_service } from '../services/user_service.js';
 import { baseHandlers } from './baseHandler.js';
 
 const [BASE_ENDPOINT, SERVICE] = [`${BASE_URL}/${ENDPOINT.USER}`, user_service]
@@ -10,6 +10,7 @@ const [BASE_ENDPOINT, SERVICE] = [`${BASE_URL}/${ENDPOINT.USER}`, user_service]
 export const userHandlers = [
 
 
+  // GET(ME): getUser
   http.get(`${BASE_ENDPOINT}/me`, () => {
     const user = SERVICE.getMyProfile();
     if (!currentLoggedUser || !user) {
@@ -19,7 +20,7 @@ export const userHandlers = [
   }),
 
 
-
+  // PUT(ME): updateUser
   http.put(`${BASE_ENDPOINT}/me`, async ({  request }) => {
 
     let updates;
@@ -46,6 +47,7 @@ export const userHandlers = [
 
 
 
+  // PUT(ME): uploadUserImage
   http.put(`${BASE_ENDPOINT}/me/upload-image`, async ({ request }) => {
 
     const formData = await request.formData();
@@ -54,31 +56,11 @@ export const userHandlers = [
     if (!file) {
       return HttpResponse.json({ error: 'No file' }, { status: 400 });
     }
-
-    // 1. Generar un ID único para este archivo
     const fileId = crypto.randomUUID();
-    
-    // 2. Crear una URL de objeto para el archivo recibido
-    // Esto crea una URL como "blob:http://localhost:3000/uuid-..."
     const objectUrl = URL.createObjectURL(file);
     const response = SERVICE.updateProfileImage(objectUrl)
 
     return HttpResponse.json(response, { status: 201 });
-  }),
-
-
-  http.get(`${BASE_ENDPOINT}/:id`, ({ params }) => {
-    const id = Number(params.id);
-    const user = SERVICE.getById(id);
-    if (!user) return new HttpResponse(null, { status: 404 });
-    return HttpResponse.json(user);
-  }),
-
-
-  http.get(`${BASE_ENDPOINT}`, ({ request }) => {
-    const users = SERVICE.filterPage(request);
-    if (!users) return new HttpResponse(null, { status: 404 });
-    return HttpResponse.json(users);
   }),
 
 

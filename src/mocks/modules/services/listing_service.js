@@ -8,5 +8,4 @@ export const listing_service = {
 
     ...(baseService(collection)),
 
-
 }

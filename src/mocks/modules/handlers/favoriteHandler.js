@@ -13,7 +13,7 @@ export const favoriteHandlers = [
 
   ...(baseHandlers(BASE_ENDPOINT, SERVICE)),
   
-    // POST: CREATE
+  // POST: CREATE
   http.post(`${BASE_ENDPOINT}/:id`, ({ params }) => {
     const user = user_service.getMyProfile();
     if (!currentLoggedUser || !user) {
@@ -24,7 +24,7 @@ export const favoriteHandlers = [
     return HttpResponse.json(newFavorite);
   }),
 
-  // GET: BY ID 
+  // GET: EXISTS BY ID
   http.get(`${BASE_ENDPOINT}/:id/check`, ({ params }) => {
     const id = String(params.id);
     const user = SERVICE.existsById(id);

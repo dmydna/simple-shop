@@ -1,4 +1,4 @@
- import { http, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
 import { auth_service } from '../services/auth_service';
@@ -7,13 +7,11 @@ import { currentLoggedUser, setCurrentLoggedUser } from '../db';
 
 const [BASE_ENDPOINT, SERVICE] = [`${BASE_URL}/${ENDPOINT.AUTH}`, auth_service]
 
-
 export const authHandlers = [
 
+  // POST: LOGIN
   http.post(`${BASE_ENDPOINT}/login`, async ({ request }) => {
     const body = await request.json();
-    console.log('[MOCK-API] Login:', body);
-
     if (SERVICE.login(body)) {
       return new HttpResponse(null, {
         status: 200,
@@ -29,6 +27,8 @@ export const authHandlers = [
     );
   }),
 
+
+  // POST: GET AUTH
   http.get(`${BASE_ENDPOINT}/me`, () => {
     const auth = SERVICE.getAuth();
     if (!currentLoggedUser || !auth) {
@@ -37,6 +37,8 @@ export const authHandlers = [
     return HttpResponse.json(auth);
   }),
 
+
+  // POST: LOGOUT
   http.post(`${BASE_ENDPOINT}/logout`, () => {
     localStorage.clear();
     setCurrentLoggedUser("")
@@ -52,6 +54,7 @@ export const authHandlers = [
   }),
 
 
+  // POST: CHANGE-MAIL
   http.post(`${BASE_ENDPOINT}/change-email`, async ({ request }) => {
     const body = await request.json();
 
@@ -67,5 +70,7 @@ export const authHandlers = [
     );
   }),
 
+
+  // TODO: (POST) CHANGE-PASSWORD
 
 ];

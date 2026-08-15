@@ -4,7 +4,7 @@ import { db, currentLoggedUser } from '../db.js';
 export const baseService =  (collection) => ({
 
     create: (data) => {
-        return db.create(collection, data)
+        return db.save(collection, data)
     },
 
     getById: (id) => {
@@ -27,7 +27,7 @@ export const baseService =  (collection) => ({
         ); 
     },
 
-    updateStatus: (id, {status}) => {
+    updateStatus: (id, { status }) => {
         return db.update(
             collection, 
             item => item.id == id , 

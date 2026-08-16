@@ -13,7 +13,7 @@ export default defineConfig({
     hmr: {
       clientPort: 3000, 
     },
-proxy: {
+    proxy: {
       '/api': {
         // 'backend' es el nombre del servicio en tu docker-compose.yml
         target: 'http://backend:8080', 

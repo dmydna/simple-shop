@@ -4,6 +4,7 @@ import { HoverIcon } from "./FloatButton"
 import { useNavigate } from "react-router-dom";
 import { productService } from "../services/productService";
 import { useAsync } from "@hooks/useAsync"
+import { listingService } from "@/features/listing/services/listingService";
 
 
 export default function DeleteFloatButton({item, style, className}){
@@ -25,7 +26,7 @@ export default function DeleteFloatButton({item, style, className}){
     }
 
 
-    const updateStatus = useAsync(productService.updateStatus, {onSuccess, onError});
+    const updateStatus = useAsync(listingService.updateStatus, {onSuccess, onError});
  
  
 

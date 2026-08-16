@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/utils/config";
 import { useState, useEffect } from "react";
 
 
@@ -26,7 +27,7 @@ export const useCheckServer = (isOnline) => {
     
     useEffect(() => {
         if (isOnline) {
-            useCheckServer(`${BASE_URL}/api/health`, setServerStatus)
+            checkServer(`${BASE_URL}/api/health`, setServerStatus)
                 .then(setServerStatus);
         }
     }, [isOnline]);

@@ -1,4 +1,6 @@
 import NotSearchResults from "@/features/fallback/NotSearchResults";
+import { healthService } from "@/features/health/services/healthService";
+import { useAsync } from "@/hooks/useAsync";
 import useCheckServer from "@/hooks/useCheckServer";
 import useNetworkStatus from "@/hooks/useNetworkStatus";
 import { useUrlState } from "@/hooks/useUrlState";
@@ -31,16 +33,22 @@ export const AppStatus = (
     const navigate = useNavigate()
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { isOnline } = useNetworkStatus();
+    // const { isOnline } = useNetworkStatus();
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { serverStatus } = useCheckServer();
+    /*const { serverStatus } = useCheckServer(isOnline);*/
+
+    const serverStatus = useAsync( healthService.checkConnection )
+    
+    useEffect(()=>{
+       serverStatus.execute()
+    },[])
 
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(()=>{
 
       // Agrega estilos al main de la App para centrar los Fallbacks
-      if(!isOnline || serverStatus == 'servidor_caido' || isEmpty || error){
+      if(!serverStatus.data == 'servidor_caido' || isEmpty || error){
         if(document.querySelector('main')){ 
           document.querySelector('main')
             .classList.add('d-flex', 'justify-content-center', 'align-items-center') 
@@ -57,7 +65,7 @@ export const AppStatus = (
             .classList.remove('d-flex', 'justify-content-center', 'align-items-center') 
         }
       };
-    },[isOnline,serverStatus, error, isEmpty, loading])
+    },[serverStatus, error, isEmpty, loading])
 
 
     
@@ -68,8 +76,8 @@ export const AppStatus = (
           {placeholder}
       </div>);
     // 2. No conectado a internet ?
-    if (!isOnline) 
-      return <PageIsOffline />
+    // if (!isOnline) 
+    //   return <PageIsOffline />
     // 3. Servidor caido
     if (serverStatus === 'servidor_caido') 
       return (<PageServerDown />)

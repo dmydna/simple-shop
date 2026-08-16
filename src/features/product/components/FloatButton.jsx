@@ -27,7 +27,7 @@ export function HoverIcon({action, children, icon, className, disabled}){
  * Si está activo (status=true), siempre se ve 'fill'.
  * Si está inactivo, muestra 'fill' solo al hacer hover.
  */
-export function ToggleIcon({action, children, icon, status, className, disabled}){
+export function ToggleIcon({action, children, icon, status, className, disabled = false}){
   
   const [isHovered, setIsHovered] = useState(false);
 

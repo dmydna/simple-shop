@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import ProductCard from './ProductCard.jsx';
-import { useStats } from "@features/stats/hooks/useStats.js";
 import PageLoading from '@features/fallback/PageLoading.jsx';
 import { statsService } from '@/features/stats/services/statsService.js';
 import { useFetchTrigger } from '@/hooks/useFetchTrigger.js';
+import PageError from '@/features/fallback/PageError.jsx';
 
 
 function TopSection({ children, maxElems = 1, top, maxCols, className }) {

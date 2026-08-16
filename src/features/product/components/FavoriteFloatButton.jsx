@@ -15,38 +15,36 @@ export default function FavoriteFloatButton({item, style, className}){
    const msg_del = "removido de favoritos"
 
    const options = (msg) => ({
-      onSucess : (response) => {
-         setIsFavorite(response.isFavorite);
-         if (toast.isActive()) return;
-            toast.success(msg);
+      onSuccess : () => {
+         setIsFavorite(true);
+         toast.success(msg);
       },
       onError: (err) =>{
-         if (toast.isActive()) return;
-            toast.warning(err?.menssage || "error en operacion");
+         toast.warning(err?.menssage || "error en operacion");
       }
 
     })
 
-   const createFavorite = useAsync(favoriteService.createFavorite, {...options(msg_add)});
-   const deleteFavorite = useAsync(favoriteService.deleteFavorite, {...options(msg_del)});
+   const createFavorite = useAsync(favoriteService.create, {...options(msg_add)});
+   const deleteFavorite = useAsync(favoriteService.Delete, {...options(msg_del)});
    const checkFavorite  = useAsync(favoriteService.isFavoriteProduct);
 
    const checkFavoriteStatus = useCallback(async () => { 
       if(item?.id != undefined) 
          setIsFavorite(await checkFavorite.execute(item.id)) 
-   }, [item.id])
+   }, [item])
 
     useEffect(() => {
         checkFavoriteStatus();
     }, [checkFavoriteStatus]);
 
-    const toggleFavorite = (item) => {
+    const toggleFavorite = useCallback( () => {
       if( !isFavorite ) {
          createFavorite.execute(item.id)
       }else{
          deleteFavorite.execute(item.id)
       }
-    }
+    }, [createFavorite, deleteFavorite, isFavorite])
 
 
 	return (
@@ -55,7 +53,7 @@ export default function FavoriteFloatButton({item, style, className}){
             status={ isFavorite }
          	style={ style }
             className={`border rounded-circle bg-wh01 ${className}`} 
-            action={ () => toggleFavorite(item.id) }
+            action={ toggleFavorite }
             icon="heart"
          />
 	)

@@ -1,4 +1,4 @@
-import { db, currentLoggedUser } from '../db.js';
+import { db, currentLoggedUser } from '@/mocks/modules/db.js';
 
 
 export const baseService =  (collection) => ({

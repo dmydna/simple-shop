@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useWindowsWidth } from '../../../contexts/useWindowSize.jsx';
+import { useWindowsWidth } from '@contexts/useWindowSize.jsx';
 
 function DetailsCarousel({children, filterFn, count, className, images}){
 

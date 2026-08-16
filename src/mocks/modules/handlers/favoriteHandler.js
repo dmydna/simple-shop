@@ -1,10 +1,10 @@
 import { http, HttpResponse } from 'msw';
 
+import { currentLoggedUser } from '@/mocks/modules/db';
+import { baseHandlers } from '@/mocks/modules/handlers/baseHandler';
+import { favorite_service } from '@/mocks/modules/services/favorite_service';
+import { user_service } from '@/mocks/modules/services/user_service';
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
-import { favorite_service } from '../services/favorite_service';
-import { baseHandlers } from './baseHandler';
-import { user_service } from '../services/user_service';
-import { currentLoggedUser } from '../db';
 
 const [BASE_ENDPOINT, SERVICE] = [`${BASE_URL}/${ENDPOINT.FAVORITE}`, favorite_service]
 

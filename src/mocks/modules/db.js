@@ -1,9 +1,9 @@
 import { generatePath } from "react-router-dom";
-import listingData from "./data/listings.snapshot.json"
-import productData from "./data/products.snapshot.json"
-import userData from "./data/users.snapshot.json"
-import {buildPageResponse, applyFilters, applySorting, extractPaginationParams, createMockDate} from "./utils"
-import { metaDB } from "./meta";
+import listingData from "@/mocks/modules/data/listings.snapshot.json"
+import productData from "@/mocks/modules/data/products.snapshot.json"
+import userData from "@/mocks/modules/data/users.snapshot.json"
+import {buildPageResponse, applyFilters, applySorting, extractPaginationParams, createMockDate} from "@/mocks/modules/utils"
+import { metaDB } from "@/mocks/modules/meta";
 
 
 // Variable en memoria para simular el usuario logueado actualmente en el mock

@@ -3,9 +3,9 @@ import { Tintify } from "@features/product/components/FloatButton";
 import { useState } from "react";
 import { Alert, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../contexts/CartContext.jsx";
-import CartClearModal from "./CartClearModal.jsx";
-import MyCartTable from "./MyCartTable.jsx";
+import { useCart } from "@f/cart/contexts/CartContext.jsx";
+import CartClearModal from "@f/cart/components/CartClearModal.jsx";
+import MyCartTable from "@f/cart/components/MyCartTable.jsx";
 
 
 export const MyCart = ({ children, className }) => {

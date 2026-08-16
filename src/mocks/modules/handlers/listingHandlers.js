@@ -1,9 +1,8 @@
 import { http, HttpResponse } from 'msw';
 
+import { baseHandlers } from '@/mocks/modules/handlers/baseHandler';
+import { listing_service } from '@/mocks/modules/services/listing_service';
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
-import { listing_service } from '../services/listing_service';
-import { baseHandlers } from './baseHandler';
-import { object } from 'zod';
 
 const [BASE_ENDPOINT, SERVICE] = [`${BASE_URL}/${ENDPOINT.LISTING}`, listing_service]
 

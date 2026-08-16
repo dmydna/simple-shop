@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Img0 from "../../assets/check-crop.gif"
+import Img0 from "@assets/check-crop.gif"
 
 
 function SuccessCheck({show, width, className, handleEnd, handleStart, time}){

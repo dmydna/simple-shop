@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { IconTint } from "./FloatButton"
+import { IconTint } from "@f/product/components/FloatButton"
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap"
-import DeleteFloatButton from "./DeleteFloatButton"
-import StatusFloatButton from "./StatusFloatButton"
-import FavoriteFloatButton from "./FavoriteFloatButton"
+import DeleteFloatButton from "@f/product/components/DeleteFloatButton"
+import StatusFloatButton from "@f/product/components/StatusFloatButton"
+import FavoriteFloatButton from "@f/product/components/FavoriteFloatButton"
 import { useAuthContext } from "@/features/auth/contexts/AuthContext"
-import EditFloatButton from "./EditFloatButton"
+import EditFloatButton from "@f/product/components/EditFloatButton"
 
 
 

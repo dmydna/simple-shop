@@ -1,4 +1,4 @@
-import { bi_icons, color as Color } from "./enums"
+import { bi_icons, color as Color } from "@utils/enums"
 
 export const BASE_URL = "http://localhost:8080"
 export const ENDPOINT = "api/image"

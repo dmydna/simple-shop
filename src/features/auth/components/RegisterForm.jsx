@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Alert, Button, Col, Form } from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-import {useForm} from "../../../hooks/useForm.js";
-import { useAuthContext } from "../contexts/AuthContext.jsx";
+import {useForm} from "@hooks/useForm.js";
+import { useAuthContext } from "@f/auth/contexts/AuthContext.jsx";
 
 
 function RegisterForm({ children, style, className}){

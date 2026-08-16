@@ -3,7 +3,7 @@ import SearchLive from "@/features/search/SearchLive";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { ListingTable } from "./ListingTable";
+import { ListingTable } from "@dashboard/listing/ListingTable";
 
 
 

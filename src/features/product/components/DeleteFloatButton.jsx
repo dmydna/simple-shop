@@ -1,8 +1,6 @@
 import { toast } from "react-toastify";
-import { Card, Col } from "react-bootstrap";
-import { HoverIcon } from "./FloatButton"
+import { HoverIcon } from "@f/product/components/FloatButton"
 import { useNavigate } from "react-router-dom";
-import { productService } from "../services/productService";
 import { useAsync } from "@hooks/useAsync"
 import { listingService } from "@/features/listing/services/listingService";
 

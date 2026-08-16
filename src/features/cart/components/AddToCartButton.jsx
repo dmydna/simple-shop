@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { useCart } from "../contexts/CartContext.jsx";
+import { useCart } from "@f/cart/contexts/CartContext.jsx";
 
 
 

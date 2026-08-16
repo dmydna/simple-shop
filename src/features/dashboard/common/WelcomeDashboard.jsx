@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import ButtonLink from "./ButtonLink"
+import ButtonLink from "@dashboard/common/ButtonLink"
 
 function WelcomeDashboard() {
 

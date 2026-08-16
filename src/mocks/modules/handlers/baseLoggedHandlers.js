@@ -1,6 +1,6 @@
+import { currentLoggedUser } from '@/mocks/modules/db';
+import { user_service } from '@/mocks/modules/services/user_service';
 import { http, HttpResponse } from 'msw';
-import { currentLoggedUser } from '../db';
-import { user_service } from '../services/user_service';
 
 export const baseLoggedHandlers = (BASE_ENDPOINT, SERVICE) => [
 

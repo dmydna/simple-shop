@@ -1,5 +1,5 @@
-import { db, currentLoggedUser } from '../db.js';
-import { baseService } from './baseService.js';
+import { baseService } from '@/mocks/modules/services/baseService.js';
+import { currentLoggedUser, db } from '@/mocks/modules/db.js';
 
 
 const collection = 'users';

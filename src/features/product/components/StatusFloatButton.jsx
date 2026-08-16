@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { Card, Col } from "react-bootstrap";
-import { HoverIcon } from "./FloatButton"
+import { HoverIcon } from "@f/product/components/FloatButton"
 import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAsync } from "@/hooks/useAsync";

@@ -1,5 +1,5 @@
 import { Table } from 'react-bootstrap';
-import MyOrderRating from './MyOrderRating';
+import MyOrderRating from '@f/order/components/MyOrderRating';
 
 
 

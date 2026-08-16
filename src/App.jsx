@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import "./styles/index.css";
+import "@/styles/index.css";
 
 import ProtectedRoute from "@common/ProtectedRoute";
 import ProtectedRouteAdmin from "@common/ProtectedRouteAdmin.jsx";
@@ -50,8 +50,8 @@ import ListingList from "@features/dashboard/listing/ListingList";
 import PaymentForm from "@features/payment/components/PaymentForm.jsx";
 
 import CatalogeLayout from "@components/layout/CatalogeLayout";
-import OrderDetails from "./pages/OrderDetails";
-import ChangeMail from "./pages/ChangeMail";
+import OrderDetails from "@pages/OrderDetails";
+import ChangeMail from "@pages/ChangeMail";
 
 // DONE: update listing
 

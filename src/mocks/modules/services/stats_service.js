@@ -1,7 +1,6 @@
-import { http, HttpResponse } from 'msw';
-import { db } from '../db.js';
-import { baseService } from './baseService.js';
-import { listCountSubfield, listCountSublist } from '../utils.js';
+import { db } from '@/mocks/modules/db.js';
+import { baseService } from '@/mocks/modules/services/baseService.js';
+import { listCountSubfield, listCountSublist } from '@/mocks/modules/utils.js';
 
 const collection = 'stats';
 

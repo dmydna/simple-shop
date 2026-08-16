@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useAuthContext } from "../contexts/AuthContext.jsx";
+import { useAuthContext } from "@f/auth/contexts/AuthContext.jsx";
 
 function LoginMenu(){
 

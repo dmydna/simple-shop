@@ -1,7 +1,7 @@
 import { useFetchElem } from "@/hooks/useFetchElem.js";
 import { useFetchData } from "@hooks/useFetchData.js";
 import { useService } from "@hooks/useService.js";
-import { reviewService } from "../services/reviewService.js";
+import { reviewService } from "@f/review/services/reviewService.js";
 
 export const useReview = ({...config}={}) => {
 

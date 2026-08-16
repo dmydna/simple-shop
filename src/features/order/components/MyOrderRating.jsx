@@ -1,4 +1,4 @@
-import ReviewButton from "./ReviewButton";
+import ReviewButton from "@f/order/components/ReviewButton";
 
 
 export default function MyOrderRating({rating,reviewId}){

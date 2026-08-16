@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
-import { useCart } from "../contexts/CartContext.jsx";
+import { useCart } from "@f/cart/contexts/CartContext.jsx";
 
 function CartInput({ producto, className, style }) {
 

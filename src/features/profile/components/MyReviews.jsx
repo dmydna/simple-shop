@@ -3,8 +3,7 @@ import { useReview } from "@/features/review/hooks/useReview";
 import DataView from "@common/DataView";
 import Pagination from '@features/pagination/components/Pagination.jsx';
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { ProfileHeader } from "./ProfileHeader";
+import { ProfileHeader } from "@f/profile/components/ProfileHeader";
 
 
 

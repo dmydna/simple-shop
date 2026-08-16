@@ -1,6 +1,6 @@
 import { Container, Row } from "react-bootstrap";
 import React from "react";
-import ChangePasswordForm from "../features/auth/components/ChangePasswordForm.jsx";
+import ChangePasswordForm from "@features/auth/components/ChangePasswordForm.jsx";
 
 
 function ChangePassword(){

@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap";
-import { useOrderDetailContext } from "../contexts/OrderDetailContext";
+import { useOrderDetailContext } from "@f/order/contexts/OrderDetailContext";
 import CartNavButton from "@/features/cart/components/CartNavButton";
 import { useMemo } from "react";
 

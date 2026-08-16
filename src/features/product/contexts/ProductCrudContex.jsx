@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect } from "react";
-import { useProductCrud } from "../hooks/useProductCrud.js";
+import { useProductCrud } from "@f/product/hooks/useProductCrud.js";
 
 export const ProductCrudContext = createContext(null)
 

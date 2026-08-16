@@ -1,8 +1,8 @@
+import { listingService } from '@f/listing/services/listingService.js';
 import { useEffect, useRef, useState } from 'react';
 import { Form } from "react-bootstrap";
-import { useListingCrudContext } from '../contexts/ListingCrudContext.jsx';
-import { useListing } from '../hooks/useListing.js';
-import { listingService } from '../services/listingService.js';
+import { useListingCrudContext } from '@f/listing/contexts/ListingCrudContext.jsx';
+import { useListing } from '@f/listing/hooks/useListing.js';
 
 
 

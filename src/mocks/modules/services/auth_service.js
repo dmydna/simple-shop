@@ -1,7 +1,6 @@
-import ChangePassword from '@/pages/ChangePassword.jsx';
-import { currentLoggedUser, db, setCurrentLoggedUser } from '../db.js';
-import { user_service } from './user_service.js';
-import { baseService } from './baseService.js';
+import { baseService } from '@/mocks/modules/services/baseService.js';
+import { user_service } from '@/mocks/modules/services/user_service.js';
+import { currentLoggedUser, db, setCurrentLoggedUser } from '@/mocks/modules/db.js';
 
 const COLLECTION = 'users'
 

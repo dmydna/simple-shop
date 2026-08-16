@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import SiderbarLink from "./SidebarLink";
+import SiderbarLink from "@f/sidebar/components/SidebarLink";
 
 export default function SidebarDashboard() {
 

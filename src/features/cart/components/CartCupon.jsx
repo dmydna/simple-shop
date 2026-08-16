@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
-import { useCart } from "../contexts/CartContext.jsx";
+import { useCart } from "@f/cart/contexts/CartContext.jsx";
 
 function CartCupon({title, check, onCheck}){
 

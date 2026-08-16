@@ -1,6 +1,4 @@
-import { http, HttpResponse } from 'msw';
-import { db } from '../db.js';
-import { baseService } from './baseService.js';
+import { baseService } from '@/mocks/modules/services/baseService.js';
 
 const collection = 'listings';
 

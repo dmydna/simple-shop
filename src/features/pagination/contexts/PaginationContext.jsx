@@ -1,5 +1,5 @@
 import React, {  useEffect,  useState } from "react";
-import {usePageable} from "../hook/usePageable.js";
+import {usePageable} from "@f/pagination/hook/usePageable.js";
 
 
 /** Paginacion Local **/

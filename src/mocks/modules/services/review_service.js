@@ -1,4 +1,4 @@
-import { baseService } from './baseService.js';
+import { baseService } from '@/mocks/modules/services/baseService.js';
 
 
 const collection = 'reviews';

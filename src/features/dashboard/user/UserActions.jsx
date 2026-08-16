@@ -4,7 +4,7 @@ import { useValidParams } from "@hooks/useValidParams";
 import { useEffect, useMemo } from "react";
 import { Button } from "react-bootstrap";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import ButtonLink from "../common/ButtonLink";
+import ButtonLink from "@dashboard/common/ButtonLink";
 import { useUrlState } from "@/hooks/useUrlState";
 import { useUrlParams } from "@/hooks/useUrlParams";
 

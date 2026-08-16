@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import PaginatorInput from "./PaginatorInput.jsx";
+import PaginatorInput from "@f/pagination/components/PaginatorInput.jsx";
 // Componente que muestra los botones de paginación
 
 

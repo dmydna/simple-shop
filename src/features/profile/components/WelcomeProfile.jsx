@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Alert, Button, FloatingLabel, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { useProfile } from "../contexts/ProfileContext.jsx";
-import { ProfileHeader } from "./ProfileHeader";
+import { useProfile } from "@f/profile/contexts/ProfileContext.jsx";
+import { ProfileHeader } from "@f/profile/components/ProfileHeader";
 import { useWarning } from "@/hooks/useWarning.js";
 
 function WelcomePerfil({ children }) {

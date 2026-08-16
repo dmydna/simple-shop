@@ -1,8 +1,8 @@
-import { db } from '../db.js';
-import { createMockDate } from '../utils.js';
-import { baseService } from './baseService.js';
-import { listing_service } from './listing_service.js';
-import { user_service } from './user_service.js';
+import { db } from '@/mocks/modules/db.js';
+import { baseService } from '@/mocks/modules/services/baseService.js';
+import { listing_service } from '@/mocks/modules/services/listing_service.js';
+import { user_service } from '@/mocks/modules/services/user_service.js';
+import { createMockDate } from '@/mocks/modules/utils.js';
 
 
 const collection = 'orders';

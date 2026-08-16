@@ -1,9 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
+import { currentLoggedUser } from '@/mocks/modules/db';
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
-import { order_service } from '../services/order_service';
-import { baseHandlers } from './baseHandler';
-import { currentLoggedUser } from '../db';
 
 const BASE_ENDPOINT = `${BASE_URL}/${ENDPOINT.GATEWAY}`
 

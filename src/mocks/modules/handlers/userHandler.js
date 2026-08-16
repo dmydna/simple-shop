@@ -1,9 +1,9 @@
 import { http, HttpResponse } from 'msw';
 
+import { currentLoggedUser } from '@/mocks/modules/db.js';
+import { baseHandlers } from '@/mocks/modules/handlers/baseHandler.js';
+import { user_service } from '@/mocks/modules/services/user_service.js';
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
-import { currentLoggedUser, db } from '../db.js';
-import { user_service } from '../services/user_service.js';
-import { baseHandlers } from './baseHandler.js';
 
 const [BASE_ENDPOINT, SERVICE] = [`${BASE_URL}/${ENDPOINT.USER}`, user_service]
 

@@ -1,8 +1,8 @@
 import { http, HttpResponse } from 'msw';
 
+import { baseHandlers } from '@/mocks/modules/handlers/baseHandler';
+import { order_service } from '@/mocks/modules/services/order_service';
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
-import { order_service } from '../services/order_service';
-import { baseHandlers } from './baseHandler';
 
 const [BASE_ENDPOINT, SERVICE] = [`${BASE_URL}/${ENDPOINT.ORDER}`, order_service]
 

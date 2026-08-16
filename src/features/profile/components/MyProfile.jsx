@@ -1,15 +1,12 @@
-import PageError from "@features/fallback/PageError.jsx";
-import PageLoading from "@features/fallback/PageLoading.jsx";
-import PageSuccess from "@features/fallback/PageSuccess.jsx";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
-import { useProfile } from "../contexts/ProfileContext.jsx";
-import { ProfileHeader } from "./ProfileHeader.jsx";
+import { useProfile } from "@f/profile/contexts/ProfileContext.jsx";
+import { ProfileHeader } from "@f/profile/components/ProfileHeader.jsx";
 import FetchStateModal from "@/components/common/FetchStateModal.jsx";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { CompleteUserRegister } from "@/utils/schemas.js";
-import FormProfile from "./FormProfile.jsx";
+import FormProfile from "@f/profile/components/FormProfile.jsx";
 
 
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Dropdown, Form, Row } from "react-bootstrap";
-import {useFilterBarContext} from "../../features/filters/context/FilterBarContext.jsx";
+import {useFilterBarContext} from "@features/filters/context/FilterBarContext.jsx";
 
 
 

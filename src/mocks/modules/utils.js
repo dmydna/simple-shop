@@ -1,5 +1,5 @@
 
-import { db } from "./db";
+import { db } from "@/mocks/modules/db";
 
 // --- PAGINATION UTILS ---
 

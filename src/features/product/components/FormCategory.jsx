@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
-import { useProductCrudContext } from "../contexts/ProductCrudContex";
 import { category } from "@/utils/enums";
 import InputCrudFloating from "@/features/crud/components/InputCrudFloating";
 

@@ -2,10 +2,10 @@ import { useCart } from "@features/cart/contexts/CartContext.jsx";
 import { usePayment } from "@features/payment/hooks/usePayment.js";
 import { Col, Container, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
-import { CartLayout } from "../../features/cart/layout/CartLayout";
-import MyOrderLayout from "../../features/cart/layout/MyOrderLayout";
-import { PaymentProvider } from "../../features/payment/contexts/PaymentContext";
-import MyCartLayout from "../../features/cart/layout/MyCartLayout";
+import { CartLayout } from "@features/cart/layout/CartLayout";
+import MyOrderLayout from "@features/cart/layout/MyOrderLayout";
+import { PaymentProvider } from "@features/payment/contexts/PaymentContext";
+import MyCartLayout from "@features/cart/layout/MyCartLayout";
 
 
 function Cart() {

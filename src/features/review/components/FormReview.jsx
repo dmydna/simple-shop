@@ -7,7 +7,7 @@ import { placeholder } from "@utils/image.js";
 import { useEffect, useState } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ProfileHeader } from "../../profile/components/ProfileHeader";
+import { ProfileHeader } from "@f/profile/components/ProfileHeader";
 
 
 

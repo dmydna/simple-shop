@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import {CardDetailsPlaceholder} from "./CardDetailsPlaceholder.jsx";
-import {ImgPlaceholder} from "./ImgPlaceholder.jsx";
+import {CardDetailsPlaceholder} from "@f/placeholder/CardDetailsPlaceholder.jsx";
+import {ImgPlaceholder} from "@f/placeholder/ImgPlaceholder.jsx";
 
 export const DetailsPlaceholder = () => {
     return (

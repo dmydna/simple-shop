@@ -1,10 +1,8 @@
 import { Alert, Card } from "react-bootstrap";
-import CartItem from "@f/cart/components/CartItem.jsx";
-import { useOrderDetailContext } from "../contexts/OrderDetailContext";
-import OrderItem from "./OrderItem";
+import { useOrderDetailContext } from "@f/order/contexts/OrderDetailContext";
 import { useEffect, useState } from "react";
 import { useUrlState } from "@/hooks/useUrlState";
-import OrderTable from "./OrderTable";
+import OrderTable from "@f/order/components/OrderTable";
 import { useUrlParams } from "@/hooks/useUrlParams";
 
 

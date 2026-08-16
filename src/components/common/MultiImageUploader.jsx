@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import DownloadFileButton from './DownloadFileButton';
+import DownloadFileButton from '@common/DownloadFileButton';
 
 function MultiImageUploader({ maxImages = 10, maxSizeMB = 1, setImages, images, locked = false }) {
 

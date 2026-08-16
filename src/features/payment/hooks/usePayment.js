@@ -1,8 +1,8 @@
 import { useCart } from "@/features/cart/contexts/CartContext.jsx";
 import { useFetch } from "@hooks/useFetch.js";
 import { useState } from "react";
-import { useGateway } from '../hooks/useGateway.js';
-import { usePurchaseOrder } from './usePurchaseOrder.js';
+import { useGateway } from '@f/payment/hooks/useGateway.js';
+import { usePurchaseOrder } from '@f/payment/hooks/usePurchaseOrder.js';
 
 // HACK esta hook necesito revisarse para simplificar logica.
 export const usePayment = () => {

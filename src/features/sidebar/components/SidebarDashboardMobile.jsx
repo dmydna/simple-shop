@@ -1,6 +1,4 @@
-import SiderbarLink from "./SidebarLink";
-import CartButton from "@features/cart/components/CartButton.jsx";
-
+import SiderbarLink from "@f/sidebar/components/SidebarLink";
 
 export default function SidebarDashboardMobile({ toggle }) {
 

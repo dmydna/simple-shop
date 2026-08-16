@@ -1,7 +1,7 @@
 import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useCart } from "../contexts/CartContext.jsx";
-import CartInput from "./CartInput.jsx";
+import { useCart } from "@f/cart/contexts/CartContext.jsx";
+import CartInput from "@f/cart/components/CartInput.jsx";
 
 function CartItem({item, index}) {
 

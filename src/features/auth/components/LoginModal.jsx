@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button, Modal,Card, Container, ButtonGroup } from "react-bootstrap";
 
 
-import LoginForm from "./LoginForm.jsx";
+import LoginForm from "@f/auth/components/LoginForm.jsx";
 
 
 

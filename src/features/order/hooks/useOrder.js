@@ -1,4 +1,4 @@
-import { orderService } from "../services/orderService.js";
+import { orderService } from "@f/order/services/orderService.js";
 import { useFetchData } from "@hooks/useFetchData.js";
 import { useFetchElem } from "@/hooks/useFetchElem.js";
 

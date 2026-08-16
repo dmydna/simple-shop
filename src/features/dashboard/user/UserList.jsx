@@ -4,7 +4,7 @@ import { useUser } from "@/features/user/hooks/useUser";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { UserTable } from "./UserTable";
+import { UserTable } from "@dashboard/user/UserTable";
 
 
 

@@ -1,8 +1,8 @@
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { HoverProvider } from "../../../contexts/HoverContext.jsx";
-import HoverWrapper from "../../../contexts/HoverWrapper.jsx";
-import { useCart } from "../contexts/CartContext.jsx";
+import { HoverProvider } from "@contexts/HoverContext.jsx";
+import HoverWrapper from "@contexts/HoverWrapper.jsx";
+import { useCart } from "@f/cart/contexts/CartContext.jsx";
 import { Tintify } from "@features/product/components/FloatButton"
 
 

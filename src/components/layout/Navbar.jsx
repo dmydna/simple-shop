@@ -1,9 +1,9 @@
 import { Container, Nav, Navbar as NavBar  } from "react-bootstrap";
-import { useScrollY } from "../../contexts/useWindowScroll.jsx";
-import ActionBar from "../common/ActionBar.jsx";
-import Logo from "../common/Logo.jsx";
-import NavItems from "../common/NavItems.jsx";
-import MobileMenu from "./MobileMenu.jsx";
+import { useScrollY } from "@contexts/useWindowScroll.jsx";
+import ActionBar from "@common/ActionBar.jsx";
+import Logo from "@common/Logo.jsx";
+import NavItems from "@common/NavItems.jsx";
+import MobileMenu from "@layout/MobileMenu.jsx";
 import { NavbarProvider } from "@/contexts/NavbarContext.jsx";
 import { useState } from "react";
 

@@ -1,9 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
+import { buy_service } from '@/mocks/modules/services/buy_services';
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
-import { auth_service } from '../services/auth_service';
-import { currentLoggedUser, setCurrentLoggedUser } from '../db';
-import { buy_service } from '../services/buy_services';
 
 
 const [BASE_ENDPOINT, SERVICE] = [`${BASE_URL}/${ENDPOINT.BUY}`, buy_service]

@@ -1,9 +1,9 @@
 import {  useState } from "react";
 import { useCrudForm } from "@features/crud/hooks/useCrudForm.js";
 import { useCrudActions } from "@/features/crud/hooks/useCrudActions.js";
-import { useUser } from "../hooks/useUser.js";
-import { userService } from "../service/userService.js";
-import { ListingDTO } from "@/utils/schemas.js";
+import { useUser } from "@f/user/hooks/useUser.js";
+import { userService } from "@f/user/service/userService.js";
+
 
 
 // Se usa profile porque incluye mas datos que user

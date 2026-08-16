@@ -1,7 +1,7 @@
  import { http, HttpResponse } from 'msw';
 
+import { auth_service } from '@/mocks/modules/services/auth_service';
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
-import { auth_service } from '../services/auth_service';
 
 
 

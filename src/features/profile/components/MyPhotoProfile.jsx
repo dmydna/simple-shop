@@ -2,8 +2,8 @@ import FetchState from '@/components/common/FetchState.jsx';
 import ImageUploader from "@common/ImageUploader.jsx";
 import { useEffect, useState } from 'react';
 import { Button } from "react-bootstrap";
-import { useProfile } from "../contexts/ProfileContext.jsx";
-import { ProfileHeader } from './ProfileHeader.jsx';
+import { useProfile } from "@f/profile/contexts/ProfileContext.jsx";
+import { ProfileHeader } from '@f/profile/components/ProfileHeader.jsx';
 
 
 const MyPhotoProfile = ({ title, className }) => {

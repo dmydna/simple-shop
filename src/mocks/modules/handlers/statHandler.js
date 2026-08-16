@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
-import { stats_service } from '../services/stats_service';
+import { stats_service } from '@/mocks/modules/services/stats_service';
 
 const [BASE_ENDPOINT, SERVICE] = [`${BASE_URL}/${ENDPOINT.STATS}`, stats_service]
 

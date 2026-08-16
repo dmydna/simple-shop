@@ -1,6 +1,6 @@
 import { CRUD } from "@/utils/enums";
 import { useEffect } from "react";
-import { useUrlParams } from "../../../hooks/useUrlParams";
+import { useUrlParams } from "@hooks/useUrlParams";
 
 
 // TODO: Mover a @f/dashboard o @f/crud

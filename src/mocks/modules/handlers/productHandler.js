@@ -1,7 +1,6 @@
-import { http, HttpResponse } from 'msw';
+import { baseHandlers } from '@/mocks/modules/handlers/baseHandler';
+import { product_service } from '@/mocks/modules/services/product_service';
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
-import { product_service } from '../services/product_service';
-import { baseHandlers } from './baseHandler';
 
 
 

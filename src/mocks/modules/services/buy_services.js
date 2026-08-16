@@ -1,10 +1,8 @@
 
-import { db } from '../db.js';
-import { auth_service } from './auth_service.js';
-import { baseService } from './baseService.js';
-import { order_service } from './order_service.js';
-import { review_service } from './review_service.js';
-import { user_service } from './user_service.js';
+import { db } from '@/mocks/modules/db.js';
+import { baseService } from '@/mocks/modules/services/baseService.js';
+import { user_service } from '@/mocks/modules/services/user_service.js';
+import { order_service } from '@/mocks/modules/services/order_service.js';
 
 
 const collection = 'buy';

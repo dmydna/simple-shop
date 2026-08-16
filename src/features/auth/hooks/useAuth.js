@@ -1,6 +1,6 @@
 import nprogress from "nprogress";
 import { useEffect, useMemo, useState } from "react";
-import { authService } from "../services/authService.js";
+import { authService } from "@f/auth/services/authService.js";
 import { userService } from "@/features/user/service/userService.js";
 import { useNavigate } from "react-router-dom";
 import { useUrlState } from "@/hooks/useUrlState.js";

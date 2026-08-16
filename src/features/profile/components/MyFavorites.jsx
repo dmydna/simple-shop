@@ -3,8 +3,7 @@ import RemovableListItem from "@/components/common/RemovableListItem";
 import { useFavorite } from '@/features/favorite/hooks/useFavorite.js';
 import Pagination from '@features/pagination/components/Pagination.jsx';
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { ProfileHeader } from "./ProfileHeader";
+import { ProfileHeader } from "@f/profile/components/ProfileHeader";
 
 function MyFavorites({ children }) {
 

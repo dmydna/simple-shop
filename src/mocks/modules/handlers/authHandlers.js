@@ -1,8 +1,8 @@
 import { http, HttpResponse } from 'msw';
 
+import { currentLoggedUser, setCurrentLoggedUser } from '@/mocks/modules/db';
+import { auth_service } from '@/mocks/modules/services/auth_service';
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
-import { auth_service } from '../services/auth_service';
-import { currentLoggedUser, setCurrentLoggedUser } from '../db';
 
 
 const [BASE_ENDPOINT, SERVICE] = [`${BASE_URL}/${ENDPOINT.AUTH}`, auth_service]

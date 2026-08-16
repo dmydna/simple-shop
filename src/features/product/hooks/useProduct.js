@@ -1,7 +1,6 @@
 import { useFetchElem } from "@/hooks/useFetchElem.js";
-import { useFetchData } from "../../../hooks/useFetchData.js";
-import { productService } from "../services/productService.js";
-import { useEffect } from "react";
+import { useFetchData } from "@hooks/useFetchData.js";
+import { productService } from "@f/product/services/productService.js";
 
 export const useProduct = ({autofetch=false}={}) => {
 

@@ -4,13 +4,13 @@ import { useListingSync } from "@/features/listing/hooks/useListingSync.js";
 import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import CategoryCarrousel from "../../components/common/CategoryCarrousel.jsx";
-import CategoryNav from "../../components/common/CategoryNav.jsx";
-import AddToCartButton from "../../features/cart/components/AddToCartButton.jsx";
-import Pagination from "../../features/pagination/components/Pagination.jsx";
-import { ListingPlaceholder } from "../../features/placeholder/ListingPlaceholder.jsx";
-import ProductCard from "../../features/product/components/ProductCard.jsx";
-import ListingContextLayout from "./ListingContextLayout.jsx";
+import CategoryCarrousel from "@common/CategoryCarrousel.jsx";
+import CategoryNav from "@common/CategoryNav.jsx";
+import AddToCartButton from "@features/cart/components/AddToCartButton.jsx";
+import Pagination from "@features/pagination/components/Pagination.jsx";
+import { ListingPlaceholder } from "@features/placeholder/ListingPlaceholder.jsx";
+import ProductCard from "@features/product/components/ProductCard.jsx";
+import ListingContextLayout from "@pages/Product/ListingContextLayout.jsx";
 
 
 

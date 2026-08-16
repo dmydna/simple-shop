@@ -1,6 +1,6 @@
 import { Container, Row } from "react-bootstrap";
 import React from "react";
-import ChangeMailForm from "../features/auth/components/ChangeMailForm.jsx";
+import ChangeMailForm from "@features/auth/components/ChangeMailForm.jsx";
 
 
 function ChangeMail(){

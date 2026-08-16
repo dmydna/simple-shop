@@ -1,5 +1,5 @@
 import CartButton from "@features/cart/components/CartButton.jsx";
-import SiderbarLink from "./SidebarLink";
+import SiderbarLink from "@f/sidebar/components/SidebarLink";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext";
 
 

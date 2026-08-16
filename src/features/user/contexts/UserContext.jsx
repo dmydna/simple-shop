@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import {useUser} from "../hooks/useUser.js";
+import {useUser} from "@f/user/hooks/useUser.js";
 
 
 export const UserContext = createContext(null)

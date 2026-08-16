@@ -2,7 +2,7 @@ import CartNavButton from "@/features/cart/components/CartNavButton";
 import { MyOrderCart } from "@features/cart/components/MyOrderCart.jsx";
 import { MyOrderCartPlaceHoder } from "@features/placeholder/MyOrderCartPlaceHolder.jsx";
 import { useState } from "react";
-import { usePaymentContext } from "../../payment/contexts/PaymentContext";
+import { usePaymentContext } from "@f/payment/contexts/PaymentContext";
 
 
 

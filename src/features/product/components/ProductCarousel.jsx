@@ -1,9 +1,9 @@
+import { useWindowsWidth } from '@contexts/useWindowSize.jsx';
+import { useListing } from "@f/listing/hooks/useListing.js";
+import ProductCard from '@f/product/components/ProductCard.jsx';
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
-import { useWindowsWidth } from '../../../contexts/useWindowSize.jsx';
-import { useListing } from "../../listing/hooks/useListing.js";
-import ProductCard from './ProductCard.jsx';
 
 
 

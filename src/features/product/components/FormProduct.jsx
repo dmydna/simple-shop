@@ -1,8 +1,4 @@
-import { TagsList } from "@/components/common/TagsList";
 import InputCrudFloating from "@/features/crud/components/InputCrudFloating";
-import { useProductCrudContext } from "../contexts/ProductCrudContex";
-import FormCategory from "./FormCategory";
-
 
 function FormProduct({ children, className, crudHook }) {
 

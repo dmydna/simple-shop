@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useWindowsWidth } from "../../contexts/useWindowSize.jsx";
-import Search from "./Search.jsx";
+import { useWindowsWidth } from "@contexts/useWindowSize.jsx";
+import Search from "@f/search/Search.jsx";
+import { useEffect, useState } from "react";
 
 function SearchOverlay(){
 

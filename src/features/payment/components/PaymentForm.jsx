@@ -1,7 +1,7 @@
 import { Form } from "react-bootstrap";
-import payment from "../../../assets/payment.png";
-import { useForm } from "../../../hooks/useForm";
-import { useProfile } from "../../profile/contexts/ProfileContext";
+import payment from "@assets/payment.png";
+import { useForm } from "@hooks/useForm";
+import { useProfile } from "@f/profile/contexts/ProfileContext";
 
 function PaymentForm(){
 

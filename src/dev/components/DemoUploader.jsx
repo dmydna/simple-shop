@@ -2,11 +2,8 @@ import { devService } from "@/dev/services/devService";
 import { useService } from "@/hooks/useService";
 import { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import PageError from "@features/fallback/PageError";
-import PageLoading from "@features/fallback/PageLoading";
-import PageSuccess from "@features/fallback/PageSuccess";
-import JSONFileUploader from "./JSONFileUploader";
-import JSONFileDetails from "./JSONFileDetails";
+import JSONFileUploader from "@dev/components/JSONFileUploader";
+import JSONFileDetails from "@dev/components/JSONFileDetails";
 import FetchState from "@/components/common/FetchState";
 
 

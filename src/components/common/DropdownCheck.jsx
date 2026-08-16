@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Dropdown, Form } from "react-bootstrap";
-import { useFilterBarContext } from "../../features/filters/context/FilterBarContext.jsx";
+import { useFilterBarContext } from "@features/filters/context/FilterBarContext.jsx";
 
 function DropdownCheck({children ,className, style, variant }){
 

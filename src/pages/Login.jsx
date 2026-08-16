@@ -1,7 +1,7 @@
 import { Container, Row } from "react-bootstrap";
 import React from "react";
 
-import LoginForm from "../features/auth/components/LoginForm.jsx";
+import LoginForm from "@f/auth/components/LoginForm.jsx";
 
 
 function Login(){

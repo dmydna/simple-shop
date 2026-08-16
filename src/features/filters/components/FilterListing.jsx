@@ -1,5 +1,5 @@
-import FilterBarParams from "./FilterBarParams";
-import SelectParams from "./SelectParams";
+import FilterBarParams from "@f/filters/components/FilterBarParams";
+import SelectParams from "@f/filters/components/SelectParams";
 
 export default function FilterListing(){
 	

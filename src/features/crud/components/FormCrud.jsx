@@ -4,8 +4,8 @@ import FormWarning from "@/features/dashboard/common/FormWarning";
 import { useUrlState } from "@/hooks/useUrlState";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ButtonCrud from "./ButtonCrud";
-import ModalCrud from "./ModalCrud";
+import ButtonCrud from "@f/crud/components/ButtonCrud";
+import ModalCrud from "@f/crud/components/ModalCrud";
 
 
 // NOTA este componente es multi-contexto, 

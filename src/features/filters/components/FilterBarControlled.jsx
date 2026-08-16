@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
-import { FilterTags } from "../../../components/common/FilterTags.jsx";
-import { FilterBarProvider } from "../context/FilterBarContext.jsx";
-import { useUrlFilters } from "../hooks/useUrlFilters.jsx";
+import { FilterTags } from "@common/FilterTags.jsx";
+import { FilterBarProvider } from "@f/filters/context/FilterBarContext.jsx";
+import { useUrlFilters } from "@f/filters/hooks/useUrlFilters.jsx";
 
 
 

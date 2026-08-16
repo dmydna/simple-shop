@@ -1,5 +1,5 @@
 import {Container, Row} from "react-bootstrap";
-import {CardListingPlaceholder} from "./CardListingPlaceholder.jsx";
+import {CardListingPlaceholder} from "@f/placeholder/CardListingPlaceholder.jsx";
 import React from "react";
 
 export const ListingPlaceholder = () => (

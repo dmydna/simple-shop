@@ -1,7 +1,7 @@
 import 'nprogress/nprogress.css';
 
 import { createContext, useContext } from "react";
-import { useListingCrud } from '../hooks/useListingCrud.js';
+import { useListingCrud } from '@f/listing/hooks/useListingCrud.js';
 
 export const ListingCrudContext = createContext(null)
 

@@ -1,6 +1,6 @@
 // HoverWrapper.jsx
 import React from "react";
-import { useHover } from "./HoverContext";
+import { useHover } from "@contexts/HoverContext";
 
 
 

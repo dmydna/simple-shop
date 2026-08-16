@@ -1,7 +1,6 @@
 import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { HoverIcon, IconTint } from "./FloatButton"
-import ProductButtonBar from "./ProductButtonBar"
+import ProductButtonBar from "@f/product/components/ProductButtonBar"
 
 
 function ProductCard({ children, className, cols, imgSize, ...item}){

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link, useNavigate } from "react-router-dom";
-import { useUIContext } from "../../../contexts/UIContext.jsx";
+import { useUIContext } from "@contexts/UIContext.jsx";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
 import { IconTint, Tintify } from "@features/product/components/FloatButton"
 import ImageWithFallback from "@/components/common/ImageWithFallback.jsx";

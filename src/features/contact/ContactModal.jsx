@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Modal, Row } from "react-bootstrap";
 
-import ContactForm from "./ContactForm.jsx";
+import ContactForm from "@f/contact/ContactForm.jsx";
 
 function ContactModal({show, onHide}) {
 

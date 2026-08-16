@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import nprogress from 'nprogress';
-import { useFetch } from './useFetch';
+import { useFetch } from '@hooks/useFetch';
 
 export const useService = ({ service, onSuccess, onError, onRefresh } = {}) => {
     const { 

@@ -1,6 +1,6 @@
 import PageLoading from "@features/fallback/PageLoading.jsx";
 import { useEffect } from "react";
-import { AppStatus } from "../../components/common/AppStatus.jsx";
+import { AppStatus } from "@common/AppStatus.jsx";
 import { useUrlParams } from "@/hooks/useUrlParams.js";
 
 export default function ListingContextLayout({children, placeholder, ...props}){

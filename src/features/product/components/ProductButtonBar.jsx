@@ -1,13 +1,9 @@
-import { Card, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { HoverIcon, IconTint } from "./FloatButton"
+import { HoverIcon, IconTint } from "@f/product/components/FloatButton"
 import {useAuthContext} from "@features/auth/contexts/AuthContext"
 import React, { useState } from "react";
-import EditFloatButton from "./EditFloatButton";
-import DeleteFloatButton from "./DeleteFloatButton";
-import StatusFloatButton from "./StatusFloatButton";
-
-
+import EditFloatButton from "@f/product/components/EditFloatButton";
+import DeleteFloatButton from "@f/product/components/DeleteFloatButton";
+import StatusFloatButton from "@f/product/components/StatusFloatButton";
 
 
 

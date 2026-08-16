@@ -2,8 +2,8 @@ import ModalCrud from "@/features/crud/components/ModalCrud";
 import FormAccount from "@/features/user/components/FormAccount";
 import FormBasic from "@/features/user/components/FormBasic";
 import { useUserCrud } from "@/features/user/hooks/useUserCrud";
-import FormCrud from "../../crud/components/FormCrud";
-import UserActions from "./UserActions";
+import FormCrud from "@f/crud/components/FormCrud";
+import UserActions from "@dashboard/user/UserActions";
 
 function UserForm() {
 

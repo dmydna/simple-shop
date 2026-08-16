@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import LoginModal from "../features/auth/components/LoginModal.jsx";
-import ContactModal from "../features/contact/ContactModal.jsx";
+import LoginModal from "@features/auth/components/LoginModal.jsx";
+import ContactModal from "@features/contact/ContactModal.jsx";
 
 const UIContext = createContext(null)
 

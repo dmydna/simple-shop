@@ -1,9 +1,9 @@
 import { Container, Row, Col } from "react-bootstrap";
-import CardProfile from "./CardProfile";
+import CardProfile from "@f/profile/components/CardProfile";
 import { Outlet } from 'react-router-dom';
-import { useProfile } from "../contexts/ProfileContext";
+import { useProfile } from "@f/profile/contexts/ProfileContext";
 import { useEffect } from "react";
-import SidebarProfile from "./SidebarProfile";
+import SidebarProfile from "@f/profile/components/SidebarProfile";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext";
 
 

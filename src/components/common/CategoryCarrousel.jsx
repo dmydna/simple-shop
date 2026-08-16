@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import Img3 from "../../assets/dressing-table.png";
-import Img4 from '../../assets/grocery.png';
-import Img1 from "../../assets/lipstick.png";
-import Img2 from '../../assets/perfume.png';
+import Img3 from "@assets/dressing-table.png";
+import Img4 from '@assets/grocery.png';
+import Img1 from "@assets/lipstick.png";
+import Img2 from '@assets/perfume.png';
 import { category } from "@utils/enums.js";
-import CategoryItem from "./CategoryItem";
+import CategoryItem from "@common/CategoryItem";
 
 function CategoryCarrousel({className}){
   const [index, setIndex] = useState(0);

@@ -1,7 +1,7 @@
 import nprogress from "nprogress";
 import { useCallback, useEffect, useState } from "react";
-import { usePageable } from "../features/pagination/hook/usePageable.js";
-import { useFetch } from "./useFetch.js";
+import { usePageable } from "@f/pagination/hook/usePageable.js";
+import { useFetch } from "@hooks/useFetch.js";
 
 
 export const useFetchData = ({service, size = 8, methodName = 'getPage', autofetch=true, ...config}) => {

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import ProductCard from './ProductCard.jsx';
+import ProductCard from '@f/product/components/ProductCard.jsx';
 import PageLoading from '@features/fallback/PageLoading.jsx';
 import { statsService } from '@/features/stats/services/statsService.js';
 import { useFetchTrigger } from '@/hooks/useFetchTrigger.js';

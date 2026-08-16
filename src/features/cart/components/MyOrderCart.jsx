@@ -1,8 +1,8 @@
+import { useWindowsWidth } from "@contexts/useWindowSize.jsx";
+import { useCart } from "@f/cart/contexts/CartContext.jsx";
 import { useMemo } from "react";
 import { Card } from "react-bootstrap";
 import { useMatch } from "react-router-dom";
-import { useWindowsWidth } from "../../../contexts/useWindowSize.jsx";
-import { useCart } from "../contexts/CartContext.jsx";
 
 export const MyOrderCart = ({check, oncheck, handle}) => {
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Col } from "react-bootstrap";
-import LinkArrow from "./LinkArrow";
+import LinkArrow from "@common/LinkArrow";
 
 
 function CardPromo({Img, children, variant , to, cta, className, p, m}){

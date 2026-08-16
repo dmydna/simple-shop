@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { useFetch } from "./useFetch";
+import { useFetch } from "@hooks/useFetch";
 
 export const useFetchElem = ({ fetchMethod }) => {
     const { loading, setLoading, error, setError } = useFetch();

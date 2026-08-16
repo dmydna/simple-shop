@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { favoriteService } from "../services/favoriteService.js";
+import { favoriteService } from "@f/favorite/services/favoriteService.js";
 import { useFetchData } from "@hooks/useFetchData.js";
 import { useService } from "@hooks/useService.js";
 import { useFetchElem } from "@/hooks/useFetchElem.js";

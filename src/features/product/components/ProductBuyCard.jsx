@@ -1,12 +1,10 @@
 import StarRating from "@/components/common/StarRating.jsx";
-import { useState } from "react";
-import { Alert, Card, InputGroup } from "react-bootstrap";
+import { Card, InputGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import BuyNowButton from "../../../components/common/BuyNowButton.jsx";
-import AddToCartButton from "../../cart/components/AddToCartButton.jsx";
-import { useCart } from "../../cart/contexts/CartContext.jsx";
-import FavoriteFloatButton from "./FavoriteFloatButton.jsx";
-import AdminFloatButton from "./AdminFloatButton.jsx";
+import BuyNowButton from "@common/BuyNowButton.jsx";
+import AddToCartButton from "@f/cart/components/AddToCartButton.jsx";
+import { useCart } from "@f/cart/contexts/CartContext.jsx";
+import AdminFloatButton from "@f/product/components/AdminFloatButton.jsx";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
 
 

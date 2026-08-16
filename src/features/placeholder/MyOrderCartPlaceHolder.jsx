@@ -1,5 +1,5 @@
-import { Alert, Button, Card, Col, Container, Row } from "react-bootstrap";
-import { useWindowsHeight, useWindowsWidth } from "../../contexts/useWindowSize.jsx";
+import { useWindowsWidth } from "@contexts/useWindowSize.jsx";
+import { Card } from "react-bootstrap";
 
 
 export const MyOrderCartPlaceHoder = () => {

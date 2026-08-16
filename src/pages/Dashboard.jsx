@@ -1,14 +1,14 @@
 import React from "react";
 import { Button, Container, Row, Form, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import CategoryItem from "../components/common/CategoryItem.jsx";
+import CategoryItem from "@common/CategoryItem.jsx";
 
-import Img1 from "../assets/print-product.png";
-import Img2 from '../assets/delivery-time.png';
-import Img3 from "../assets/expend.png";
-import Img4 from '../assets/paper.png';
-import Img5 from "../assets/t-shirt.png"
-import Img6 from "../assets/draft.png"
+import Img1 from "@assets/print-product.png";
+import Img2 from '@assets/delivery-time.png';
+import Img3 from "@assets/expend.png";
+import Img4 from '@assets/paper.png';
+import Img5 from "@assets/t-shirt.png"
+import Img6 from "@assets/draft.png"
 
 const Dashboard = ({ col, preview = false }) => {
 

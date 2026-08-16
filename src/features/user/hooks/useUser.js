@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import {userService} from "../service/userService.js";
-import {useFetchData} from "../../../hooks/useFetchData.js";
+import {userService} from "@f/user/service/userService.js";
+import {useFetchData} from "@hooks/useFetchData.js";
 import { useFetchElem } from "@/hooks/useFetchElem.js";
 
 export const useUser = (fetchElemMethod=null) => {

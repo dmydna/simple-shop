@@ -1,8 +1,8 @@
+import { useWindowsWidth } from "@contexts/useWindowSize.jsx";
+import { useListing } from "@f/listing/hooks/useListing.js";
 import { useEffect, useMemo, useState } from "react";
 import { Button, Dropdown, Form, InputGroup } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useWindowsWidth } from "../../contexts/useWindowSize.jsx";
-import { useListing } from "../listing/hooks/useListing.js";
 
 function Search({toggle, setToggle}){
     

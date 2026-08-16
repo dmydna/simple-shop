@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { HoverIcon } from "./FloatButton"
+import { HoverIcon } from "@f/product/components/FloatButton"
 
 export default function EditFloatButton({item}){
 	

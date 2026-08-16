@@ -1,7 +1,7 @@
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useProfile } from "../contexts/ProfileContext";
-import { ProfileHeader } from "./ProfileHeader";
+import { useProfile } from "@f/profile/contexts/ProfileContext";
+import { ProfileHeader } from "@f/profile/components/ProfileHeader";
 
 
 function MyAccount({ children }) {

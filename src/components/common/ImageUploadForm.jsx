@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
-import { listingService } from '../../features/listing/services/listingService.js';
+import { listingService } from '@features/listing/services/listingService.js';
 
 const ImageUploadForm = ({ productId, children, className }) => {
   const [selectedFile, setSelectedFile] = useState(null);

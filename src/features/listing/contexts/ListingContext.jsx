@@ -2,7 +2,7 @@ import nprogress from 'nprogress';
 import 'nprogress/nprogress.css';
 
 import React, { createContext, useContext } from "react";
-import {useListing} from "../hooks/useListing.js";
+import {useListing} from "@f/listing/hooks/useListing.js";
 
 export const ListingContext = createContext(null)
 

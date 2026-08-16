@@ -1,6 +1,6 @@
 import React from "react";
-import { useUIContext } from "../../../contexts/UIContext.jsx";
-import LoginModal from "./LoginModal.jsx";
+import { useUIContext } from "@contexts/UIContext.jsx";
+import LoginModal from "@f/auth/components/LoginModal.jsx";
 import {Button} from "react-bootstrap";
 
 function LoginButton({className, Style, children, handle}){

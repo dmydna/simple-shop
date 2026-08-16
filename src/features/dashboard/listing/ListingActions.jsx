@@ -4,7 +4,7 @@ import { useValidParams } from "@hooks/useValidParams";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import ButtonLink from "../common/ButtonLink";
+import ButtonLink from "@dashboard/common/ButtonLink";
 import { useUrlParams } from "@/hooks/useUrlParams";
 import { ConfirmMessage } from "@/components/common/ConfirmMessage";
 import ModalConfirm from "@/components/common/ModalConfirm";

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import ProductCard from './ProductCard.jsx';
-import {useListing} from "../../listing/hooks/useListing.js";
+import ProductCard from '@f/product/components/ProductCard.jsx';
+import {useListing} from "@f/listing/hooks/useListing.js";
 
 function ProductSection({children, maxElems=1 ,filter, maxCols, className, borders}){
 

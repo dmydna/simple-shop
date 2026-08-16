@@ -1,6 +1,6 @@
 // src/features/filters/context/FilterContext.jsx
 import {createContext, useContext} from "react";
-import {useFilter} from "../hooks/useFilter.jsx";
+import {useFilter} from "@f/filters/hooks/useFilter.jsx";
 
 const FilterContext = createContext();
 

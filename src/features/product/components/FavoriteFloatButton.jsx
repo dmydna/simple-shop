@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { ToggleIcon } from "./FloatButton";
+import { ToggleIcon } from "@f/product/components/FloatButton";
 import { useAsync } from "@/hooks/useAsync";
 import { favoriteService } from "@/features/favorite/services/favoriteService";
 

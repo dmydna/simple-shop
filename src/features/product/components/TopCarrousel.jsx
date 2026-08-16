@@ -1,12 +1,12 @@
+import { statsService } from '@/features/stats/services/statsService.js';
+import { useFetchTrigger } from '@/hooks/useFetchTrigger.js';
+import { useWindowsWidth } from '@contexts/useWindowSize.jsx';
+import ProductCard from '@f/product/components/ProductCard.jsx';
+import PageError from '@features/fallback/PageError.jsx';
+import PageLoading from '@features/fallback/PageLoading.jsx';
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
-import { useWindowsWidth } from '../../../contexts/useWindowSize.jsx';
-import ProductCard from './ProductCard.jsx';
-import PageLoading from '@features/fallback/PageLoading.jsx';
-import PageError from '@features/fallback/PageError.jsx';
-import { useFetchTrigger } from '@/hooks/useFetchTrigger.js';
-import { statsService } from '@/features/stats/services/statsService.js';
 
 
 

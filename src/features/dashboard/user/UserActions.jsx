@@ -1,21 +1,19 @@
-import FetchStateToast from "@/components/common/FetchStateToast";
+import ButtonLink from "@/components/common/ButtonLink";
 import { useUserCrud } from "@/features/user/hooks/useUserCrud";
-import { useValidParams } from "@hooks/useValidParams";
-import { useEffect, useMemo } from "react";
-import { Button } from "react-bootstrap";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import ButtonLink from "@dashboard/common/ButtonLink";
-import { useUrlState } from "@/hooks/useUrlState";
 import { useUrlParams } from "@/hooks/useUrlParams";
+import { useUrlState } from "@/hooks/useUrlState";
+import { URL_USER_CRUD } from "@/utils/links";
+import { CrudActions } from "@f/crud/components/CrudActions";
+import { useEffect, useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 
 
+export default function UserActions({ close, className }) {
 
-export default function UserActions({ close }) {
-
-    const { setId, currentItem, setCurrentItem, handleStatus, loading, error, setError,
-     setSuccess, success, refreshElem } = useUserCrud()
+    const crudHook = useUserCrud()
+    const { setId, currentItem, setCurrentItem, success, refreshElem } = crudHook
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -23,10 +21,10 @@ export default function UserActions({ close }) {
     const {setSearchParams} = useUrlState();
 
     //Params
-    const {modeParam, idParam, tableParam} = useUrlParams()
+    const { modeParam, idParam } = useUrlParams()
 
     //URLs
-    const FORM_URL = "/dashboard/user-form";
+    const FORM_URL = URL_USER_CRUD;
     const CURRENT_URL = location.pathname;
 
     useEffect(() => {
@@ -41,135 +39,99 @@ export default function UserActions({ close }) {
 
 
    // Handles
-   const isStatusBanned = useMemo(()=>{
-       return currentItem?.meta?.status == "BANNED";
-   },[currentItem])
 
-   const isDistincActive = useMemo(()=>{
-       return currentItem?.meta?.status != "ACTIVE";
-   },[currentItem])
+   const status = useMemo(()=> ({
+        banned:   currentItem?.meta?.status == "BANNED",
+        active:   currentItem?.meta?.status == "ACTIVE",
+        inactive: currentItem?.meta?.status == "INACTIVE"
+   }),[currentItem])
 
-   const isStatusActive = useMemo(()=>{
-       return currentItem?.meta?.status === "ACTIVE"
-   },[currentItem])
+   const handle = useMemo(()=> ({
+        ban:     () => navigate(`${CURRENT_URL}?id=${currentItem?.id}&dialog=ban.create`),
+        unban:   () => navigate(`${CURRENT_URL}?id=${currentItem?.id}&dialog=ban.update`),
+        clone:   () => navigate(`${FORM_URL}?mode=create&id=${currentItem.id}`),
+        edit:    () => navigate(`${FORM_URL}?mode=edit&id=${currentItem.id}`),
+        summary: () => navigate(`${FORM_URL}?mode=view&id=${currentItem.id}`),
+        delete:  () => {},
+   }),[currentItem])
 
 
-
-  // TODO: manejar rutas muertas de UserList/UserForm.
-  useValidParams({
-    id: (val) => val != null, // Solo números
-    mode: (val) => ['view', 'edit'].includes(val), // Solo valores permitidos
-    status: (val) => ['ACTIVE','INACTIVE','BANNED', 'DELETED'].includes(val), 
-  }, {redirect: "/dashboard/user-list"});
 
     return (
-        <div className="p-3 island rounded">
+        <div className={className}>
 
-           <FetchStateToast 
-                hook={{ loading, error, setError, success, setSuccess }}
-                fluid 
-            >
-                <>
-                    <div className="d-flex justify-content-between mb-4">
-                        <p style={{ lineHeight: '1.25rem' }} className="fs-6 mb-0 fw-medium p-1">
-                            {idParam ? "User Config" : "List Config"}
-                        </p>
-                        {close && (
-                            <Button style={{ lineHeight: '1.25rem' }}  onClick={close} variant="light" className="p-1">
-                                <i className="bi-x-lg "></i>
-                            </Button>
-                        )}
-
-                    </div>
-
-                    <ButtonLink
-                        disabled={ true }
-                        visible={ !idParam }
-                        icon="bi-plus-lg"
-                        handle={() => navigate(`${FORM_URL}?mode=create`)}
-                    >
-                        Create Post
-                    </ButtonLink>
-
+            <CrudActions  close={close} {...crudHook} >
                 
 
                     {/** Item Config **/}
 
                     <ButtonLink
-                        handle={() => navigate(`${CURRENT_URL}?id=${currentItem?.id}&dialog=ban.create`)}
-                        icon="bi-eye-slash"
-                        visible={ isStatusActive }
+                        disabled={true}
+                        icon="bi-image"
+                        visible={true}
                     >
-                        Temporary ban
+                        Change user pic
                     </ButtonLink>
 
                     <ButtonLink
-                        handle={() => navigate(`${CURRENT_URL}?id=${currentItem?.id}&dialog=ban.update`)}
+                        disabled={true}
+                        icon="bi-key"
+                        visible={true}
+                    >
+                        Asignate Role
+                    </ButtonLink>
+
+ 
+                    <hr className="my-1"/> 
+
+                   <ButtonLink
+                        handle={ handle.ban }
+                        icon="bi-person-slash"
+                        visible={ status.active && modeParam  !== 'create'}
+                    >
+                        Ban user
+                    </ButtonLink>
+
+                    <ButtonLink
+                        handle={ handle.unban }
                         icon="bi-eye"
-                        visible={ isStatusBanned }
+                        visible={ status.banned }
                     >
                         Remove ban
                     </ButtonLink>
 
-                    <ButtonLink
-                        handle={() => navigate(`${CURRENT_URL}?id=${currentItem?.id}&dialog=ban.create`)}
-                        icon="bi-exclamation-triangle"
-                        visible={ isStatusActive }
-                    >
-                        Permanent ban
-                    </ButtonLink>
-
 
                     <ButtonLink
-                        visible={ isDistincActive }
-                        handle={() => handleDelete(currentItem?.id)}
+                        disabled={true}
+                        visible={ modeParam  !== 'create' }
+                        handle={ handle.delete }
                         icon="bi-trash3"
                     >
-                        Delete User
+                        Delete
                     </ButtonLink>
 
+                    <hr className="my-1"/> 
+
                     <ButtonLink
-                        visible={ idParam }
-                        handle={() => navigate(`${FORM_URL}?mode=edit&id=${currentItem?.id}`)}
+                        disabled={true}
+                        visible={ idParam && modeParam  !== 'create' }
+                        handle={ handle.edit }
                         icon="bi-pencil"
                     >
                         Edit User
                     </ButtonLink>
 
                     <ButtonLink
-                        visible={ idParam }
-                        handle={() => navigate(`${FORM_URL}?mode=view&id=${currentItem?.id}`)}
+                        visible={ idParam && modeParam  !== 'create' }
+                        handle={ handle.summary }
                         icon="bi-three-dots-vertical"
                     >
-                        User summary
+                        Summary
                     </ButtonLink>
 
 
-                    {/** List Actions **/}
-
-                    <ButtonLink
-                        disabled={true}
-                        visible={ !idParam }
-                        icon="bi-upload"
-                        handle={() => navigate('/faqs')}
-                    >
-                        Import File
-                    </ButtonLink>
-
-
-                    <ButtonLink
-                        disabled={true}
-                        visible={ !idParam }
-                        icon="bi bi-download"
-                        handle={() => navigate('/faqs')}
-                    >
-                        Export File
-                    </ButtonLink>
-                </>
-
-            </FetchStateToast>
-
-        </div>
+            </CrudActions>
+        </div>    
     )
 }
 

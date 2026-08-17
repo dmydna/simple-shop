@@ -20,12 +20,22 @@ export const statsService = {
 
     // GET: Obtener top de **type** especifico  
     getTop: async ({type, limit=0}) => {
-    	// type :  visits || ranked || sales || categories || tags
+    	// type :  visits || ranked || sales || on-sales
         const params = new URLSearchParams();
         params.append("limit", limit)
         const finalEndpoint = `${BASE_ENDPOINT}/top/${type}`
         const response = await api.get(finalEndpoint, params);
         return response;
-    }
+    },
     
+    getStatsByField: async ({entity, field, limit=1}) => {
+        // field :  status || tags || category
+        // entity : products || listings || users
+        const params = new URLSearchParams();
+        params.append("limit", limit)
+        const finalEndpoint = `${BASE_ENDPOINT}/${entity}/${field}/`
+        const response = await api.get(finalEndpoint, params);
+        return response; // [{name, count}, ...]
+    }
+
 }

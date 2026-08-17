@@ -8,7 +8,7 @@ export const ListingPlaceholder = () => (
             <span className="placeholder col-1 bg-white"></span>
         </h5>
         <Row>
-            {[...Array(6)].map((_, i) => <CardListingPlaceholder key={i} />)}
+            {[...Array(4)].map((_, i) => <CardListingPlaceholder key={i} />)}
         </Row>
     </Container>
 )

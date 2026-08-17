@@ -18,6 +18,7 @@ import { useState } from "react";
 
 export const useListingCrud = () => {
 
+    // General states
     const [showModal, setShowModal] = useState(false)
     const [dataItem, setDataItem] = useState({});
     const [crudMode, setCrudMode] = useState()
@@ -27,7 +28,8 @@ export const useListingCrud = () => {
     const configService = {service: listingService}
     const configElem = {fetchMethod: listingService.getByHash}
 
-    const { id, setId, loading, error: errorItem, currentItem,  setCurrentItem, refreshElem } = useFetchElem({...configElem})
+    const { id, setId, loading, error: errorItem, currentItem,  setCurrentItem, refreshElem }
+     = useFetchElem({...configElem})
 
     const { ... formCrud } = useCrudForm(currentItem, scheme, "create" ,{});
     const { ...servicesMethods} = useService({ ...configService});

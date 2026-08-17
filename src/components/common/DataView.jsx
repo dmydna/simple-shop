@@ -10,11 +10,14 @@ export default function DataView({
     onRetry,
     loading, 
     emptyIcon,
-    emptyMessage 
+    emptyVariant,
+    emptyMessage, 
+    emptyConfig,
 }) {
 
     const isEmpty = data?.length === 0 ;
     const navigate = useNavigate();
+ 
 
     if(loading) return <PageLoading />
     if (error?.code === 'TOKEN_EXPIRED') {
@@ -22,7 +25,7 @@ export default function DataView({
       return  <>{children}</>
     }
     if(error)   return <PageError error={error}  handle={() => onRetry()} />
-    if(isEmpty) return <PageEmpty ico={emptyIcon} message={emptyMessage}/>
+    if(isEmpty) return <PageEmpty variant={emptyVariant} ico={emptyIcon} message={emptyMessage}/>
 
     return <>  {children} </>;
 }

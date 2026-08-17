@@ -1,25 +1,35 @@
+import{ IconNotify,  TintContainer } from "@/components/common/IconTintyColor";
+import CenterLayout from "@/components/layout/CenterLayout";
 import { FeedbackMessage } from "@common/FeedbackMessage.jsx";
-import CartIcon from "@features/cart/components/CartIcon.jsx";
+import {CartIcon, CartIconTint } from "@features/cart/components/CartIcon.jsx";
+import { useEffect, useRef } from "react";
+import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+
 
 
 function CartEmpty(){
 
+    const cartEmpty = useRef(null)
     const navigate = useNavigate();
     const goToHome = () => {
         navigate("/products")
     }
-    const msg = 'Agregá productos para comenzar tu compra.';
-    return (
+    const msg = 'Add products to start your purchase.';
+
+
+  return ( 
+    <CenterLayout>    
         <FeedbackMessage
-            title="Tu carrito está vacío"
+            title="Your cart is empty."
             message={msg}
             icon="bi-cart-x icn-xl"
             actionLabel="agregar al cart"
             onAction={goToHome}
-        > {{ "icon" : <CartIcon scale=".7" opacity=".3" />  }}
+        >  {{ "icon" : <CartIconTint />}}
        </FeedbackMessage>
-    )
+    </CenterLayout> 
+  )
 }
 
 export default CartEmpty;

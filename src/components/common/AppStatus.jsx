@@ -10,6 +10,7 @@ import PageNotContent from "@features/fallback/PageNotContent";
 import PageServerDown from "@features/fallback/PageServerDown";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import CenterLayout from "../layout/CenterLayout";
 
 
 /**
@@ -44,32 +45,6 @@ export const AppStatus = (
     },[])
 
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(()=>{
-
-      // Agrega estilos al main de la App para centrar los Fallbacks
-      if(!serverStatus.data == 'servidor_caido' || isEmpty || error){
-        if(document.querySelector('main')){ 
-          document.querySelector('main')
-            .classList.add('d-flex', 'justify-content-center', 'align-items-center') 
-        }
-      }else{
-        if(document.querySelector('main')){ 
-          document.querySelector('main')
-            .classList.remove('d-flex', 'justify-content-center', 'align-items-center') 
-        }
-      }
-      if(loading) {
-        if(document.querySelector('main')){ 
-          document.querySelector('main')
-            .classList.remove('d-flex', 'justify-content-center', 'align-items-center') 
-        }
-      };
-    },[serverStatus, error, isEmpty, loading])
-
-
-    
-
     // 1. -- Cargando contenido.
     if (loading) return (
       <div className="rounded mt-2 mb-5 pb-5 w-100">
@@ -79,8 +54,12 @@ export const AppStatus = (
     // if (!isOnline) 
     //   return <PageIsOffline />
     // 3. Servidor caido
-    if (serverStatus === 'servidor_caido') 
-      return (<PageServerDown />)
+    if (serverStatus == 'servidor_caido') 
+      return (
+        <CenterLayout>
+          <PageServerDown />
+        </CenterLayout>
+      )
     // 2. -- Error de carga de contenido
     if (error?.code === 'TOKEN_EXPIRED') {
       navigate('/home?dialog=expiredsession')
@@ -88,14 +67,28 @@ export const AppStatus = (
     }
 
     if (error) 
-      return <PageError error={error} handle={onRetry} />
+      return (
+      <CenterLayout>
+        <PageError error={error} handle={onRetry} />
+      </CenterLayout>
+     ) 
 
     if(notSearchResults)
-      return <NotSearchResults />
+      return (
+      <CenterLayout>
+        <NotSearchResults />
+      </CenterLayout>
+      )
+       
 
     // 3. No hay contenido
     if (isEmpty) 
-      return <PageNotContent /> 
+      return (
+      <CenterLayout>
+        <PageNotContent />
+       </CenterLayout>
 
+      )
+      
     return <>{children}</>
 };

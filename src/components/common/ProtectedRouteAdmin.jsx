@@ -19,6 +19,12 @@ export default function ProtectedRouteAdmin({ children }) {
         renewSession();
     }
 
+
+
+    window.scrollTo({ top: 0, behavior: 'instant'});
+
+
+
     return isAuth && isAdmin ? 
     <RouteLayout>
         {children}

@@ -1,8 +1,8 @@
+import "@/styles/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import "@/styles/index.css";
 
 import ProtectedRoute from "@common/ProtectedRoute";
 import ProtectedRouteAdmin from "@common/ProtectedRouteAdmin.jsx";
@@ -27,6 +27,7 @@ import Register from "@pages/Register.jsx";
 import Page404NotFound from "@features/fallback/Page404NotFound.jsx";
 import PageNotReady from "@features/fallback/PageNotReady";
 
+import ProfileLayout from "@/features/profile/components/ProfileLayout";
 import MyAccount from "@features/profile/components/MyAccount";
 import MyActivity from "@features/profile/components/MyActivity";
 import MyDashboard from "@features/profile/components/MyDashboard";
@@ -34,7 +35,6 @@ import MyFavorites from "@features/profile/components/MyFavorites";
 import MyPhotoProfile from "@features/profile/components/MyPhotoProfile";
 import MyProfile from "@features/profile/components/MyProfile";
 import MyPurchases from "@features/profile/components/MyPurchases";
-import UserLayout from "@features/profile/components/UserLayout";
 import WelcomePerfil from "@features/profile/components/WelcomeProfile";
 
 import { ListingCrudProvider } from "@features/listing/contexts/ListingCrudContext";
@@ -50,34 +50,17 @@ import ListingList from "@features/dashboard/listing/ListingList";
 import PaymentForm from "@features/payment/components/PaymentForm.jsx";
 
 import CatalogeLayout from "@components/layout/CatalogeLayout";
-import OrderDetails from "@pages/OrderDetails";
 import ChangeMail from "@pages/ChangeMail";
+import OrderDetails from "@pages/OrderDetails";
 
 // DONE: update listing
 
 function App() {
 
-
   const navItems = ["Home", "Products", "Contact"];
   const [seccion, setSeccion] = useState("Home");
 
-  const navFix = 'pt-5';
-
-  const location = useLocation()
-
-  const bgPage = ['/login', '/contact', '/auth', '/register', 
-  '/complete-register', '/change-password', '/change-email']
-
-  useEffect(() => {
-    if ( bgPage.includes(location.pathname) ) {
-      document.querySelector('body')
-         ?.classList.add('bg-full-heaven')
-    } else {
-      document.querySelector('body')
-        ?.classList.remove('bg-full-heaven')
-    }
-  }, [location])
-
+  const navFix = 'pt-4';
 
   return (
 
@@ -104,7 +87,7 @@ function App() {
             </ProtectedRoute>  
             } />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/complete-register" element={
+            <Route path="/complete-registration" element={
               <ProfileProvider>
                 <CompleteRegister />
               </ProfileProvider>
@@ -126,7 +109,7 @@ function App() {
               <ProtectedRoute>
                 <UserProvider>
                   <ProfileProvider>
-                    <UserLayout />
+                    <ProfileLayout />
                   </ProfileProvider>
                 </UserProvider>
               </ProtectedRoute>
@@ -141,9 +124,16 @@ function App() {
               <Route path="dashboard" element={<MyDashboard />} />
 
             </Route>
-            <Route path="/dashboard">
+            <Route path="/admin">
                 
               <Route index element={
+                <DashboardLayout>
+                  <WelcomeDashboard />
+                </DashboardLayout>
+              } />
+
+
+              <Route path="dashboard" element={
                 <DashboardLayout>
                   <WelcomeDashboard />
                 </DashboardLayout>

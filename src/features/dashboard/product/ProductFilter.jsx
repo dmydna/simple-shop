@@ -4,11 +4,11 @@ import SelectParams from "@features/filters/components/SelectParams"
 
 
 // TODO: implementar logica real de filtro
-function ProductFilter({close}){
+function ProductFilter({close, className}){
 
 	const {content} = useProduct()
 	return(
-		<FilterParams close={close} badgeParams={true}>
+		<FilterParams className={className}  close={close} badgeParams={true}>
 			<SelectParams.Tags  content={content}/>
 			<SelectParams.Category />			
 			<SelectParams.ProductStatus />

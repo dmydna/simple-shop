@@ -6,6 +6,10 @@ import NavItems from "@common/NavItems.jsx";
 import MobileMenu from "@layout/MobileMenu.jsx";
 import { NavbarProvider } from "@/contexts/NavbarContext.jsx";
 import { useState } from "react";
+import { IconTint } from "@common/IconTintyColor";
+import SidebarButton from "@layout/SidebarButton";
+//import { IconTint } from "@common/FloatButtonCollection";
+
 
 
 
@@ -26,9 +30,10 @@ function Navbar({ onSeleccion, items }) {
         bg="light" 
         expand="md"       
         className={`Navbar fixed-top transition bg-body-tertiary p-0
-      ${ isScrollY ? 'py-0 shadow-sm' : 'py-3'}`} 
+      ${ isScrollY ? 'py-1 shadow-sm' : 'py-3'}`} 
       >
         <Container fluid="xl" className="small align-items-center"> 
+          <SidebarButton className={"position-absolute"} id={"dashbar-button"}/>
           <MobileMenu>
             <NavItems  
               items={items} 

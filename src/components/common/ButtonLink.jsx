@@ -1,4 +1,3 @@
-import { Tintify } from "@/features/product/components/FloatButton";
 
 function ButtonLink({ handle, icon,children, className, visible=true, role, disabled=false, arrow=false }) {
 

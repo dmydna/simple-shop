@@ -1,11 +1,11 @@
+import { HoverIcon } from "@/components/common/FloatButtonCollection"
 import { useNavigate } from "react-router-dom"
-import { HoverIcon } from "@f/product/components/FloatButton"
 
 export default function EditFloatButton({item}){
 	
 	const navigate = useNavigate()
     const handleEdit = () => {
-        navigate(`/dashboard/listing-form?mode=edit${item.meta.status == 'DRAFT' ? '.draft' : ''}&hash=${item.id}`)
+        navigate(`/dashboard/listing-form?mode=edit${item.meta.status == 'DRAFT' ? '.draft' : ''}&id=${item.id}`)
     }
 
 

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { ListingTable } from "@dashboard/listing/ListingTable";
+import { URL_LISTING_CRUD, URL_LISTING_LIST } from "@/utils/links";
 
 
 
@@ -13,59 +14,47 @@ import { ListingTable } from "@dashboard/listing/ListingTable";
 const ListingList = () => {
 
     const navigate = useNavigate();
-    const baseHook = useListing({autofetch: true});
-    const {listings, setFilters} = baseHook;
+    const baseHook = useListing({ autofetch: true });
+    const { listings, setFilters } = baseHook;
     const [search, setSearch] = useState();
 
     // URLs
-    const FORM_URL = "/dashboard/listing-form";
-    const CURRENT_URL = "/dashboard/listing-list";
+    const FORM_URL = URL_LISTING_CRUD;
+    const CURRENT_URL = URL_LISTING_LIST;
 
     useEffect(() => {
         if (search) setFilters({ page: 0, title: search })
     }, [search])
 
 
+
+
+
     return (
         <>
-        <style>{`
-        /** empty table height-fix **/
-            .vh-50 {height: 50vh }
-        `}</style>
-        <div className="mb-3 mx-0 mx-md-2">
-
-            <div className="mx-auto p-4 rounded island border">
-                <div>
-                    <div>
-                        <p className="h5 mb-3">
-                            Publicaciones
-                        </p>
-                    </div>
-                    <div className="d-flex justify-content-between my-4 flex-wrap" >
-                        <Button
-                            variant="light"
-                            onClick={() => navigate(`${FORM_URL}?mode=create`)}
-                            className="my-2 flex-fill flex-md-grow-0">
-                            <i className="bi bi-plus-lg"></i>
-                            <span className="fw-medium ms-2">Create new</span>
-                        </Button>
-                        <SearchLive
-                            className='flex-fill flex-md-grow-0'
-                            items={listings}
-                            handleSearch={setSearch}
-                            handleFilter={() => navigate(`${CURRENT_URL}?dialog=filter`)}
-                        />
-                    </div>
-                </div>
-
-                <ListingTable baseHook={baseHook} />
-
+            <div>
+                <p className="h5 mb-3">
+                    Post List
+                </p>
             </div>
-        </div>
-
+            <div className="d-flex justify-content-between my-4 flex-wrap" >
+                <Button
+                    variant="light"
+                    onClick={() => navigate(`${FORM_URL}?mode=create`)}
+                    className="my-2 flex-fill flex-md-grow-0">
+                    <i className="bi bi-plus-lg"></i>
+                    <span className="fw-medium ms-2">Create new</span>
+                </Button>
+                <SearchLive
+                    className='flex-fill flex-md-grow-0'
+                    items={listings}
+                    handleSearch={setSearch}
+                    handleFilter={() => navigate(`${CURRENT_URL}?dialog=filter`)}
+                />
+            </div>
+            <ListingTable baseHook={baseHook} />
         </>
-
-        );
+    );
 }
 
 export default ListingList;

@@ -49,19 +49,22 @@ const SelectByEnum = ({content, label, cols, textStyle, multiseleccion}) => {
 
 
 
-const SelectByStats = ({type, label, cols, textStyle, multiseleccion, className}) => {
+const SelectByStats = ( domian ,{statsOf, label, cols, textStyle, multiseleccion, className}) => {
 
 	const {data, loading, error} = useFetchTrigger({ 
-        fetchMethod: statsService.getTop, 
-        initialTriggers: {limit:15, type: type} 
+        fetchMethod: statsService.getStatsByField, 
+        initialTriggers: {limit:15, entity: domian , field: statsOf} 
   })
 
   // Extraer etiquetas únicas de los listings
   const Tags = useMemo(() => {
     const res = new Set();
-    data?.forEach( ({name, count}) => {
-        res.add(`${name || 'sin categoria'}(${count})`);
-    });
+    if(Array.isArray(data)){
+    	data.forEach( ({name, count}) => {
+        	res.add(`${name || 'sin categoria'}(${count})`);
+    	});
+    }
+
     return Array.from(res).sort(); // Ordenar alfabéticamente para mejor UX
   }, [data]);
 
@@ -71,7 +74,7 @@ const SelectByStats = ({type, label, cols, textStyle, multiseleccion, className}
 			className={"mb-2"}
 			cols={multiseleccion  ? cols : 1}
 			textStyle={multiseleccion  ? textStyle : 'uppercase'}
-			name={label || type} 
+			name={label || statsOf} 
 			array={Tags}
 		/>
 	)	
@@ -139,43 +142,39 @@ const RangePrice = () => {
 
 export default {
   AvalabilityStock, 
-	Tags : ()=>SelectByStats({
+	Tags : ()=>SelectByStats("listings" ,{
 	  cols: 2, 
-	  type:"tags", 
+	  statsOf: "tags",
 	  multiseleccion: true
 	}),
-	Category : ()=>SelectByStats({ 
+	Category : ()=>SelectByStats("listings",{ 
 	  cols: 1, 
-	  type:"categories", 
-	  label: "category",
+	  statsOf: "category",
 	  textStyle: "uppercase",
 	}),
 
-	ProductStatus: ()=>SelectByStats({ 
+	ProductStatus: ()=>SelectByStats("products",{ 
 	  cols: 1, 
-	  type:"product-status", 
-	  label: "status",
+	  statsOf: "status",
 	  textStyle: "uppercase",
 	}),
 
-	AvailabilityStatus: ()=>SelectByStats({ 
+	AvailabilityStatus: ()=>SelectByStats("listings",{ 
 	  cols: 1, 
-	  type:"availability-status", 
+	  statsOf:"availabilityStatus", 
 	  label: "availability",
 	  textStyle: "uppercase",
 	}),
 
-	UserStatus: ()=>SelectByStats({ 
-	  cols: 1, 
-	  type:"user-status", 
-	  label: "status",
+	UserStatus: ()=>SelectByStats("users",{ 
+	  cols: 1,
+	  statsOf:"status", 
 	  textStyle: "uppercase",
 	}),
 
-	ListingStatus: ()=>SelectByStats({ 
+	ListingStatus: ()=>SelectByStats("listings",{ 
 	  cols: 1, 
-	  type:"listing-status", 
-	  label: "status",
+	  statsOf: "status",
 	  textStyle: "uppercase",
 	}),
 

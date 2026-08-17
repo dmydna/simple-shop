@@ -5,7 +5,7 @@ import { useService } from "@hooks/useService";
 // para verificaciones, alerts, etc.
 // Pero no es posible, sin saber que service esta siendo invocado.
 
-
+// @DEPRECATED
 export const useCrudActions = ({ service, onRefresh }) => {
     
     const { create, update, Delete, updateStatus, 

@@ -14,6 +14,7 @@ function FormSku({children, className, baseHook}){
             name={"sku"}
             label={"Sku"}
             {...baseHook}
+            showEditButton={false}
           />
 
           <InputCrudFloating

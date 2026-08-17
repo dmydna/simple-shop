@@ -87,7 +87,7 @@ function ProductListing() {
               </> : ''
             }
             <Row>
-              {listings.map((p) => (
+              {listings?.map((p) => (
                 <ProductCard className={'border m-2 p-2 island'}
                   {...p}
                   key={p.id}

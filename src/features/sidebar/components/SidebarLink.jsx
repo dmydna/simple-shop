@@ -1,5 +1,5 @@
+import { Tintify } from "@/components/common/FloatButtonCollection";
 import { Link } from "react-router-dom";
-import { Tintify } from "@features/product/components/FloatButton"
 
 
 const variantClasses = {

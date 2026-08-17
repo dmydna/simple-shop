@@ -4,14 +4,15 @@ import { authService } from "@f/auth/services/authService.js";
 import { userService } from "@/features/user/service/userService.js";
 import { useNavigate } from "react-router-dom";
 import { useUrlState } from "@/hooks/useUrlState.js";
+import { useFetch } from "@/hooks/useFetch";
 
 
 export function useAuth() {
 
   const navigate = useNavigate()
   
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
+  const {loading, setLoading, error, setError, success, setSuccess} =  useFetch()
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
   const [reset, setReset] = useState(false);
@@ -45,6 +46,7 @@ export function useAuth() {
       setError(null)
       setReset(false)
       setLoading(false)
+      setSuccess(null)
     }
   }, [reset])
 
@@ -74,12 +76,14 @@ export function useAuth() {
   const changePassword = async (passwData) => {
     nprogress.start();
     setLoading(true)
+    setSuccess(false)
     setError(null)
     try {
       await authService.changePassword(passwData);
+      setSuccess(true)
     } catch (err) {
       console.error("Error de carga de API", err);
-      setError("Error. Revisa los campos solicitados.", err)
+      setError(err)
       throw err;
     } finally {
       setLoading(false)
@@ -89,13 +93,15 @@ export function useAuth() {
 
   const changeEmail = async (data) => {
     nprogress.start();
+    setSuccess(false)
     setLoading(true)
     setError(null)
     try {
       await authService.changeEmail(data);
+      setSuccess(true)
     } catch (err) {
       console.error("Error de carga de API", err);
-      setError("Error. Revisa los campos solicitados.", err)
+      setError(err)
       throw err;
     } finally {
       setLoading(false)
@@ -106,20 +112,20 @@ export function useAuth() {
 
   const login = async (userData) => {
     nprogress.start();
+    setSuccess(false)
     setLoading(true);
     setError(null)
     setLogged(false)
     try {
+      // login API
       await authService.login(userData);
-      const data = await authService.getMe();
-      setToken(data?.accessToken || null)
-      setUser(data || null)
-      setLogged(true);
-      setLocalStorage({...data})
-      //// console.log(data)
+      // login Frontend
+      await authentication()
+      setSuccess(true)
+      setLogged(true)
     } catch (err) {
       console.error("Error de carga de API", err);
-      setError("No se inicio session. Revisa tus credenciales.")
+      setError(err)
       throw err;
     } finally {
       setLoading(false);
@@ -148,15 +154,27 @@ export function useAuth() {
   }
 
 
+  const authentication = async () => {
+    const data = await authService.getMe();
+    setToken(data?.accessToken || null)
+    setUser(data || null)
+    setLogged(true);
+    setLocalStorage({...data})
+    return data;
+  }
+
   const register = async (userData) => {
     nprogress.start();
     setLoading(true)
     setError(null)
     try {
+      // registrar API (logea si es correcto)
       await authService.register(userData);
+      // login Frontend
+      await authentication()
     } catch (err) {
       console.error("Error de carga de API", err);
-      setError("Error. Revisa los campos solicitados.")
+      setError(err)
       throw err;
     } finally {
       setLoading(false)
@@ -199,7 +217,11 @@ export function useAuth() {
     logged,
     setLogged,
     changePassword,
-    changeEmail
+    changeEmail,
+    setError,
+    success,
+    setSuccess,
+    fetchStatus: {loading, setLoading, error, setError, success, setSuccess}
   });
 }
 

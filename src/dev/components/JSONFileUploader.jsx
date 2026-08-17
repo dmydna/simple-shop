@@ -1,3 +1,4 @@
+import CenterLayout from '@/components/layout/CenterLayout';
 import { useRef, useState } from 'react';
 
 export default function JSONFileUploader({ children, file, setFile}) {
@@ -77,7 +78,8 @@ export default function JSONFileUploader({ children, file, setFile}) {
   };
 
   return (
-    <div className="upload-container my-4">
+
+      <div className="upload-container my-5">
       
   
       <div className={`${!file ? 'd-block': 'd-none'}`}>
@@ -148,7 +150,7 @@ export default function JSONFileUploader({ children, file, setFile}) {
 
 
       {error && <div className="alert alert-danger mt-3 py-2 small">{error}</div>}
-    </div>
+      </div>
   );
 }
 

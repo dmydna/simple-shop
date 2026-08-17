@@ -1,5 +1,6 @@
 import { useAuthContext } from "@/features/auth/contexts/AuthContext";
 import FeedbackError from "@common/FeedbackError"
+import { IconTint, IconTintyColor } from "./IconTintyColor";
 
 
 export const FeedbackMessage = ({
@@ -9,7 +10,8 @@ export const FeedbackMessage = ({
                              actionLabel,
                              onAction,
                              children,
-                             message
+                             message,
+                             variant="secondary",
                          }) => {
 
 
@@ -23,14 +25,19 @@ export const FeedbackMessage = ({
     const hasDetails = isAdmin && detailedMessage !== genericMessage;
 
     return (
-        <div style={{maxWidth: '600px'}} className="d-block mx-3 mx-md-auto my-4">
+        <div style={{maxWidth: '600px'}} className="d-block mx-3 mx-md-auto my-auto h-100">
             <div className="row justify-content-center align-items-center flex-fill h-100">
                 <div className="col-12 text-center">
+                    <div className="mb-4">
                     {/* Icono sutil */}
-                     {children?.icon || 
-                    <div className="mb-3 text-secondary" style={{ opacity: 0.3 }}>
-                       <i className={`bi ${icon}`} style={{ fontSize: "3.5rem" }}></i> 
-                    </div> }
+                     {children?.icon ||
+
+                   // <div className="mb-3 text-secondary" style={{ opacity: 0.3 }}>
+                    //    <i className={`bi ${icon}`} style={{ fontSize: "3.5rem" }}></i> 
+                    // </div> 
+                    
+                     <IconTint variant={variant} icon={icon} size={80} fs={1} />}   
+                    </div>
 
                     {/* Texto refinado */}
                     <h3 className="fs-5 fw-light text-dark mb-2">{title}</h3>

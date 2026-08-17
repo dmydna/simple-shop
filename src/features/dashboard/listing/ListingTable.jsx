@@ -15,7 +15,7 @@ export const ListingTable = ({ baseHook, className, }) => {
 
 
     // eslint-disable-next-line no-unused-vars
-    const { content, loading, totalPages, ...props } = baseHook;
+    const { content, loading, totalPages, error, refreshData, ...props } = baseHook;
 
     const { setSearchParams } = useUrlState()
 
@@ -29,15 +29,16 @@ export const ListingTable = ({ baseHook, className, }) => {
     }
 
     const openDialogActions = (item) => {
-        setSearchParams(prev => ({ ...prev, dialog: 'action', hash: item?.id }))
+        setSearchParams(prev => ({ ...prev, dialog: 'action', id: item?.id }))
     }
-
 
 
     return (
         <DataView
             loading={loading}
+            error={error}
             data={content}
+            onRetry={ refreshData }
             emptyIcon={"bi bi-sticky"}
             emptyMessage={"No hay items"}
         >

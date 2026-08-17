@@ -1,14 +1,16 @@
 import CartButton from "@features/cart/components/CartButton.jsx";
 import SiderbarLink from "@f/sidebar/components/SidebarLink";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 
 // Nota: esta sidebar es la version normal con navegacion global y admite ambos roles
-export default function SidebarAppMobile({ onShow, expandable = true, toggle }) {
+export default function SidebarAppMobile({ onShow, expandable = true }) {
 
     const { isAuth } = useAuthContext()
     const BASE_URL ='/dashboard'
     const {isAdmin} = useAuthContext()
+    const navigate = useNavigate()
 
   
 
@@ -29,7 +31,6 @@ export default function SidebarAppMobile({ onShow, expandable = true, toggle }) 
             />
 
             <SiderbarLink
-                onclick={()=>toggle("/user")}
                 to={`${isAuth ? '/user' : '/login'}`}
                 icon="bi-person"
                 label="account"
@@ -37,15 +38,16 @@ export default function SidebarAppMobile({ onShow, expandable = true, toggle }) 
 
             {isAdmin && (
                 <SiderbarLink
-                    onclick={()=>toggle("/dashboard")}
                     to={`/dashboard`}
                     icon="bi-list-nested"
-                    label="dashboard"
+                    label="panel"
                 />
             )}
 
-            <CartButton/> 
-
+            <div>
+             <CartButton/> 
+              <p style={{fontSize: ".700rem"}} className="m-0 mt-2 text-center">cart</p>
+            </div>
 
 
         </ul>

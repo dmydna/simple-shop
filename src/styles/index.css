@@ -668,11 +668,18 @@ tr:last-child {
 
 /* dashbar */
 
+#content, 
+#navbar, 
+#dashbar,
+#dashbar-button{ transition: margin-left 1s; }
+
+#dashbar {  margin-left: -80px !important ; }
+
+.active-bar #dashbar { margin-left: 0px !important }
+.active-bar #dashbar-button { opacity: 0; }
 
 .active-bar #navbar,
-.active-bar #content {
-    margin-left: 60px;
-}
+.active-bar #content { margin-left: 60px;}
 
 @media (max-width: 767.98px)  { /* sm */
     .active-bar  #navbar,

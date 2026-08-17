@@ -12,7 +12,6 @@ function ProductForm(){
 
     return (
         <FormCrud
-            type="product"
             {...crudHook}
             enableEdit
             enableCreate

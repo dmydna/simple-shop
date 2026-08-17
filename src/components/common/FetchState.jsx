@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom";
  *
  * @returns {React.ReactElement} El componente renderizado.
  */
-function FetchState({ children, hook }) {
+function FetchState({ children, hook, to }) {
     
     const { loading, error, setError, success, setSuccess } = hook;
     const navigate = useNavigate();
@@ -31,7 +31,7 @@ function FetchState({ children, hook }) {
     useEffect(()=>{
         setSuccess(false);
         setError(null);
-    },[setError, setSuccess])
+    },[])
 
 
     if(loading) {return <PageLoading />};
@@ -48,7 +48,11 @@ function FetchState({ children, hook }) {
     }
     if(success) {
         return (
-            <PageSuccess handle={() => setSuccess(null)} />
+            <PageSuccess handle={() =>{
+                if(to){navigate(to)}
+                setSuccess(null)
+              } 
+           } />
         )
 
     }

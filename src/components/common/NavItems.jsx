@@ -2,6 +2,7 @@ import React from "react";
 import { Nav } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useNavbarContext } from "@/contexts/NavbarContext";
+import { URL_CONTACT } from "@/utils/links";
 
 function NavItems({items, onSeleccion, className}){
 
@@ -14,7 +15,7 @@ function NavItems({items, onSeleccion, className}){
     const handleContact = () =>{ 
       !showMenu ? 
       onHideContact(true) : 
-      navigate('/contacto'), 
+      navigate(URL_CONTACT), 
       setShowMenu(false)
     }
     const handleClick = (item) => {  

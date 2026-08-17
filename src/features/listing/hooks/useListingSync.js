@@ -11,13 +11,16 @@ export const useListingSync = ({
     totalElements 
     }) => {
 
-    const {tagsParam, pageParam, searchParam, filterParam, categoryParam, allParams} 
+    const {tagsParam, minPrice, maxPrice ,pageParam, searchParam, filterParam, categoryParam, allParams} 
     = useUrlParams();
 
     useEffect(() => {
 
         if (filterParam){
             if (tagsParam)         { setFilters( prev => ({ ...prev, tags: tagsParam }) ) }            
+            if (minPrice && minPrice){
+                { setFilters( prev => ({ ...prev, minPrice, maxPrice }) ) }
+            }
         }
 
         if (!pageParam)        { setCurrentPage(1) }

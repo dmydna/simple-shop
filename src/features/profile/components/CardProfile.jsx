@@ -5,6 +5,7 @@ import { Card } from "react-bootstrap";
 import userDefaultXL from "/user-default-xl.png"
 import ImgAction from "@/components/common/ImgAction";
 import { useNavigate } from "react-router-dom";
+import OffCanvasButton from "@/components/common/OffCanvasButton";
 
 function CardProfile({ name, image, children, className, imgSize }) {
 
@@ -21,6 +22,9 @@ function CardProfile({ name, image, children, className, imgSize }) {
 
     return (
         <Card  className={`mb-2 island border text-start flex-row`}>
+            
+            <OffCanvasButton className={"d-block d-md-none"} />
+
             <div className="d-block mx-auto position-relative">
                 <ImgAction
                     action={() => navigate('/user/photo')}
@@ -45,7 +49,7 @@ function CardProfile({ name, image, children, className, imgSize }) {
                 <Card.Text className="mb-0">
                 <span style={{whiteSpace: 'nowrap', maxWidth:'100%'}} 
                     className="text-secondary mb-0 small d-inline-block text-truncate">
-                    { profile?.email || '' }
+                    { profile?.email || 'your.email@mail.com' }
                 </span>
                 </Card.Text>
                 <p className="small pill-success d-inline-block mb-0" 

@@ -40,10 +40,12 @@ export const listingService = {
     // POST: crear listing (admite imagenes)
     create: async (data, selectedFile) => {
 
+        // console.log("listingService", data)
+
         const listingData = toCreateListing(data);
         const formData = new FormData();
 
-        formData.append('listing', new Blob([JSON.stringify(listingData)], {
+        formData.append('data', new Blob([JSON.stringify(listingData)], {
             type: 'application/json'
         }));
 

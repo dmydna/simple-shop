@@ -24,7 +24,6 @@ function CategoryCarrousel({className}){
           category={category.BEAUTY}
           description='salud e higiene' 
           link={`/products?category=${category.BEAUTY}`}
-          handleClick={() => handleClick(category.BEAUTY)}
         />
       </Carousel.Item>  
       <Carousel.Item>
@@ -35,8 +34,7 @@ function CategoryCarrousel({className}){
           image={Img2} 
           description='perfumeria' 
           category={category.FRAGRANCE} 
-          link={`/products?category=${category.FRAGRANCE}`}
-          handleClick={() => handleClick(category.FRAGRANCE)}
+          link={`/products?category=${category.FRAGRANCES}`}
         />
       </Carousel.Item>
       <Carousel.Item>
@@ -48,7 +46,6 @@ function CategoryCarrousel({className}){
           category={category.FURNITURE} 
           description='oficina y hogar' 
           link={`/products?category=${category.FURNITURE}`}
-          handleClick={() => handleClick(category.FURNITURE)}
         />
       </Carousel.Item>
       <Carousel.Item>
@@ -60,7 +57,6 @@ function CategoryCarrousel({className}){
           description='comercio y almacen' 
           category={category.GROCERIES} 
           link={`/products?category=${category.GROCERIES}`}
-          handleClick={() => handleClick(category.GROCERIES)}
         />
       </Carousel.Item>
     </Carousel>

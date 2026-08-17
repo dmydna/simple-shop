@@ -86,8 +86,8 @@ function Search({toggle, setToggle}){
             style={{zIndex: 99999 }}
           >
             {/* !! convierte a booleano cualquier expresion */}
-            <Dropdown.Menu className={`w-100 pe-3`}>
-              {listings.map((p) => (
+            <Dropdown.Menu className={`w-100 pe-3 position-absolute`}>
+              {listings?.map((p) => (
                 <Dropdown.Item
                   onClick={() => {
                     setShow(false);

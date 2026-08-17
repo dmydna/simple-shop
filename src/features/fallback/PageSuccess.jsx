@@ -8,7 +8,8 @@ function PageSuccess({handle}){
         <FeedbackMessage
             title="Operacion exitosa"
             message={msg}
-            icon="bi-check-circle"
+            variant="success"
+            icon="bi-check"
             actionLabel={handle ? "aceptar" : null}
             onAction={handle || null}
         />

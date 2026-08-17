@@ -1,9 +1,10 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import ProductCard from '@f/product/components/ProductCard.jsx';
 import PageLoading from '@features/fallback/PageLoading.jsx';
 import { statsService } from '@/features/stats/services/statsService.js';
 import { useFetchTrigger } from '@/hooks/useFetchTrigger.js';
 import PageError from '@/features/fallback/PageError.jsx';
+
 
 
 function TopSection({ children, maxElems = 1, top, maxCols, className }) {
@@ -37,11 +38,12 @@ function TopSection({ children, maxElems = 1, top, maxCols, className }) {
         );
     }
 
+
     return (
         <div className={`${className} rounded h-100 p-4`}>
             <div className='row'>
                 {children}
-                {data?.map((p) => (
+                {Array.isArray(data) && data?.map((p) => (
                     <ProductCard
                         {...p}
                         key={p.id}

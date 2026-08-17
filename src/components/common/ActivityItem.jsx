@@ -1,6 +1,5 @@
-import { Tintify } from "@/features/product/components/FloatButton";
-import { Card, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Tintify } from "@/components/common/FloatButtonCollection";
+import { Col } from "react-bootstrap";
 
 export default function ActivityItem({ count, children, col, bg }) {
 

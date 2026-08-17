@@ -78,10 +78,11 @@ function InputCheckParam({
         <span className="small text-muted fw-semibold mx-3">
           {selectedTags.length !== 0 ? (
             <span className="">
-              {selectedTags[selectedTags.length-1]} ({selectedTags.length})
+              { multiselection  && `seleccionados (${selectedTags.length})`}
+              { !multiselection && array.find( t =>  formatCase(t) == selectedTags[selectedTags.length-1]) }
             </span>
           ) : (
-            'Seleccionar'
+            'seleccionar'
           )}
         </span>
       </Dropdown.Toggle>

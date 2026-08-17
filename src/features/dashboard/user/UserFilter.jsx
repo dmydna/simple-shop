@@ -3,11 +3,9 @@ import FilterParams from '@features/filters/components/FilterParams'
 import SelectParams from "@features/filters/components/SelectParams"
 
 // TODO: implementar logica real de filtro
-function UserFilter({close}){
+function UserFilter({close, className}){
 	return(
-		<FilterParams close={close} badgeParams={true}>
-{/*			<SelectParams.SelectByEnum 
-				label="status" content={userStatus} />*/}
+		<FilterParams className={className} close={close} badgeParams={true}>
 			<SelectParams.SelectByEnum 
 				label="role" content={role} />
 			<SelectParams.UserStatus />

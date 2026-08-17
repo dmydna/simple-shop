@@ -6,6 +6,7 @@ import { ProfileHeader } from "@f/profile/components/ProfileHeader";
 import RemovableListItem from "@/components/common/RemovableListItem";
 import { usePurchases } from "@f/profile/hooks/usePurchases";
 import { useUrlParams } from "@/hooks/useUrlParams";
+import { success } from "zod";
 
 function MyPurchases() {
 
@@ -61,6 +62,7 @@ function MyPurchases() {
             loading={loading}
             emptyMessage={"No tienes compras aún"}
             emptyIcon="bi bi-handbag"
+            emptyVariant={"success"}
             error={error}
             onRetry={refreshData}
         >

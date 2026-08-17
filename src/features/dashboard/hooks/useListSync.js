@@ -17,7 +17,7 @@ export const useListSync = ({ baseHook }) => {
 
     const {availabilityParam, tableVersion, tagsParam, hashParam, pageParam,
        idParam, searchParam, categoryParam, statusParam, roleParam, skuParam, 
-       sortParam } = useUrlParams()
+       sortParam, minPrice, maxPrice } = useUrlParams()
     
 
     useEffect(() => {
@@ -34,10 +34,11 @@ export const useListSync = ({ baseHook }) => {
         if (tableVersion)   { props?.refreshData() }
         if (statusParam)    { setFilters({ status: statusParam }) }
         if (sortParam)      { setFilters({ sort: sortParam }) }
+        if (minPrice && maxPrice) {setFilters({ minPrice, maxPrice })}
 
     }, [tagsParam, pageParam, categoryParam, tableVersion, statusParam,
         searchParam, setFilters, setCurrentPage, totalElements,availabilityParam,setId,
-        sortParam
+        sortParam, minPrice, maxPrice
     ])
 
 

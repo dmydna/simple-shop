@@ -20,7 +20,7 @@ function FormCrud({
 
 }) {
 
-    const { handleUpdate, handleCreate, loading, error, setError, success,
+    const { update, create, loading, error, setError, success,
         setSuccess, refreshElem, handleAction, ...props }  = crudHook
 
     const navigate = useNavigate()
@@ -29,25 +29,34 @@ function FormCrud({
     const { editMode, viewMode, createMode, copyMode, edit_draftMode, draftMode } 
     = useFormSync({...crudHook})
 
+    const [root, dashboard, current] = window.location.pathname.split("/")
+
+    const alias = {
+        'product-form': 'Products',
+        'listing-form': 'Posts',
+        'user-form': 'Users',
+    }
+
+
     const title = useMemo(() => {
         // -- Nota: 
         // 1. El modo draft solo permite editar
         // 2. El modo create incluye crear draft
-        let action = `${type}`
-        if (editMode) action = `Edit ${type}`;
-        if (createMode || copyMode) action = `Add ${type}`;
-        if (viewMode) action = `${type} Summary`;
-        if (edit_draftMode) action = `Edit ${type} draft`
+        let action = `${alias[current]}`
+        if (editMode) action = `Edit ${alias[current]}`;
+        if (createMode || copyMode) action = `Add ${alias[current]}`;
+        if (viewMode) action =  `${alias[current]} Summary `;
+        if (edit_draftMode) action = `Edit ${alias[current]} draft`
         return action;
     }, [editMode, type, createMode, copyMode, viewMode, edit_draftMode])
-
 
     const [showWarn, setShowWarn] = useState(false)
 
 
 
     const handlePublish = async (data, selectedFile = null) => {
-        await handleCreate({ ...data, status: "ACTIVE" }, selectedFile)
+        const response = await create({ ...data, status: "ACTIVE" }, selectedFile)
+        setSearchParams(prev => ({...prev, id: response.id, mode: 'view'}) )
     }
 
 
@@ -58,27 +67,23 @@ function FormCrud({
 
 
     const handleEdit = async (data, selectedFile = null) => {
-        await handleUpdate(data.id, data, selectedFile)
+        await update(data.id, data, selectedFile)
     }
 
     const handleEditDraft = async (data, selectedFile = null) => {
         // console.log("handleEditDraft:",  data);
-        await handleUpdate(data.id, data, selectedFile)
+        await update(data.id, data, selectedFile)
     }
-
 
     const handleCreateDraft = async (data, selectedFile = null) => {
-        await handleCreate({ ...data, status: "DRAFT" }, selectedFile)
+        await create({ ...data, status: "DRAFT" }, selectedFile)
     }
-
 
     useEffect(() => {
         refreshElem()
     }, [success, createMode, refreshElem])
 
     return (
-
-        <div className="border island p-4 mb-3 mx-0 mx-md-2">
 
             <FetchState.Modal 
                 hook={{ loading, error, setError, success, setSuccess }} 
@@ -120,7 +125,7 @@ function FormCrud({
 
                         <ButtonCrud
                             icon="bi-send"
-                            title="Publicar"
+                            title="Send"
                             variant="dark"
                             visible={(createMode || copyMode) && enableCreate}
                             handle={() => handleAction(handlePublish)}
@@ -137,16 +142,13 @@ function FormCrud({
                     </div>
                 </div>
 
-            </FetchState.Modal>
-
             <ModalCrud
                 show={showWarn}
             >
                 <FormWarning close={() => setShowWarn(false)} />
             </ModalCrud>
 
-        </div>
-
+            </FetchState.Modal>
     )
 }
 

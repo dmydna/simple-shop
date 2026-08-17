@@ -1,11 +1,11 @@
+import { Tintify } from "@/components/common/FloatButtonCollection";
 import { useWarning } from "@/hooks/useWarning.js";
-import { Tintify } from "@features/product/components/FloatButton";
+import CartClearModal from "@f/cart/components/CartClearModal.jsx";
+import MyCartTable from "@f/cart/components/MyCartTable.jsx";
+import { useCart } from "@f/cart/contexts/CartContext.jsx";
 import { useState } from "react";
 import { Alert, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "@f/cart/contexts/CartContext.jsx";
-import CartClearModal from "@f/cart/components/CartClearModal.jsx";
-import MyCartTable from "@f/cart/components/MyCartTable.jsx";
 
 
 export const MyCart = ({ children, className }) => {

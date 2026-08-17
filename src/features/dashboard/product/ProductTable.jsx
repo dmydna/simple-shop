@@ -96,7 +96,7 @@ function ProductTable({ children, baseHook, className }) {
                                             src={placeholderURL.product(item?.id)}
                                         /> */}
                                             <div className='my-2'>
-                                                <PlaceholderIcon fontSize='fs-5' variant={'primary flex-glow'} icon={'bi-box-seam'} />
+                                                <PlaceholderIcon fontSize='fs-5' variant={'success flex-glow'} icon={'bi-box-seam'} />
                                                 <span className='flex-grow-1 mx-3 fw-medium'>{item?.name || ''}</span>
                                             </div>
                                     </td>

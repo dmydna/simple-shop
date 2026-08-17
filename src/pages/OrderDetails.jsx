@@ -1,8 +1,8 @@
+import { IconTint } from "@/components/common/FloatButtonCollection";
 import { MyOrderDetail } from "@/features/order/components/MyOrderDetail";
 import { MyOrderList } from "@/features/order/components/MyOrderList";
 import { OrderDetailProvider } from "@/features/order/contexts/OrderDetailContext";
 import { useOrder } from "@/features/order/hooks/useOrder";
-import { IconTint } from "@/features/product/components/FloatButton";
 import FormReview from "@/features/review/components/FormReview";
 import { useUrlParams } from "@/hooks/useUrlParams";
 import { useUrlState } from "@/hooks/useUrlState";

@@ -6,9 +6,7 @@ export default function RouteLayout({children}){
 
 
     return (
-      <AppStatus
-          placeholder={<PageLoading />}
-      >
+      <AppStatus placeholder={<PageLoading />} >
         {children}
       </AppStatus>
     )

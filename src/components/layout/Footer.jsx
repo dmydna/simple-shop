@@ -1,6 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Logo from '@common/Logo.jsx';
+import { URL_CONTACT } from '@/utils/links';
 
 
 function Footer() {
@@ -11,7 +12,7 @@ function Footer() {
         <Row>
          <Col className='order-2 mt-4' xs={12} md={6}>
            <div className='d-flex align-items-end justify-content-center justify-content-md-end h-100'>
-           <Link className='text-decoration-none text-reset' to={'/contacto'} >
+           <Link className='text-decoration-none text-reset' to={URL_CONTACT} >
              <p className='small border rounded-pill mb-0 mx-2 py-1 px-3'  
              style={{cursor:"pointer"}} >Contacto</p>
            </Link>

@@ -16,20 +16,19 @@ function ProductCarousel({ children, filter, maxCols, maxElems, className, imgSi
   const [chunkSize, setChunkSize] = useState(maxCols || 4)
   const width = useWindowsWidth()
 
-  const { listings, setFilters } = useListing({ autofetch: true }) //LOCAL
+  const { listings, setFilters, content } = useListing({ autofetch: true}) //LOCAL
 
 
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
 
-  useEffect(() => {
+  useEffect(()=>{
     setFilters(filter)
-    // console.log(filter)
-  }, [filter])
+    console.log(filter)
+  },[filter])
 
 
-   
   const [visibleProducts, setVisibleProducts] = useState([]);
 
   useEffect(() => {

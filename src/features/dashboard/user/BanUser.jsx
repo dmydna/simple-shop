@@ -11,10 +11,12 @@ import { placeholder } from "@utils/image.js";
 import { arrayToDate } from "@utils/mappers.js";
 import { Button, Form } from "react-bootstrap";
 
+import userDefault from "/user-default-xs.png"
 
 import { useUrlParams } from "@/hooks/useUrlParams";
 import { useUrlState } from "@/hooks/useUrlState";
 import 'react-datepicker/dist/react-datepicker.css';
+import ImageWithFallback from "@/components/common/ImageWithFallback";
 
 
 function BanUser({ close }) {
@@ -97,10 +99,16 @@ function BanUser({ close }) {
                         onSubmit={async () => await handleAction(handleSubmit)}>
                         <Form.Group className="mb-3 w-100">
                             <div className='d-flex gap-3 mb-3  border-0 rounded-3'>
-                                <img
-                                    style={{ height: '55px', width: '55px' }}
-                                    className='border rounded'
-                                    src={currentItem?.image || placeholder({ dimension: "45x45", background: ".menta", fontSize: "20", icon: "bi-person" })} />
+
+                                <ImageWithFallback 
+                                  className="rounded-circle border d-none d-md-block" 
+                                  src={currentItem?.image || '#'}
+                                  fallbackSrc={userDefault}
+                                  width={55} 
+                                  height={55}
+                                />
+
+
                                 <div className="flex-fill my-1">
                                     <p className='small fw-semibold text-uppercase m-0'>{currentItem?.username || 'Username'}</p>
                                     <p className='small text-lowercase'>

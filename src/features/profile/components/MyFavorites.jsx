@@ -26,6 +26,7 @@ function MyFavorites({ children }) {
 
     return (
         <DataView
+            emptyVariant="danger"
             data={content}
             error={error}
             loading={loading}

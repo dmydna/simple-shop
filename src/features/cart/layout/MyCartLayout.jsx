@@ -28,7 +28,7 @@ function MyCartLayout() {
 				{!loading && !error && (
 					<MyCart className="p-4 island">
 						<p className="h5 fw-bold pt-3">
-							Mi cart({cartItems.length})
+							Mi carrito({cartItems.length})
 						</p>
 					</MyCart>
 				)}

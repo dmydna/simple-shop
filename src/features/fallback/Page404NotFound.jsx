@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {FeedbackMessage} from "@common/FeedbackMessage.jsx";
 import React from "react";
+import CenterLayout from "@/components/layout/CenterLayout";
 
 function Page404NotFound(){
 
@@ -10,13 +11,15 @@ function Page404NotFound(){
     }
     const error = 'Parece que no encontramos la pagina';
     return (
-        <FeedbackMessage
-            title="404 page not found"
-            message={error}
-            icon="bi-exclamation-triangle"
-            actionLabel="volver a Incio"
-            onAction={goToHome}
-        />
+        <CenterLayout fix>
+            <FeedbackMessage
+                title="404 page not found"
+                message={error}
+                icon="bi-exclamation-triangle"
+                actionLabel="volver a Incio"
+                onAction={goToHome}
+            />
+        </CenterLayout>
     )
 }
 

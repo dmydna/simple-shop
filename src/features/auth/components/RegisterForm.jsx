@@ -3,36 +3,35 @@ import { Alert, Button, Col, Form } from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "@hooks/useForm.js";
 import { useAuthContext } from "@f/auth/contexts/AuthContext.jsx";
+import PublicRoute from "@/components/common/PublicRoute";
+import { URL_VERIFY_ACCOUNT } from "@/utils/links";
 
 
 function RegisterForm({ children, style, className}){
 
     const navigate = useNavigate();
-    const [ registerSuccess,  setRegisterSuccess ] = useState(false);
+    const [ registerSuccess,  setRegisterSuccess ] = useState(null);
     const { login, loading, error,  register } = useAuthContext();
     const { onChange, formData} = useForm()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await register(formData);
-        //navigate("/user/information");
+        await register(formData)
         setRegisterSuccess(true);
+        navigate(URL_VERIFY_ACCOUNT);
+
     }
 
-    const autoLogin = async () => {
-        const {username, password} = formData;
-        await login({username, password});
-        navigate("/complete-register");
-    }
-    
-    useEffect( () => { 
-       if(registerSuccess){ autoLogin(formData) } 
-    } ,[autoLogin, formData, registerSuccess])
+    useEffect(()=>{
+        if(error){setRegisterSuccess(false)}
+    },[error])
+
 
     return (
+        <PublicRoute>
         <Col className={`${className} mx-auto`} style={ {...style, minHeight: '400px'}}>
-            {!registerSuccess && children}
-            {registerSuccess ? (
+            {!loading && children}
+            {loading ? (
               <div 
                  className="d-flex flex-column align-items-center justify-content-center w-100 h-100 my-2">
                <div 
@@ -98,6 +97,7 @@ function RegisterForm({ children, style, className}){
              )}
             
         </Col>
+    </PublicRoute>
     )
 
 

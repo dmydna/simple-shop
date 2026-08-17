@@ -101,19 +101,22 @@ export function toUpdateProduct(data) {
 }
 
 
-
 export function toCreateListing(data) {
+    const images = data?.images?.length != 0 ? data.images : []
+    // descartar url temporales (preview) antes de enviar.
+    const cleanImages = images.filter(url => !url.startsWith('data:') );
 
     return {
         title: data.title,
         description: data.description,
         price: data.price,
+        stock: data.stock,
         discountPercentage: data.discountPercentage,
         warrantyInformation: data.warrantyInformation,
         shippingInformation: data.shippingInformation,
         returnPolicy: data.returnPolicy,
         minimumOrderQuantity: data.minimumOrderQuantity,
-        images: [],
+        images: cleanImages,
         thumbnail: data.thumbnail,
         sku: data.sku,
         status: data.status

@@ -5,6 +5,8 @@ import { Button, Container, Form } from "react-bootstrap";
 import JSONFileUploader from "@dev/components/JSONFileUploader";
 import JSONFileDetails from "@dev/components/JSONFileDetails";
 import FetchState from "@/components/common/FetchState";
+import ProtectedRouteAdmin from "@/components/common/ProtectedRouteAdmin";
+import CenterLayout from "@/components/layout/CenterLayout";
 
 
 
@@ -48,35 +50,39 @@ function DemoUploader() {
 
 
     return (
-        <Container>
-            <div className="d-block mx-auto rounded island p-4 border mb-3" style={{ maxWidth: '500px' }}>
-                <FetchState
-                    hook={{loading, error, setError, success, setSuccess}}
-                >
-                    <>
-                        <p className="h5">Demo </p>
+        <ProtectedRouteAdmin>
+            <FetchState
+                hook={{ loading, error, setError, success, setSuccess }}
+            >
+                <CenterLayout>
+                <Container className="mt-5">
+                    <div className="d-block mx-auto rounded-4 island p-4 border mb-3" style={{ maxWidth: '500px' }}>
+                        <>
+                            <p className="h5">Demo </p>
 
-                        {!file && (
-                            <small className="mb-4 text-secondary">
-                                Selecciona un archivo <b>.json</b> valido para cargar contenido demo.
-                            </small>
-                        )}
+                            {!file && (
+                                <small className="mb-4 text-secondary">
+                                    Selecciona un archivo <b>.json</b> valido para cargar contenido demo.
+                                </small>
+                            )}
 
-                        <JSONFileUploader file={file} setFile={setFile}>
-                            <JSONFileDetails file={file} content={content} />
-                        </JSONFileUploader>
+                            <JSONFileUploader file={file} setFile={setFile}>
+                                <JSONFileDetails file={file} content={content} />
+                            </JSONFileUploader>
                         
 
-                        {file && (
-                            <Button className="d-block mx-auto rounded-4" onClick={handleSubmit} variant="dark">
-                                Enviar
-                            </Button>
-                        )}
-                    </>
-                </FetchState>
-            </div>
+                            {file && (
+                                <Button className="d-block mx-auto rounded-4" onClick={handleSubmit} variant="dark">
+                                    Enviar
+                                </Button>
+                            )}
+                        </>
+                    </div>
 
-        </Container>
+                </Container>
+            </CenterLayout>
+            </FetchState>
+        </ProtectedRouteAdmin>
 
     )
 }

@@ -1,6 +1,6 @@
 import { Button, Modal } from "react-bootstrap";
 import cartImg from "@assets/shopping-cart.png";
-import CartIcon from "@features/cart/components/CartIcon.jsx"
+import {CartIcon} from "@features/cart/components/CartIcon.jsx"
 
 function CartClearModal({show, onHide, handle}) {
 
@@ -15,8 +15,8 @@ function CartClearModal({show, onHide, handle}) {
 
   <Modal.Body className="text-center">
 
-    <div className='d-flex justify-content-between'>
-     <span className='fs-5 fw-semibold'>
+    <div className='d-flex justify-content-end'>
+     <span className='fs-5 fw-semibold visually-hidden'>
         Vaciar cart
      </span>
       <span onClick={()=>onHide(false)} className='btn btn-light rounded-circle'>

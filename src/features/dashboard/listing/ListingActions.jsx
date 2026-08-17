@@ -1,237 +1,203 @@
-import FetchState from "@/components/common/FetchState";
-import { useListingCrud } from "@/features/listing/hooks/useListingCrud";
-import { useValidParams } from "@hooks/useValidParams";
-import { useEffect, useMemo, useState } from "react";
-import { Button } from "react-bootstrap";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import ButtonLink from "@dashboard/common/ButtonLink";
-import { useUrlParams } from "@/hooks/useUrlParams";
+import ButtonLink from "@/components/common/ButtonLink";
 import { ConfirmMessage } from "@/components/common/ConfirmMessage";
 import ModalConfirm from "@/components/common/ModalConfirm";
-import { MSG_LISTING_DELETE, MSG_LISTING_INACTIVE, MSG_LISTING_ACTIVE } from "@/components/common/MsgConfirm"; 
+import { MSG_LISTING_ACTIVE, MSG_LISTING_DELETE, MSG_LISTING_INACTIVE } from "@/components/common/MsgConfirm";
+import { useListingCrud } from "@/features/listing/hooks/useListingCrud";
+import { useUrlParams } from "@/hooks/useUrlParams";
+import { useUrlState } from "@/hooks/useUrlState";
+import { URL_LISTING_CRUD, URL_LISTING_LIST } from "@/utils/links";
+import { CrudActions } from "@f/crud/components/CrudActions";
+import { useEffect, useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-export default function ListingActions({ close }) {
+export default function ListingActions({ close, className }) {
+
+
+    const crudHook = useListingCrud()
 
     const { setId, currentItem, setCurrentItem, loading, error, setError, 
-    setSuccess, success, refreshElem, updateStatus } = useListingCrud({autofetch: false})
+        setSuccess, success, refreshElem, updateStatus } 
+    = crudHook
 
     // ModalConfirm
     const [showConfirm, setShowConfirm] = useState(false);
     const [dataConfirm, setDataConfirm] = useState([]);
-    const [msgConfirm, setMsgConfirm ] = useState();
+    const [msgConfirm, setMsgConfirm] = useState();
 
     // Navigation
     const navigate = useNavigate();
     const location = useLocation();
 
     //Params
-    const [searchParams, setSearchParams] = useSearchParams();
-    const {modeParam, idParam} = useUrlParams()
-
+    const { searchParams, setSearchParams } = useUrlState();
+    const { modeParam, idParam, hashParam } = useUrlParams()
 
     // URLs
-    const FORM_URL = "/dashboard/listing-form";
+    const FORM_URL = URL_LISTING_CRUD;
+    const LIST_URL = URL_LISTING_LIST;
 
     useEffect(() => {
         if (idParam) { setId(idParam) } else { setCurrentItem(null) }
         if (success) { 
             refreshElem(); // refrescar elemento (local)
-            setSearchParams(prev => { // refrescar lista (global)
-                const newParams = new URLSearchParams(prev);
-                newParams.set('tableVersion', Date.now());
-                return newParams;
-            },{ replace: true });
-       }
+            setSearchParams(prev => ({ 
+              ...prev, tableVersion: Date.now()// refrescar lista (global)
+            })) 
+        }
     }, [idParam, success])
 
 
-   // VISIBLE BUTTONS
+    // VISIBLE BUTTONS
 
-   const isStatusActive = useMemo(()=>{
-       return currentItem?.meta?.status === "ACTIVE"
-   },[currentItem])
-
-
-   const isStatusNotActive = useMemo(()=>{
-       return currentItem?.meta?.status === "INACTIVE"
-   },[currentItem])
+    const isStatusActive = useMemo(() => {
+        return currentItem?.meta?.status === "ACTIVE"
+    }, [currentItem])
 
 
-
-  // FORM LINKs
-
-  const EDIT_LINK = useMemo(()=>{
-    if(currentItem?.meta?.status === 'DRAFT'){
-        return `${FORM_URL}?mode=edit.draft&hash=${currentItem?.id}`
-    }
-    return `${FORM_URL}?mode=edit&hash=${currentItem?.id}`
-  },[currentItem])
+    const isStatusNotActive = useMemo(() => {
+        return currentItem?.meta?.status === "INACTIVE"
+    }, [currentItem])
 
 
-  const CREATE_LINK = `${FORM_URL}?mode=create`
+    // -- MODAL CONFIRM --
 
-  const CLONE_LINK = useMemo(()=>{
-    return `${FORM_URL}?mode=create&hash=${currentItem?.id}`
-  },[currentItem])
-
-  const VIEW_LINK = useMemo(()=>{
-    return `${FORM_URL}?mode=view&hash=${currentItem?.id}`
-  },[currentItem])
-
-  const PRODUCT_SPECS_LINK = useMemo(()=>{
-    return `/dashboard/product-form?mode=view&id=${currentItem?.productId}`
-  },[currentItem])
-
-
-  // PARAMs VALIDATIONS
-  useValidParams({
-    id: (val) => val != null, // Solo números
-    mode: (val) => ['view','create', 'edit', 'draft', 'edit.draft'].includes(val), // Solo valores permitidos
-    status: (val) => ['ACTIVE','INACTIVE','DELETED', 'DRAFT'].includes(val), 
-  }, {redirect: "/dashboard/list-list"});
-
-
-
-     // ModalConfirm
     const handleStatus = (...args) => {
         const [id, status, ...xs] = args;
 
-        if(status == "ACTIVE") 
+        if (status == "ACTIVE") 
             setMsgConfirm(<MSG_LISTING_ACTIVE id={id} />)
-        if(status == "INACTIVE") 
+        if (status == "INACTIVE") 
             setMsgConfirm(<MSG_LISTING_INACTIVE id={id} />)
-        if(status == "DELETED") 
+        if (status == "DELETED") 
             setMsgConfirm(<MSG_LISTING_DELETE id={id} />)
 
         setDataConfirm([...args])
         setShowConfirm(true)
     }
+
+
     const handleConfirm = () => {
         updateStatus(...dataConfirm)
         setShowConfirm(false)
     }
 
+
+   const status = useMemo(()=> ({
+        draft:    currentItem?.meta?.status == "DRAFT",
+        active:   currentItem?.meta?.status == "ACTIVE",
+        inactive: currentItem?.meta?.status == "INACTIVE"
+   }),[currentItem])
+
+    const handle = useMemo(()=> ({
+        specs :  () => navigate(`${FORM_URL}?mode=view&id=${currentItem?.productId}`) ,
+        create:  () => navigate(`${FORM_URL}?mode=create`),
+        edit2:   () => navigate(`${FORM_URL}?mode=edit.draft&id=${currentItem?.id}`), 
+        clone:   () => navigate(`${FORM_URL}?mode=create&id=${currentItem.id}`),
+        edit:    () => navigate(`${FORM_URL}?mode=edit&id=${currentItem.id}`),
+        summary: () => navigate(`${FORM_URL}?mode=view&id=${currentItem.id}`),
+        preview: () => navigate(`/p/${currentItem.id}`),
+        deactive:() => handleStatus(currentItem.id, "INACTIVE"),
+        activate:() => handleStatus(currentItem.id, "ACTIVE"),
+        delete:  () => handleStatus(currentItem.id, "DELETED"),
+   }),[currentItem])
+
+
+
     return (
-        <div className="p-3 island rounded">
-           
-           <FetchState.Toast
-                hook={{ loading, error, setError, success, setSuccess }} 
-            >
-                 <>
-                    <div className="d-flex justify-content-between mb-4">
-                        <p style={{ lineHeight: '1.25rem' }} className="fs-6 mb-0 fw-medium p-1">
-                            Post Config
-                        </p>
-                        {close && (
-                            <Button style={{ lineHeight: '1.25rem' }}  onClick={close} variant="light" className="p-1">
-                                <i className="bi-x-lg "></i>
-                            </Button>
-                        )}
+        <div className={className}>
 
-                    </div>
-
-
+            <CrudActions close={close} {...crudHook} >
+            
                     <ButtonLink
-                        visible={ !currentItem }
+                        visible={!currentItem}
                         icon="bi-plus-lg"
-                        handle={() => navigate(CREATE_LINK)}
+                        handle={ handle.create }
                     >
                         Create
                     </ButtonLink>
 
-
-                    {/** Item Config **/}
-
-
-
                     <ButtonLink
-                        handle={() => navigate(PRODUCT_SPECS_LINK)}
-                        icon="bi-box-arrow-up-right"
-                        visible={ isStatusActive }
+                        handle={ handle.specs }
+                        icon="bi-box-seam"
+                        visible={modeParam != 'create'}
                     >
                         Product Specs
                     </ButtonLink>
 
                     <ButtonLink
-                        handle={() => navigate(`/p/${currentItem.id}`)}
-                        icon="bi-box-arrow-up-right"
-                        visible={ isStatusActive }
+                        handle={ handle.preview }
+                        icon="bi-star"
+                        visible={modeParam != 'create'}
                     >
-                        View Online
-                    </ButtonLink>
-
-                    <ButtonLink
-                        handle={ () => handleStatus(currentItem.id, "INACTIVE") }
-                        icon="bi-eye-slash"
-                        visible={ isStatusActive }
-                    >
-                        Deactivate
-                    </ButtonLink>
-
-                    <ButtonLink
-                        handle={() => handleStatus(currentItem.id, "ACTIVE")}
-                        icon="bi-eye"
-                        visible={ isStatusNotActive }
-                    >
-                       Activate
+                        Preview
                     </ButtonLink>
 
 
                     <ButtonLink
+                        disabled={true}
                         icon="bi-image"
-                        visible={ isStatusActive }
+                        visible={true}
                     >
                         Change thumbnail
                     </ButtonLink>
 
-
+                    <hr className="my-1"/> 
+                    
                     <ButtonLink
-                        visible={ true }
-                        handle={() => handleStatus(currentItem?.id, "DELETED")}
-                        icon="bi-trash3"
-                    >
-                        Delete
-                    </ButtonLink>
-
-
-
-                    <ButtonLink
-                        visible={ currentItem }
-                        handle={() => navigate(EDIT_LINK) }
+                        visible={modeParam != 'create'}
+                        handle={ handle.edit }
                         icon="bi-pencil"
                     >
                         Edit
                     </ButtonLink>
 
-                    {/*  
-                        FIXME: Imagenes se crashean al eliminar listing original.  
-                        Nota: Actualmente solo copia los enlaces. 
-                        se debe re-subir archivo de imagenes.
-                    */}
                     <ButtonLink
-                        visible={ currentItem }
-                        handle={() => navigate(CLONE_LINK)}
+                        visible={modeParam != 'create'}
+                        handle={ handle.clone }
                         icon="bi-copy"
                     >
                         Clone
                     </ButtonLink>
 
-
-
                     <ButtonLink
-                        visible={ idParam }
-                        handle={() => navigate(VIEW_LINK)}
+                        visible={idParam}
+                        handle={ handle.summary }
                         icon="bi-three-dots"
                     >
                         Summary
                     </ButtonLink>
 
+                    <hr className="my-1"/> 
+
+                    <ButtonLink
+                        handle={ handle.deactive }
+                        icon="bi-eye-slash"
+                        visible={ status.active }
+                    >
+                        Deactivate
+                    </ButtonLink>
+
+                    <ButtonLink
+                        handle={ handle.activate }
+                        icon="bi-eye"
+                        visible={ !status.active }
+                    >
+                        Activate
+                    </ButtonLink>
+
+                    <ButtonLink
+                        visible={true}
+                        handle={ handle.delete }
+                        icon="bi-trash3"
+                    >
+                        Delete
+                    </ButtonLink>
 
                     {/** List Actions **/}
 
                     <ButtonLink
                         disabled={true}
-                        visible={ !idParam }
+                        visible={!idParam}
                         icon="bi-upload"
                         handle={() => navigate('/faqs')}
                     >
@@ -241,7 +207,7 @@ export default function ListingActions({ close }) {
 
                     <ButtonLink
                         disabled={true}
-                        visible={ !idParam }
+                        visible={!idParam}
                         icon="bi bi-download"
                         handle={() => navigate('/faqs')}
                     >
@@ -252,13 +218,12 @@ export default function ListingActions({ close }) {
                         <ConfirmMessage 
                             title={"Confirmar Accion"}
                             message={msgConfirm}
-                            onClose={()=>setShowConfirm(false)} 
-                            onAction={()=>handleConfirm()}
+                            onClose={() => setShowConfirm(false)} 
+                            onAction={() => handleConfirm()}
                         />
                     </ModalConfirm>    
-
-                </>
-            </FetchState.Toast>
+        
+            </CrudActions>
 
         </div>
     )

@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useProfile } from "@f/profile/contexts/ProfileContext.jsx";
 import { ProfileHeader } from "@f/profile/components/ProfileHeader";
 import { useWarning } from "@/hooks/useWarning.js";
+import { URL_CHANGE_PASSWORD, URL_FAQs, URL_USER_PICTURE, URL_USER_PROFILE, URL_USER_PURCHASES, URL_VERIFY_ACCOUNT } from "@/utils/links";
+import ArrowLink from "@/components/common/ArrowLink";
 
 function WelcomePerfil({ children }) {
 
@@ -15,8 +17,8 @@ function WelcomePerfil({ children }) {
    return (
       <div>
          <ProfileHeader
-            title={`¡Bienvenido ${profile?.username || ''}!`}
-            subtitle="Aquí puedes gestionar todo lo relacionado con tu cuenta."
+            title={`¡Welcome ${profile?.username || ''}!`}
+            subtitle="We ve' assambled some links to get started"
          />
          <div style={{ minHeight: '200px' }}>
             {!completeRegistration && ( 
@@ -24,35 +26,30 @@ function WelcomePerfil({ children }) {
                   <Alert variant="danger">
                      <i className="bi bi-exclamation-triangle me-3"></i>
                      Completa el proceso de registro haciendo click  
-                     <b onClick={() => navigate('/register/complete')} className="text-dark mx-2" href="/complete-register">aqui.</b>   
+                     <b onClick={() => navigate(URL_VERIFY_ACCOUNT)} className="text-dark mx-2" href="/complete-register">aqui.</b>   
                   </Alert>
                </div> 
             )}
 
-            <p onClick={() => navigate('/faqs')} className="btn bg-light border py-3 mb-3 text-start w-100 d-flex justify-content-between">
-               <span>Preguntas Frecuentes</span>
-               <i className="bi-chevron-right"></i>
-            </p>
+            <ArrowLink to={URL_FAQs}>
+               Frequent questions
+            </ArrowLink>   
 
-            <p onClick={() => navigate('/user/account')} className="btn bg-light border py-3 mb-3 text-start w-100 d-flex justify-content-between">
-               <span>Cambiar contraseña</span>
-               <i className="bi-chevron-right"></i>
-            </p>
+            <ArrowLink to={URL_CHANGE_PASSWORD}>
+               Change password
+            </ArrowLink>   
 
-            <p onClick={() => navigate('/user/profile')} className="btn bg-light border py-3 mb-3 text-start w-100 d-flex justify-content-between">
-               <span>Actualizar datos personales</span>
-               <i className="bi-chevron-right"></i>
-            </p>
+            <ArrowLink to={URL_USER_PROFILE}>
+               Update personal data
+            </ArrowLink>   
 
-            <p onClick={() => navigate('/user/purchases')} className="btn bg-light border py-3 mb-3 text-start w-100 d-flex justify-content-between">
-               <span>Ver historial de compras</span>
-               <i className="bi-chevron-right"></i>
-            </p>
+            <ArrowLink to={URL_USER_PURCHASES}>
+               View purchase history and details
+            </ArrowLink>   
 
-            <p onClick={() => navigate('/user/photo')} className="btn bg-light border py-3 mb-3 text-start w-100 d-flex justify-content-between">
-               <span>Cambiar imagen de usuario</span>
-               <i className="bi-chevron-right"></i>
-            </p>
+            <ArrowLink to={URL_USER_PICTURE}>
+               Change user image
+            </ArrowLink>   
 
          </div>
 

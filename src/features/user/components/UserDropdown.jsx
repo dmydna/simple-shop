@@ -1,12 +1,13 @@
+import { IconTint } from "@/components/common/FloatButtonCollection";
+import ImageWithFallback from "@/components/common/ImageWithFallback.jsx";
+import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
+import { useUIContext } from "@contexts/UIContext.jsx";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link, useNavigate } from "react-router-dom";
-import { useUIContext } from "@contexts/UIContext.jsx";
-import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
-import { IconTint, Tintify } from "@features/product/components/FloatButton"
-import ImageWithFallback from "@/components/common/ImageWithFallback.jsx";
-import userDefault from "/user-default-xs.png"
+import userDefault from "/user-default-xs.png";
+import { URL_DASHBOARD, URL_USER_FAVORITE, URL_USER_PURCHASES } from "@/utils/links";
 
 
 
@@ -78,28 +79,25 @@ function UserDropdown({ className }) {
           >
             <div className="active-fix">
               <b className="fw-semibold">{user?.username}</b>
-              <p className="m-0 small text-secondary">Ver perfil completo</p>
+              <p className="m-0 small text-secondary">View full profile</p>
             </div>
           </Dropdown.Item>
   
           {/* Links de navegación */}
           {isAdmin && (
             <>  
-              <Dropdown.Item as={Link} to="/dashboard">
+              <Dropdown.Item as={Link} to={URL_DASHBOARD}>
                 <i className="bi bi-gear me-2"></i> Dashboard
-              </Dropdown.Item>
-              <Dropdown.Item as={Link} to="user/activity">
-                <i className="bi bi-bar-chart  me-2"></i> Overview
               </Dropdown.Item>
             </>
           )}
 
-          <Dropdown.Item as={Link} to="user/favorites">
-            <i className="bi bi-heart me-2"></i> Favoritos
+          <Dropdown.Item as={Link} to={URL_USER_FAVORITE}>
+            <i className="bi bi-heart me-2"></i> Favorites
           </Dropdown.Item>
 
-          <Dropdown.Item as={Link} to="/user/purchases">
-            <i className="bi bi-handbag me-2"></i> Compras
+          <Dropdown.Item as={Link} to={URL_USER_PURCHASES}>
+            <i className="bi bi-handbag me-2"></i> Purchases
           </Dropdown.Item>
   
           <Dropdown.Divider />
@@ -112,7 +110,7 @@ function UserDropdown({ className }) {
               onClick={handleLogout}
               className="w-100"
             >
-              <i className="bi bi-box-arrow-right me-1"></i> Cerrar sesión
+              <i className="bi bi-box-arrow-right me-1"></i> Log out
             </Button>
           </Dropdown.Item>
         </Dropdown.Menu>

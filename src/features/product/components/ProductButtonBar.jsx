@@ -1,9 +1,9 @@
-import { HoverIcon, IconTint } from "@f/product/components/FloatButton"
-import {useAuthContext} from "@features/auth/contexts/AuthContext"
-import React, { useState } from "react";
-import EditFloatButton from "@f/product/components/EditFloatButton";
+import { IconTint } from "@/components/common/FloatButtonCollection";
 import DeleteFloatButton from "@f/product/components/DeleteFloatButton";
+import EditFloatButton from "@f/product/components/EditFloatButton";
 import StatusFloatButton from "@f/product/components/StatusFloatButton";
+import { useAuthContext } from "@features/auth/contexts/AuthContext";
+import { useState } from "react";
 
 
 
@@ -28,6 +28,11 @@ export default function  ProductButtonBar({item}){
                                action={handleAddFavorite}
                                icon="heart"
                             />*/}
+                            {item?.meta?.status == "DELETED" && (
+                            <span style={{borderRadius:'6px', lineHeight:'10px', padding: '6px', fontSize: '.8rem'}}
+                                className='pill-warning my-2 z-index-10'>
+                                deleted
+                            </span>)}
                             {item?.meta?.status == "DRAFT" && (
                             <span style={{borderRadius:'6px', lineHeight:'10px', padding: '6px', fontSize: '.8rem'}}
                                 className='pill-dark my-2 z-index-10'>

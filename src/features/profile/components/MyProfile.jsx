@@ -37,7 +37,7 @@ function MyProfile({ children }) {
         <div>
             <ProfileHeader
                 title="Informacion Personal"
-                subtitle="Puedes ver o cambiar tu informacion"
+                subtitle="Aquí puedes gestionar todo lo relacionado con informacion personal."
             />
             
             <FormProfile

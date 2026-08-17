@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { FeedbackMessage } from "@common/FeedbackMessage.jsx";
 
-function PageEmpty({ico, message}){
+function PageEmpty({ico, message, variant}){
 
     const navigate = useNavigate();
 
@@ -11,6 +11,7 @@ function PageEmpty({ico, message}){
             title="Sin contenido"
             message={message || defaultMsg}
             icon={ico || "bi-journal-plus"}
+            variant={variant}
         />
     )
 }

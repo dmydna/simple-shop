@@ -12,7 +12,7 @@ function FormWarning({close}){
    const {formData, hash, onChange} = useForm()
 
    const handleSubmit = () => {
-      navigate(`${location.pathname}?mode=edit&hash=${hash}`)
+      navigate(`${location.pathname}?mode=edit&id=${hash}`)
       close()
    }
 

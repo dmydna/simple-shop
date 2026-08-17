@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetchData } from "@/hooks/useFetchData.js";
 import { listingService } from "@features/listing/services/listingService.js";
 import { useFetchElem } from "@/hooks/useFetchElem.js";
@@ -13,8 +13,6 @@ export const useListing = ({autofetch=false, size=8, ...config}={}) => {
 
     const {loading: loadingItem, error: errorItem, currentItem, setCurrentItem, id, setId, refreshElem }
         = useFetchElem({fetchMethod: listingService.getByHash})
-
-
 
     return ({
         ...props ,

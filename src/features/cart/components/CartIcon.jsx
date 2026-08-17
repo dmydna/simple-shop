@@ -1,4 +1,6 @@
-function CartIcon({icon, variant, scale, opacity}){
+import { IconNotify, TintContainer } from "@/components/common/IconTintyColor"
+
+export function CartIcon({icon, variant, scale, opacity}){
 
     return (
            <span 
@@ -13,4 +15,16 @@ function CartIcon({icon, variant, scale, opacity}){
    )
 }
 
-export default CartIcon;
+export function CartIconTint(){
+    return(
+        <TintContainer>
+           <IconNotify
+             fs={1} 
+             icon="bi-cart3"  
+             right={8} 
+             top={5} 
+             count={"x"} 
+            />
+        </TintContainer>
+    )
+}

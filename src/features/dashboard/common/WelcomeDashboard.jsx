@@ -1,6 +1,9 @@
-import { Button } from "react-bootstrap";
+import CarrouselScroll from "@/components/common/CarrouselScroll";
+import MyActivity from "@/features/profile/components/MyActivity";
+import StatsOverview from "@/features/stats/components/StatsOverview";
+import { Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import ButtonLink from "@dashboard/common/ButtonLink"
+import GetStarted from "./GetStarted";
 
 function WelcomeDashboard() {
 
@@ -12,39 +15,27 @@ function WelcomeDashboard() {
                 <p className="fw-medium fs-5 mb-0">Welcome to Dashboard</p>
                     <p className="text-secondary small">We ve' assambled some links to get started</p>
             </div>
-            <div className="d-flex flex-column justify-content-between gap-2 flex-wrap">
-                <div className="my-3">
-                    <p className="fw-medium">Get Started</p>
+
+      <Row className={`my-5 mb-2 d-md-flex`}> 
+
+            <CarrouselScroll count={6} fix={0}>
+                <StatsOverview />
+            </CarrouselScroll>
+
+      </Row>
 
 
-                    <ButtonLink
-                        icon="bi-plus-lg"
-                        handle={() => navigate('/dashboard/listing-form?mode=create')}
-                    >
-                        Add post
-                    </ButtonLink>
 
-                    <ButtonLink
-                        icon="bi-chat"
-                        handle={() => navigate('/faqs')}
-                    >
-                        Look notifications
-                    </ButtonLink>
 
-                    <ButtonLink
-                        icon="bi-bag"
-                        handle={() => navigate('/faqs')}
-                    >
-                       Admin purchases
-                    </ButtonLink>
+            <div className="row">
+                <div className="col col-12 col-md-6 mb-4">
+                    
+                    <GetStarted/>
 
-                    <ButtonLink
-                        icon="bi-question-circle"
-                        handle={() => navigate('/faqs')}
-                    >
-                       Admin purchases
-                    </ButtonLink>
+                </div>
 
+                <div className="col col-12 col-md-6">
+                    <MyActivity/>
 
                 </div>
             </div>

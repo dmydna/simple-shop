@@ -13,8 +13,9 @@ function UserForm() {
 
     return (
         <FormCrud
-            type="user"
             {...crudHook}
+            enableEdit
+            enableCreate
         >
 
             <p className="fw-medium">

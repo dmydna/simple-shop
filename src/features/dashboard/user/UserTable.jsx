@@ -75,7 +75,7 @@ export const UserTable = ({  baseHook, className }) => {
                                             type='checkbox'
                                             id={`default-radio`}
                                             className='mt-3'
-                                           checked={idParam == item.id}
+                                            checked={idParam == item.id}
                                             onChange={(e) => {
                                                 e.stopPropagation();
                                                 toggleSelect(item);
@@ -104,7 +104,7 @@ export const UserTable = ({  baseHook, className }) => {
                                             </>
                                             :
                                             <div className='d-flex align-items-center my-2'>
-                                                <PlaceholderIcon fontSize='fs-5' variant={'primary'} icon={'bi-person'} />
+                                                <PlaceholderIcon fontSize='fs-5' variant={'danger'} icon={'bi-person'} />
                                                 <span className='flex-grow-1 mx-3 fw-medium'>{item?.username}</span>
                                             </div>
                                             

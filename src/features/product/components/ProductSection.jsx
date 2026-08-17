@@ -25,7 +25,7 @@ function ProductSection({children, maxElems=1 ,filter, maxCols, className, borde
       <div className={`${className} rounded  h-100 p-4`}>
         <div className='row'>
           {children}
-        {listings.slice(0, maxElems).map((p) => (
+        {listings?.slice(0, maxElems).map((p) => (
             <ProductCard
               {...p}
               key={p.id}

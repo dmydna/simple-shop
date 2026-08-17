@@ -1,64 +1,52 @@
-import { useEffect, useState } from "react";
-import { useProduct } from "@/features/product/hooks/useProduct.js";
+import { useState } from "react";
 import { productService } from '@/features/product/services/productService.js';
 import { CRUD } from "@utils/enums.js";
 import { useCrudForm } from "@/features/crud/hooks/useCrudForm.js";
-import { useCrudActions } from "@/features/crud/hooks/useCrudActions.js";
 import { ProductDTO } from "@/utils/schemas";
+import { useFetchElem } from "@/hooks/useFetchElem";
+import { useService } from "@/hooks/useService";
 
-export const useProductCrud = ({autofetch=false}={}) => {
+export const useProductCrud = () => {
 
-    const { setCurrentItem, currentProduct, setId, id, loading: loadingItem, 
-    error: errorItem, refreshElem, ...props} = useProduct({autofetch: autofetch});
-
+    // General states
     const [showModal, setShowModal] = useState(false)
     const [dataItem, setDataItem] = useState({});
     const [crudMode, setCrudMode]  = useState();
     const [scheme, setScheme] = useState(ProductDTO)
     
-    const { ... formCrud } = useCrudForm(currentProduct, scheme, "create");
+    // config hooks
+    const configService = {service: productService}
+    const configElem = {fetchMethod: productService.getById}
 
-    const { handleCreate, handleUpdate, handleDelete,  handleStatus, 
-        loading, setLoading, error, success, setError, setSuccess, ...actions
-    } = useCrudActions({ service: productService });
-
-
-    useEffect(()=>{
-        console.log("ACA", currentProduct)
-    },[currentProduct])
-
+    const { id, setId, loading, error: errorItem, currentItem,  setCurrentItem, refreshElem } = 
+    useFetchElem({...configElem})
+    const { ... formCrud } = useCrudForm(currentItem, scheme, "create");
+    const { ...servicesMethods } = useService({ ...configService});
 
     return ({
-        ...props,
+        ...servicesMethods,
         // Form
         ...formCrud,
-        // Actions
-        handleCreate,
-        handleUpdate,
-        handleDelete,
-        handleStatus,
+        scheme,
+        setScheme,
+
         // Fetch state
-        loading: loadingItem || loading,
-        setLoading,
-        error,
-        setError,
-        success,
-        setSuccess,
+        loading,
         errorItem,
+
         // Product
+        id,setId,
+        setCurrentItem,
+        currentProduct: currentItem,
+        currentItem,
+        refreshElem,
         dataItem,
         setDataItem,
-        setId, id,
+
+        // Mode
         crudMode, 
-        setCrudMode, 
+        setCrudMode,
         showModal, 
         setShowModal,
-        setCurrentItem,
-        currentProduct,
-        refreshElem,
-        currentItem: currentProduct,
-
-        scheme, setScheme,
-        ...actions
     })
 }

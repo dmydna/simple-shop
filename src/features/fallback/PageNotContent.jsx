@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FeedbackMessage } from "@common/FeedbackMessage.jsx";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
 
 function PageNotContent() {
@@ -12,6 +12,8 @@ function PageNotContent() {
     }
     const msg_user = 'No hay elementos en esta sección. Estamos trabajando en eso.';
     const msg_admin = 'No hay elementos en esta sección. Agrega alguno para comenzar.'
+    
+
     return (
         <>
             {isAdmin ? (

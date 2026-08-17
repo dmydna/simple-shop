@@ -4,18 +4,18 @@ import { useSearchParams } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 
 
-function FilterParams({children, close, badgeParams = false}){
+function FilterParams({children, close, badgeParams = false, className}){
 	
 	const [searchParams, setSearchParams] = useSearchParams();
 	const allParams = searchParams.toString();
 
 	const clearParams = () => setSearchParams(new URLSearchParams() ) ;
 	return (
-		<div className="p-3 island rounded">
+		<div className={className}>
 
 			<div className="d-flex justify-content-between mb-4">
 				<p style={{ lineHeight: '1.25rem' }} 
-					className="fs-6 mb-0 fw-medium p-1">
+					className="small mb-0 fw-medium p-1">
 					Filter by
 				</p>
 				<div className='d-flex gap-3'>

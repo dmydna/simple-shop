@@ -37,7 +37,10 @@ export const useUrlParams = () => {
     const skuParam = searchParams.get('sku');
     const sortParam = searchParams.get('sort');
     const pageVersion = searchParams.get('pageVersion');
-
+    const modeParam = searchParams.get('mode');
+    const minPrice =  searchParams.get('minPrice');
+    const maxPrice =  searchParams.get('maxPrice');
+    const dialogParam = searchParams.get('dialog');
 
     const create_banMode = searchParams.get('dialog') == "ban.create";
     const update_banMode = searchParams.get('dialog') == "ban.update";
@@ -52,6 +55,6 @@ export const useUrlParams = () => {
        availabilityParam, tableVersion, tagsParam, hashParam, pageParam,
        idParam, searchParam, categoryParam, statusParam, roleParam, skuParam,
        sortParam, filterParam, allParams, create_banMode, update_banMode,
-       pageVersion
+       pageVersion, modeParam, minPrice, maxPrice, dialogParam
     }
 }

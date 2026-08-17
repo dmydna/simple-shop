@@ -1,5 +1,5 @@
+import { Tintify } from "@/components/common/FloatButtonCollection";
 import PlaceholderIcon from "@/components/common/PlaceholderIcon";
-import { Tintify } from "@/features/product/components/FloatButton";
 import { useNavigate } from "react-router-dom";
 
 export default function RemovableListItem({

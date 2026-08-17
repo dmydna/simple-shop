@@ -125,6 +125,8 @@ export const pillColor = Object.freeze({
 /* --------------------------------- */
    "ACTIVE":   "pill-primary",
    "INACTIVE": "pill-secondary",
+   "DELETED":  "pill-danger",
+/* --------------------------------- */   
    "BANNED":   "pill-danger",
    "DRAFT":    "pill-dark",
 /* --------------------------------- */

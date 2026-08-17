@@ -22,14 +22,10 @@ function ProductDetails() {
    const { loading, error, currentItem, fetchDataByHash, setId } 
    = useFetchElem({ fetchMethod: (id) => listingService.getByHash(id, true) })
 
+    window.scrollTo({ top: 0, behavior: 'instant'});
 
    useEffect(() => {
-      console.trace("Trace log:" ,hash)
       setId(hash)
-      window.scrollTo({
-         top: 0,
-         behavior: 'instant'
-      });
    }, [hash, setId])
 
 
@@ -42,7 +38,8 @@ function ProductDetails() {
       >
          <Container fluid="xl" className="bg-white rounded mt-2 pt-2">
             <>
-               {!currentItem ?
+               {
+               !currentItem ?
                   '' :
                   <>
                      <Row className="g-3" key={currentItem.id}>

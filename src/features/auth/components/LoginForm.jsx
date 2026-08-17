@@ -3,8 +3,8 @@ import {Alert, Button, Col, Form} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import { useUIContext } from "@contexts/UIContext.jsx";
 import {useForm} from "@hooks/useForm.js";
-import { useAuth } from "@f/auth/hooks/useAuth.js";
 import { useAuthContext } from "@f/auth/contexts/AuthContext.jsx";
+import PublicRoute from "@/components/common/PublicRoute";
 
 
 function LoginForm({ children, style, className}){
@@ -28,6 +28,7 @@ function LoginForm({ children, style, className}){
 
 
     return (
+    <PublicRoute>
         <Col className={`${className} mx-auto`} style={style}>
                 {children}
             <Form  onSubmit={handleSubmit}>
@@ -51,8 +52,8 @@ function LoginForm({ children, style, className}){
                         onChange={onChange}
                     />
                 </Form.Group>
-                <div className={`${error ? 'opacity-100' : 'opacity-0'}`} >
-                    <Alert variant="danger">{error}</Alert>
+                <div className={`${  error?.message || error?.error || "" ? 'opacity-100' : 'opacity-0'}`} >
+                    <Alert variant="danger">{error?.message || error?.error || ""}</Alert>
                 </div>
 
                 {loading ?
@@ -76,6 +77,7 @@ function LoginForm({ children, style, className}){
 
             </Form>
         </Col>
+    </PublicRoute>
     )
 
 

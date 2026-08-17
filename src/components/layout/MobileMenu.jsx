@@ -2,6 +2,7 @@ import { useNavbarContext } from "@/contexts/NavbarContext.jsx";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
 import SideBarDashboard from "@/features/dashboard/common/SiderbarDashboard.jsx";
 import SidebarProfile from "@/features/profile/components/SidebarProfile.jsx";
+import { URL_LOGIN, URL_SIGIN } from "@/utils/links";
 import { Button, Nav, Offcanvas } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -22,19 +23,19 @@ function MobileMenu({ children }) {
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate(URL_LOGIN);
   };
 
   const handleLogin = () => {
     showMenu &&
       handleClose()
-    navigate('/login');
+    navigate(URL_LOGIN);
   }
 
   const handleRegister = () => {
     showMenu &&
       handleClose()
-    navigate('/register');
+    navigate(URL_SIGIN);
   }
 
 
@@ -90,12 +91,6 @@ function MobileMenu({ children }) {
                   User
                 </Nav.Link>
 
-                {location.pathname.startsWith('/user') && (
-                  <div className="border-top py-3 pb-4 border-bottom">
-                    <SidebarProfile border={false} role={'CLIENT'} />
-                  </div>
-                )}
-
                 {/*HACK: agregar acordion en menu mobile*/}
                 <Nav.Link
                   key={'/dashboard'}
@@ -106,14 +101,7 @@ function MobileMenu({ children }) {
                 >
                   Dashboard
                 </Nav.Link>
-
-                {location.pathname.startsWith('/dashboard') && (
-                  <div className="border-top py-3 pb-4">
-                    <SideBarDashboard showIcons/> 
-                  </div>
-                )}
-
-
+                
               </Nav>
 
 

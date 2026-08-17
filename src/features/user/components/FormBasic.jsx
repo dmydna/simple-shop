@@ -1,9 +1,12 @@
 import InputCrudFloating from "@/features/crud/components/InputCrudFloating";
 
+import userDefault from "/user-default-xl.png"
+import ImageWithFallback from "@/components/common/ImageWithFallback";
+import { Button } from "react-bootstrap";
 
 export default function FormBasic({ children, className, crudHook }) {
 
- const {currentItem} = crudHook
+  const { currentItem } = crudHook
 
 
   return (
@@ -17,38 +20,41 @@ export default function FormBasic({ children, className, crudHook }) {
         <div className="d-flex flex-column flex-lg-row mb-3">
 
           <div className="me-4">
-          <img 
-             className="rounded mb-3 border" 
-             height={140} 
-             width={140} 
-             src={currentItem?.image} 
-           />
+
+            <ImageWithFallback
+              className="rounded-circle border mb-3 mx-auto" 
+              src={currentItem?.image || '#'}
+              fallbackSrc={userDefault}
+              width={70} 
+              height={70}
+            />
+
           </div>
 
 
           <div className="d-flex flex-fill flex-column">
 
-        <div className="flex-fill d-flex gap-2 flex-column flex-lg-row">
-          <InputCrudFloating
-            name={"username"}
-            label={"Username"}
-            {...crudHook}
-          />
+            <div className="flex-fill d-flex gap-2 flex-column flex-lg-row">
+              <InputCrudFloating
+                name={"username"}
+                label={"Username"}
+                {...crudHook}
+              />
 
-          <InputCrudFloating
-            name={"email"}
-            label={"Email"}
-            {...crudHook}
-          />
+              <InputCrudFloating
+                name={"email"}
+                label={"Email"}
+                {...crudHook}
+              />
 
-        </div>
+            </div>
 
-
-          <InputCrudFloating
-            name={"role"}
-            label={"Role"}
-            {...crudHook}
-          />
+            
+            <InputCrudFloating
+              name={"role"}
+              label={"Role"}
+              {...crudHook}
+            />
           </div>
         </div>
       </>

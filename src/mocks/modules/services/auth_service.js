@@ -1,6 +1,7 @@
 import { baseService } from '@/mocks/modules/services/baseService.js';
 import { user_service } from '@/mocks/modules/services/user_service.js';
 import { currentLoggedUser, db, setCurrentLoggedUser } from '@/mocks/modules/db.js';
+import { isValidEmail } from '@/mocks/modules/utils';
 
 const COLLECTION = 'users'
 
@@ -8,11 +9,25 @@ export const auth_service = {
 		
 	 ...baseService(COLLECTION),
 
+	 register : (request) => {
+	 	const user = user_service.create(request);
+	 	if(user){ 
+	 		setCurrentLoggedUser(user.username)
+	 		return true;
+	 	}
+	 	return false;
+	 },
+
 	 login : (request) => {
-	 	const user = db.find(COLLECTION, u => u.username === request.username);
-	 	console.info("[MOCK API / auth_service]:" ,user)
+	 	let user = null;
+	 	if(isValidEmail(request.username)){
+	 		user = db.find(COLLECTION, u => u.email === request.username);
+	 	}else{
+	 		user = db.find(COLLECTION, u => u.username === request.username);
+	 	}
+
 	 	if(user && user.password == request.password){ 
-	 		setCurrentLoggedUser(request.username)
+	 		setCurrentLoggedUser(user.username)
 	 		return true;
 	 	}
 	 	return false;
@@ -29,8 +44,9 @@ export const auth_service = {
 	 	return true
 	 },
 
-	 ChangePasswordByUserMail: (username, request) => {
-	 	user_service.ChangePassword(username, request.oldPassword, request.newPassword)
+	 changeUserPassword: (request) => {
+	 	const username = currentLoggedUser 
+	 	return user_service.changePassword(username, request.oldPassword, request.newPassword)
 	 },
 
 
@@ -39,7 +55,5 @@ export const auth_service = {
 	 },
 
 
-
-
-
 }
+

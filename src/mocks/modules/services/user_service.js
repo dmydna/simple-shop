@@ -1,5 +1,6 @@
 import { baseService } from '@/mocks/modules/services/baseService.js';
 import { currentLoggedUser, db } from '@/mocks/modules/db.js';
+import BanUser from '@/features/dashboard/user/BanUser';
 
 
 const collection = 'users';
@@ -7,6 +8,10 @@ const collection = 'users';
 export const user_service = {
 
     ...(baseService(collection)),
+
+    create: (data) => {
+        return db.save(collection, data)
+    },
 
     getMyProfile: () => {
         return  db.find(collection, item => item.username === currentLoggedUser);
@@ -19,6 +24,23 @@ export const user_service = {
 
     updateProfile: (id, update) => {
         return db.update(collection, id, update) 
+    },
+
+    banUser: (id, request) =>{
+        const user = user_service.getById(id);
+        if(!user) throw new Error("Usuario no encontrado");
+        user.banExpiresAt = request.banExpiresAt;
+        user.meta.status = "BANNED"
+        user.banReason = request.banReason;
+        return db.save(collection, user)  
+    },
+ 
+    unbanUser: (id) =>{
+        const user = user_service.getById(id);
+        if(!user) throw new Error("Usuario no encontrado");
+        user.status.meta = "ACTIVE";
+        user.banExpiresAt = null;
+        return db.save(collection, user)  
     },
 
     updateProfileImage: (url) => {
@@ -35,5 +57,19 @@ export const user_service = {
         } 
         return null;
      },
+
+
+    changePassword: (username, oldPassword, newPassword) => {
+        const user = db.find(collection,  u => u.username == username)
+        if(user){
+            if(user.password == oldPassword){
+                return db.update(collection, u => u.username == username, u => ({...u, password: newPassword}))
+            }
+            return null;
+        } 
+        return null;
+     },
+
+
 
 }

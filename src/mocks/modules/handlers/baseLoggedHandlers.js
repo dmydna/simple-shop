@@ -70,8 +70,6 @@ export const baseLoggedHandlers = (BASE_ENDPOINT, SERVICE) => [
       );
     }
 
-    console.log(`Actualizando usuario ${id} con datos:`, updates);
-
     const existingElem = SERVICE.existsById(id);
 
     if (!existingElem) {
@@ -105,8 +103,6 @@ export const baseLoggedHandlers = (BASE_ENDPOINT, SERVICE) => [
         { status: 400 }
       );
     }
-
-    console.log(`Actualizando elemento ${id} con datos:`, updates);
 
     // 2. Buscar el usuario en la "base de datos"
     const exists = SERVICE.existsById(id);

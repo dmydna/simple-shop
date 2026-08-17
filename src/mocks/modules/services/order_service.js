@@ -1,4 +1,4 @@
-import { db } from '@/mocks/modules/db.js';
+import { currentLoggedUser, db } from '@/mocks/modules/db.js';
 import { baseService } from '@/mocks/modules/services/baseService.js';
 import { listing_service } from '@/mocks/modules/services/listing_service.js';
 import { user_service } from '@/mocks/modules/services/user_service.js';
@@ -12,7 +12,7 @@ export const order_service = {
     ...(baseService(collection)),
 
     getById: (id) => {
-        return db.findWithRelations(collection, o => o.id == id);
+        return  db.findWithRelations(collection,  o => o.id == String(id)  );
     },
 
 
@@ -58,11 +58,34 @@ export const order_service = {
         }
 
         // crear y guardar cada order item. 
-        valid.forEach(i => order_service.createOrderItems(i, order)) 
+        valid.forEach(item => {
+            const orderItem = order_service.createOrderItems(item, order);
+            const review = order_service.createReviewsForOrderItem(orderItem);
+            db.update(
+                "orders_items", 
+                i => i.id == orderItem.id, 
+                i => ({...i, reviewId : review.id})
+            )
+        }) 
         
         return true
     },
 
+
+    createReviewsForOrderItem(orderItem){
+        return db.save("reviews",{
+            username: currentLoggedUser,
+            title: orderItem.name,
+            userPic: '',
+            rating: null,
+            thumbnail: orderItem.thumbnail,
+            comment: '',
+            productId: orderItem.id,
+            orderItemId: orderItem.id,
+            listingId: orderItem.listingId,
+            status: "PENDING"
+        })
+    },
 
     createOrderItems: (item, order) => {
 
@@ -71,7 +94,7 @@ export const order_service = {
 
         if (!listing) return false;
 
-        db.save("orders_items",{
+        return db.save("orders_items",{
             userId: user.id,
             orderId: order.id,
             listingId: listing.id,
@@ -91,27 +114,14 @@ export const order_service = {
 
     decreaseStock: (item) => {
 
-        const listing = listing_service.getById(item.listingId)
-
-        console.log("obtiene listing", item, item.listingId)
+        let listing = listing_service.getById(item.listingId)
 
         if (!listing) return false;
         if (listing.stock < item.quantity) return false;
 
         listing.stock = item.quantity;
 
-        if (listing.stock == 0) {
-            listing.availabilityStatus = "Out of Stock";
-            listing.meta.status = "INACTIVE";
-        }
-
-        if (listing.stock < 10) {
-            listing.availabilityStatus = "Low Stock";
-        }
-
-        if (listing.stock >= 10) {
-            listing.availabilityStatus = "In Stock";
-        }
+        listing = listing_service.setStatusForStock(listing);
 
         db.save("listings", listing);
 

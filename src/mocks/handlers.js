@@ -9,6 +9,7 @@ import { orderHandlers } from '@/mocks/modules/handlers/orderHandler';
 import { buyHandlers } from '@/mocks/modules/handlers/buyHandler';
 import { gatewayHandlers } from '@/mocks/modules/handlers/gatewayHandler';
 import { statsHandlers } from '@/mocks/modules/handlers/statHandler';
+import { reviewHandlers } from '@/mocks/modules/handlers/reviewHandler';
 
 
 export const handlers = [
@@ -21,5 +22,6 @@ export const handlers = [
   ...orderHandlers,
   ...buyHandlers,
   ...gatewayHandlers,
-  ...statsHandlers
+  ...statsHandlers,
+  ...reviewHandlers
 ];

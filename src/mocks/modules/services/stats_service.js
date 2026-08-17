@@ -1,12 +1,12 @@
 import { db } from '@/mocks/modules/db.js';
 import { baseService } from '@/mocks/modules/services/baseService.js';
-import { listCountSubfield, listCountSublist } from '@/mocks/modules/utils.js';
+import { listCountByField } from '@/mocks/modules/utils';
 
 const collection = 'stats';
 
 export const stats_service = {
 
-    ...(baseService(collection)),
+
 
     getTopSales: (limit) => {
         return db["orders"].numeros.sort((a, b) => b.quantity - a.quantity)
@@ -31,43 +31,55 @@ export const stats_service = {
     },
 
 
-    getGeneralStats: () => {
+    getUserStats: async (field, limit) => {
+        return await listCountByField("users", field, limit)
+    },
+
+    getProductStats: async (field, limit) => {
+        return await listCountByField("products", field, limit)
+    },
+
+    getListingStats: async (field, limit) => {
+        return await listCountByField("listings", field, limit)
+    },
+
+
+    getGeneralStats(){
 
         return {
             totalListings: db["listings"].length,
             totalListingValue:0,
-            totalSales:0,
+            totalSales: this.countByStatus("orders", "paid"),
             orders: {
-               paid: 0, pending: 0, total: db["orders"].length   
+               paid: this.countByStatus("orders", "paid"), 
+               pending: this.countByStatus("orders", "pending"), 
+               total: db["orders"].length   
             },
             users: {
-                active: 0, banned: 0, total: db["users"].length
+                active: this.countByStatus("users", "active"), 
+                banned: this.countByStatus("users", "banned"), 
+                total: db["users"].length
             },
             reviews: {
-                active: 0, pending: 0, total: 99
+                active: 0, 
+                pending: this.countByStatus("reviews", "pending"), 
+                total: db["reviews"].length
             },
             products: {
-                draft: 0, active: 0, total: db["listings"].length
+                draft: 0, 
+                active: this.countByStatus("products", "active"), 
+                total: db["products"].length
             } 
 
         }
+
+    },
+    
+    countByStatus(collection, status){
+        return db[collection].filter(i => i.status == status.toUpperCase()).length
     },
 
-    getPopularTags: async(limit) => {
-        return await listCountSublist("listings.tags", limit)
-    },
-
-    getTopCategories: async(limit) => {
-        return await listCountSubfield("listings.category", limit)
-    },
-
-    getTopAvailibilityStatus: async(limit) => {
-        return await listCountSubfield("listings.availabilityStatus", limit)
-    },
-
-    getTopListingStatus: async(limit) => {
-        return await listCountSubfield("listings.meta.status", limit)
-    }
+    ...(baseService(collection)),
 
 
 }

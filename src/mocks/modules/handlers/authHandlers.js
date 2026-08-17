@@ -53,6 +53,22 @@ export const authHandlers = [
     );
   }),
 
+  // POST: REGISTER
+  http.post(`${BASE_ENDPOINT}/register`, async ({ request }) => {
+    const body = await request.json();
+
+    if (SERVICE.register(body)) {
+      return new HttpResponse(null, {
+        status: 200
+      });
+    }
+
+    return HttpResponse.json(
+      { message: 'No se pudo registrar usuario' },
+      { status: 500 }
+    );
+  }),
+
 
   // POST: CHANGE-MAIL
   http.post(`${BASE_ENDPOINT}/change-email`, async ({ request }) => {
@@ -72,5 +88,22 @@ export const authHandlers = [
 
 
   // TODO: (POST) CHANGE-PASSWORD
+  http.post(`${BASE_ENDPOINT}/change-password`, async ({ request }) => {
+    const body = await request.json();
+
+    console.log(body)
+    if (SERVICE.changeUserPassword(body)) {
+      return new HttpResponse(null, {
+        status: 200
+      });
+    }
+
+    return HttpResponse.json(
+      { message: 'Credenciales inválidas' },
+      { status: 401 }
+    );
+  }),
+
+
 
 ];

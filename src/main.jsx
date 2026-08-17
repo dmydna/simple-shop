@@ -17,6 +17,16 @@ async function enableMocking() {
 
   const { worker } = await import('@/mocks/browser');
 
+// Registrar el listener para reactivar MSW tras inactividad
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      worker.start({
+        onUnhandledRequest: 'bypass',
+        quiet: true, // Evita spam de logs en la consola al reanudarse
+      });
+    }
+  });
+
   return worker.start({
     onUnhandledRequest: 'bypass',
   });

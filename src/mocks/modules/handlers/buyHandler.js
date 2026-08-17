@@ -12,7 +12,6 @@ export const buyHandlers = [
   // POST: BUY/CONFIRM PAYMENT
   http.post(`${BASE_ENDPOINT}`, async ({ request }) => {
     const body = await request.json();
-    console.log('[MOCK-API] Login:', body);
 
     if (SERVICE.confirmPayment(body)) {
       return new HttpResponse(null, { status: 200 });

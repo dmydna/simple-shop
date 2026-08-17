@@ -1,5 +1,6 @@
 
 import { db } from "@/mocks/modules/db";
+import { collectionByFK } from "./config";
 
 // --- PAGINATION UTILS ---
 
@@ -19,7 +20,6 @@ export const extractPaginationParams = (url) => {
   for (const [key, value] of Object.entries(allParams)) {
     if (!paginationKeys.has(key)) {
       filters[key] = decodeURIComponent(value.replace(/\+/g, " "));
-      console.log(filters[key])
     }
   }
 
@@ -35,6 +35,31 @@ export const applyFilters = (data, filters) => {
   return data.filter(item => {
     return Object.entries(filters).every(([key, value]) => {
       const itemValue = item[key];
+
+      // 1. Manejo de Rangos (minPrice, maxPrice)
+      // Detectamos si la clave empieza con "min" o "max"
+      if (key.startsWith('min')) {
+        const field = key.replace('min', '').toLowerCase(); // Ej: "minPrice" -> "price"
+        const itemPrice = parseFloat(item[field]); // Convertir a número para comparar
+
+        // Retornar false si no es un número válido
+        if (isNaN(itemPrice)) return false;
+
+        // Comparar si el precio es mayor o igual al límite
+        return itemPrice >= parseFloat(value);
+      }
+
+      if (key.startsWith('max')) {
+        const field = key.replace('max', '').toLowerCase(); // Ej: "maxPrice" -> "price"
+        const itemRange = parseFloat(item[field]);
+
+        if (isNaN(itemRange)) return false;
+
+        // Comparar si el precio es menor o igual al límite
+        return itemRange <= parseFloat(value);
+      }
+
+      // 2. Filtro Estándar (String o Comparación Simple)
       if (itemValue === undefined) return false;
 
       if (typeof value === 'string') {
@@ -44,6 +69,78 @@ export const applyFilters = (data, filters) => {
     });
   });
 };
+
+
+
+export default function findRelation(FK, value){
+  if(collectionByFK[FK]){
+    const collection = collectionByFK[FK];
+    return db[collection].find(i => i.id == value) 
+  } 
+  return null
+}
+
+
+export function getRelations(item){
+  const relations = [] 
+  Object.entries(item).forEach( ([key, value])  => {
+      const rel = findRelation(key, value);
+      if(rel) relations.push(rel) 
+    })
+  return relations;
+}
+
+
+
+export const applyFiltersWidthRelation = (data, filters) => {
+  if (!filters || Object.keys(filters).length === 0) return data;
+
+  return data.filter(item => {
+
+    const relations = getRelations(item);
+
+    return Object.entries(filters).every(([key, value]) => {
+  
+
+    // HACK: si no encuentra en item busca el filtro en su primer relacion  
+      const relItem = relations.length != 0 ? relations[0] : {}
+
+      const itemValue = item[key] || relItem[key];
+
+      // 1. Manejo de Rangos (minPrice, maxPrice)
+      // Detectamos si la clave empieza con "min" o "max"
+      if (key.startsWith('min')) {
+        const field = key.replace('min', '').toLowerCase(); // Ej: "minPrice" -> "price"
+        const itemPrice = parseFloat(item[field] || relItem[field]); // Convertir a número para comparar
+
+        // Retornar false si no es un número válido
+        if (isNaN(itemPrice)) return false;
+
+        // Comparar si el precio es mayor o igual al límite
+        return itemPrice >= parseFloat(value);
+      }
+
+      if (key.startsWith('max')) {
+        const field = key.replace('max', '').toLowerCase(); // Ej: "maxPrice" -> "price"
+        const itemRange = parseFloat(item[field] || relItem[field]);
+
+        if (isNaN(itemRange)) return false;
+
+        // Comparar si el precio es menor o igual al límite
+        return itemRange <= parseFloat(value);
+      }
+
+      // 2. Filtro Estándar (String o Comparación Simple)
+      if (itemValue === undefined) return false;
+
+      if (typeof value === 'string') {
+        return String(itemValue).toLowerCase().includes(value.toLowerCase());
+      }
+      return itemValue == value;
+    });
+  });
+};
+
 
 /**
  * Aplica ordenamiento a un array de datos.
@@ -136,56 +233,21 @@ export const dateFromMockArray = (arr, month1Index = false) => {
 
 // --- STATS UTILS ---
 
-// HACKME: se adapta a un caso particular 
-export const listCountSubfield = async (path, limit) => {
-  // 1. Validar entrada
-  if (!path || typeof path !== 'string') {
-    console.error("listCountSubfield: Ruta inválida");
-    return [];
-  }
 
-  // 2. Dividir la ruta en partes
-  // Ej: "listings.meta.status" -> ["listings", "meta", "status"]
-  const parts = path.split('.');
-  
-  if (parts.length < 2) {
-    console.error("listCountSubfield: La ruta debe tener al menos 2 partes (coleccion.campo)");
-    return [];
-  }
+export const listCountByField = async (collection, field, limit) => {
 
-  // 3. Obtener la colección base (primera parte)
-  const collectionName = parts[0];
-  const baseCollection = db[collectionName];
+  const baseCollection = db[collection];
 
-  if (!baseCollection || !Array.isArray(baseCollection)) {
-    console.error(`listCountSubfield: Colección '${collectionName}' no encontrada o no es un array`);
-    return [];
-  }
 
-  // 4. Definir la ruta interna para acceder al campo (sin la colección)
-  const internalPath = parts.slice(1).join('.');
-
-  // 5. Función auxiliar para navegar el objeto anidado
-  const getNestedValue = (obj, pathStr) => {
-    const keys = pathStr.split('.');
-    let current = obj;
-
-    for (const key of keys) {
-      if (current === null || current === undefined) return undefined;
-      if (!current.hasOwnProperty || !current.hasOwnProperty(key)) return undefined;
-      current = current[key];
-    }
-    return current;
-  };
-
-  // 6. Agrupar y contar
   const group = {};
 
   for (const item of baseCollection) {
-    // Navegamos hasta el campo final
-    const value = getNestedValue(item, internalPath);
 
-    // Si el valor no existe, no es un array, o es null/undefined, lo ignoramos
+    // HACK: si no encuentra en item busca el filtro en su primer relacion  
+    const relations = getRelations(item)
+    const relItem = relations.length == 0 ? {} : relations[0] 
+
+    const value          = item[field] || relItem[field]
     if (value === undefined || value === null) continue;
 
     // Si el valor es un array (ej: status: ["active", "pending"]), contamos cada elemento individualmente
@@ -203,7 +265,6 @@ export const listCountSubfield = async (path, limit) => {
     }
   }
 
-  // 7. Formatear y retornar resultados
   return Object.keys(group)
     .map(k => ({ name: k, count: group[k] }))
     .sort((a, b) => b.count - a.count)
@@ -211,88 +272,20 @@ export const listCountSubfield = async (path, limit) => {
 };
 
 
-// HACKME: se adapta a un caso particular 
-export const listCountSublist = async (path, limit) => {
-  // 1. Validar entrada
-  if (!path || typeof path !== 'string') {
-    console.error("listCountSublist: Ruta inválida");
-    return [];
-  }
-
-  const parts = path.split('.');
-  
-  if (parts.length !== 2) {
-    console.error(`listCountSublist: La ruta debe tener formato "coleccion.campo". Recibido: ${path}`);
-    return [];
-  }
-
-  const [collectionName, fieldName] = parts;
-
-  // 3. Obtener la colección
-  const collection = db[collectionName];
-  
-  if (!collection || !Array.isArray(collection)) {
-    console.error(`listCountSublist: Colección '${collectionName}' no encontrada`);
-    return [];
-  }
-
-  // 4. Agrupar y contar
-  const group = {};
-
-  for (const item of collection) {
-    const values = item[fieldName];
-
-    // Si el campo no existe o no es un array, lo saltamos
-    if (!Array.isArray(values)) continue;
-
-    // Iterar sobre el array de valores (tags, categories, etc.)
-    for (const val of values) {
-      if (val !== undefined && val !== null) {
-        const keyName = String(val);
-        group[keyName] = (group[keyName] || 0) + 1;
-      }
-    }
-  }
-
-  // 5. Formatear y retornar
-  return Object.keys(group)
-    .map(k => ({ name: k, count: group[k] }))
-    .sort((a, b) => b.count - a.count)
-    .slice(0, limit);
-};
-
-
-
-/*
-function listCountSublist(list, sublist,limit){
-  const group = {}
-  const build_group = list.map(p => {
-  const target = p[sublist]
-
-  target.forEach(t => {
-      if(!group[t]){ group[t] = 1 ;return; }
-      group[t] ++  
-    })
-  })
-
-  return Object.keys(group)
-     .map( k =>  ({name: k, count:   group[k]}))
-     .sort((a,b) => b.count - a.count)
-     .slice(0, limit+1)   
+export function isValidEmail(email) {
+  // Patrón estricto para formato estándar
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 }
 
-function listCountSubfield(list, subfield,limit){
-  const group = {}
-  const build_group = list.map(p => {
-  const target = p[subfield]
 
-  if(!group[target]){ group[target] = 1; return; }
-  group[target] ++  
 
-  return Object.keys(group)
-     .map( k =>  ({name: k, count:   group[k]}))
-     .sort((a,b) => b.count - a.count)
-     .slice(0, limit+1)   
+// -- utils ---
+
+
+// aplana flat en base
+export function flatMapIn(base, flat){
+  // quitamos compos que no puede ser aplanados (cubre caso general)
+  const {id, created, updatedAt, deletedAt, ...map} = flat;
+  return {...base,...map}
 }
-
-*/

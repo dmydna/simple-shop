@@ -5,8 +5,9 @@ export const baseHandlers = (BASE_ENDPOINT, SERVICE) => [
   // Metodos comunes para handlers
 
   // POST: CREATE
-  http.post(`${BASE_ENDPOINT}`, (base) => {
-    const newUser = SERVICE.create(base);
+  http.post(`${BASE_ENDPOINT}`, async ({request}) => {
+    const body = await request.json()
+    const newUser = SERVICE.create(body);
     if (!newUser) {
       return HttpResponse.json(
         { message: 'No se pudo crear el item' }, 
@@ -62,7 +63,9 @@ export const baseHandlers = (BASE_ENDPOINT, SERVICE) => [
   // PUT: UPDATE BY ID
   http.put(`${BASE_ENDPOINT}/:id`, async ({ params, request }) => {
     
-    const { id } = params; 
+    const id = String(params.id);
+
+
     let updates;
     try {
       updates = await request.json();
@@ -86,9 +89,9 @@ export const baseHandlers = (BASE_ENDPOINT, SERVICE) => [
   }),
 
 
-    // PATCH: STATUS
+  // PATCH: STATUS
   http.patch(`${BASE_ENDPOINT}/:id/status`, async ({ params, request }) => {
-    const { id } = params; 
+    const id = String(params.id);
     
     let updates;
     try {
@@ -113,6 +116,15 @@ export const baseHandlers = (BASE_ENDPOINT, SERVICE) => [
 
     return HttpResponse.json( {status: updatedData.meta.status }, { status: 200 });
   }),
+
+
+
+  // DELETED: DELETE BY ID
+  http.delete(`${BASE_ENDPOINT}/:id`, async ({ params, request }) => {
+    const id = String(params.id);
+    SERVICE.deleteById(id)
+    return HttpResponse.json( null, { status: 200 });
+  })
 
 
 ];

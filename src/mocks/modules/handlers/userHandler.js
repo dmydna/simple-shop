@@ -64,6 +64,52 @@ export const userHandlers = [
   }),
 
 
+  // PATCH: STATUS
+  http.patch(`${BASE_ENDPOINT}/:id/ban-user`, async ({ params, request }) => {
+    const { id } = params; 
+    
+    let updates;
+    try {
+      updates = await request.json();
+    } catch (error) {
+      return HttpResponse.json(
+        { error: 'Cuerpo de la petición inválido', details: error.message },
+        { status: 400 }
+      );
+    }
+
+    const exists = SERVICE.existsById(id);
+
+    if (!exists) {
+      return HttpResponse.json(
+        { error: 'Elemento no encontrado' },
+        { status: 404 }
+      );
+    }
+
+    const response = SERVICE.banUser(id, updates)
+
+    return HttpResponse.json( null, { status: 200 });
+  }),
+
+
+http.patch(`${BASE_ENDPOINT}/:id/unban-user`, async ({ params }) => {
+    const { id } = params; 
+    const exists = SERVICE.existsById(id);
+
+    if (!exists) {
+      return HttpResponse.json(
+        { error: 'Elemento no encontrado' },
+        { status: 404 }
+      );
+    }
+
+    const response = SERVICE.unbanUser(id)
+
+    return HttpResponse.json( null, { status: 200 });
+  }),
+
+
    ...(baseHandlers(BASE_ENDPOINT, SERVICE))
 
 ];

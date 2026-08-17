@@ -41,7 +41,11 @@ export const favorite_service = {
     },
 
     filterPage: (request) => {
-        return db.findPage("favorites", request, favoriteMapper)
+        return db.findPage(collection, request, favoriteMapper)
+    },
+
+    deleteById:(listingId) => {
+        return db.deleteFrom(collection, i => i.listingId == listingId)
     },
 
 

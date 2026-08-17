@@ -1,4 +1,4 @@
-import { db, currentLoggedUser } from '@/mocks/modules/db.js';
+import { db } from '@/mocks/modules/db.js';
 
 
 export const baseService =  (collection) => ({
@@ -8,7 +8,7 @@ export const baseService =  (collection) => ({
     },
 
     getById: (id) => {
-        return db.find(collection, item => item.id == id);
+        return db.findWithRelations(collection, item => item.id == id, i => db.__buildMeta(i, collection) ) ;
     },
 
     getIndexDB: (id) => {
@@ -16,7 +16,7 @@ export const baseService =  (collection) => ({
     }
     ,
     filterPage: (request) => {
-        return db.findPage(collection,request);
+        return db.findPage(collection,request, i => db.__buildMeta(i, collection));
     },
 
     updateById: (id, update) => {
@@ -31,17 +31,17 @@ export const baseService =  (collection) => ({
         return db.update(
             collection, 
             item => item.id == id , 
-            item => ({ ...item, meta: {...item.meta, "status": status} }) 
+            item => ({ ...item, status: status }) ,
+            true
         ); 
     },
 
     deleteById:(id) => {
-        console.log(db[collection])
-        return db._delete(collection, id)
+        return db.deleteFrom(collection, i => i.id == id)
     },
 
     existsById: (id) => {
-        return db.exists(collection, i => i.id === id)
+        return db.exists(collection, i => i.id == id)
     },
 
 })

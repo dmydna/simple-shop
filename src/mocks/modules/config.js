@@ -1,8 +1,6 @@
 
 // --- RELATIONS MAPPING DB  ---
 
-import OrderItem from "@/features/order/components/OrderItem";
-
 
 
 export const configDB = {

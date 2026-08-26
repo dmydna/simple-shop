@@ -1,12 +1,10 @@
 import React from "react";
-import { useUIContext } from "@contexts/UIContext.jsx";
 import LoginModal from "@f/auth/components/LoginModal.jsx";
 import {Button} from "react-bootstrap";
 
 function LoginButton({className, Style, children, handle}){
    
-    const {showLogin, onHideLogin}  = useUIContext()
-    const handleLogin = handle ? handle() && onHideLogin(true) : onHideLogin(true)
+    const handleLogin = handle && handle()
 
     return(
         <>

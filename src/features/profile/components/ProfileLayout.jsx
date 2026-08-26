@@ -34,7 +34,7 @@ const ProfileLayout = () => {
 
 
                 <Col className="col-12 col-sm-12 col-md-12 col-lg-9 px-0 px-md-2">
-                    <div className="h-100 col-12 rounded-4 border p-4 mb-4 island">
+                    <div className="h-100 min-vh-md-70 col-12 rounded-4 border p-4 mb-4 island">
                            <Outlet/>
                     </div>
 

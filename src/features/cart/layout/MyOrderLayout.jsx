@@ -14,6 +14,12 @@ function MyOrderLayout() {
 
 	const [cuponCheck, setCuponCheck] = useState(false)
 	
+
+	const confirmAction = (func) => {
+		window.scrollTo({ top: 0, behavior: 'instant'});
+		func()
+	}
+
 	return (
 	<>
 	{ loading || error && (<MyOrderCartPlaceHoder />)}
@@ -28,24 +34,24 @@ function MyOrderLayout() {
 				check={cuponCheck}>
 			</MyOrderCart>
 
-			<div style={{ marginTop: '10px' }} className="border p-3 mx-2 d-flex justify-content-center gap-3 island">
+			<div style={{ marginTop: '10px' }} className="border p-3 mx-0 mx-md-2 d-flex justify-content-center gap-3 island">
 
 				<CartNavButton  
 					visible={!success} 
-					handle={handleCancel}
+					handle={()=>confirmAction(handleCancel)}
 					variant="light"
 					title="Cancelar" 
 				/>
 
 				<CartNavButton  
 					visible={step == cartStep.CART && !success} 
-					handle={handleConfirmOrder} 
+					handle={()=>confirmAction(handleConfirmOrder)} 
 					title="Continuar" 
 				/>
 
 				<CartNavButton  
 					visible={step == cartStep.PAY && !success} 
-					handle={handleConfirmPay} 
+					handle={()=>confirmAction(handleConfirmPay)} 
 					title="Confirmar Compra" 
 				/>
 

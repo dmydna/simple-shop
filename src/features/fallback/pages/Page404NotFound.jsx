@@ -11,7 +11,7 @@ function Page404NotFound(){
     }
     const error = 'Parece que no encontramos la pagina';
     return (
-        <CenterLayout fix>
+        <CenterLayout>
             <FeedbackMessage
                 title="404 page not found"
                 message={error}

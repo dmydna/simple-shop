@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import ButtonLink from "../../../components/common/ButtonLink";
+import ButtonLink from "@common/ButtonLink";
 import { URL_FAQs, URL_LISTING_CRUD } from "@/utils/links";
 
 export default function GetStarted(){

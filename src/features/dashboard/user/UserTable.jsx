@@ -33,6 +33,7 @@ export const UserTable = ({  baseHook, className }) => {
             data={content}
             emptyIcon={"bi bi-person"}
             emptyMessage={"No hay items"}
+            listFix={true}
         >
         <>
             <div className={`${className} small w-100`}>

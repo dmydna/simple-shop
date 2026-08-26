@@ -1,8 +1,8 @@
 import { useAuthContext } from "@/features/auth/contexts/AuthContext";
 import { IconTint } from "@common/IconTintyColor";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 
-export default function SidebarButton({id, className}){
+export default function DockbarToggle({id, className}){
 	
 	const {isAdmin, isAuth} = useAuthContext()
 

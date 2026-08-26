@@ -5,6 +5,7 @@ import warningIMG from "/src/assets/404.png"
 import Img1 from "/src/assets/web_404_crop.png"
 import '/src/styles/animations.css'
 import {FeedbackMessage} from "@common/FeedbackMessage.jsx";
+import CenterLayout from "@/components/layout/CenterLayout";
 
 
 function Page403Forbidden(){
@@ -15,6 +16,7 @@ function Page403Forbidden(){
     }
     const error = 'Acceso restringido';
     return (
+        <CenterLayout>
         <FeedbackMessage
             title="403 forbidden"
             message={error}
@@ -22,6 +24,7 @@ function Page403Forbidden(){
             actionLabel="volver a Incio"
             onAction={goToHome}
         />
+        </CenterLayout>
     )
 }
 

@@ -5,7 +5,7 @@ import { Modal } from "react-bootstrap";
 
 
 
-export default function ModalParam({ children, param, inverse = false }) {
+export default function ModalParam({ children, param, inverse = false, size="sm" }) {
 
 
     const { searchParams, setSearchParams } = useUrlState();
@@ -61,7 +61,7 @@ export default function ModalParam({ children, param, inverse = false }) {
         <Modal
             show={show}
             onHide={close}
-            size="sm"
+            size={size}
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >

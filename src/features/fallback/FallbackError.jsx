@@ -1,10 +1,9 @@
-import {FeedbackMessage} from "@common/FeedbackMessage.jsx";
-import React, { useEffect } from "react";
+import { FeedbackMessage } from "@common/FeedbackMessage.jsx";
 
-function PageError({handle, error, variant="light"}){
+function FallbackError({handle, error, variant="light", fixes, className}){
 
     return (
-        <div className={`m-auto h-100`}>
+        <div className={`m-auto h-100 ${className}`}>
         <FeedbackMessage
             title="Hubo un error"
             icon="bi-x"
@@ -12,9 +11,10 @@ function PageError({handle, error, variant="light"}){
             onAction={handle || null }
             error={error}
             variant={"danger"}
+            listFix={fixes}
         />
         </div>
     )
 }
 
-export default PageError;
+export default FallbackError;

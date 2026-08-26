@@ -15,6 +15,7 @@ function Cart() {
   const successHandle = () => {
     clearCart()
     methods?.setSuccess(null)
+
   }
 
   return (

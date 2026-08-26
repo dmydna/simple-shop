@@ -1,7 +1,8 @@
+import FallbackError from "@/features/fallback/FallbackError";
+import FallbackSuccess from "@/features/fallback/FallbackSuccess";
+import PageLoading from "@/features/fallback/pages/PageLoading";
 import { usePaymentContext } from "@/features/payment/contexts/PaymentContext";
-import PageError from "@features/fallback/PageError";
-import PageLoading from "@features/fallback/PageLoading";
-import PageSuccess from "@features/fallback/PageSuccess";
+import { URL_USER_ORDER } from "@/utils/links";
 import { MyCart } from "@features/cart/components/MyCart";
 import { useCart } from "@features/cart/contexts/CartContext";
 import PaymentForm from "@features/payment/components/PaymentForm";
@@ -16,7 +17,7 @@ function MyCartLayout() {
 	= usePaymentContext()
 
 	const handleSucess = () => {
-		navigate(`/order/${orderResponse?.orderId}`)
+		navigate(`${URL_USER_ORDER}/${orderResponse?.orderId}`)
 		clearCart()
 	}
 
@@ -28,7 +29,7 @@ function MyCartLayout() {
 				{!loading && !error && (
 					<MyCart className="p-4 island">
 						<p className="h5 fw-bold pt-3">
-							Mi carrito({cartItems.length})
+							My cart({cartItems.length})
 						</p>
 					</MyCart>
 				)}
@@ -49,17 +50,17 @@ function MyCartLayout() {
 		)}
 		{success && (
 			<Card className="p-4 island mb-2 h-100 border align-items-center justify-content-center d-flex">
-				<PageSuccess handle={handleSucess} />
+				<FallbackSuccess handle={handleSucess} />
 			</Card>
 		)}
 		{error && (
 			<div className="p-4 island mb-2 h-100 border align-items-center justify-content-center d-flex">
-				<PageError  handle={() => setError(null)} />
+				<FallbackError  handle={() => setError(null)} />
 			</div>
 		)}
 		{canceled && (
 			<Card className="p-4 island mt-2">
-				<PageSuccess handle={() => navigate('/')} />
+				<FallbackSuccess handle={() => navigate('/')} />
 			</Card>
 		)}
 	</>)

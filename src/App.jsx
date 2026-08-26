@@ -1,7 +1,7 @@
 import "@/styles/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 import ProtectedRoute from "@common/ProtectedRoute";
@@ -13,7 +13,7 @@ import Navbar from "@layout/Navbar.jsx";
 import { ToastContainer } from "react-toastify";
 
 
-import Cart from "@pages/Cart/Cart.jsx";
+import Cart from "@/pages/Cart.jsx";
 import Contact from "@pages/Contact";
 import Home from "@pages/Home";
 import ProductDetails from "@pages/Product/ProductDetails";
@@ -24,8 +24,8 @@ import CompleteRegister from "@pages/CompleteRegister";
 import Login from "@pages/Login";
 import Register from "@pages/Register.jsx";
 
-import Page404NotFound from "@features/fallback/Page404NotFound.jsx";
-import PageNotReady from "@features/fallback/PageNotReady";
+
+import Page404NotFound from "@/features/fallback/pages/Page404NotFound.jsx";
 
 import ProfileLayout from "@/features/profile/components/ProfileLayout";
 import MyAccount from "@features/profile/components/MyAccount";
@@ -41,8 +41,8 @@ import { ListingCrudProvider } from "@features/listing/contexts/ListingCrudConte
 import { ProfileProvider } from "@features/profile/contexts/ProfileContext.jsx";
 import { UserProvider } from "@features/user/contexts/UserContext.jsx";
 
+import Dockbar from "@/components/layout/Dockbar";
 import DemoUploader from "@/dev/components/DemoUploader";
-import SmartSidebarApp from "@components/layout/SmartSidebarApp";
 import WelcomeDashboard from "@features/dashboard/common/WelcomeDashboard";
 import DashboardLayout from "@features/dashboard/layout/DashboardLayout";
 import ListingForm from "@features/dashboard/listing/ListingForm";
@@ -52,6 +52,7 @@ import PaymentForm from "@features/payment/components/PaymentForm.jsx";
 import CatalogeLayout from "@components/layout/CatalogeLayout";
 import ChangeMail from "@pages/ChangeMail";
 import OrderDetails from "@pages/OrderDetails";
+import PageWip from "@features/fallback/pages/PageWip";
 
 // DONE: update listing
 
@@ -72,7 +73,7 @@ function App() {
 
         <main className={`flex-grow-1 p-3 px-0 ${navFix}`}>
 
-          <SmartSidebarApp />
+          <Dockbar />
 
           <Routes>
             <Route path="/" element={<Home />} />
@@ -93,7 +94,7 @@ function App() {
               </ProfileProvider>
             }></Route>
             <Route path="/test/uploader" element={<DemoUploader />} />
-            <Route path="/faqs" element={<PageNotReady />} />
+            <Route path="/faqs" element={<PageWip />} />
             
             <Route path="/p/:hash" element={<ProductDetails />} />
 

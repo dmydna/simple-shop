@@ -1,7 +1,6 @@
-import PageError from "@features/fallback/PageError";
-import { useEffect } from "react";
+import FallbackError from "@/features/fallback/FallbackError";
+import FallbackSuccess from "@/features/fallback/FallbackSuccess";
 import CartEmpty from "@features/cart/components/CartEmpty";
-import PageSuccess from "@features/fallback/PageSuccess";
 
 
 /**
@@ -27,21 +26,9 @@ export const CartLayout = (
     // - El fallback solo responde en caso de Carrito Vacio. 
     // - Para fallbacks Success y Error se usa `MyCartLayout`.
 
-    useEffect(()=>{
-      if(isEmpty){
-        if(document.querySelector('main')){ 
-          document.querySelector('main').classList.add('d-flex', 'justify-content-center', 'align-items-center') 
-        }
-      }else{
-        if(document.querySelector('main')){ 
-          document.querySelector('main').classList.remove('d-flex', 'justify-content-center', 'align-items-center') 
-        }
-      }
-    },[isEmpty])
 
-
-    if (success) return <PageSuccess handle={()=> setSuccess(null)} />
-    if (error) return   <PageError error={error} handle={ ()=> setError(null)} />
+    if (success) return <FallbackSuccess handle={()=> setSuccess(null)} />
+    if (error) return   <FallbackError error={error} handle={ ()=> setError(null)} />
     if (isEmpty) return <CartEmpty /> 
 
 

@@ -1,7 +1,7 @@
 import { FeedbackMessage } from "@common/FeedbackMessage.jsx";
 import { useNavigate } from "react-router-dom";
 
-function PageIsOffline(){
+function FallbackIsOffline(){
 
     const navigate = useNavigate();
     const reload = () => {window.location.reload()}
@@ -17,4 +17,4 @@ function PageIsOffline(){
     )
 }
 
-export default PageIsOffline;
+export default FallbackIsOffline;

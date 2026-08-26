@@ -1,18 +1,14 @@
 
-import { CompleteUserRegister } from "@/utils/schemas";
-import PageLoading from "@features/fallback/PageLoading";
-import { useProfile } from "@features/profile/contexts/ProfileContext.jsx";
-import { Button, Col, FloatingLabel, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { CRUD } from '@/utils/enums';
-import InputFloating from "@/components/common/InputFloating";
 import FetchStateToast from "@/components/common/FetchStateToast";
-import FormProfile from "@/features/profile/components/FormProfile";
 import PublicRoute from "@/components/common/PublicRoute";
-import ProtectedRoute from "@/components/common/ProtectedRoute";
+import FormProfile from "@/features/profile/components/FormProfile";
+import { CompleteUserRegister } from "@/utils/schemas";
+import { useProfile } from "@features/profile/contexts/ProfileContext.jsx";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect } from 'react';
+import { Button, Col } from "react-bootstrap";
+import { useForm } from 'react-hook-form';
+import { useNavigate } from "react-router-dom";
 
 
 function CompleteRegisterForm({ children, className, style }) {

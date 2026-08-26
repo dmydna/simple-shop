@@ -9,15 +9,10 @@ function NavItems({items, onSeleccion, className}){
   const navigate = useNavigate()
 
   
-    const {onHideContact, setShowMenu, showMenu} = useNavbarContext()
+    const {setShowMenu, showMenu} = useNavbarContext()
 
 
-    const handleContact = () =>{ 
-      !showMenu ? 
-      onHideContact(true) : 
-      navigate(URL_CONTACT), 
-      setShowMenu(false)
-    }
+
     const handleClick = (item) => {  
       onSeleccion(item) ;
       showMenu &&
@@ -38,7 +33,7 @@ function NavItems({items, onSeleccion, className}){
         )}
         <Nav.Link 
             className={className}
-            onClick={handleContact}
+            onClick={()=> navigate(`${window.location.pathname}?dialog=contact`)}
         >
           Contact
         </Nav.Link>

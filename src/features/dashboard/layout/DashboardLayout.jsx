@@ -36,7 +36,7 @@ function DashboardLayout({ children }) {
 
                 </Row>
 
-                <OffCanvasSidebar title={"Dashboard"} >
+                <OffCanvasSidebar title={"Panel"} >
                     <SidebarDash />
                 </OffCanvasSidebar>
 

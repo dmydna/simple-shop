@@ -1,8 +1,7 @@
-import {useNavigate} from "react-router-dom";
-import {FeedbackMessage} from "@common/FeedbackMessage.jsx";
-import React from "react";
+import { FeedbackMessage } from "@common/FeedbackMessage.jsx";
+import { useNavigate } from "react-router-dom";
 
-function PageServerDown(){
+function FallbackServerDown(){
 
     const navigate = useNavigate();
     const addContent = () => {
@@ -18,4 +17,4 @@ function PageServerDown(){
     )
 }
 
-export default PageServerDown;
+export default FallbackServerDown;

@@ -1,12 +1,11 @@
 import { Container, Row } from "react-bootstrap";
 import React, { useEffect } from "react";
 
-import LoginForm from "@f/auth/components/LoginForm.jsx";
-
-
 export default function PageFormLayout({children}){
 
+
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'instant'});
         const body = document.querySelector("body");
         const main = document.querySelector("main");
         if (!body && !main) return;

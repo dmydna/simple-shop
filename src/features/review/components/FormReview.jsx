@@ -59,7 +59,7 @@ function FormReview({className, close}) {
 
                     <div className="position-relative">
                         <ProfileHeader
-                            className='m-0'
+                            className='my-2'
                             title="Califica tu producto"
                         />
                         {close && (
@@ -79,13 +79,15 @@ function FormReview({className, close}) {
 
                             <div className='d-flex gap-3 mb-3  border-0 rounded-3 p-2 w-100'>  
 {/*                                <img style={{ height: '55px', width: '55px' }} className='rounded' src={currentItem?.image || placeholder({ dimension: "45x45", background: ".menta", fontSize: "20", icon: "f244" })} />*/}
-                                <PlaceholderIcon fontSize='fs-4' variant={'success flex-glow'} icon={'bi-cart3'} />
+                                <div className="d-none d-md-block">
+                                    <PlaceholderIcon fontSize='fs-4' variant={'success flex-glow'} icon={'bi-cart3'} />
+                                </div>
                                 <div className="flex-fill">
                                     <p onClick={()=> navigate(`/p/${currentItem?.id}`)} 
-                                       className='small fw-semibold m-0 pointer'>
+                                       className='small fw-semibold m-0 pointer mb-3 mb-md-0'>
                                        {currentItem?.title}
                                     </p>
-                                    <div className='d-flex justify-content-between align-items-center'>
+                                    <div className='d-flex justify-content-between align-items-md-center flex-column flex-md-row '>
                                         <p className='m-0'>Calificación: {rating} estrellas</p>
                                         <StarRating value={rating} onChange={setRating} />
                                     </div>

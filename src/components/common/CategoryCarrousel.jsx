@@ -33,7 +33,7 @@ function CategoryCarrousel({className}){
           className="border rounded-4"
           image={Img2} 
           description='perfumeria' 
-          category={category.FRAGRANCE} 
+          category={category.FRAGRANCES} 
           link={`/products?category=${category.FRAGRANCES}`}
         />
       </Carousel.Item>

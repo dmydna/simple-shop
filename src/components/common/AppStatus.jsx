@@ -1,16 +1,16 @@
-import NotSearchResults from "@/features/fallback/NotSearchResults";
+import FallbackError from "@/features/fallback/FallbackError";
+import FallbackNotContent from "@/features/fallback/FallbackNotContent";
+import FallbackNotSearchResults from "@/features/fallback/FallbackNotSearchResults";
+import FallbackServerDown from "@/features/fallback/FallbackServerDown";
 import { healthService } from "@/features/health/services/healthService";
 import { useAsync } from "@/hooks/useAsync";
-import useCheckServer from "@/hooks/useCheckServer";
-import useNetworkStatus from "@/hooks/useNetworkStatus";
-import { useUrlState } from "@/hooks/useUrlState";
-import PageError from "@features/fallback/PageError";
-import PageIsOffline from "@features/fallback/PageIsOffline";
-import PageNotContent from "@features/fallback/PageNotContent";
-import PageServerDown from "@features/fallback/PageServerDown";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import CenterLayout from "../layout/CenterLayout";
+import CenterLayout from "@layout/CenterLayout";
+import PageServerDown from "@/features/fallback/pages/PageServerDown";
+import PageNotSearchResults from "@/features/fallback/pages/PageNotSearchResults";
+import PageNotContent from "@/features/fallback/pages/PageNotContent";
+import PageError from "@/features/fallback/pages/PageError";
 
 
 /**
@@ -56,9 +56,7 @@ export const AppStatus = (
     // 3. Servidor caido
     if (serverStatus == 'servidor_caido') 
       return (
-        <CenterLayout>
-          <PageServerDown />
-        </CenterLayout>
+        <PageServerDown />
       )
     // 2. -- Error de carga de contenido
     if (error?.code === 'TOKEN_EXPIRED') {
@@ -68,27 +66,16 @@ export const AppStatus = (
 
     if (error) 
       return (
-      <CenterLayout>
-        <PageError error={error} handle={onRetry} />
-      </CenterLayout>
+       <PageError error={error} handle={onRetry} />
      ) 
 
     if(notSearchResults)
-      return (
-      <CenterLayout>
-        <NotSearchResults />
-      </CenterLayout>
-      )
+      return (<PageNotSearchResults />)
        
 
     // 3. No hay contenido
     if (isEmpty) 
-      return (
-      <CenterLayout>
-        <PageNotContent />
-       </CenterLayout>
-
-      )
+      return (<PageNotContent />)
       
     return <>{children}</>
 };

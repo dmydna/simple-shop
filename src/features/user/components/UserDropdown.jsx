@@ -1,7 +1,6 @@
 import { IconTint } from "@/components/common/FloatButtonCollection";
 import ImageWithFallback from "@/components/common/ImageWithFallback.jsx";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
-import { useUIContext } from "@contexts/UIContext.jsx";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -13,14 +12,13 @@ import { URL_DASHBOARD, URL_USER_FAVORITE, URL_USER_PURCHASES } from "@/utils/li
 
 function UserDropdown({ className }) {
 
-
   const { user, isAuth, logout, isAdmin } = useAuthContext();
-  const { setShowLoginModal, showLoginModal } = useUIContext()
-
   const [isActive, setIsActive] = useState(false)
   
   // si esta logeado activa el dropdown toggle, si no muestra LoginModal
-  const handleToggle = (isOpen) => isAuth ? setIsActive(isOpen) : setShowLoginModal(true)
+  const handleToggle = (isOpen) => 
+    isAuth ? setIsActive(isOpen) : 
+    navigate(`${window.location.pathname}?dialog=login`)
 
   const navigate = useNavigate();
 

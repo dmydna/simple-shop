@@ -19,7 +19,7 @@ const variantClasses = {
 
 
 
-export default function SiderbarLink({ label, icon, to, className, style, variant = 'outline-dark', fs ,onclick }) {
+export default function DockbarLink({ label, icon, to, className, style, variant = 'outline-dark', fs ,onclick }) {
   // Obtenemos las clases por defecto o usamos un fallback seguro
   const classes = variantClasses[variant] || variantClasses['outline-dark'];
 

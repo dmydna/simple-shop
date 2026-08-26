@@ -17,6 +17,8 @@ export const URL_USER_PURCHASES = `${URL_USER_HOME}/purchases`
 export const URL_USER_ACCOUNT = `${URL_USER_HOME}/account`
 export const URL_USER_PROFILE = `${URL_USER_HOME}/profile`
 export const URL_USER_PICTURE = `${URL_USER_HOME}/photo`
+export const URL_USER_ORDER   = `/order`
+
 
 export const URL_LOGIN = "/login"
 export const URL_SIGIN = "/register"

@@ -1,9 +1,9 @@
+import FallbackError from '@/features/fallback/FallbackError.jsx';
+import PageLoading from '@/features/fallback/pages/PageLoading.jsx';
 import { statsService } from '@/features/stats/services/statsService.js';
 import { useFetchTrigger } from '@/hooks/useFetchTrigger.js';
 import { useWindowsWidth } from '@contexts/useWindowSize.jsx';
 import ProductCard from '@f/product/components/ProductCard.jsx';
-import PageError from '@features/fallback/PageError.jsx';
-import PageLoading from '@features/fallback/PageLoading.jsx';
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
@@ -107,7 +107,7 @@ function TopCarousel({ children, top,maxCols, maxElems, className, imgSize = 180
     if (error) {
         return (
         <div className={className}>
-          <PageError error={error} />
+          <FallbackError error={error} />
         </div>
         );
     }

@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import { FeedbackMessage } from "@common/FeedbackMessage.jsx";
+import { useNavigate } from "react-router-dom";
 
-function PageEmpty({ico, message, variant}){
+function FallbackEmpty({ico, message, variant, className, fixes}){
 
     const navigate = useNavigate();
 
@@ -12,8 +12,9 @@ function PageEmpty({ico, message, variant}){
             message={message || defaultMsg}
             icon={ico || "bi-journal-plus"}
             variant={variant}
+            listFix={fixes}
         />
     )
 }
 
-export default PageEmpty;
+export default FallbackEmpty;

@@ -1,9 +1,9 @@
-import PageError from "@features/fallback/PageError";
-import PageSuccess from "@features/fallback/PageSuccess";
-import React, { useEffect } from 'react';
-import PageLoading from "@features/fallback/PageLoading";
+import FallbackError from "@/features/fallback/FallbackError";
+import FallbackSuccess from "@/features/fallback/FallbackSuccess";
+import PageLoading from "@/features/fallback/pages/PageLoading";
 import FetchStateModal from "@common/FetchStateModal";
 import FetchStateToast from "@common/FetchStateToast";
+import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
 /**
@@ -43,12 +43,12 @@ function FetchState({ children, hook, to }) {
     
     if(error)   {
         return (
-            <PageError error={error}  handle={() => setError(null)} />
+            <FallbackError error={error}  handle={() => setError(null)} />
         )
     }
     if(success) {
         return (
-            <PageSuccess handle={() =>{
+            <FallbackSuccess handle={() =>{
                 if(to){navigate(to)}
                 setSuccess(null)
               } 

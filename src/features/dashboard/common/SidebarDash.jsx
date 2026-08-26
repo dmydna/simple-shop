@@ -7,7 +7,7 @@ export default function SidebarDash({ role, border = false, className }) {
 
     const navigate = useNavigate()
 
-    const BASE_URL = "/dashboard"
+
 
     return (
         <div className={className}>

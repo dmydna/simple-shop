@@ -2,7 +2,7 @@ import { useNavbarContext } from "@/contexts/NavbarContext.jsx";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
 import SideBarDashboard from "@/features/dashboard/common/SiderbarDashboard.jsx";
 import SidebarProfile from "@/features/profile/components/SidebarProfile.jsx";
-import { URL_LOGIN, URL_SIGIN } from "@/utils/links";
+import { URL_DASHBOARD, URL_LOGIN, URL_SIGIN, URL_USER_HOME } from "@/utils/links";
 import { Button, Nav, Offcanvas } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -85,7 +85,7 @@ function MobileMenu({ children }) {
                   key={'/user'}
                   onClick={handleClose}
                   as={Link}
-                  to={'/user'}
+                  to={URL_USER_HOME}
                   className="fw-semibold fs-5 py-2 m-1"
                 >
                   User
@@ -96,7 +96,7 @@ function MobileMenu({ children }) {
                   key={'/dashboard'}
                   onClick={handleClose}
                   as={Link}
-                  to={'/dashboard'}
+                  to={URL_DASHBOARD}
                   className="fw-semibold fs-5 py-2 m-1"
                 >
                   Dashboard

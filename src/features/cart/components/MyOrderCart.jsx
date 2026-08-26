@@ -8,11 +8,6 @@ export const MyOrderCart = ({check, oncheck, handle}) => {
 
     const {totalPrice,totalDiscount, cartItems, cartCount,  couponDiscount} = useCart()
 
-    const buyMatch = useMatch("/cart/:buy")
-
-    const width = useWindowsWidth()
-
-
     const totalAmountDiscounts = useMemo(() => {
         let result = 0;
 
@@ -51,8 +46,7 @@ export const MyOrderCart = ({check, oncheck, handle}) => {
     }, [check, totalPrice, totalDiscount]);
 
     return (
-        <Card // style={{top: (width > 900 ? "55px" : 0)  }}
-                   className={`m-2 p-4 island`} >
+        <Card className={`mx-0 mt-3 mt-md-0 mx-md-2 p-3 island`} >
             <Card.Text className="h5 fw-bold text-secondary py-2">
                 Mi pedido
             </Card.Text>

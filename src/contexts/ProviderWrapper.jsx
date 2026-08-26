@@ -1,18 +1,18 @@
 import { AuthProvider } from "@features/auth/contexts/AuthContext.jsx";
 import { CartProvider } from "@features/cart/contexts/CartContext.jsx";
-import { ListingProvider } from "@features/listing/contexts/ListingContext.jsx";
-import { UIProvider } from "@contexts/UIContext";
+import UIWrapper from "./UIWrapper";
 
 // Este es tu Wrapper "CRUD"
 
 export const ProviderWrapper = ({ children }) => {
     return (
-        <AuthProvider>
-            <UIProvider>
+
+            <AuthProvider>
                 <CartProvider>
-                    {children}
+                    <UIWrapper>
+                        {children}
+                    </UIWrapper>
                 </CartProvider>
-            </UIProvider>
-        </AuthProvider>
+            </AuthProvider>
     );
 };

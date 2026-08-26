@@ -52,7 +52,7 @@ export default function OrderDetails() {
           <Col className={`col-12 col-md-12 col-lg-12 col-xl-7`}>
               
 
-            <MyOrderList className="p-4 island">
+            <MyOrderList className="p-3 island">
               <div className="d-flex gap-2 align-items-center">
                 < IconTint
                   className={'rounded-circle'}
@@ -79,7 +79,7 @@ export default function OrderDetails() {
             {idParam && (
               <FormReview
                 close={closeReview} 
-                className={'p-4 island border'}
+                className={'p-3 island border'}
               />
             )}
 

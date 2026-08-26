@@ -52,6 +52,7 @@ const ListingList = () => {
                     handleFilter={() => navigate(`${CURRENT_URL}?dialog=filter`)}
                 />
             </div>
+
             <ListingTable baseHook={baseHook} />
         </>
     );

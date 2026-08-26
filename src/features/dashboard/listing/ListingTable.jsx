@@ -41,6 +41,7 @@ export const ListingTable = ({ baseHook, className, }) => {
             onRetry={ refreshData }
             emptyIcon={"bi bi-sticky"}
             emptyMessage={"No hay items"}
+            listFix={true}
         >
             <>
                 <div className={`${className} small w-100`}>

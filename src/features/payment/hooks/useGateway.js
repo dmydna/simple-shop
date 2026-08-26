@@ -6,7 +6,6 @@ import { useState } from "react";
 export const useGateway = ({buy, setLoading, setError, onSuccess, orderResponse}) => {
 
     const {profile} = useProfile()
-    const [validToken, setValidToken] = useState(false)
     const [tokenGateway, setTokenGateway] = useState(null)
     const {create: paymentRequest } = useService({service: gatewayService})
 
@@ -18,13 +17,11 @@ export const useGateway = ({buy, setLoading, setError, onSuccess, orderResponse}
                 { "orderId": orderResponse.orderId,  "userEmail": profile.email }
             )
             setTokenGateway(token)
-            // console.log(token, "-- GATEWAY REQUEST [OK] --")
             return  (
                 { "orderId": orderResponse.orderId , "paymentToken" : token }
             )
         }catch(error){
             setError(true)
-            // console.log(error, "-- GATEWAY REQUEST [FAIL] --")
             throw new Error(error);
         }finally{
             setLoading(false)
@@ -55,6 +52,7 @@ export const useGateway = ({buy, setLoading, setError, onSuccess, orderResponse}
           await handleValidateGateway(tokenRequest)
         }
         catch(err){
+            setError(true)
         }
 
     }

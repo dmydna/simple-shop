@@ -35,7 +35,7 @@ export const ListingDTO = z.object({
   shippingInformation: z.string().default(""),
   availabilityStatus:  z.string().default(""),
   minimumOrderQuantity: z.coerce.number().int().min(1, "El precio no puede ser negativo").default(1),
-  images: z.array(z.string()).default([]),
+  //images: z.array(z.string()).default([""]),
   // productId: z.coerce.number().int().default(0),
   productName: z.string().default(""),
   sku: z.string().min(1, "sku requerido").default(""),

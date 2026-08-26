@@ -1,12 +1,10 @@
-import nprogress from 'nprogress';
 import 'nprogress/nprogress.css';
 
-import React, { createContext, useContext, useState } from "react";
-import {useAuth} from "@features/auth/hooks/useAuth.js";
-import ModalParam from '@/components/common/ModalParam';
-import ExpiredSession from '@/features/fallback/ExpiredSession';
-import { useNavigate } from 'react-router-dom';
 import ModalConfirm from '@/components/common/ModalConfirm';
+import FallbackExpiredSession from '@/features/fallback/FallbackExpiredSession';
+import { useAuth } from "@features/auth/hooks/useAuth.js";
+import { createContext, useContext, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext(null)
 
@@ -27,7 +25,7 @@ export function AuthProvider({ children }){
         <AuthContext.Provider value={{...authHook, renewSession: () => setShow(true)}}>
             {children}
             <ModalConfirm show={show} close={setShow}>
-                <ExpiredSession  handle={expiredSessionHandle}  />
+                <FallbackExpiredSession  handle={expiredSessionHandle}  />
             </ModalConfirm>
         </AuthContext.Provider>
 

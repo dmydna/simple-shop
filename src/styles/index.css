@@ -1,21 +1,25 @@
-:root {
-    /* Azul Base (Referencia) */
-    --color-blue: #a2d9ff;
+/**
+ * Bootstrap-media-queries
+ * 
+ * @media (max-width: 1399.98px) {  xl  }
+ * @media (max-width: 1199.98px) {  lg  }
+ * @media (max-width: 991.98px)  {  md  }
+ * @media (max-width: 767.98px)  {  sm  }
+ * @media (max-width: 575.98px)  {  xs  }
+ * 
+**/
 
-    /* Naranja / Durazno (Cálido y suave) */
+
+:root {
+    --color-blue: #a2d9ff;
     --color-orange: #ffca92;
     --text-on-orange: #5c3a1a;
-
-    /* Violeta / Lavanda (Elegante y místico) */
     --color-purple: #c7b3ff;
     --text-on-purple: #3a2a66;
-
-    /* Otros colores (para mantener consistencia) */
     --color-red: #ffabab;
     --color-green: #a2ffc1;
     --color-yellow: #fff2a2;
     --bs-breadcrumb-divider: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E");
-
 }
 
 
@@ -57,18 +61,9 @@
 
 
 
-hr {
-    opacity: .15;
-}
-
-.disabled {
-    opacity: .6
-}
-
-
-.selected td {
-    background-color: #6c757d24;
-}
+hr { opacity: .15; }
+.disabled { opacity: .6}
+.selected td { background-color: #6c757d24;}
 
 
 
@@ -425,16 +420,7 @@ hr {
 
 
 
-/**
- * Bootstrap-media-queries
- * 
- * @media (max-width: 1399.98px) {  xl  }
- * @media (max-width: 1199.98px) {  lg  }
- * @media (max-width: 991.98px)  {  md  }
- * @media (max-width: 767.98px)  {  sm  }
- * @media (max-width: 575.98px)  {  xs  }
- * 
-**/
+
 
 
 @media (max-width: 1399.98px) { /* xl */ }
@@ -709,4 +695,14 @@ tr:last-child {
 .bg-tint:hover { 
     background-color: rgba(0, 0, 0, 0.1)!important; 
     cursor: pointer;
+}
+
+
+
+/** FIXES **/
+
+@media (max-width: 991.98px)  { /* md */ 
+    .min-vh-md-70{
+        min-height: 70vh!important;
+    }
 }

@@ -1,8 +1,7 @@
-import { useUrlParams } from "@/hooks/useUrlParams";
+import FallbackError from "@/features/fallback/FallbackError";
+import FallbackSuccess from "@/features/fallback/FallbackSuccess";
+import PageLoading from "@/features/fallback/pages/PageLoading";
 import { useUrlState } from "@/hooks/useUrlState";
-import PageError from "@features/fallback/PageError";
-import PageLoading from "@features/fallback/PageLoading";
-import PageSuccess from "@features/fallback/PageSuccess";
 import { useEffect, useState } from 'react';
 import { Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -53,12 +52,12 @@ export default function FetchStateModal({ children, hook, version = false }) {
                     <>
                         {loading && <PageLoading />}
                         {error && !loading && 
-                            <PageError error={error} handle={() => {
+                            <FallbackError error={error} handle={() => {
                                 setShow(false)
                                 setError(null) 
                             }} />}
                         {success && !error && !loading && 
-                            <PageSuccess handle={() => {
+                            <FallbackSuccess handle={() => {
                                 setShow(false)
                                 setSuccess(null) 
                                 versionHandle()

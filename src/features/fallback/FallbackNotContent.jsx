@@ -1,9 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import { FeedbackMessage } from "@common/FeedbackMessage.jsx";
-import React, { useEffect } from "react";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
+import { FeedbackMessage } from "@common/FeedbackMessage.jsx";
+import { useNavigate } from "react-router-dom";
 
-function PageNotContent() {
+function FallbackNotContent() {
 
     const { isAdmin } = useAuthContext()
     const navigate = useNavigate();
@@ -35,4 +34,4 @@ function PageNotContent() {
     )
 }
 
-export default PageNotContent;
+export default FallbackNotContent;

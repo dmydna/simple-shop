@@ -1,13 +1,12 @@
-import { Container, Nav, Navbar as NavBar  } from "react-bootstrap";
-import { useScrollY } from "@contexts/useWindowScroll.jsx";
+import { NavbarProvider } from "@/contexts/NavbarContext.jsx";
+import DockbarToggle from "@/features/dockbar/components/DockbarToggle";
 import ActionBar from "@common/ActionBar.jsx";
 import Logo from "@common/Logo.jsx";
 import NavItems from "@common/NavItems.jsx";
+import { useScrollY } from "@contexts/useWindowScroll.jsx";
 import MobileMenu from "@layout/MobileMenu.jsx";
-import { NavbarProvider } from "@/contexts/NavbarContext.jsx";
 import { useState } from "react";
-import { IconTint } from "@common/IconTintyColor";
-import SidebarButton from "@layout/SidebarButton";
+import { Container, Nav, Navbar as NavBar } from "react-bootstrap";
 //import { IconTint } from "@common/FloatButtonCollection";
 
 
@@ -33,7 +32,10 @@ function Navbar({ onSeleccion, items }) {
       ${ isScrollY ? 'py-1 shadow-sm' : 'py-3'}`} 
       >
         <Container fluid="xl" className="small align-items-center"> 
-          <SidebarButton className={"position-absolute"} id={"dashbar-button"}/>
+          <DockbarToggle 
+            className={"d-none d-md-block position-absolute"} 
+            id={"dashbar-button"}
+          />
           <MobileMenu>
             <NavItems  
               items={items} 

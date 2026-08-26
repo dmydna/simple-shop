@@ -69,19 +69,8 @@ function ProductListing() {
             </div>
             {showFilter ?
               <>
-                <CategoryNav className='d-none d-m-block' show={showFilter} />
-                
+                <CategoryNav className='d-none d-md-block' show={showFilter} />
                 <CategoryCarrousel className='d-block d-md-none' />
-
-{/*                <FilterBarControlled fix={true} dataSource={listings} onApply={setFilters} className="mb-5" >
-                        <DropdownCheck variant="light"  className="border rounded my-2 flex-fill">
-                            <span className="fw-semibold">etiquetas</span>
-                        </DropdownCheck>
-                         <DropdownRange variant="light" className="border rounded my-2 flex-fill"  min={0} max={1500} defaultValue={20} type={'$'}>
-                              <span className="fw-medium">precio</span>
-                         </DropdownRange>
-                </FilterBarControlled >*/}
-
                 <FilterListing />
 
               </> : ''

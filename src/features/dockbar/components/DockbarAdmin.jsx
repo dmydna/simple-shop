@@ -1,19 +1,18 @@
-import { Link, useNavigate } from "react-router-dom";
-import SiderbarLink from "@f/sidebar/components/SidebarLink";
+import DockbarLink from "@/features/dockbar/components/DockbarLink";
+import DockbarToggle from "@/features/dockbar/components/DockbarToggle";
 import { URL_DASHBOARD, URL_DEV, URL_LISTING_LIST, URL_PRODUCT_LIST, URL_USER_LIST } from "@/utils/links";
-import SidebarButton from "@/components/layout/SidebarButton";
 
-export default function SidebarDashboard() {
+export default function DockbarAdmin() {
 
     return (
         <ul className="list-group list-group-flush">
 
 
             <div className="mt-2 mb-4">
-                <SidebarButton />
+                <DockbarToggle />
             </div>
 
-            <SiderbarLink
+            <DockbarLink
                 className='mb-4'
                 to={URL_DASHBOARD}
                 icon="bi-gear"
@@ -21,21 +20,21 @@ export default function SidebarDashboard() {
             />
 
 
-            <SiderbarLink
+            <DockbarLink
                 className="mb-4"
                 to={URL_LISTING_LIST}
                 icon="bi-sticky"
                 label="listings"
             />
 
-            <SiderbarLink
+            <DockbarLink
                 className="mb-4"
                 to={URL_PRODUCT_LIST}
                 icon="bi-box-seam"
                 label="products"
             />
 
-            <SiderbarLink
+            <DockbarLink
                  className="mb-4"
                 to={URL_USER_LIST}
                 icon="bi-person"
@@ -43,7 +42,7 @@ export default function SidebarDashboard() {
             />
 
 
-            <SiderbarLink
+            <DockbarLink
                 className="mb-3"
                 to={URL_DEV}
                 icon="bi-terminal"

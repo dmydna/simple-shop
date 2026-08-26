@@ -1,6 +1,6 @@
-import PageEmpty from '@features/fallback/PageEmpty.jsx';
-import PageError from '@features/fallback/PageError';
-import PageLoading from '@features/fallback/PageLoading';
+import FallbackEmpty from '@/features/fallback/FallbackEmpty.jsx';
+import FallbackError from '@/features/fallback/FallbackError';
+import PageLoading from '@/features/fallback/pages/PageLoading';
 import { useNavigate } from 'react-router-dom';
 
 export default function DataView({ 
@@ -13,19 +13,22 @@ export default function DataView({
     emptyVariant,
     emptyMessage, 
     emptyConfig,
+    listFix=false,
 }) {
 
     const isEmpty = data?.length === 0 ;
     const navigate = useNavigate();
  
 
-    if(loading) return <PageLoading />
+    const heightFix = listFix ? 'min-vh-md-70' : '';
+
+    if (loading) return <PageLoading />
     if (error?.code === 'TOKEN_EXPIRED') {
       navigate('/home?dialog=expiredsession')
       return  <>{children}</>
     }
-    if(error)   return <PageError error={error}  handle={() => onRetry()} />
-    if(isEmpty) return <PageEmpty variant={emptyVariant} ico={emptyIcon} message={emptyMessage}/>
+    if(error)   return <FallbackError fixes error={error}  handle={() => onRetry()} />
+    if(isEmpty) return <FallbackEmpty fixes variant={emptyVariant} ico={emptyIcon} message={emptyMessage}/>
 
     return <>  {children} </>;
 }

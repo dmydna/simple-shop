@@ -1,9 +1,9 @@
-import { useEffect, useMemo } from 'react';
-import ProductCard from '@f/product/components/ProductCard.jsx';
-import PageLoading from '@features/fallback/PageLoading.jsx';
+import FallbackError from '@/features/fallback/FallbackError.jsx';
+import PageLoading from '@/features/fallback/pages/PageLoading.jsx';
 import { statsService } from '@/features/stats/services/statsService.js';
 import { useFetchTrigger } from '@/hooks/useFetchTrigger.js';
-import PageError from '@/features/fallback/PageError.jsx';
+import ProductCard from '@f/product/components/ProductCard.jsx';
+import { useMemo } from 'react';
 
 
 
@@ -33,7 +33,7 @@ function TopSection({ children, maxElems = 1, top, maxCols, className }) {
     if (error) {
         return (
         <div className={className}>
-          <PageError error={error} />
+          <FallbackError error={error} />
         </div>
         );
     }

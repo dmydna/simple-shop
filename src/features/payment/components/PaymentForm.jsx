@@ -14,7 +14,7 @@ function PaymentForm(){
        //style={{ minHeight: "100vh" }} 
        >
         <Form 
-             className="island border"
+             className="p-3 island border"
              style={{ width: "700px", padding:"40px", background: "#fff", borderRadius: "10px"}}
              action="">
             <div className="d-flex flex-wrap gap-3">

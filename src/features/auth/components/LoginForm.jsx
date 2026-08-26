@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import {Alert, Button, Col, Form} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-import { useUIContext } from "@contexts/UIContext.jsx";
 import {useForm} from "@hooks/useForm.js";
 import { useAuthContext } from "@f/auth/contexts/AuthContext.jsx";
 import PublicRoute from "@/components/common/PublicRoute";
@@ -9,7 +8,6 @@ import PublicRoute from "@/components/common/PublicRoute";
 
 function LoginForm({ children, style, className}){
 
-    const { setShowLoginModal} = useUIContext()
     const { login, loading, error,  setReset } = useAuthContext();
     const { onChange, formData} = useForm()
 
@@ -22,8 +20,6 @@ function LoginForm({ children, style, className}){
         e.preventDefault();
         await login(formData)
         navigate("/user")
-
-        setShowLoginModal(false)
    };
 
 
@@ -70,7 +66,7 @@ function LoginForm({ children, style, className}){
 
                 <div className="d-flex justify-content-center m-2">
                    <p className="me-2">¿Aun no tienes una cuenta?</p>
-                    <Link onClick={()=> setShowLoginModal(false)} to={"/register"}>
+                    <Link to={"/register"}>
                         <p className="text-primary fw-bold">Registrarme</p>
                     </Link>
                 </div>

@@ -19,6 +19,19 @@ export const userHandlers = [
     return HttpResponse.json(user);
   }),
 
+// NEW_API_FEAT
+  http.get(`${BASE_ENDPOINT}/me/summary`, () => {
+    const user = SERVICE.getMyProfile();
+    if (!currentLoggedUser || !user) {
+      return HttpResponse.json({ message: 'No autenticado' }, { status: 401 });
+    }
+    return HttpResponse.json({ 
+      role: user.role, 
+      username: user.username, 
+      image: user.image, 
+    });
+  }),
+
 
   // PUT(ME): updateUser
   http.put(`${BASE_ENDPOINT}/me`, async ({  request }) => {

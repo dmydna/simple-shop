@@ -1,6 +1,5 @@
 import { baseService } from '@/mocks/modules/services/baseService.js';
 import { currentLoggedUser, db } from '@/mocks/modules/db.js';
-import BanUser from '@/features/dashboard/user/BanUser';
 
 
 const collection = 'users';

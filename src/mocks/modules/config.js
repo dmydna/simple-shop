@@ -7,7 +7,12 @@ export const configDB = {
 
   reviews: {
     id: { field: "id",  type: "string" },
-    FK:   "reviewId" 
+    FK:   "username" , // HACK deberia ser "reviewId" por convencion
+    relations: {
+      oneToOne: [
+        {  key: "user", collection: "users",  owner: true }
+      ]
+    }
   },
 
   listings: {
@@ -17,7 +22,6 @@ export const configDB = {
     relations: {
       // busca y matchea listingId con item/s de collection: 
       // (e.i: collection.find(i -> i.listingId == listingId))
-      foreignKey: "listingId", 
       oneToMany: [
         // mappea los item de collection en key 
         // (e.i: listing.reviews = [i,..] ) 

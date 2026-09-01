@@ -1,6 +1,5 @@
 import { http, HttpResponse } from 'msw';
 
-import { currentLoggedUser } from '@/mocks/modules/db.js';
 import { baseHandlers } from '@/mocks/modules/handlers/baseHandler.js';
 import { review_service } from '@/mocks/modules/services/review_service.js';
 import { BASE_URL, ENDPOINT } from "@utils/config.js";
@@ -25,6 +24,32 @@ export const reviewHandlers = [
   }),
 
 
-   ...(baseHandlers(BASE_ENDPOINT, SERVICE))
+  // PUT: UPDATE BY ID
+  http.put(`${BASE_ENDPOINT}/:id`, async ({ params, request }) => {
+    const id = params.id;
+    let updates;
+    try {
+      updates = await request.json();
+    } catch (error) {
+      return HttpResponse.json(
+        { error: 'Cuerpo de la petición inválido', details: error.message },
+        { status: 400 }
+      );
+    }
+    const existingElem = SERVICE.existsById(id);
+    if (!existingElem) {
+      return HttpResponse.json(
+        { error: 'Elemento no encontrado' },
+        { status: 404 }
+      );
+    }
+    const updatedData = SERVICE.updateById(id, updates)
+
+
+    return HttpResponse.json(updatedData, { status: 200 });
+  }),
+
+
+  ...(baseHandlers(BASE_ENDPOINT, SERVICE))
 
 ];

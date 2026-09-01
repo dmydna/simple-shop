@@ -25,8 +25,21 @@ export const auth_service = {
 	 	}else{
 	 		user = db.find(COLLECTION, u => u.username === request.username);
 	 	}
+		
+		if(user.meta.status == "BANNED"){
+			//throw new Error("Usuario baneado")
+			return false
+		}
+
+		if(user.meta.status == "DELETED"){
+			//throw new Error("Usuario eliminado")
+			return false
+		}
+
+
 
 	 	if(user && user.password == request.password){ 
+
 	 		setCurrentLoggedUser(user.username)
 	 		return true;
 	 	}

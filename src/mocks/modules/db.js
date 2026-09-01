@@ -47,11 +47,11 @@ export const db = {
   __create(collection, data) {
 
 
-    console.log(this)
+    //console.log(this)
 
     const config = this.configDB[collection];
     if (!config) {
-      console.warn(`[DB.CREATE] No hay configuracion para ${collection}`);
+      //console.warn(`[DB.CREATE] No hay configuracion para ${collection}`);
       return this.__saveItem(collection, data);
     }
 
@@ -112,7 +112,7 @@ __saveItem(collection, data) {
 
   __delete(collection, filterFn){
     const data = this[collection].find(filterFn);
-    console.log("DELTED ITEM:", data)
+    //console.log("DELTED ITEM:", data)
     if(!data) return false;
     const DATE =  createMockDate( new Date() );
     const index = this.__getIndex(collection, data.id);
@@ -156,10 +156,10 @@ _loadRelations(entity, parentCol){
       if (rel.owner) {
         /* 2.a  El padre posee la FK  */
         const fkVal = entity[fkField];    
-        console.log("fkVal:",fkVal)  
-        console.log("childCol:",childCol)       // valor de la FK en el padre
+        //console.log("fkVal:",fkVal)  
+        //console.log("childCol:",childCol)       // valor de la FK en el padre
         entity[rel.key] = childCol.find(item => item.id === fkVal) || null;
-        console.log(`entity[${rel.key}]:`,entity[rel.key] )  
+        //console.log(`entity[${rel.key}]:`,entity[rel.key] )  
       } else {
         /* 2.b  El hijo posee la FK  */
         entity[rel.key] = childCol.find(item => item[fkField] === parentId) || null;
@@ -180,7 +180,7 @@ _loadRelations(entity, parentCol){
     });
   }
 
-  console.log(entity)
+  //console.log(entity)
 
   return entity;
 },
@@ -237,7 +237,34 @@ __buildMeta(entity, collection) {
 
   find(collection, filterFn, mapperFn = null) {
     let entity = this[collection].find(filterFn);
-    console.log(entity)
+    if(entity && entity.status == "HARD_DELETED"){
+      return null
+    }
+    if(mapperFn){ 
+      return mapperFn( entity ) 
+    }
+    return this.__buildMeta(entity, collection);
+  },
+  
+
+  // obtiene de forma segura la colleccion
+  collection(collection, limit=null){
+    let copy = null
+    if(limit){
+      copy = this[collection].slice(0, limit)
+    }else{
+      copy = this[collection]
+    }
+    return copy
+  },
+
+  sort(collection, sortFn,  limit=null){
+    return this.collection(collection, limit).sort(sortFn)
+    .map(i => this.__buildMeta(i, collection))
+  },
+
+  __find(collection, filterFn, mapperFn = null) {
+    let entity = this[collection].find(filterFn);
     if(entity && entity.status == "HARD_DELETED"){
       return null
     }
@@ -248,6 +275,7 @@ __buildMeta(entity, collection) {
   },
   
   findWithRelations(collection, filterFn, mapperFn = null){
+    //console.log(this)
     const entity = this[collection].find(filterFn);
     if(mapperFn){ return mapperFn(this._loadRelations(entity, collection)) }
     return this.__buildMeta( this._loadRelations(entity, collection) , collection )
@@ -275,44 +303,32 @@ __buildMeta(entity, collection) {
 
 
   findPage(collection, request, mapperFn = null) {
-
-    console.log(this)
-
     if (!request || !request.url) {
       return { content: [], totalElements: 0, totalPages: 0 };
     }
-
     const url = new URL(request.url);
-    
     // 1. Extraer parámetros
     const { page, size, sortParam, filters } = extractPaginationParams(url);
-    
     // 2. Obtener datos base (de la colección o del array mapeado)
     const baseData = this[collection]
       .filter(i => i.status != "HARD_DELETED")
       .toReversed();
-    
     if (!Array.isArray(baseData)) {
-      console.warn(`Datos no son un array en ${collection}`);
+      //console.warn(`Datos no son un array en ${collection}`);
       return { content: [], totalElements: 0, totalPages: 0 };
     }
-
     // 3. Aplicar filtros
     const filteredData = applyFiltersWidthRelation(baseData, filters);
-
     // 4. Aplicar ordenamiento
     const sortedData = applySorting(filteredData, sortParam);
-
     // 5. Calcular paginación
     const totalElements = sortedData.length;
     const start = page * size;
     const end = start + size;
     let pageContent = sortedData.slice(start, end);
-
     if(mapperFn){
       pageContent = pageContent.map(mapperFn)
     }
-
     // 6. Construir respuesta (Pasamos sortParam explícitamente para evitar scope issues)
     return { ...buildPageResponse(pageContent, page, size, totalElements, sortParam) };
   },

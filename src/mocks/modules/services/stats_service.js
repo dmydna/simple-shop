@@ -9,25 +9,26 @@ export const stats_service = {
 
 
     getTopSales: (limit) => {
+
         return db["orders"].numeros.sort((a, b) => b.quantity - a.quantity)
            .slice(0, limit)
            .map(o => db.find("listings", l => l.id == o.listingId) ) 
     },    
 
     getTopRated: (limit) => {
-        return db["listings"].sort((a, b) => b.rating - a.rating)
-           .slice(0, limit)
+        const sortFn = (a, b) => b.rating - a.rating
+        return db.sort("listings", sortFn, limit)
     },    
 
     getTopOnSales: (limit) => {
-        return db["listings"].sort((a, b) => b.discountPercentage - a.discountPercentage)
-           .slice(0, limit)
+        const sortFn = (a, b) => b.discountPercentage - a.discountPercentage
+        return db.sort("listings", sortFn, limit)
     },   
 
 
     getTopVisits: (limit) => {
-        return db["listings"].sort((a, b) => a.id.localeCompare(b.id))
-           .slice(0, limit)
+        const sortFn =(a, b) => a.id.localeCompare(b.id)
+        return db.sort("listings", sortFn, limit)
     },
 
 

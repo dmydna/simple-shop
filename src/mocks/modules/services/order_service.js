@@ -87,6 +87,11 @@ export const order_service = {
         })
     },
 
+    updateOrderItem: (update) =>{
+        console.log("update order item", update)
+        return db.update("orders_items", i => i.id ==update.id  , () => update)
+    },
+
     createOrderItems: (item, order) => {
 
         const user = user_service.getMyProfile()

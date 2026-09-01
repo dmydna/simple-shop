@@ -81,6 +81,11 @@ export function toCreateProduct(data) {
 
 
 
+export function toUpdateUser(data){
+    // TODO
+    return data
+}
+
 export function toUpdateProduct(data) {
     const dimensions = {
         width: data.width,

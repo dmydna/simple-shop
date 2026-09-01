@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 
 // TODO: (1) mover  checkServer a @features/health/hooks
-export const checkServer = async (url, handleStatus) => {
+const checkServer = async (url, handleStatus) => {
     try {
         const response = await fetch(url, { signal: AbortSignal.timeout(5000) });
 
@@ -34,5 +34,3 @@ export const useCheckServer = (isOnline) => {
 
     return ({ isOnline, serverStatus })
 }
-
-export default useCheckServer;

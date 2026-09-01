@@ -43,7 +43,7 @@ export default function DockbarAdmin() {
 
 
             <DockbarLink
-                className="mb-3"
+                className="mb-3 d-none"
                 to={URL_DEV}
                 icon="bi-terminal"
                 label="demo"

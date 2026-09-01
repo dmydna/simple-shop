@@ -12,7 +12,8 @@ export const FeedbackMessage = ({
                              children,
                              message,
                              variant="secondary",
-                             listFix=false // force center list fallbacks
+                             listFix=false, // force center list fallbacks
+                             showDetails = true
                          }) => {
 
 
@@ -47,7 +48,7 @@ export const FeedbackMessage = ({
                        style={{ overflow: 'auto', maxWidth: '280px', lineHeight: '1.4' }}>
                         { error ? displayMessage.substr(0, 90) + "..." : message }
                     </p>
-                   { error && hasDetails && (
+                   { error && hasDetails && showDetails && (
                        <FeedbackError 
                            detailedMessage={detailedMessage} 
                            error={error} 

@@ -1,5 +1,5 @@
 import CenterLayout from "@/components/layout/CenterLayout";
-import FallbackWip from "@f/fallback/FallbackWip";
+import FallbackWip from "@/features/fallback/components/FallbackWip";
 
 export default function PageWip(){
     return (

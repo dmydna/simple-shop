@@ -1,11 +1,9 @@
+import ButtonCrud from "@/components/common/ButtonCreate";
 import FetchState from "@/components/common/FetchState";
-import { useFormSync } from "@/features/crud/hooks/useFormSync";
-import FormWarning from "@/features/dashboard/common/FormWarning";
+import { useFormCrudSync } from "@/features/crud/hooks/useFormCrudSync";
 import { useUrlState } from "@/hooks/useUrlState";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ButtonCrud from "@f/crud/components/ButtonCrud";
-import ModalCrud from "@f/crud/components/ModalCrud";
 
 
 // NOTA este componente es multi-contexto, 
@@ -27,7 +25,7 @@ function FormCrud({
     const { setSearchParams } = useUrlState()
 
     const { editMode, viewMode, createMode, copyMode, edit_draftMode, draftMode } 
-    = useFormSync({...crudHook})
+    = useFormCrudSync({...crudHook})
 
     const [root, dashboard, current] = window.location.pathname.split("/")
 
@@ -141,12 +139,6 @@ function FormCrud({
 
                     </div>
                 </div>
-
-            <ModalCrud
-                show={showWarn}
-            >
-                <FormWarning close={() => setShowWarn(false)} />
-            </ModalCrud>
 
             </FetchState.Modal>
     )

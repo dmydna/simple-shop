@@ -14,31 +14,32 @@ export function useAuth() {
 
   const {loading, setLoading, error, setError, success, setSuccess} =  useFetch()
   const [token, setToken] = useState(null);
-  const [user, setUser] = useState(null);
   const [reset, setReset] = useState(false);
   const [logged, setLogged] = useState(true)
+  
+  const [auth, setAuth] = useState(null) // @ex [user, setUser] 
 
   useEffect(() => {
     authService.getMe()
       .then(response => {
-        setUser(response)
+        setAuth(response) // @ deprecado
         setLocalStorage({...response})
       })
-      .catch(() => setUser(null)) // Si responde 401, no está autenticado
+      .catch(() => setAuth(null)) // Si responde 401, no está autenticado
       .finally(() => setLoading(false));
   },[]);
 
   const isAuth = useMemo(() => {
-    return user ? true : false
-  }, [user])
+    return auth ? true : false
+  }, [auth])
 
   const isAdmin = useMemo(() => {
-    return user?.role == 'ADMIN' ? true : false
-  }, [user])
+    return auth?.role == 'ADMIN' ? true : false
+  }, [auth])
 
   const expiredDate = useMemo(() => {
-      return user?.expiredAt 
-  },[user])
+      return auth?.expiredAt 
+  },[auth])
 
 
   useEffect(() => {
@@ -59,12 +60,12 @@ export function useAuth() {
 
     if (savedStorage?.user && savedStorage?.role) {
       setToken(savedStorage?.token);
-      setUser({ ...savedStorage });
+      setAuth({ ...savedStorage });
       setLoading(false);
       setLogged(savedStorage?.token)
     }else{
       setToken(null);
-      setUser(null);
+      setAuth(null);
       setLoading(false);
       setLogged(false)
     }
@@ -157,7 +158,7 @@ export function useAuth() {
   const authentication = async () => {
     const data = await authService.getMe();
     setToken(data?.accessToken || null)
-    setUser(data || null)
+    setAuth(data || null)
     setLogged(true);
     setLocalStorage({...data})
     return data;
@@ -189,13 +190,13 @@ export function useAuth() {
     authService.logout()
       .then(()=>{
         setToken(null);
-        setUser(null);
+        setAuth(null);
         setLogged(false)
         removeLocalStorage(...args)
         navigate('/login')
       })
       .catch((err)=> {
-        setUser(null)
+        setAuth(null)
         setLogged(false)
         setError(err)
       })
@@ -207,7 +208,8 @@ export function useAuth() {
     expiredDate,
     isAuth,
     token, 
-    user, 
+    user: auth,
+    auth, // reeplaza a user
     login, 
     logout, 
     register, 

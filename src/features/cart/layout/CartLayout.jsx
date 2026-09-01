@@ -1,5 +1,5 @@
-import FallbackError from "@/features/fallback/FallbackError";
-import FallbackSuccess from "@/features/fallback/FallbackSuccess";
+import FallbackError from "@/features/fallback/components/FallbackError";
+import FallbackSuccess from "@/features/fallback/components/FallbackSuccess";
 import CartEmpty from "@features/cart/components/CartEmpty";
 
 

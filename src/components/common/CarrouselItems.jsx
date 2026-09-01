@@ -30,11 +30,6 @@ export default function CarouselItems({ items, title, children, className, chunk
   }, [items, chunkSize]);
 
 
-
-  useEffect(() => {
-    // console.log("slides:", slides)
-  }, [slides])
-
   return (
 
     <div className={`row ${className}  position-relative rounded  h-100`} >
@@ -71,7 +66,7 @@ export default function CarouselItems({ items, title, children, className, chunk
         </Carousel>
       }
       {slides?.length == 1 &&
-        <div className=" d-flex justify-content-around">
+        <div className=" d-flex">
           {slides?.map((chunk, index) => (
             <Carousel.Item key={index}>
               {chunk.map((item) => (

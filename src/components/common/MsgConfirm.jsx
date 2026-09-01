@@ -11,7 +11,21 @@ export const MSG_LISTING_DELETE   = ({id}) => (
         	   <li> Nose borraran datos de auditoria</li>
         	</ul>
         	</div>
-        )
+)
+
+export const MSG_USER_DELETE   = ({id}) => (
+        	<div className="mt-2 small">
+        	<p className="mb-2">
+        	    <b>[ELIMINAR]</b> {` El usuaria con id ${id? `#${id}`: ''} causa:`} 
+        	</p>
+        	<ul className="text-start">
+        	   <li> Perdida de accesso de la informacion </li>
+        	   <li> La Accion no es reversible</li>
+        	   <li> Nose borraran datos de auditoria </li>
+        	</ul>
+        	</div>
+)
+
 
 export const MSG_LISTING_INACTIVE = ({id}) => (
         <div className="mt-2 small">

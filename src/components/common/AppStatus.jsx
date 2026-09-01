@@ -1,16 +1,11 @@
-import FallbackError from "@/features/fallback/FallbackError";
-import FallbackNotContent from "@/features/fallback/FallbackNotContent";
-import FallbackNotSearchResults from "@/features/fallback/FallbackNotSearchResults";
-import FallbackServerDown from "@/features/fallback/FallbackServerDown";
+import PageError from "@/features/fallback/pages/PageError";
+import PageNotContent from "@/features/fallback/pages/PageNotContent";
+import PageNotSearchResults from "@/features/fallback/pages/PageNotSearchResults";
+import PageServerDown from "@/features/fallback/pages/PageServerDown";
 import { healthService } from "@/features/health/services/healthService";
 import { useAsync } from "@/hooks/useAsync";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import CenterLayout from "@layout/CenterLayout";
-import PageServerDown from "@/features/fallback/pages/PageServerDown";
-import PageNotSearchResults from "@/features/fallback/pages/PageNotSearchResults";
-import PageNotContent from "@/features/fallback/pages/PageNotContent";
-import PageError from "@/features/fallback/pages/PageError";
 
 
 /**

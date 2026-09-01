@@ -38,7 +38,7 @@ export default function MyCartTable({ className, content }) {
                                 {/* TITLE */}
                                 <td>
                                     <span className='fw-medium'>{item?.title}</span>
-                                    <CartInput style={{maxWidth: '200px'}} producto={item}/>
+                                    <CartInput style={{width: '150px'}} producto={item}/>
                                 </td>
 
                                 {/* DESCRIPTION */}
@@ -49,8 +49,8 @@ export default function MyCartTable({ className, content }) {
                                 </td>
 
                                 {/* PRICE */}
-                                <td className='fw-medium d-table-cell'
-                                    style={{ lineHeight: '5.4', textAlign: 'end' }}  > 
+                                <td className='bg-light fw-medium d-table-cell'
+                                    style={{zIndex:2, lineHeight: '5.4', textAlign: 'end' }}  > 
                                     <i className='bi bi-currency-dollar'></i>
                                     {(item?.finalPrice*item?.cantidad).toFixed(2) || 0}
                                 </td>

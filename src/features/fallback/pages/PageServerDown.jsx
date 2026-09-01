@@ -1,5 +1,5 @@
 import CenterLayout from "@/components/layout/CenterLayout";
-import FallbackServerDown from "@f/fallback/FallbackServerDown";
+import FallbackServerDown from "@/features/fallback/components/FallbackServerDown";
 
 export default function PageServerDown(){
     return (

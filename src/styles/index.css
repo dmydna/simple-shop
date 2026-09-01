@@ -657,7 +657,7 @@ tr:last-child {
 #content, 
 #navbar, 
 #dashbar,
-#dashbar-button{ transition: margin-left 1s; }
+#dashbar-button{ transition: margin-left .6s; }
 
 #dashbar {  margin-left: -80px !important ; }
 
@@ -700,6 +700,9 @@ tr:last-child {
 
 
 /** FIXES **/
+
+
+
 
 @media (max-width: 991.98px)  { /* md */ 
     .min-vh-md-70{

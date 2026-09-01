@@ -1,5 +1,5 @@
 import CenterLayout from "@/components/layout/CenterLayout";
-import FallbackNotContent from "@f/fallback/FallbackNotContent";
+import FallbackNotContent from "@/features/fallback/components/FallbackNotContent";
 
 export default function PageNotContent(){
     return (

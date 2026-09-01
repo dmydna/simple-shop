@@ -91,7 +91,7 @@ function CartInput({ producto, className, style }) {
           onChange={(e) => handleChange(e)}
           // onInput={e => handleChange(e)}
           className="text-center border-0 fw-bold no-arrows"
-          style={{ width: "50px", fontSize: "0.9rem", boxShadow: 'none' }}
+          style={{ width: "30px", fontSize: "0.9rem", boxShadow: 'none' }}
         ></Form.Control>
 
         {/* Boton - */}

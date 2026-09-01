@@ -1,5 +1,5 @@
-import FallbackEmpty from '@/features/fallback/FallbackEmpty.jsx';
-import FallbackError from '@/features/fallback/FallbackError';
+import FallbackEmpty from '@/features/fallback/components/FallbackEmpty.jsx';
+import FallbackError from '@/features/fallback/components/FallbackError';
 import PageLoading from '@/features/fallback/pages/PageLoading';
 import { useNavigate } from 'react-router-dom';
 

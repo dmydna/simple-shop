@@ -1,7 +1,7 @@
 import 'nprogress/nprogress.css';
 
 import ModalConfirm from '@/components/common/ModalConfirm';
-import FallbackExpiredSession from '@/features/fallback/FallbackExpiredSession';
+import FallbackExpiredSession from '@/features/fallback/components/FallbackExpiredSession';
 import { useAuth } from "@features/auth/hooks/useAuth.js";
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';

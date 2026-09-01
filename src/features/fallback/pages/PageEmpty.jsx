@@ -1,5 +1,5 @@
 import CenterLayout from "@/components/layout/CenterLayout";
-import FallbackEmpty from "@f/fallback/FallbackEmpty";
+import FallbackEmpty from "@/features/fallback/components/FallbackEmpty";
 
 export default function PageEmpty(){
     return (

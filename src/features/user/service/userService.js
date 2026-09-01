@@ -1,7 +1,7 @@
 // src/services/userService.js
 import { api } from "@/utils/api";
 import { ENDPOINT } from "@utils/config.js";
-import { mapToURLSearchParams } from "@utils/mappers.js";
+import { mapToURLSearchParams, toUpdateUser } from "@utils/mappers.js";
 
 const BASE_ENDPOINT = ENDPOINT.USER;
 
@@ -29,6 +29,13 @@ export const userService = {
         return response;
     },
 
+    // NEW_API_FEAT
+    getMySummary: async () => {
+        const finalEndpoint = `${BASE_ENDPOINT}/me/summary`
+        const response = await api.get(finalEndpoint);
+        return response;
+    },
+
 
     // (ADMIN) GET: obtener usuario
     getById: async (id) => {
@@ -48,11 +55,11 @@ export const userService = {
     // (ADMIN) PATCH: actualizar estatus de usuario
     updateStatus: async (id, status) => {
         const finalEndpoint = `${BASE_ENDPOINT}/${id}/status`;
-        const params = new URLSearchParams();
-        params.append('status', status);
-        const response = await api.patch(finalEndpoint, params)
-        return response;
+        const response = await api.patch(finalEndpoint, {status: status});
+        return response;  
     },
+
+
 
     // (ADMIN) PATCH: aplicar baneo de usuario
     banUser: async (id, banRequest) => {
@@ -80,6 +87,19 @@ export const userService = {
         return response;
     },
 
+    delete: async (id) =>{
+        const endpoint = `${BASE_ENDPOINT}/${id}`;
+        const response = await api.delete(endpoint)
+        return response;
+    },
+
+    // (ADMIN) PUT: update user
+    update: async (id, data) => {
+        const endpoint = `${BASE_ENDPOINT}/${id}`;
+        const userData = toUpdateUser(data);
+        const response = await api.put(endpoint, userData)
+        return response;
+    }, 
 
     // PUT: actualizar/editar datos de perfil de usuario
     updateMyProfile: async (profileData) => {

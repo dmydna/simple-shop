@@ -15,7 +15,7 @@
       "@hooks/*": ["src/hooks/*"],
       "@contexts/*": ["src/contexts/*"],
       "@pages/*": ["src/pages/*"],
-      "@dashboard/*": ["src/features/dashboard/*"]
+      "@dashboard/*": ["src/features/admin/*"]
     }
   },
   "include": ["src/**/*"],

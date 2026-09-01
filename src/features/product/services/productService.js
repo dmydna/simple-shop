@@ -42,12 +42,12 @@ export const productService = {
     },
 
     // PUT: Actualiza producto.
-    update: async (id, data) => {
-        const productData = toUpdateProduct(data);
-        const finalEndpoint = `${BASE_ENDPOINT}/${data.id}`
-        const response = await api.put(finalEndpoint, productData)
-        return response;
+    updateStatus: async (id, status) => {
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}/status`;
+        const response = await api.patch(finalEndpoint, {status: status});
+        return response;  
     },
+
 
     // DELETE: Eliminar un producto.
     delete: async (id) => {
@@ -57,8 +57,9 @@ export const productService = {
     },
 
     // PATCH: Actualizar status = {ACTIVE, INACTIVE, DRAFT, DELETED}
+    // NEW_FEAT_API
     updateStatus: async (id, status) => {
-        const finalEndpoint = `${BASE_ENDPOINT}/${id}`
+        const finalEndpoint = `${BASE_ENDPOINT}/${id}/status`
         const response = await api.patch(finalEndpoint, { status: status })
         return response;
     },

@@ -1,19 +1,22 @@
 import { IconTint } from "@/components/common/FloatButtonCollection";
 import ImageWithFallback from "@/components/common/ImageWithFallback.jsx";
 import { useAuthContext } from "@/features/auth/contexts/AuthContext.jsx";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link, useNavigate } from "react-router-dom";
 import userDefault from "/user-default-xs.png";
 import { URL_DASHBOARD, URL_USER_FAVORITE, URL_USER_PURCHASES } from "@/utils/links";
+import { useAsync } from "@/hooks/useAsync";
+import { userService } from "@features/user/service/userService";
 
 
 
 function UserDropdown({ className }) {
 
-  const { user, isAuth, logout, isAdmin } = useAuthContext();
+  const { auth, isAuth, logout, isAdmin } = useAuthContext();
   const [isActive, setIsActive] = useState(false)
+  const [imageUser, setImageUser] = useState(null)
   
   // si esta logeado activa el dropdown toggle, si no muestra LoginModal
   const handleToggle = (isOpen) => 
@@ -28,8 +31,23 @@ function UserDropdown({ className }) {
   };
 
 
+  const getMyUser = useAsync(userService.getMySummary)
 
-  const imgUrlUser = `http://localhost:8080/uploads/users/${user?.username}.png`
+  const myUser = async() => {
+    const user = await getMyUser.execute()
+
+    setImageUser(user?.image || '#')
+  }
+
+  useEffect(()=>{
+    myUser()
+
+  },[auth])
+
+  useEffect(()=>{
+    console.log("cambia imagen de navbar", imageUser)
+  },[imageUser])
+
 
   return (
     <>
@@ -55,7 +73,7 @@ function UserDropdown({ className }) {
           {isAuth && 
             <ImageWithFallback 
               className="rounded-circle border d-none d-md-block" 
-              src={imgUrlUser}
+              src={ imageUser }
               fallbackSrc={userDefault}
               width={30} 
               height={30}
@@ -76,7 +94,7 @@ function UserDropdown({ className }) {
             className="border-bottom py-2"
           >
             <div className="active-fix">
-              <b className="fw-semibold">{user?.username}</b>
+              <b className="fw-semibold">{ auth?.username}</b>
               <p className="m-0 small text-secondary">View full profile</p>
             </div>
           </Dropdown.Item>

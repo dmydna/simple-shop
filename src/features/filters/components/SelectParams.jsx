@@ -171,6 +171,13 @@ export default {
 	  statsOf:"status", 
 	  textStyle: "uppercase",
 	}),
+	
+	UserRole: ()=>SelectByStats("users",{ 
+	  cols: 1,
+	  statsOf:"role", 
+	  textStyle: "uppercase",
+	}),
+
 
 	ListingStatus: ()=>SelectByStats("listings",{ 
 	  cols: 1, 
